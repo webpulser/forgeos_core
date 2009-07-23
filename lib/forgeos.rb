@@ -1,0 +1,3 @@
+module Forgeos
+  AdminMenu = {}
+end
