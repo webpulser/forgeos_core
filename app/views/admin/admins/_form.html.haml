@@ -1,0 +1,67 @@
+- form_for [:admin, admin], :html => { :id => 'edit_admin', :multipart=>true } do |f|
+  = image_tag(admin.avatar.public_filename(:small)) if admin.avatar && !admin.avatar.filename.nil?
+  - fields_for admin.avatar do |avatar|
+    %p
+      %b
+        = avatar.label :uploaded_data, I18n.t('avatar').capitalize
+        \:
+      = avatar.file_field :uploaded_data
+  %p
+    %b
+      = f.label :lastname, I18n.t('lastname').capitalize
+      \:
+    = f.text_field :lastname
+  %p
+    %b
+      = f.label :firstname, I18n.t('firstname').capitalize
+      \:
+    = f.text_field :firstname
+  %p
+    %b
+      = f.label :email, I18n.t('email').capitalize
+      \:
+    = f.text_field :email
+  - if (admin.new_record?)
+    %p
+      %b
+        = f.label :password, I18n.t('password').capitalize
+        \:
+      = f.password_field :password
+    %p
+      %b
+        = f.label :password_confirmation, I18n.t('password_confirmation').capitalize
+        \:
+      = f.password_field :password_confirmation
+  
+  %fieldset
+    %legend
+      = link_to_effect_toggle(I18n.t('role', :count => 2).capitalize, 'roles')
+      |
+      = link_to_function(I18n.t('select_all').capitalize,"$('.roles').each(function(){this.checked=true;}); $($('.roles')[0]).trigger('onchange')")
+      |
+      = link_to_function(I18n.t('unselect_all').capitalize,"$('.roles').each(function(){this.checked=false;}); $($('.roles')[0]).trigger('onchange')")
+    = hidden_field_tag "admin[role_ids][]"
+    #roles
+      %table
+        - Role.all.in_groups_of(4).each do |role_group|
+          %tr
+            - role_group.each do |role|
+              %td.content
+                - unless role.nil?
+                  = check_box_tag "admin[role_ids][]", role.id, admin.roles.include?(role), :onchange => remote_function(:url => { :action => 'update_rights', :id => admin.id }, :with => "$('#edit_admin').serialize()", :update => 'rights'), :class => 'roles'
+                  = role.name
+  
+  %fieldset
+    %legend
+      = link_to_effect_toggle(I18n.t('right', :count => 2).capitalize, 'rights')
+      |
+      = link_to_function(I18n.t('select_all').capitalize,"$('.rights').each(function(){this.checked=true;})")
+      |
+      = link_to_function(I18n.t('unselect_all').capitalize,"$('.rights').each(function(){this.checked=false;})")
+    #rights
+      = render :partial => 'form_rights', :locals => { :admin => admin, :rights => admin.roles.collect{|role| role.rights}.flatten }
+  %p
+    = f.submit I18n.t('save').capitalize
+
+- if !(admin.new_record?)
+  - content_for :tools, link_to(I18n.t('show').capitalize, [:admin, admin])

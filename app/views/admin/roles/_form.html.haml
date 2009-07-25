@@ -1,0 +1,17 @@
+- form_for [:admin, role] do |f|
+  = f.error_messages
+  %p
+    %b
+      = f.label :name, I18n.t('name').capitalize
+      \:
+    = f.text_field :name
+  %p
+    %b
+      = I18n.t('right', :count => 2).capitalize
+      \:
+    = render :partial => 'form_rights', :locals => { :rights => Right.all, :role => role }
+  %p
+    = f.submit I18n.t('save').capitalize
+
+- if !(role.new_record?)
+  - content_for :tools, link_to(I18n.t('show').capitalize, [:admin, role])

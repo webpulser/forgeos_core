@@ -1,0 +1,31 @@
+%p
+  %b
+    = I18n.t('avatar').capitalize
+    \:
+  = image_tag(@admin.avatar.public_filename(:small)) if @admin.avatar && !@admin.avatar.filename.nil?
+%p
+  %b
+    = I18n.t('email').capitalize
+    \:
+  = h @admin.email
+%p
+  %b
+    = I18n.t('lastname').capitalize
+    \:
+  = h @admin.lastname
+%p
+  %b
+    = I18n.t('firstname').capitalize
+    \:
+  = h @admin.firstname
+%p
+  %b
+    = I18n.t('role', :count => 2).capitalize
+    \:
+  = @admin.roles.collect{ |role| role.name}.join(', ')
+%p
+  %b
+    = I18n.t('right', :count => 2).capitalize
+    \:
+  = @admin.rights.collect{ |right| right.name }.join(', ')
+- content_for :tools, link_to(I18n.t('edit').capitalize, [:edit, :admin, @admin])

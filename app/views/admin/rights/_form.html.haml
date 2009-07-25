@@ -1,0 +1,22 @@
+- form_for [:admin, right] do |f|
+  = f.error_messages
+  %p
+    %b
+      = f.label :name, I18n.t('name').capitalize
+      \:
+    = f.text_field :name
+  %p
+    %b
+      = f.label :controller_name, I18n.t('controller_name').capitalize
+      \:
+    = f.text_field :controller_name
+  %p
+    %b
+      = f.label :action_name, I18n.t('action_name').capitalize
+      \:
+    = f.text_field :action_name
+  %p
+    = f.submit I18n.t('save').capitalize
+
+- if !(right.new_record?)
+  - content_for :tools, link_to(I18n.t('show').capitalize, [:admin,right])

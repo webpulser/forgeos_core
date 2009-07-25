@@ -1,0 +1,22 @@
+%h1
+  = I18n.t('role', :count => 2).capitalize
+%table
+  %thead
+    %tr
+      %th
+        = I18n.t('name').capitalize
+      %th
+        = I18n.t('action', :count => 2).capitalize
+  %tbody
+    - @roles.each do |role|
+      %tr
+        %td
+          = h role.name
+        %td
+          = link_to I18n.t('show').capitalize, admin_role_path(role)
+          \-
+          = link_to I18n.t('edit').capitalize, edit_admin_role_path(role)
+          \-
+          = link_to I18n.t('destroy').capitalize, admin_role_path(role), :confirm => I18n.t('role.destroy.confirm').capitalize, :method => :delete
+
+- content_for :tools,link_to(I18n.t('role.create.action').capitalize, new_admin_role_path, :class => 'add')

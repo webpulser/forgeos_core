@@ -1,0 +1,16 @@
+%p
+  %b
+    = I18n.t('name').capitalize
+    \:
+  = h @right.name
+%p
+  %b
+    = I18n.t('controller_name').capitalize
+    \:
+  = h @right.controller_name
+%p
+  %b
+    = I18n.t('action_name').capitalize
+    \:
+  = h @right.action_name
+- content_for :tools, link_to(I18n.t('edit').capitalize, edit_admin_right_path(@right))

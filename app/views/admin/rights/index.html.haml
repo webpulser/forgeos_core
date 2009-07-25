@@ -1,0 +1,30 @@
+%h1
+  = I18n.t('right', :count => 2).capitalize
+%table
+  %thead
+    %tr
+      %th
+        = I18n.t('name').capitalize
+      %th
+        = I18n.t('controller_name').capitalize
+      %th
+        = I18n.t('action_name').capitalize
+      %th
+        = I18n.t('action', :count => 2).capitalize
+  %tbody
+    - @rights.each do |right|
+      %tr
+        %td
+          = h right.name
+        %td
+          = h right.controller_name
+        %td
+          = h right.action_name
+        %td
+          = link_to I18n.t('show').capitalize, admin_right_path(right)
+          \-
+          = link_to I18n.t('edit').capitalize, edit_admin_right_path(right)
+          \-
+          = link_to I18n.t('destroy').capitalize, admin_right_path(right), :confirm => I18n.t('right.destroy.confirm').capitalize, :method => :delete
+
+- content_for :tools, link_to(I18n.t('right.create.action').capitalize, new_admin_right_path, :class => 'add')
