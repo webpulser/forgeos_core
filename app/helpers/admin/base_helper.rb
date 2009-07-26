@@ -15,38 +15,10 @@ module Admin::BaseHelper
     end
     return out
   end
-
-  def display_standard_flashes(message = nil, with_tag = true)
-    if !flash[:notice].nil? && !flash[:notice].blank?
-      flash_to_display, level = flash[:notice], 'ui-state-highlight'
-      flash[:notice] = nil
-    elsif !flash[:warning].nil? && !flash[:warning].blank?
-      flash_to_display, level = flash[:warning], 'ui-state-error'
-      flash[:warning] = nil
-    elsif !flash[:error].nil? && !flash[:error].blank?
-      level = 'ui-state-error'
-      if flash[:error].instance_of? ActiveRecord::Errors
-        flash_to_display = '<span class="ico close">' + message + '</span>'
-        flash_to_display << activerecord_error_list(flash[:error])
-      else
-        flash_to_display = flash[:error]
-      end
-      flash[:error] = nil
-    else
-      return if message.nil?
-      flash_to_display = message
-      level = 'ui-state-highlight'
+  
+  def build_menu
+    Forgeos::AdminMenu.each do |tab|
+      content_for :menu, menu_item(tab.dup)
     end
-
-    
-    content = content_tag('div', content_tag('div', content_tag('p',flash_to_display, :style => 'text-align : center'), :class => "#{level} ui-corner-all"), :class => 'ui-widget')
-    script = render(:update) do |page|
-      page.replace_html('display_standard_flashes', content)
-      page.visual_effect(:slide_down, 'display_standard_flashes')
-      page.delay(10) do
-        page.visual_effect(:slide_up,'display_standard_flashes')
-      end
-    end
-    return with_tag ? javascript_tag(script) : script
   end
 end

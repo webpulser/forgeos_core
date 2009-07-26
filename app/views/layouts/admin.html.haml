@@ -35,14 +35,8 @@
         #topmenu
           %ul#nav
             - if logged_in?
-              - menu.each_key do |entry|
-                %li{ :class => (@controller.controller_name == entry || menu[entry].keys.include?(@controller.controller_name)) ? 'current' : nil }
-                  = link_to(I18n.t(entry).capitalize, { :controller => entry } , :class => 'folder_table')
-                  %ul
-                    - menu[entry].each_key do |subentry|
-                      %li
-                        = link_to(I18n.t(subentry).capitalize, { :controller => (menu[entry][subentry]['class'].nil? ? subentry : entry), :action => (menu[entry][subentry]['class'].nil? ? 'index' : subentry), :id => menu[entry][subentry]['id'] } , :class => menu[entry][subentry]['class'] || 'folder_table')
-            
+              - build_menu
+              = yield :menu
         = javascript_tag "$(function(){ $('#nav').droppy({speed: 5, timeout: 5}); })"
 
       - if logged_in?
