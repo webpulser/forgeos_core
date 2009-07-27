@@ -21,4 +21,21 @@ module Admin::BaseHelper
       content_for :menu, menu_item(tab.dup)
     end
   end
+
+  def dataTables_tag(columns_count)
+    javascript_tag "
+    $(function(){
+      oTable = $('#table').dataTable({ 
+        'aoColumns': [#{' null,'*(columns_count-1)} { 'bSearchable': false, 'bSortable': false } ],
+        'oLanguage': { 
+          'sProcessing' : '#{I18n.t('jquery.dataTables.oLanguage.sProcessing')}',
+          'sLengthMenu':'#{I18n.t('jquery.dataTables.oLanguage.sLengthMenu')}',
+          'sZeroRecords':'#{I18n.t('jquery.dataTables.oLanguage.sZeroRecords')}',
+          'sInfo':'#{I18n.t('jquery.dataTables.oLanguage.sInfo')}',
+          'sInfoEmpty':'#{I18n.t('jquery.dataTables.oLanguage.sInfoEmpty')}',
+          'sSearch':'#{I18n.t('jquery.dataTables.oLanguage.sSearch')}'
+        }
+      });
+    });"
+  end
 end
