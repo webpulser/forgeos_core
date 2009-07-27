@@ -1,0 +1,36 @@
+es:
+  keyword:
+    one: palabra clave
+    other: palabras clave
+
+# Dates formats 
+  date:
+    formats:
+      default: "%d/%m/%Y"
+      short: "%e %b"
+      long: "%e, %B %Y"
+      only_day: "%e"
+
+    day_names: [Domingo, Lunes, Martes, Miércoles, Jueves, Viernes, Sábado]
+    abbr_day_names: [Do, Lu, Ma, Mi, Ju, Vi, Sa]
+    month_names: [~, Enero, Febrero, Marzo, Abril, Mayo, Junio, Julio, Agosto, Septiembre, Octubre, Noviembre, Diciembre]
+    abbr_month_names: [~, Ene, Feb, Mar, Abr, May, Jun, Jul, Ago, Sep, Oct, Nov, Dic]
+    order: [ :day :month, :year ]
+  
+  time:
+    formats:
+      default: "%a %d %b %H:%M:%S %Z %Y"
+      time: "%H:%M"
+      short: "%d %b %H:%M"
+      long: "%H:%M del %d de %B de %Y"
+      only_second: "%S"
+      
+      datetime:
+        formats:
+          default: "%Y-%m-%dT%H:%M:%S%Z"
+          
+      am: ''
+      pm: ''
+
+
+

@@ -1,3 +1,4 @@
+I18n.load_path += Dir[Rails.root.join('vendor', 'plugins', 'forgeos_core', 'config', 'locales', '*.{rb,yml}')]
 config.gem 'mime-types', :lib => 'mime/types'
 config.gem 'mislav-will_paginate', :source => "http://gems.github.com", :lib => "will_paginate"
 config.gem 'coupa-acts_as_list', :source => "http://gems.github.com"
