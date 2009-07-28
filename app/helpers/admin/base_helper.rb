@@ -22,11 +22,15 @@ module Admin::BaseHelper
     end
   end
 
-  def dataTables_tag(columns_count)
+  def dataTables_tag(columns_count=1, action_column=true)
+    columns_count -= 1 if action_column
+    columns = columns_count.times.collect{'null'}
+    columns << "{ 'bSearchable': false, 'bSortable': false }" if action_column
+
     javascript_tag "
     $(function(){
       oTable = $('#table').dataTable({ 
-        'aoColumns': [#{' null,'*(columns_count-1)} { 'bSearchable': false, 'bSortable': false } ],
+        'aoColumns': [ #{columns.join(',')} ],
         'oLanguage': { 
           'sProcessing' : '#{I18n.t('jquery.dataTables.oLanguage.sProcessing')}',
           'sLengthMenu':'#{I18n.t('jquery.dataTables.oLanguage.sLengthMenu')}',
