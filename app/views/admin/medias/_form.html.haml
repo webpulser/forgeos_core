@@ -1,0 +1,34 @@
+#fileUpload
+  - form_for media, :url => (media.new_record? ? admin_medias_path : admin_media_path(media)), :html => { :method => (media.new_record? ? :post : :put), :multipart => true } do |f|
+    = f.error_messages
+    = f.file_field :uploaded_data
+    = f.submit I18n.t('save').capitalize
+
+= javascript_include_tag 'jquery.uploadify'
+= stylesheet_link_tag 'admin/uploadify'
+
+- session_key = ActionController::Base.session_options[:key]
+- javascript_tag do
+  $(function(){
+  $('#fileUpload').fileUpload({
+  'uploader': '/images/uploadify/uploader.swf',
+  = "'cancelImg': '#{image_path('uploadify/cancel.png')}',"
+  = "'script': '#{media.new_record? ? admin_medias_path : admin_media_path(media)}',"
+  'scriptData': { 
+  = "'target': '#{params[:target]}',"
+  = "'target_id': '#{params[:target_id]}', "
+  'format': 'json',
+  = "'authenticity_token': encodeURIComponent('#{form_authenticity_token}'),"
+  = "'#{session_key}': encodeURIComponent('#{cookies[session_key]}')"
+  },
+  'ScriptAccess': 'always',
+  'multi': 'true',
+  'displayData': 'speed',
+  'onAllComplete': function(){
+  = display_standard_flashes(I18n.t('media.create.success').capitalize,false)
+  }
+  });});
+
+= link_to_function I18n.t('media.upload.start').capitalize, "$('#fileUpload').fileUploadStart()"
+|
+= link_to_function I18n.t('media.upload.clear').capitalize,"$('#fileUpload').fileUploadClearQueue()"

@@ -3,6 +3,61 @@ es:
     one: palabra clave
     other: palabras clave
 
+# Admin
+  download: 'descargar'
+  medias: 'medias'
+  media:
+    list: 'lista de medias'
+    one: 'media'
+    other: 'medias'
+    none: 'no hay medias'
+    all: 'todos'
+    associated_rights: 'derechos asociados'
+    upload: 
+      start: 'descargar'
+      clear: 'vaciar la lista'
+    create:
+      action: 'crear un media'
+      success: 'el media se ha creado con éxito'
+      failed: 'ha habido un problema durante la creación del media'
+    update:
+      action: 'editar el media'
+      success: 'el media fue actualizado con éxito'
+      failed: 'ha habido un problema durante la actualización del media'
+    download:
+      action: 'descargar el media'
+      failed: 'ha habido un problema durante la descarga del media'
+    destroy:
+      action: 'destruir el media'
+      success: 'el media se ha destruido con éxito'
+      failed: 'ha habido un problema durante la destrucción del media'
+      confirm: '¿estás seguro de que quieres borrar este media?'
+    type:
+      one: 'teclea'
+      other: 'tecleas'
+    content_type: 'tipo de contenido'
+    filename: 'nombre de archivo'
+    size: 'tamaño'
+    byte:
+      one: 'octeto'
+      other: 'octetos'
+      mega: 'Mo'
+    pdf:
+      one: 'pdf'
+      other: 'pdfs'
+    doc:
+      one: 'doc'
+      other: 'docs'
+    video:
+      one: 'video'
+      other: 'videos'
+    picture:
+      one: 'imágenen'
+      other: 'imágenes'
+    misc:
+      one: 'otro'
+      other: 'otros'
+
 # Dates formats 
   date:
     formats:
@@ -32,5 +87,11 @@ es:
     am: ''
     pm: ''
 
-
-
+# ActiveRecord
+  activerecord:
+    models:
+      media: 'media'
+      doc: 'documento'
+      pdf: 'pdf'
+      video: 'video'
+      picture: 'imagen'

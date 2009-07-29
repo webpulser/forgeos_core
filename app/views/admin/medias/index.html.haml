@@ -1,0 +1,54 @@
+- content_for :tools, link_to(I18n.t('media.create.action').capitalize, new_admin_media_path, :class => 'add')
+
+%h1
+  = I18n.t('media.list').capitalize
+#filters
+  = label_tag  I18n.t('media.type.other').capitalize
+  \:
+  = link_to_if params[:file_type], I18n.t('media.all').capitalize, admin_medias_path
+  \-
+  = link_to_unless params[:file_type] == 'pdf', I18n.t('media.pdf.other').capitalize, admin_medias_path(:file_type => 'pdf')
+  \-
+  = link_to_unless params[:file_type] == 'doc', I18n.t('media.doc.other').capitalize, admin_medias_path(:file_type => 'doc')
+  \-
+  = link_to_unless params[:file_type] == 'video', I18n.t('media.video.other').capitalize, admin_medias_path(:file_type => 'video')
+  \-
+  = link_to_unless params[:file_type] == 'picture', I18n.t('media.picture.other').capitalize, admin_medias_path(:file_type => 'picture')
+  \-
+  = link_to_unless params[:file_type] == 'media', I18n.t('media.misc.other').capitalize, admin_medias_path(:file_type => 'media')
+#list_medias
+  %table#table
+    %thead
+      %tr
+        %th
+          = I18n.t('media.filename').capitalize
+        %th
+          = I18n.t('media.type.other').capitalize
+        %th
+          = I18n.t('media.content_type').capitalize
+        %th
+          = I18n.t('media.size').capitalize
+        %th
+          = I18n.t('action.other').capitalize
+    %tbody
+      - unless @medias.nil? or @medias.blank?
+        - @medias.each do |media|
+          %tr{ :class => cycle('even', 'odd') }
+            %td
+              = media.filename
+            %td
+              = media.class.human_name.capitalize
+            %td
+              = media.content_type
+            %td
+              = media.size
+              = I18n.t('media.byte', :count => media.size)
+            %td
+              = link_to I18n.t('download').capitalize, admin_media_path(media), :popup => true
+              \-
+              = link_to I18n.t('destroy').capitalize, admin_media_path(media), :method => 'delete', :confirm => I18n.t('media.destroy.confirm').capitalize
+      - else
+        %tr
+          %td{ :colspan => "5" }
+            = I18n.t('media.none').capitalize
+= dataTables_tag(5)

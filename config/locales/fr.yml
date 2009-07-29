@@ -3,6 +3,61 @@ fr:
     one: 'mot clé'
     other: 'mots clés'
 
+# Admin
+  download: 'télécharger'
+  medias: 'médias'
+  media:
+    list: 'liste des médias'
+    one: 'média'
+    other: 'médias'
+    none: 'aucun média'
+    all: 'tous'
+    associated_rights: 'droits associés'
+    upload: 
+      start: 'démarer le téléchargement'
+      clear: 'nettoyer la liste'
+    create:
+      action: 'créer un média'
+      success: 'le média a bien été créé'
+      failed: 'un problème est survenu lors de la création du média'
+    update:
+      action: 'éditer le média'
+      success: 'le média a bien été mis à jour'
+      failed: 'un problème est survenu lors de la mise à jour du média'
+    download:
+      action: 'télécharger le média'
+      failed: 'un problème est survenu lors du téléchargement du média'
+    destroy:
+      action: 'supprimer le média'
+      success: 'le média a bien été supprimé'
+      failed: 'un problème est survenu lors de la suppression du média'
+      confirm: 'êtes-vous sûr de vouloir supprimer ce média ?'
+    type:
+      one: 'type'
+      other: 'types'
+    content_type: 'content type'
+    filename: 'nom du fichier'
+    size: 'taille'
+    byte:
+      one: 'octet'
+      other: 'octets'
+      mega: 'Mo'
+    pdf:
+      one: 'pdf'
+      other: 'pdfs'
+    doc:
+      one: 'doc'
+      other: 'docs'
+    video:
+      one: 'vidéo'
+      other: 'vidéos'
+    picture:
+      one: 'image'
+      other: 'images'
+    misc:
+      one: 'autre'
+      other: 'autres'
+
 # Date formats
   date:
     formats:
@@ -31,3 +86,12 @@ fr:
           
     am: ''
     pm: ''
+
+# ActiveRecord
+  activerecord:
+    models:
+      media: 'média'
+      doc: 'document'
+      pdf: 'pdf'
+      video: 'vidéo'
+      picture: 'image'

@@ -1,0 +1,6 @@
+- content_for :tools, link_to(I18n.t('list').capitalize, admin_medias_path, :class => 'house' )
+- if media && !(media.new_record?)
+  - content_for :tools do
+    = link_to(I18n.t('download').capitalize, admin_media_path(media), :popup => true)
+    = link_to(I18n.t('destroy').capitalize, admin_media_path(media), :method => 'delete', :confirm => I18n.t('media.destroy.confirm').capitalize)
+- content_for :tools, link_to(I18n.t('back').capitalize, :back)

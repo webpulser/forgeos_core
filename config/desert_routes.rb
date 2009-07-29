@@ -7,5 +7,6 @@ namespace :admin do |admin|
   admin.resources :admins
   admin.resources :roles
   admin.resources :rights
+  admin.resources :medias, :except => [:edit]
   admin.root :controller => 'account'
 end
