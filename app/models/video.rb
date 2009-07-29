@@ -1,7 +1,4 @@
 class Video < Attachment
-  has_attachment  :content_type => %w[video/x-msvideo video/mpeg],
-                  :file_system_path => 'public/uploads/videos',
-                  :storage => :file_system,
-                  :max_size => 50.megabytes
+  has_attachment YAML.load_file(File.join(RAILS_ROOT, 'config', 'attachments.yml'))['video'].symbolize_keys
   validates_as_attachment
 end

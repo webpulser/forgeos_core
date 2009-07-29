@@ -1,6 +1,4 @@
 class Media < Attachment
-  has_attachment  :file_system_path => 'public/uploads/medias',
-                  :storage => :file_system,
-                  :max_size => 50.megabytes
+  has_attachment YAML.load_file(File.join(RAILS_ROOT, 'config', 'attachments.yml'))['media'].symbolize_keys
   validates_as_attachment
 end

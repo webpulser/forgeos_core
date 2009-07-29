@@ -3,4 +3,3 @@
   - content_for :tools do
     = link_to(I18n.t('download').capitalize, admin_media_path(media), :popup => true)
     = link_to(I18n.t('destroy').capitalize, admin_media_path(media), :method => 'delete', :confirm => I18n.t('media.destroy.confirm').capitalize)
-- content_for :tools, link_to(I18n.t('back').capitalize, :back)

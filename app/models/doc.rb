@@ -1,7 +1,4 @@
 class Doc < Attachment
-  has_attachment  :content_type => ['application/msword','application/vnd.oasis.opendocument.text'],
-                  :file_system_path => 'public/uploads/docs',
-                  :storage => :file_system,
-                  :max_size => 50.megabytes
+  has_attachment YAML.load_file(File.join(RAILS_ROOT, 'config', 'attachments.yml'))['doc'].symbolize_keys
   validates_as_attachment
 end

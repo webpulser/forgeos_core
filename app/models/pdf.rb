@@ -1,7 +1,4 @@
 class Pdf < Attachment
-  has_attachment  :content_type => 'application/pdf',
-                  :file_system_path => 'public/uploads/pdfs',
-                  :storage => :file_system,
-                  :max_size => 50.megabytes
+  has_attachment YAML.load_file(File.join(RAILS_ROOT, 'config', 'attachments.yml'))['pdf'].symbolize_keys
   validates_as_attachment
 end
