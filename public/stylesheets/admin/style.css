@@ -448,3 +448,6 @@ a.modules_manage {
 }
 
 ul.comment_list { padding-left: 30px; }
+input.loading {
+  background: transparent url(/images/spinner.gif) no-repeat right;
+}
