@@ -9,6 +9,6 @@ config.gem 'haml'
 # Load Haml and Sass
 require 'haml'
 Haml.init_rails(binding)
-require 'sortable_pictures'
+require 'sortable_attachments'
 
 ActionController::Dispatcher.middleware.insert 0, 'FlashSessionCookieMiddleware'
