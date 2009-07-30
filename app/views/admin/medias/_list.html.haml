@@ -31,8 +31,4 @@
               = link_to_remote I18n.t('destroy').capitalize, :url => admin_media_path(media, :target => defined?(target) ? target : nil, :target_id => defined?(target_id) ? target_id : nil), :confirm => I18n.t('media.destroy.confirm'), :method => 'delete'
             - else
               = link_to I18n.t('destroy').capitalize, admin_media_path(media), :method => 'delete', :confirm => I18n.t('media.destroy.confirm').capitalize
-    - else
-      %tr
-        %td{ :colspan => "5" }
-          = I18n.t('media.none').capitalize
 = dataTables_tag(5)
