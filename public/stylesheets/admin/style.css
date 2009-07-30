@@ -451,3 +451,25 @@ ul.comment_list { padding-left: 30px; }
 input.loading {
   background: transparent url(/images/spinner.gif) no-repeat right;
 }
+
+
+.icon1 {
+  background: transparent url(/images/admin/icons/icons.png) no-repeat left;
+  width:  16px;
+  height: 16px;
+  min-width:  16px;
+  min-height: 16px;
+  max-width:  16px;
+  max-height: 16px;
+  display: inline-block;
+}
+
+.icon1.moins {
+  background-position: 0px -32px;
+}
+.icon1.moins.disabled {
+  background-position: 0px 0px;
+}
+.icon1.plus {
+  background-position: 0px -64px;
+}
