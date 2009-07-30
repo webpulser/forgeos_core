@@ -13,6 +13,7 @@ en:
     none: 'no medias'
     all: 'all'
     associated_rights: 'associated rights'
+    not_exist: 'the requested media does not exist'
     upload: 
       start: 'start upload'
       clear: 'clear queue'

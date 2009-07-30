@@ -1,5 +1,6 @@
 class Admin::MediasController < Admin::BaseController
   session :cookie_only => false, :only => :create
+  before_filter :get_media, :only => [:show, :destroy]
 
   def index
     if params[:file_type]
@@ -11,7 +12,6 @@ class Admin::MediasController < Admin::BaseController
 
   # GET /medias/1
   def show
-    @media = Attachment.find(params[:id])
     send_file(@media.full_filename)
   end
 
@@ -49,6 +49,19 @@ class Admin::MediasController < Admin::BaseController
           @media.content_type = @content_type
           if @media.save
             flash[:notice] = I18n.t('media.create.success').capitalize
+
+            if params[:target] && params[:target_id] && !params[:target].blank?
+              sortable_attachment = @media.sortable_attachments.new
+
+              begin
+                target = params[:target].camelize.constantize
+              rescue NameError
+                return redirect_to(admin_medias_path)
+              end
+
+              sortable_attachment.attachable = target.find_by_id(params[:target_id])
+              sortable_attachment.save
+            end
             render :json => { :result => 'success', :asset => @media.id}
           else
             logger.debug(@media.errors.inspect)
@@ -62,31 +75,55 @@ class Admin::MediasController < Admin::BaseController
 
   end
 
-  # PUT /medias/1
-  def update
-    @media = Attachment.find(params[:id])
-    @users = User.all
+#   # PUT /medias/1
+#   def update
+#     @users = User.all
     
-    if @media.update_attributes(params[:attachment])
-      flash[:notice] = I18n.t('media.update.success').capitalize
-    else
-      flash[:error] = I18n.t('media.update.failed').capitalize
-    end
-    return redirect_to(admin_medias_path)
-  end
+#     if @media.update_attributes(params[:attachment])
+#       flash[:notice] = I18n.t('media.update.success').capitalize
+#     else
+#       flash[:error] = I18n.t('media.update.failed').capitalize
+#     end
+#     return redirect_to(admin_medias_path)
+#   end
 
   # DELETE /medias/1
   def destroy
-    @media = Attachment.find(params[:id])
     if @media && @media.destroy
       flash[:notice] = I18n.t('media.destroy.success').capitalize
     else
       flash[:notice] = I18n.t('media.destroy.failed').capitalize
     end
 
-    respond_to do |format|
-      format.html { redirect_to(admin_medias_path) }
-      format.xml  { head :ok }
+    # media destroy is requested from another controller
+    if request.xhr? && params[:target] && params[:target_id] && !params[:target].blank?
+      # get the attached model and retrieve all attachments
+      begin
+        target = params[:target].camelize.constantize
+        attachable = target.find_by_id(params[:target_id])
+        @medias = attachable.attachments if attachable
+      rescue NameError
+        index
+      end
+
+      return render(:update) do |page|
+        # without dataTables
+        # page << "$('#media_#{params[:id]}').parents('tr').remove()"
+        # with dataTables
+        page << "oTable.fnDeleteRow(oTable.fnGetPosition($('#media_#{params[:id]}').parents('tr')[0]));"
+        page << display_standard_flashes('', false)
+      end
+    end
+    return redirect_to(admin_medias_path)
+  end
+
+private
+
+  def get_media
+    @media = Attachment.find_by_id params[:id]
+    unless @media
+      flash[:error] = I18n.t('media.not_exist').capitalize 
+      return redirect_to(admin_medias_path)
     end
   end
 end

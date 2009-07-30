@@ -2,6 +2,8 @@
   - form_for media, :url => (media.new_record? ? admin_medias_path : admin_media_path(media)), :html => { :method => (media.new_record? ? :post : :put), :multipart => true } do |f|
     = f.error_messages
     = f.file_field :uploaded_data
+    = hidden_field_tag :target, params[:target]
+    = hidden_field_tag :target_id, params[:target_id]
     = f.submit I18n.t('save').capitalize
 
 = javascript_include_tag 'jquery.uploadify'

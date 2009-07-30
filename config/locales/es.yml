@@ -13,6 +13,7 @@ es:
     none: 'no hay medias'
     all: 'todos'
     associated_rights: 'derechos asociados'
+    not_exist: 'el media solicitado no existe'
     upload: 
       start: 'descargar'
       clear: 'vaciar la lista'

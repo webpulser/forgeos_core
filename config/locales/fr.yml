@@ -13,6 +13,7 @@ fr:
     none: 'aucun média'
     all: 'tous'
     associated_rights: 'droits associés'
+    not_exist: "le média sélectionné n'existe pas"
     upload: 
       start: 'démarer le téléchargement'
       clear: 'nettoyer la liste'

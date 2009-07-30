@@ -1,0 +1,38 @@
+%table#table
+  %thead
+    %tr
+      %th
+        = I18n.t('media.filename').capitalize
+      %th
+        = I18n.t('media.type.other').capitalize
+      %th
+        = I18n.t('media.content_type').capitalize
+      %th
+        = I18n.t('media.size').capitalize
+      %th
+        = I18n.t('action.other').capitalize
+  %tbody
+    - unless medias.nil? or medias.blank?
+      - medias.each do |media|
+        %tr{ :class => cycle('even', 'odd') }
+          %td{ :id => "media_#{media.id}" }
+            = media.filename
+          %td
+            = media.class.human_name.capitalize
+          %td
+            = media.content_type
+          %td
+            = media.size
+            = I18n.t('media.byte', :count => media.size)
+          %td
+            = link_to I18n.t('download').capitalize, admin_media_path(media), :popup => true
+            \-
+            - if defined?(remote) && remote
+              = link_to_remote I18n.t('destroy').capitalize, :url => admin_media_path(media, :target => defined?(target) ? target : nil, :target_id => defined?(target_id) ? target_id : nil), :confirm => I18n.t('media.destroy.confirm'), :method => 'delete'
+            - else
+              = link_to I18n.t('destroy').capitalize, admin_media_path(media), :method => 'delete', :confirm => I18n.t('media.destroy.confirm').capitalize
+    - else
+      %tr
+        %td{ :colspan => "5" }
+          = I18n.t('media.none').capitalize
+= dataTables_tag(5)
