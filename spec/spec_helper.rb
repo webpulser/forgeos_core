@@ -12,4 +12,10 @@ Spec::Runner.configure do |config|
   config.include ControllerHelpers::Uploader, :type => :controller
   config.include LoginHelpers, :type => :controller
   config.extend ControllerMacros, :type => :controller
+
+  config.global_fixtures = :all
+  config.before(:each) {
+    $currency = mock_model(Currency)
+    $currency.stub!(:find_by_code).and_return @currency
+  }
 end

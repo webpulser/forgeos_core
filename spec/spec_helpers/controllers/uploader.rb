@@ -1,8 +1,8 @@
 module ControllerHelpers 
   module Uploader
     # get us an object that represents an uploaded csv file
-    def uploaded_file(path, content_type="test/csv", filename=nil)
-      path = File.join(RAILS_ROOT, "features", "files", path)
+    def uploaded_file(path, content_type='image/png', filename=nil)
+      path = File.join(Desert::Manager.plugin_path('forgeos_core'), 'spec', 'files', path)
 
       filename ||= File.basename(path)
       t = Tempfile.new(filename)

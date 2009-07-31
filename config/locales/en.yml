@@ -5,7 +5,26 @@ en:
 
 # Admin
   download: 'download'
+  admins: 'administrators'
   medias: 'médias'
+  admin:
+    one: 'administrator'
+    other: 'administrators'
+    none: 'no administrator'
+    show: 'show administrador'
+    not_exist: 'the requested administrator does not exist'
+    create:
+      success: 'the administrator was successfully created'
+      failed: 'a problem occured during the administrator creation'
+      action: 'create an administrator'
+    update:
+      success: 'the administrator was successfully updated'
+      failed: 'a problem occured during the administrator update'
+      action: 'edit administrator'
+    destroy:
+      success: 'the administrator was successfully destroyed'
+      failed: 'a problem occured during the administrator destroy'
+      confirm: 'are you sure to delete this administrator ?'   
   media:
     list: 'list of medias'
     one: 'media'
