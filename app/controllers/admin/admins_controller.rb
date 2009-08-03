@@ -62,9 +62,10 @@ class Admin::AdminsController < Admin::BaseController
     respond_to do |format|
       if @admin.update_attributes(params[:admin])
         flash[:notice] = I18n.t('admin.update.success').capitalize
-        format.html { redirect_to(admin_admin_path(@admin)) }
+        format.html { redirect_to(admin_admins_path) }
         format.xml  { head :ok }
       else
+        flash[:error] = I18n.t('admin.update.failed').capitalize
         format.html { render :action => "edit" }
         format.xml  { render :xml => @admin.errors, :status => :unprocessable_entity }
       end

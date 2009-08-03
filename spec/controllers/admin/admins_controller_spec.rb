@@ -199,83 +199,82 @@ describe Admin::AdminsController, "POST create" do
   end
 end
 
-# TODO !
-# describe Admin::AdminsController, "PUT update" do
-#   should_require_admin_login :put, :update
+describe Admin::AdminsController, "PUT update" do
+  should_require_admin_login :put, :update
   
-#   describe "admin admin" do
-#     before(:each) do
-#       login_as_admin
-# 			@user = mock_model(User, :null_object => true)
-#       @admin = mock_model(Admin, :save => nil)
-#       @admin.stub!(:user).and_return @user
-#       Admin.stub!(:find_by_id).and_return @admin
-#     end
+  describe "admin admin" do
+    before(:each) do
+      login_as_admin
+			@user = mock_model(User, :null_object => true)
+      @admin = mock_model(Admin, :save => nil)
+      @admin.stub!(:user).and_return @user
+      Admin.stub!(:find_by_id).and_return @admin
+    end
     
-#     context "when the admin saves successfully" do
-#       before(:each) do
-#         @admin.stub!(:update_attributes).and_return true
-#       end
+    context "when the admin saves successfully" do
+      before(:each) do
+        @admin.stub!(:update_attributes).and_return true
+      end
 
-#       it "should load the required admin" do
-#         Admin.should_receive(:find_by_id).with("1").and_return @admin
-#         put :update, :id => 1, :admin => {}
-#       end
+      it "should load the required admin" do
+        Admin.should_receive(:find_by_id).with("1").and_return @admin
+        put :update, :id => 1, :admin => {}
+      end
 
-#       it "should save the admin" do
-#         @admin.should_receive(:update_attributes).with('name' => 'new_webpulser', 'active' => '0', 'competitors_option' => '0', 'user' => @admin.user).and_return(true)
-#         put :update, :admin => { :name => 'new_webpulser', :active => '0', :competitors_option => '0' }
-#       end
+      it "should save the admin" do
+        @admin.should_receive(:update_attributes).with('firstname' => 'Bob', 'lastname' => 'Alice', 'email' => 'bob.alice@company.com', 'password' => 'bobalice', 'password_confirmation' => 'bobalice', 'role_ids' => [], 'right_ids' => []).and_return(true)
+        put :update, :admin => {'firstname' => 'Bob', 'lastname' => 'Alice', 'email' => 'bob.alice@company.com', 'password' => 'bobalice', 'password_confirmation' => 'bobalice', 'role_ids' => [], 'right_ids' => []}, :avatar => {:uploaded_data => @uploader}
+      end
       
-#       it "should set a flash[:notice] message" do
-#         put :update, :admin => {}
-#         flash[:notice].should == "The admin was successfully updated"
-#       end
+      it "should set a flash[:notice] message" do
+        put :update, :admin => {}
+        flash[:notice].should_not == nil
+      end
       
-#       it "should redirect to the admins index" do
-#         put :update, :admin => {}
-#         response.should redirect_to(admin_admins_path)
-#       end
-#     end
+      it "should redirect to the admins index" do
+        put :update, :admin => {}
+        response.should redirect_to(admin_admins_path)
+      end
+    end
 
-#     context "when the admin does not exist" do
-#       before(:each) do
-#         Admin.stub!(:find_by_id).and_return nil
-#       end
+    context "when the admin does not exist" do
+      before(:each) do
+        Admin.stub!(:find_by_id).and_return nil
+      end
 
-#       it "should put a message in flash[:error]" do
-#         put :update
-#         flash[:error].should == "Admin does not exist"
-#       end
+      it "should put a message in flash[:error]" do
+        put :update
+        flash[:error].should_not == nil
+      end
 
-#       it "should redirect to the admins index" do
-#         put :update
-#         response.should redirect_to(admin_admins_path)
-#       end
-#     end
+      it "should redirect to the admins index" do
+        put :update
+        response.should redirect_to(admin_admins_path)
+      end
+    end
     
-#     context "when the admin fails to save" do
-#       before(:each) do
-#         @admin.stub!(:update_attributes).and_return false
-#       end
+    context "when the admin fails to save" do
+      before(:each) do
+        @admin.stub!(:update_attributes).and_return false
+      end
       
-#       it "should assign @admin" do
-#         put :update, :admin => {}
-#         assigns[:admin].should == @admin
-#       end
+      it "should assign @admin" do
+        put :update, :admin => {}
+        assigns[:admin].should == @admin
+      end
 
-#       it "should put a message in flash[:error]" do
-#         put :update, :admin => {}
-#         flash[:error].should == "A problem occurred during the admin update"
-#       end
+      it "should put a message in flash[:error]" do
+        put :update, :admin => {}
+        flash[:error].should_not == nil
+      end
       
-#       it "should render the edit template" do
-#         put :update, :admin => {}
-#         response.should render_template("edit")
-#       end
-#     end
-#   end
-# end
+      it "should render the edit template" do
+        put :update, :admin => {}
+        response.should render_template("edit")
+      end
+    end
+  end
+end
 
 describe Admin::AdminsController, "DELETE destroy" do
   should_require_admin_login :delete, :destroy
