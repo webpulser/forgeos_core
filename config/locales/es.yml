@@ -55,6 +55,9 @@ es:
     type:
       one: 'teclea'
       other: 'tecleas'
+    attach:
+      unknown_type: 'la teclea del elemento es desconocido'
+      failed: "ha habido un problemea durante la edition de la relación con el elemento"
     content_type: 'tipo de contenido'
     filename: 'nombre de archivo'
     size: 'tamaño'

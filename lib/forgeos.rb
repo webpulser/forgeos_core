@@ -11,6 +11,9 @@ module Forgeos
   ]
   # Set site's menu
   Menu = []
+  # Set attachable media types
+  AttachableTypes = []
+
 
   def self.url_generator(phrase = '')
     url = phrase.dup

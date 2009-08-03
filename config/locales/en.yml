@@ -55,6 +55,9 @@ en:
     type:
       one: 'type'
       other: 'types'
+    attach:
+      unknown_type: 'the type of the attachable element is unknown'
+      error: 'a problem occured during the check of the type of the attachable element'
     content_type: 'content type'
     filename: 'filename'
     size: 'size'

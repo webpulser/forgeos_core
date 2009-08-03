@@ -18,6 +18,25 @@ class Admin::MediasController < Admin::BaseController
   # GET /medias/new
   def new
     @media = Attachment.new
+
+    if params[:target] && params[:target_id] && !params[:target].blank?
+      # get attachable model...
+      begin
+        # and check if model is an available attachable type
+        attachable_type = params[:target].camelize
+
+        unless Forgeos::AttachableTypes.include?(attachable_type)
+          flash[:error] = I18n.t('media.attach.unknown_type').capitalize
+          return redirect_to(admin_medias_path)
+        end
+
+        attachable_type.constantize
+      rescue NameError
+        flash[:error] = I18n.t('media.attach.failed').capitalize
+        return redirect_to(admin_medias_path)
+      end
+    end
+
     render :action => 'create'
   end
 
@@ -53,10 +72,17 @@ class Admin::MediasController < Admin::BaseController
             if params[:target] && params[:target_id] && !params[:target].blank?
               sortable_attachment = @media.sortable_attachments.new
 
+              # get attachable model
               begin
-                target = params[:target].camelize.constantize
+                # check if model is an available attachable type
+                attachable_type = params[:target].camelize
+                unless Forgeos::AttachableTypes.include?(attachable_type)
+                  return render :json => { :result => 'error', :error => I18n.t('media.attach.unknown_type').capitalize }
+                end
+
+                target = attachable_type.constantize
               rescue NameError
-                return redirect_to(admin_medias_path)
+                return render :json => { :result => 'error', :error => I18n.t('media.attach.failed').capitalize }
               end
 
               sortable_attachment.attachable = target.find_by_id(params[:target_id])
@@ -64,7 +90,6 @@ class Admin::MediasController < Admin::BaseController
             end
             render :json => { :result => 'success', :asset => @media.id}
           else
-            logger.debug(@media.errors.inspect)
             render :json => { :result => 'error', :error => @media.errors.first }
           end
         else
