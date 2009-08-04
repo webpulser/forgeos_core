@@ -111,6 +111,11 @@ fr:
           
     am: ''
     pm: ''
+  datetime:
+    prompts:
+      day: 'Jour'
+      month: 'Mois'
+      year: 'Année'
 
 # ActiveRecord
   activerecord:

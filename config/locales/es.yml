@@ -111,6 +111,11 @@ es:
           
     am: ''
     pm: ''
+  datetime:
+    prompts:
+      day: 'Día'
+      month: 'Mes'
+      year: 'Año'
 
 # ActiveRecord
   activerecord:
