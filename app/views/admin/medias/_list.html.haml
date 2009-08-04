@@ -25,7 +25,9 @@
             = media.size
             = I18n.t('media.byte', :count => media.size)
           %td
-            = link_to I18n.t('download').capitalize, admin_media_path(media), :popup => true
+            = link_to I18n.t('show').capitalize, admin_media_path(media)
+            \-
+            = link_to I18n.t('download').capitalize, download_admin_media_path(media), :popup => true
             \-
             - if defined?(remote) && remote
               = link_to_remote I18n.t('destroy').capitalize, :url => admin_media_path(media, :target => defined?(target) ? target : nil, :target_id => defined?(target_id) ? target_id : nil), :confirm => I18n.t('media.destroy.confirm'), :method => 'delete'

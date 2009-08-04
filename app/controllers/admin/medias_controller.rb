@@ -1,6 +1,6 @@
 class Admin::MediasController < Admin::BaseController
   session :cookie_only => false, :only => :create
-  before_filter :get_media, :only => [:show, :destroy]
+  before_filter :get_media, :only => [:show, :download, :destroy]
 
   def index
     if params[:file_type]
@@ -12,6 +12,10 @@ class Admin::MediasController < Admin::BaseController
 
   # GET /medias/1
   def show
+  end
+
+  # GET /medias/1
+  def download
     send_file(@media.full_filename)
   end
 

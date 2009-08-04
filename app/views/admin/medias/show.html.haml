@@ -1,0 +1,50 @@
+= render :partial => 'top_links', :locals => { :media => @media }
+%h1
+  = I18n.t('media.show').capitalize
+
+%p{ :style => "font-size: 16px;" }
+  %b
+    = I18n.t('media.filename').capitalize
+    \:
+  = @media.filename
+
+#tabs
+  %ul
+    %li
+      %a{ :href => "#tabs-2" }
+        = I18n.t('information.other').capitalize
+    %li
+      %a{ :href => "#tabs-1" }
+        = I18n.t('associated_element.other').capitalize
+  #tabs-1
+    %p{ :style => "font-size: 16px;" }
+      %b
+        = I18n.t('media.type.one').capitalize
+        \:
+      = @media.class.human_name.capitalize
+    %p{ :style => "font-size: 16px;" }
+      %b
+        = I18n.t('media.content_type').capitalize
+        \:
+      = @media.content_type
+    %p{ :style => "font-size: 16px;" }
+      %b
+        = I18n.t('media.size').capitalize
+        \:
+      = @media.size
+      = I18n.t('media.byte', :count => @media.size)
+
+    - if @media.kind_of?(Picture)
+      - thumbnail_names = %w[big normal small thumb] #@media.attachment_options[:thumbnails].keys
+      %table#thumbnails
+        - thumbnail_names.each do |thumb|
+          %tr
+            %td
+              = image_tag @media.public_filename(thumb)
+            %td
+              = thumb
+  #tabs-2
+    %ul#associated_elements.no-list-style-type
+      = render :partial => 'list_associated_elements', :locals => { :media => @media }
+= javascript_tag "$(function(){ $('#tabs').tabs(); })"
+

@@ -5,6 +5,7 @@ es:
 
 # Admin
   download: 'descargar'
+  show: 'mostrar'
   admins: 'administradores'
   medias: 'medias'
   admin:
@@ -32,6 +33,7 @@ es:
     none: 'no hay medias'
     all: 'todos'
     associated_rights: 'derechos asociados'
+    show: 'mostrar el media'
     not_exist: 'el media solicitado no existe'
     upload: 
       start: 'descargar'
@@ -113,6 +115,7 @@ es:
 # ActiveRecord
   activerecord:
     models:
+      admin: 'administrador'
       media: 'media'
       doc: 'documento'
       pdf: 'pdf'

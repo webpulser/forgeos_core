@@ -5,6 +5,7 @@ en:
 
 # Admin
   download: 'download'
+  show: 'show'
   admins: 'administrators'
   medias: 'médias'
   admin:
@@ -32,6 +33,7 @@ en:
     none: 'no medias'
     all: 'all'
     associated_rights: 'associated rights'
+    show: 'show media'
     not_exist: 'the requested media does not exist'
     upload: 
       start: 'start upload'
