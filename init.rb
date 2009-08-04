@@ -4,6 +4,7 @@ config.gem 'mislav-will_paginate', :source => "http://gems.github.com", :lib => 
 config.gem 'coupa-acts_as_list', :source => "http://gems.github.com"
 config.gem 'coupa-acts_as_tree', :source => "http://gems.github.com"
 config.gem 'jimiray-acts_as_commentable', :source => "http://gems.github.com", :lib => 'acts_as_commentable'
+config.gem 'webpulser-jrails', :source => "http://gems.github.com", :lib => 'jrails'
 config.gem 'haml'
 
 # Load Haml and Sass
