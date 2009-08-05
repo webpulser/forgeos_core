@@ -42,4 +42,27 @@ module Admin::BaseHelper
       });
     });"
   end
+
+  def dataTables_medias_tag(columns_count=5, action_column=true)
+    columns_count -= 1 if action_column
+    columns = columns_count.times.collect{'null'}
+
+    columns << "{ 'bSearchable': false, 'bSortable': false }" if action_column
+    columns[0] = "{ 'bVisible': false, 'sType': 'numeric' }"
+
+    javascript_tag "
+    $(function(){
+      oTable = $('#table').dataTable({ 
+        'aoColumns': [ #{columns.join(',')} ],
+        'oLanguage': { 
+          'sProcessing' : '#{I18n.t('jquery.dataTables.oLanguage.sProcessing')}',
+          'sLengthMenu':'#{I18n.t('jquery.dataTables.oLanguage.sLengthMenu')}',
+          'sZeroRecords':'#{I18n.t('jquery.dataTables.oLanguage.sZeroRecords')}',
+          'sInfo':'#{I18n.t('jquery.dataTables.oLanguage.sInfo')}',
+          'sInfoEmpty':'#{I18n.t('jquery.dataTables.oLanguage.sInfoEmpty')}',
+          'sSearch':'#{I18n.t('jquery.dataTables.oLanguage.sSearch')}'
+        }
+      });
+    });"
+  end
 end

@@ -146,6 +146,43 @@ class Admin::MediasController < Admin::BaseController
     return redirect_to(admin_medias_path)
   end
 
+  # Sort media for attachable
+  def sort
+    if params['media_list']     
+      # get attachable model...
+      begin
+        # and check if model is an available attachable type
+        attachable_type = params[:target].camelize
+
+        unless Forgeos::AttachableTypes.include?(attachable_type)
+          flash[:error] = I18n.t('media.attach.unknown_type').capitalize
+          return redirect_to(admin_medias_path)
+        end
+
+        target = attachable_type.constantize
+      rescue NameError
+        flash[:error] = I18n.t('media.attach.failed').capitalize
+        return redirect_to(admin_medias_path)
+      end
+
+      # update position of attachments
+      if @target = target.find_by_id(params[:id])
+        medias = @target.sortable_attachments
+        medias.each do |media|
+          if index = params['media_list'].index(media.attachment_id.to_s)
+            media.update_attribute(:position, index+1)
+          end
+        end
+
+        # refresh list of medias
+        return render(:update) do |page|
+          page.replace_html("list_medias", :partial => 'admin/medias/list', :locals => { :medias => @target.attachments, :target => params[:target], :target_id => params[:id], :remote => true})
+        end
+      end
+    end
+    render(:nothing => true)
+  end
+
 private
 
   def get_media

@@ -58,7 +58,7 @@ fr:
       one: 'type'
       other: 'types'
     attach:
-      unknown_type: "le type de l'élément à attacher est inconnu"
+      unknown_type: "le type de l'élément attaché est inconnu"
       failed: "un problème est survenu lors de l'édition de lien avec l'élément"
     content_type: 'content type'
     filename: 'nom du fichier'
