@@ -7,7 +7,7 @@ en:
   download: 'download'
   show: 'show'
   admins: 'administrators'
-  medias: 'médias'
+  medias: 'medias'
   admin:
     one: 'administrator'
     other: 'administrators'
