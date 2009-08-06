@@ -5,6 +5,7 @@
         %th
           = I18n.t('position').capitalize
       %th
+      %th
         = I18n.t('media.filename').capitalize
       %th
         = I18n.t('media.type.other').capitalize
@@ -21,6 +22,8 @@
           - if defined?(target) && defined?(target_id)
             %td
               = media.sortable_attachments.find_by_attachable_id(target_id).position 
+          %td
+            = image_tag("medias/50x50/#{media.class.to_s.downcase}.png")
           %td
             = media.filename
           %td
