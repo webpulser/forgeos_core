@@ -22,17 +22,24 @@ module Admin::BaseHelper
     end
   end
 
-  def dataTables_tag(columns_count=1, action_column=true, sorting=false)
+  def dataTables_tag(columns_count=1, options = {})
+
+    id = options[:id].nil? ? 'table' : options[:id]
+    action_column = options[:action_column].nil? ? true : options[:action_column]
+    sorting = options[:sorting].nil? ? false : options[:sorting]
+
+
     columns_count -= 1 if action_column
     columns = columns_count.times.collect{'null'}
     columns << "{ 'bSearchable': false, 'bSortable': false }" if action_column
     columns[0] = "{ 'bVisible': false, 'sType': 'numeric' }" if sorting
 
+
     javascript_tag "
     $(function(){
-      oTable = $('#table').dataTable({ 
+      oTable = $('##{id}').dataTable({
         'aoColumns': [ #{columns.join(',')} ],
-        'oLanguage': { 
+        'oLanguage': {
           'sProcessing' : '#{I18n.t('jquery.dataTables.oLanguage.sProcessing')}',
           'sLengthMenu':'#{I18n.t('jquery.dataTables.oLanguage.sLengthMenu')}',
           'sZeroRecords':'#{I18n.t('jquery.dataTables.oLanguage.sZeroRecords')}',
