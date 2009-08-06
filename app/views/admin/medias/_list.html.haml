@@ -41,7 +41,7 @@
               = link_to I18n.t('destroy').capitalize, admin_media_path(media), :method => 'delete', :confirm => I18n.t('media.destroy.confirm').capitalize
 
 - if defined?(target) && defined?(target_id)
-  = dataTables_medias_tag(5)
+  = dataTables_tag(6, true, true)
   = sortable_element 'media_list', :url => { :controller => 'admin/medias', :action => 'sort', :id => defined?(target_id) ? target_id : nil, :target => defined?(target) ? target : nil }, :complete => visual_effect(:highlight, 'media_list'), :tag => 'tr' if defined?(target) && defined?(target_id)
 - else
   = dataTables_tag(5)
