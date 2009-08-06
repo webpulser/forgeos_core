@@ -8,7 +8,7 @@
       %th
         = I18n.t('media.filename').capitalize
       %th
-        = I18n.t('media.type.other').capitalize
+        = I18n.t('media.type.one').capitalize
       %th
         = I18n.t('media.content_type').capitalize
       %th
@@ -44,7 +44,7 @@
               = link_to I18n.t('destroy').capitalize, admin_media_path(media), :method => 'delete', :confirm => I18n.t('media.destroy.confirm').capitalize
 
 - if defined?(target) && defined?(target_id)
-  = dataTables_tag(6, true, true)
+  = dataTables_tag(7, :action_column => true, :sorting => true)
   = sortable_element 'media_list', :url => { :controller => 'admin/medias', :action => 'sort', :id => defined?(target_id) ? target_id : nil, :target => defined?(target) ? target : nil }, :complete => visual_effect(:highlight, 'media_list'), :tag => 'tr' if defined?(target) && defined?(target_id)
 - else
-  = dataTables_tag(5)
+  = dataTables_tag(6)
