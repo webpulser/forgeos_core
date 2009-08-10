@@ -6,14 +6,14 @@ class Person < ActiveRecord::Base
 
   belongs_to :avatar, :class_name => 'Picture', :dependent => :destroy
   
-  validates_presence_of     :lastname, :firstname, :email
+  validates_presence_of     :lastname, :firstname, :email, :civility_id, :country_id
   validates_length_of       :email,    :within => 3..100, :too_long => "is too long", :too_short => "is too short"
   validates_uniqueness_of   :email, :case_sensitive => false, :message => "is invalid"
   validates_format_of :email, :with => /\A([^@\s]+)@((?:[-a-z0-9]+\.)+[a-z]{2,})\Z/i
   before_create :make_activation_code 
   # prevents a user from submitting a crafted form that bypasses activation
   # anything else you want your user to change should be added here.
-  attr_accessible :lastname, :firstname, :email, :password, :password_confirmation
+  attr_accessible :lastname, :firstname, :email, :password, :password_confirmation, :civility_id, :country_id
 
   def fullname
     "#{lastname} #{firstname}"
