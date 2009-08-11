@@ -36,7 +36,12 @@ module Admin::BaseHelper
     javascript_tag "
     $(function(){
       oTable = $('##{id}').dataTable({
+        'sPaginationType': 'full_numbers',
+        'sDom': 'ftp',
         'aoColumns': [ #{columns.join(',')} ],
+        'sProcessing': true,
+	'bServerSide': true,
+	'sAjaxSource': '#{options[:url]}',
         'oLanguage': {
           'sProcessing' : '#{I18n.t('jquery.dataTables.oLanguage.sProcessing')}',
           'sLengthMenu':'#{I18n.t('jquery.dataTables.oLanguage.sLengthMenu')}',

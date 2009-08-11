@@ -5,6 +5,7 @@ config.gem 'coupa-acts_as_list', :source => "http://gems.github.com"
 config.gem 'coupa-acts_as_tree', :source => "http://gems.github.com"
 config.gem 'jimiray-acts_as_commentable', :source => "http://gems.github.com", :lib => 'acts_as_commentable'
 config.gem 'webpulser-jrails', :source => "http://gems.github.com", :lib => 'jrails'
+config.gem 'freelancing-god-thinking-sphinx', :lib => 'thinking_sphinx'
 config.gem 'haml'
 
 # Load Haml and Sass

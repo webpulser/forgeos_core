@@ -1,70 +1,43 @@
 !!!
-- menu = Forgeos::AdminMenu
 %html{ :xmlns => "http://www.w3.org/1999/xhtml" }
   %head
-    %meta{ :content => "text/html; charset=utf-8", "http-equiv" => "Content-Type" }
-    %title
-      = t 'project_name'
-      \- Admin
-    %link{ :href => "/favicon.ico", :rel => "shortcut icon", :type => "image/x-icon" }
-    = stylesheet_link_tag %w(admin/droppy admin/style dataTables/demo_page dataTables/demo_table), :cache => 'admin/base'
-    = stylesheet_link_tag "admin/theme#{cookies[:theme]||''}"
+    %meta{ :content => "text/html; charset=UTF-8", "http-equiv" => "Content-Type" }
+    = stylesheet_link_tag %w(960 jquery-ui/themes/forgeos jquery.selectbox jstree/tree_component admin/style)
     = javascript_include_tag 'jquery'
-    /
-      [if IE]>
-      <haml:loud> stylesheet_link_tag '/stylesheets/admin/ie-sucks' </haml:loud>
-      <![endif]
+    %title
+      Document sans nom
   %body
-    #container
-      #header
-        %h2
-          = I18n.t 'project_name'
-          \- Admin
-        .logged_in
-          - if logged_in?
-            = link_to current_user.fullname, admin_account_path(current_user), :title => I18n.t('your_account').capitalize
-            |
-            = link_to I18n.t('disconnect').capitalize, admin_session_path(:locale => params[:locale]), :method => :delete
-          - else
-            = link_to I18n.t('log_in').capitalize, new_admin_session_path(:locale => params[:locale])
-        %div
-          \&nbsp;
-        .change_language
-          - I18n.available_locales.each do |key, locale|
-            = link_to_unless(I18n.locale.to_sym==key.to_sym, image_tag("flags/#{key}.gif"), :locale => key)
-        #topmenu
-          %ul#nav
-            - if logged_in?
-              - build_menu
-              = yield :menu
-        = javascript_tag "$(function(){ $('#nav').droppy({speed: 5, timeout: 5}); })"
-
-      - if logged_in?
-        #top-panel
-          #panel
-            %ul
-              = yield_for_tools
-      #display_standard_flashes
-        = display_standard_flashes
-      #wrapper
-        #content
-          = yield
+    #container.container_16
+      .grid_16
+        %ul#submenu.backgrounds
+          %li.left.first
+            %a{ :href => "#" }
+              Administration
+          %li.left
+            %a{ :href => "#" }
+              Preferences
+          %li.left
+            %a{ :href => "#" }
+              Library
+          %li.left
+            %a{ :href => "#" }
+              My Account
+          %li.right
+            %a{ :href => "#" }
+              Logout
+          %li.right
+            %a{ :href => "#" }
+              Support
+          %li.right.first
+            %a{ :href => "#" }
+              See website
+        %ul#menu.backgrounds
+          - build_menu
+          = yield :menu
+        .backgrounds.menu-bottom
+      .clear
+      #page.grid_16
+        = yield
       #footer
-        #credits
-          = t 'template_by'
-          %a{ :href => "http://www.bloganje.com" }
-            Bloganje
-        #styleswitcher
-          %ul
-            %li
-              = link_to_function 'd', "$.cookies.set('theme', null); window.location.reload()", :title=>I18n.t('default'), :id=>'defswitch'
-            %li
-              = link_to_function 'b', "$.cookies.set('theme', 1); window.location.reload()", :title=>I18n.t('blue'), :id=>'blueswitch'
-            %li
-              = link_to_function 'g', "$.cookies.set('theme',2); window.location.reload()", :title=>I18n.t('green'), :id=>'greenswitch'
-            %li
-              = link_to_function 'br', "$.cookies.set('theme',3); window.location.reload()", :title=>I18n.t('brown'), :id=>'brownswitch'
-            %li
-              = link_to_function 'm', "$.cookies.set('theme',4); window.location.reload()", :title=>I18n.t('mix'), :id=>'mixswitch'
-        %br
-    = javascript_include_tag %w(jquery-ui jrails jquery.droppy jquery.dataTables.min jquery.cookies.min admin/base), :cache => 'admin'
+        ici c'est le footer !
+      = javascript_include_tag %w(jstree/css jstree/tree_component.min jquery-ui admin/customselects jquery.dataTables.min admin/base)

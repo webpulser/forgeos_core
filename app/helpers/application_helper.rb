@@ -8,11 +8,12 @@ module ApplicationHelper
   end
 
   def menu_item(tab)
-    html_options = tab[:html] || {}
+    html_options = tab[:html] ? tab[:html].dup : {}
     tab_name = (tab.delete(:i18n) ? I18n.t(*tab[:title]) : tab[:title])
     url = tab.delete(:url)
     base_request_path = request.path.gsub(/\/$/,'')[0,request.path.rindex('/')]
-    html_options[:class] = ([request.path,base_request_path].include?(url_for(url)) ? 'active' : nil)
+    html_options[:class] = '' unless html_options[:class]
+    html_options[:class] += ' current' if [request.path,base_request_path].include?(url_for(url))
     if helper = tab.delete(:helper)
         link = self.send(helper[:method],tab_name)
     else

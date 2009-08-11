@@ -1,13 +1,16 @@
 module Forgeos
   # Set administration's menu
   AdminMenu = [
-    { :title => 'admins', :url => { :controller => 'admin/admins' }, :i18n => true,
-      :children => [
-        { :title => 'rights', :url => { :controller => 'admin/rights' }, :i18n => true },
-        { :title => 'roles', :url => { :controller => 'admin/roles' }, :i18n => true }
-      ]
+    { :title => 'dashboard',
+      :url => { :controller => 'admin/dashboard' }, :i18n => true,
+      :html => { :class => 'left'}
     },
-    { :title => 'medias', :url => { :controller => 'admin/medias' }, :i18n => true }
+    { :title => 'statistics',
+      :url => { :controller => 'admin/stats' },
+      :html => { :class => 'right' } },
+    { :title => 'marketing', 
+      :url => { :controller => 'admin/marketing' },
+      :html => { :class => 'right' } }
   ]
   # Set site's menu
   Menu = []
