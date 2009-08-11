@@ -23,8 +23,7 @@
             %a{ :href => "#" }
               My Account
           %li.right
-            %a{ :href => "#" }
-              Logout
+            =link_to 'Logout', :controller => "sessions", :action => 'destroy'
           %li.right
             %a{ :href => "#" }
               Support
