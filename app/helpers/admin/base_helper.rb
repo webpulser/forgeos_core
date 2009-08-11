@@ -37,11 +37,11 @@ module Admin::BaseHelper
     $(function(){
       oTable = $('##{id}').dataTable({
         'sPaginationType': 'full_numbers',
-        'sDom': 'ftp',
+        'sDom': \"<'top'if>t<'bottom'p<'clear'>\",
         'aoColumns': [ #{columns.join(',')} ],
         'sProcessing': true,
-	'bServerSide': true,
-	'sAjaxSource': '#{options[:url]}',
+        'bServerSide': true,
+        'sAjaxSource': '#{options[:url]}',
         'oLanguage': {
           'sProcessing' : '#{I18n.t('jquery.dataTables.oLanguage.sProcessing')}',
           'sLengthMenu':'#{I18n.t('jquery.dataTables.oLanguage.sLengthMenu')}',

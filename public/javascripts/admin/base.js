@@ -68,101 +68,98 @@ function toggleActivate(selector){
 
 /* Jean Charles */
 $(function(){
-	//init the tree items
-    $("#product-tree").tree({theme_name : "custom"});
-	//stretch the sidebar to the content's height
-	$("#sidebar").height($("#content").height());
+  //init the tree items
+  $("#product-tree").tree({
+    ui: { theme_path: '/stylesheets/jstree/themes/', theme_name : 'product_category'
+  }});
+  $('#product-tree').removeClass('tree-default');
+  //stretch the sidebar to the content's height
+  $("#sidebar").height($("#content").height());
 
-	//init the resizable sidebar
-	$("#sidebar").resizable({
-		handles:'e',
-		containment: '#page',
-		maxWidth: 400,
-		minWidth: 150
-	});
+  //init the resizable sidebar
+  $("#sidebar").resizable({
+    handles:'e',
+    containment: '#page',
+    maxWidth: 400,
+    minWidth: 150
+  });
 
-	$("#sidebar").resize( function() { 
-		//when resize sidebar have to resize content
-		$("#content").width($("#page").width()-($("#sidebar").width()+1));
-	});
+  $("#sidebar").resize( function() { 
+    //when resize sidebar have to resize content
+    $("#content").width($("#page").width()-($("#sidebar").width()+1));
+  });
 
-	//when click on add-product-link open the div below
-	$('#add-product-link').bind('click', function() 
-	{
-		$('#existing-products').toggleClass('open');
-		$('#existing-products').toggle('blind');
-		//init the slider
-		/*$("#myController").jFlow({
-			slides: "#mySlides",
-			width: "680px",
-			height: "85px",
-			duration: 400
-		});*/
-		
-	});
-	
-	//when click on selects resize the otions container to stratch with the select's size
-	$('.dropdown').bind('click', function() 
-	{
-		var divOption=$(this).find('.options');
-		divOption.width($(this).width()-15);	
-	});
-	
-	//init the tabulation only if there's some tabs 
-	if($("#page").children('ul')[0]!=undefined){
-		$("#page").tabs();
-	}
-	
-	
-	/* RIGHT SIDEBAR STEPS */	
-	$('a.step-title').bind('click', function() 
-	{
-		$(this).parent().toggleClass('open');
-		$(this).next().toggle('blind');
-		return false;
+  //when click on add-product-link open the div below
+  $('#add-product-link').bind('click', function() 
+  {
+    $('#existing-products').toggleClass('open');
+    $('#existing-products').toggle('blind');
+    //init the slider
+    /*$("#myController").jFlow({
+      slides: "#mySlides",
+      width: "680px",
+      height: "85px",
+      duration: 400
+    });*/
+    
+  });
+  
+  //when click on selects resize the otions container to stratch with the select's size
+  $('.dropdown').bind('click', function() 
+  {
+    var divOption=$(this).find('.options');
+    divOption.width($(this).width()-15);  
+  });
+  
+  //init the tabulation only if there's some tabs 
+  if($("#page").children('ul')[0]!=undefined){
+    $("#page").tabs();
+  }
+  
+  
+  /* RIGHT SIDEBAR STEPS */ 
+  $('a.step-title').bind('click', function() 
+  {
+    $(this).parent().toggleClass('open');
+    $(this).next().toggle('blind');
+    return false;
 
-	});
-	
-	$('#menu .current').append('<span class="after-current"></span>');
-	$('#menu .current').prepend('<span class="before-current"></span>');
-	
-	
-	$('#search .search-link').bind('click',function(){
-		$('#search .search-form').toggle('blind');
-		$('#search').toggleClass('open');
-		return false;
-	 });	
-/*	
-	$('.datatable').dataTable({
-		"sDom": '<"top"if>t<"bottom"p<"clear">'	,
-		"sPaginationType": "full_numbers",
-		"aaSorting": [[ 1, "desc" ]]
-	 });	
-*/
-	$('#search .search-form').html($('.dataTables_filter').clone(true));
-	$('#table_wrapper .dataTables_filter').remove();
-	
-	
+  });
+  
+  $('#menu .current').append('<span class="after-current"></span>');
+  $('#menu .current').prepend('<span class="before-current"></span>');
+  
+  
+  $('#search .search-link').bind('click',function(){
+    $('#search .search-form').toggle('blind');
+    $('#search').toggleClass('open');
+    return false;
+   });  
+
+  $('#search .search-form').html($('.dataTables_filter').clone(true));
+  $('.top .dataTables_filter').remove();
+  
+  
 });
 /*
 $(function() {
-	$('textarea.tinymce').tinymce({
-		// General options
-		script_url : '../scripts/tiny_mce/tiny_mce.js',
-		mode : "textareas",
-		theme : "advanced",
-		skin : "forgeos",
-		
-			// Theme options
-		theme_advanced_buttons1 : "styleselect,|,bold,italic,underline,strikethrough,|,justifyleft,justifycenter,justifyright,justifyfull,|,outdent,indent,|,code",
-		theme_advanced_buttons2 :"",
-		theme_advanced_toolbar_location : "top",
-		theme_advanced_toolbar_align : "left",
-		theme_adavnced_statusbar_location : "bottom",
-		theme_advanced_resizing : true
-		// Example content CSS (should be your site CSS)
-		//content_css : "styles/style.css"
-		
-	});
+  $('textarea.tinymce').tinymce({
+    // General options
+    script_url : '../scripts/tiny_mce/tiny_mce.js',
+    mode : "textareas",
+    theme : "advanced",
+    skin : "forgeos",
+    
+      // Theme options
+    theme_advanced_buttons1 : "styleselect,|,bold,italic,underline,strikethrough,|,justifyleft,justifycenter,justifyright,justifyfull,|,outdent,indent,|,code",
+    theme_advanced_buttons2 :"",
+    theme_advanced_toolbar_location : "top",
+    theme_advanced_toolbar_align : "left",
+    theme_adavnced_statusbar_location : "bottom",
+    theme_advanced_resizing : true
+    // Example content CSS (should be your site CSS)
+    //content_css : "styles/style.css"
+    
+  });
 });
 */
