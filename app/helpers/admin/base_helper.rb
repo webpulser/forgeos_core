@@ -48,7 +48,7 @@ module Admin::BaseHelper
           'sZeroRecords':'#{I18n.t('jquery.dataTables.oLanguage.sZeroRecords')}',
           'sInfo':'#{I18n.t('jquery.dataTables.oLanguage.sInfo')}',
           'sInfoEmpty':'#{I18n.t('jquery.dataTables.oLanguage.sInfoEmpty')}',
-          'sSearch':'#{I18n.t('jquery.dataTables.oLanguage.sSearch')}'
+          'sSearch':''
         }
       });
     });"
