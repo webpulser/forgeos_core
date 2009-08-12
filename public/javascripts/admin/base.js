@@ -66,6 +66,12 @@ function toggleActivate(selector){
   link.toggleClass('see-off');
 }
 
+function removedataTablesRow(selector){
+  oTable.fnDeleteRow(
+      oTable.fnGetPosition($(selector).parents('tr')[0])
+  );
+}
+
 /* Jean Charles */
 $(function(){
   //init the tree items
