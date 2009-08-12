@@ -119,19 +119,34 @@ $(function(){
   
   //init the tabulation only if there's some tabs 
   if($("#page").children('ul')[0]!=undefined){
-    $("#page").tabs();
+    $("#page").tabs({
+      select: function(event, ui) {
+        var url = $.data(ui.tab, 'load.tabs');
+        if( url ) {
+            location.href = url;
+            return false;
+        }
+        return true;
+      }
+    });
   }
   
   
   /* RIGHT SIDEBAR STEPS */ 
   $('a.step-title').bind('click', function() 
   {
-    $(this).parent().toggleClass('open');
-    $(this).next().toggle('blind');
+    if (!$(this).parent().hasClass('disabled')) {
+      $(this).next().toggle('blind');
+      $(this).parent().toggleClass('open');
+    }
     return false;
-
   });
-  
+  $('a.step-title').each(function(){ 
+    if ($(this).parent().hasClass('disabled')) {
+      $(this).next().hide();
+    }
+  });
+
   $('#menu .current').append('<span class="after-current"></span>');
   $('#menu .current').prepend('<span class="before-current"></span>');
   
