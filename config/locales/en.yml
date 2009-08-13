@@ -5,6 +5,10 @@ en:
 
 # Admin
   get_forgotten_password: 'I forgot my password'
+  go_back_admin: 'go back to administration'
+  see_site: 'see the website'
+  library: 'library'
+  administration: 'administration'
   download: 'download'
   show: 'show'
   admins: 'administrators'

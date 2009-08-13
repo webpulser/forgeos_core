@@ -36,6 +36,5 @@ class Admin::SessionsController < Admin::BaseController
     cookies.delete :auth_token
     reset_session
     flash[:notice] = I18n.t('log_out_ok').capitalize
-    redirect_to(:action => 'new')
   end
 end

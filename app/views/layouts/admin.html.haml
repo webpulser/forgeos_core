@@ -11,25 +11,21 @@
       .grid_16
         %ul#submenu.backgrounds
           %li.left.first
-            %a{ :href => "#" }
-              Administration
+            = link_to I18n.t('administration').capitalize, admin_admins_path
           %li.left
             %a{ :href => "#" }
               Preferences
           %li.left
-            %a{ :href => "#" }
-              Library
+            = link_to I18n.t('library').capitalize, admin_medias_path
           %li.left
-            %a{ :href => "#" }
-              My Account
+            = link_to I18n.t('your_account').capitalize, admin_account_path(current_user)
           %li.right
-            =link_to 'Logout', :controller => "sessions", :action => 'destroy'
+            = link_to I18n.t('logout').capitalize, admin_logout_path
           %li.right
             %a{ :href => "#" }
               Support
           %li.right.first
-            %a{ :href => "#" }
-              See website
+            = link_to I18n.t('see_site').capitalize, :root
         %ul#menu.backgrounds
           - build_menu
           = yield :menu

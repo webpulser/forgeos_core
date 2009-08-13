@@ -1,0 +1,21 @@
+#container.container_16
+  #spacer.grid_16
+    \&nbsp;
+  .grid_3
+    \&nbsp;
+  #login-container.logout.grid_10
+    .sign-out-message
+      = I18n.t('log_out_ok').capitalize
+    .grid_3.alpha
+      \&nbsp;
+    .buttons.grid_4.alpha.omega
+      - link_to admin_login_path, :class => 'backgrounds button' do
+        %span.small-icons.admin
+          = I18n.t('go_back_admin').capitalize
+      - link_to :root, :class => 'backgrounds button' do
+        %span.small-icons.see
+          = I18n.t('see_site').capitalize
+    .grid_3.omega
+      \&nbsp;
+  .grid_3
+    \&nbsp;
