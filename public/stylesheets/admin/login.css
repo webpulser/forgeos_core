@@ -73,13 +73,19 @@ body{
   padding:2px 0;
 }
 
-.sign-in-message{
-  background-color:#f7bd2e;
+.sign-in-message, .sign-out-message{
   color:#FFF;
   padding:14px 0px 8px 40px;
   font-size:1.1em;
   font-weight:bold;
 }
+.sign-in-message{
+  background-color:#f7bd2e;
+}
+
+.sign-out-message{
+  background-color:#8fcc65;
+ }
 
 .submit-button{
   background-position:0px -359px;
@@ -92,4 +98,32 @@ body{
   margin-top:15px;
   font-size:1.1em;
   cursor:pointer;
+}
+
+.logout{
+  height:211px !important;
+}
+
+.buttons{
+  text-align:center;
+  padding-top:35px;
+}
+
+.button{
+  -moz-border-radius:2px;
+  background-color:#EAEBEC;
+  background-position:0 -10px;
+  border:1px solid #BFBFBF;
+  display:block;
+  font-size:0.8em;
+  padding:8px 5px 5px;
+  color:#5f5f5f;
+  text-decoration:none;
+  margin-top:15px;
+  font-weight:bold;
+}
+
+.see{
+  background-position:0 -1008px;
+  padding-left:25px;
 }

@@ -80,7 +80,7 @@ $(function(){
   }});
   $('#product-tree').removeClass('tree-default');
   //stretch the sidebar to the content's height
-  $("#sidebar").height($("#content").height());
+ // $("#sidebar").height($("#content").height());
 
   //init the resizable sidebar
   $("#sidebar").resizable({
@@ -107,9 +107,14 @@ $(function(){
       height: "85px",
       duration: 400
     });*/
-    
   });
-  
+ 
+$('.some-variants').bind('click',function(){
+  var element=$(this);
+  var p_element=element.find('p');
+  element.toggleClass('open');
+  p_element.toggle('blind');
+});
   //when click on selects resize the otions container to stratch with the select's size
   $('.dropdown').bind('click', function() 
   {
@@ -151,17 +156,19 @@ $(function(){
   $('#menu .current').prepend('<span class="before-current"></span>');
   
   
-  $('#search .search-link').bind('click',function(){
-    $('#search .search-form').toggle('blind');
-    $('#search').toggleClass('open');
-    return false;
-   });  
 
-  $('#search .search-form').html($('.dataTables_filter').clone(true));
+  $('.search-form').html($('.dataTables_filter').clone(true));
+  $('.search-form').append('<a href="#" class="backgrounds button-ok">OK</a>');
   $('.top .dataTables_filter').remove();
-  
+  $('.search-link, .button-ok').bind('click',toggle_search_elements);
   
 });
+
+function toggle_search_elements(){
+ $('.search-form').toggle('blind');
+    $('#search').toggleClass('open');
+    return false;
+}
 /*
 $(function() {
   $('textarea.tinymce').tinymce({
