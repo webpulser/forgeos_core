@@ -28,9 +28,9 @@ module Admin::BaseHelper
     action_column = options[:action_column].nil? ? true : options[:action_column]
     sorting = options[:sorting].nil? ? false : options[:sorting]
 
-    columns_count -= 1 if action_column
+    #columns_count -= 1 if action_column
     columns = columns_count.times.collect{'null'}
-    columns << "{ 'bSearchable': false, 'bSortable': false }" if action_column
+    #columns << "{ 'bSearchable': false, 'bSortable': false }" if action_column
     columns[0] = "{ 'bVisible': false, 'sType': 'numeric' }" if sorting
 
     javascript_tag "
@@ -42,6 +42,7 @@ module Admin::BaseHelper
         'sProcessing': true,
         'bServerSide': true,
         'sAjaxSource': '#{options[:url]}',
+        'fnDrawCallback': DataTablesDrawCallBack,
         'oLanguage': {
           'sProcessing' : '#{I18n.t('jquery.dataTables.oLanguage.sProcessing')}',
           'sLengthMenu':'#{I18n.t('jquery.dataTables.oLanguage.sLengthMenu')}',
