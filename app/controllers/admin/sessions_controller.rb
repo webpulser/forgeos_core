@@ -1,5 +1,6 @@
 # This controller handles the login/logout function of the site.  
 class Admin::SessionsController < Admin::BaseController
+  layout 'admin_login'
   skip_before_filter :login_required, :only => [:new, :create]
   def new
     session[:redirect] = nil

@@ -1,0 +1,95 @@
+@charset "UTF-8";
+/* CSS Document */
+
+
+/* CSS GENERAUX*/
+body{
+  background-image:url(/images/admin/backgrounds/background.png);
+  font-family:Arial, Helvetica, sans-serif;
+  margin:0px;
+  padding:0px;
+}
+
+/* 16x16 ICONS */
+
+.small-icons{
+  background-image:url(/images/admin/small-icons-16-16-verti.png);
+  background-repeat:no-repeat;
+  padding-left:20px;
+}
+
+/* BIG ICONS */
+
+.big-icons{
+  background-image:url(/images/admin/big-icons-24-24-verti.png);
+  background-repeat:no-repeat;
+  padding-left:28px;
+}
+
+.borders{
+  background-image:url(/images/admin/borders-verti.png);
+  background-repeat:no-repeat;
+}
+  
+
+/* BACKGROUNDS */
+.backgrounds{
+  background-image:url(/images/admin/backgrounds-verti.png) !important;
+  background-repeat:repeat-x;
+}
+
+/* LOGIN PAGE */
+#login-container{
+  background-color:#FFF;
+  -moz-border-radius:4px;
+  height:275px;
+  padding-top:30px;
+}
+#spacer {
+  height: 100px;
+}
+#login-container form{
+  margin-top:20px;
+  padding:0 25px;
+  color:#808080;
+  font-size:0.8em;
+}
+
+#login-container form label{
+  font-weight:bold;
+}
+
+#login-container form a{
+  color:#808080;
+  text-decoration:underline;
+}
+
+#login-container form .text{
+  margin:5px 15px 10px 0;
+  width:200px;
+  -moz-border-radius:4px;
+  border:1px solid #B2B2B2;
+  height:16px;
+  padding:2px 0;
+}
+
+.sign-in-message{
+  background-color:#f7bd2e;
+  color:#FFF;
+  padding:14px 0px 8px 40px;
+  font-size:1.1em;
+  font-weight:bold;
+}
+
+.submit-button{
+  background-position:0px -359px;
+  -moz-border-radius:4px;
+  color:#FFF;
+  border:0;
+  height:30px;
+  padding:0 5px;
+  font-weight:bold;
+  margin-top:15px;
+  font-size:1.1em;
+  cursor:pointer;
+}

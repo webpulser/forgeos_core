@@ -4,6 +4,7 @@ en:
     other: 'keywords'
 
 # Admin
+  get_forgotten_password: 'I forgot my password'
   download: 'download'
   show: 'show'
   admins: 'administrators'

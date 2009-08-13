@@ -740,11 +740,11 @@ a.dropdown_toggle span { display:block; background:url(/images/admin/left-select
     .datatable thead th.sorting_asc{background-position:right -1636px}
   .dataTables_wrapper .bottom{height:16px;margin-top:10px;margin-left:22px;}
 
-  .paginate_active,.paginate_button{padding:2px 5px;height:14px;font-size:0.8em;
+  .paginate_active,.paginate_button{padding:2px 5px;font-size:0.7em;font-weight: bold;
     margin:0px 2px; display:inline-block;cursor:pointer;}
   .paginate_button.previous,.paginate_button.next{
     background:#e5f2f9 url(/images/admin/small-icons-16-16-verti.png) no-repeat;
-      -moz-border-radius:4px;color:#0083c5;}
+      color:#0083c5;}
     .paginate_button.first,.paginate_button.last{display:none;}
     .paginate_button.previous{background-position:left -191px;padding-left:18px;}
     .paginate_button.next{background-position:right -1342px;padding-right:18px;}

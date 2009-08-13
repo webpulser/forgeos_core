@@ -1,15 +1,25 @@
-- form_tag admin_session_path do
-  %p
-    = label_tag :email, I18n.t('email').capitalize
-    \:
-    = text_field_tag 'email'
-  %p
-    = label_tag :password, I18n.t('password').capitalize
-    \:
-    = password_field_tag 'password'
-  %p
-    = label_tag :remember_me, I18n.t('remember_me').capitalize
-    \:
-    = check_box_tag 'remember_me'
-  %p
-    = submit_tag I18n.t('log_in').capitalize
+#container.container_16
+  #spacer.grid_16
+    &nbsp;
+  .grid_3
+    &nbsp;
+  #login-container.grid_10
+    .sign-in-message
+      = I18n.t('log_in').capitalize
+    - form_tag admin_session_path do
+      = label_tag :email, I18n.t('email').capitalize
+      %br
+      = text_field_tag 'email', nil, :class => 'text'
+      %br
+      = label_tag :password, I18n.t('password').capitalize
+      %br
+      = password_field_tag 'password', nil, :class => 'text'
+      %a{ :href => "#" }
+      = I18n.t('get_forgotten_password').capitalize
+      %br
+      = check_box_tag 'remember_me'
+      = I18n.t('remember_me').capitalize
+      %br
+      = submit_tag I18n.t('log_in').capitalize, :class => 'backgrounds submit-button'
+  .grid_3
+    &nbsp;
