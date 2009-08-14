@@ -6,7 +6,7 @@ class Person < ActiveRecord::Base
 
   belongs_to :avatar, :class_name => 'Picture', :dependent => :destroy
   
-  validates_presence_of     :lastname, :firstname, :email, :civility_id, :country_id
+  validates_presence_of     :lastname, :firstname, :email
   validates_length_of       :email,    :within => 3..100, :too_long => "is too long", :too_short => "is too short"
   validates_uniqueness_of   :email, :case_sensitive => false, :message => "is invalid"
   validates_format_of :email, :with => /\A([^@\s]+)@((?:[-a-z0-9]+\.)+[a-z]{2,})\Z/i
