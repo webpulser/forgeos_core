@@ -54,4 +54,13 @@ module Admin::BaseHelper
       });
     });"
   end
+
+  def fg_search
+    label = content_tag(:span, I18n.t('search').capitalize, :class => 'small-icons search-span')
+    link_to(label, '#', :class => 'small-icons left search-link')
+  end
+
+  def fg_submit_tag(*label)
+    submit_tag I18n.t(label.length == 1 ? label.first : label).capitalize, :class => 'backgrounds interact-button'
+  end
 end
