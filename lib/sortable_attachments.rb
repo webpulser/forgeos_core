@@ -7,8 +7,7 @@ module SortableAttachments #:nodoc:
 
   module ClassMethods
     def sortable_attachments
-      has_many :sortable_attachments, :dependent => :destroy, :order => 'position', :as => :attachable
-      has_many :attachments, :through => :sortable_attachments, :readonly => true, :order => 'sortable_attachments.position'
+      has_and_belongs_to_many :attachments, :list => true
     end
   end
 
