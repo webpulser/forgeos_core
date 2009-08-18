@@ -1,86 +1,55 @@
 class Admin::RolesController < Admin::BaseController
-  # GET /roles
-  # GET /roles.xml
   def index
-    @roles = Role.find(:all)
-
     respond_to do |format|
       format.html # index.html.erb
-      format.xml  { render :xml => @roles }
+      format.json do
+        sort
+        render :layout => false
+      end
     end
   end
 
-  # GET /roles/1
-  # GET /roles/1.xml
   def show
     @role = Role.find(params[:id])
-
-    respond_to do |format|
-      format.html # show.html.erb
-      format.xml  { render :xml => @role }
-    end
   end
 
-  # GET /roles/new
-  # GET /roles/new.xml
   def new
-    @role = Role.new
-
-    respond_to do |format|
-      format.html # new.html.erb
-      format.xml  { render :xml => @role }
-    end
+    @role = Role.new(params[:role])
   end
 
-  # GET /roles/1/edit
   def edit
     @role = Role.find(params[:id])
   end
 
-  # POST /roles
-  # POST /roles.xml
   def create
     @role = Role.new(params[:role])
-
-    respond_to do |format|
-      if @role.save
-        flash[:notice] = I18n.t('role.create.success').capitalize
-        format.html { redirect_to(admin_role_path(@role)) }
-        format.xml  { render :xml => @role, :status => :created, :location => @role }
-      else
-        format.html { render :action => "new" }
-        format.xml  { render :xml => @role.errors, :status => :unprocessable_entity }
-      end
+    if @role.save
+      flash[:notice] = I18n.t('role.create.success').capitalize
+      redirect_to(admin_role_path(@role))
+    else
+      render :action => "new"
     end
   end
 
-  # PUT /roles/1
-  # PUT /roles/1.xml
   def update
     @role = Role.find(params[:id])
 
-    respond_to do |format|
-      if @role.update_attributes(params[:role])
-        flash[:notice] = I18n.t('role.update.success').capitalize
-        format.html { redirect_to(admin_role_path(@role)) }
-        format.xml  { head :ok }
-      else
-        format.html { render :action => "edit" }
-        format.xml  { render :xml => @role.errors, :status => :unprocessable_entity }
-      end
+    if @role.update_attributes(params[:role])
+      flash[:notice] = I18n.t('role.update.success').capitalize
+      redirect_to(admin_role_path(@role))
+    else
+      render :action => "edit"
     end
   end
 
-  # DELETE /roles/1
-  # DELETE /roles/1.xml
   def destroy
     @role = Role.find(params[:id])
-    @role.destroy
-
-    respond_to do |format|
-      format.html { redirect_to(admin_roles_path) }
-      format.xml  { head :ok }
+    if @role.destroy
+      flash[:notice] = I18n.t('role.destroy.success').capitalize
+    else
+      flash[:error] = I18n.t('role.destroy.failed').capitalize
     end
+    redirect_to(admin_roles_path)
   end
 
   def rights
@@ -94,4 +63,26 @@ class Admin::RolesController < Admin::BaseController
     redirect_to :action => 'rights', :id => @role
   end
 
+private
+
+  def sort
+    columns = %w(name)
+    conditions = []
+    per_page = params[:iDisplayLength].to_i
+    offset =  params[:iDisplayStart].to_i
+    page = (offset / per_page) + 1
+    order = "#{columns[params[:iSortCol_0].to_i]} #{params[:iSortDir_0].upcase}"
+    if params[:sSearch] && !params[:sSearch].blank?
+      @roles = Role.search(params[:sSearch],
+        :order => order,
+        :page => page,
+        :per_page => per_page)
+    else
+      @roles = Role.paginate(:all,
+        :conditions => conditions,
+        :order => order,
+        :page => page,
+        :per_page => per_page)
+    end
+  end
 end

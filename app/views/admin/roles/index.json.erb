@@ -1,0 +1,31 @@
+{
+'iTotalDisplayRecords': <%= @roles.total_entries || 0 %>,
+'aaData': [
+<% @roles.each do |role| %>
+  <% link_id = "role_#{role.id}" %>
+  <% 
+     role_clone = role.clone.attributes
+     role_clone[:right_ids] = role.right_ids
+  %>
+  [
+  '<%= content_tag(:div, '&nbsp;',:class => 'small-icons role') %>',
+  '<%= escape_javascript content_tag(:div, link_to(role.name, [:admin, role]), :class => 'role-name') %>',
+  '<%= role.admins.count %>',
+  '<%= role.created_at.to_s(:slashed_fr) %>',
+  '<%= I18n.t('active').capitalize %>',
+
+  '<%= escape_javascript link_to('', new_admin_role_path(:role => role_clone), :class => 'small-icons duplicate-link') -%>
+    <%= escape_javascript link_to('', [:edit, :admin, role], :class => 'small-icons edit-link') -%>
+    <%= escape_javascript link_to_remote('', :url => [:admin, role],
+      :method => :delete,
+      :confirm => I18n.t('role.destroy.confirm').capitalize,
+      :success => "removedataTablesRow('#destroy_#{link_id}')", 
+      :html => {
+      :class => 'small-icons destroy-link', :id => "destroy_#{link_id}"
+    })
+    -%>'
+  ] <%= ',' unless @roles.last == role %>
+
+<% end %>
+]
+}
