@@ -4,6 +4,12 @@ es:
     other: palabras clave
 
 # Admin
+  save_changes: 'guardar los cambios'
+  get_forgotten_password: 'contraseña olvidada'
+  go_back_admin: 'volver a la dministración'
+  see_site: 'mostrer el sitio'
+  library: 'biblioteca'
+  administration: 'administración'
   download: 'descargar'
   show: 'mostrar'
   created_on: 'fecha de creación'
@@ -34,6 +40,7 @@ es:
     none: 'no hay roles'
     all: 'todos los roles'
     show: 'mostrar rol'
+    not_exist: 'el rol solicitado no existe'
     create:
       success: 'el rol ha sido creado con éxito'
       failed: 'ha habido un problema al crear el rol'
@@ -50,7 +57,9 @@ es:
     one: 'derecho'
     other: 'derechos'
     none: 'no hay derechos'
+    all: 'todos los derechos'
     show: 'mostrar derecho'
+    not_exist: 'el derecho solicitado no existe'
     create:
       success: 'el derecho se ha creado con éxito'
       failed: 'ha habido un problema al crear el derecho'

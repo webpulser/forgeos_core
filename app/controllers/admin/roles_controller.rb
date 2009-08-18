@@ -1,4 +1,6 @@
 class Admin::RolesController < Admin::BaseController
+  before_filter :get_role, :only => [:show, :edit, :update, :destroy, :rights, :add_right]
+
   def index
     respond_to do |format|
       format.html # index.html.erb
@@ -10,7 +12,6 @@ class Admin::RolesController < Admin::BaseController
   end
 
   def show
-    @role = Role.find(params[:id])
   end
 
   def new
@@ -18,7 +19,6 @@ class Admin::RolesController < Admin::BaseController
   end
 
   def edit
-    @role = Role.find(params[:id])
   end
 
   def create
@@ -27,23 +27,22 @@ class Admin::RolesController < Admin::BaseController
       flash[:notice] = I18n.t('role.create.success').capitalize
       redirect_to(admin_role_path(@role))
     else
+      flash[:error] = I18n.t('role.create.failed').capitalize
       render :action => "new"
     end
   end
 
   def update
-    @role = Role.find(params[:id])
-
     if @role.update_attributes(params[:role])
       flash[:notice] = I18n.t('role.update.success').capitalize
       redirect_to(admin_role_path(@role))
     else
+      flash[:error] = I18n.t('role.update.failed').capitalize
       render :action => "edit"
     end
   end
 
   def destroy
-    @role = Role.find(params[:id])
     if @role.destroy
       flash[:notice] = I18n.t('role.destroy.success').capitalize
     else
@@ -53,17 +52,22 @@ class Admin::RolesController < Admin::BaseController
   end
 
   def rights
-    @role = Role.find(params[:id])
   end
 
   def add_right
-    @role = Role.find(params[:id])
     @role.update_attributes(params[:role])
     @role.save
     redirect_to :action => 'rights', :id => @role
   end
 
 private
+
+  def get_role
+    unless @role = Role.find_by_id(params[:id])
+      flash[:error] = I18n.t('role.not_exist').capitalize
+      return redirect_to(admin_roles_path)
+    end
+  end
 
   def sort
     columns = %w(name)

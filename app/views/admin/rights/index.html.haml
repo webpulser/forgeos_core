@@ -1,31 +1,36 @@
 = render :partial => 'tabs'
-%h1
-  = I18n.t('right', :count => 2).capitalize
-%table
-  %thead
-    %tr
-      %th
-        = I18n.t('name').capitalize
-      %th
-        = I18n.t('controller_name').capitalize
-      %th
-        = I18n.t('action_name').capitalize
-      %th
-        = I18n.t('action', :count => 2).capitalize
-  %tbody
-    - @rights.each do |right|
+#sidebar.grid_4.omega.alpha
+  .backgrounds.header
+    %a.backgrounds.action-button{ :href => "#" }
+      %span.big-icons.new-category
+      %span.small-icons.arrow
+  .backgrounds.sidebar-background
+  .sidebar-content
+    %h5.small-icons.all-rights
+      = I18n.t('right.all').capitalize
+    #right-tree
+      %ul
+        = render :partial => 'admin/categories/list', :locals => { :categories => ProductCategory.find_all_by_parent_id(nil) }
+#content.grid_12.alpha.omega
+  .backgrounds.header
+    = link_to I18n.t('right.create.action').capitalize, new_admin_right_path
+    #search.right
+      = link_to content_tag(:span, I18n.t('search').capitalize, :class => 'small-icons search-span'), '#', :class => 'small-icons left search-link'
+    .backgrounds.search-form
+  .content-background
+  %table#table.datatable
+    %thead
       %tr
-        %td
-          = h right.name
-        %td
-          = h right.controller_name
-        %td
-          = h right.action_name
-        %td
-          = link_to I18n.t('show').capitalize, admin_right_path(right)
-          \-
-          = link_to I18n.t('edit').capitalize, edit_admin_right_path(right)
-          \-
-          = link_to I18n.t('destroy').capitalize, admin_right_path(right), :confirm => I18n.t('right.destroy.confirm').capitalize, :method => :delete
+        %th
+        %th
+          = I18n.t('name').capitalize
+        %th
+          = I18n.t('category.one').capitalize
+        %th
+          = I18n.t('controller_name').capitalize
+        %th
+          = I18n.t('action_name').capitalize
+        %th
+    %tbody
 
-- content_for :tools, link_to(I18n.t('right.create.action').capitalize, new_admin_right_path, :class => 'add')
+= dataTables_tag 6, :url => admin_rights_path(:format => :json)

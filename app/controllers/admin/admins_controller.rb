@@ -47,7 +47,7 @@ class Admin::AdminsController < Admin::BaseController
 
   def destroy
     if request.delete? && @admin.destroy
-        flash[:notice] = I18n.t('admin.destroy.success').capitalize
+      flash[:notice] = I18n.t('admin.destroy.success').capitalize
     else
       flash[:error] = I18n.t('admin.destroy.failed').capitalize
     end
@@ -66,8 +66,7 @@ class Admin::AdminsController < Admin::BaseController
 private
 
   def get_admin
-    @admin = Admin.find_by_id params[:id]
-    unless @admin
+    unless @admin = Admin.find_by_id(params[:id])
       flash[:error] = I18n.t('admin.not_exist').capitalize
       return redirect_to(admin_admins_path)
     end

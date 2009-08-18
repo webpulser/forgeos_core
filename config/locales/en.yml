@@ -40,6 +40,7 @@ en:
     none: 'no roles'
     all: 'all roles'
     show: 'show role'
+    not_exist: 'the requested role does not exist'
     create:
       success: 'the role was successfully created'
       failed: 'a problem occured during the role creation'
@@ -56,11 +57,13 @@ en:
     one: 'right'
     other: 'rights'
     none: 'no rights'
+    all: 'all rights'
     show: 'show right'
+    not_exist: 'the requested right does not exist'
     create:
       success: 'the right was successfully created'
       failed: 'a problem occured during the right creation'
-      action: 'create a right'
+      action: 'create right'
     update:
       success: 'the right was successfully updated'
       failed: 'a problem occured during the right update'

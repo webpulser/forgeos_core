@@ -4,6 +4,12 @@ fr:
     other: 'mots clés'
 
 # Admin
+  save_changes: 'enregistrer les changements'
+  get_forgotten_password: 'mot de passe oublié'
+  go_back_admin: "retour vers l'administration"
+  see_site: 'voir le site'
+  library: 'librairie'
+  administration: 'administration'
   download: 'télécharger'
   show: 'voir'
   created_on: 'date de création'
@@ -34,6 +40,7 @@ fr:
     none: 'aucun rôle'
     all: 'tous les rôles'
     show: 'voir le rôle'
+    not_exist: "le rôle sélectionné n'existe pas"
     create:
       success: "le rôle a bien été créé"
       failed: "un problème est survenu lors de la création du rôle"
@@ -50,7 +57,9 @@ fr:
     one: 'droit'
     other: 'droits'
     none: 'aucun droit'
+    all: 'tous les droits'
     show: 'voir le droit'
+    not_exist: "le droit sélectionné n'existe pas"
     create:
       success: "le droit a bien été créé"
       failed: "un problème est survenu lors de la création du droit"
