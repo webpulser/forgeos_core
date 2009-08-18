@@ -6,18 +6,20 @@ es:
 # Admin
   download: 'descargar'
   show: 'mostrar'
+  created_on: 'fecha de creación'
   admins: 'administradores'
   medias: 'medias'
   admin:
     one: 'administrador'
     other: 'administradores'
     none: 'no hay administradores'
+    all: 'todos los usarios'
     show: 'mostrar administrador'
     not_exist: 'el administrador solicitado no existe'
     create:
       success: 'se ha creado con éxito la cuenta de administrador'
       failed: 'ha ocurrido un problema durante la creación de la cuenta de administrador'
-      action: 'crear un administrador'
+      action: 'crear un usario'
     update:
       success: 'el administrador se ha actualizado con éxito'
       failed: 'ha ocurrido un problema durante la actualización del administrador'
@@ -25,7 +27,7 @@ es:
     destroy:
       success: 'el administrador se ha eliminado con éxito'
       failed: 'ha ocurrido un problema al eliminar el administrador'
-      confirm: '¿estás seguro de que quieres eliminar éste administrador?'
+      confirm: '¿estás seguro de que quieres eliminar éste usario?'
   media:
     list: 'lista de medias'
     one: 'media'

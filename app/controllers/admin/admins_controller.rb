@@ -1,90 +1,57 @@
 class Admin::AdminsController < Admin::BaseController
   before_filter :get_admin, :only => [:show, :edit, :update, :destroy, :update_rights]
 
-  # GET /admins
-  # GET /admins.xml
   def index
-    @admins = Admin.all
-
     respond_to do |format|
       format.html # index.html.erb
-      format.xml  { render :xml => @admins }
+      format.json do
+        sort
+        render :layout => false
+      end
     end
   end
 
-  # GET /admins/1
-  # GET /admins/1.xml
   def show
-    respond_to do |format|
-      format.html # show.html.erb
-      format.xml  { render :xml => @admin }
-    end
   end
 
-  # GET /admins/new
-  # GET /admins/new.xml
   def new
-    @admin = Admin.new
-
-    respond_to do |format|
-      format.html # new.html.erb
-      format.xml  { render :xml => @admin }
-    end
+    @admin = Admin.new(params[:admin])
   end
 
-  # GET /admins/1/edit
   def edit
   end
 
-  # POST /admins
-  # POST /admins.xml
   def create
     @admin = Admin.new(params[:admin])
     @admin.build_avatar(params[:avatar]) unless @admin.avatar
-    respond_to do |format|
-      if @admin.save
-        flash[:notice] = I18n.t('admin.create.success').capitalize
-        format.html { redirect_to(admin_admins_path) }
-        format.xml  { render :xml => @admin, :status => :created, :location => @admin }
-      else
-        flash[:error] = I18n.t('admin.create.failed').capitalize
-        format.html { render :action => "new" }
-        format.xml  { render :xml => @admin.errors, :status => :unprocessable_entity }
-      end
+
+    if @admin.save
+      flash[:notice] = I18n.t('admin.create.success').capitalize
+      redirect_to(admin_admins_path)
+    else
+      flash[:error] = I18n.t('admin.create.failed').capitalize
+      render :action => "new"
     end
   end
 
-  # PUT /admins/1
-  # PUT /admins/1.xml
   def update
     upload_avatar 
-    
-    respond_to do |format|
-      if @admin.update_attributes(params[:admin])
-        flash[:notice] = I18n.t('admin.update.success').capitalize
-        format.html { redirect_to(admin_admins_path) }
-        format.xml  { head :ok }
-      else
-        flash[:error] = I18n.t('admin.update.failed').capitalize
-        format.html { render :action => "edit" }
-        format.xml  { render :xml => @admin.errors, :status => :unprocessable_entity }
-      end
+    if @admin.update_attributes(params[:admin])
+      flash[:notice] = I18n.t('admin.update.success').capitalize
+      redirect_to(admin_admins_path)
+    else
+      flash[:error] = I18n.t('admin.update.failed').capitalize
+      render :action => "edit"
     end
   end
 
-  # DELETE /admins/1
-  # DELETE /admins/1.xml
   def destroy
     if request.delete? && @admin.destroy
         flash[:notice] = I18n.t('admin.destroy.success').capitalize
-      else
-        flash[:error] = I18n.t('admin.destroy.failed').capitalize
-      end
-
-    respond_to do |format|
-      format.html { redirect_to(admin_admins_path) }
-      format.xml  { head :ok }
+    else
+      flash[:error] = I18n.t('admin.destroy.failed').capitalize
     end
+    redirect_to(admin_admins_path)
   end
 
   def update_rights
@@ -111,6 +78,27 @@ private
       @avatar = @admin.create_avatar(params[:avatar])
       flash[:error] = @avatar.errors unless @avatar.save
       params[:admin].update(:avatar_id => @avatar.id)
+    end
+  end
+
+  def sort
+    columns = %w(firstname lastname)
+    conditions = []
+    per_page = params[:iDisplayLength].to_i
+    offset =  params[:iDisplayStart].to_i
+    page = (offset / per_page) + 1
+    order = "#{columns[params[:iSortCol_0].to_i]} #{params[:iSortDir_0].upcase}"
+    if params[:sSearch] && !params[:sSearch].blank?
+      @admins = Admin.search(params[:sSearch],
+        :order => order,
+        :page => page,
+        :per_page => per_page)
+    else
+      @admins = Admin.paginate(:all,
+        :conditions => conditions,
+        :order => order,
+        :page => page,
+        :per_page => per_page)
     end
   end
 end

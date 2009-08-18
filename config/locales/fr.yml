@@ -6,18 +6,20 @@ fr:
 # Admin
   download: 'télécharger'
   show: 'voir'
+  created_on: 'date de création'
   admins: 'administrateurs'
   medias: 'médias'
   admin:
     one: 'administrateur'
     other: 'administrateurs'
     none: 'aucun administrateur'
+    all: 'tous les utilisateurs'
     show: "voir l'administrador"
     not_exist: "l'administrateur sélectionné n'existe pas"
     create:
       success: "l'administrateur a bien été créé"
       failed: "un problème est survenu lors de la création de l'administrateur"
-      action: 'créer un administrateur'
+      action: 'créer un utilisateur'
     update:
       success: "l'administrateur a bien été mis à jour"
       failed: "un problème est survenu lors de la mise à jour de l'administrateur"
@@ -25,7 +27,7 @@ fr:
     destroy:
       success: "l'administrateur a bien été supprimé"
       failed: "un problème est survenu lors de la suppression de l'administrateur"
-      confirm: "êtes-vous sûr de vouloir supprimer cet administrateur ?"
+      confirm: "êtes-vous sûr de vouloir supprimer cet utilisateur?"
   media:
     list: 'liste des médias'
     one: 'média'

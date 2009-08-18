@@ -15,6 +15,12 @@ class Person < ActiveRecord::Base
   # anything else you want your user to change should be added here.
   attr_accessible :lastname, :firstname, :email, :password, :password_confirmation, :civility_id, :country_id, :birthday
 
+  define_index do
+    indexes firstname, :sortable => true
+    indexes lastname, :sortable => true
+    indexes email, :sortable => true
+  end
+
   def fullname
     "#{lastname} #{firstname}"
   end

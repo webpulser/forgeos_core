@@ -12,18 +12,20 @@ en:
   administration: 'administration'
   download: 'download'
   show: 'show'
+  created_on: 'created on'
   admins: 'administrators'
   medias: 'medias'
   admin:
     one: 'administrator'
     other: 'administrators'
     none: 'no administrator'
+    all: 'all users'
     show: 'show administrador'
     not_exist: 'the requested administrator does not exist'
     create:
       success: 'the administrator was successfully created'
       failed: 'a problem occured during the administrator creation'
-      action: 'create an administrator'
+      action: 'create user'
     update:
       success: 'the administrator was successfully updated'
       failed: 'a problem occured during the administrator update'
@@ -31,7 +33,7 @@ en:
     destroy:
       success: 'the administrator was successfully destroyed'
       failed: 'a problem occured during the administrator destroy'
-      confirm: 'are you sure to delete this administrator ?'   
+      confirm: 'are you sure to delete this user?'
   media:
     list: 'list of medias'
     one: 'media'
