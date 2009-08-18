@@ -5,6 +5,9 @@ module Forgeos
       :url => { :controller => 'admin/dashboard' }, :i18n => true,
       :html => { :class => 'left'}
     },
+    { :title => 'site builder',
+      :url => { :controller => 'admin/product_types'},
+      :html => { :class => 'right' } },
     { :title => 'statistics',
       :url => { :controller => 'admin/stats' },
       :html => { :class => 'right' } },
