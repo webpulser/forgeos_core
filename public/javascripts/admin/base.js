@@ -72,6 +72,20 @@ function removedataTablesRow(selector){
   );
 }
 
+function DataTablesDrawCallBack() {
+  InitCustomSelects();
+  showLinkToPages();
+}
+
+function showLinkToPages(){
+  $('.plus').bind('click',function(){
+    var element=$(this);
+    var p_element=element.parents('tr').find('p');
+    element.toggleClass('open');
+    p_element.toggle('blind');
+  });
+}
+
 /* Jean Charles */
 $(function(){
   //init the tree items
