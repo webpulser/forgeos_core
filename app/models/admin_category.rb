@@ -1,0 +1,2 @@
+class AdminCategory < Category
+end

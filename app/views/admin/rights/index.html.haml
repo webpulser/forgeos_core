@@ -10,7 +10,7 @@
       = I18n.t('right.all').capitalize
     #right-tree
       %ul
-        = render :partial => 'admin/categories/list', :locals => { :categories => ProductCategory.find_all_by_parent_id(nil) }
+        = render :partial => 'admin/categories/list', :locals => { :categories => RightCategory.find_all_by_parent_id(nil) }
 #content.grid_12.alpha.omega
   .backgrounds.header
     = link_to I18n.t('right.create.action').capitalize, new_admin_right_path

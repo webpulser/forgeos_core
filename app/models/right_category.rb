@@ -1,0 +1,2 @@
+class RightCategory < Category
+end

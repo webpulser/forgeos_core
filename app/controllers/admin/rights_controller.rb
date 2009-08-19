@@ -61,7 +61,7 @@ private
   end
 
   def sort
-    columns = %w(name controller_name action_name)
+    columns = %w(name name '' controller_name action_name '')
     conditions = []
     per_page = params[:iDisplayLength].to_i
     offset =  params[:iDisplayStart].to_i

@@ -10,7 +10,7 @@
       = I18n.t('role.all').capitalize
     #role-tree
       %ul
-        = render :partial => 'admin/categories/list', :locals => { :categories => ProductCategory.find_all_by_parent_id(nil) }
+        = render :partial => 'admin/categories/list', :locals => { :categories => RoleCategory.find_all_by_parent_id(nil) }
 #content.grid_12.alpha.omega
   .backgrounds.header
     = link_to I18n.t('role.create.action').capitalize, new_admin_role_path
