@@ -13,6 +13,9 @@ en:
   download: 'download'
   show: 'show'
   created_on: 'created on'
+  active: 'active'
+  inactive: 'inactive'
+  meta_description: 'meta description'
   admins: 'administrators'
   medias: 'medias'
   admin:

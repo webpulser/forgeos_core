@@ -7,6 +7,11 @@
     = f.text_field :name
   %p
     %b
+      = f.label :active, I18n.t('active').capitalize
+      \:
+    = f.check_box :active
+  %p
+    %b
       = I18n.t('right', :count => 2).capitalize
       \:
     = render :partial => 'form_rights', :locals => { :rights => Right.all, :role => role }

@@ -12,7 +12,10 @@ es:
   administration: 'administración'
   download: 'descargar'
   show: 'mostrar'
-  created_on: 'fecha de creación'
+  created_on: 'creada el'
+  active: 'activo'
+  inactive: 'inactivo'
+  meta_description: 'meta descripción'
   admins: 'administradores'
   medias: 'medias'
   admin:

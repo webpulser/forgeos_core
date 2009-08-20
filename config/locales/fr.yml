@@ -13,6 +13,9 @@ fr:
   download: 'télécharger'
   show: 'voir'
   created_on: 'date de création'
+  active: 'actif'
+  inactive: 'inactif'
+  meta_description: 'meta description'
   admins: 'administrateurs'
   medias: 'médias'
   admin:

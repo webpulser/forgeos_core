@@ -4,16 +4,22 @@
 <% @roles.each do |role| %>
   <% link_id = "role_#{role.id}" %>
   <% 
+     status = [['active', 'active'], ['inactive', 'inactive']]
      role_clone = role.clone.attributes
      role_clone[:right_ids] = role.right_ids
   %>
   [
-  '<%= content_tag(:div, '&nbsp;',:class => 'small-icons role') %>',
-  '<%= escape_javascript content_tag(:div, link_to(role.name, [:admin, role]), :class => 'role-name') %>',
+  '<%= escape_javascript content_tag(:div, '<div class="image">&nbsp;<span class="small-icons role">&nbsp;</span></div>', :class => role.admins.count > 0 ? 'some-variants plus' : '')%>',
+  '<%= escape_javascript content_tag(:div, link_to(role.name, [:admin, role]), :class => 'role-name') -%>
+   <%= escape_javascript '<br /><p style="display:none">' -%>
+     <% role.admins.each do |admin| -%>
+       <%= escape_javascript link_to("#{admin.firstname} #{admin.lastname}", [:admin, admin]) -%>
+       <%= '<br/>' -%>
+     <% end -%>
+   <%= '</p>' %>',
   '<%= role.admins.count %>',
   '<%= role.created_at.to_s(:slashed_fr) %>',
-  '<%= I18n.t('active').capitalize %>',
-
+  '<%= escape_javascript(select_tag :status, options_for_select(status, role.active ? 'active' : 'inactive'), :class => 'status') -%>',
   '<%= escape_javascript link_to('', new_admin_role_path(:role => role_clone), :class => 'small-icons duplicate-link') -%>
     <%= escape_javascript link_to('', [:edit, :admin, role], :class => 'small-icons edit-link') -%>
     <%= escape_javascript link_to_remote('', :url => [:admin, role],
