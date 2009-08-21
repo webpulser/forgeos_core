@@ -5,7 +5,7 @@ namespace :admin do |admin|
   admin.resource :session
   admin.resources :account
   admin.resources :admins
-  admin.resources :roles
+  admin.resources :roles, :member => { :activate => :post }
   admin.resources :rights
   admin.resources :medias, :except => [:edit], :member => { :download => :get, :sort => :post }
   admin.root :controller => 'account'

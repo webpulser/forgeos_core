@@ -19,7 +19,7 @@
    <%= '</p>' %>',
   '<%= role.admins.count %>',
   '<%= role.created_at.to_s(:slashed_fr) %>',
-  '<%= escape_javascript(select_tag :status, options_for_select(status, role.active ? 'active' : 'inactive'), :class => 'status') -%>',
+  '<%= escape_javascript(select_tag :status, options_for_select(status, role.active ? 'active' : 'inactive'), :class => 'active', :onchange => "#{remote_function(:url => activate_admin_role_path(role), :with => "'active=' + value")}") -%>',
   '<%= escape_javascript link_to('', new_admin_role_path(:role => role_clone), :class => 'small-icons duplicate-link') -%>
     <%= escape_javascript link_to('', [:edit, :admin, role], :class => 'small-icons edit-link') -%>
     <%= escape_javascript link_to_remote('', :url => [:admin, role],

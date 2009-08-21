@@ -1,5 +1,5 @@
 class Admin::RolesController < Admin::BaseController
-  before_filter :get_role, :only => [:show, :edit, :update, :destroy, :rights, :add_right]
+  before_filter :get_role, :only => [:show, :edit, :update, :destroy, :rights, :add_right, :activate]
 
   def index
     respond_to do |format|
@@ -58,6 +58,10 @@ class Admin::RolesController < Admin::BaseController
     @role.update_attributes(params[:role])
     @role.save
     redirect_to :action => 'rights', :id => @role
+  end
+
+  def activate
+    render :text => @role.activate
   end
 
 private

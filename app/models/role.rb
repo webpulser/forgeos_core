@@ -7,4 +7,8 @@ class Role < ActiveRecord::Base
   define_index do
     indexes name, :sortable => true
   end
+
+  def activate
+    self.update_attribute('active', !self.active)
+  end
 end
