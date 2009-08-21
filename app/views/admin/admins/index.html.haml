@@ -30,7 +30,7 @@
           = I18n.t('email').capitalize
         %th
           = I18n.t('created_on').capitalize
-        %th
+        %th.actions-td
     %tbody
 
 = dataTables_tag 6, :url => admin_admins_path(:format => :json)

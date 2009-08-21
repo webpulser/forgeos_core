@@ -30,7 +30,7 @@
           = I18n.t('controller_name').capitalize
         %th
           = I18n.t('action_name').capitalize
-        %th
+        %th.actions-td
     %tbody
 
 = dataTables_tag 6, :url => admin_rights_path(:format => :json)

@@ -31,7 +31,7 @@
         %th
           = I18n.t('active').capitalize
           ?
-        %th
+        %th.actions-td
     %tbody
 
 = dataTables_tag 6, :url => admin_roles_path(:format => :json)
