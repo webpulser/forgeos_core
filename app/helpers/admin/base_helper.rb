@@ -70,7 +70,7 @@ module Admin::BaseHelper
     content_tag :div, :class => 'block-container' do
       content_tag(:span, :class => 'block-type') do
         content_tag(:span, content_tag(:span, '&nbsp;', :class => 'inner'), :class => 'handler') +
-        block.class.to_s
+        block.class.human_name.capitalize
       end +
       content_tag(:span, block.respond_to?(:title) ? block.title : block.filename, :class => 'block-name') +
       link_to('', '#', :class => 'big-icons gray-destroy') +
