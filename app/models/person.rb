@@ -4,6 +4,8 @@ class Person < ActiveRecord::Base
   include Authentication::ByPassword
   include Authentication::ByCookieToken
 
+  acts_as_tagger
+
   belongs_to :avatar, :class_name => 'Picture', :dependent => :destroy
   
   validates_presence_of     :lastname, :firstname, :email
