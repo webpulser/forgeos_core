@@ -14,8 +14,8 @@
       = label_tag :password, I18n.t('password').capitalize
       %br
       = password_field_tag 'password', nil, :class => 'text'
-      %a{ :href => "#" }
-      = I18n.t('get_forgotten_password').capitalize
+      -#%a{ :href => "#" }
+      -#= I18n.t('get_forgotten_password').capitalize
       %br
       = check_box_tag 'remember_me'
       = I18n.t('remember_me').capitalize
