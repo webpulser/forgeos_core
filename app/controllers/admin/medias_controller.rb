@@ -74,23 +74,39 @@ class Admin::MediasController < Admin::BaseController
             flash[:notice] = I18n.t('media.create.success').capitalize
 
             if params[:target] && params[:target_id] && !params[:target].blank?
-              sortable_attachment = @media.sortable_attachments.new
+#              sortable_attachment = @media.sortable_attachments.new
+#
+#              # get attachable model
+#              begin
+#                # check if model is an available attachable type
+#                attachable_type = params[:target].camelize
+#                unless Forgeos::AttachableTypes.include?(attachable_type)
+#                  return render :json => { :result => 'error', :error => I18n.t('media.attach.unknown_type').capitalize }
+#                end
+#
+#                target = attachable_type.constantize
+#              rescue NameError
+#                return render :json => { :result => 'error', :error => I18n.t('media.attach.failed').capitalize }
+#              end
+#
+#              sortable_attachment.attachable = target.find_by_id(params[:target_id])
+#              sortable_attachment.save
 
-              # get attachable model
               begin
-                # check if model is an available attachable type
-                attachable_type = params[:target].camelize
-                unless Forgeos::AttachableTypes.include?(attachable_type)
+                target = params[:target].camelize
+                unless Forgeos::AttachableTypes.include?(target)
                   return render :json => { :result => 'error', :error => I18n.t('media.attach.unknown_type').capitalize }
                 end
-
-                target = attachable_type.constantize
               rescue NameError
                 return render :json => { :result => 'error', :error => I18n.t('media.attach.failed').capitalize }
               end
 
-              sortable_attachment.attachable = target.find_by_id(params[:target_id])
-              sortable_attachment.save
+              case target
+                when 'Product'
+                @product = Product.find_by_id(params[:target_id])
+                foo = (@product.attachment_ids << @media.id)
+                @product.update_attribute('attachment_ids', foo)
+              end
             end
             render :json => { :result => 'success', :asset => @media.id}
           else
