@@ -4,6 +4,7 @@
     %meta{ :content => "text/html; charset=UTF-8", "http-equiv" => "Content-Type" }
     = stylesheet_link_tag %w(960 jquery-ui/themes/forgeos jquery.selectbox jstree/tree_component admin/style)
     = javascript_include_tag 'jquery'
+    = javascript_tag "var AUTH_TOKEN = #{form_authenticity_token.inspect};" if protect_against_forgery?
     %title
       Document sans nom
   %body
