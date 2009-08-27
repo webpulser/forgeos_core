@@ -74,7 +74,7 @@ module Admin::BaseHelper
       end +
       content_tag(:span, block.respond_to?(:title) ? block.title : block.filename, :class => 'block-name') +
       link_to('', '#', :class => 'big-icons gray-destroy') +
-      hidden_field_tag("#{model_name}[#{block_name}_ids][]", block.id)
+      hidden_field_tag("#{model_name}[#{block_name}_ids][]", block.id, :class => 'block-selected')
     end
   end
 
