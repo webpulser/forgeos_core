@@ -8,7 +8,7 @@
      admin_clone[:role_ids] = admin.role_ids
   %>
   [
-  '<%= content_tag(:div, '&nbsp;',:class => 'small-icons admin')%>',
+  '<%= content_tag(:div, '&nbsp;',:class => 'small-icons admin-ico')%>',
   '<%= escape_javascript content_tag(:div, link_to("#{admin.firstname} #{admin.lastname}", [:admin, admin]), :class => 'admin-name') %>',
   '<%= admin.roles.collect {|role| role.name}.join(', ') %>',
   '<%= escape_javascript content_tag(:div, mail_to(admin.email, admin.email), :class => 'email' )%>',

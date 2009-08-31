@@ -9,7 +9,7 @@
      role_clone[:right_ids] = role.right_ids
   %>
   [
-  '<%= escape_javascript content_tag(:div, '<div class="image">&nbsp;<span class="small-icons role">&nbsp;</span></div>', :class => role.admins.count > 0 ? 'some-variants plus' : '')%>',
+  '<%= escape_javascript content_tag(:div, '<div class="image">&nbsp;<span class="small-icons role-ico">&nbsp;</span></div>', :class => role.admins.count > 0 ? 'some-variants plus' : '')%>',
   '<%= escape_javascript content_tag(:div, link_to(role.name, [:admin, role]), :class => 'role-name') -%>
    <%= escape_javascript '<br /><p style="display:none">' -%>
      <% role.admins.each do |admin| -%>

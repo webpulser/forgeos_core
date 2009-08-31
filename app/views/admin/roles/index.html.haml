@@ -13,7 +13,7 @@
         = render :partial => 'admin/categories/list', :locals => { :categories => RoleCategory.find_all_by_parent_id(nil) }
 #content.grid_12.alpha.omega
   .backgrounds.header
-    = link_to I18n.t('role.create.action').capitalize, new_admin_role_path
+    = link_to content_tag(:span,I18n.t('role.create.action').capitalize, :class=>'big-icons create-role'), new_admin_role_path, :class=>'backgrounds action-button'
     #search.right
       = link_to content_tag(:span, I18n.t('search').capitalize, :class => 'small-icons search-span'), '#', :class => 'small-icons left search-link'
     .backgrounds.search-form

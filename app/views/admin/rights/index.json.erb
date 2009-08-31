@@ -5,7 +5,7 @@
   <% link_id = "right_#{right.id}" %>
   <% right_clone = right.clone.attributes %>
   [
-  '<%= content_tag(:div, '&nbsp;',:class => 'small-icons right') %>',
+  '<%= content_tag(:div, '&nbsp;',:class => 'small-icons right-ico') %>',
   '<%= escape_javascript content_tag(:div, link_to(right.name, [:admin, right]), :class => 'right-name') %>',
   '-',
   '<%= right.controller_name %>',
