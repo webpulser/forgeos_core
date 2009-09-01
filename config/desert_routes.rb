@@ -1,6 +1,7 @@
 namespace :admin do |admin|
   admin.logout '/logout', :controller => 'sessions', :action => 'destroy'
   admin.login '/login', :controller => 'sessions', :action => 'new'
+  admin.notifications '/notifications', :controller => 'base', :action => 'notifications'
 
   admin.resource :session
   admin.resources :account
