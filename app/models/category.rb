@@ -9,4 +9,12 @@ class Category < ActiveRecord::Base
   def level
     return self.ancestors.length
   end
+
+  def kind
+    read_attribute(:type)
+  end
+  
+  def kind=(kind)
+    write_attribute(:type, kind)
+  end
 end
