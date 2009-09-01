@@ -1,5 +1,4 @@
 class Admin::MediasController < Admin::BaseController
-  session :cookie_only => false, :only => :create
   before_filter :get_media, :only => [:show, :download, :destroy]
 
   def index
