@@ -18,6 +18,12 @@ es:
   meta_description: 'meta descripción'
   admins: 'administradores'
   medias: 'medias'
+  folder:
+    create: 'crear un repertorio'
+    smart: 'crear un repertorio inámico'
+    edit: 'modificar un repertorio'
+    duplicate: 'duplicar un repertorio'
+    destroy: 'destruir un repertorio'
   admin:
     one: 'administrador'
     other: 'administradores'

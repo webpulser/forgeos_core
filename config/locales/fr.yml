@@ -18,6 +18,12 @@ fr:
   meta_description: 'meta description'
   admins: 'administrateurs'
   medias: 'médias'
+  folder:
+    create: 'créer un dossier'
+    smart: 'créer un dossier dynamique'
+    edit: 'modifier un dossier'
+    duplicate: 'dupliquer un dossier'
+    destroy: 'supprimer un dossier'
   admin:
     one: 'administrateur'
     other: 'administrateurs'
