@@ -1,21 +1,59 @@
-- content_for :tools, link_to(I18n.t('media.create.action').capitalize, new_admin_media_path, :class => 'add')
+= render :partial => 'tabs'
 
-%h1
-  = I18n.t('media.list').capitalize
-#filters
-  = label_tag  I18n.t('media.type.other').capitalize
-  \:
-  = link_to_if params[:file_type], I18n.t('media.all').capitalize, admin_medias_path
-  \-
-  = link_to_unless params[:file_type] == 'pdf', I18n.t('media.pdf.other').capitalize, admin_medias_path(:file_type => 'pdf')
-  \-
-  = link_to_unless params[:file_type] == 'doc', I18n.t('media.doc.other').capitalize, admin_medias_path(:file_type => 'doc')
-  \-
-  = link_to_unless params[:file_type] == 'video', I18n.t('media.video.other').capitalize, admin_medias_path(:file_type => 'video')
-  \-
-  = link_to_unless params[:file_type] == 'picture', I18n.t('media.picture.other').capitalize, admin_medias_path(:file_type => 'picture')
-  \-
-  = link_to_unless params[:file_type] == 'media', I18n.t('media.misc.other').capitalize, admin_medias_path(:file_type => 'media')
-#list_medias
-  = render :partial => 'admin/medias/list', :locals => { :medias => @medias }
+#sidebar.grid_4.omega.alpha
 
+  .backgrounds.header
+    %span.backgrounds.action-button.create-action
+      %span.big-icons.new-category
+      %span.small-icons.arrow
+      %span.create-list
+        %span.big-icons.create-folder
+          = I18n.t('folder.create')
+        -#%span.small-icons.create-smart-folder
+          -#= I18n.t('folder.smart')
+
+    %span.backgrounds.action-button.update-action
+      %span.small-icons.more-actions
+      %span.small-icons.arrow
+      %span.update-list
+        %span.small-icons.modify-folder
+          = I18n.t('folder.edit')
+        %span.small-icons.duplicate-folder
+          = I18n.t('folder.duplicate')
+        %span.small-icons.delete-folder
+          = I18n.t('folder.destroy')
+
+  .backgrounds.sidebar-background
+
+  .sidebar-content
+    %h2.small-icons.medias
+      = link_to I18n.t('media.all').capitalize, admin_medias_path
+    #media-tree.a-tree
+      %ul#root-tree
+        /= render :partial => 'admin/pages/sections_list', :locals => { :sections => Section.find_all_by_parent_id(nil) }
+
+#content.grid_12.alpha.omega
+  .backgrounds.header
+    = link_to content_tag(:span,I18n.t("media.#{@file_type}.create.action").capitalize, :class=>"big-icons add-#{@file_type}"), new_admin_media_path, :class=>'backgrounds action-button'
+    #search.right
+      = link_to content_tag(:span, I18n.t('search').capitalize, :class => 'small-icons search-span'), '#', :class => 'small-icons left search-link'
+    .backgrounds.search-form
+  .content-background
+  %table#table.datatable
+    %thead
+      %tr
+        %th
+        %th
+          = I18n.t('name').capitalize
+        %th
+          = I18n.t('type').capitalize
+        %th
+          = I18n.t('updated_at').capitalize
+        %th
+          = I18n.t('media.size').capitalize
+        %th
+          = I18n.t('media.used').capitalize
+        %th.actions-td
+    %tbody
+
+= dataTables_tag 7, :url => admin_medias_path(:format => :json, :file_type => @file_type)

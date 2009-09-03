@@ -2,10 +2,13 @@ class Admin::MediasController < Admin::BaseController
   before_filter :get_media, :only => [:show, :download, :destroy]
 
   def index
-    if params[:file_type]
-      @medias = Attachment.find_all_by_parent_id_and_type(nil,params[:file_type].capitalize)
-    else
-      @medias = Attachment.find_all_by_parent_id(nil)
+    @file_type = params[:file_type]
+    respond_to do |format|
+      format.html
+      format.json do
+        sort
+        render :layout => false
+      end
     end
   end
 
@@ -39,8 +42,6 @@ class Admin::MediasController < Admin::BaseController
         return redirect_to(admin_medias_path)
       end
     end
-
-    render :action => 'create'
   end
 
 #   # GET /medias/1/edit
@@ -207,4 +208,27 @@ private
       return redirect_to(admin_medias_path)
     end
   end
+
+  def sort
+    columns = %w(id filename content_type updated_at size used '')
+    conditions = ['type = ?', @file_type]
+    per_page = params[:iDisplayLength].to_i
+    offset =  params[:iDisplayStart].to_i
+    page = (offset / per_page) + 1
+    order = "#{columns[params[:iSortCol_0].to_i]} #{params[:iSortDir_0].upcase}"
+    if params[:sSearch] && !params[:sSearch].blank?
+      @medias = Attachment.search(params[:sSearch],
+        :conditions => conditions,
+        :order => order,
+        :page => page,
+        :per_page => per_page)
+    else
+      @medias = Attachment.paginate(:all,
+        :conditions => conditions,
+        :order => order,
+        :page => page,
+        :per_page => per_page)
+    end
+  end
+
 end

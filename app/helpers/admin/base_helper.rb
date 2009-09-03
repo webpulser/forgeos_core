@@ -24,9 +24,9 @@ module Admin::BaseHelper
 
   def dataTables_tag(columns_count=1, options = {})
     id = options[:id].nil? ? 'table' : options[:id]
-    action_column = options[:action_column].nil? ? true : options[:action_column]
+    #action_column = options[:action_column].nil? ? true : options[:action_column]
     sorting = options[:sorting].nil? ? false : options[:sorting]
-
+    
     #columns_count -= 1 if action_column
     columns = columns_count.times.collect{'null'}
     #columns << "{ 'bSearchable': false, 'bSortable': false }" if action_column
