@@ -13,6 +13,7 @@ fr:
   download: 'télécharger'
   show: 'voir'
   created_on: 'date de création'
+  updated_at: 'date de modification'
   active: 'actif'
   inactive: 'inactif'
   meta_description: 'meta description'
@@ -90,6 +91,7 @@ fr:
     associated_rights: 'droits associés'
     show: 'voir le média'
     not_exist: "le média sélectionné n'existe pas"
+    used: 'utilisé(e)'
     upload: 
       start: 'démarer le téléchargement'
       clear: 'nettoyer la liste'
@@ -125,15 +127,26 @@ fr:
     pdf:
       one: 'pdf'
       other: 'pdfs'
+      create:
+        action: 'ajouter un pdf'
+    file:
+      one: 'fichier'
+      other: 'fichiers'
+      create:
+        action: 'ajouter un fichier'
     doc:
       one: 'doc'
       other: 'docs'
     video:
       one: 'vidéo'
       other: 'vidéos'
+      create:
+        action: 'ajouter une vidéo'
     picture:
       one: 'image'
       other: 'images'
+      create:
+        action: 'ajouter une image'
     misc:
       one: 'autre'
       other: 'autres'

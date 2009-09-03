@@ -13,6 +13,7 @@ en:
   download: 'download'
   show: 'show'
   created_on: 'created on'
+  updated_at: 'date modified'
   active: 'active'
   inactive: 'inactive'
   meta_description: 'meta description'
@@ -90,6 +91,7 @@ en:
     associated_rights: 'associated rights'
     show: 'show media'
     not_exist: 'the requested media does not exist'
+    used: 'used'
     upload: 
       start: 'start upload'
       clear: 'clear queue'
@@ -125,15 +127,26 @@ en:
     pdf:
       one: 'pdf'
       other: 'pdfs'
+      create:
+        action: 'add a pdf'
+    file:
+      one: 'file'
+      other: 'files'
+      create:
+        action: 'add a file'
     doc:
       one: 'doc'
       other: 'docs'
     video:
       one: 'video'
       other: 'videos'
+      create:
+        action: 'add a video'
     picture:
       one: 'picture'
       other: 'pictures'
+      create:
+        action: 'add a picture'
     misc:
       one: 'other'
       other: 'others'
