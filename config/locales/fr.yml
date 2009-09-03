@@ -25,6 +25,7 @@ fr:
     edit: 'modifier un dossier'
     duplicate: 'dupliquer un dossier'
     destroy: 'supprimer un dossier'
+    associated_to: 'associations avec les dossiers'
   admin:
     one: 'administrateur'
     other: 'administrateurs'

@@ -24,6 +24,7 @@ es:
     edit: 'modificar un repertorio'
     duplicate: 'duplicar un repertorio'
     destroy: 'destruir un repertorio'
+    associated_to: 'asociaciones con repertorios'
   admin:
     one: 'administrador'
     other: 'administradores'

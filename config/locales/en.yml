@@ -25,6 +25,7 @@ en:
     edit: 'modify a folder'
     duplicate: 'duplicate a folder'
     destroy: 'delete a folder'
+    associated_to: 'associated to folder'
   admin:
     one: 'user'
     other: 'users'
