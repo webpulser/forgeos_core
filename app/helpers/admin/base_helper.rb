@@ -23,7 +23,6 @@ module Admin::BaseHelper
   end
 
   def dataTables_tag(columns_count=1, options = {})
-
     id = options[:id].nil? ? 'table' : options[:id]
     action_column = options[:action_column].nil? ? true : options[:action_column]
     sorting = options[:sorting].nil? ? false : options[:sorting]
@@ -43,6 +42,7 @@ module Admin::BaseHelper
         'bServerSide': true,
         'sAjaxSource': '#{options[:url]}',
         'fnDrawCallback': DataTablesDrawCallBack,
+        'fnRowCallback': DataTablesRowCallBack,
         'oLanguage': {
           'sProcessing' : '#{I18n.t('jquery.dataTables.oLanguage.sProcessing')}',
           'sLengthMenu':'#{I18n.t('jquery.dataTables.oLanguage.sLengthMenu')}',

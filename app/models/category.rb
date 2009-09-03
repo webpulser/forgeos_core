@@ -17,4 +17,12 @@ class Category < ActiveRecord::Base
   def kind=(kind)
     write_attribute(:type, kind)
   end
+
+  def total_elements_count
+    ([self.elements.count] + children.collect(&:total_elements_count)).inject(:+)
+  end
+
+  def elements
+    []
+  end
 end
