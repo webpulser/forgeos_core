@@ -1,0 +1,27 @@
+{
+'iTotalDisplayRecords': <%= @medias.total_entries || 0 %>,
+'aaData': [
+<% @medias.each do |media| %>
+  <%
+    link_id = "page_#{media.id}"
+  %>
+  [
+  '<%= content_tag(:div, '&nbsp;',:class => "small-icons #{@file_type}")%>',
+  '<%= escape_javascript content_tag(:div, link_to(media.filename, [:admin, media]), :class => 'media-name') %>',
+  '<%= media.file_type.upcase  %> ',
+  '<%= media.updated_at.to_s(:slashed_fr) %>',
+  '<%= "#{media.size} Ko"%>',
+  '<%= "N/A"  %>',
+  '<%= escape_javascript link_to('', [:edit, :admin, media], :class => 'small-icons edit-link') -%>
+    <%= escape_javascript link_to_remote('', :url => [:admin, media],
+      :method => :delete,
+      :confirm => I18n.t('media.destroy.confirm').capitalize,
+      :success => "removedataTablesRow('#destroy_#{link_id}')",
+      :html => {
+      :class => 'small-icons destroy-link', :id => "destroy_#{link_id}"
+    })
+    -%>'
+    ] <%= ',' unless @medias.last == media %>
+<% end %>
+]
+}
