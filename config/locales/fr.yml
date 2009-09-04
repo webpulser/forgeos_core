@@ -128,24 +128,31 @@ fr:
     pdf:
       one: 'pdf'
       other: 'pdfs'
+      all: 'tous les pdfs'
       create:
         action: 'ajouter un pdf'
     file:
       one: 'fichier'
       other: 'fichiers'
+      all: 'tous les fichiers'
       create:
         action: 'ajouter un fichier'
     doc:
       one: 'doc'
       other: 'docs'
+      all: 'tous les documents'
+      create:
+        action: 'ajouter un document'
     video:
       one: 'vidéo'
       other: 'vidéos'
+      all: 'toutes les vidéos'
       create:
         action: 'ajouter une vidéo'
     picture:
       one: 'image'
       other: 'images'
+      all: 'toutes les images'
       create:
         action: 'ajouter une image'
     misc:
