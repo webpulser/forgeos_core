@@ -26,8 +26,8 @@
   .backgrounds.sidebar-background
 
   .sidebar-content
-    %h2.small-icons.medias
-      = link_to I18n.t('media.all').capitalize, admin_medias_path
+    %h2{ :class => "small-icons #{@file_type}"}
+      = link_to I18n.t(:all, :scope => [:media, @file_type]).capitalize, admin_medias_path
     #media-tree.a-tree
       %ul#root-tree
         /= render :partial => 'admin/pages/sections_list', :locals => { :sections => Section.find_all_by_parent_id(nil) }

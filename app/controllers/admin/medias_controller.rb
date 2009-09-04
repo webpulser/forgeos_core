@@ -51,6 +51,7 @@ class Admin::MediasController < Admin::BaseController
 
   # POST /medias
   def create
+    
     respond_to do |format|
       format.json do
         if params[:Filedata]
@@ -59,7 +60,7 @@ class Admin::MediasController < Admin::BaseController
           case @content_type
           when 'image/png','image/jpeg','image/pjpeg', 'image/gif'
             @media = Picture.new(params[:attachment])
-          when 'application/pdf' 
+          when 'application/pdf'
             @media = Pdf.new(params[:attachment])
           when 'video/x-msvideo'
             @media = Video.new(params[:attachment])
@@ -68,32 +69,18 @@ class Admin::MediasController < Admin::BaseController
           else
             @media = Media.new(params[:attachment])
           end
+
           @media.uploaded_data = { 'tempfile' => params[:Filedata], 'content_type' => 'none', 'filename' => params[:Filename] }
           @media.content_type = @content_type
+          
           if @media.save
             flash[:notice] = I18n.t('media.create.success').capitalize
 
             if params[:target] && params[:target_id] && !params[:target].blank?
-#              sortable_attachment = @media.sortable_attachments.new
-#
-#              # get attachable model
-#              begin
-#                # check if model is an available attachable type
-#                attachable_type = params[:target].camelize
-#                unless Forgeos::AttachableTypes.include?(attachable_type)
-#                  return render :json => { :result => 'error', :error => I18n.t('media.attach.unknown_type').capitalize }
-#                end
-#
-#                target = attachable_type.constantize
-#              rescue NameError
-#                return render :json => { :result => 'error', :error => I18n.t('media.attach.failed').capitalize }
-#              end
-#
-#              sortable_attachment.attachable = target.find_by_id(params[:target_id])
-#              sortable_attachment.save
-
+              
               begin
                 target = params[:target].camelize
+                # check if model is an available type
                 unless Forgeos::AttachableTypes.include?(target)
                   return render :json => { :result => 'error', :error => I18n.t('media.attach.unknown_type').capitalize }
                 end
@@ -101,12 +88,11 @@ class Admin::MediasController < Admin::BaseController
                 return render :json => { :result => 'error', :error => I18n.t('media.attach.failed').capitalize }
               end
 
-              case target
-                when 'Product'
-                @product = Product.find_by_id(params[:target_id])
-                foo = (@product.attachment_ids << @media.id)
-                @product.update_attribute('attachment_ids', foo)
-              end
+              type = target.constantize
+              object = type.find_by_id(params[:target_id])
+              attachments = (object.attachment_ids << @media.id)
+              object.update_attribute('attachment_ids', attachments)
+              
             end
             render :json => { :result => 'success', :id => @media.id, :path => @media.public_filename('')}
           else
@@ -163,41 +149,41 @@ class Admin::MediasController < Admin::BaseController
   end
 
   # Sort media for attachable
-  def sort
-    if params['media_list']     
-      # get attachable model...
-      begin
-        # and check if model is an available attachable type
-        attachable_type = params[:target].camelize
-
-        unless Forgeos::AttachableTypes.include?(attachable_type)
-          flash[:error] = I18n.t('media.attach.unknown_type').capitalize
-          return redirect_to(admin_medias_path)
-        end
-
-        target = attachable_type.constantize
-      rescue NameError
-        flash[:error] = I18n.t('media.attach.failed').capitalize
-        return redirect_to(admin_medias_path)
-      end
-
-      # update position of attachments
-      if @target = target.find_by_id(params[:id])
-        medias = @target.sortable_attachments
-        medias.each do |media|
-          if index = params['media_list'].index(media.attachment_id.to_s)
-            media.update_attribute(:position, index+1)
-          end
-        end
-
-        # refresh list of medias
-        return render(:update) do |page|
-          page.replace_html("list_medias", :partial => 'admin/medias/list', :locals => { :medias => @target.attachments, :target => params[:target], :target_id => params[:id], :remote => true})
-        end
-      end
-    end
-    render(:nothing => true)
-  end
+#  def sort
+#    if params['media_list']
+#      # get attachable model...
+#      begin
+#        # and check if model is an available attachable type
+#        attachable_type = params[:target].camelize
+#
+#        unless Forgeos::AttachableTypes.include?(attachable_type)
+#          flash[:error] = I18n.t('media.attach.unknown_type').capitalize
+#          return redirect_to(admin_medias_path)
+#        end
+#
+#        target = attachable_type.constantize
+#      rescue NameError
+#        flash[:error] = I18n.t('media.attach.failed').capitalize
+#        return redirect_to(admin_medias_path)
+#      end
+#
+#      # update position of attachments
+#      if @target = target.find_by_id(params[:id])
+#        medias = @target.sortable_attachments
+#        medias.each do |media|
+#          if index = params['media_list'].index(media.attachment_id.to_s)
+#            media.update_attribute(:position, index+1)
+#          end
+#        end
+#
+#        # refresh list of medias
+#        return render(:update) do |page|
+#          page.replace_html("list_medias", :partial => 'admin/medias/list', :locals => { :medias => @target.attachments, :target => params[:target], :target_id => params[:id], :remote => true})
+#        end
+#      end
+#    end
+#    render(:nothing => true)
+#  end
 
 private
 
@@ -211,19 +197,25 @@ private
 
   def sort
     columns = %w(id filename content_type updated_at size used '')
-    conditions = ['type = ?', @file_type]
+    unless @file_type.nil?
+      conditions = ['type = ?', @file_type]
+      type = @file_type.camelize.constantize
+    else
+      conditions = []
+      type = Attachment
+    end
     per_page = params[:iDisplayLength].to_i
     offset =  params[:iDisplayStart].to_i
     page = (offset / per_page) + 1
     order = "#{columns[params[:iSortCol_0].to_i]} #{params[:iSortDir_0].upcase}"
     if params[:sSearch] && !params[:sSearch].blank?
-      @medias = Attachment.search(params[:sSearch],
+      @medias = type.search(params[:sSearch],
         :conditions => conditions,
         :order => order,
         :page => page,
         :per_page => per_page)
     else
-      @medias = Attachment.paginate(:all,
+      @medias = type.paginate(:all,
         :conditions => conditions,
         :order => order,
         :page => page,

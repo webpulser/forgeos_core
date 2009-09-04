@@ -1,5 +1,6 @@
 %ul.ui-tabs-nav.ui-helper-reset.ui-helper-clearfix.ui-widget-header.ui-corner-all
-  %li.ui-state-default.ui-corner-top.ui-tabs-selected.ui-state-active= link_to I18n.t('media.picture.other').capitalize, '#content'
-  %li.ui-state-default.ui-corner-top= link_to I18n.t('media.file.other').capitalize, '#'
-  %li.ui-state-default.ui-corner-top= link_to I18n.t('media.pdf.other').capitalize, admin_medias_path(:file_type => 'pdf')
-  %li.ui-state-default.ui-corner-top= link_to I18n.t('media.video.other').capitalize, admin_medias_path(:file_type => 'video')
+  - %w(picture pdf video file doc).each do |file_type|
+    - link_class = 'ui-state-default ui-corner-top'
+    - link_class += ' ui-tabs-selected ui-state-active' if @file_type.to_s == file_type
+    %li{:class => link_class}= link_to I18n.t(:other, :scope => [:media, file_type]).capitalize, ( @file_type.to_s == file_type ? '#content' : admin_medias_path(:file_type => file_type ))
+  
