@@ -20,8 +20,8 @@
   = "'target': '#{params[:target]}',"
   = "'target_id': '#{params[:target_id]}', "
   'format': 'json',
-  = "'authenticity_token': encodeURIComponent('#{form_authenticity_token}'),"
-  = "'#{session_key}': encodeURIComponent('#{cookies[session_key]}')"
+  = "'authenticity_token': '#{form_authenticity_token}',"
+  = "'#{session_key}': '#{cookies[session_key]}'"
   },
   'ScriptAccess': 'always',
   'multi': 'true',

@@ -95,7 +95,7 @@ en:
     used: 'used'
     upload: 
       start: 'start upload'
-      clear: 'clear queue'
+      clear_queue: 'clear queue'
     create:
       action: 'create a media'
       success: 'the media was successfully created'

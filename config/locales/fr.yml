@@ -95,7 +95,7 @@ fr:
     used: 'utilisé(e)'
     upload: 
       start: 'démarer le téléchargement'
-      clear: 'nettoyer la liste'
+      clear_queue: 'nettoyer la liste'
     create:
       action: 'créer un média'
       success: 'le média a bien été créé'

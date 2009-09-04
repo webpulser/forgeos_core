@@ -93,7 +93,7 @@ es:
     not_exist: 'el media solicitado no existe'
     upload: 
       start: 'descargar'
-      clear: 'vaciar la lista'
+      clear_queue: 'vaciar la lista'
     create:
       action: 'crear un media'
       success: 'el media se ha creado con éxito'
