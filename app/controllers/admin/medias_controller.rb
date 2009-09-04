@@ -108,7 +108,7 @@ class Admin::MediasController < Admin::BaseController
                 @product.update_attribute('attachment_ids', foo)
               end
             end
-            render :json => { :result => 'success', :asset => @media.id}
+            render :json => { :result => 'success', :id => @media.id, :path => @media.public_filename('')}
           else
             render :json => { :result => 'error', :error => @media.errors.first }
           end
