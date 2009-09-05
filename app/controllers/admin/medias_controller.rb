@@ -94,7 +94,7 @@ class Admin::MediasController < Admin::BaseController
               object.update_attribute('attachment_ids', attachments)
               
             end
-            render :json => { :result => 'success', :id => @media.id, :path => @media.public_filename('')}
+            render :json => { :result => 'success', :id => @media.id, :path => @media.public_filename(''), :size => @media.size, :type => @media.type.to_s.upcase }
           else
             render :json => { :result => 'error', :error => @media.errors.first }
           end
