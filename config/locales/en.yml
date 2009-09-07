@@ -93,6 +93,7 @@ en:
     show: 'show media'
     not_exist: 'the requested media does not exist'
     used: 'used'
+    linked: 'linked files'
     upload: 
       start: 'start upload'
       clear_queue: 'clear queue'

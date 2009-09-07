@@ -93,6 +93,7 @@ fr:
     show: 'voir le média'
     not_exist: "le média sélectionné n'existe pas"
     used: 'utilisé(e)'
+    linked: 'fichiers liés'
     upload: 
       start: 'démarer le téléchargement'
       clear_queue: 'nettoyer la liste'
