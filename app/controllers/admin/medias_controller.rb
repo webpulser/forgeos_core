@@ -197,13 +197,18 @@ private
 
   def sort
     columns = %w(id filename content_type updated_at size used '')
+    conditions =[[]]
+    conditions[0] << 'parent_id IS NULL'
+    
     unless @file_type.nil?
-      conditions = ['type = ?', @file_type]
+      conditions[0] << 'type = ?'
+      conditions << @file_type
       type = @file_type.camelize.constantize
     else
-      conditions = []
       type = Attachment
     end
+    conditions[0] = conditions[0].join(' AND ')
+
     per_page = params[:iDisplayLength].to_i
     offset =  params[:iDisplayStart].to_i
     page = (offset / per_page) + 1
