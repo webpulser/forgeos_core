@@ -11,8 +11,11 @@ namespace :admin do |admin|
   admin.resources :admins
   admin.resources :roles, :member => { :activate => :post }
   admin.resources :rights
-  admin.resources :medias, :except => [:edit], :member => { :download => :get, :sort => :post }, :path_prefix => 'admin/:file_type'
-  admin.resources :attachments, :controller => :medias, :except => [:edit], :member => { :download => :get, :sort => :post }
+  %w(medias pictures docs pdfs videos attachments).each do |resources_alias|
+    route_options = { :controller => :attachments, :member => { :download => :get } }
+    route_options[:path_prefix] = 'admin/:file_type' if %w(attachments).include?(resources_alias)
+    admin.resources resources_alias.to_sym, route_options
+  end
 #  admin.root :controller => 'account'
   admin.root :controller => 'products'
 end

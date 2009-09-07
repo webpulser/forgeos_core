@@ -27,7 +27,7 @@
 
   .sidebar-content
     %h2{ :class => "small-icons #{@file_type}"}
-      = link_to I18n.t(:all, :scope => [:media, @file_type]).capitalize, admin_medias_path
+      = link_to I18n.t(:all, :scope => [:media, @file_type]).capitalize, admin_attachments_path
     #media-tree.a-tree
       %ul#root-tree
         /= render :partial => 'admin/pages/sections_list', :locals => { :sections => Section.find_all_by_parent_id(nil) }
@@ -56,4 +56,4 @@
         %th.actions-td
     %tbody
 
-= dataTables_tag 7, :url => admin_medias_path(:format => :json, :file_type => @file_type)
+= dataTables_tag 7, :url => admin_attachments_path(:format => :json, :file_type => @file_type)

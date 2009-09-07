@@ -132,7 +132,7 @@ en:
       all: 'all pdfs'
       create:
         action: 'add a pdf'
-    file:
+    media:
       one: 'file'
       other: 'files'
       all: 'all files'

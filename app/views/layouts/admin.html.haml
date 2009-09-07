@@ -17,7 +17,7 @@
             %a{ :href => "#" }
               Preferences
           %li.left
-            = link_to I18n.t('library').capitalize, admin_medias_path(:file_type => 'picture')
+            = link_to I18n.t('library').capitalize, admin_attachments_path(:file_type => 'picture')
           %li.left
             = link_to I18n.t('your_account').capitalize, admin_account_path(current_user)
           %li.right

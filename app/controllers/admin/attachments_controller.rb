@@ -1,4 +1,4 @@
-class Admin::MediasController < Admin::BaseController
+class Admin::AttachmentsController < Admin::BaseController
   before_filter :get_media, :only => [:show, :download, :destroy]
 
   def index
@@ -33,13 +33,13 @@ class Admin::MediasController < Admin::BaseController
 
         unless Forgeos::AttachableTypes.include?(attachable_type)
           flash[:error] = I18n.t('media.attach.unknown_type').capitalize
-          return redirect_to(admin_medias_path)
+          return redirect_to(admin_attachments_path)
         end
 
         attachable_type.constantize
       rescue NameError
         flash[:error] = I18n.t('media.attach.failed').capitalize
-        return redirect_to(admin_medias_path)
+        return redirect_to(admin_attachments_path)
       end
     end
   end
@@ -67,7 +67,7 @@ class Admin::MediasController < Admin::BaseController
           when 'application/msword', 'application/vnd.oasis.opendocument.text'
             @media = Doc.new(params[:attachment])
           else
-            @media = Media.new(params[:attachment])
+            @media = Asset.new(params[:attachment])
           end
 
           @media.uploaded_data = { 'tempfile' => params[:Filedata], 'content_type' => 'none', 'filename' => params[:Filename] }
@@ -115,7 +115,7 @@ class Admin::MediasController < Admin::BaseController
 #     else
 #       flash[:error] = I18n.t('media.update.failed').capitalize
 #     end
-#     return redirect_to(admin_medias_path)
+#     return redirect_to(admin_attachments_path)
 #   end
 
   # DELETE /medias/1
@@ -145,7 +145,7 @@ class Admin::MediasController < Admin::BaseController
         page << display_standard_flashes('', false)
       end
     end
-    return redirect_to(admin_medias_path)
+    return redirect_to(admin_attachments_path)
   end
 
   # Sort media for attachable
@@ -158,13 +158,13 @@ class Admin::MediasController < Admin::BaseController
 #
 #        unless Forgeos::AttachableTypes.include?(attachable_type)
 #          flash[:error] = I18n.t('media.attach.unknown_type').capitalize
-#          return redirect_to(admin_medias_path)
+#          return redirect_to(admin_attachments_path)
 #        end
 #
 #        target = attachable_type.constantize
 #      rescue NameError
 #        flash[:error] = I18n.t('media.attach.failed').capitalize
-#        return redirect_to(admin_medias_path)
+#        return redirect_to(admin_attachments_path)
 #      end
 #
 #      # update position of attachments
@@ -191,7 +191,7 @@ private
     @media = Attachment.find_by_id params[:id]
     unless @media
       flash[:error] = I18n.t('media.not_exist').capitalize 
-      return redirect_to(admin_medias_path)
+      return redirect_to(admin_attachments_path)
     end
   end
 

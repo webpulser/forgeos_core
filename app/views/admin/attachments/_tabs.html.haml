@@ -1,0 +1,6 @@
+%ul.ui-tabs-nav.ui-helper-reset.ui-helper-clearfix.ui-widget-header.ui-corner-all
+  - %w(picture pdf video media doc).each do |file_type|
+    - link_class = 'ui-state-default ui-corner-top'
+    - link_class += ' ui-tabs-selected ui-state-active' if @file_type.to_s == file_type
+    %li{:class => link_class}= link_to I18n.t(:other, :scope => [:media, file_type]).capitalize, ( @file_type.to_s == file_type ? '#content' : admin_attachments_path(:file_type => file_type ))
+  
