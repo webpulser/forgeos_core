@@ -27,14 +27,14 @@
 
   .sidebar-content
     %h2{ :class => "small-icons #{@file_type}"}
-      = link_to I18n.t(:all, :scope => [:media, @file_type]).capitalize, admin_attachments_path
-    #media-tree.a-tree
+      = link_to_function I18n.t(:all, :scope => [:media, @file_type]).capitalize, "select_all_elements('/admin/#{@file_type}/attachments.json');"
+    .a-tree{:id => "#{@file_type}-attachment-tree"}
       %ul#root-tree
-        /= render :partial => 'admin/pages/sections_list', :locals => { :sections => Section.find_all_by_parent_id(nil) }
+        = render :partial => 'admin/categories/list', :locals => { :categories => @categories }
 
 #content.grid_12.alpha.omega
   .backgrounds.header
-    = link_to content_tag(:span,I18n.t("media.#{@file_type}.create.action").capitalize, :class=>"big-icons add-#{@file_type}"), new_admin_media_path, :class=>'backgrounds action-button'
+    = link_to content_tag(:span,I18n.t("media.#{@file_type}.create.action").capitalize, :class=>"big-icons add-#{@file_type}"), new_admin_attachment_path, :class=>'backgrounds action-button'
     #search.right
       = link_to content_tag(:span, I18n.t('search').capitalize, :class => 'small-icons search-span'), '#', :class => 'small-icons left search-link'
     .backgrounds.search-form

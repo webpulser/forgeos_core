@@ -1,0 +1,2 @@
+class DocCategory < AttachmentCategory
+end

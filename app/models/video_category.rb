@@ -1,0 +1,2 @@
+class VideoCategory < AttachmentCategory
+end

@@ -15,7 +15,7 @@
   $('#fileUpload').uploadify({
   'uploader': '/images/uploadify/uploadify.swf',
   = "'cancelImg': '#{image_path('uploadify/cancel.png')}',"
-  = "'script': '#{media.new_record? ? admin_attachments_path : admin_media_path(media)}',"
+  = "'script': '#{media.new_record? ? admin_attachments_path : admin_attachment_path(media)}',"
   'scriptData': { 
   = "'target': '#{params[:target]}',"
   = "'target_id': '#{params[:target_id]}', "
