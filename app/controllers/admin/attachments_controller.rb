@@ -1,5 +1,5 @@
 class Admin::AttachmentsController < Admin::BaseController
-  before_filter :get_media, :only => [:show, :download, :destroy]
+  before_filter :get_media, :only => [:show, :download, :edit, :update, :destroy]
   before_filter :get_categories, :only => [:index]
 
   def index
@@ -44,14 +44,12 @@ class Admin::AttachmentsController < Admin::BaseController
     end
   end
 
-#   # GET /medias/1/edit
-#   def edit
-#     @media = Attachment.find(params[:id])
-#   end
+  # GET /medias/1/edit
+  def edit
+  end
 
   # POST /medias
   def create
-    
     respond_to do |format|
       format.json do
         if params[:Filedata]
@@ -145,7 +143,7 @@ class Admin::AttachmentsController < Admin::BaseController
         page << display_standard_flashes('', false)
       end
     end
-    return redirect_to(admin_attachments_path)
+    return render :nothing => true
   end
 
   # Sort media for attachable
