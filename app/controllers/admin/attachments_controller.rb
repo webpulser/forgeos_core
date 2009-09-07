@@ -67,7 +67,7 @@ class Admin::AttachmentsController < Admin::BaseController
           when 'application/msword', 'application/vnd.oasis.opendocument.text'
             @media = Doc.new(params[:attachment])
           else
-            @media = Asset.new(params[:attachment])
+            @media = Media.new(params[:attachment])
           end
 
           @media.uploaded_data = { 'tempfile' => params[:Filedata], 'content_type' => 'none', 'filename' => params[:Filename] }
