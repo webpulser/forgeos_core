@@ -156,8 +156,28 @@ en:
       one: 'picture'
       other: 'pictures'
       all: 'all pictures'
+      alternative: 'alternative text'
+      title: 'picture title'
+      add: 'add picture'
+      featured: 'featured picture'
+      show:
+        action: 'show picture'
       create:
-        action: 'add a picture'
+        success: 'the picture was successfully created'
+        failed: 'a problem occured during the picture creation'
+        action: 'create a picture'
+      update:
+        success: 'the picture was successfully updated'
+        failed: 'a problem occured during the picture update'
+        action: 'edit picture'
+      destroy:
+        success: 'the picture was successfully destroyed'
+        failed: 'a problem occured during the picture destroy'
+        confirm: 'are you sure to delete this picture ?'
+      upload:
+        start: 'Start Upload'
+        clear_queue: 'Clear Queue'
+        action: 'upload a picture'
     misc:
       one: 'other'
       other: 'others'

@@ -97,7 +97,7 @@ fr:
     upload: 
       start: 'démarer le téléchargement'
       clear_queue: 'nettoyer la liste'
-      action: charger des fichiers 
+      action: 'charger des fichiers' 
     create:
       action: 'créer un média'
       success: 'le média a bien été créé'
@@ -121,7 +121,7 @@ fr:
       unknown_type: "le type de l'élément attaché est inconnu"
       failed: "un problème est survenu lors de l'édition de lien avec l'élément"
     content_type: 'content type'
-    updated_at: dernière mise à jour
+    updated_at: 'dernière mise à jour'
     filename: 'nom du fichier'
     size: 'taille'
     byte:
@@ -156,8 +156,28 @@ fr:
       one: 'image'
       other: 'images'
       all: 'toutes les images'
+      alternative: 'texte alternatif'
+      title: "titre de l'image"
+      add: 'ajouter photo'
+      featured: 'photo principale'
+      show:
+        action: "voir l'image"
       create:
-        action: 'ajouter une image'
+        success: "l'image a bien été créée"
+        failed: "un problème est survenu lors de la création de l'image"
+        action: 'créer une image'
+      update:
+        success: "l'image a bien été mise à jour"
+        failed: "un problème est survenu lors de la mise à jour de l'image"
+        action: "éditer l'image"
+      destroy:
+        success: "l'image a bien été supprimée"
+        failed: "un problème est survenu lors de la suppression de l'image"
+        confirm: 'êtes-vous sûr de vouloir supprimer cette image ?'
+      upload:
+        start: "Commencer l'envoi"
+        clear_queue: 'Vider la liste'
+        action: 'charger une image'
     misc:
       one: 'autre'
       other: 'autres'
