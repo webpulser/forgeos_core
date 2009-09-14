@@ -97,6 +97,7 @@ en:
     upload: 
       start: 'start upload'
       clear_queue: 'clear queue'
+      action: upload files
     create:
       action: 'create a media'
       success: 'the media was successfully created'
@@ -119,9 +120,10 @@ en:
     attach:
       unknown_type: 'the type of the attachable element is unknown'
       error: 'a problem occured during the check of the type of the attachable element'
-    content_type: 'content type'
-    filename: 'filename'
-    size: 'size'
+    content_type: content type
+    updated_at: last update
+    filename: filename
+    size: size
     byte:
       one: 'byte'
       other: 'bytes'

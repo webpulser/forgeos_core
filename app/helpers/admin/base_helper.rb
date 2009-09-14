@@ -28,18 +28,19 @@ module Admin::BaseHelper
     sorting = options[:sorting].nil? ? false : options[:sorting]
     
     #columns_count -= 1 if action_column
-    columns = columns_count.times.collect{'null'}
+    columns = options[:columns] || columns_count.times.collect{'null'}
     #columns << "{ 'bSearchable': false, 'bSortable': false }" if action_column
     columns[0] = "{ 'bVisible': false, 'sType': 'numeric' }" if sorting
 
     javascript_tag "
     $(function(){
-      oTable = $('##{id}').dataTable({
+      var table = $('##{id}').dataTable({
         'sPaginationType': 'full_numbers',
         'sDom': \"<'top'if>t<'bottom'p<'clear'>\",
         'aoColumns': [ #{columns.join(',')} ],
         'sProcessing': true,
         'bServerSide': true,
+        'bStateSave': true,
         'sAjaxSource': '#{options[:url]}',
         'fnDrawCallback': DataTablesDrawCallBack,
         'fnRowCallback': DataTablesRowCallBack,
@@ -52,6 +53,11 @@ module Admin::BaseHelper
           'sSearch':''
         }
       });
+      if(typeof oTables == 'undefined')
+        oTables = new Array();
+
+      oTables.push(table);
+      oTable = oTables[0];
     });"
   end
 

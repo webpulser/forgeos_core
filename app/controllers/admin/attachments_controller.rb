@@ -118,30 +118,10 @@ class Admin::AttachmentsController < Admin::BaseController
 
   # DELETE /medias/1
   def destroy
-    if @media && @media.destroy
+    if @media.destroy
       flash[:notice] = I18n.t('media.destroy.success').capitalize
     else
       flash[:notice] = I18n.t('media.destroy.failed').capitalize
-    end
-
-    # media destroy is requested from another controller
-    if request.xhr? && params[:target] && params[:target_id] && !params[:target].blank?
-      # get the attached model and retrieve all attachments
-      begin
-        target = params[:target].camelize.constantize
-        attachable = target.find_by_id(params[:target_id])
-        @medias = attachable.attachments if attachable
-      rescue NameError
-        index
-      end
-
-      return render(:update) do |page|
-        # without dataTables
-        # page << "$('#media_#{params[:id]}').parents('tr').remove()"
-        # with dataTables
-        page << "oTable.fnDeleteRow(oTable.fnGetPosition($('#media_#{params[:id]}').parents('tr')[0]));"
-        page << display_standard_flashes('', false)
-      end
     end
     return render :nothing => true
   end

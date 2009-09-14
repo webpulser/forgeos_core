@@ -40,20 +40,5 @@
     .backgrounds.search-form
   .content-background
   %table#table.datatable
-    %thead
-      %tr
-        %th
-        %th
-          = I18n.t('name').capitalize
-        %th
-          = I18n.t('type').capitalize
-        %th
-          = I18n.t('updated_at').capitalize
-        %th
-          = I18n.t('media.size').capitalize
-        %th
-          = I18n.t('media.used').capitalize
-        %th.actions-td
-    %tbody
 
-= dataTables_tag 7, :url => admin_attachments_path(:format => :json, :file_type => @file_type)
+= dataTables_tag 8, :url => admin_attachments_path(:format => :json, :file_type => @file_type), :columns => ['{ "bSortable": false }',"{ 'sTitle': '#{I18n.t('name')}' }","{ 'sTitle': '#{I18n.t('type')}' }","{ 'sTitle': '#{I18n.t('media.updated_at')}' }","{ 'sTitle': '#{I18n.t('media.size')}' }", "{'bVisible': false, 'sTitle': '#{I18n.t('media.used')}'}", "{ 'bSortable': false, 'bSearchable': false, 'sClass': 'actions-td'}",'{ "bVisible": false}','{ "bVisible": false}','{ "bVisible": false}']

@@ -6,6 +6,9 @@
     link_id = "page_#{media.id}"
   %>
   [
+<% if params[:skin] == 'thumbnail' %>
+  '<%= escape_javascript(render :partial => 'table_thumbnail', :locals => { :media => media })%>',
+<% else %>
   '<%= content_tag(:div, '&nbsp;', :id => link_id, :class => "small-icons #{@file_type}")%>',
   '<%= escape_javascript content_tag(:div, link_to(media.filename, [:admin, media]), :class => 'media-name') %>',
   '<%= media.file_type.upcase  %> ',
@@ -20,7 +23,11 @@
       :html => {
       :class => 'small-icons destroy-link', :id => "destroy_#{link_id}"
     })
-    -%>'
+    -%>',
+<% end %>
+   '<%= escape_javascript(media.public_filename) %>',
+   '<%= media.id %>',
+   '<%= media.filename %>'
     ] <%= ',' unless @medias.last == media %>
 <% end %>
 ]
