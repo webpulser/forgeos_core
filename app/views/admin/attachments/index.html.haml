@@ -41,4 +41,4 @@
   .content-background
   %table#table.datatable
 
-= dataTables_tag 8, :url => admin_attachments_path(:format => :json, :file_type => @file_type), :columns => ['{ "bSortable": false }',"{ 'sTitle': '#{I18n.t('name')}' }","{ 'sTitle': '#{I18n.t('type')}' }","{ 'sTitle': '#{I18n.t('media.updated_at')}' }","{ 'sTitle': '#{I18n.t('media.size')}' }", "{'bVisible': false, 'sTitle': '#{I18n.t('media.used')}'}", "{ 'bSortable': false, 'bSearchable': false, 'sClass': 'actions-td'}",'{ "bVisible": false}','{ "bVisible": false}','{ "bVisible": false}']
+= dataTables_tag :url => admin_attachments_path(:format => :json, :file_type => @file_type), :columns => ['{ "bSortable": false }',"{ 'sTitle': '#{I18n.t('name')}' }","{ 'sTitle': '#{I18n.t('type')}' }","{ 'sTitle': '#{I18n.t('media.updated_at')}' }","{ 'sTitle': '#{I18n.t('media.size')}' }", "{'bVisible': false, 'sTitle': '#{I18n.t('media.used')}'}", "{ 'bSortable': false, 'bSearchable': false, 'sClass': 'actions-td'}",'{ "bVisible": false}','{ "bVisible": false}','{ "bVisible": false}']

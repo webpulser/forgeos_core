@@ -22,15 +22,9 @@ module Admin::BaseHelper
     end
   end
 
-  def dataTables_tag(columns_count=1, options = {})
+  def dataTables_tag(options = {})
     id = options[:id].nil? ? 'table' : options[:id]
-    #action_column = options[:action_column].nil? ? true : options[:action_column]
-    sorting = options[:sorting].nil? ? false : options[:sorting]
-    
-    #columns_count -= 1 if action_column
-    columns = options[:columns] || columns_count.times.collect{'null'}
-    #columns << "{ 'bSearchable': false, 'bSortable': false }" if action_column
-    columns[0] = "{ 'bVisible': false, 'sType': 'numeric' }" if sorting
+    columns = options[:columns]
 
     # data source
     data_source = ''
@@ -78,15 +72,15 @@ module Admin::BaseHelper
     content_tag(:div, '', :class => 'borders interact-button-right')
   end
 
-  def block_container(model_name, block_name, block)
-    content_tag :div, :class => 'block-container' do
+  def block_container(model_name, block_name, block, &proc)
+    content_tag :div, :class => 'block-container ui-corner-all' do
       content_tag(:span, :class => 'block-type') do
         content_tag(:span, content_tag(:span, '&nbsp;', :class => 'inner'), :class => 'handler') +
-        block.class.human_name.capitalize
+        block.class.human_name
       end +
-      content_tag(:span, block.respond_to?(:title) ? block.title : block.filename, :class => 'block-name') +
+      content_tag(:span, capture(&proc), :class => 'block-name') +
       link_to('', '#', :class => 'big-icons gray-destroy') +
-      hidden_field_tag("#{model_name}[#{block_name}_ids][]", block.id, :class => 'block-selected')
+      hidden_field_tag("#{model_name}[#{block_name}_ids][]", block.id)
     end
   end
 

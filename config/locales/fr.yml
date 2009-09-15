@@ -184,6 +184,8 @@ fr:
 
 # Date formats
   date:
+    one: date
+    other: dates
     formats:
       default: "%d-%m-%Y"
       short: "%e %b"
@@ -208,8 +210,8 @@ fr:
         formats:
           default: "%Y-%m-%dT%H:%M:%S%Z"
           
-    am: ''
-    pm: ''
+    am:
+    pm:
   datetime:
     prompts:
       day: 'Jour'

@@ -15,23 +15,9 @@
   .backgrounds.header
     = link_to content_tag(:span,I18n.t('admin.create.action').capitalize, :class=>'big-icons create-admin'), new_admin_admin_path, :class=>'backgrounds action-button'
     #search.right
-      = link_to content_tag(:span, I18n.t('search').capitalize, :class => 'small-icons search-span'), '#', :class => 'small-icons left search-link'
+      = fg_search
     .backgrounds.search-form
   .content-background
   %table#table.datatable
-    %thead
-      %tr
-        %th
-        %th
-          = I18n.t('name').capitalize
-        %th
-          = I18n.t('role.one').capitalize
-        %th
-          = I18n.t('email').capitalize
-        %th
-          = I18n.t('created_on').capitalize
-        %th.actions-td
-    %tbody
-
-= dataTables_tag 6, :url => admin_admins_path(:format => :json)
-
+    
+= dataTables_tag :url => admin_admins_path(:format => :json), :columns => ["{'bSearchable':false,'bSortable':false}","{'sTitle':'#{I18n.t :name}'}","{'sTitle':'#{I18n.t :role, :count => 1}'}","{'sTitle':'#{I18n.t :email}'}","{'sTitle':'#{I18n.t :created_on}'}","{'sClass':'actions-td','bSearchable':false,'bSortable':false}"]

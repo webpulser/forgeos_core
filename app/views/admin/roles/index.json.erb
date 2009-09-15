@@ -1,37 +1,44 @@
 {
-'iTotalDisplayRecords': <%= @roles.total_entries || 0 %>,
+'iTotalDisplayRecords': <%= @roles.total_entries || 0 -%>,
 'aaData': [
-<% @roles.each do |role| %>
+<% @roles.each do |role| -%>
   <% 
      link_id = "role_#{role.id}"
-     status = [['active', 'active'], ['inactive', 'inactive']]
+     klass = role.active? ? 'see-on' : 'see-off'
      role_clone = role.clone.attributes
      role_clone[:right_ids] = role.right_ids
-  %>
+  -%>
   [
   '<%= escape_javascript content_tag(:div, '<div class="image">&nbsp;<span class="small-icons role-ico">&nbsp;</span></div>', :id => link_id, :class => role.admins.count > 0 ? 'some-variants plus' : '')%>',
-  '<%= escape_javascript content_tag(:div, link_to(role.name, [:admin, role]), :class => 'role-name') -%>
-   <%= escape_javascript '<br /><p style="display:none">' -%>
-     <% role.admins.each do |admin| -%>
-       <%= escape_javascript link_to("#{admin.firstname} #{admin.lastname}", [:admin, admin]) -%>
-       <%= '<br/>' -%>
-     <% end -%>
-   <%= '</p>' %>',
-  '<%= role.admins.count %>',
-  '<%= role.created_at.to_s(:slashed_fr) %>',
-  '<%= escape_javascript(select_tag :status, options_for_select(status, role.active ? 'active' : 'inactive'), :class => 'active', :onchange => "#{remote_function(:url => activate_admin_role_path(role), :with => "'active=' + value")}") -%>',
-  '<%= escape_javascript link_to('', new_admin_role_path(:role => role_clone), :class => 'small-icons duplicate-link') -%>
-    <%= escape_javascript link_to('', [:edit, :admin, role], :class => 'small-icons edit-link') -%>
-    <%= escape_javascript link_to_remote('', :url => [:admin, role],
+  '<%= escape_javascript(
+    content_tag(:div, link_to(role.name, [:admin, role]), :class => 'role-name') +
+    '<br /><p style="display:none">' +
+    role.admins.collect{ |admin| link_to("#{admin.firstname} #{admin.lastname}", [:admin, admin]) }.join('<br />') +
+    '</p>'
+  ) -%>',
+  '<%= role.admins.count -%>',
+  '<%= role.created_at.to_s(:slashed_fr) -%>',
+  '<%= escape_javascript(
+    link_to_remote('', :url => activate_admin_role_path(role),
+     :complete => "toggleActivate('#show_#{link_id}')",
+     :html => { 
+       :class => "small-icons #{klass}",
+       :id => "show_#{link_id}"
+       })
+  ) -%>',
+  '<%= escape_javascript(
+    link_to('', new_admin_role_path(:role => role_clone), :class => 'small-icons duplicate-link') +
+    link_to('', [:edit, :admin, role], :class => 'small-icons edit-link') +
+    link_to_remote('', :url => [:admin, role],
       :method => :delete,
       :confirm => I18n.t('role.destroy.confirm').capitalize,
       :success => "removedataTablesRow('#destroy_#{link_id}')", 
       :html => {
       :class => 'small-icons destroy-link', :id => "destroy_#{link_id}"
     })
-    -%>'
-  ] <%= ',' unless @roles.last == role %>
+  ) -%>'
+  ] <%= ',' unless @roles.last == role -%>
 
-<% end %>
+<% end -%>
 ]
 }

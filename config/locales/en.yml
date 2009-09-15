@@ -184,6 +184,8 @@ en:
 
 # Dates formats 
   date:
+    one: date
+    other: dates
     formats:
       default: "%Y-%m-%d"
       short: "%e %b"
