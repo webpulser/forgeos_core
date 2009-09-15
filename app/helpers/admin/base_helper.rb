@@ -32,6 +32,15 @@ module Admin::BaseHelper
     #columns << "{ 'bSearchable': false, 'bSortable': false }" if action_column
     columns[0] = "{ 'bVisible': false, 'sType': 'numeric' }" if sorting
 
+    # data source
+    data_source = ''
+    unless options[:url].nil? or options[:url].blank?
+      data_source += "'bServerSide': true,"
+      data_source += "'sAjaxSource': '#{options[:url]}',"
+      data_source += "'fnDrawCallback': DataTablesDrawCallBack,"
+      data_source += "'fnRowCallback': DataTablesRowCallBack,"
+    end
+
     javascript_tag "
     $(function(){
       var table = $('##{id}').dataTable({
@@ -39,11 +48,8 @@ module Admin::BaseHelper
         'sDom': \"<'top'if>t<'bottom'p<'clear'>\",
         'aoColumns': [ #{columns.join(',')} ],
         'sProcessing': true,
-        'bServerSide': true,
         'bStateSave': true,
-        'sAjaxSource': '#{options[:url]}',
-        'fnDrawCallback': DataTablesDrawCallBack,
-        'fnRowCallback': DataTablesRowCallBack,
+        #{data_source}
         'oLanguage': {
           'sProcessing' : '#{I18n.t('jquery.dataTables.oLanguage.sProcessing')}',
           'sLengthMenu':'#{I18n.t('jquery.dataTables.oLanguage.sLengthMenu')}',
