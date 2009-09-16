@@ -14,6 +14,7 @@ class Admin::AttachmentsController < Admin::BaseController
 
   # GET /medias/1
   def show
+    @thumbnails = @media.thumbnails.all :order => '(width*height) DESC'
   end
 
   # GET /medias/1

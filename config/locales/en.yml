@@ -91,6 +91,7 @@ en:
     all: 'all'
     associated_rights: 'associated rights'
     show: 'show media'
+    back: 'back to library'
     not_exist: 'the requested media does not exist'
     used: 'used'
     linked: 'linked files'
@@ -110,7 +111,7 @@ en:
       action: 'download the media'
       failed: 'a problem occured during the media download'
     destroy:
-      action: 'delete the media'
+      action: 'delete media'
       success: 'the media was successfully deleted'
       failed: 'a problem occured during the media deletion'
       confirm: 'are you sure that you want to delete this media?'
@@ -121,13 +122,24 @@ en:
       unknown_type: 'the type of the attachable element is unknown'
       error: 'a problem occured during the check of the type of the attachable element'
     content_type: content type
-    updated_at: last update
+    file_type: 'file type'
+    updated_at: 'last modification'
     filename: filename
     size: size
+    original_size: 'original size'
     byte:
       one: 'byte'
       other: 'bytes'
+      kilo: 'Kb'
       mega: 'Mb'
+    pixel:
+      one: 'pixel'
+      other: 'pixels'
+    thumbnails:
+      big: 'big'
+      normal: 'normal'
+      small: 'small'
+      thumb: 'thumb'
     pdf:
       one: 'pdf'
       other: 'pdfs'

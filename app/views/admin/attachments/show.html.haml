@@ -1,13 +1,112 @@
-%h1
-  = I18n.t('media.show').capitalize
+- thumbnails_hu = @media.attachment_options[:thumbnails]
 
-%p{ :style => "font-size: 16px;" }
-  %b
-    = I18n.t('media.filename').capitalize
-    \:
-  = @media.filename
+#wrap
+  .backgrounds.big-header
+    %h1#media-title
+      = @media.filename
+    .interact-links
+      .borders.interact-button-left
+      = link_to I18n.t('media.update.action').capitalize, [:edit, :admin, @media ], :class => 'backgrounds interact-button'
+      .borders.interact-button-right
+      = I18n.t('or')
+      = link_to I18n.t('media.back').capitalize, admin_attachments_path(:file_type => 'picture'), :class => 'back-link'
 
-#tabs
+  #content.grid_16.alpha.omega
+    #media-modify.grid_12.alpha
+      .media-modify-wrap
+        - permalink = "#{request.protocol}#{request.host_with_port}/#{@media.public_filename}"
+        %h2.permalink
+          = I18n.t('permalink', :count => 1).capitalize
+          \:
+          = link_to permalink, permalink
+
+        - if largest_thumb = @thumbnails.shift
+          .large-image.media-image-container.grid_7.omega
+            = image_tag largest_thumb.public_filename
+            %br
+            %span.media-size
+              = I18n.t("media.thumbnails.#{largest_thumb.thumbnail}").upcase
+            %br
+            %span.media-size-pixels
+              = "#{largest_thumb.width}x#{largest_thumb.height} #{I18n.t('media.pixel', :count => 2)}"
+
+        .large-info-container.grid_5.alpha.omega
+          .large-info-block
+            %span.large-info-name
+              = I18n.t('media.original_size').capitalize
+            %span.large-info-value
+              = "#{@media.width} * #{@media.height} #{I18n.t('media.pixel', :count => 2)}"
+            .clear
+          .large-info-block
+            %span.large-info-name
+              = I18n.t('media.file_type').capitalize
+            %span.large-info-value
+              = @media.file_type.upcase
+            .clear
+          .large-info-block
+            %span.large-info-name
+              = I18n.t('media.updated_at').capitalize
+            %span.large-info-value
+              = @media.updated_at.to_s(:slashed_fr)
+            .clear
+          .large-info-block
+            %span.large-info-name
+              = I18n.t('media.size').capitalize
+            %span.large-info-value
+              = "#{@media.size/1024} #{I18n.t('media.byte.kilo')}"
+            .clear
+        .clear
+
+        - @thumbnails.each do |thumb|
+          .grid_4.alpha.omega.media-image-container
+            = image_tag thumb.public_filename
+            %br
+            %span.media-size
+              = I18n.t("media.thumbnails.#{thumb.thumbnail}").upcase
+            %br
+            %span.media-size-pixels
+              = "#{thumb.width}x#{thumb.height} #{I18n.t('media.pixel', :count => 2)}"
+
+        -#.grid_4.alpha.omega.media-image-container
+          = image_tag @media.public_filename(:normal)
+          %br
+          %span.media-size
+            = I18n.t('media.thumbnails.normal').upcase
+          %br
+          %span.media-size-pixels
+            = "#{thumbnails_hu[:normal]} #{I18n.t('media.pixel', :count => 2)}"
+        -#.grid_3.alpha.omega.media-image-container
+          = image_tag @media.public_filename(:small)
+          %br
+          %span.media-size
+            = I18n.t('media.thumbnails.small').upcase
+          %br
+          %span.media-size-pixels
+            = "#{thumbnails_hu[:small]} #{I18n.t('media.pixel', :count => 2)}"
+        -#.grid_3.alpha.omega.media-image-container
+          = image_tag @media.public_filename(:thumb)
+          %br
+          %span.media-size
+            = I18n.t('media.thumbnails.thumb').upcase
+          %br
+          %span.media-size-pixels
+            = "#{thumbnails_hu[:thumb]} #{I18n.t('media.pixel', :count => 2)}"
+        -#.grid_2.alpha.omega.media-image-container
+          %img.media-image{ :src => "/uploads/images/bart-xxs.png", :alt => "big image" }
+          %br
+          %span.media-size
+            XX-SMALL
+          %br
+          %span.media-size-pixels
+            375-400 pixels
+    #right-sidebar.grid_4.omega
+      .step
+        = link_to I18n.t('media.destroy.action').capitalize, [:admin, @media], :confirm => I18n.t('media.destroy.confirm').capitalize, :method => :delete, :class => 'small-icons delete'
+        .clear
+    .clear
+
+
+-##tabshu
   %ul
     %li
       %a{ :href => "#tabs-1" }
@@ -34,7 +133,7 @@
       = I18n.t('media.byte', :count => @media.size)
 
     - if @media.kind_of?(Picture)
-      - thumbnail_names = %w[big normal small thumb] #@media.attachment_options[:thumbnails].keys
+      - thumbnail_names = %w[big normal small thumb] #@media.attachment_options[:thumbnails].sort_.keys
       %table#thumbnails
         - thumbnail_names.each do |thumb|
           %tr
@@ -44,6 +143,6 @@
               = thumb
   #tabs-2
     %ul#associated_elements.no-list-style-type
-      = render :partial => 'list_associated_elements', :locals => { :media => @media }
-= javascript_tag "$(function(){ $('#tabs').tabs(); })"
+      -#= render :partial => 'list_associated_elements', :locals => { :media => @media }
+-#= javascript_tag "$(function(){ $('#tabs').tabs(); })"
 

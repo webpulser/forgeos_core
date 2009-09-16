@@ -17,6 +17,7 @@ fr:
   active: 'actif'
   inactive: 'inactif'
   meta_description: 'meta description'
+  last_modification: 'dernière modification'
   admins: 'administrateurs'
   medias: 'médias'
   folder:
@@ -91,6 +92,7 @@ fr:
     all: 'tous'
     associated_rights: 'droits associés'
     show: 'voir le média'
+    back: 'return vers la librairie'
     not_exist: "le média sélectionné n'existe pas"
     used: 'utilisé(e)'
     linked: 'fichiers liés'
@@ -121,13 +123,24 @@ fr:
       unknown_type: "le type de l'élément attaché est inconnu"
       failed: "un problème est survenu lors de l'édition de lien avec l'élément"
     content_type: 'content type'
+    file_type: 'type du fichier'
     updated_at: 'dernière mise à jour'
     filename: 'nom du fichier'
     size: 'taille'
+    original_size: 'taille originale'
     byte:
       one: 'octet'
       other: 'octets'
+      kilo: 'Ko'
       mega: 'Mo'
+    pixel:
+      one: 'pixel'
+      other: 'pixels'
+    thumbnails:
+      big: 'grand'
+      normal: 'normal'
+      small: 'petit'
+      thumb: 'vignette'
     pdf:
       one: 'pdf'
       other: 'pdfs'

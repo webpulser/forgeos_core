@@ -16,6 +16,7 @@ es:
   active: 'activo'
   inactive: 'inactivo'
   meta_description: 'meta descripción'
+  last_modification: 'última '
   admins: 'administradores'
   medias: 'medias'
   folder:
@@ -90,6 +91,7 @@ es:
     all: 'todos'
     associated_rights: 'derechos asociados'
     show: 'mostrar el media'
+    back: 'atrás a la biblioteca'
     not_exist: 'el media solicitado no existe'
     upload: 
       start: 'descargar'
@@ -117,12 +119,24 @@ es:
       unknown_type: 'la teclea del elemento es desconocido'
       failed: "ha habido un problemea durante la edition de la relación con el elemento"
     content_type: 'tipo de contenido'
+    file_type: 'tipo de archivo'
+    updated_at: 'última actualización'
     filename: 'nombre de archivo'
     size: 'tamaño'
+    original_size: 'tamaño original'
     byte:
       one: 'octeto'
       other: 'octetos'
+      kilo: 'Ko'
       mega: 'Mo'
+    pixel:
+      one: 'pixel'
+      other: 'pixels'
+    thumbnails:
+      big: 'grande'
+      normal: 'normal'
+      small: 'pequeño'
+      thumb: 'pequeñito'
     pdf:
       one: 'pdf'
       other: 'pdfs'

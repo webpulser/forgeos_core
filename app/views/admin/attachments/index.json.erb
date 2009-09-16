@@ -13,7 +13,7 @@
   '<%= escape_javascript content_tag(:div, link_to(media.filename, [:admin, media]), :class => 'media-name') %>',
   '<%= media.file_type.upcase  %> ',
   '<%= media.updated_at.to_s(:slashed_fr) %>',
-  '<%= "#{media.size/1024} Ko"%>',
+  '<%= "#{media.size/1024} #{I18n.t('media.byte.kilo')}" %>',
   '<%= "N/A"  %>',
   '<%= escape_javascript link_to('', [:edit, :admin, media], :class => 'small-icons edit-link') -%>
     <%= escape_javascript link_to_remote('', :url => [:admin, media],
