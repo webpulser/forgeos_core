@@ -123,7 +123,6 @@ es:
     updated_at: 'última actualización'
     filename: 'nombre de archivo'
     size: 'tamaño'
-    original_size: 'tamaño original'
     byte:
       one: 'octeto'
       other: 'octetos'
@@ -149,6 +148,7 @@ es:
     picture:
       one: 'imágenen'
       other: 'imágenes'
+      original_size: 'tamaño original'
     misc:
       one: 'otro'
       other: 'otros'

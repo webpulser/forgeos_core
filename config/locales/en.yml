@@ -126,7 +126,6 @@ en:
     updated_at: 'last modification'
     filename: filename
     size: size
-    original_size: 'original size'
     byte:
       one: 'byte'
       other: 'bytes'
@@ -170,6 +169,7 @@ en:
       all: 'all pictures'
       alternative: 'alternative text'
       title: 'picture title'
+      original_size: 'original image size'
       add: 'add picture'
       featured: 'featured picture'
       show:

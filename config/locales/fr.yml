@@ -127,7 +127,6 @@ fr:
     updated_at: 'dernière mise à jour'
     filename: 'nom du fichier'
     size: 'taille'
-    original_size: 'taille originale'
     byte:
       one: 'octet'
       other: 'octets'
@@ -171,6 +170,7 @@ fr:
       all: 'toutes les images'
       alternative: 'texte alternatif'
       title: "titre de l'image"
+      original_size: 'taille originale'
       add: 'ajouter photo'
       featured: 'photo principale'
       show:
