@@ -61,7 +61,7 @@ class Admin::AttachmentsController < Admin::BaseController
             @media = Picture.new(params[:attachment])
           when 'application/pdf'
             @media = Pdf.new(params[:attachment])
-          when 'video/x-msvideo'
+          when 'video/x-msvideo', 'video/quicktime'
             @media = Video.new(params[:attachment])
           when 'application/msword', 'application/vnd.oasis.opendocument.text'
             @media = Doc.new(params[:attachment])
