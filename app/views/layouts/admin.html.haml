@@ -2,7 +2,7 @@
 %html{ :xmlns => "http://www.w3.org/1999/xhtml" }
   %head
     %meta{ :content => "text/html; charset=UTF-8", "http-equiv" => "Content-Type" }
-    = stylesheet_link_tag %w(960 jquery-ui/themes/forgeos jquery.selectbox jstree/tree_component admin/style)
+    = stylesheet_link_tag %w(960 jquery-ui/themes/forgeos jquery.selectbox jstree/tree_component admin/base )
     = javascript_include_tag 'jquery'
     = javascript_tag "var AUTH_TOKEN = #{form_authenticity_token.inspect};" if protect_against_forgery?
     %title
@@ -37,4 +37,4 @@
         = yield
       #footer
       #dialog
-      = javascript_include_tag %w(jquery-ui jrails jstree/css jstree/tree_component.min admin/customselects jquery.dataTables.min admin/base)
+      = javascript_include_tag %w(jquery-ui jrails jstree/css jstree/tree_component.min admin/customselects jquery.dataTables.min admin/base  jquery.dataSlides)
