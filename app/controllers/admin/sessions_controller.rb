@@ -17,7 +17,7 @@ class Admin::SessionsController < Admin::BaseController
         session[:redirect] = nil
         redirect_to(redirect)
       else
-        redirect_to_home
+        redirect_to(:root)
       end
       flash[:notice] = I18n.t("log_in_ok").capitalize
     else
