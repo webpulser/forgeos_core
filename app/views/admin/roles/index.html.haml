@@ -8,7 +8,7 @@
   .sidebar-content
     %h2.small-icons.all-roles
       = I18n.t('role.all').capitalize
-    #role-tree
+    #role-tree.init-tree
       %ul
         = render :partial => 'admin/categories/list', :locals => { :categories => RoleCategory.find_all_by_parent_id(nil) }
 #content.grid_12.alpha.omega

@@ -8,7 +8,7 @@
   .sidebar-content
     %h2.small-icons.all-rights
       = I18n.t('right.all').capitalize
-    #right-tree
+    #right-tree.init-tree
       %ul
         = render :partial => 'admin/categories/list', :locals => { :categories => RightCategory.find_all_by_parent_id(nil) }
 #content.grid_12.alpha.omega

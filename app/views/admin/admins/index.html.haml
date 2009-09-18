@@ -8,7 +8,7 @@
   .sidebar-content
     %h2.small-icons.all-admins
       = I18n.t('admin.all').capitalize
-    #admin-tree
+    #admin-tree.init-tree
       %ul
         = render :partial => 'admin/categories/list', :locals => { :categories => AdminCategory.find_all_by_parent_id(nil) }
 #content.grid_12.alpha.omega
