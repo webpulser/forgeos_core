@@ -15,6 +15,38 @@ module Forgeos
       :url => { :controller => 'admin/marketing' },
       :html => { :class => 'right' } }
   ]
+
+  AdminSubMenu = [
+    { :title => 'Administration',
+      :url => { :controller => 'admin/admins' },
+      :html => { :class => 'left first'}
+    },
+    { :title => 'Preferences',
+      :url => { :controller => 'admin/preferences'},
+      :html => { :class => 'left' }
+    },
+    { :title => 'Library',
+      :url => { :controller => 'admin/attachments' },
+      :html => { :class => 'left' }
+    },
+    { :title => 'Your account',
+      :url => { :controller => 'admin/account' },
+      :html => { :class => 'left' }
+    },
+    { :title => 'Logout',
+      :url => { :controller => 'admin/logout' },
+      :html => { :class => 'right' }
+    },
+    { :title => 'Support',
+      :url => 'http://www.webpulser.com',
+      :html => { :class => 'right' }
+    },
+    { :title => 'See the website',
+      :url => :root,
+      :html => { :class => 'right first' }
+    }
+  ]
+  
   # Set site's menu
   Menu = []
   # Set attachable media types

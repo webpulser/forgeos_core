@@ -1,9 +1,10 @@
 # Methods added to this helper will be available to all templates in the application.
 module ApplicationHelper
   
-  def build_menu(menu = Forgeos::Menu,options = {}, html_options = {})
+  def build_menu(menu = Forgeos::Menu,options = { :menu => :menu}, html_options = {})
+    menu_name = options.delete(:menu)
     menu.each do |tab|
-      content_for :menu, menu_item(tab.dup)
+      content_for menu_name, menu_item(tab.dup)
     end
   end
 
@@ -13,7 +14,7 @@ module ApplicationHelper
     url = tab.delete(:url)
     request_path = request.path.gsub(/\/$/,'')
     html_options[:class] = '' unless html_options[:class]
-    html_options[:class] += ' current' if (url_for(url) != '/admin' || request_path == '/admin') && request_path.include?(url_for(url))
+    html_options[:class] += ' current' if (url_for(url) != '/' || request_path == '/') && (url_for(url) != '/admin' || request_path == '/admin') && request_path.include?(url_for(url))
     if helper = tab.delete(:helper)
         link = self.send(helper[:method],tab_name)
     else
