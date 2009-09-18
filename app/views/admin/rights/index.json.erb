@@ -4,16 +4,15 @@
 <% @rights.each do |right| %>
   <% 
      link_id = "right_#{right.id}"
-     right_clone = right.clone.attributes 
   %>
   [
   '<%= content_tag(:div, '&nbsp;', :id => link_id, :class => 'small-icons right-ico') %>',
-  '<%= escape_javascript content_tag(:div, link_to(right.name, [:admin, right]), :class => 'right-name') %>',
+  '<%= escape_javascript content_tag(:div, right.name, :class => 'right-name') %>',
   '<%= right.controller_name %>',
   '<%= right.action_name %>',
 
-  '<%= escape_javascript link_to('', new_admin_right_path(:right => right_clone), :class => 'small-icons duplicate-link') -%>
-    <%= escape_javascript link_to('', [:edit, :admin, right], :class => 'small-icons edit-link') -%>
+  '<%= escape_javascript content_tag(:span, '&nbsp;', :class => 'small-icons duplicate-link duplicate-right') -%>
+    <%= escape_javascript content_tag(:span, '&nbsp;', :class => 'small-icons edit-link edit-right') -%>
     <%= escape_javascript link_to_remote('', :url => [:admin, right],
       :method => :delete,
       :confirm => I18n.t('right.destroy.confirm').capitalize,

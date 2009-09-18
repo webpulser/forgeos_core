@@ -25,30 +25,48 @@ class Admin::RightsController < Admin::BaseController
     @right = Right.new(params[:right])
     if @right.save
       flash[:notice] = I18n.t('right.create.success').capitalize
-      redirect_to(admin_right_path(@right))
+      return request.xhr? ? (render :nothing => true) : redirect_to(admin_right_path(@right))
     else
       flash[:error] = I18n.t('right.create.failed').capitalize
-      render :action => "new"
+      if request.xhr?
+        render :nothing => true, :json => { :result => 'error' }
+        return false
+      else
+        render :action => 'new'
+        render
+      end
     end
   end
 
   def update
     if @right.update_attributes(params[:right])
       flash[:notice] = I18n.t('right.update.success').capitalize
-      redirect_to(admin_right_path(@right))
+      return request.xhr? ? (render :nothing => true) : redirect_to(admin_right_path(@right))
     else
       flash[:error] = I18n.t('right.update.failed').capitalize
-      render :action => "edit"
+      if request.xhr?
+        render :nothing => true, :json => { :result => 'error' }
+        return false
+      else
+        render :action => 'edit'
+      end
     end
   end
 
   def destroy
+    
     if @right.destroy
       flash[:notice] = I18n.t('right.destroy.success').capitalize
+      return request.xhr? ? (render :nothing => true) : redirect_to(admin_rights_path)
     else
       flash[:error] = I18n.t('right.destroy.failed').capitalize
+      if request.xhr?
+        render :nothing => true, :json => { :result => 'error' }
+        return false
+      else
+        redirect_to(admin_rights_path)
+      end
     end
-    redirect_to(admin_rights_url)
   end
 
 private
