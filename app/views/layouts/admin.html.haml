@@ -29,7 +29,7 @@
           %li.right.first
             = link_to I18n.t('see_site').capitalize, :root
         %ul#menu.backgrounds
-          - build_menu
+          - build_menu(Forgeos::AdminMenu)
           = yield :menu
         .backgrounds.menu-bottom
       .clear

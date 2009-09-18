@@ -16,12 +16,6 @@ module Admin::BaseHelper
     return out
   end
   
-  def build_menu
-    Forgeos::AdminMenu.each do |tab|
-      content_for :menu, menu_item(tab.dup)
-    end
-  end
-
   def dataTables_tag(options = {})
     id = options[:id].nil? ? 'table' : options[:id]
     columns = options[:columns]

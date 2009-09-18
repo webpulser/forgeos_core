@@ -16,6 +16,5 @@ namespace :admin do |admin|
     route_options[:path_prefix] = 'admin/:file_type' if %w(attachments).include?(resources_alias)
     admin.resources resources_alias.to_sym, route_options
   end
-#  admin.root :controller => 'account'
-  admin.root :controller => 'products'
+  admin.root :controller => 'dashboard'
 end
