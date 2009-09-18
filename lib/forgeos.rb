@@ -26,7 +26,7 @@ module Forgeos
       :html => { :class => 'left' }
     },
     { :title => 'Library',
-      :url => { :controller => 'admin/attachments' },
+      :url => { :controller => 'admin/library' },
       :html => { :class => 'left' }
     },
     { :title => 'Your account',
