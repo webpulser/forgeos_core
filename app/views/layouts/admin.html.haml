@@ -12,22 +12,8 @@
     #container.container_16
       .grid_16
         %ul#submenu.backgrounds
-          %li.left.first
-            = link_to I18n.t('administration').capitalize, admin_admins_path
-          %li.left
-            %a{ :href => "#" }
-              Preferences
-          %li.left
-            = link_to I18n.t('library').capitalize, admin_attachments_path(:file_type => 'picture')
-          %li.left
-            = link_to I18n.t('your_account').capitalize, admin_account_path(current_user)
-          %li.right
-            = link_to I18n.t('logout').capitalize, admin_logout_path
-          %li.right
-            %a{ :href => "#" }
-              Support
-          %li.right.first
-            = link_to I18n.t('see_site').capitalize, :root
+          - build_menu(Forgeos::AdminSubMenu, :menu => :submenu)
+          = yield :submenu
         %ul#menu.backgrounds
           - build_menu(Forgeos::AdminMenu)
           = yield :menu
