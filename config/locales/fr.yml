@@ -1,32 +1,40 @@
 fr:
   keyword:
-    one: 'mot clé'
-    other: 'mots clés'
+    one: mot clé
+    other: mots clés
 
 # Admin
-  save_changes: 'enregistrer les changements'
-  get_forgotten_password: 'mot de passe oublié'
+  save_changes: enregistrer les changements
+  get_forgotten_password: mot de passe oublié
   go_back_admin: "retour vers l'administration"
-  see_site: 'voir le site'
-  library: 'librairie'
-  administration: 'administration'
-  download: 'télécharger'
-  show: 'voir'
-  created_on: 'date de création'
-  updated_at: 'date de modification'
-  active: 'actif'
-  inactive: 'inactif'
-  meta_description: 'meta description'
-  last_modification: 'dernière modification'
-  admins: 'administrateurs'
-  medias: 'médias'
+  see_site: voir le site
+  library: librairie
+  administration: administration
+  preferences: préférences
+  support: support
+  site_builder: site builder
+  statistics: statistiques
+  marketing: marketing
+  download: télécharger
+  show: voir
+  created_on: date de création
+  updated_at: date de modification
+  active: actif
+  inactive: inactif
+  meta_description: meta description
+  last_modification: dernière modification
+  admins: administrateurs
+  medias: médias
+  account:
+    update:
+      action: modifier vos informations
   folder:
-    create: 'créer un dossier'
-    smart: 'créer un dossier dynamique'
-    edit: 'modifier un dossier'
-    duplicate: 'dupliquer un dossier'
-    destroy: 'supprimer un dossier'
-    associated_to: 'associations avec les dossiers'
+    create: créer un dossier
+    smart: créer un dossier dynamique
+    edit: modifier un dossier
+    duplicate: dupliquer un dossier
+    destroy: supprimer un dossier
+    associated_to: associations avec les dossiers
   admin:
     one: 'administrateur'
     other: 'administrateurs'
@@ -48,7 +56,7 @@ fr:
       failed: "un problème est survenu lors de la suppression de l'administrateur"
       confirm: "êtes-vous sûr de vouloir supprimer cet utilisateur?"
     contact:
-      action: envoyer un message à l\'administrateur
+      action: "envoyer un message à l'administrateur"
   role:
     one: 'rôle'
     other: 'rôles'

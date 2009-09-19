@@ -12,13 +12,24 @@ en:
   administration: administration
   download: download
   show: show
-  created_on: created on
+  created_on: 'created on'
   updated_at: date modified
   active: active
   inactive: inactive
   meta_description: meta description
   admins: administrators
   medias: medias
+  statistics: statistics
+  site_builder: site builder
+  preferences: preferences
+  your_account: your account
+  library: library
+  marketing: marketing
+  dasboard: dashboard
+  support: support
+  account:
+    update:
+      action: update your informations
   folder:
     create: create a folder
     smart: create a smart folder
@@ -29,7 +40,7 @@ en:
   admin:
     one: user
     other: users
-    none: no user
+    none: 'no user'
     all: all users
     show: show user
     not_exist: the requested user does not exist

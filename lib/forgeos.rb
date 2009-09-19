@@ -2,46 +2,57 @@ module Forgeos
   # Set administration's menu
   AdminMenu = [
     { :title => 'dashboard',
-      :url => { :controller => 'admin/dashboard' }, :i18n => true,
+      :url => { :controller => 'admin/dashboard' },
+      :i18n => true,
       :html => { :class => 'left'}
     },
-    { :title => 'site builder',
+    { :title => 'site_builder',
       :url => { :controller => 'admin/product_types'},
+      :i18n => true,
       :html => { :class => 'right' } },
     { :title => 'statistics',
-      :url => { :controller => 'admin/stats' },
+      :url => { :controller => 'admin/statistics' },
+      :i18n => true,
       :html => { :class => 'right' } },
     { :title => 'marketing', 
+      :i18n => true,
       :url => { :controller => 'admin/marketing' },
       :html => { :class => 'right' } }
   ]
 
   AdminSubMenu = [
-    { :title => 'Administration',
+    { :title => 'administration',
+      :i18n => true,
       :url => { :controller => 'admin/admins' },
       :html => { :class => 'left first'}
     },
-    { :title => 'Preferences',
+    { :title => 'preferences',
+      :i18n => true,
       :url => { :controller => 'admin/preferences'},
       :html => { :class => 'left' }
     },
-    { :title => 'Library',
+    { :title => 'library',
+      :i18n => true,
       :url => { :controller => 'admin/library' },
       :html => { :class => 'left' }
     },
-    { :title => 'Your account',
+    { :title => 'your_account',
+      :i18n => true,
       :url => { :controller => 'admin/account' },
       :html => { :class => 'left' }
     },
-    { :title => 'Logout',
+    { :title => 'logout',
+      :i18n => true,
       :url => { :controller => 'admin/logout' },
       :html => { :class => 'right' }
     },
-    { :title => 'Support',
+    { :title => 'support',
+      :i18n => true,
       :url => 'http://www.webpulser.com',
       :html => { :class => 'right' }
     },
-    { :title => 'See the website',
+    { :title => 'see_site',
+      :i18n => true,
       :url => :root,
       :html => { :class => 'right first' }
     }
