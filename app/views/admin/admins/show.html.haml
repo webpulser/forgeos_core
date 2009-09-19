@@ -1,31 +1,26 @@
-%p
-  %b
-    = I18n.t('avatar').capitalize
-    \:
-  = image_tag(@admin.avatar.public_filename(:small)) if @admin.avatar && !@admin.avatar.filename.nil?
-%p
-  %b
-    = I18n.t('email').capitalize
-    \:
-  = h @admin.email
-%p
-  %b
-    = I18n.t('lastname').capitalize
-    \:
-  = h @admin.lastname
-%p
-  %b
-    = I18n.t('firstname').capitalize
-    \:
-  = h @admin.firstname
-%p
-  %b
-    = I18n.t('role', :count => 2).capitalize
-    \:
-  = @admin.roles.collect{ |role| role.name}.join(', ')
-%p
-  %b
-    = I18n.t('right', :count => 2).capitalize
-    \:
-  = @admin.rights.collect{ |right| right.name }.join(', ')
-- content_for :tools, link_to(I18n.t('edit').capitalize, [:edit, :admin, @admin])
+.backgrounds.big-header
+  = @admin.firstname
+  = @admin.lastname
+  .interact-links
+    .borders.interact-button-left
+    = link_to I18n.t('admin.update.action').capitalize, [:edit, :admin, @admin], :class => 'backgrounds interact-button'
+    .borders.interact-button-right
+    = I18n.t('or')
+    = link_to I18n.t('cancel').capitalize, admin_admins_path, :class => 'back-link'
+#content.grid_16.alpha.omega
+  .grid_12.alpha
+    .inner-content
+      = I18n.t('avatar')
+      %div
+        = image_tag(@admin.avatar.public_filename(:small)) if @admin.avatar
+      = I18n.t('email')
+      %div 
+        = @admin.email
+      = I18n.t(:role, :count => 1)
+      %div
+        = @admin.role.name
+  #right-sidebar.grid_4.omega
+    .step
+      = mail_to @admin.email,I18n.t('admin.contact.action'),  :class => 'small-icons contact'
+      =# link_to I18n.t('admin.duplicate.action'), [:duplicate,:admin,@admin], :class => 'small-icons duplicate'
+      = link_to I18n.t('admin.destroy.action').capitalize, [:admin, @admin], :confirm => I18n.t('admin.destroy.confirm').capitalize, :method => :delete, :class => 'small-icons delete'

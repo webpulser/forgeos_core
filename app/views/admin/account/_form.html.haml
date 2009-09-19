@@ -1,36 +1,26 @@
-- form_for :user, user, :url => admin_account_path(user), :html => { :method => :put, :id => 'edit_user', :multipart=>true } do |f|
-  = f.error_messages
-  = image_tag(user.avatar.public_filename(:thumb)) if user.avatar && !user.avatar.filename.nil?
-  - fields_for user.avatar do |avatar|
-    %p
-      %b
-        = avatar.label :uploaded_data, I18n.t('avatar').capitalize
-        \:
-      = avatar.file_field :uploaded_data
-  %p
-    %b
-      = f.label :lastname, I18n.t('lastname').capitalize
-      \:
-    = f.text_field :lastname
-  %p
-    %b
-      = f.label :firstname, I18n.t('firstname').capitalize
-      \:
+- form_for [:admin, admin], :html => { :multipart=>true } do |f|
+  .backgrounds.big-header
     = f.text_field :firstname
-  %p
-    %b
-      = f.label :email, I18n.t('email').capitalize
-      \:
-    = f.text_field :email
-  %p
-    %b
-      = f.label :password, I18n.t('password').capitalize
-      \:
-    = f.password_field :password
-  %p
-    %b
-      = f.label :password_confirmation, I18n.t('password_confirmation').capitalize
-      \:
-    = f.password_field :password_confirmation
-  %p
-    = f.submit I18n.t('save').capitalize
+    = f.text_field :lastname
+    .interact-links
+      = fg_submit_tag 'save_changes'
+      = I18n.t('or')
+      = link_to I18n.t('cancel').capitalize, admin_account_path, :class => 'back-link'
+  #content.grid_16.alpha.omega
+    .grid_12.alpha
+      .inner-content
+        - admin.build_avatar unless admin.avatar
+        - f.fields_for :avatar do |avatar|
+          = avatar.label :uploaded_data, I18n.t('avatar').capitalize
+          %div
+            = image_tag(admin.avatar.public_filename(:small)) if admin.avatar
+            = avatar.file_field :uploaded_data
+        = f.label :email, I18n.t('email')
+        %div 
+          = f.text_field :email
+        = f.label :password, I18n.t('password')
+        %div
+          = f.password_field :password
+        = f.label :password_confirmation, I18n.t('password_confirmation')
+        %div
+          = f.password_field :password_confirmation

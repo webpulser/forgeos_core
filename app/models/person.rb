@@ -6,7 +6,8 @@ class Person < ActiveRecord::Base
 
   acts_as_tagger
 
-  belongs_to :avatar, :class_name => 'Picture', :dependent => :destroy
+  has_one :avatar, :dependent => :destroy
+  accepts_nested_attributes_for :avatar
   
   validates_presence_of     :lastname, :firstname, :email
   validates_length_of       :email,    :within => 3..100, :too_long => "is too long", :too_short => "is too short"
@@ -15,7 +16,7 @@ class Person < ActiveRecord::Base
   before_create :make_activation_code 
   # prevents a user from submitting a crafted form that bypasses activation
   # anything else you want your user to change should be added here.
-  attr_accessible :lastname, :firstname, :email, :password, :password_confirmation, :civility_id, :country_id, :birthday, :tel1, :tel2, :email_confirmation
+  attr_accessible :lastname, :firstname, :email, :password, :password_confirmation, :civility_id, :country_id, :birthday, :tel1, :tel2, :email_confirmation, :avatar_attributes
 
   define_index do
     indexes firstname, :sortable => true

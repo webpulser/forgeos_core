@@ -1,6 +1,7 @@
 class Admin < Person
-  has_and_belongs_to_many :roles
-  has_and_belongs_to_many :rights  
-  attr_accessible :right_ids, :role_ids
+  belongs_to :role
+  #has_many :rights, :through => :role
+  attr_accessible :right_ids, :role_id
   before_create :activate
+  delegate :rights, :right_ids, :to => :role
 end 

@@ -42,9 +42,12 @@ es:
       failed: 'ha ocurrido un problema durante la actualización del administrador'
       action: 'editar administrador'
     destroy:
+      action: 'supprimir el administrador'
       success: 'el administrador se ha eliminado con éxito'
       failed: 'ha ocurrido un problema al eliminar el administrador'
       confirm: '¿estás seguro de que quieres eliminar éste usario?'
+    contact:
+      action: 
   role:
     one: 'rol'
     other: 'roles'

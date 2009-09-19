@@ -43,9 +43,12 @@ fr:
       failed: "un problème est survenu lors de la mise à jour de l'administrateur"
       action: "éditer l'administrateur"
     destroy:
+      action: "supprimer l'administrateur"
       success: "l'administrateur a bien été supprimé"
       failed: "un problème est survenu lors de la suppression de l'administrateur"
       confirm: "êtes-vous sûr de vouloir supprimer cet utilisateur?"
+    contact:
+      action: envoyer un message à l\'administrateur
   role:
     one: 'rôle'
     other: 'rôles'

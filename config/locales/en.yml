@@ -1,198 +1,201 @@
 en: 
   keyword:
-    one: 'keyword'
-    other: 'keywords'
+    one: keyword
+    other: keywords
 
 # Admin
-  save_changes: 'save changes'
-  get_forgotten_password: 'I forgot my password'
-  go_back_admin: 'go back to administration'
-  see_site: 'see the website'
-  library: 'library'
-  administration: 'administration'
-  download: 'download'
-  show: 'show'
-  created_on: 'created on'
-  updated_at: 'date modified'
-  active: 'active'
-  inactive: 'inactive'
-  meta_description: 'meta description'
-  admins: 'administrators'
-  medias: 'medias'
+  save_changes: save changes
+  get_forgotten_password: I forgot my password
+  go_back_admin: go back to administration
+  see_site: see the website
+  library: library
+  administration: administration
+  download: download
+  show: show
+  created_on: created on
+  updated_at: date modified
+  active: active
+  inactive: inactive
+  meta_description: meta description
+  admins: administrators
+  medias: medias
   folder:
-    create: 'create a folder'
-    smart: 'create a smart folder'
-    edit: 'modify a folder'
-    duplicate: 'duplicate a folder'
-    destroy: 'delete a folder'
-    associated_to: 'associated to folder'
+    create: create a folder
+    smart: create a smart folder
+    edit: modify a folder
+    duplicate: duplicate a folder
+    destroy: delete a folder
+    associated_to: associated to folder
   admin:
-    one: 'user'
-    other: 'users'
-    none: 'no user'
-    all: 'all users'
-    show: 'show user'
-    not_exist: 'the requested user does not exist'
+    one: user
+    other: users
+    none: no user
+    all: all users
+    show: show user
+    not_exist: the requested user does not exist
     create:
-      success: 'the user was successfully created'
-      failed: 'a problem occured during the user creation'
-      action: 'create user'
+      success: the user was successfully created
+      failed: a problem occured during the user creation
+      action: create user
     update:
-      success: 'the user was successfully updated'
-      failed: 'a problem occured during the user update'
-      action: 'edit user'
+      success: the user was successfully updated
+      failed: a problem occured during the user update
+      action: edit user
     destroy:
-      success: 'the user was successfully deleted'
-      failed: 'a problem occured during the user deletion'
-      confirm: 'are you sure to delete this user?'
+      action: delete the user
+      success: the user was successfully deleted
+      failed: a problem occured during the user deletion
+      confirm: are you sure to delete this user?
+    contact:
+      action: send a message to the user
   role:
-    one: 'role'
-    other: 'roles'
-    none: 'no roles'
-    all: 'all roles'
-    show: 'show role'
-    not_exist: 'the requested role does not exist'
+    one: role
+    other: roles
+    none: no roles
+    all: all roles
+    show: show role
+    not_exist: the requested role does not exist
     create:
-      success: 'the role was successfully created'
-      failed: 'a problem occured during the role creation'
-      action: 'create role'
+      success: the role was successfully created
+      failed: a problem occured during the role creation
+      action: create role
     update:
-      success: 'the role was successfully updated'
-      failed: 'a problem occured during the role update'
-      action: 'edit role'
+      success: the role was successfully updated
+      failed: a problem occured during the role update
+      action: edit role
     destroy:
-      success: 'the role was successfully deleted'
-      failed: 'a problem occured during the role deletion'
-      confirm: 'are you sure that you want to delete this role?'
+      success: the role was successfully deleted
+      failed: a problem occured during the role deletion
+      confirm: are you sure that you want to delete this role?
   right:
-    one: 'right'
-    other: 'rights'
-    none: 'no rights'
-    all: 'all rights'
-    show: 'show right'
-    not_exist: 'the requested right does not exist'
+    one: right
+    other: rights
+    none: no rights
+    all: all rights
+    show: show right
+    not_exist: the requested right does not exist
     create:
-      success: 'the right was successfully created'
-      failed: 'a problem occured during the right creation'
-      action: 'create right'
+      success: the right was successfully created
+      failed: a problem occured during the right creation
+      action: create right
     update:
-      success: 'the right was successfully updated'
-      failed: 'a problem occured during the right update'
-      action: 'edit right'
+      success: the right was successfully updated
+      failed: a problem occured during the right update
+      action: edit right
     destroy:
-      success: 'the right was successfully deleted'
-      failed: 'a problem occured during the right deletion'
-      confirm: 'are you sure that you want to delete this right?'
+      success: the right was successfully deleted
+      failed: a problem occured during the right deletion
+      confirm: are you sure that you want to delete this right?
   media:
-    list: 'list of medias'
-    one: 'media'
-    other: 'medias'
-    none: 'no medias'
-    all: 'all'
-    associated_rights: 'associated rights'
-    show: 'show media'
-    back: 'back to library'
-    not_exist: 'the requested media does not exist'
-    used: 'used'
-    linked: 'linked files'
+    list: list of medias
+    one: media
+    other: medias
+    none: no medias
+    all: all
+    associated_rights: associated rights
+    show: show media
+    back: back to library
+    not_exist: the requested media does not exist
+    used: used
+    linked: linked files
     upload: 
-      start: 'start upload'
-      clear_queue: 'clear queue'
+      start: start upload
+      clear_queue: clear queue
       action: upload files
     create:
-      action: 'create a media'
-      success: 'the media was successfully created'
-      failed: 'a problem occured during the media creation'
+      action: create a media
+      success: the media was successfully created
+      failed: a problem occured during the media creation
     update:
-      action: 'edit the media'
-      success: 'the media was successfully updated'
-      failed: 'a problem occured during the media update'
+      action: edit the media
+      success: the media was successfully updated
+      failed: a problem occured during the media update
     download:
-      action: 'download the media'
-      failed: 'a problem occured during the media download'
+      action: download the media
+      failed: a problem occured during the media download
     destroy:
-      action: 'delete media'
-      success: 'the media was successfully deleted'
-      failed: 'a problem occured during the media deletion'
-      confirm: 'are you sure that you want to delete this media?'
+      action: delete media
+      success: the media was successfully deleted
+      failed: a problem occured during the media deletion
+      confirm: are you sure that you want to delete this media?
     type:
-      one: 'type'
-      other: 'types'
+      one: type
+      other: types
     attach:
-      unknown_type: 'the type of the attachable element is unknown'
-      error: 'a problem occured during the check of the type of the attachable element'
+      unknown_type: the type of the attachable element is unknown
+      error: a problem occured during the check of the type of the attachable element
     content_type: content type
-    file_type: 'file type'
-    updated_at: 'last modification'
+    file_type: file type
+    updated_at: last modification
     filename: filename
     size: size
     byte:
-      one: 'byte'
-      other: 'bytes'
-      kilo: 'Kb'
-      mega: 'Mb'
+      one: byte
+      other: bytes
+      kilo: Kb
+      mega: Mb
     pixel:
-      one: 'pixel'
-      other: 'pixels'
+      one: pixel
+      other: pixels
     thumbnails:
-      big: 'big'
-      normal: 'normal'
-      small: 'small'
-      thumb: 'thumb'
+      big: big
+      normal: normal
+      small: small
+      thumb: thumb
     pdf:
-      one: 'pdf'
-      other: 'pdfs'
-      all: 'all pdfs'
+      one: pdf
+      other: pdfs
+      all: all pdfs
       create:
-        action: 'add a pdf'
+        action: add a pdf
     media:
-      one: 'file'
-      other: 'files'
-      all: 'all files'
+      one: file
+      other: files
+      all: all files
       create:
-        action: 'add a file'
+        action: add a file
     doc:
-      one: 'document'
-      other: 'documents'
-      all: 'all documents'
+      one: document
+      other: documents
+      all: all documents
       create:
-        action: 'add a document'
+        action: add a document
     video:
-      one: 'video'
-      other: 'videos'
-      all: 'all videos'
+      one: video
+      other: videos
+      all: all videos
       create:
-        action: 'add a video'
+        action: add a video
     picture:
-      one: 'picture'
-      other: 'pictures'
-      all: 'all pictures'
-      alternative: 'alternative text'
-      title: 'picture title'
-      original_size: 'original image size'
-      add: 'add picture'
-      featured: 'featured picture'
+      one: picture
+      other: pictures
+      all: all pictures
+      alternative: alternative text
+      title: picture title
+      original_size: original image size
+      add: add picture
+      featured: featured picture
       show:
-        action: 'show picture'
+        action: show picture
       create:
-        success: 'the picture was successfully created'
-        failed: 'a problem occured during the picture creation'
-        action: 'create a picture'
+        success: the picture was successfully created
+        failed: a problem occured during the picture creation
+        action: create a picture
       update:
-        success: 'the picture was successfully updated'
-        failed: 'a problem occured during the picture update'
-        action: 'edit picture'
+        success: the picture was successfully updated
+        failed: a problem occured during the picture update
+        action: edit picture
       destroy:
-        success: 'the picture was successfully destroyed'
-        failed: 'a problem occured during the picture destroy'
-        confirm: 'are you sure to delete this picture ?'
+        success: the picture was successfully destroyed
+        failed: a problem occured during the picture destroy
+        confirm: are you sure to delete this picture ?
       upload:
-        start: 'Start Upload'
-        clear_queue: 'Clear Queue'
-        action: 'upload a picture'
+        start: Start Upload
+        clear_queue: Clear Queue
+        action: upload a picture
     misc:
-      one: 'other'
-      other: 'others'
+      one: other
+      other: others
 
 # Dates formats 
   date:
@@ -222,14 +225,14 @@ en:
         formats:
           default: "%Y-%m-%dT%H:%M:%S%Z"
           
-      am: 'am'
-      pm: 'pm'
+      am: am
+      pm: pm
 
 # ActiveRecord
   activerecord:
     models:
-      media: 'media'
-      doc: 'document'
-      pdf: 'pdf'
-      video: 'video'
-      picture: 'picture'
+      media: media
+      doc: document
+      pdf: pdf
+      video: video
+      picture: picture

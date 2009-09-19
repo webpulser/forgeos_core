@@ -35,7 +35,6 @@ class Admin::AdminsController < Admin::BaseController
   end
 
   def update
-    upload_avatar 
     if @admin.update_attributes(params[:admin])
       flash[:notice] = I18n.t('admin.update.success').capitalize
       redirect_to(admin_admins_path)
@@ -53,16 +52,6 @@ class Admin::AdminsController < Admin::BaseController
     end
     redirect_to(admin_admins_path)
   end
-
-  def update_rights
-    @roles = Role.find_all_by_id(params[:admin][:role_ids])
-    @rights = []
-    @roles.each do |role| 
-      @rights += role.rights
-    end
-    render :layout => false
-  end
-
 private
 
   def get_admin
@@ -72,16 +61,8 @@ private
     end
   end
 
-  def upload_avatar
-    if @admin && params[:avatar] && params[:avatar][:uploaded_data] && !params[:avatar][:uploaded_data].blank?
-      @avatar = @admin.create_avatar(params[:avatar])
-      flash[:error] = @avatar.errors unless @avatar.save
-      params[:admin].update(:avatar_id => @avatar.id)
-    end
-  end
-
   def sort
-    columns = %w(firstname firstname roles.name email created_at '')
+    columns = %w(lastname roles.name email created_at)
     conditions = []
     per_page = params[:iDisplayLength].to_i
     offset =  params[:iDisplayStart].to_i
@@ -90,14 +71,14 @@ private
 
     if params[:sSearch] && !params[:sSearch].blank?
       @admins = Admin.search(params[:sSearch],
-        :include => 'roles',
+        :include => 'role',
         :order => order,
         :page => page,
         :per_page => per_page)
     else
       @admins = Admin.paginate(:all,
         :conditions => conditions,
-        :include => 'roles',
+        :include => 'role',
         :order => order,
         :page => page,
         :per_page => per_page)
