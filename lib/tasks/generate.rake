@@ -28,25 +28,23 @@ namespace :forgeos_core do
           controller_name = controller_underscore.gsub("_controller", "")
           controller = ("admin/"+controller_underscore).camelize.constantize
 
-          print "generating role #{controller_name}..."
-          role = Role.find_or_create_by_name controller_name
+          print "generating rights for #{controller_name} "
 
           # create a right per controller action
           controller.action_methods.reject { |action| ApplicationController.action_methods.include?(action) }.each do |action|
             right = Right.find_or_create_by_name_and_controller_name_and_action_name "#{controller_name}_#{action}", "admin/#{controller_name}", action
-            role.rights << right unless role.rights.include? right
+            print '.'
           end
-          puts 'ok'
-
-          # add this new role to the admin roles
-          admin = Admin.find_by_id(Fixtures.identify('administrator'))
-          admin.roles << role unless admin.roles.find_by_name(role.name)
-
-          # add all rights of role to the admin
-          role.rights.each do |right|
-            admin.rights << right unless admin.rights.find_by_name(right.name)
-          end
+          puts ' [ok]'
         end
+        role = Role.first
+        admin = Admin.first
+        print "associate rights to #{role.name} "
+        role.update_attributes(:right_ids => Right.all(:select => :id).collect(&:id))
+        puts ' [ok]'
+        print "associate role to first admin "
+        admin.update_attribute(:role_id,role.id)
+        puts ' [ok]'
       end
     end
   end
