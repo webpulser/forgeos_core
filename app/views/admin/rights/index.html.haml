@@ -9,8 +9,6 @@
     %h2.small-icons.all-rights
       = I18n.t('right.all').capitalize
     #right-tree.init-tree
-      %ul
-        = render :partial => 'admin/categories/list', :locals => { :categories => RightCategory.find_all_by_parent_id(nil) }
 #content.grid_12.alpha.omega
   .backgrounds.header
     = link_to content_tag(:span,I18n.t('right.create.action').capitalize, :class=>'big-icons create-rights'), '#', :class=>'backgrounds action-button'

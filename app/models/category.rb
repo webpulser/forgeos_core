@@ -26,4 +26,14 @@ class Category < ActiveRecord::Base
   def elements
     []
   end
+
+  def to_jstree
+    hash = {}
+    hash[:attributes] = { :id => "#{self.class.to_s.underscore}_#{id}", :type => 'folder' }
+    hash[:data] = { :title => "#{name}<span>#{total_elements_count}</span>", :attributes => { :class => 'big-icons' } }
+    unless children.empty?
+     hash[:children] = children.collect(&:to_jstree)
+    end
+    hash
+  end
 end

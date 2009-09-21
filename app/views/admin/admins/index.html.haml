@@ -9,8 +9,6 @@
     %h2.small-icons.all-admins
       = I18n.t('admin.all').capitalize
     #admin-tree.init-tree
-      %ul
-        = render :partial => 'admin/categories/list', :locals => { :categories => AdminCategory.find_all_by_parent_id(nil) }
 #content.grid_12.alpha.omega
   .backgrounds.header
     = link_to content_tag(:span,I18n.t('admin.create.action').capitalize, :class=>'big-icons create-admin'), new_admin_admin_path, :class=>'backgrounds action-button'
