@@ -16,7 +16,7 @@ module Forgeos
       :html => { :class => 'right' } },
     { :title => 'marketing', 
       :i18n => true,
-      :url => { :controller => 'admin/marketing' },
+      :url => { :controller => 'admin/special_offers', :action => 'new'},
       :html => { :class => 'right' } }
   ]
 
