@@ -1,0 +1,2 @@
+class PageSeeCounter < StatisticCounter
+end
