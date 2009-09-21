@@ -12,7 +12,7 @@ namespace :admin do |admin|
   admin.resources :roles, :member => { :activate => :post }
   admin.resources :rights
   %w(medias pictures docs pdfs videos attachments).each do |resources_alias|
-    route_options = { :controller => :attachments, :member => { :download => :get } }
+    route_options = { :controller => :attachments, :member => { :download => :get }, :except => [:new] }
     route_options[:path_prefix] = 'admin/:file_type' if %w(attachments).include?(resources_alias)
     admin.resources resources_alias.to_sym, route_options
   end

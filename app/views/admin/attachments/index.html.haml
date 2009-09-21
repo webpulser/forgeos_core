@@ -1,7 +1,6 @@
 = render :partial => 'tabs'
 
 #sidebar.grid_4.omega.alpha
-
   .backgrounds.header
     %span.backgrounds.action-button.create-action
       %span.big-icons.new-category
@@ -11,7 +10,6 @@
           = I18n.t('folder.create')
         -#%span.small-icons.create-smart-folder
           -#= I18n.t('folder.smart')
-
     %span.backgrounds.action-button.update-action
       %span.small-icons.more-actions
       %span.small-icons.arrow
@@ -22,9 +20,7 @@
           = I18n.t('folder.duplicate')
         %span.small-icons.delete-folder
           = I18n.t('folder.destroy')
-
   .backgrounds.sidebar-background
-
   .sidebar-content
     %h2{ :class => "small-icons #{@file_type}"}
       = link_to_function I18n.t(:all, :scope => [:media, @file_type]).capitalize, "select_all_elements('/admin/#{@file_type}/attachments.json')"
@@ -34,7 +30,7 @@
 
 #content.grid_12.alpha.omega
   .backgrounds.header
-    = link_to content_tag(:span,I18n.t("media.#{@file_type}.create.action").capitalize, :class=>"big-icons add-#{@file_type}"), new_admin_attachment_path, :class=>'backgrounds action-button'
+    = link_to content_tag(:span,I18n.t("media.#{@file_type}.create.action").capitalize, :class=>"big-icons add-#{@file_type}"), '#', :class => 'backgrounds action-button', :id => 'add-attachment'
     #search.right
       = link_to content_tag(:span, I18n.t('search').capitalize, :class => 'small-icons search-span'), '#', :class => 'small-icons left search-link'
     .backgrounds.search-form
@@ -42,3 +38,5 @@
   %table#table.datatable
 
 = dataTables_tag :url => admin_attachments_path(:format => :json, :file_type => @file_type), :columns => ['{ "bSortable": false }',"{ 'sTitle': '#{I18n.t('name').capitalize}' }","{ 'sTitle': '#{I18n.t('type').capitalize}' }","{ 'sTitle': '#{I18n.t('media.updated_at').capitalize}' }","{ 'sTitle': '#{I18n.t('media.size').capitalize}' }", "{'bVisible': false, 'sTitle': '#{I18n.t('media.used').capitalize}'}", "{ 'bSortable': false, 'bSearchable': false, 'sClass': 'actions-td'}",'{ "bVisible": false}','{ "bVisible": false}','{ "bVisible": false}']
+
+= render :partial => 'attachments_popup'

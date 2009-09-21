@@ -22,29 +22,6 @@ class Admin::AttachmentsController < Admin::BaseController
     send_file(@media.full_filename)
   end
 
-  # GET /medias/new
-  def new
-    @media = Attachment.new
-
-    if params[:target] && params[:target_id] && !params[:target].blank?
-      # get attachable model...
-      begin
-        # and check if model is an available attachable type
-        attachable_type = params[:target].camelize
-
-        unless Forgeos::AttachableTypes.include?(attachable_type)
-          flash[:error] = I18n.t('media.attach.unknown_type').capitalize
-          return redirect_to(admin_attachments_path)
-        end
-
-        attachable_type.constantize
-      rescue NameError
-        flash[:error] = I18n.t('media.attach.failed').capitalize
-        return redirect_to(admin_attachments_path)
-      end
-    end
-  end
-
   # GET /medias/1/edit
   def edit
   end
@@ -102,7 +79,6 @@ class Admin::AttachmentsController < Admin::BaseController
         end
       end
     end
-
   end
 
 #   # PUT /medias/1

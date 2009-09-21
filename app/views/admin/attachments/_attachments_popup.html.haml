@@ -1,0 +1,43 @@
+- form_for [:admin, Attachment.new], :html => { :multipart => true } do |f|
+  #imageUploadDialog.upload-lightbox-container.white
+    #imageUpload
+      = f.file_field :uploaded_data
+      = hidden_field_tag :target, params[:target]
+      = hidden_field_tag :target_id, params[:target_id]
+      = f.submit I18n.t('save').capitalize
+
+  -# TODO move to base.js
+  - session_key = ActionController::Base.session_options[:key]
+  - javascript_tag do
+    function initImageUpload(link){
+    $('#imageUploadDialog').dialog('open');
+    $('#imageUpload').uploadify({
+    'uploader': '/images/uploadify/uploadify.swf',
+    = "'cancelImg': '#{image_path('admin/big-icons/delete-icon.png')}',"
+    = "'script': '#{admin_medias_path(:file_type => 'picture')}',"
+    = "'buttonImg' :'#{image_path("uploadify/choose-picture_#{I18n.locale}.png")}',"
+    'width' :'154',
+    'height' :'24',
+    'scriptData': {
+    'format': 'json',
+    = "'authenticity_token': encodeURIComponent('#{u form_authenticity_token}')," if protect_against_forgery?
+    = "'#{session_key}': encodeURIComponent('#{cookies[session_key]}')"
+    },
+    'ScriptAccess': 'always',
+    'multi': 'true',
+    'displayData': 'speed',
+    'onComplete': function(e,queueID,fileObj,response,data){
+    result = JSON.parse(response);
+    if (result.result == 'success'){
+    oTable.fnDraw();
+    } else {
+    display_notification_message('error',result.error)
+    }
+    },
+    'onAllComplete': function(){
+    $('#imageUploadDialog').dialog('close');
+    }
+    });}
+
+  = stylesheet_link_tag 'admin/uploadify'
+  = javascript_include_tag %w(swfobject jquery.uploadify)
