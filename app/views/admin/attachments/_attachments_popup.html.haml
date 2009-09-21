@@ -6,16 +6,16 @@
       = hidden_field_tag :target_id, params[:target_id]
       = f.submit I18n.t('save').capitalize
 
-  -# TODO move to base.js
   - session_key = ActionController::Base.session_options[:key]
   - javascript_tag do
     function initImageUpload(link){
     $('#imageUploadDialog').dialog('open');
+    $('#imageUploadDialog').html('<div id="imageUpload"></div>');
     $('#imageUpload').uploadify({
     'uploader': '/images/uploadify/uploadify.swf',
     = "'cancelImg': '#{image_path('admin/big-icons/delete-icon.png')}',"
-    = "'script': '#{admin_medias_path(:file_type => 'picture')}',"
-    = "'buttonImg' :'#{image_path("uploadify/choose-picture_#{I18n.locale}.png")}',"
+    = "'script': '#{admin_attachments_path(:file_type => 'picture')}',"
+    = "'buttonImg' :'#{image_path("uploadify/upload-button_#{I18n.locale}.png")}',"
     'width' :'154',
     'height' :'24',
     'scriptData': {
