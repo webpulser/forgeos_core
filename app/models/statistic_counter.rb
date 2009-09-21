@@ -2,7 +2,6 @@ class StatisticCounter < ActiveRecord::Base
   
   belongs_to :element, :polymorphic => true, :dependent => :destroy
 
-  validates_uniqueness_of :element_id, :scope => [ :date, :element_type ]
   def initialize
     super
     set_default_date_to_current
