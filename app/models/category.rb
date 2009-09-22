@@ -2,7 +2,7 @@ class Category < ActiveRecord::Base
   acts_as_tree
   
   # TODO
-  #has_and_belongs_to_many :attachments, :list => true, :order => 'position'
+  has_and_belongs_to_many :attachments, :list => true, :order => 'position'
   
   validates_presence_of :name
 
