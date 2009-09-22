@@ -1,4 +1,10 @@
 module Forgeos
+  class Statistics
+    def self.total_of_visitors(date = nil)
+      return 0
+    end
+  end
+
   # Set administration's menu
   AdminMenu = [
     { :title => 'dashboard',
