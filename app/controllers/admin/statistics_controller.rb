@@ -5,6 +5,14 @@ class Admin::StatisticsController < Admin::BaseController
 
 private
   def get_date
-    @date = Date.current
+    @date = 
+      case params[:timestamp]
+      when 'month'
+        Date.current.ago(1.month).to_date..Date.current
+      when 'yesterday'
+        Date.yesterday..Date.current
+      else
+        Date.current
+      end
   end
 end
