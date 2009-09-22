@@ -30,7 +30,7 @@ module Admin::BaseHelper
     end
 
     javascript_tag "
-    $(function(){
+    jQuery(document).ready(function(){
       var table = $('##{id}').dataTable({
         'sPaginationType': 'full_numbers',
         'sDom': \"<'top'if>t<'bottom'p<'clear'>\",

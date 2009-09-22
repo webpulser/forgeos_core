@@ -24,4 +24,5 @@
         = yield
       #footer
       #dialog
-      = javascript_include_tag %w(jquery-ui jrails jstree/css jstree/tree_component.min admin/customselects jquery.dataTables.min admin/base  jquery.dataSlides)
+      = javascript_include_tag 'admin/customselects'
+      = javascript_include_tag %w(tiny_mce/jquery.tinymce jquery-ui jrails jquery.dataTables.min jquery.dataSlides jstree/css jstree/tree_component.min admin/functions admin/init), :cache => 'admin/base'

@@ -1,8 +1,8 @@
 class ApplicationController < ActionController::Base
   include AuthenticatedSystem
   helper :all
-
   protect_from_forgery
+  filter_parameter_logging :password, :password_confirmation
   
   before_filter :set_locale
 
