@@ -4,9 +4,7 @@
     %h1#media-title
       = @media.filename
     .interact-links
-      .borders.interact-button-left
       = link_to I18n.t('media.update.action').capitalize, [:edit, :admin, @media ], :class => 'backgrounds interact-button'
-      .borders.interact-button-right
       = I18n.t('or')
       = link_to I18n.t('media.back').capitalize, admin_attachments_path(:file_type => 'picture'), :class => 'back-link'
 

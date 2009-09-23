@@ -2,9 +2,7 @@
   = @admin.firstname
   = @admin.lastname
   .interact-links
-    .borders.interact-button-left
     = link_to I18n.t('admin.update.action').capitalize, [:edit, :admin, @admin], :class => 'backgrounds interact-button'
-    .borders.interact-button-right
     = I18n.t('or')
     = link_to I18n.t('cancel').capitalize, admin_admins_path, :class => 'back-link'
 #content.grid_16.alpha.omega

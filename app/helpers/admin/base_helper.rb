@@ -61,9 +61,7 @@ module Admin::BaseHelper
   end
 
   def fg_submit_tag(*label)
-    content_tag(:div, '', :class => 'borders interact-button-left') +
-    submit_tag(I18n.t(label.length == 1 ? label.first : label).capitalize, :class => 'backgrounds interact-button') +
-    content_tag(:div, '', :class => 'borders interact-button-right')
+    submit_tag(I18n.t(label.length == 1 ? label.first : label).capitalize, :class => 'backgrounds interact-button')
   end
 
   def block_container(model_name, block_name, block, &proc)
