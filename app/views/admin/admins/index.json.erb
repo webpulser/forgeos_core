@@ -10,7 +10,7 @@
   '<%= escape_javascript content_tag(:div, link_to("#{admin.firstname} #{admin.lastname}", [:admin, admin]), :class => 'admin-name') %>',
   '<%= admin.role.name %>',
   '<%= escape_javascript content_tag(:div, mail_to(admin.email, admin.email), :class => 'email' )%>',
-  '<%= admin.created_at.to_s(:slashed_fr) %>',
+  '<%= admin.created_at.to_s(:short) %>',
 
   '<%= escape_javascript(
     link_to('', '#', :class => 'small-icons duplicate-link') +

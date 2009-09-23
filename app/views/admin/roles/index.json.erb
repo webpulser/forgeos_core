@@ -15,7 +15,7 @@
     content_tag(:p,role.admins.collect{ |admin| link_to("#{admin.firstname} #{admin.lastname}", [:admin, admin]) }.join('<br />') , :style=>'display:none')
   ) -%>',
   '<%= role.admins.count -%>',
-  '<%= role.created_at.to_s(:slashed_fr) -%>',
+  '<%= role.created_at.to_s(:short) -%>',
   '<%= escape_javascript(
     link_to_remote('', :url => activate_admin_role_path(role),
      :complete => "toggleActivate('#show_#{link_id}')",
