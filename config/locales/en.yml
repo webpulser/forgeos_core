@@ -27,6 +27,50 @@ en:
   marketing: marketing
   dasboard: dashboard
   support: support
+  users: customers
+  roles: roles
+  rights: rights
+  controller_name: 'controller name'
+  action_name: 'action name'
+  customer:
+    one: customer
+    other: customers
+  visitor:
+    online:
+     one: '{{count}} visitor online'
+     other: '{{count}} visitors online'
+  user:
+    one: customer
+    other: customers
+    back: back to customer list
+    spent_on: spent on
+    create:
+      success: the customer was successfully created
+      failed: a problem occured during the customer creation
+      action: create a customer
+    update:
+      success: the customer was successfully updated
+      failed: a problem occured during the customer update
+      action: edit customer
+    destroy:
+      success: the customer was successfully destroyed
+      failed: a problem occured during the customer destroy
+      confirm: are you sure to delete this customer?
+    activation:
+      success: the customer was successfully activated
+      failed: a problem occured during the customer activation
+      action: activate
+    disactivation:
+      success: the customer was successfully disactivated
+      failed: a problem occured during the customer deactivation
+      action: deactivate
+    export:
+      failed: export failed, no customers found
+    search:
+      failed: no customers found
+    online:
+      one: '{{count}} user online'
+      other: '{{count}} users online' 
   account:
     update:
       action: update your informations
