@@ -37,4 +37,4 @@
 
 = dataTables_tag :url => admin_attachments_path(:format => :json, :file_type => @file_type), :columns => ['{ "bSortable": false }',"{ 'sTitle': '#{I18n.t('name').capitalize}' }","{ 'sTitle': '#{I18n.t('type').capitalize}' }","{ 'sTitle': '#{I18n.t('media.updated_at').capitalize}' }","{ 'sTitle': '#{I18n.t('media.size').capitalize}' }", "{'bVisible': false, 'sTitle': '#{I18n.t('media.used').capitalize}'}", "{ 'bSortable': false, 'bSearchable': false, 'sClass': 'actions-td'}",'{ "bVisible": false}','{ "bVisible": false}','{ "bVisible": false}']
 
-= render :partial => 'attachments_popup'
+= render :partial => 'attachments_popup', :locals => {:file_type => @file_type}

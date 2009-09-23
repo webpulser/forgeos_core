@@ -15,7 +15,7 @@
     'uploader': '/images/uploadify/uploadify.swf',
     = "'cancelImg': '#{image_path('admin/big-icons/delete-icon.png')}',"
     = "'script': '#{admin_attachments_path(:file_type => 'picture')}',"
-    = "'buttonImg' :'#{image_path("uploadify/upload-button_#{I18n.locale}.png")}',"
+    = "'buttonImg' :'#{image_path("uploadify/upload-#{file_type}_#{I18n.locale}.png")}',"
     'width' :'154',
     'height' :'24',
     'scriptData': {
