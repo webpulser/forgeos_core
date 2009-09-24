@@ -24,10 +24,10 @@
       :class => 'small-icons destroy-link', :id => "destroy_#{link_id}"
     })
     -%>',
-<% end %>
    '<%= escape_javascript(media.public_filename) %>',
    '<%= media.id %>',
    '<%= media.filename %>'
+ <% end %>
     ] <%= ',' unless @medias.last == media %>
 <% end %>
 ]

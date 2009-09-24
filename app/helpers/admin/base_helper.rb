@@ -55,6 +55,46 @@ module Admin::BaseHelper
     });"
   end
 
+
+  def dataSlides_tag(options = {})
+    id = options[:id].nil? ? 'table' : options[:id]
+    columns = options[:columns]
+
+    # data source
+    data_source = ''
+    unless options[:url].nil? or options[:url].blank?
+      data_source += "'bServerSide': true,"
+      data_source += "'sAjaxSource': '#{options[:url]}',"
+      data_source += "'fnDrawCallback': DataTablesDrawCallBack,"
+      data_source += "'fnRowCallback': DataTablesRowCallBack,"
+    end
+
+    javascript_tag "
+    jQuery(document).ready(function(){
+      var table = $('##{id}').dataSlide({
+        'sPaginationType': 'full_numbers',
+        'sDom': \"<'top'if>t<'bottom'p<'clear'>\",
+        'aoColumns': [ #{columns.join(',')} ],
+        'sProcessing': true,
+        'bStateSave': true,
+        #{data_source}
+        'oLanguage': {
+          'sProcessing' : '#{I18n.t('jquery.dataTables.oLanguage.sProcessing')}',
+          'sLengthMenu':'#{I18n.t('jquery.dataTables.oLanguage.sLengthMenu')}',
+          'sZeroRecords':'#{I18n.t('jquery.dataTables.oLanguage.sZeroRecords')}',
+          'sInfo':'#{I18n.t('jquery.dataTables.oLanguage.sInfo')}',
+          'sInfoEmpty':'#{I18n.t('jquery.dataTables.oLanguage.sInfoEmpty')}',
+          'sSearch':''
+        }
+      });
+      if(typeof oTables == 'undefined')
+        oTables = new Array();
+
+      oTables.push(table);
+      oTable = oTables[0];
+    });"
+  end
+
   def fg_search
     label = content_tag(:span, I18n.t('search').capitalize, :class => 'small-icons search-span')
     link_to(label, '#', :class => 'small-icons left search-link')
