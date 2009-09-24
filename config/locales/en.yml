@@ -45,6 +45,8 @@ en:
     other: customers
     back: back to customer list
     spent_on: spent on
+    all: all customers
+    not_exist: this customer doesn't exist
     create:
       success: the customer was successfully created
       failed: a problem occured during the customer creation
@@ -57,6 +59,7 @@ en:
       success: the customer was successfully destroyed
       failed: a problem occured during the customer destroy
       confirm: are you sure to delete this customer?
+      action: destroy customer
     activation:
       success: the customer was successfully activated
       failed: a problem occured during the customer activation

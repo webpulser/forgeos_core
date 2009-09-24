@@ -44,6 +44,8 @@ fr:
     other: utilisateurs
     back: 'retours aux utilisateurs'
     spent_on: 'depensé en'
+    all: "tous les clients"
+    not_exist: "cet utilisateur n'existe pas"
     create:
       success: "l'utilisateur a bien été créé"
       failed: "un problème est survenu lors de la création de l'utilisateur"
@@ -56,6 +58,7 @@ fr:
       success: "l'utilisateur a bien été supprimé"
       failed: "un problème est survenu lors de la suppression de l'utilisateur"
       confirm: "êtes-vous sûr de vouloir supprimer cet utilisateur ?"
+      action: 'supprimer le client'
     activation:
       success: "l'utilisateur a bien été activé"
       failed: "un problème est survenu lors de l'activation de l'utilisateur"
