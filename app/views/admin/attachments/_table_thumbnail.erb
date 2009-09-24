@@ -1,6 +1,4 @@
-<%= image_tag(media.public_filename('')) %>
-<br />
-<span><%= media.filename %></span>
+<%= image_tag(media.public_filename(''),:title=>media.filename) %>
 <br />
 <%= media.content_type %> -  <%= media.size/1024 %> Ko
 <br />
