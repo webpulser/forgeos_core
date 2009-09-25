@@ -47,6 +47,11 @@ en:
     spent_on: spent on
     all: all customers
     not_exist: this customer doesn't exist
+    best_customer:
+      one: best customer
+      other: best customers
+    show:
+      all: see all customers
     customer_infos: customer infos
     contact_infos: contact informations
     history: account history

@@ -44,8 +44,13 @@ fr:
     other: utilisateurs
     back: 'retours aux utilisateurs'
     spent_on: 'dépensé en'
-    all: "tous les clients"
+    all: "tous les utilisateurs"
     not_exist: "cet utilisateur n'existe pas"
+    best_customer:
+      one: meilleur utilisateur
+      other: meilleurs utilisateurs
+    show:
+      all: voir tous les utilisateurs
     customer_infos: informatioins sur le client
     contact_infos: informations sur le contact
     history: historique du compte
