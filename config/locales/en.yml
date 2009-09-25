@@ -48,6 +48,7 @@ en:
     all: all customers
     not_exist: this customer doesn't exist
     joined_the: joined the
+    contact: contact customer
     best_customer:
       one: best customer
       other: best customers

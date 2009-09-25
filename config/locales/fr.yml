@@ -42,11 +42,12 @@ fr:
   user:
     one: utilisateur
     other: utilisateurs
-    back: 'retours aux utilisateurs'
+    back: 'retour aux utilisateurs'
     spent_on: 'dépensé en'
     all: "tous les utilisateurs"
     not_exist: "cet utilisateur n'existe pas"
     joined_the: inscrit le
+    contact: "contacter l'utilisateur"
     best_customer:
       one: meilleur utilisateur
       other: meilleurs utilisateurs
@@ -165,7 +166,7 @@ fr:
     all: 'tous'
     associated_rights: 'droits associés'
     show: 'voir le média'
-    back: 'return vers la librairie'
+    back: 'retour vers la librairie'
     not_exist: "le média sélectionné n'existe pas"
     used: 'utilisé(e)'
     linked: 'fichiers liés'
