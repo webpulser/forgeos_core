@@ -46,6 +46,7 @@ fr:
     spent_on: 'dépensé en'
     all: "tous les utilisateurs"
     not_exist: "cet utilisateur n'existe pas"
+    joined_the: inscrit le
     best_customer:
       one: meilleur utilisateur
       other: meilleurs utilisateurs
