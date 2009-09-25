@@ -22,7 +22,7 @@ module Forgeos
       :html => { :class => 'right' } },
     { :title => 'marketing', 
       :i18n => true,
-      :url => { :controller => 'admin/special_offers', :action => 'new'},
+      :url => { :controller => 'admin/special_offers'},
       :html => { :class => 'right' } }
   ]
 
