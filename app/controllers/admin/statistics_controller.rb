@@ -13,8 +13,10 @@ private
         Date.current.ago(1.week).to_date..Date.current
       when 'yesterday'
         Date.yesterday..Date.current
-      else
+      when 'today'
         Date.current..Date.current
+      else # week
+        Date.current.ago(1.week).to_date..Date.current
       end
   end
 end
