@@ -12,7 +12,7 @@ class StatisticCounter < ActiveRecord::Base
      if sc
        sc.increment!(:counter)
      else
-       false
+       save
      end
   end
 private
