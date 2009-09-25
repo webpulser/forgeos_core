@@ -65,7 +65,7 @@ en:
       action: edit customer
     destroy:
       success: the customer was successfully destroyed
-      failed: a problem occured during the customer destroy
+      failed: a problem occured during the customer deletion
       confirm: are you sure to delete this customer?
       action: destroy customer
     activation:
@@ -253,8 +253,8 @@ en:
         failed: a problem occured during the picture update
         action: edit picture
       destroy:
-        success: the picture was successfully destroyed
-        failed: a problem occured during the picture destroy
+        success: the picture was successfully deleted
+        failed: a problem occured during the picture deletion
         confirm: are you sure to delete this picture ?
       upload:
         start: Start Upload
