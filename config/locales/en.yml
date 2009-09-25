@@ -47,6 +47,9 @@ en:
     spent_on: spent on
     all: all customers
     not_exist: this customer doesn't exist
+    customer_infos: customer infos
+    contact_infos: contact informations
+    history: account history
     create:
       success: the customer was successfully created
       failed: a problem occured during the customer creation

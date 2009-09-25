@@ -46,6 +46,9 @@ fr:
     spent_on: 'dépensé en'
     all: "tous les clients"
     not_exist: "cet utilisateur n'existe pas"
+    customer_infos: informatioins sur le client
+    contact_infos: informations sur le contact
+    history: historique du compte
     create:
       success: "l'utilisateur a bien été créé"
       failed: "un problème est survenu lors de la création de l'utilisateur"

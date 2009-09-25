@@ -1,2 +1,0 @@
-class PageSeeCounter < StatisticCounter
-end
