@@ -36,7 +36,7 @@ module Admin::BaseHelper
         'sDom': \"<'top'if>t<'bottom'p<'clear'>\",
         'aoColumns': [ #{columns.join(',')} ],
         'sProcessing': true,
-        'bStateSave': true,
+        'bStateSave': false,
         #{data_source}
         'oLanguage': {
           'sProcessing' : '#{I18n.t('jquery.dataTables.oLanguage.sProcessing')}',
@@ -76,7 +76,7 @@ module Admin::BaseHelper
         'sDom': \"<'top'if>t<'bottom'p<'clear'>\",
         'aoColumns': [ #{columns.join(',')} ],
         'sProcessing': true,
-        'bStateSave': true,
+        'bStateSave': false,
         #{data_source}
         'oLanguage': {
           'sProcessing' : '#{I18n.t('jquery.dataTables.oLanguage.sProcessing')}',
