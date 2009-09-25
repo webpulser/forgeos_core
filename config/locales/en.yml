@@ -50,6 +50,9 @@ en:
     best_customer:
       one: best customer
       other: best customers
+    new_customer:
+      one: new customer
+      other: new customers
     show:
       all: see all customers
     customer_infos: customer infos

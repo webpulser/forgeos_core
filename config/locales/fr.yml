@@ -49,6 +49,9 @@ fr:
     best_customer:
       one: meilleur utilisateur
       other: meilleurs utilisateurs
+    new_customer:
+      one: nouvel utilisateur
+      other: nouveaux utilisateurs
     show:
       all: voir tous les utilisateurs
     customer_infos: informatioins sur le client
