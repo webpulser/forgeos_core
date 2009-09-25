@@ -47,6 +47,7 @@ en:
     spent_on: spent on
     all: all customers
     not_exist: this customer doesn't exist
+    join_the: join the
     best_customer:
       one: best customer
       other: best customers
