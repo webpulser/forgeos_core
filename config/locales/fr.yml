@@ -17,7 +17,7 @@ fr:
   statistics: statistiques
   marketing: marketing
   download: télécharger
-  show: voir
+  show: afficher
   created_on: date de création
   updated_at: date de modification
   active: actif
@@ -28,7 +28,7 @@ fr:
   admins: administrateurs
   medias: médias
   rights: droits
-  roles: roles
+  roles: rôles
   controller_name: 'nom du contrôleur'
   action_name: "nom de l'action"
   visitor:
@@ -43,7 +43,7 @@ fr:
     one: utilisateur
     other: utilisateurs
     back: 'retours aux utilisateurs'
-    spent_on: 'depensé en'
+    spent_on: 'dépensé en'
     all: "tous les clients"
     not_exist: "cet utilisateur n'existe pas"
     create:
@@ -65,7 +65,7 @@ fr:
       action: "activer"
     disactivation:
       success: "l'utilisateur a bien été désactivé"
-      failed: "un problème est survenu lors de l'désactivation de l'utilisateur"
+      failed: "un problème est survenu lors de la désactivation de l'utilisateur"
       action: "désactiver"
     export:
       failed: "échec de l'export, aucun utilisateur trouvé"
@@ -90,12 +90,12 @@ fr:
     other: 'administrateurs'
     none: 'aucun administrateur'
     all: 'tous les utilisateurs'
-    show: "voir l'administrador"
+    show: "voir l'administrateur"
     not_exist: "l'administrateur sélectionné n'existe pas"
     create:
       success: "l'administrateur a bien été créé"
       failed: "un problème est survenu lors de la création de l'administrateur"
-      action: 'créer un utilisateur'
+      action: 'créer un administrateur'
     update:
       success: "l'administrateur a bien été mis à jour"
       failed: "un problème est survenu lors de la mise à jour de l'administrateur"
@@ -136,7 +136,7 @@ fr:
     create:
       success: "le droit a bien été créé"
       failed: "un problème est survenu lors de la création du droit"
-      action: 'créer un droit'
+      action: "créer un droit"
     update:
       success: "le droit a bien été mis à jour"
       failed: "un problème est survenu lors de la mise à jour du droit"
@@ -299,8 +299,8 @@ fr:
     distance_in_words:
       half_a_minute: "une demi-minute"
       less_than_x_seconds:
-        zero:  "moins d'une seconde"
-        one:   "moins de 1 seconde"
+        zero:  "moins de une seconde"
+        one:   "moins de une seconde"
         other: "moins de {{count}} secondes"
       x_seconds:
         one:   "1 seconde"
