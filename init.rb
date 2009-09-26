@@ -9,6 +9,8 @@ config.gem 'jimiray-acts_as_commentable', :source => "http://gems.github.com", :
 config.gem 'webpulser-jrails', :source => "http://gems.github.com", :lib => 'jrails'
 config.gem 'webpulser-habtm_list', :source => "http://gems.github.com"
 config.gem 'freelancing-god-thinking-sphinx', :lib => 'thinking_sphinx', :source => "http://gems.github.com"
+config.gem 'ar-extensions'
+config.gem 'ruleby'
 config.gem 'haml'
 
 # Load Haml and Sass
