@@ -1,7 +1,7 @@
 module Forgeos
   class Statistics
     def self.total_of_visitors(date = nil)
-      return 0
+      VisitorCounter.sum(:counter, :conditions => { :date => date}) 
     end
   end
 

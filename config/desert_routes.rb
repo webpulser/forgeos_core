@@ -3,6 +3,7 @@ namespace :admin do |admin|
   admin.login '/login', :controller => 'sessions', :action => 'new'
   admin.notifications '/notifications', :controller => 'base', :action => 'notifications'
   admin.statistics '/statistics', :controller => 'statistics'
+  admin.statistics_graph '/statistics/graph', :controller => 'statistics', :action => 'graph'
 
 #  admin.connect 'medias/:file_type', :controller => :medias, :action => :index
 #  admin.connect 'medias/:file_type/new', :controller => :medias, :action => :new
