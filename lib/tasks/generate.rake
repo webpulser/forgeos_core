@@ -23,16 +23,21 @@ namespace :forgeos_core do
         # create a role for each controller and its associated actions rights
         Dir.foreach(path) do |filename| 
           next if filename.match(/^\./) or !filename.match(/\.rb$/) or File.directory?(File.join(path, filename))
-        
+
           controller_underscore = filename.gsub(".rb", "")
           controller_name = controller_underscore.gsub("_controller", "")
           controller = ("admin/"+controller_underscore).camelize.constantize
 
           print "generating rights for #{controller_name} "
 
-          # create a right per controller action
+          unless right_category = RightCategory.find_by_name(controller_name)
+            right_category = RightCategory.create( :name => controller_name )
+          end
+          
+          # create a right per controller action, & link it with the right RightCategory
           controller.action_methods.reject { |action| ApplicationController.action_methods.include?(action) }.each do |action|
             right = Right.find_or_create_by_name_and_controller_name_and_action_name "#{controller_name}_#{action}", "admin/#{controller_name}", action
+            right_category.rights << right if right_category.rights.all( :conditions => { :name => "#{controller_name}_#{action}" }).empty?
             print '.'
           end
           puts ' [ok]'
