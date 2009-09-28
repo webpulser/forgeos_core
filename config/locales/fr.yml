@@ -127,6 +127,7 @@ fr:
     all: 'tous les rôles'
     show: 'voir le rôle'
     not_exist: "le rôle sélectionné n'existe pas"
+    attributed_to: 'rôle attribué aux utilisateurs'
     create:
       success: "le rôle a bien été créé"
       failed: "un problème est survenu lors de la création du rôle"

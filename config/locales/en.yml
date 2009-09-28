@@ -127,6 +127,7 @@ en:
     all: all roles
     show: show role
     not_exist: the requested role does not exist
+    attributed_to: 'role attributed to users'
     create:
       success: the role was successfully created
       failed: a problem occured during the role creation
