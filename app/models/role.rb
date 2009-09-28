@@ -4,6 +4,8 @@ class Role < ActiveRecord::Base
 
   validates_presence_of :name
 
+  has_and_belongs_to_many :role_categories, :readonly => true
+
   define_index do
     indexes name, :sortable => true
   end

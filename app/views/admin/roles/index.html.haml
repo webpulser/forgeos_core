@@ -1,14 +1,29 @@
 = render :partial => 'tabs'
 #sidebar.grid_4.omega.alpha
   .backgrounds.header
-    %span.backgrounds.action-button
+    %span.backgrounds.action-button.create-action
       %span.big-icons.new-category
       %span.small-icons.arrow
+      %span.create-list
+        %span.big-icons.create-folder
+          = I18n.t('folder.create').capitalize
+        -#%span.small-icons.create-smart-folder
+          -#= I18n.t('folder.smart').capitalize
+    %span.backgrounds.action-button.update-action
+      %span.small-icons.more-actions
+      %span.small-icons.arrow
+      %span.update-list
+        %span.small-icons.modify-folder
+          = I18n.t('folder.edit').capitalize
+        %span.small-icons.duplicate-folder
+          = I18n.t('folder.duplicate').capitalize
+        %span.small-icons.delete-folder
+          = I18n.t('folder.destroy').capitalize
   .backgrounds.sidebar-background
   .sidebar-content
     %h2.small-icons.all-roles
-      = I18n.t('role.all').capitalize
-    #role-tree.init-tree
+      = link_to_function I18n.t('role.all').capitalize, "select_all_elements('/admin/roles.json')"
+    #role-tree.init-tree.a-tree
 #content.grid_12.alpha.omega
   .backgrounds.header
     = link_to content_tag(:span,I18n.t('role.create.action').capitalize, :class=>'big-icons create-role'), new_admin_role_path, :class=>'backgrounds action-button'
