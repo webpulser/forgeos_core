@@ -1,0 +1,264 @@
+# Admin
+  save_changes: save changes
+  get_forgotten_password: I forgot my password
+  go_back_admin: go back to administration
+  see_site: see the website
+  library: library
+  administration: administration
+  download: download
+  show: show
+  created_on: 'created on'
+  updated_at: date modified
+  active: active
+  inactive: inactive
+  meta_description: meta description
+  admins: administrators
+  medias: medias
+  statistics: statistics
+  site_builder: site builder
+  preferences: preferences
+  your_account: your account
+  library: library
+  marketing: marketing
+  dasboard: dashboard
+  support: support
+  users: customers
+  roles: roles
+  rights: rights
+  controller_name: 'controller name'
+  action_name: 'action name'
+  customer:
+    one: customer
+    other: customers
+  visitor:
+    online:
+     one: '{{count}} visitor online'
+     other: '{{count}} visitors online'
+  user:
+    one: customer
+    other: customers
+    back: back to customer list
+    spent_on: spent on
+    all: all customers
+    not_exist: this customer doesn't exist
+    joined_the: joined the
+    contact: contact customer
+    best_customer:
+      one: best customer
+      other: best customers
+    new_customer:
+      one: new customer
+      other: new customers
+    show:
+      all: see all customers
+    customer_infos: customer infos
+    contact_infos: contact informations
+    history: account history
+    create:
+      success: the customer was successfully created
+      failed: a problem occured during the customer creation
+      action: create a customer
+    update:
+      success: the customer was successfully updated
+      failed: a problem occured during the customer update
+      action: edit customer
+    destroy:
+      success: the customer was successfully destroyed
+      failed: a problem occured during the customer deletion
+      confirm: are you sure to delete this customer?
+      action: destroy customer
+    activation:
+      success: the customer was successfully activated
+      failed: a problem occured during the customer activation
+      action: activate
+    disactivation:
+      success: the customer was successfully deactivated
+      failed: a problem occured during the customer deactivation
+      action: deactivate
+    export:
+      failed: export failed, no customers found
+    search:
+      failed: no customers found
+    online:
+      one: '{{count}} user online'
+      other: '{{count}} users online' 
+  account:
+    update:
+      action: update your information
+  folder:
+    create: create a folder
+    smart: create a smart folder
+    edit: modify a folder
+    duplicate: duplicate a folder
+    destroy: delete a folder
+    associated_to: associated to folder
+  admin:
+    one: user
+    other: users
+    none: 'no user'
+    all: all users
+    show: show user
+    not_exist: the requested user does not exist
+    create:
+      success: the user was successfully created
+      failed: a problem occured during the user creation
+      action: create user
+    update:
+      success: the user was successfully updated
+      failed: a problem occured during the user update
+      action: edit user
+    destroy:
+      action: delete the user
+      success: the user was successfully deleted
+      failed: a problem occured during the user deletion
+      confirm: are you sure to delete this user?
+    contact:
+      action: send a message to the user
+  role:
+    one: role
+    other: roles
+    none: no roles
+    all: all roles
+    show: show role
+    not_exist: the requested role does not exist
+    create:
+      success: the role was successfully created
+      failed: a problem occured during the role creation
+      action: create role
+    update:
+      success: the role was successfully updated
+      failed: a problem occured during the role update
+      action: edit role
+    destroy:
+      success: the role was successfully deleted
+      failed: a problem occured during the role deletion
+      confirm: are you sure that you want to delete this role?
+  right:
+    one: right
+    other: rights
+    none: no rights
+    all: all rights
+    show: show right
+    not_exist: the requested right does not exist
+    create:
+      success: the right was successfully created
+      failed: a problem occured during the right creation
+      action: create right
+    update:
+      success: the right was successfully updated
+      failed: a problem occured during the right update
+      action: edit right
+    destroy:
+      success: the right was successfully deleted
+      failed: a problem occured during the right deletion
+      confirm: are you sure that you want to delete this right?
+  media:
+    list: list of media
+    one: media
+    other: media
+    none: no media
+    all: all
+    associated_rights: associated rights
+    show: show media
+    back: back to library
+    not_exist: the requested media does not exist
+    used: used
+    linked: linked files
+    upload: 
+      start: start upload
+      clear_queue: clear queue
+      action: upload files
+    create:
+      action: create a media
+      success: the media was successfully created
+      failed: a problem occured during the media creation
+    update:
+      action: edit the media
+      success: the media was successfully updated
+      failed: a problem occured during the media update
+    download:
+      action: download the media
+      failed: a problem occured during the media download
+    destroy:
+      action: delete media
+      success: the media was successfully deleted
+      failed: a problem occured during the media deletion
+      confirm: are you sure that you want to delete this media?
+    type:
+      one: type
+      other: types
+    attach:
+      unknown_type: the type of the attachable element is unknown
+      error: a problem occured during the check of the type of the attachable element
+    content_type: content type
+    file_type: file type
+    updated_at: last modification
+    filename: filename
+    size: size
+    byte:
+      one: byte
+      other: bytes
+      kilo: Kb
+      mega: Mb
+    pixel:
+      one: pixel
+      other: pixels
+    thumbnails:
+      big: big
+      normal: normal
+      small: small
+      thumb: thumb
+    pdf:
+      one: pdf file
+      other: pdf files
+      all: all pdf files
+      create:
+        action: add a pdf file
+    media:
+      one: file
+      other: files
+      all: all files
+      create:
+        action: add a file
+    doc:
+      one: document
+      other: documents
+      all: all documents
+      create:
+        action: add a document
+    video:
+      one: video
+      other: videos
+      all: all videos
+      create:
+        action: add a video
+    picture:
+      one: picture
+      other: pictures
+      all: all pictures
+      alternative: alternative text
+      title: picture title
+      original_size: original image size
+      add: add picture
+      featured: featured picture
+      show:
+        action: show picture
+      create:
+        success: the picture was successfully created
+        failed: a problem occured during the picture creation
+        action: create a picture
+      update:
+        success: the picture was successfully updated
+        failed: a problem occured during the picture update
+        action: edit picture
+      destroy:
+        success: the picture was successfully deleted
+        failed: a problem occured during the picture deletion
+        confirm: are you sure to delete this picture ?
+      upload:
+        start: Start Upload
+        clear_queue: Clear Queue
+        action: upload a picture
+    misc:
+      one: other
+      other: others
