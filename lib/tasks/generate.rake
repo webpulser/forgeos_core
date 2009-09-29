@@ -33,7 +33,7 @@ namespace :forgeos_core do
           unless right_category = RightCategory.find_by_name(controller_name)
             right_category = RightCategory.create( :name => controller_name )
           end
-          
+     
           # create a right per controller action, & link it with the right RightCategory
           controller.action_methods.reject { |action| ApplicationController.action_methods.include?(action) }.each do |action|
             right = Right.find_or_create_by_name_and_controller_name_and_action_name "#{controller_name}_#{action}", "admin/#{controller_name}", action

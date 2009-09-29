@@ -20,6 +20,18 @@
                 %label= right.name
               .clear
 
+      .fieldset
+        %a.small-icons.panel{ :href => '#' }
+          = I18n.t('other')
+        .option-panel-content
+          .clear
+          .multi-select-div
+          - Right.all.each do |right|
+            - if right.right_categories.empty?
+              .checkbox-container
+                %label= right.name
+          .clear
+
   #right-sidebar.grid_4.omega.alpha
     .step
       /= link_to I18n.t('role.duplicate').capitalize, [:duplicate, :admin, @role], :class => 'small-icons duplicate'
