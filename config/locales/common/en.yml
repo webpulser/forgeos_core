@@ -1,9 +1,16 @@
+en: 
+  forgeos: Forgeos Commerce
+  keyword:
+    one: keyword
+    other: keywords
+
 # Admin
   save_changes: save changes
   get_forgotten_password: I forgot my password
   go_back_admin: go back to administration
   see_site: see the website
   library: library
+  administration: administration
   download: download
   show: show
   created_on: 'created on'
@@ -11,6 +18,7 @@
   active: active
   inactive: inactive
   meta_description: meta description
+  admins: administrators
   medias: medias
   statistics: statistics
   site_builder: site builder
@@ -20,6 +28,9 @@
   marketing: marketing
   dasboard: dashboard
   support: support
+  users: customers
+  roles: roles
+  rights: rights
   controller_name: 'controller name'
   action_name: 'action name'
   customer:
@@ -29,9 +40,54 @@
     online:
      one: '{{count}} visitor online'
      other: '{{count}} visitors online'
-  account:
+  user:
+    one: customer
+    other: customers
+    back: back to customer list
+    spent_on: spent on
+    all: all customers
+    not_exist: this customer doesn't exist
+    joined_the: joined the
+    contact: contact customer
+    best_customer:
+      one: best customer
+      other: best customers
+    new_customer:
+      one: new customer
+      other: new customers
+    show:
+      all: see all customers
+    customer_infos: customer infos
+    contact_infos: contact informations
+    history: account history
+    create:
+      success: the customer was successfully created
+      failed: a problem occured during the customer creation
+      action: create a customer
     update:
-      action: update your information
+      success: the customer was successfully updated
+      failed: a problem occured during the customer update
+      action: edit customer
+    destroy:
+      success: the customer was successfully destroyed
+      failed: a problem occured during the customer deletion
+      confirm: are you sure to delete this customer?
+      action: destroy customer
+    activation:
+      success: the customer was successfully activated
+      failed: a problem occured during the customer activation
+      action: activate
+    disactivation:
+      success: the customer was successfully deactivated
+      failed: a problem occured during the customer deactivation
+      action: deactivate
+    export:
+      failed: export failed, no customers found
+    search:
+      failed: no customers found
+    online:
+      one: '{{count}} user online'
+      other: '{{count}} users online' 
   folder:
     create: create a folder
     smart: create a smart folder
@@ -39,7 +95,7 @@
     duplicate: duplicate a folder
     destroy: delete a folder
     associated_to: associated to folder
-    media:
+  media:
     list: list of media
     one: media
     other: media

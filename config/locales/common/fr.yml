@@ -1,3 +1,9 @@
+fr:
+  forgeos: Forgeos Commerce
+  keyword:
+    one: mot clé
+    other: mots clés
+
 # Admin
   save_changes: enregistrer les changements
   get_forgotten_password: mot de passe oublié
@@ -15,11 +21,14 @@
   created_on: date de création
   updated_at: date de modification
   active: actif
+  users: utilisateurs
   inactive: inactif
   meta_description: meta description
   last_modification: dernière modification
   admins: administrateurs
   medias: médias
+  rights: droits
+  roles: rôles
   controller_name: 'nom du contrôleur'
   action_name: "nom de l'action"
   visitor:
@@ -30,9 +39,55 @@
   customer:
     one: client
     other: clients
-  account:
+  user:
+    one: utilisateur
+    other: utilisateurs
+    back: 'retour aux utilisateurs'
+    spent_on: 'dépensé en'
+    all: "tous les utilisateurs"
+    not_exist: "cet utilisateur n'existe pas"
+    joined_the: inscrit le
+    contact: "contacter l'utilisateur"
+    best_customer:
+      one: meilleur utilisateur
+      other: meilleurs utilisateurs
+    new_customer:
+      one: nouvel utilisateur
+      other: nouveaux utilisateurs
+    show:
+      all: voir tous les utilisateurs
+    customer_infos: informatioins sur le client
+    contact_infos: informations sur le contact
+    history: historique du compte
+    create:
+      success: "l'utilisateur a bien été créé"
+      failed: "un problème est survenu lors de la création de l'utilisateur"
+      action: "créer un utilisateur"
     update:
-      action: modifier vos informations
+      success: "l'utilisateur a bien été mis à jour"
+      failed: "un problème est survenu lors de la mise à jour de l'utilisateur"
+      action: "éditer l'utilisateur"
+    destroy:
+      success: "l'utilisateur a bien été supprimé"
+      failed: "un problème est survenu lors de la suppression de l'utilisateur"
+      confirm: "êtes-vous sûr de vouloir supprimer cet utilisateur ?"
+      action: 'supprimer le client'
+    activation:
+      success: "l'utilisateur a bien été activé"
+      failed: "un problème est survenu lors de l'activation de l'utilisateur"
+      action: "activer"
+    disactivation:
+      success: "l'utilisateur a bien été désactivé"
+      failed: "un problème est survenu lors de la désactivation de l'utilisateur"
+      action: "désactiver"
+    export:
+      failed: "échec de l'export, aucun utilisateur trouvé"
+    search:
+      failed: 'aucun utilisateur trouvé'
+    online:
+      zero: '{{count}} utilisateur connecté'
+      one: '{{count}} utilisateur connecté'
+      other: '{{count}} utilisateurs connectés'
   folder:
     create: créer un dossier
     smart: créer un dossier dynamique
@@ -40,7 +95,6 @@
     duplicate: dupliquer un dossier
     destroy: supprimer un dossier
     associated_to: associations avec les dossiers
-
   media:
     list: 'liste des médias'
     one: 'média'
