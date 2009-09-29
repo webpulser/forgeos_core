@@ -1,28 +1,24 @@
-{
-'iTotalDisplayRecords': <%= @rights.total_entries || 0 %>,
-'aaData': [
-<% @rights.each do |right| %>
-  <% 
-     link_id = "right_#{right.id}"
-  %>
-  [
-  '<%= content_tag(:div, '&nbsp;', :id => link_id, :class => 'small-icons right-ico') %>',
-  '<%= escape_javascript content_tag(:div, right.name, :class => 'right-name') %>',
-  '<%= right.controller_name %>',
-  '<%= right.action_name %>',
-
-  '<%= escape_javascript content_tag(:span, '&nbsp;', :class => 'small-icons duplicate-link duplicate-right') -%>
-    <%= escape_javascript content_tag(:span, '&nbsp;', :class => 'small-icons edit-link edit-right') -%>
-    <%= escape_javascript link_to_remote('', :url => [:admin, right],
-      :method => :delete,
-      :confirm => I18n.t('right.destroy.confirm').capitalize,
-      :success => "removedataTablesRow('#destroy_#{link_id}')", 
-      :html => {
-      :class => 'small-icons destroy-link', :id => "destroy_#{link_id}"
-    })
-    -%>'
-  ] <%= ',' unless @rights.last == right %>
-
-<% end %>
-]
-}
+<% 
+  output = {
+    :iTotalDisplayRecords => @rights.total_entries || 0,
+    :aaData => @rights.collect do |right|
+      link_id = "right_#{right.id}"
+      [
+        content_tag(:div, '&nbsp;', :id => link_id, :class => 'small-icons right-ico'),
+        content_tag(:div, right.name, :class => 'right-name'),
+        right.controller_name,
+        right.action_name,
+        content_tag(:span, '&nbsp;', :class => 'small-icons duplicate-link duplicate-right') +
+        content_tag(:span, '&nbsp;', :class => 'small-icons edit-link edit-right') +
+        link_to_remote('', :url => [:admin, right],
+          :method => :delete,
+          :confirm => I18n.t('right.destroy.confirm').capitalize,
+          :success => "removedataTablesRow('#destroy_#{link_id}')", 
+          :html => {
+          :class => 'small-icons destroy-link', :id => "destroy_#{link_id}"
+        })
+      ]
+    end
+ }
+-%>
+<%= output.to_json %>
