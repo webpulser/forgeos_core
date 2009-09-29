@@ -79,8 +79,11 @@ private
   end
 
   def sort
-    columns = %w(name name '' controller_name action_name '')
-    conditions = []
+    columns = %w(rights.id rights.name controller_name action_name)
+    conditions = {}
+    if params[:category_id]
+      conditions[:right_categories_rights] = { :right_category_id =>  params[:category_id] }
+    end
     per_page = params[:iDisplayLength].to_i
     offset =  params[:iDisplayStart].to_i
     page = (offset / per_page) + 1
@@ -88,11 +91,13 @@ private
     if params[:sSearch] && !params[:sSearch].blank?
       @rights = Right.search(params[:sSearch],
         :order => order,
+        :include => :right_categories,
         :page => page,
         :per_page => per_page)
     else
       @rights = Right.paginate(:all,
         :conditions => conditions,
+        :include => :right_categories,
         :order => order,
         :page => page,
         :per_page => per_page)
