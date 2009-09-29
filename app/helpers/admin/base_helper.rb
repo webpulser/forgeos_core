@@ -29,6 +29,10 @@ module Admin::BaseHelper
       data_source += "'fnRowCallback': DataTablesRowCallBack,"
     end
 
+    unless options[:callback].nil? or options[:callback].blank?
+      data_source += "'fnDrawCallback': #{options[:callback]},"
+    end
+
     javascript_tag "
     jQuery(document).ready(function(){
       var table = $('##{id}').dataTable({
