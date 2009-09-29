@@ -1,0 +1,2 @@
+class SearchKeywordCounter < StatisticCounter
+end
