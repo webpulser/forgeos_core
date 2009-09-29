@@ -74,14 +74,4 @@ module ApplicationHelper
     return with_tag ? javascript_tag(script) : script
   end
 
-  def javascript_include_dir_tag(dir)
-    js_files=""
-
-    puts Dir.getwd
-    puts Dir.getwd
-    puts Dir.getwd
-    puts Dir.getwd
-    puts Dir.getwd
-  end
-
 end
