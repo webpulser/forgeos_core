@@ -1,3 +1,4 @@
+require 'action_view/helpers/assert_tag_helper'
 module Forgeos
   class Statistics
     def self.total_of_visitors(date = nil)

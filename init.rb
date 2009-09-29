@@ -1,5 +1,5 @@
 I18n.load_path += Dir[Rails.root.join('vendor', 'plugins', 'forgeos_core', 'config', 'locales', '*.{rb,yml}')]
-
+require 'forgeos'
 # Specify gems to use
 config.gem 'mime-types', :lib => 'mime/types'
 config.gem 'mislav-will_paginate', :source => "http://gems.github.com", :lib => "will_paginate"
