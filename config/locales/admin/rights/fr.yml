@@ -1,0 +1,19 @@
+right:
+  one: 'droit'
+  other: 'droits'
+  none: 'aucun droit'
+  all: 'tous les droits'
+  show: 'voir le droit'
+  not_exist: "le droit sélectionné n'existe pas"
+  create:
+    success: "le droit a bien été créé"
+    failed: "un problème est survenu lors de la création du droit"
+    action: "créer un droit"
+  update:
+    success: "le droit a bien été mis à jour"
+    failed: "un problème est survenu lors de la mise à jour du droit"
+    action: "éditer le droit"
+  destroy:
+    success: "le droit a bien été supprimé"
+    failed: "un problème est survenu lors de la suppression du droit"
+    confirm: "êtes-vous sûr de vouloir supprimer ce droit ?"
