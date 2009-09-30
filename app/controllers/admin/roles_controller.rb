@@ -86,7 +86,7 @@ private
     conditions = {}
 
     if params[:category_id]
-      conditions[:role_categories_roles] = { :role_category_id => params[:category_id] }
+      conditions[:categories_elements] = { :category_id => params[:category_id] }
     end
 
     per_page = params[:iDisplayLength].to_i

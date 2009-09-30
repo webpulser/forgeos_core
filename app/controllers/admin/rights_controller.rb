@@ -82,7 +82,7 @@ private
     columns = %w(rights.id rights.name controller_name action_name)
     conditions = {}
     if params[:category_id]
-      conditions[:right_categories_rights] = { :right_category_id =>  params[:category_id] }
+      conditions[:categories_elements] = { :category_id =>  params[:category_id] }
     end
     per_page = params[:iDisplayLength].to_i
     offset =  params[:iDisplayStart].to_i

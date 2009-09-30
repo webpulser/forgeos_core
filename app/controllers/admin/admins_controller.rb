@@ -63,7 +63,7 @@ private
 
   def sort
     columns = %w(lastname roles.name email created_at)
-    conditions = []
+    conditions = {}
     per_page = params[:iDisplayLength].to_i
     offset =  params[:iDisplayStart].to_i
     page = (offset / per_page) + 1
@@ -71,14 +71,14 @@ private
 
     if params[:sSearch] && !params[:sSearch].blank?
       @admins = Admin.search(params[:sSearch],
-        :include => 'role',
+        :include => :role,
         :order => order,
         :page => page,
         :per_page => per_page)
     else
       @admins = Admin.paginate(:all,
         :conditions => conditions,
-        :include => 'role',
+        :include => :role,
         :order => order,
         :page => page,
         :per_page => per_page)

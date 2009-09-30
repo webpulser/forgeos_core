@@ -1,4 +1,3 @@
 class RightCategory < Category
-  has_and_belongs_to_many :rights
-  has_and_belongs_to_many :elements, :class_name => 'Right'
+  has_and_belongs_to_many :elements, :join_table => 'categories_elements', :foreign_key => 'category_id', :association_foreign_key => 'element_id', :class_name => 'Right'
 end

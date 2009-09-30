@@ -162,13 +162,12 @@ private
 
   def sort
     columns = %w(filename filename content_type updated_at size used '')
-    conditions =[[]]
-    conditions[0] << 'attachments.parent_id IS NULL'
+    conditions = {}
+    conditions[:parent_id] = nil
     
     # file type
     unless @file_type.nil?
-      conditions[0] << 'attachments.type = ?'
-      conditions << @file_type
+      conditions[:type] = @file_type
       type = @file_type.camelize.constantize
     else
       type = Attachment
@@ -176,11 +175,8 @@ private
 
     # category
     if params[:category_id]
-      conditions[0] << 'attachment_categories_attachments.attachment_category_id = ?'
-      conditions << params[:category_id]
+      conditions[:categories_elements] = { :category_id => params[:category_id] }
     end
-
-    conditions[0] = conditions[0].join(' AND ')
 
     per_page = params[:iDisplayLength].to_i
     offset =  params[:iDisplayStart].to_i
@@ -189,14 +185,14 @@ private
     if params[:sSearch] && !params[:sSearch].blank?
       @medias = type.search(params[:sSearch],
         :conditions => conditions,
-        :include => ['attachment_categories'],
+        :include => :attachment_categories,
         :order => order,
         :page => page,
         :per_page => per_page)
     else
       @medias = type.paginate(:all,
         :conditions => conditions,
-        :include => ['attachment_categories'],
+        :include => :attachment_categories,
         :order => order,
         :page => page,
         :per_page => per_page)
