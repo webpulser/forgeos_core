@@ -30,22 +30,19 @@
                   %label= right.name
               .clear
 
+      - rights = Right.all(:include => :right_categories, :conditions => { :categories => {:id => nil} })
+      - unless rights.nil?
         .fieldset
           %a.small-icons.panel{ :href => '#' }
             = I18n.t('other')
           .option-panel-content
             .clear
             .multi-select-div
-              %a{ :href => '#' }
-                = I18n.t('select_all').capitalize
-              %a{ :href => '#' }
-                = I18n.t('unselect_all').capitalize
-            - Right.all.each do |right|
-              - if right.right_categories.empty?
-                .checkbox-container
-                  = check_box_tag "role[right_ids][]", right.id, (role ? role.rights.include?(right) : false)
-                  %label= right.name
-            .clear
+            - rights.each do |right
+              .checkbox-container
+                = check_box_tag "role[right_ids][]", right.id, (role ? role.rights.include?(right) : false)
+                %label= right.name
+              .clear
 
 
     #right-sidebar.grid_4.omega.alpha

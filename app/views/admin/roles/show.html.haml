@@ -20,17 +20,18 @@
                 %label= right.name
               .clear
 
-      .fieldset
-        %a.small-icons.panel{ :href => '#' }
-          = I18n.t('other')
-        .option-panel-content
-          .clear
-          .multi-select-div
-          - Right.all.each do |right|
-            - if right.right_categories.empty?
+      - rights = Right.all(:include => :right_categories, :conditions => { :categories => {:id => nil} })
+      - unless rights.nil?
+        .fieldset
+          %a.small-icons.panel{ :href => '#' }
+            = I18n.t('other')
+          .option-panel-content
+            .clear
+            .multi-select-div
+            - rights.each do |right
               .checkbox-container
                 %label= right.name
-          .clear
+              .clear
 
   #right-sidebar.grid_4.omega.alpha
     .step
