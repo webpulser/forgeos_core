@@ -1,7 +1,7 @@
 class Admin::BaseController < ApplicationController
   include AuthenticatedSystem
   layout 'admin'
-  before_filter :login_required
+  before_filter :login_required, :except => :url
 
   def notifications
     @notifications = {}
