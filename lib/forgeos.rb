@@ -1,3 +1,4 @@
+# coding: utf-8
 require 'action_view/helpers/assert_tag_helper'
 module Forgeos
   class Statistics
