@@ -1,4 +1,5 @@
 # ActiveRecord
+en:
   activerecord:
     models:
       media: media

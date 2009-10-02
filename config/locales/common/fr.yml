@@ -31,6 +31,10 @@ fr:
   roles: rôles
   controller_name: 'nom du contrôleur'
   action_name: "nom de l'action"
+  general_settings: options générales
+  notification:
+    one: notification
+    other: notifications
   visitor:
     online:
       zero: '{{count}} visiteur en ligne'

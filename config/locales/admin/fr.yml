@@ -1,7 +1,5 @@
-  users: utilisateurs
-  rights: droits
-  roles: rôles
-user:
+fr:
+  user:
     one: utilisateur
     other: utilisateurs
     back: 'retour aux utilisateurs'

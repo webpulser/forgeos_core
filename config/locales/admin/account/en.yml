@@ -1,3 +1,4 @@
-account:
-  update:
-    action: update your information
+en:
+  account:
+    update:
+      action: update your information

@@ -1,0 +1,21 @@
+fr:
+  role:
+    one: 'rôle'
+    other: 'rôles'
+    none: 'aucun rôle'
+    all: 'tous les rôles'
+    show: 'voir le rôle'
+    not_exist: "le rôle sélectionné n'existe pas"
+    attributed_to: 'rôle attribué aux utilisateurs'
+    create:
+      success: "le rôle a bien été créé"
+      failed: "un problème est survenu lors de la création du rôle"
+      action: 'créer un rôle'
+    update:
+      success: "le rôle a bien été mis à jour"
+      failed: "un problème est survenu lors de la mise à jour du rôle"
+      action: "éditer le rôle"
+    destroy:
+      success: "le rôle a bien été supprimé"
+      failed: "un problème est survenu lors de la suppression du rôle"
+      confirm: "êtes-vous sûr de vouloir supprimer ce rôle ?"

@@ -33,6 +33,10 @@ en:
   rights: rights
   controller_name: 'controller name'
   action_name: 'action name'
+  general_settings: general settings
+  notification:
+    one: notification
+    other: notifications
   customer:
     one: customer
     other: customers

@@ -1,0 +1,23 @@
+en:
+  admin:
+    one: user
+    other: users
+    none: 'no user'
+    all: all users
+    show: show user
+    not_exist: the requested user does not exist
+    create:
+      success: the user was successfully created
+      failed: a problem occured during the user creation
+      action: create user
+    update:
+      success: the user was successfully updated
+      failed: a problem occured during the user update
+      action: edit user
+    destroy:
+      action: delete the user
+      success: the user was successfully deleted
+      failed: a problem occured during the user deletion
+      confirm: are you sure to delete this user?
+    contact:
+      action: send a message to the user

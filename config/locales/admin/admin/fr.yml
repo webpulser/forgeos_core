@@ -1,0 +1,23 @@
+fr:
+  admin:
+    one: 'administrateur'
+    other: 'administrateurs'
+    none: 'aucun administrateur'
+    all: 'tous les utilisateurs'
+    show: "voir l'administrateur"
+    not_exist: "l'administrateur sélectionné n'existe pas"
+    create:
+      success: "l'administrateur a bien été créé"
+      failed: "un problème est survenu lors de la création de l'administrateur"
+      action: 'créer un administrateur'
+      update:
+        success: "l'administrateur a bien été mis à jour"
+        failed: "un problème est survenu lors de la mise à jour de l'administrateur"
+        action: "éditer l'administrateur"
+      destroy:
+        action: "supprimer l'administrateur"
+        success: "l'administrateur a bien été supprimé"
+        failed: "un problème est survenu lors de la suppression de l'administrateur"
+        confirm: "êtes-vous sûr de vouloir supprimer cet utilisateur?"
+      contact:
+        action: "envoyer un message à l'administrateur"
