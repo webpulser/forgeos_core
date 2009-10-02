@@ -1,0 +1,117 @@
+#right-sidebar div.step
+  :background = !lightBlueBg url(/images/admin/backgrounds/background-right-sidebar.png) repeat-x top
+  padding: 5px 10px
+  font-size: 0.7em
+  margin-bottom: 1px
+  :color = !greenBlue
+  &.status
+    padding-top: 30px
+  a
+    display: block
+    :color = !blueLink
+    &.step-title
+      background-position: 0 -816px
+      :color = !greenBlue
+      font-weight: bold
+  &.open
+    a.step-title
+      background-position: 0 -912px
+.last-date, .username
+  a
+    text-decoration: underline
+.add_size
+  text-decoration: underline
+  :color = !greenBlue
+  font-size: 0.8em
+.preview, .duplicate, .delete, .contact
+  margin: 5px 0px
+.preview
+  background-position: 0px -144px
+.duplicate
+  background-position: 0px -288px
+.delete
+  background-position: 0px -864px
+.contact
+  background-position: 0px -2977px
+.step .enhanced
+  display: none !important
+.open .enhanced
+  display: block !important
+.step
+  .inner-step
+    display: none
+  &.open .inner-step
+    +block()
+.inner-step
+  margin-top: 5px
+  padding: 5px
+  p
+    padding: 0 0 0 5px
+    margin: 0 0 5px 0
+    :border-left = 1px solid !greenBlue
+.tags
+  a, label
+    display: inline-block !important
+    :background-color = !white
+    :border = 1px solid !white
+    -moz-border-radius: 5px
+    :color = !greenBlue
+    padding: 0px 5px
+    margin: 2px 0px
+  span
+    padding: 5px
+    position: relative
+    +left()
+    +borderCorner(3px,3px,3px,3px)
+    :background-color = !white
+    :margin 2px
+.status p
+  padding: 0
+  margin: 5px 0 0 10px
+.meta p
+  border: 0
+  padding: 0
+  margin: 0 0 2px 0
+  span
+    font-weight: bold
+.attribute-new
+  :color = !blueLink
+  text-decoration: underline
+  margin-left: 22px
+.tags span:hover .gray-destroy, .block-container:hover .gray-destroy
+  filter: alpha(opacity=100)
+  opacity: 1
+form#wrap
+  .tags
+    :background-color = !white
+    :border= 1px solid !contentHeaderBorder
+    +borderCorner()
+    a
+      :background-color =  !contentHeaderBorder
+      :color = !black
+      background-position: right -208px
+      padding-right: 24px
+    span
+      padding: 5px 20px 5px 5px
+    span a
+      background-position: left -205px
+      height: 14px
+      width: 16px
+      padding: 0
+      background-color: transparent
+      border: 0
+      margin: 0
+    input
+      width: 75px
+      +borderCorner(3px,3px,3px,3px)
+      background-position: 0 -595px
+      :border = 1px solid !contentHeaderBorder
+      +left()
+#right-sidebar .text
+  :background-color = !white
+  :border = 1px solid !contentHeaderBorder
+  +borderCorner()
+  height: 130px
+  padding: 5px
+  margin-left: -5px
+  width: 188px

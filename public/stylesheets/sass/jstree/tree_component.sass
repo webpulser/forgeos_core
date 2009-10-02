@@ -1,0 +1,203 @@
+@media all and (-webkit-min-device-pixel-ratio:10000), not all and (-webkit-min-device-pixel-ratio:0)
+  head~body
+    & .tree
+      & >
+        & ul
+          & >
+            & li
+              &.last
+                & >
+                  & ul
+                    margin-bottom: 36px
+
+  .tree
+    & li
+      & li
+        overflow: visible
+
+
+
+.tree
+  ul
+    margin: 0 0 0 5px
+    padding: 0 0 0 0
+    list-style-type: none
+
+  li
+    display: block
+    min-height: 18px
+    line-height: 18px
+    padding: 0 0 0 15px
+    margin: 0 0 0 0
+    clear: both
+    _height: 18px
+    #height: auto
+
+    ul
+      display: none
+
+    a, span
+      display: inline-block
+      line-height: 16px
+      height: 16px
+      color: black
+      white-space: nowrap
+      text-decoration: none
+      padding: 1px 4px 1px 1px
+      margin: 0
+
+    a
+      &:focus
+        outline: none
+
+      input
+        margin: 0
+        padding: 0 0
+        display: inline-block
+        height: 12px !important
+        border: 1px solid white
+        background: white
+        font-size: 10px
+        font-family: Verdana
+
+    span input
+      margin: 0
+      padding: 0 0
+      display: inline-block
+      height: 12px !important
+      border: 1px solid white
+      background: white
+      font-size: 10px
+      font-family: Verdana
+
+    a input:not([class="xxx"]), span input:not([class="xxx"])
+      padding: 1px 0
+
+  .ltr li.last
+    float: left
+
+  .rtl li.last
+    float: right
+    #float: none
+    _float: right
+
+  > ul li.last
+    overflow: visible
+
+  li
+    &.open ul
+      display: block
+
+    &.closed ul
+      display: none !important
+
+
+#jstree-dragged
+  position: absolute
+  top: -10px
+  left: -10px
+  margin: 0
+  padding: 0
+
+  .rtl
+    _width: 20px
+    #width: 200px
+    margin: 0
+    padding: 0
+
+  ul ul ul
+    display: none
+
+
+.tree .rtl
+  margin: 0 5px 0 0
+
+  ul
+    margin: 0 5px 0 0
+
+  li
+    padding: 0 15px 0 0
+
+    a, span
+      padding: 1px 1px 1px 4px
+
+
+.tree-context
+  display: none
+  position: absolute
+  list-style-type: none
+  margin: 0
+  padding: 0
+  left: -2000px
+  top: -2000px
+
+  .separator
+    display: none
+
+  a
+    display: block
+    margin: 0
+    padding: 0
+
+
+.tree .ltr li a, x:-moz-any-link
+  display: inline
+  float: left
+
+
+.tree .rtl li a, x:-moz-any-link
+  display: inline
+  float: right
+
+
+.tree li ul, x:-moz-any-link
+  clear: both
+
+
+.tree
+  .ltr li a, .rtl li a
+    display: inline-block
+    float: none
+
+
+x
+  &:-moz-any-link, &:default
+    display: inline-block
+    float: none
+
+
+.tree li ul
+  clear: none
+
+
+x
+  &:-moz-any-link, &:default
+    clear: none
+
+
+.tree
+  .ltr li a, .rtl li a
+    #display: inline-block
+    #float: none
+
+  li
+    _width: 1px
+
+    ul
+      #clear: none
+
+    li
+      overflow: hidden
+      #overflow: visible
+      _overflow: visible
+
+  >
+    .ltr > li, .rtl > li
+      display: table
+
+  .ltr li.last
+    #margin-top: expression( (this.previousSibling && /open/.test(this.previousSibling.className) ) ? "-2px" : "0")
+    _margin-top: expression( (this.previousSibling && /open/.test(this.previousSibling.className) ) ? "-2px" : "0")
+
+  .rtl li.last
+    _margin-top: expression( (this.previousSibling && /open/.test(this.previousSibling.className) ) ? "-2px" : "0")

@@ -1,0 +1,34 @@
+.sidebar-content
+  padding: 2px 5px
+  margin-bottom: 40px
+.sidebar-background
+  background-position: 0px -1042px
+  height: 16px
+  filter: alpha(opacity=60)
+  opacity: 0.6
+.sidebar-content h2
+  font-size: 0.8em
+  :margin
+    :top 5px
+    :bottom 10px
+  :padding
+    :top 2px
+    :bottom 2px
+  :color = !darkBrown
+  a
+    :color = !darkBrown
+.header
+  :border-bottom = 1px solid !contentHeaderBorder
+.ui-resizable-handle.ui-resizable-e
+  :background
+    :image url(/images/admin/borders/drag-and-drop.png)
+    :position right center
+    :repeat repeat-x
+  cursor: move
+  height: 40px
+  right: -27px
+  width: 40px
+  +block()
+  z-index: 1
+.action-button
+  :margin-left 5px
