@@ -5,6 +5,7 @@ en:
     other: keywords
 
 # Admin
+  and: and
   save_changes: save changes
   get_forgotten_password: I forgot my password
   go_back_admin: go back to administration
