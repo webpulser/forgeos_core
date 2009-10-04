@@ -12,12 +12,12 @@ jQuery(document).ready(function(){
        data: { url: value, authenticity_token: AUTH_TOKEN },
        dataType:'text',
        success:function(request){
-               var target = $('#product_url,#pack_url');
-               target.val(request);
-               target.removeClass('loading');
+         var target = $('input:regex(id,.+_url)');
+         target.val(request);
+         target.removeClass('loading');
        },
        type:'post',
-       url:'/admin/products/url'
+       url: '/admin/products/url'
      });
   });
 
