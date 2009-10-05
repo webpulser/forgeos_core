@@ -1,11 +1,12 @@
 jQuery(document).ready(function(){
-  init_tree("#roles-tree",'RoleCategory', '/admin/roles.json','/admin/role_categories.json');
-  init_tree("#rights-tree",'RightCategory', '/admin/rights.json','/admin/right_categories.json');
-  init_tree("#picture-attachment-tree",'PictureCategory', '/admin/picture/attachments.json', '/admin/picture_categories.json');
-  init_tree("#pdf-attachment-tree",'PdfCategory', '/admin/pdf/attachments.json', '/admin/pdf_categories.json');
-  init_tree("#video-attachment-tree",'VideoCategory', '/admin/video/attachments.json','/admin/video_categories.json');
-  init_tree("#media-attachment-tree",'MediaCategory', '/admin/media/attachments.json','/admin/media_categories.json');
-  init_tree("#doc-attachment-tree",'DocCategory', '/admin/doc/attachments.json','/admin/doc_categories.json');
+  init_category_tree('#admins-tree','AdminCategory','/admin/admin_categories.json');
+  init_category_tree('#roles-tree','RoleCategory','/admin/role_categories.json');
+  init_category_tree('#rights-tree','RightCategory','/admin/right_categories.json');
+  init_category_tree('#picture-attachment-tree','PictureCategory','/admin/picture_categories.json');
+  init_category_tree('#pdf-attachment-tree','PdfCategory','/admin/pdf_categories.json');
+  init_category_tree('#video-attachment-tree','VideoCategory','/admin/video_categories.json');
+  init_category_tree('#media-attachment-tree','MediaCategory','/admin/media_categories.json');
+  init_category_tree('#doc-attachment-tree','DocCategory','/admin/doc_categories.json');
 
   //init the menu modify tree
   $("#menu-tree").tree({

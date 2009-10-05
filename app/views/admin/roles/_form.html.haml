@@ -38,7 +38,7 @@
           .option-panel-content
             .clear
             .multi-select-div
-            - rights.each do |right
+            - rights.each do |right|
               .checkbox-container
                 = check_box_tag "role[right_ids][]", right.id, (role ? role.rights.include?(right) : false)
                 %label= right.name

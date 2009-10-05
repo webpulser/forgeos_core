@@ -69,16 +69,21 @@ private
     page = (offset / per_page) + 1
     order = "#{columns[params[:iSortCol_0].to_i]} #{params[:iSortDir_0].upcase}"
 
+    if params[:category_id]
+      conditions[:categories_elements] = { :category_id => params[:category_id] }
+    end
+
     if params[:sSearch] && !params[:sSearch].blank?
       @admins = Admin.search(params[:sSearch],
-        :include => :role,
+        :conditions => conditions,
+        :include => [:role, :admin_categories],
         :order => order,
         :page => page,
         :per_page => per_page)
     else
       @admins = Admin.paginate(:all,
         :conditions => conditions,
-        :include => :role,
+        :include => [:role, :admin_categories],
         :order => order,
         :page => page,
         :per_page => per_page)

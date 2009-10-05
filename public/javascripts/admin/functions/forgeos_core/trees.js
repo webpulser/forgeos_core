@@ -35,7 +35,7 @@ function get_category_data(name, type, parent_id) {
 }
 
 // initialise tree theme and callbacks
-function init_tree(selector,type, url, source) {
+function init_category_tree(selector, type, source) {
   $(selector).tree({
     data:{
       type: 'json',
@@ -112,8 +112,19 @@ function init_tree(selector,type, url, source) {
       oncopy: function(NODE,REF_NODE,TYPE,TREE_OBJ,RB) { duplicate_category(NODE, type); },
       onselect: function(NODE,TREE_OBJ) {
         var cat_id = get_rails_element_id(NODE);
-        oTable.fnSettings().sAjaxSource = url + '?category_id=' + cat_id;
-        oTable.fnDraw();
+        var current_table = oTables[current_table_index];
+        var url = current_table.fnSettings().sAjaxSource;
+        var url_base = url.split('?')[0];
+        var params;
+
+        // update category id
+        params = get_json_params_from_url(url);
+        params.category_id = cat_id;
+        params = stringify_params_from_json(params);
+
+        // construct url and redraw table
+        update_current_dataTable_source(url_base + '?' + params);
+        return true;
       },
       // remove count span
       beforerename: function(NODE,LANG,TREE_OBJ) {
@@ -138,20 +149,39 @@ function check_jsTree_selected(element){
   }
   return false;
 }
-
-
+ 
 // unselect current node and refresh dataTables
-function select_all_elements(url) {
-  // unselect current selected node
-  var tree_id = $('.init-tree').attr('id');
-  if (tree_id != null) {
-    var tree = $.tree_reference(tree_id);
-    tree.deselect_branch(tree.selected);
-    $.tree_reference(tree_id).selected = null;
-  }
+function select_all_elements_by_url(url) {
   // change dataTables ajax source en redraw the table
   oTable.fnSettings().sAjaxSource = url;
   oTable.fnDraw();
+}
+
+// unselect current node, remove category and refresh dataTable
+function select_all_elements_without_category(tree_id) {
+  var tree_id = tree_id ? tree_id : $('.init-tree').attr('id');
+  var tree = $.tree_reference(tree_id);
+
+  // unselect current selected node
+  if (tree) {
+    tree.deselect_branch(tree.selected);
+    $(tree).selected = null;
+  }
+
+  // remove category from dataTables ajax source and redraw the table
+  var current_table = oTables[current_table_index];
+  var url = current_table.fnSettings().sAjaxSource;
+  var url_base = url.split('?')[0];
+  var params;
+
+  // update category id
+  params = get_json_params_from_url(url);
+  params.category_id = null;
+  params = stringify_params_from_json(params);
+
+  // construct url and redraw table
+  update_current_dataTable_source(url_base + '?' + params);
+  return true;
 }
 
 function update_parent_categories_count(element) {
@@ -181,7 +211,6 @@ function set_category_droppable(category_id, type) {
     }
   });
 }
-
 
 function removeClasses(){
   var elementsWithClassName=$('.lightbox-container').find('.clicked, .active');

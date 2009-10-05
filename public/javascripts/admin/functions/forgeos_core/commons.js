@@ -35,6 +35,38 @@ function jquery_obj_to_str(obj){
   return $('<div>').append($(obj).clone()).remove().html();
 }
 
+function get_json_params_from_url(url){
+  var url_params = url.split('?')[1];
+  var json_params = {}
+  var params;
+
+  // extract params and get them in json
+  if (url_params){
+    params = url_params ? url_params.split('&') : null;
+
+    // create json params
+    if (params){
+      for (var i=0; i<params.length; i++){
+        var key = params[i].split('=')[0];
+        var value = params[i].split('=')[1];
+        json_params[key] = value;
+      }
+    }
+  }
+  return json_params;
+}
+
+function stringify_params_from_json(json_params){
+  var params = [];
+  JSON.stringify(json_params, function (key, value) {
+    if (key && value) {
+      params.push(key+'='+value);
+    }
+    return value;
+  });
+  return params.join('&');
+}
+
 function add_item_on_add_click() {
   false_id = -1;
   var new_choice = '<li class="block-container">';

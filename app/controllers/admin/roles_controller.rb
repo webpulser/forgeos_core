@@ -82,7 +82,7 @@ private
   end
 
   def sort
-    columns = %w(name name count(people.id) created_at '' '')
+    columns = %w(roles.name roles.name count(people.id) created_at '' '')
     conditions = {}
 
     if params[:category_id]
@@ -95,7 +95,8 @@ private
     order = "#{columns[params[:iSortCol_0].to_i]} #{params[:iSortDir_0].upcase}"
     if params[:sSearch] && !params[:sSearch].blank?
       @roles = Role.search(params[:sSearch],
-        :include => [ :admins, :role_categories],
+        :conditions => conditions,
+        :include => [:admins, :role_categories],
         :group => 'roles.id',
         :order => order,
         :page => page,
@@ -103,7 +104,7 @@ private
     else
       @roles = Role.paginate(:all,
         :conditions => conditions,
-        :include => [ :admins, :role_categories],
+        :include => [:admins, :role_categories],
         :group => 'roles.id',
         :order => order,
         :page => page,

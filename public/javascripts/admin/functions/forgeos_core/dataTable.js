@@ -138,7 +138,6 @@ function DataTablesRowCallBack(nRow, aData, iDisplayIndex){
       $(this).attr('checked',($(this).is(':checked')?0:1));
     });
   }
-
   return nRow;
 }
 
