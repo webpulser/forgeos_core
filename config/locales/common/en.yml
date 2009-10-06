@@ -7,6 +7,13 @@ en:
 # Admin
   and: and
   save_changes: save changes
+  name: name
+  email: email
+  avatar: avatar
+  firstname: firstname
+  lastname: lastname
+  password: password
+  password_confirmation: password confirmation
   get_forgotten_password: I forgot my password
   go_back_admin: go back to administration
   see_site: see the website

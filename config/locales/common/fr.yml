@@ -7,6 +7,13 @@ fr:
 # Admin
   and: et
   save_changes: enregistrer les changements
+  name: nom
+  email: email
+  avatar: avatar
+  firstname: 'prénom'
+  lastname: nom
+  password: mot de passe
+  password_confirmation: 'vérification du mot de passe'
   get_forgotten_password: mot de passe oublié
   go_back_admin: "retour vers l'administration"
   see_site: voir le site
