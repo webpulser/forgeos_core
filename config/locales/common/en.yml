@@ -5,6 +5,7 @@ en:
     other: keywords
 
 # Admin
+  or: or
   and: and
   save_changes: save changes
   name: name
