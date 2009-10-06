@@ -7,6 +7,8 @@ es:
 # Admin
   save_changes: 'guardar los cambios'
   get_forgotten_password: 'contraseña olvidada'
+  email: email
+  password: contraseña
   go_back_admin: 'volver a la dministración'
   see_site: 'mostrer el sitio'
   library: 'biblioteca'
