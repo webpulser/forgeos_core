@@ -42,7 +42,9 @@ namespace :forgeos_core do
           end
           puts ' [ok]'
         end
-        role = Role.first
+        unless role = Role.first
+          role = Role.create :name => 'super administrator'
+        end
         admin = Admin.first
         print "associate rights to #{role.name} "
         role.update_attributes(:right_ids => Right.all(:select => :id).collect(&:id))
