@@ -6,6 +6,7 @@ fr:
 
 # Admin
   save_changes: enregistrer les changements
+  name: nom
   email: email
   password: mot de passe
   get_forgotten_password: mot de passe oublié

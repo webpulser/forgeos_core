@@ -6,6 +6,7 @@ en:
 
 # Admin
   save_changes: save changes
+  name: name
   email: email
   password: password
   get_forgotten_password: I forgot my password

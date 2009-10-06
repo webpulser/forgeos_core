@@ -6,9 +6,10 @@ es:
 
 # Admin
   save_changes: 'guardar los cambios'
-  get_forgotten_password: 'contraseña olvidada'
+  name: nombre
   email: email
   password: contraseña
+  get_forgotten_password: 'contraseña olvidada'
   go_back_admin: 'volver a la dministración'
   see_site: 'mostrer el sitio'
   library: 'biblioteca'
