@@ -7,6 +7,16 @@ picture:
     :normal: '200x200' 
     :small: '100x100'
     :thumb: '50x50'
+  max_size: 52428800
+
+avatar:
+  storage: :file_system
+  file_system_path: 'public/uploads/avatars'
+  content_type: :image
+  thumbnails: 
+    :small: '100x100'
+    :thumb: '50x50'
+  max_size: 52428800
 
 doc:
   content_type: 
