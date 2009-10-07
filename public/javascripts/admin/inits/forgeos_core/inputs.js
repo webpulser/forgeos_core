@@ -2,11 +2,14 @@ jQuery(document).ready(function(){
   // init delayedObserver to generate url from name
   $('input:regex(id,.+_(name|title))').change(function() {
      var value = $(this).val();
+     var id = $(this).attr('id');
+     var element_name = id.split('_')[0];
      var element = $('textarea:regex(id,.+_meta_info_attributes_title)');
      if (element.is(':visible')){
        element.val(value);
      }
 
+     
      $.ajax({
        beforeSend:function(request){$('input:regex(id,.+_url)').addClass('loading');},
        data: { url: value, authenticity_token: AUTH_TOKEN },
@@ -17,11 +20,11 @@ jQuery(document).ready(function(){
          target.removeClass('loading');
        },
        type:'post',
-       url: '/admin/products/url'
+       url: '/admin/'+element_name+'s/url'
      });
   });
 
-  $('textarea:regex(id,.+_description)').change(function() {
+  $('textarea:regex(id,.+_(description|content))').change(function() {
      var value = $(this).text();
      var element = $('textarea:regex(id,.+_meta_info_attributes_description)');
      if (element.is(':visible')){
