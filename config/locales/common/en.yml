@@ -46,6 +46,9 @@ en:
   notification:
     one: notification
     other: notifications
+  status:
+    one: status
+    other: statuses
   customer:
     one: customer
     other: customers

@@ -7,7 +7,7 @@ fr:
 # Admin
   or: ou
   and: et
-  save_changes: enregistrer les changements
+  save_changes: enregistrer
   name: nom
   email: email
   avatar: avatar
@@ -44,14 +44,17 @@ fr:
   notification:
     one: notification
     other: notifications
+  status:
+    one: statut
+    other: statuts
+  customer:
+    one: client
+    other: clients
   visitor:
     online:
       zero: '{{count}} visiteur en ligne'
       one: '{{count}} visiteur en ligne'
       other: '{{count}} visiteurs en ligne'
-  customer:
-    one: client
-    other: clients
   user:
     one: utilisateur
     other: utilisateurs
