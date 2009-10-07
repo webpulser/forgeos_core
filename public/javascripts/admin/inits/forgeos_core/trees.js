@@ -10,7 +10,11 @@ jQuery(document).ready(function(){
 
   //init the menu modify tree
   $("#menu-tree").tree({
-    ui: { theme_path: '/stylesheets/jstree/themes/', theme_name : 'menu-tree' },
+    ui: {
+      theme_path: '/stylesheets/jstree/themes/',
+      theme_name : 'menu-tree',
+      selected_parent_close: false
+    },
     rules: {draggable : 'all', clickable: 'all'},
     callback: {
       onload: function(TREE_OBJ){

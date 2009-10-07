@@ -39,10 +39,63 @@ function init_category_tree(selector, type, source) {
   $(selector).tree({
     data:{
       type: 'json',
-      url: source,
-      async: false
+      opts: {
+        url: source
+      }
     },
-    ui: { theme_path: '/stylesheets/jstree/themes/', theme_name : 'product_category' },
+    plugins: {
+      'contextmenu': {
+        items : {
+          create : {
+            label	: "Créer",
+            icon	: "create",
+            visible	: function (NODE, TREE_OBJ) {
+              if(NODE.length != 1) return 0;
+              return TREE_OBJ.check("creatable", NODE);
+            },
+            action	: function (NODE, TREE_OBJ) {
+              TREE_OBJ.create(false, TREE_OBJ.get_node(NODE[0]));
+            },
+            separator_after : false
+          },
+          rename : {
+            label	: "Renommer",
+            icon	: "rename",
+            visible	: function (NODE, TREE_OBJ) {
+              if(NODE.length != 1) return false;
+              return TREE_OBJ.check("renameable", NODE);
+            },
+            action	: function (NODE, TREE_OBJ) {
+              TREE_OBJ.rename(NODE);
+            }
+          },
+          remove : {
+            label	: "Supprimer",
+            icon	: "remove",
+            visible	: function (NODE, TREE_OBJ) {
+              var ok = true;
+              $.each(NODE, function () {
+                if(TREE_OBJ.check("deletable", this) == false) {
+                  ok = false;
+                  return false;
+                }
+              });
+              return ok;
+            },
+            action	: function (NODE, TREE_OBJ) {
+              $.each(NODE, function () {
+                TREE_OBJ.remove(this);
+              });
+            }
+          }
+        }
+      }
+    },
+    ui: {
+      theme_path: '/stylesheets/jstree/themes/',
+      theme_name : 'product_category',
+      selected_parent_close: false
+    },
     callback: {
       onload: function(TREE_OBJ){
         tree_id = $(TREE_OBJ.container).attr('id');
@@ -55,7 +108,7 @@ function init_category_tree(selector, type, source) {
             drop:function(ev, ui){
               $.ajax({
               data: {element_id:get_rails_element_id($(ui.draggable)), authenticity_token: encodeURIComponent(AUTH_TOKEN)},
-              success:function(request){TREE_OBJ.refresh();},
+              success:function(request){$.tree.focused().refresh();},
               type:'post',
               url:'/admin/categories/' + category_id + '/add_element'
               });
@@ -90,7 +143,7 @@ function init_category_tree(selector, type, source) {
             url: '/admin/categories/' + cat_id,
               // update elements count
               complete: function(request) {
-                TREE_OBJ.refresh();
+                $.tree.focused().refresh();
               },
               data: {authenticity_token:AUTH_TOKEN, format: 'json', 'category[name]': $(NODE).children('a').text()},
               dataType:'text',
@@ -159,13 +212,12 @@ function select_all_elements_by_url(url) {
 
 // unselect current node, remove category and refresh dataTable
 function select_all_elements_without_category(tree_id) {
-  var tree_id = tree_id ? tree_id : $('.init-tree').attr('id');
-  var tree = $.tree_reference(tree_id);
+  var t = $.tree.focused();
 
   // unselect current selected node
-  if (tree) {
-    tree.deselect_branch(tree.selected);
-    $(tree).selected = null;
+  if (t) {
+    t.deselect_branch(t.selected);
+    t.selected = null;
   }
 
   // remove category from dataTables ajax source and redraw the table

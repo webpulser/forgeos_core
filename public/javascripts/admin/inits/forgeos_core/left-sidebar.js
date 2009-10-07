@@ -70,12 +70,12 @@ jQuery(document).ready(function(){
    *param : tree_id => id of current-tree line 104
    **/
   $('.create-folder, .create-smart').live('click',function(){
-    if(check_jsTree_selected(tree_id)){
-      $.tree_reference(tree_id).create();
+    var t = $.tree.focused();
+    if(t.selected){
+      t.create();
     }
     else{
-      $.tree_reference(tree_id).create({}, -1);
-      // error_on_jsTree_action("please select a category first");
+      t.create({},-1)
     }
   });
 
@@ -85,8 +85,9 @@ jQuery(document).ready(function(){
    *param : tree_id => id of current-tree  line 104
    **/
   $('.modify-folder').live('click',function(){
-    if(check_jsTree_selected(tree_id)){
-      $.tree_reference(tree_id).rename();
+    var t = $.tree.focused();
+    if(t.selected){
+       t.rename()
     }
     else{
        error_on_jsTree_action("please select a category first");
@@ -99,8 +100,9 @@ jQuery(document).ready(function(){
    *param : tree_id => id of current-tree line 104
    **/
   $('.delete-folder').live('click',function(){
-    if(check_jsTree_selected(tree_id)){
-      $.tree_reference(tree_id).remove();
+    var t = $.tree.focused();
+    if(t.selected){
+       t.remove();
     }
     else{
        error_on_jsTree_action("please select a category first");
@@ -113,15 +115,10 @@ jQuery(document).ready(function(){
    *param : tree_id => id of current-tree line 104
    **/
    $('.duplicate-folder').live('click',function(){
-    if(check_jsTree_selected(tree_id)){
-      var tree = $.tree_reference(tree_id);
-      var parent = tree.parent(tree.selected);
-
-      tree.copy();
-      if (parent)
-        tree.paste(parent);
-      else
-        tree.paste(-1);
+    var t = $.tree.focused();
+    if(t.selected){
+      t.copy();
+      t.paste(-1);
 
     }
     else{
