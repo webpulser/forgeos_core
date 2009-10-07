@@ -62,31 +62,32 @@ private
   end
 
   def sort
-    columns = %w(lastname roles.name email created_at)
-    conditions = {}
+    columns = %w(id lastname roles.name email created_at)
     per_page = params[:iDisplayLength].to_i
     offset =  params[:iDisplayStart].to_i
     page = (offset / per_page) + 1
-    order = "#{columns[params[:iSortCol_0].to_i]} #{params[:iSortDir_0].upcase}"
+    order_column = params[:iSortCol_0].to_i
+    order = "#{columns[order_column]} #{params[:iSortDir_0].upcase}"
+
+    conditions = {}
+    includes = []
+    options = { :page => page, :per_page => per_page }
 
     if params[:category_id]
       conditions[:categories_elements] = { :category_id => params[:category_id] }
+      includes << :admin_categories
     end
 
+    includes << :role if order_column == 2
+
+    options[:conditions] = conditions unless conditions.empty?
+    options[:include] = includes unless includes.empty?
+    options[:order] = order unless order.squeeze.blank?
+
     if params[:sSearch] && !params[:sSearch].blank?
-      @admins = Admin.search(params[:sSearch],
-        :conditions => conditions,
-        :include => [:role, :admin_categories],
-        :order => order,
-        :page => page,
-        :per_page => per_page)
+      @admins = Admin.search(params[:sSearch],options)
     else
-      @admins = Admin.paginate(:all,
-        :conditions => conditions,
-        :include => [:role, :admin_categories],
-        :order => order,
-        :page => page,
-        :per_page => per_page)
+      @admins = Admin.paginate(:all,options)
     end
   end
 end

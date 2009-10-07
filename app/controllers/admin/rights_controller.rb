@@ -80,27 +80,28 @@ private
 
   def sort
     columns = %w(rights.id rights.name controller_name action_name)
-    conditions = {}
-    if params[:category_id]
-      conditions[:categories_elements] = { :category_id =>  params[:category_id] }
-    end
     per_page = params[:iDisplayLength].to_i
     offset =  params[:iDisplayStart].to_i
     page = (offset / per_page) + 1
     order = "#{columns[params[:iSortCol_0].to_i]} #{params[:iSortDir_0].upcase}"
+
+    conditions = {}
+    includes = []
+    options = { :page => page, :per_page => per_page }
+
+    if params[:category_id]
+      conditions[:categories_elements] = { :category_id =>  params[:category_id] }
+      includes << :right_categories
+    end
+
+    options[:conditions] = conditions unless conditions.empty?
+    options[:include] = includes unless includes.empty?
+    options[:order] = order unless order.squeeze.blank?
+
     if params[:sSearch] && !params[:sSearch].blank?
-      @rights = Right.search(params[:sSearch],
-        :order => order,
-        :include => :right_categories,
-        :page => page,
-        :per_page => per_page)
+      @rights = Right.search(params[:sSearch],options)
     else
-      @rights = Right.paginate(:all,
-        :conditions => conditions,
-        :include => :right_categories,
-        :order => order,
-        :page => page,
-        :per_page => per_page)
+      @rights = Right.paginate(:all,options)
     end
   end
 end

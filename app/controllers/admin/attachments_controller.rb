@@ -103,44 +103,7 @@ class Admin::AttachmentsController < Admin::BaseController
     return render :nothing => true
   end
 
-  # Sort media for attachable
-#  def sort
-#    if params['media_list']
-#      # get attachable model...
-#      begin
-#        # and check if model is an available attachable type
-#        attachable_type = params[:target].camelize
-#
-#        unless Forgeos::AttachableTypes.include?(attachable_type)
-#          flash[:error] = I18n.t('media.attach.unknown_type').capitalize
-#          return redirect_to(admin_attachments_path)
-#        end
-#
-#        target = attachable_type.constantize
-#      rescue NameError
-#        flash[:error] = I18n.t('media.attach.failed').capitalize
-#        return redirect_to(admin_attachments_path)
-#      end
-#
-#      # update position of attachments
-#      if @target = target.find_by_id(params[:id])
-#        medias = @target.sortable_attachments
-#        medias.each do |media|
-#          if index = params['media_list'].index(media.attachment_id.to_s)
-#            media.update_attribute(:position, index+1)
-#          end
-#        end
-#
-#        # refresh list of medias
-#        return render(:update) do |page|
-#          page.replace_html("list_medias", :partial => 'admin/medias/list', :locals => { :medias => @target.attachments, :target => params[:target], :target_id => params[:id], :remote => true})
-#        end
-#      end
-#    end
-#    render(:nothing => true)
-#  end
-
-private
+  private
 
   def get_media
     @media = Attachment.find_by_id params[:id]
@@ -162,8 +125,14 @@ private
 
   def sort
     columns = %w(filename filename content_type updated_at size used '')
-    conditions = {}
-    conditions[:parent_id] = nil
+    per_page = params[:iDisplayLength].to_i
+    offset =  params[:iDisplayStart].to_i
+    page = (offset / per_page) + 1
+    order = "#{columns[params[:iSortCol_0].to_i]} #{params[:iSortDir_0].upcase}"
+
+    conditions = { :parent_id => nil }
+    includes = []
+    options = { :page => page, :per_page => per_page }
     
     # file type
     unless @file_type.nil?
@@ -176,26 +145,17 @@ private
     # category
     if params[:category_id]
       conditions[:categories_elements] = { :category_id => params[:category_id] }
+      includes = :attachment_categories
     end
 
-    per_page = params[:iDisplayLength].to_i
-    offset =  params[:iDisplayStart].to_i
-    page = (offset / per_page) + 1
-    order = "#{columns[params[:iSortCol_0].to_i]} #{params[:iSortDir_0].upcase}"
+    options[:conditions] = conditions unless conditions.empty?
+    options[:include] = includes unless includes.empty?
+    options[:order] = order unless order.squeeze.blank?
+
     if params[:sSearch] && !params[:sSearch].blank?
-      @medias = type.search(params[:sSearch],
-        :conditions => conditions,
-        :include => :attachment_categories,
-        :order => order,
-        :page => page,
-        :per_page => per_page)
+      @medias = type.search(params[:sSearch],options)
     else
-      @medias = type.paginate(:all,
-        :conditions => conditions,
-        :include => :attachment_categories,
-        :order => order,
-        :page => page,
-        :per_page => per_page)
+      @medias = type.paginate(:all,options)
     end
   end
 

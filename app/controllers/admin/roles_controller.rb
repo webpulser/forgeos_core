@@ -82,33 +82,37 @@ private
   end
 
   def sort
-    columns = %w(roles.name roles.name count(people.id) created_at '' '')
-    conditions = {}
-
-    if params[:category_id]
-      conditions[:categories_elements] = { :category_id => params[:category_id] }
-    end
-
+    columns = %w(roles.name roles.name count(people.id) created_at)
     per_page = params[:iDisplayLength].to_i
     offset =  params[:iDisplayStart].to_i
     page = (offset / per_page) + 1
-    order = "#{columns[params[:iSortCol_0].to_i]} #{params[:iSortDir_0].upcase}"
+    order_column = params[:iSortCol_0].to_i
+    order = "#{columns[order_column]} #{params[:iSortDir_0].upcase}"
+
+    conditions = {}
+    includes = []
+    group_by = []
+    options = { :page => page, :per_page => per_page }
+
+    if params[:category_id]
+      conditions[:categories_elements] = { :category_id => params[:category_id] }
+      includes << :role_categories
+    end
+
+    if order_column == 2
+      includes << :admins 
+      group_by << 'roles.id'
+    end
+
+    options[:conditions] = conditions unless conditions.empty?
+    options[:include] = includes unless includes.empty?
+    options[:group] = group_by.join(', ') unless group_by.empty?
+    options[:order] = order unless order.squeeze.blank?
+
     if params[:sSearch] && !params[:sSearch].blank?
-      @roles = Role.search(params[:sSearch],
-        :conditions => conditions,
-        :include => [:admins, :role_categories],
-        :group => 'roles.id',
-        :order => order,
-        :page => page,
-        :per_page => per_page)
+      @roles = Role.search(params[:sSearch],options)
     else
-      @roles = Role.paginate(:all,
-        :conditions => conditions,
-        :include => [:admins, :role_categories],
-        :group => 'roles.id',
-        :order => order,
-        :page => page,
-        :per_page => per_page)
+      @roles = Role.paginate(:all,options)
     end
   end
 end
