@@ -13,7 +13,8 @@
         - f.fields_for :avatar do |avatar|
           = avatar.label :uploaded_data, I18n.t('avatar').capitalize
           %div
-            = image_tag(admin.avatar.public_filename(:small)) if admin.avatar
+            - if admin.avatar && !admin.avatar.new_record?
+              = image_tag(admin.avatar.public_filename(:small)) 
             = avatar.file_field :uploaded_data
         = f.label :email, I18n.t('email')
         %div 
