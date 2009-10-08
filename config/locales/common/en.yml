@@ -56,6 +56,8 @@ en:
     online:
      one: '{{count}} visitor online'
      other: '{{count}} visitors online'
+    one: visitor
+    other: visitors
   user:
     one: customer
     other: customers

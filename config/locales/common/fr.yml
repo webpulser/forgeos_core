@@ -55,6 +55,8 @@ fr:
       zero: '{{count}} visiteur en ligne'
       one: '{{count}} visiteur en ligne'
       other: '{{count}} visiteurs en ligne'
+    one: visiteur
+    other: visiteurs
   user:
     one: utilisateur
     other: utilisateurs
