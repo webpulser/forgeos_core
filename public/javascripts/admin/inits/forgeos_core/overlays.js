@@ -4,7 +4,8 @@ jQuery(document).ready(function(){
      autoOpen:false,
      modal:true,
      minHeight: 380,
-     width: 500
+     width: 500,
+      resizable:'se'
   });
 
   $('#imageSelectDialog').dialog({
