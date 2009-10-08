@@ -223,3 +223,24 @@ en:
     misc:
       one: other
       other: others
+  statistic:
+    one: statistic
+    other: statistics
+    trends: trends
+    keyfacts: keyfacts
+    average_order: average order
+    average_customer: average customers
+    products_sold: products sold
+    revenue: revenue
+    conversion_rate: conversion rate
+    show:
+      all: 'see statistics'
+      for: show for
+    live:
+      one: 'live statistic'
+      other: 'live statistics'
+    last:
+      month: last 30 days
+      week: last 7 days
+  top_5_items: Top 5 search items
+  please_select: 'please select'
