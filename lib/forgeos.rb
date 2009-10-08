@@ -54,13 +54,13 @@ module Forgeos
     { :title => 'support',
       :i18n => true,
       :url => 'http://www.webpulser.com',
-      :html => { :class => 'right' }
-    },
-    { :title => 'see_site',
-      :i18n => true,
-      :url => :root,
       :html => { :class => 'right first' }
     }
+    #{ :title => 'see_site',
+    #  :i18n => true,
+    #  :url => :root,
+    #  :html => { :class => 'right first' }
+    #}
   ]
   
   # Set site's menu
