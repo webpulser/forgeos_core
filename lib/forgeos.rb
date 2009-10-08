@@ -18,18 +18,11 @@ module Forgeos
       :i18n => true,
       :html => { :class => 'left'}
     },
-    { :title => 'site_builder',
-      :url => { :controller => 'admin/product_types'},
-      :i18n => true,
-      :html => { :class => 'right' } },
     { :title => 'statistics',
       :url => { :controller => 'admin/statistics' },
       :i18n => true,
-      :html => { :class => 'right' } },
-    { :title => 'marketing', 
-      :i18n => true,
-      :url => { :controller => 'admin/special_offers'},
-      :html => { :class => 'right' } }
+      :html => { :class => 'right' }
+    }
   ]
 
   AdminSubMenu = [
