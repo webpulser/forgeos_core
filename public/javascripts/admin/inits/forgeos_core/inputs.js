@@ -31,4 +31,18 @@ jQuery(document).ready(function(){
        element.val(value);
      }
   });
+  //init nested_sortable
+  $('.nested_sortable').each(function(){
+    $(this).sortable({
+      handle:'.handler',
+      placeholder: 'ui-state-highlight',
+      update: function(event, ui){
+        $(this).children('.block-container').each(function(){
+          var index = $(this).parent().children('.block-container').index(this);
+          var item_position = $(this).find('input:regex(id,.+_position)');
+          item_position.val(index);
+        });
+      }
+    });
+  });
 });
