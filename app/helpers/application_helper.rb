@@ -8,18 +8,32 @@ module ApplicationHelper
     end
   end
 
+  def current_path?(url,path = request.path.gsub(/\/$/,''))
+    (url_for(url) != '/' || path == '/') && (url_for(url) != '/admin' || path == '/admin') && path.include?(url_for(url))
+  end
+
   def menu_item(tab)
     html_options = tab[:html] ? tab[:html].dup : {}
     tab_name = (tab.delete(:i18n) ? I18n.t(*tab[:title]) : tab[:title])
-    url = tab.delete(:url)
-    request_path = request.path.gsub(/\/$/,'')
     html_options[:class] = '' unless html_options[:class]
-    html_options[:class] += ' current' if (url_for(url) != '/' || request_path == '/') && (url_for(url) != '/admin' || request_path == '/admin') && request_path.include?(url_for(url))
+    urls = tab.delete(:url) 
+
+    if urls.is_a?(Array)
+      urls.each do |url|
+        html_options[:class] += ' current' if current_path?(url)
+      end
+      url = urls.first
+    else
+      url = urls
+      html_options[:class] += ' current' if current_path?(url)
+    end
+
     if helper = tab.delete(:helper)
         link = self.send(helper[:method],tab_name)
     else
         link = link_to(tab_name.capitalize, url)
     end
+
     if tab[:children] && !tab[:children].empty?
       menu = []
       tab[:children].each do |child|
@@ -27,6 +41,7 @@ module ApplicationHelper
       end
       link += content_tag(:ul, menu.join)
     end
+
     content_tag( :li, link, html_options)
   end
 

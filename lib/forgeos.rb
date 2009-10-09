@@ -28,7 +28,11 @@ module Forgeos
   AdminSubMenu = [
     { :title => 'administration',
       :i18n => true,
-      :url => { :controller => 'admin/admins' },
+      :url => [
+        { :controller => 'admin/admins' },
+        { :controller => 'admin/roles' },
+        { :controller => 'admin/rights' }
+      ],
       :html => { :class => 'left first'}
     },
     { :title => 'preferences',
@@ -38,7 +42,14 @@ module Forgeos
     },
     { :title => 'library',
       :i18n => true,
-      :url => { :controller => 'admin/library' },
+      :url => [
+        { :controller => 'admin/library' },
+        { :controller => 'admin/images/attachments' },
+        { :controller => 'admin/pdf/attachments' },
+        { :controller => 'admin/video/attachments' },
+        { :controller => 'admin/media/attachments' },
+        { :controller => 'admin/doc/attachments' }
+      ],
       :html => { :class => 'left' }
     },
     { :title => 'your_account',
