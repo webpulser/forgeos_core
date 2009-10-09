@@ -14,8 +14,8 @@ class CreatePeople < ActiveRecord::Migration
         :limit => 40
       t.datetime :remember_token_expires_at,
         :activated_at
-      t.belongs_to  :avatar
-        :country
+      t.belongs_to :avatar,
+        :country,
         :role
       t.date :birthday
       t.timestamps

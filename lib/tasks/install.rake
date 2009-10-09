@@ -4,8 +4,8 @@ namespace :forgeos_core do
   end
 
   task :initialize => [ 'db:migrate' ] do
-    #email = ARGV[1]
-    #Admin.new(:email => {}, :first_name => 'admin', :last_name => 'admin', :passord => , :passord_confirmation => )
+    system 'rake forgeos_commerce:fixtures:load FIXTURES=people,geo_zones'
+    system 'rake forgeos_core:generate:acl vendor/plugins/forgeos_core'
   end
 
   task :install => [ 'gems:install', :initialize, :sync]
