@@ -11,3 +11,4 @@ administrator:
   remember_token: 
   firstname: admin
   email: admin@forgeos.com
+  role_id: 1

@@ -1,7 +1,7 @@
 class CreateRightsRoles < ActiveRecord::Migration
   def self.up
     create_table :rights_roles, :id => false do |t|
-      t.integer :right,
+      t.belongs_to :right,
         :role
     end
   end
