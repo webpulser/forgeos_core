@@ -1,11 +1,10 @@
 !!! xml utf-8
 !!! 1.1
-%html{ "xml:lang" => I18n.locale, :xmlns => "http://www.w3.org/1999/xhtml" }
+%html{ 'xml:lang' => I18n.locale, :xmlns => 'http://www.w3.org/1999/xhtml' }
   %head
-    %meta{ :content => "text/html; charset=utf-8", "http-equiv" => "Content-Type" }
-    %link{ :href => "/favicon.gif", :rel => "shortcut icon", :type => "image/gif" }
+    %meta{ :content => 'text/html; charset=utf-8', 'http-equiv' => 'Content-Type' }
+    %link{ :href => '/images/admin/favicon.gif', :rel => 'shortcut icon', :type => 'image/gif' }
     = stylesheet_link_tag %w(960 admin/login)
-    %title
-      Login
+    %title= I18n.t(:login)
   %body
     = yield
