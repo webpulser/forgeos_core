@@ -3,6 +3,7 @@ en:
   keyword:
     one: keyword
     other: keywords
+  login: login
 
 # Admin
   or: or

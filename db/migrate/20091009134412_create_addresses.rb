@@ -9,8 +9,8 @@ class CreateAddresses < ActiveRecord::Migration
         :city,
         :type,
         :designation
-      t.belongs_to :civility,
-        :country,
+      t.integer :civility
+      t.belongs_to :country,
         :user,
         :order
       t.timestamps

@@ -1,6 +1,6 @@
 class CreatePeople < ActiveRecord::Migration
   def self.up
-    create_table :people, :force => true do |t|
+    create_table :people do |t|
       t.string :email,
         :firstname,
         :lastname,
