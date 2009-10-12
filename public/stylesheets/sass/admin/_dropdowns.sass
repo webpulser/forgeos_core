@@ -6,7 +6,7 @@
   +left()
   position: relative
   margin: 0 0 0 10px
-  min-width: 150px
+  width: 150px
   .options
     position: absolute
     left: 5px
@@ -59,25 +59,30 @@ a.dropdown_toggle
   +block()
   height: 25px
   padding-right: 24px
-.dropdown
-  +left()
-  position: relative
-  margin: 0
-  min-width: 200px
-  text-transform: uppercase
-  .options
-    position: absolute
-    left: 5px
-    top: 25px
-    overflow: auto
-    :background = !white
-    :border = 1px solid !contentHeaderBorder
-    border-top: 0
-    padding: 0
-.published a.dropdown_toggle
-  background-image: url(/images/admin/selects/big-green-right.png)
-  span
-    background-image: url(/images/admin/selects/big-green-left.png)
+#right-sidebar
+  .dropdown
+    +left()
+    position: relative
+    margin: 0
+    width: 200px
+    width: 200px
+    text-transform: uppercase
+    a.dropdown_toggle
+      span
+        :color = !white !important
+      .options
+        position: absolute
+        left: 5px
+        top: 25px
+        overflow: auto
+        :background = !white
+        :border = 1px solid !contentHeaderBorder
+        border-top: 0
+        padding: 0
+  .published a.dropdown_toggle
+    background-image: url(/images/admin/selects/big-green-right.png)
+    span
+      background-image: url(/images/admin/selects/big-green-left.png)
 #right-sidebar div.step.status .unpublished a.dropdown_toggle
   background-image: url(/images/admin/selects/unpublished-right.png)
   span
@@ -136,20 +141,15 @@ a.dropdown_toggle
   a.dropdown_toggle span
     background-image: url(/images/admin/selects/big-brown-left.png)
     :color= !white
-.dropdown
-  +left()
-  position: relative
-  margin: 0
-  min-width: 200px
 .datatable
   .dropdown
-    min-width: 110px
+    width: 110px
     +block()
     +left()
   a.dropdown_toggle
     padding-right: 20px
   .dropdown .options
-    min-width: 100px
+    width: 100px
     top: 20px
   .published a.dropdown_toggle
     background-image: url(/images/admin/selects/small-green-right.png)
@@ -240,7 +240,6 @@ a.dropdown_toggle
     clear: none
   .dropdown
     width: 100px
-    min-width: 100px
   a.dropdown_toggle
     background: url(/images/admin/small-icons/bottom-arrow.png) right center no-repeat
     height: 22px
@@ -264,7 +263,7 @@ a.dropdown_toggle
       :color = !blueLink
       text-transform: none
 .country-select .dropdown, .civility-select .dropdown, .delivery-method .dropdown
-  margin-left: 0
+  margin-left: 0px
 .country-select
   .dropdown .options
     height: 150px
@@ -357,7 +356,6 @@ div.tree-link
   .dropdown
     margin-left: 0
     width: auto
-    min-width: 0
   a.dropdown_toggle
     background: url(/images/admin/small-icons/bottom-arrow.png) right 6px no-repeat
     padding-right: 10px
@@ -383,7 +381,6 @@ div.tree-link
       :left 0
       :right 5px
     width: auto
-    min-width: 0
   a.dropdown_toggle
     background: url(/images/admin/small-icons/bottom-arrow.png) right 3px no-repeat
     padding-right: 15px
@@ -413,7 +410,6 @@ div.tree-link
     .dropdown
       :margin-left 0
       :width auto
-      :min-width 0
     a.dropdown_toggle
       :background url(/images/admin/small-icons/bottom-arrow.png) right -2px no-repeat
       :padding-right 26px
