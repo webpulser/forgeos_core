@@ -1,12 +1,14 @@
-namespace :forgeos_core do
-  task :sync do
-    system 'rsync -rvC vendor/plugins/forgeos_core/public .'
-  end
+namespace :forgeos do
+  namespace :core do
+    task :sync do
+      system 'rsync -rvC vendor/plugins/forgeos_core/public .'
+    end
 
-  task :initialize => [ 'db:migrate' ] do
-    system 'rake forgeos_commerce:fixtures:load FIXTURES=people,geo_zones'
-    system 'rake forgeos_core:generate:acl vendor/plugins/forgeos_core'
-  end
+    task :initialize => [ :environment, 'db:migrate' ] do
+      system 'rake forgeos:core:fixtures:load forgeos_core people,geo_zones'
+      system 'rake forgeos:core:generate:acl vendor/plugins/forgeos_core'
+    end
 
-  task :install => [ 'gems:install', :initialize, :sync]
+    task :install => [ 'gems:install', :initialize, :sync]
+  end
 end
