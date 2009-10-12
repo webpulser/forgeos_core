@@ -6,6 +6,19 @@ fr:
   login: connection
 
 # Admin
+  back-office:
+    title:
+      dashboard: accueil
+      statistics: statistiques
+      admins: administrateurs
+      roles: rôles
+      rights: droits
+      preferences: préférences
+      library: librairie
+      attachments: librairie
+      account: votre compte
+      logout: déconnexion
+      login: connexion
   or: ou
   and: et
   conditions:

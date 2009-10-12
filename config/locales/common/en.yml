@@ -6,6 +6,19 @@ en:
   login: login
 
 # Admin
+  back-office:
+    title:
+      dashboard: dashboard
+      statistics: statistics
+      admins: administrators
+      roles: roles
+      rights: rights
+      preferences: preferences
+      library: library
+      attachments: library
+      account: your account
+      logout: logout
+      login: login
   or: or
   and: and
   conditions:
