@@ -222,7 +222,7 @@ fr:
       alternative: 'texte alternatif'
       title: "titre de l'image"
       original_size: 'taille originale'
-      add: 'ajouter photo'
+      add: 'ajouter une photo'
       featured: 'photo principale'
       show:
         action: "voir l'image"

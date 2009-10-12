@@ -93,7 +93,7 @@ function init_category_tree(selector, type, source) {
     },
     ui: {
       theme_path: '/stylesheets/jstree/themes/',
-      theme_name : 'product_category',
+      theme_name : 'categories',
       selected_parent_close: false
     },
     callback: {
