@@ -8,6 +8,13 @@ en:
 # Admin
   or: or
   and: and
+  conditions:
+    is: is
+    is_not: is not
+    is_equals_or_greater_than: is equals or greater than
+    is_equals_or_less_than: is equals or less than
+    is_greater_than: is greater than
+    is_less_than: is less than
   save_changes: save changes
   name: name
   email: email

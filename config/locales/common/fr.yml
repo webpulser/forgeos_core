@@ -8,6 +8,14 @@ fr:
 # Admin
   or: ou
   and: et
+  conditions:
+    is: est
+    is_not: "n'est pas"
+    is_equals_or_greater_than: est égal ou supérieur à
+    is_equals_or_less_than: est égal ou inférieur à
+    is_greater_than: est supérieur à
+    is_less_than: est inférieur à
+  save_changes: save changes
   save_changes: enregistrer
   name: nom
   email: email
