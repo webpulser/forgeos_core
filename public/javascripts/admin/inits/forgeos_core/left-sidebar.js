@@ -70,7 +70,8 @@ jQuery(document).ready(function(){
    *param : tree_id => id of current-tree line 104
    **/
   $('.create-folder, .create-smart').live('click',function(){
-    var t = $.tree.focused();
+    var tree_id = $('.category-tree').attr('id');
+    var t = $.tree.reference(tree_id);
     if(t.selected){
       t.create();
     }

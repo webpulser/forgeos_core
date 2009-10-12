@@ -24,7 +24,7 @@ jQuery(document).ready(function(){
      });
   });
 
-  $('textarea:regex(id,.+_(description|content))').change(function() {
+  $('textarea.mceEditor:regex(id,.+_(description|content))').change(function() {
      var value = $(this).text();
      var element = $('textarea:regex(id,.+_meta_info_attributes_description)');
      if (element.is(':visible')){
