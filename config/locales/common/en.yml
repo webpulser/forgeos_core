@@ -134,6 +134,26 @@ en:
     duplicate: duplicate a folder
     destroy: delete a folder
     associated_to: associated to folder
+  categories: categories
+  category:
+    one: category
+    other: categories
+    not_exist: 'the requested category does not exist'
+    create:
+      success: 'the category was successfully created'
+      failed: 'a problem occured during the category creation'
+      action: 'create a category'
+    update:
+      success: 'the category was successfully updated'
+      failed: 'a problem occured during the category update'
+      action: 'edit category'
+    destroy:
+      success: 'the category was successfully deleted'
+      failed: 'a problem occured during the category deletion'
+      confirm: 'are you sure to delete this category ?' 
+    sub:
+      create:
+        action: 'create a subcategory'
   media:
     list: list of media
     one: media
