@@ -71,12 +71,14 @@ jQuery(document).ready(function(){
    **/
   $('.create-folder, .create-smart').live('click',function(){
     var tree_id = $('.category-tree').attr('id');
-    var t = $.tree.reference(tree_id);
-    if(t.selected){
-      t.create();
-    }
-    else{
-      t.create({},-1)
+    var tree = $.tree.reference(tree_id);
+    if (tree){
+      if(tree.selected){
+        tree.create();
+      }
+      else{
+        tree.create({},-1);
+      }
     }
   });
 
