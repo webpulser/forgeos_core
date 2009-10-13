@@ -12,7 +12,7 @@ h2. Plugins
 * acts_as_commentable
 * localized_dates
 
-# And install all others plugins (don't forget to read there README) :
+# And install all other plugins (don't forget to read their README) :
 
  <pre><code>
   Install restful_authentication :

@@ -131,9 +131,9 @@ fr:
   folder:
     create: créer un dossier
     smart: créer un dossier dynamique
-    edit: modifier un dossier
-    duplicate: dupliquer un dossier
-    destroy: supprimer un dossier
+    edit: modifier le dossier
+    duplicate: dupliquer le dossier
+    destroy: supprimer le dossier
     associated_to: associations avec les dossiers
   categories: 'catégories'
   category:
