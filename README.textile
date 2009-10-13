@@ -1,0 +1,38 @@
+h1. ForgeosCore
+
+ForgeosCore is the core of Forgeos project (* http://www.forgeos.com http://www.forgeos.com)
+
+FOREOS_CORE_VERSION : 0.9.0
+
+h1. Prerequisites
+
+h2. Plugins
+
+* restful_authentication
+* acts_as_commentable
+* localized_dates
+
+# And install all others plugins (don't forget to read there README) :
+
+ <pre><code>
+  Install restful_authentication :
+   git clone git://github.com/technoweenie/restful-authentication.git vendor/plugins/restful_authentication
+
+  Install attachment_fu :
+   git clone git://github.com/technoweenie/attachment_fu.git vendor/plugins/attachment_fu
+
+  Install localized_dates :
+   ./script/plugin install git://github.com/clemens/localized_dates.git
+ </pre></code>
+
+h2. Initialize
+
+ <pre><code>
+  ./script/generate migration install_forgeos_core_plugin
+
+  gem install desert haml 
+  rake db:create
+  rake forgeos:core:install
+ </code></pre>
+
+Powered by [http://www.webpulser.com Webpulser]
