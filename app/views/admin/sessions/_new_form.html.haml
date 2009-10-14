@@ -5,7 +5,7 @@
     &nbsp;
   #login-container.grid_10
     .sign-in-message
-      = I18n.t('log_in').capitalize
+      = I18n.t('log.in.action').capitalize
     - form_tag admin_session_path do
       = label_tag :email, I18n.t('email').capitalize
       %br
@@ -20,6 +20,6 @@
       = check_box_tag 'remember_me'
       = I18n.t('remember_me').capitalize
       %br
-      = submit_tag I18n.t('log_in').capitalize, :class => 'backgrounds submit-button'
+      = submit_tag I18n.t('log.in.action').capitalize, :class => 'backgrounds submit-button'
   .grid_3
     &nbsp;

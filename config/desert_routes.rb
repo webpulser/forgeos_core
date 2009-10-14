@@ -1,3 +1,6 @@
+logout '/logout', :controller => 'sessions', :action => 'destroy'
+login '/login', :controller => 'sessions', :action => 'new'
+
 namespace :admin do |admin|
   admin.logout '/logout', :controller => 'sessions', :action => 'destroy'
   admin.login '/login', :controller => 'sessions', :action => 'new'
@@ -10,9 +13,10 @@ namespace :admin do |admin|
   admin.resources :admins
   admin.resources :roles, :member => { :activate => :post }
   admin.resources :rights
+  admin.resources :users, :collection => { :filter => [:post, :get] }, :member => { :activate => :post }
 
   admin.resources :categories, :member => { :add_element => :post }
-  %w(picture media pdf doc video attachment admin role right).each do |category|
+  %w(picture media pdf doc video attachment admin role right user).each do |category|
     admin.resources "#{category}_categories", :controller => 'categories', :requirements => { :type => "#{category}_category" }
   end
 

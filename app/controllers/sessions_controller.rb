@@ -1,13 +1,11 @@
 # This controller handles the login/logout function of the site.  
-class Admin::SessionsController < Admin::BaseController
-  layout 'admin_login'
-  skip_before_filter :login_required, :only => [:new, :create]
+class SessionsController < ApplicationController
   def new
     session[:redirect] = nil
   end
 
   def create
-    self.current_user = Admin.authenticate(params[:email], params[:password])
+    self.current_user = User.authenticate(params[:email], params[:password])
     if logged_in?
       if params[:remember_me] == "1"
         current_user.remember_me unless current_user.remember_token?
@@ -19,7 +17,7 @@ class Admin::SessionsController < Admin::BaseController
       else
         redirect_to(:root)
       end
-      flash[:notice] = I18n.t('log.in.sucess').capitalize
+      flash[:notice] = I18n.t('log.in.success').capitalize
     else
       flash[:error] = I18n.t('log.in.failed').capitalize
       if redirect = session[:redirect]
@@ -36,5 +34,6 @@ class Admin::SessionsController < Admin::BaseController
     cookies.delete :auth_token
     reset_session
     flash[:notice] = I18n.t('log.out.success').capitalize
+    redirect_to(:root)
   end
 end
