@@ -1,6 +1,8 @@
 logout '/logout', :controller => 'sessions', :action => 'destroy'
 login '/login', :controller => 'sessions', :action => 'new'
 
+resource :session
+
 namespace :admin do |admin|
   admin.logout '/logout', :controller => 'sessions', :action => 'destroy'
   admin.login '/login', :controller => 'sessions', :action => 'new'
