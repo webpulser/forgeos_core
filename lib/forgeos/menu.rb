@@ -8,6 +8,11 @@ module Forgeos
       :i18n => true,
       :html => { :class => 'left'}
     },
+    { :title => 'users',
+      :url => { :controller => 'admin/users' }, 
+      :i18n => true,
+      :html => { :class => 'left'}
+    },
     { :title => 'statistics',
       :url => { :controller => 'admin/statistics' },
       :i18n => true,

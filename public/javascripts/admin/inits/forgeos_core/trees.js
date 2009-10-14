@@ -1,4 +1,5 @@
 jQuery(document).ready(function(){
+  init_category_tree("#user-tree",'UserCategory','/admin/user_categories.json');
   init_category_tree('#admins-tree','AdminCategory','/admin/admin_categories.json');
   init_category_tree('#roles-tree','RoleCategory','/admin/role_categories.json');
   init_category_tree('#rights-tree','RightCategory','/admin/right_categories.json');

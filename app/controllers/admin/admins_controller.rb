@@ -52,6 +52,7 @@ class Admin::AdminsController < Admin::BaseController
     end
     redirect_to(admin_admins_path)
   end
+
 private
 
   def get_admin

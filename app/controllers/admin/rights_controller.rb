@@ -54,7 +54,6 @@ class Admin::RightsController < Admin::BaseController
   end
 
   def destroy
-    
     if @right.destroy
       flash[:notice] = I18n.t('right.destroy.success').capitalize
       return request.xhr? ? (render :nothing => true) : redirect_to(admin_rights_path)

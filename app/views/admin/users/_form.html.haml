@@ -1,0 +1,61 @@
+- form_for [:admin, user], :html => { :id => 'wrap', :autocomplete => 'off' } do |f|
+  .backgrounds.big-header
+    = f.text_field :lastname, :title => I18n.t('lastname'), :class => 'defaultValue'
+    = f.text_field :firstname, :title => I18n.t('firstname'), :class => 'defaultValue'
+    .interact-links
+      = submit_tag I18n.t('save_changes').capitalize, :class => 'backgrounds interact-button'
+      = I18n.t('or')
+      = link_to I18n.t('cancel').capitalize, admin_users_path, :class => 'back-link'
+
+  #content.grid_16.alpha.omega
+    #customer-see.grid_12.alpha.omega
+      // .customer-header.backgrounds
+      .padding-wrap
+        = render :partial => 'fieldset_account_informations', :locals => { :user => user, :f => f }
+        = render :partial => 'fieldset_contact_informations', :locals => { :user => user, :f => f }
+
+        /
+          .fieldset.messages-fieldset
+            %h3
+              Messages
+            .received-message
+              %a.small-icons{ :href => '#' }
+                New message!
+              %span
+                Received on 28/08/88
+            .sent-message
+              %a.small-icons
+                New message!
+              %span
+                Sent on 28/08/88
+            .send-message
+              %label
+                Title
+              %input.all-width{ :type => 'text' }
+              %label
+                Body
+              %textarea
+              .clear
+              %a.backgrounds.button{ :href => '#' }
+                Send message
+              = I18n.t('or').capitalize
+              %a.back-link{ :href => '#' }
+                Cancel
+
+    -unless user.new_record?
+      #right-sidebar.grid_4.omega.alpha
+        .step
+          = mail_to @user.email, 'Contact customer', :class => 'small-icons contact'
+          = link_to I18n.t('user.destroy.action').capitalize, [:admin, user], :confirm => I18n.t('user.destroy.confirm').capitalize, :method => :delete, :class => 'small-icons delete'
+        .step.disabled
+          = link_to I18n.t('newsletter', :count => 2).capitalize, '#', :class => 'small-icons step-title'
+        .step.open
+          = link_to I18n.t('user.history').capitalize, '#', :class => 'small-icons step-title'
+          .inner-step
+            %p
+              = I18n.t('created_on').capitalize
+              = @user.created_at.to_date
+              %br
+              // = I18n.t('by')
+              // =@user.fullname
+      .clear

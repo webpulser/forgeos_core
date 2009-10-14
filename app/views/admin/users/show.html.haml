@@ -1,0 +1,35 @@
+.backgrounds.big-header
+  %h1= @user.fullname
+  .interact-links
+    = link_to I18n.t('user.update.action'), [:edit, :admin, @user], :class => 'backgrounds interact-button'
+    = I18n.t(:or)
+    = link_to I18n.t('user.back'), admin_users_path, :class => 'back-link'
+#content.grid_16.alpha.omega
+  #customer-see.grid_12.alpha.omega
+    .customer-header.backgrounds
+    .padding-wrap
+      .fieldset
+        %h3= I18n.t('user.customer_infos').capitalize
+        .main-infos
+          .main-infos-cutomer
+            %h4.small-icons= I18n.t('user.contact_infos').capitalize
+            %p= @user.phone
+            %p.customer-email= @user.email
+        .clear
+      
+  #right-sidebar.grid_4.omega.alpha
+    .step
+      =mail_to @user.email, I18n.t('user.contact').capitalize, :class => 'small-icons contact'
+      = link_to I18n.t('user.destroy.action').capitalize, [:admin, @user], :confirm => I18n.t('user.destroy.confirm').capitalize, :method => :delete, :class => 'small-icons delete'
+    .step.disabled
+      = link_to I18n.t('newsletter', :count => 2).capitalize, '#', :class => 'small-icons step-title'
+    .step.open
+      = link_to I18n.t('user.history').capitalize, '#', :class => 'small-icons step-title'
+      .inner-step
+        %p
+          = I18n.t('created_on').capitalize
+          = @user.created_at.to_date
+          %br
+          // = I18n.t('by')
+          // =@user.fullname
+  .clear

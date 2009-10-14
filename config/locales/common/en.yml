@@ -24,6 +24,7 @@ en:
       preferences: preferences
       library: library
       attachments: library
+      users: customers
       account: your account
       logout: logout
       login: login
@@ -37,6 +38,7 @@ en:
     is_greater_than: is greater than
     is_less_than: is less than
   save_changes: save changes
+  by: by
   name: name
   email: email
   avatar: avatar
@@ -82,12 +84,25 @@ en:
   customer:
     one: customer
     other: customers
+  country: country
+  civility:
+    one: civility
+    other: civilities
+    label:
+      - [Mr, 0]
+      - [Ms, 1]
+      - [Mss, 2]
+  newsletter:
+    one: newsletter
+    other: newsletters
+    export: export for newsletter
   visitor:
     online:
      one: '{{count}} visitor online'
      other: '{{count}} visitors online'
     one: visitor
     other: visitors
+  users: customers
   user:
     one: customer
     other: customers
@@ -95,8 +110,8 @@ en:
     spent_on: spent on
     all: all customers
     not_exist: this customer doesn't exist
-    joined_the: joined the
     contact: contact customer
+    joined_on: joined on
     best_customer:
       one: best customer
       other: best customers
