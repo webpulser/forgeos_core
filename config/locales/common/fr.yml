@@ -3,7 +3,7 @@ fr:
   keyword:
     one: mot clé
     other: mots clés
-  login: connection
+  login: connexion
 
 # Admin
   back-office:
