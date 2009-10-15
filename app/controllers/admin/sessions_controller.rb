@@ -19,7 +19,7 @@ class Admin::SessionsController < Admin::BaseController
       else
         redirect_to(:root)
       end
-      flash[:notice] = I18n.t('log.in.sucess').capitalize
+      flash[:notice] = I18n.t('log.in.success').capitalize
     else
       flash[:error] = I18n.t('log.in.failed').capitalize
       if redirect = session[:redirect]
