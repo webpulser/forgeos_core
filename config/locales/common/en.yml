@@ -6,7 +6,9 @@ en:
   login: login
   logout: 'logout'
   log:
-    have_account: have account
+    account:
+      new: sign up
+      show: your account
     in:
       action: log in
       success: you are successfully connected 
