@@ -6,6 +6,7 @@ fr:
   login: connexion
   logout: déconnexion
   log:
+    have_account: vous avez un compte
     in:
       action: se connecter
       success: connexion réussie
