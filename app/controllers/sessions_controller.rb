@@ -15,7 +15,7 @@ class SessionsController < ApplicationController
         session[:redirect] = nil
         redirect_to(redirect)
       else
-        redirect_to(:root)
+        redirect_to_home
       end
       flash[:notice] = I18n.t('log.in.success').capitalize
     else

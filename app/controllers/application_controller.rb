@@ -6,10 +6,14 @@ class ApplicationController < ActionController::Base
   
   before_filter :set_locale
 
-  private
+private
 
   def set_locale
     session[:locale] = params[:locale] || session[:locale] || I18n.default_locale
     I18n.locale = session[:locale] if I18n.available_locales.include?(session[:locale].to_sym)
+  end
+
+  def redirect_to_home
+    redirect_to(:root)
   end
 end
