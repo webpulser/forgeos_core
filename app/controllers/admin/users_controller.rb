@@ -146,8 +146,6 @@ private
 
   def new_user
     @user = User.new(params[:user])
-    @user.address_deliveries.build if @user.address_deliveries.empty?
-    @user.address_invoices.build if @user.address_invoices.empty?
   end
 
   def stream_csv
