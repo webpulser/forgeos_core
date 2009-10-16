@@ -17,6 +17,7 @@ function tmceInit(selector){
     plugins : "table,fullscreen",
     skin : 'forgeos',
     theme : 'advanced',
+    convert_urls: 0,
     onchange_callback: function(inst){ $(inst.getElement()).trigger('change'); },
     theme_advanced_resize_horizontal : false,
     theme_advanced_resizing : true,
