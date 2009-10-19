@@ -40,8 +40,10 @@ fr:
     is_equals_or_less_than: est égal ou inférieur à
     is_greater_than: est supérieur à
     is_less_than: est inférieur à
-  by: par
   save_changes: enregistrer
+  _yes: 'oui'
+  _no: 'non'
+  by: par
   name: nom
   email: email
   avatar: avatar
