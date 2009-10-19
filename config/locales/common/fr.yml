@@ -86,6 +86,8 @@ fr:
     one: client
     other: clients
   country: pays
+  telephone: téléphone
+  other_telephone: autre téléphone
   civility:
     one: civilité
     other: civilités

@@ -88,6 +88,8 @@ en:
     one: customer
     other: customers
   country: country
+  telephone: telephone
+  other_telephone: other telephone
   civility:
     one: civility
     other: civilities

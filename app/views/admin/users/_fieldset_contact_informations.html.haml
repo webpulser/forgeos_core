@@ -3,16 +3,13 @@
     = I18n.t('user.contact_infos').capitalize
   .option-panel-content
     .street-input
-      %label
-        Telephone
+      %label= I18n.t(:telephone).capitalize
       = f.text_field :phone
     .street-input
-      %label
-        Other telephone
+      %label= I18n.t(:other_telephone).capitalize
       = f.text_field :other_phone
     .street-input
-      %label
-        Email
+      %label= I18n.t(:email).capitalize
       = f.text_field :email
   .clear
 
