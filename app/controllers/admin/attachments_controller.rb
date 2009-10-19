@@ -100,7 +100,8 @@ class Admin::AttachmentsController < Admin::BaseController
     else
       flash[:notice] = I18n.t('media.destroy.failed').capitalize
     end
-    return render :nothing => true
+    return render :nothing => true if request.xhr?
+    return redirect_to(admin_attachments_path)
   end
 
   private
