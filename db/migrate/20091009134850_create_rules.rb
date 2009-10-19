@@ -8,8 +8,9 @@ class CreateRules < ActiveRecord::Migration
         :max_use,
         :default => 0,
         :null => false
-      t.string  :name,
-        :type
+      t.string :name,
+        :type,
+        :voucher_code
       t.boolean :active
       t.belongs_to :parent
     end  
