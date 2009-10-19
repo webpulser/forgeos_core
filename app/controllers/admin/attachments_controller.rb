@@ -60,8 +60,7 @@ class Admin::AttachmentsController < Admin::BaseController
             @media = Media.new(params[:attachment])
           end
 
-          @media.uploaded_data = { 'tempfile' => params[:Filedata], 'content_type' => 'none', 'filename' => params[:Filename] }
-          @media.content_type = @content_type
+          @media.uploaded_data = { 'tempfile' => params[:Filedata], 'content_type' => @content_type, 'filename' => params[:Filename]}
           
           if @media.save
             flash[:notice] = I18n.t('media.create.success').capitalize
