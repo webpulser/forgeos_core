@@ -219,7 +219,7 @@ fr:
     attach:
       unknown_type: "le type de l'élément attaché est inconnu"
       failed: "un problème est survenu lors de l'édition de lien avec l'élément"
-    content_type: content type'
+    content_type: content type
     file_type: type du fichier
     updated_at: dernière mise à jour
     filename: nom du fichier
