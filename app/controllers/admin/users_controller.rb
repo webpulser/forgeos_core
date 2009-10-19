@@ -18,9 +18,6 @@ class Admin::UsersController < Admin::BaseController
   def new
   end
 
-  def edit
-  end
-
   def create
     if @user.avatar.nil? && params[:avatar] && params[:avatar][:uploaded_data] && params[:avatar][:uploaded_data].blank?
       @user.build_avatar(params[:avatar])
@@ -32,6 +29,9 @@ class Admin::UsersController < Admin::BaseController
       flash[:error] = I18n.t('user.create.failed').capitalize
       render :new
     end
+  end
+
+  def edit
   end
 
   def update

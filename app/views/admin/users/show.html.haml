@@ -1,3 +1,4 @@
+= render :partial => 'tabs'
 .backgrounds.big-header
   %h1= @user.fullname
   .interact-links
@@ -6,7 +7,7 @@
     = link_to I18n.t('user.back'), admin_users_path, :class => 'back-link'
 #content.grid_16.alpha.omega
   #customer-see.grid_12.alpha.omega
-    .customer-header.backgrounds
+    // .customer-header.backgrounds
     .padding-wrap
       .fieldset
         %h3= I18n.t('user.customer_infos').capitalize
