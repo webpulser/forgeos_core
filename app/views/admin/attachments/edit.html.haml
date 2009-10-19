@@ -1,3 +1,1 @@
-%h1
-  = I18n.t('media.create.action').capitalize
--#= render :partial => 'form', :locals => { :media => @media }
+= render :partial => 'form', :locals => { :media => @media, :thumbnails => @thumbnails }

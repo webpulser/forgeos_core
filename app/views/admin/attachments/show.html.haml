@@ -2,7 +2,7 @@
 #wrap
   .backgrounds.big-header
     %h1#media-title
-      = @media.filename
+      = @media.name
     .interact-links
       = link_to I18n.t('media.update.action').capitalize, [:edit, :admin, @media ], :class => 'backgrounds interact-button'
       = I18n.t('or')
@@ -29,6 +29,12 @@
 
         .large-info-container.grid_5.alpha.omega
           - if @media.kind_of?(Picture)
+            .large-info-block
+              %span.large-info-name.truncate
+                = I18n.t('media.filename').capitalize
+              %span.large-info-value
+                = @media.filename
+              .clear
             .large-info-block
               %span.large-info-name
                 = I18n.t('media.picture.original_size').capitalize

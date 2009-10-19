@@ -24,6 +24,20 @@ class Admin::AttachmentsController < Admin::BaseController
 
   # GET /medias/1/edit
   def edit
+    @thumbnails = @media.thumbnails.all :order => '(width*height) DESC'
+  end
+  
+  def update
+    %w(media picture pdf video doc).each do |key|
+      params[:attachment] = params[key] if params[key]
+    end
+    if @media.update_attributes(params[:attachment])
+      flash[:notice] = I18n.t('media.update.success').capitalize
+      return redirect_to(admin_library_path)
+    else
+      flash[:error] = I18n.t('product.update.failed').capitalize
+      render :action => 'edit'
+    end
   end
 
   # POST /medias
@@ -80,18 +94,6 @@ class Admin::AttachmentsController < Admin::BaseController
       end
     end
   end
-
-#   # PUT /medias/1
-#   def update
-#     @users = User.all
-    
-#     if @media.update_attributes(params[:attachment])
-#       flash[:notice] = I18n.t('media.update.success').capitalize
-#     else
-#       flash[:error] = I18n.t('media.update.failed').capitalize
-#     end
-#     return redirect_to(admin_attachments_path)
-#   end
 
   # DELETE /medias/1
   def destroy

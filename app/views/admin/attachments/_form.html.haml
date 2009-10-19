@@ -1,36 +1,85 @@
-#fileUpload
-  - form_for [:admin, media], :html => { :multipart => true } do |f|
-    = f.error_messages
-    = f.file_field :uploaded_data
-    = hidden_field_tag :target, params[:target]
-    = hidden_field_tag :target_id, params[:target_id]
-    = f.submit I18n.t('save').capitalize
-- content_for :tools, link_to(I18n.t('list').capitalize, admin_attachments_path, :class => 'house' )
+= render :partial => 'tabs'
+- form_for [:admin, media], :html => { :multipart => true, :id => 'wrap'} do |f|
+  .backgrounds.big-header
+    = f.text_field :name, :id => 'media-title'
+    .interact-links
+      = fg_submit_tag (media.new_record? ? 'media.create.action' :'save_changes')
+      = I18n.t('or')
+      = link_to I18n.t('media.back').capitalize, admin_attachments_path(:file_type => 'picture'), :class => 'back-link'
 
-= javascript_include_tag %w(jquery.uploadify swfobject)
-= stylesheet_link_tag 'admin/uploadify'
-- session_key = ActionController::Base.session_options[:key]
-- javascript_tag do
-  $(function(){
-  $('#fileUpload').uploadify({
-  'uploader': '/images/uploadify/uploadify.swf',
-  = "'cancelImg': '#{image_path('uploadify/cancel.png')}',"
-  = "'script': '#{media.new_record? ? admin_attachments_path : admin_attachment_path(media)}',"
-  'scriptData': { 
-  = "'target': '#{params[:target]}',"
-  = "'target_id': '#{params[:target_id]}', "
-  'format': 'json',
-  = "'authenticity_token': '#{form_authenticity_token}',"
-  = "'#{session_key}': '#{cookies[session_key]}'"
-  },
-  'ScriptAccess': 'always',
-  'multi': 'true',
-  'displayData': 'speed',
-  'onAllComplete': function(){
-  = display_standard_flashes(I18n.t('media.create.success').capitalize,false)
-  }
-  });});
+  #content.grid_16.alpha.omega
+    #media-modify.grid_12.alpha
+      .media-modify-wrap
+        - permalink = "#{request.protocol}#{request.host_with_port}/#{media.public_filename}"
+        %h2.permalink
+          = I18n.t('permalink', :count => 1).capitalize
+          \:
+          = link_to permalink, permalink
 
-= link_to_function I18n.t('media.upload.start').capitalize, "$('#fileUpload').uploadifyUpload()"
-|
-= link_to_function I18n.t('media.upload.clear_queue').capitalize,"$('#fileUpload').uploadifyClearQueue()"
+        - if largest_thumb = thumbnails.shift
+          .large-image.media-image-container.grid_7.omega
+            = image_tag largest_thumb.public_filename
+            %br
+            %span.media-size
+              = I18n.t("media.thumbnails.#{largest_thumb.thumbnail}").upcase
+            %br
+            %span.media-size-pixels
+              = "#{largest_thumb.width} x #{largest_thumb.height} #{I18n.t('media.pixel', :count => 2)}"
+
+        .large-info-container.grid_5.alpha.omega
+          - if media.kind_of?(Picture)
+            .large-info-block
+              %span.large-info-name.truncate
+                = I18n.t('media.filename').capitalize
+              %span.large-info-value
+                = media.filename
+              .clear
+            .large-info-block
+              %span.large-info-name
+                = I18n.t('media.picture.original_size').capitalize
+              %span.large-info-value
+                = "#{media.width} x #{media.height} #{I18n.t('media.pixel', :count => 2)}"
+              .clear
+          .large-info-block
+            %span.large-info-name
+              = I18n.t('media.file_type').capitalize
+            %span.large-info-value
+              = media.file_type.upcase
+            .clear
+          .large-info-block
+            %span.large-info-name
+              = I18n.t('media.updated_at').capitalize
+            %span.large-info-value
+              = media.updated_at.to_s(:short)
+            .clear
+          .large-info-block
+            %span.large-info-name
+              = I18n.t('media.size').capitalize
+            %span.large-info-value
+              = "#{media.size/1024} #{I18n.t('media.byte.kilo')}"
+            .clear
+        .clear
+
+        - thumbnails.each do |thumb|
+          .grid_4.alpha.omega.media-image-container
+            = image_tag thumb.public_filename
+            %br
+            %span.media-size
+              = I18n.t("media.thumbnails.#{thumb.thumbnail}").upcase
+            %br
+            %span.media-size-pixels
+              = "#{thumb.width} x #{thumb.height} #{I18n.t('media.pixel', :count => 2)}"
+
+    #right-sidebar.grid_4.omega
+      .step
+        = link_to I18n.t('media.destroy.action').capitalize, [:admin, media], :confirm => I18n.t('media.destroy.confirm').capitalize, :method => :delete, :class => 'small-icons delete'
+        .clear    
+      .step.open
+        %a.small-icons.step-title{ :href => "#" }
+          Associated to collection
+        #association-media-tree.inner-step.init-tree
+          %ul
+            = hidden_field_tag "#{f.object_name}[attachment_category_ids][]" 
+            = render :partial => 'admin/categories/associated_elements', :locals => { :association_id => 'attachment_category_ids', :element => media, :category_ids => media.attachment_category_ids, :categories => AttachmentCategory.find_all_by_parent_id(nil) }
+            .clear
+    .clear
