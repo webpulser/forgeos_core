@@ -10,7 +10,7 @@ class CreateRules < ActiveRecord::Migration
         :null => false
       t.string :name,
         :type,
-        :voucher_code
+        :code
       t.boolean :active
       t.belongs_to :parent
     end  
