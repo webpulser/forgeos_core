@@ -181,7 +181,8 @@ private
   end
 
   def sort
-    columns = %w(lastname email joined_on)
+    columns = %w(lastname lastname email joined_on activated_at)
+
     per_page = params[:iDisplayLength].to_i
     offset =  params[:iDisplayStart].to_i
     page = (offset / per_page) + 1
@@ -189,7 +190,7 @@ private
 
     conditions = {}
     includes = []
-    options = { :page => page, :per_page => per_page }
+    options = { :order => order, :page => page, :per_page => per_page }
 
     if params[:category_id]
       conditions[:categories_elements] = { :category_id => params[:category_id] }

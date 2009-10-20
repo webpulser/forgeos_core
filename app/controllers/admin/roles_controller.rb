@@ -82,7 +82,7 @@ private
   end
 
   def sort
-    columns = %w(roles.name roles.name count(people.id) created_at)
+    columns = %w(roles.name roles.name count(people.id) created_at active)
     per_page = params[:iDisplayLength].to_i
     offset =  params[:iDisplayStart].to_i
     page = (offset / per_page) + 1
