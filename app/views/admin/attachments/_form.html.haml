@@ -5,7 +5,7 @@
     .interact-links
       = fg_submit_tag (media.new_record? ? 'media.create.action' :'save_changes')
       = I18n.t('or')
-      = link_to I18n.t('media.back').capitalize, admin_attachments_path(:file_type => 'picture'), :class => 'back-link'
+      = link_to I18n.t('media.back').capitalize, admin_attachments_path(:file_type => find_media_type_from_content_type(media) ), :class => 'back-link'
 
   #content.grid_16.alpha.omega
     #media-modify.grid_12.alpha
@@ -80,6 +80,6 @@
         #association-media-tree.inner-step.init-tree
           %ul
             = hidden_field_tag "#{f.object_name}[attachment_category_ids][]" 
-            = render :partial => 'admin/categories/associated_elements', :locals => { :association_id => 'attachment_category_ids', :element => media, :category_ids => media.attachment_category_ids, :categories => AttachmentCategory.find_all_by_parent_id(nil) }
+            = render :partial => 'admin/categories/associated_elements', :locals => { :association_id => 'attachment_category_ids', :element => media, :category_ids => media.attachment_category_ids, :categories => find_categories_from_content_type(media) }
             .clear
     .clear

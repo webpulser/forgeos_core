@@ -86,6 +86,24 @@ function init_category_tree(selector, type, source) {
               $.each(NODE, function () {
                 TREE_OBJ.remove(this);
               });
+						}
+					},
+					add_image : {
+			    	label	: "Add image",
+			      icon	: "create",
+			      visible	: function (NODE, TREE_OBJ) {
+			      	var ok = true;
+			        $.each(NODE, function () {
+			        	if(TREE_OBJ.check("deletable", this) == false) {
+			          	ok = false;
+			            return false;
+			          }
+			        });
+			        return ok;
+			      },
+			      action	: function (NODE, TREE_OBJ) {
+			      	alert('Je suis dans forgeos_core js/functions/trees L.105 edit me !')
+					    return false;
             }
           }
         }

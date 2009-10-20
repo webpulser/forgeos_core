@@ -88,5 +88,39 @@ module ApplicationHelper
     end
     return with_tag ? javascript_tag(script) : script
   end
+  
+  def find_categories_from_content_type(media)
+    content_type = media.content_type
+    case content_type
+    when 'image/png','image/jpeg','image/pjpeg', 'image/gif'
+      categories = PictureCategory.find_all_by_parent_id(nil)
+    when 'application/pdf'
+      categories = PdfCategory.find_all_by_parent_id(nil)
+    when 'video/x-msvideo', 'video/quicktime'
+      categories = VideoCategory.find_all_by_parent_id(nil)
+    when 'application/msword', 'application/vnd.oasis.opendocument.text'
+      categories = DocCategory.find_all_by_parent_id(nil)
+    else
+      categories = MediaCategory.find_all_by_parent_id(nil)
+    end
+    return categories
+  end
 
+  def find_media_type_from_content_type(media)
+    content_type = media.content_type
+    case content_type
+    when 'image/png','image/jpeg','image/pjpeg', 'image/gif'
+      type = 'picure'
+    when 'application/pdf'
+      type = 'pdf'
+    when 'video/x-msvideo', 'video/quicktime'
+      type = 'video'
+    when 'application/msword', 'application/vnd.oasis.opendocument.text'
+      type = 'doc'
+    else
+      type = 'media'
+    end
+    return type
+  end
+  
 end
