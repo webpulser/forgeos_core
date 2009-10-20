@@ -9,12 +9,12 @@ class Attachment < ActiveRecord::Base
   end
 
   def file_type
-    self.content_type.split('/')[1]
+    self.content_type.split('/').last
   end
   
   def fill_blank_name_with_filename
     if self.name.nil? || self.name == ""
-        self.name = self.filename
+      self.name = self.filename.split('.').first
     end
   end
   

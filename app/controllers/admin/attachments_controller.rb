@@ -28,12 +28,16 @@ class Admin::AttachmentsController < Admin::BaseController
   end
   
   def update
+    file_type = nil
     %w(media picture pdf video doc).each do |key|
-      params[:attachment] = params[key] if params[key]
+      if params[key]
+        params[:attachment] = params[key] 
+        file_type = key
+      end
     end
     if @media.update_attributes(params[:attachment])
       flash[:notice] = I18n.t('media.update.success').capitalize
-      return redirect_to(admin_library_path)
+      return redirect_to(admin_attachments_path(:file_type => file_type ))
     else
       flash[:error] = I18n.t('product.update.failed').capitalize
       render :action => 'edit'
@@ -147,7 +151,7 @@ class Admin::AttachmentsController < Admin::BaseController
     # category
     if params[:category_id]
       conditions[:categories_elements] = { :category_id => params[:category_id] }
-      includes = :attachment_categories
+      includes << :attachment_categories
     end
 
     options[:conditions] = conditions unless conditions.empty?
