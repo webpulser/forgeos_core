@@ -128,7 +128,7 @@ function DataTablesRowCallBack(nRow, aData, iDisplayIndex){
   }
 
   if ($(oTables[current_table_index]).hasClass('selectable_rows')){
-    $(nRow).children('td:first').append('<input id="select_'+$(nRow).attr('id')+'" type="checkbox" name="none"/>');
+    $(nRow).children('td:first').prepend('<input id="select_'+$(nRow).attr('id')+'" type="checkbox" name="none"/>');
     $(nRow).click(function() {
       $(this).toggleClass('row_selected');
       var checkbox = $(this).find('input[type=checkbox]');
