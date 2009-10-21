@@ -51,19 +51,12 @@ class Admin::AttachmentsController < Admin::BaseController
         if params[:Filedata]
           require 'mime/types'
           @content_type = MIME::Types.type_for(params[:Filename]).first.to_s
-          case @content_type
-          when 'image/png','image/jpeg','image/pjpeg', 'image/gif'
-            @media = Picture.new(params[:attachment])
-          when 'application/pdf'
-            @media = Pdf.new(params[:attachment])
-          when 'video/x-msvideo', 'video/quicktime'
-            @media = Video.new(params[:attachment])
-          when 'application/msword', 'application/vnd.oasis.opendocument.text'
-            @media = Doc.new(params[:attachment])
-          else
-            @media = Media.new(params[:attachment])
+          media_class = Media
+          [Video,Pdf,Doc,Picture].each do |klass|
+            media_class = klass if klass.attachment_options[:content_type].include?(@content_type)
           end
-
+          
+          @media = media_class.new(params[:attachment])
           @media.uploaded_data = { 'tempfile' => params[:Filedata], 'content_type' => @content_type, 'filename' => params[:Filename]}
           
           if @media.save
@@ -89,6 +82,7 @@ class Admin::AttachmentsController < Admin::BaseController
             end
             render :json => { :result => 'success', :id => @media.id, :path => @media.public_filename(''), :size => @media.size, :type => @media.type.to_s.upcase }
           else
+            logger.debug("\033[01;33m#{@media.errors.inspect}\033[00m")
             render :json => { :result => 'error', :error => @media.errors.first }
           end
         else

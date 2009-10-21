@@ -16,61 +16,7 @@
           = I18n.t('permalink', :count => 1).capitalize
           \:
           = link_to permalink, permalink
-
-        - if largest_thumb = @thumbnails.shift
-          .large-image.media-image-container.grid_7.omega
-            = image_tag largest_thumb.public_filename
-            %br
-            %span.media-size
-              = I18n.t("media.thumbnails.#{largest_thumb.thumbnail}").upcase
-            %br
-            %span.media-size-pixels
-              = "#{largest_thumb.width} x #{largest_thumb.height} #{I18n.t('media.pixel', :count => 2)}"
-
-        .large-info-container.grid_5.alpha.omega
-          - if @media.kind_of?(Picture)
-            .large-info-block
-              %span.large-info-name.truncate
-                = I18n.t('media.filename').capitalize
-              %span.large-info-value
-                = @media.filename
-              .clear
-            .large-info-block
-              %span.large-info-name
-                = I18n.t('media.picture.original_size').capitalize
-              %span.large-info-value
-                = "#{@media.width} x #{@media.height} #{I18n.t('media.pixel', :count => 2)}"
-              .clear
-          .large-info-block
-            %span.large-info-name
-              = I18n.t('media.file_type').capitalize
-            %span.large-info-value
-              = @media.file_type.upcase
-            .clear
-          .large-info-block
-            %span.large-info-name
-              = I18n.t('media.updated_at').capitalize
-            %span.large-info-value
-              = @media.updated_at.to_s(:short)
-            .clear
-          .large-info-block
-            %span.large-info-name
-              = I18n.t('media.size').capitalize
-            %span.large-info-value
-              = "#{@media.size/1024} #{I18n.t('media.byte.kilo')}"
-            .clear
-        .clear
-
-        - @thumbnails.each do |thumb|
-          .grid_4.alpha.omega.media-image-container
-            = image_tag thumb.public_filename
-            %br
-            %span.media-size
-              = I18n.t("media.thumbnails.#{thumb.thumbnail}").upcase
-            %br
-            %span.media-size-pixels
-              = "#{thumb.width} x #{thumb.height} #{I18n.t('media.pixel', :count => 2)}"
-
+      = render :partial => @media.class.to_s.underscore, :object => @media
     #right-sidebar.grid_4.omega
       .step
         = link_to I18n.t('media.destroy.action').capitalize, [:admin, @media], :confirm => I18n.t('media.destroy.confirm').capitalize, :method => :delete, :class => 'small-icons delete'
