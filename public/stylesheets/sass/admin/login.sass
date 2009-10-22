@@ -1,0 +1,119 @@
+@charset "UTF-8"
+@import common.sass
+
+body
+  background-image: url(/images/admin/backgrounds/background.png)
+  font-family: Arial, Helvetica, sans-serif
+  margin: 0px
+  padding: 0px
+
+
+.small-icons
+  background-image: url(/images/admin/small-icons-16-16-verti.png)
+  background-repeat: no-repeat
+  padding-left: 20px
+
+
+.big-icons
+  background-image: url(/images/admin/big-icons-24-24-verti.png)
+  background-repeat: no-repeat
+  padding-left: 28px
+
+
+.borders
+  background-image: url(/images/admin/borders-verti.png)
+  background-repeat: no-repeat
+
+
+.backgrounds
+  background-image: url(/images/admin/backgrounds-verti.png) !important
+  background-repeat: repeat-x
+
+
+#login-container
+  background-color: #FFF
+  +borderCorner()
+  height: 275px
+  padding-top: 30px
+
+
+#spacer
+  height: 100px
+
+
+#login-container form
+  margin-top: 20px
+  padding: 0 25px
+  color: #808080
+  font-size: 0.8em
+
+  label
+    font-weight: bold
+
+  a
+    color: #808080
+    text-decoration: underline
+
+  .text
+    margin: 5px 15px 10px 0
+    width: 200px
+    +borderCorner()
+    border: 1px solid #B2B2B2
+    height: 16px
+    padding: 2px 0
+
+
+.sign-in-message, .sign-out-message
+  color: #FFF
+  padding: 14px 0px 8px 40px
+  font-size: 1.1em
+  font-weight: bold
+
+
+.sign-in-message
+  background-color: #f7bd2e
+
+
+.sign-out-message
+  background-color: #8fcc65
+
+
+.submit-button
+  background-position: 0px -359px
+  +borderCorner()
+  color: #FFF
+  border: 0
+  height: 30px
+  padding: 0 5px
+  font-weight: bold
+  margin-top: 15px
+  font-size: 1.1em
+  cursor: pointer
+
+
+.logout
+  height: 211px !important
+
+
+.buttons
+  text-align: center
+  padding-top: 35px
+
+
+.button
+  +borderCorner()
+  background-color: #EAEBEC
+  background-position: 0 -10px
+  border: 1px solid #BFBFBF
+  display: block
+  font-size: 0.8em
+  padding: 8px 5px 5px
+  color: #5f5f5f
+  text-decoration: none
+  margin-top: 15px
+  font-weight: bold
+
+
+.see
+  background-position: 0 -1008px
+  padding-left: 25px
