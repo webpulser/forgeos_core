@@ -43,6 +43,7 @@ fr:
   save_changes: enregistrer
   _yes: 'oui'
   _no: 'non'
+  ok: ok
   by: par
   name: nom
   email: email
