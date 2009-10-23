@@ -26,7 +26,7 @@ jQuery.fn.dataTableExt.oSort['currency-desc'] = function(a,b) {
 
 jQuery.fn.dataTableExt.oApi.fnGetSelectedNodes= function(){
   var aReturn = new Array();
-  var aTrs = oTables[current_table_index].fnGetNodes();
+  var aTrs = $(this).dataTableInstance().fnGetNodes();
 
   for ( var i=0 ; i<aTrs.length ; i++ )
   {
@@ -40,7 +40,7 @@ jQuery.fn.dataTableExt.oApi.fnGetSelectedNodes= function(){
 
 jQuery.fn.dataTableExt.oApi.fnGetSelectedIndexes= function(){
   var aReturn = new Array();
-  var aTrs = oTables[current_table_index].fnGetNodes();
+  var aTrs = $(this).dataTableInstance().fnGetNodes();
 
   for ( var i=0 ; i<aTrs.length ; i++ )
   {
@@ -54,7 +54,7 @@ jQuery.fn.dataTableExt.oApi.fnGetSelectedIndexes= function(){
 
 jQuery.fn.dataSlideExt.oApi.fnGetSelectedNodes= function(){
   var aReturn = new Array();
-  var aTrs = oTables[current_table_index].fnGetNodes();
+  var aTrs = $(this).dataTableInstance().fnGetNodes();
 
   for ( var i=0 ; i<aTrs.length ; i++ )
   {
@@ -68,7 +68,7 @@ jQuery.fn.dataSlideExt.oApi.fnGetSelectedNodes= function(){
 
 jQuery.fn.dataSlideExt.oApi.fnGetSelectedIndexes= function(){
   var aReturn = new Array();
-  var aTrs = oTables[current_table_index].fnGetNodes();
+  var aTrs = $(this).dataTableInstance().fnGetNodes();
 
   for ( var i=0 ; i<aTrs.length ; i++ )
   {
@@ -79,6 +79,18 @@ jQuery.fn.dataSlideExt.oApi.fnGetSelectedIndexes= function(){
   }
   return aReturn;
 }
+
+jQuery.fn.extend({
+  dataTableInstance : function(){
+    var element = this;
+    $(oTables).each(function(){
+      if ($(this).attr('id') == $(element).attr('id')) {
+        oTable = this;
+      }
+    });
+    return oTable;
+  }
+});
 
 jQuery.expr[':'].regex = function(elem, index, match) {
    var matchParams = match[3].split(','),

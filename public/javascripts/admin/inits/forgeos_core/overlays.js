@@ -15,10 +15,21 @@ jQuery(document).ready(function(){
     width: 800,
     resizable:'se',
     buttons: {
-     Ok: function(){
-       add_picture_to_element();
-       $('#imageSelectDialog').dialog('close');
-     }
+      Ok: function(){
+        var current_table = $('#image-table:visible,#thumbnail-table:visible').dataTableInstance();
+        indexes = current_table.fnGetSelectedIndexes();
+        console.info(current_table);
+        console.log(indexes);
+        for(var i=0; i<indexes.length; i++){
+          path = current_table.fnGetData(indexes[i]).slice(-3,-2);
+          id = current_table.fnGetData(indexes[i]).slice(-2,-1);
+          name = current_table.fnGetData(indexes[i]).slice(-1);
+          add_picture_to_product(path,id,name);
+        }
+        check_product_first_image();
+        $(current_table.fnGetSelectedNodes()).toggleClass('row_selected');
+        $('#imageSelectDialog').dialog('close');
+      }
     }
   });
 
@@ -61,7 +72,7 @@ jQuery(document).ready(function(){
     resizable:'se',
     buttons: {
      Ok: function(){
-       var current_table = oTables[current_table_index];
+       var current_table = $('#table-files').dataTableInstance();
        indexes = current_table.fnGetSelectedIndexes();
        for(var i=0; i<indexes.length; i++){
          size = current_table.fnGetData(indexes[i]).slice(-6,-5);
