@@ -1,18 +1,18 @@
 .backgrounds.big-header
+  =h @user.firstname
+  =h @user.lastname
   .interact-links
     = link_to I18n.t('account.update.action').capitalize, edit_admin_account_path, :class => 'backgrounds interact-button'
 #content.grid_16.alpha.omega
   .grid_12.alpha
     .inner-content
-      = I18n.t('avatar').capitalize
-      %div
-        = image_tag(@user.avatar.public_filename(:thumb)) if @user.avatar && !@user.avatar.filename.nil?
+      - if @user.avatar && !@user.avatar.filename.nil?
+        = I18n.t('avatar').capitalize
+        \:
+        %div
+          = image_tag(@user.avatar.public_filename(:thumb))
+
       = I18n.t('email').capitalize
+      \:
       %div
-        = h @user.email
-      = I18n.t('firstname').capitalize
-      %div
-        = h @user.firstname
-      = I18n.t('lastname').capitalize
-      %div
-        = h @user.lastname
+        =h @user.email

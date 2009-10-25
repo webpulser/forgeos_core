@@ -19,9 +19,7 @@ class Admin::UsersController < Admin::BaseController
   end
 
   def create
-    if @user.avatar.nil? && params[:avatar] && params[:avatar][:uploaded_data] && params[:avatar][:uploaded_data].blank?
-      @user.build_avatar(params[:avatar])
-    end
+    @user.build_avatar(params[:avatar]) unless @user.avatar
     if @user.save
       flash[:notice] = I18n.t('user.create.success').capitalize
       redirect_to(admin_users_path)
@@ -35,7 +33,6 @@ class Admin::UsersController < Admin::BaseController
   end
 
   def update
-    upload_avatar 
     if @user.update_attributes(params[:user])
       flash[:notice] = I18n.t('user.update.success').capitalize
       redirect_to(admin_users_path)
@@ -170,14 +167,6 @@ private
       csv = FasterCSV.new(output, :row_sep => "\r\n")
       yield csv
     }
-  end
-
-  def upload_avatar
-    if @user && params[:avatar] && params[:avatar][:uploaded_data] && !params[:avatar][:uploaded_data].blank?
-      @avatar = @user.create_avatar(params[:avatar])
-      flash[:error] = @avatar.errors unless @avatar.save
-      params[:user].update(:avatar_id => @avatar.id)
-    end
   end
 
   def sort

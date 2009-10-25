@@ -9,8 +9,9 @@ class ApplicationController < ActionController::Base
 private
 
   def set_locale
-    session[:locale] = params[:locale] || session[:locale] || I18n.default_locale
-    I18n.locale = session[:locale] if I18n.available_locales.include?(session[:locale].to_sym)
+    session[:locale] = current_user.lang if current_user
+    locale = params[:locale] || session[:locale] || I18n.default_locale
+    I18n.locale = locale if I18n.available_locales.include?(locale.to_sym)
   end
 
   def redirect_to_home

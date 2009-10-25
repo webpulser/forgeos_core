@@ -13,3 +13,6 @@ en:
 
       am: am
       pm: pm
+  time_zone:
+    one: time zone
+    other: time zones

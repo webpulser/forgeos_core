@@ -6,7 +6,9 @@ class CreatePeople < ActiveRecord::Migration
         :lastname,
         :type,
         :phone,
-        :other_phone
+        :other_phone,
+        :lang,
+        :time_zone
       t.string :crypted_password,
         :salt,
         :remember_token,

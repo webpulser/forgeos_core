@@ -1,0 +1,9 @@
+en:
+  lang:
+    one: language
+    other: languages
+    full:
+      en: English
+      fr: French
+      de: Deutch
+      es: Spanish

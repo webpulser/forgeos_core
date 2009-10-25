@@ -16,7 +16,9 @@ class Person < ActiveRecord::Base
   before_create :make_activation_code 
   # prevents a user from submitting a crafted form that bypasses activation
   # anything else you want your user to change should be added here.
-  attr_accessible :lastname, :firstname, :email, :password, :password_confirmation, :civility, :country_id, :birthday, :phone, :other_phone, :email_confirmation, :avatar_attributes
+  attr_accessible :lastname, :firstname, :email, :password, :password_confirmation,
+    :civility, :country_id, :birthday, :phone, :other_phone, :email_confirmation,
+    :avatar_attributes, :lang, :time_zone
 
   define_index do
     indexes firstname, :sortable => true

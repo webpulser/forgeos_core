@@ -25,10 +25,8 @@ class Admin::AccountController < Admin::BaseController
   # PUT /account/1.xml
   def update
     @user = self.current_user
-    upload_avatar 
-    
     respond_to do |format|
-      if @user.update_attributes(params[:user])
+      if @user.update_attributes(params[:account])
         flash[:notice] = I18n.t('my_account.update.success').capitalize
         format.html { redirect_to(admin_account_path(@user)) }
         format.xml  { head :ok }
@@ -49,16 +47,6 @@ class Admin::AccountController < Admin::BaseController
     respond_to do |format|
       format.html { redirect_to(new_admin_session_path) }
       format.xml  { head :ok }
-    end
-  end
-
-private
-
-  def upload_avatar
-    if @user && params[:avatar] && params[:avatar][:uploaded_data] && !params[:avatar][:uploaded_data].blank?
-      @avatar = @user.create_avatar(params[:avatar])
-      flash[:error] = @avatar.errors unless @avatar.save
-      params[:user].update(:avatar_id => @avatar.id)
     end
   end
 end

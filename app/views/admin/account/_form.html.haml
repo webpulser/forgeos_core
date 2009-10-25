@@ -1,4 +1,4 @@
-- form_for [:admin, admin], :html => { :multipart=>true } do |f|
+- form_for :account, admin, :url => admin_account_path(admin), :html => { :method => :put, :multipart=>true } do |f|
   .backgrounds.big-header
     = f.text_field :firstname
     = f.text_field :lastname
@@ -25,3 +25,10 @@
         = f.label :password_confirmation, I18n.t('password_confirmation')
         %div
           = f.password_field :password_confirmation
+        = f.label :lang, I18n.t(:lang, :count => 1)
+        %div
+          = f.select :lang, I18n.available_locales.collect{ |locale| [I18n.t(locale, :scope => [:lang, :full]),locale.to_s]}, :prompt => I18n.t(:please_select)
+        .clear
+        = f.label :time_zone, I18n.t(:time_zone, :count => 1)
+        %div
+          = f.time_zone_select :time_zone, ActiveSupport::TimeZone.all

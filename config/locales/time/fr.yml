@@ -9,3 +9,6 @@ fr:
       only_second: "%S"
     am: 'am'
     pm: 'pm'
+  time_zone:
+    one: fuseau horaire
+    other: fuseaux horaires
