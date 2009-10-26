@@ -38,6 +38,16 @@ jQuery.fn.dataTableExt.oApi.fnGetSelectedNodes= function(){
   return aReturn;
 }
 
+jQuery.fn.dataTableExt.oApi.fnUnSelectNodes= function(){
+  var aTrs = $(this).dataTableInstance().fnGetSelectedNodes();
+
+  for ( var i=0 ; i<aTrs.length ; i++ )
+  {
+    $(aTrs[i]).removeClass('row_selected');
+    $(aTrs[i]).find("input[type='checkbox']").attr('checked',0);
+  }
+}
+
 jQuery.fn.dataTableExt.oApi.fnGetSelectedIndexes= function(){
   var aReturn = new Array();
   var aTrs = $(this).dataTableInstance().fnGetNodes();
@@ -115,7 +125,7 @@ function DataTablesDrawCallBack() {
   InitCustomSelects();
   showObjectsAssociated();
   display_notifications();
-	hide_paginate();
+  hide_paginate();
 }
 
 // set id to each row and set it draggable
@@ -131,21 +141,21 @@ function DataTablesRowCallBack(nRow, aData, iDisplayIndex){
     $(nRow).draggable({
       revert: 'invalid',
       cursor: 'move',
-			handle: '.handler', 
+      handle: '.handler', 
       cursorAt: {top: 15, left: 75},
       helper: function(e){
         var element = $($(e.currentTarget).find('td a')[0]);
         var title = element.text();
         return '<div class="ui-helper ui-corner-all"><span class="handler"><span class="inner">&nbsp;</span></span>'+title+'</div>'
         },
-			start: function(event, ui) {
-				$('#page').addClass('sidebar_dragg');
-				$(this).addClass('dragging');
-			},
-			stop: function(event, ui) {
-				$('#page').removeClass('sidebar_dragg');
-				$(this).removeClass('dragging');
-			}
+      start: function(event, ui) {
+        $('#page').addClass('sidebar_dragg');
+        $(this).addClass('dragging');
+      },
+      stop: function(event, ui) {
+        $('#page').removeClass('sidebar_dragg');
+        $(this).removeClass('dragging');
+      }
     });
   }
 
@@ -169,9 +179,9 @@ function update_current_dataTable_source(source){
 }
 
 function hide_paginate(){
-	var paginate_childrens = oTables[current_table_index].fnSettings().nPaginateList.children;
-	 
-	if(paginate_childrens.length>1){
-		$('.dataTables_paginate.paging_full_numbers').show()
-	}	
+  var paginate_childrens = oTables[current_table_index].fnSettings().nPaginateList.children;
+   
+  if(paginate_childrens.length>1){
+    $('.dataTables_paginate.paging_full_numbers').show()
+  } 
 }

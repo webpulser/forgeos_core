@@ -18,8 +18,6 @@ jQuery(document).ready(function(){
       Ok: function(){
         var current_table = $('#image-table:visible,#thumbnail-table:visible').dataTableInstance();
         indexes = current_table.fnGetSelectedIndexes();
-        console.info(current_table);
-        console.log(indexes);
         for(var i=0; i<indexes.length; i++){
           path = current_table.fnGetData(indexes[i]).slice(-3,-2);
           id = current_table.fnGetData(indexes[i]).slice(-2,-1);
@@ -27,7 +25,7 @@ jQuery(document).ready(function(){
           add_picture_to_product(path,id,name);
         }
         check_product_first_image();
-        $(current_table.fnGetSelectedNodes()).toggleClass('row_selected');
+        current_table.fnUnSelectNodes();
         $('#imageSelectDialog').dialog('close');
       }
     }
