@@ -115,6 +115,7 @@ function DataTablesDrawCallBack() {
   InitCustomSelects();
   showObjectsAssociated();
   display_notifications();
+	hide_paginate();
 }
 
 // set id to each row and set it draggable
@@ -156,4 +157,12 @@ function DataTablesRowCallBack(nRow, aData, iDisplayIndex){
 function update_current_dataTable_source(source){
   oTables[current_table_index].fnSettings().sAjaxSource = source;
   oTables[current_table_index].fnDraw();
+}
+
+function hide_paginate(){
+	var paginate_childrens = oTables[current_table_index].fnSettings().nPaginateList.children;
+	 
+	if(paginate_childrens.length>1){
+		$('.dataTables_paginate.paging_full_numbers').show()
+	}	
 }
