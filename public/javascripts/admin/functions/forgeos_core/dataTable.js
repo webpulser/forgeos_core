@@ -131,12 +131,21 @@ function DataTablesRowCallBack(nRow, aData, iDisplayIndex){
     $(nRow).draggable({
       revert: 'invalid',
       cursor: 'move',
-      cursorAt: {top: 20, left: 20},
+			handle: '.handler', 
+      cursorAt: {top: 15, left: 75},
       helper: function(e){
         var element = $($(e.currentTarget).find('td a')[0]);
         var title = element.text();
         return '<div class="ui-helper ui-corner-all"><span class="handler"><span class="inner">&nbsp;</span></span>'+title+'</div>'
-        }
+        },
+			start: function(event, ui) {
+				$('#page').addClass('sidebar_dragg');
+				$(this).addClass('dragging');
+			},
+			stop: function(event, ui) {
+				$('#page').removeClass('sidebar_dragg');
+				$(this).removeClass('dragging');
+			}
     });
   }
 

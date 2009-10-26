@@ -76,13 +76,12 @@ class Admin::CategoriesController < Admin::BaseController
   end
 
 private
-
   def get_category
     unless @category = Category.find_by_id(params[:id])
       flash[:error] = I18n.t('category.found.failed').capitalize
     end
   end
-
+  
   def new_category
     @category = Category.new(params[:category])
   end

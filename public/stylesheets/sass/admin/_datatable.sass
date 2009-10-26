@@ -2,21 +2,20 @@
   font-weight: bold
   font-size: 110%
   :color = !blueLink
-  :background-color = !lightBlueBg
+  :background-color = !selectedRow
   padding: .5em 1em
-  :border = 1px solid !blueLink
+  :border = 1px solid !selectedRow - #3DOF38
   overflow: hidden
   white-space: nowrap
-  text-overflow: ellipsis
-  -o-text-overflow: ellipsis
-  -ms-text-overflow: ellipsis
-  -moz-binding: url('/ellipsis.xml#ellipsis')
-  width: 100px
-  filter: alpha(opacity=80)
-  opacity: 0.8
+  overflow: hidden
+  width: 150px
+  filter: alpha(opacity=70)
+  opacity: 0.7
 .ui-droppable.ui-state-hover
-  :background-color = !lightGreenBg !important
+  :background-color =  #FF3E00 !important
   background-repeat: no-repeat
+  border: 0
+  color: white !important
 .datatable
   td
     vertical-align: top
@@ -89,7 +88,7 @@
   :background-color = !blueLink
   :color = !white
 .actions-td
-  width: 100px !important
+  width: 130px !important
 td.enhanced
   padding: 5px 0
 tr
@@ -120,7 +119,7 @@ tr
     p
       display: block !important
 .one-product
-  padding-left: 18px
+  padding-left: 25px
 .some-variants
   .image
     background: url(/images/admin/small-icons/dark-blue-plus.png) no-repeat -1px
@@ -198,5 +197,29 @@ a.truncate
   color: #777777
 .dataTables_paginate.paging_full_numbers
   display: none
-  
+.datatable.draggable_rows
+  tr
+    &.dragging
+      background:
+        :color = !selectedRow !important
+      td:first-child
+        background:
+          :color = !selectedRow - #3D0F38 !important
+    .handler_container
+      position: relative
+      min-height: 25px
+      height: auto !important
+      height: 16px
+      padding-left: 25px
+      .small-icons
+        height: 16px
+      .handler
+        background:
+          image: url("/images/admin/backgrounds/drag-and-drop.png")
+        width: 6px
+        height: 100%
+        position: absolute !important
+        top: 0
+        left: 0
+      
   
