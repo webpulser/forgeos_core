@@ -154,6 +154,4 @@ jQuery(document).ready(function(){
     $('#fileSelectDialog #inner-lightbox a').removeClass('selected');
     $(this).addClass('selected');
   });
-
-  if (typeof(oTables) == 'undefined' || oTables.length == 0) { display_notifications(); }
 });

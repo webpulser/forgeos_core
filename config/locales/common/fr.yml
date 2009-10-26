@@ -52,7 +52,7 @@ fr:
   lastname: nom
   password: mot de passe
   password_confirmation: vérification du mot de passe
-  remember_me: rester connecté
+  remember_me: se souvenir de moi
   get_forgotten_password: mot de passe oublié
   go_back_admin: "retour vers l'administration"
   see_site: voir le site

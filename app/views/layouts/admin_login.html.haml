@@ -8,3 +8,4 @@
     %title= I18n.t(:login, :scope => ['back-office', 'title'])
   %body
     = yield
+    = javascript_include_tag %w(jquery admin/functions/forgeos_core/notifications admin/inits/forgeos_core/notifications admin/inits/forgeos_core/clicks)
