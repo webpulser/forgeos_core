@@ -19,13 +19,13 @@ class Admin::UsersController < Admin::BaseController
   end
 
   def create
-    @user.build_avatar(params[:avatar]) unless @user.avatar
     if @user.save
       flash[:notice] = I18n.t('user.create.success').capitalize
       redirect_to(admin_users_path)
     else
       flash[:error] = I18n.t('user.create.failed').capitalize
-      render :new
+      logger.debug(@user.errors.inspect)
+      render :action => 'new'
     end
   end
 

@@ -8,10 +8,20 @@
   font-size: 1.3em
   font-weight: bold
   height: 31px
-  width: 335px
+  min-width: 8em
+  max-width: 12.5em
+  width: auto
   :padding-top 5px
   +left()
-
+.big-header
+  .dropdown
+    width: auto
+    margin: 0 10px 0 0
+    ul li a span
+      line-height: 1em
+      float: none
+.fieldset.noborder
+  border-width: 0px
 #customer-see
   width: 720px
   .datatable td

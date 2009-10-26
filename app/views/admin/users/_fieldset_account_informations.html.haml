@@ -1,39 +1,17 @@
-.fieldset
-  %a.small-icons.panel{ :href => '#' }
-    = I18n.t('user.contact_infos').capitalize
-  .option-panel-content
-    .street-input
-      %label= I18n.t(:email).capitalize
-      = f.text_field :email
-    .street-input
-      %label
-        = I18n.t(:password).capitalize
-      = f.password_field :password
-    .street-input
-      %label
-        = I18n.t(:password_confirmation).capitalize
-      = f.password_field :password_confirmation
-    .clear
-    .civility-select
-      %label
-        = I18n.t(:civility, :count => 1).capitalize
-      = f.select :civility, I18n.t('civility.select'), :prompt => I18n.t('please_select').capitalize
-
-    .clear
-    .street-input
-      %label
-        = I18n.t(:birthday).capitalize
-      = f.text_field :birthday, :class => 'date-picker'
-    .street-input
-      %label= I18n.t(:telephone).capitalize
-      = f.text_field :phone
-    .street-input
-      %label= I18n.t(:other_telephone).capitalize
-      = f.text_field :other_phone
-
-    .country-select
-      %label
-        = I18n.t(:country).capitalize
-      %div
-        = f.collection_select 'country_id', Country.find(:all, :order => "name"), :id, :printable_name, :selected => user.country_id, :prompt => I18n.t('please_select').capitalize
-    .clear
+.fieldset.noborder
+  .street-input
+    %label= I18n.t(:email).capitalize
+    = f.text_field :email
+  .street-input
+    %label
+      = I18n.t(:password).capitalize
+    = f.text_field :password
+    = f.hidden_field :password_confirmation
+  .clear
+  .street-input
+    %label= I18n.t(:telephone).capitalize
+    = f.text_field :phone
+  .street-input
+    %label= I18n.t(:other_telephone).capitalize
+    = f.text_field :other_phone
+  = f.hidden_field :country_id
