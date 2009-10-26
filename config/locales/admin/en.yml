@@ -69,6 +69,10 @@ en:
         confirm: are you sure to delete this user?
       contact:
         action: send a message to the user
+      reset_password:
+        success: a email has been sent with your new password
+        failed: a problem occured during the password reset 
+        action: reset password
     role:
       one: role
       other: roles

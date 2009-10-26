@@ -16,7 +16,7 @@
       %br
       = password_field_tag 'password', nil, :class => 'text'
       -#%a{ :href => "#" }
-      -#= I18n.t('get_forgotten_password').capitalize
+      = link_to I18n.t('get_forgotten_password').capitalize, :action => 'reset_password'
       %br
       = check_box_tag 'remember_me'
       = I18n.t('remember_me').capitalize
