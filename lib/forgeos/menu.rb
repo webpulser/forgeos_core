@@ -3,7 +3,7 @@ require 'action_view/helpers/assert_tag_helper'
 module Forgeos
   # Set administration's menu
   AdminMenu = [
-    { :title => 'dashboard',
+    { :title => 'back-office.title.dashboard',
       :url => { :controller => 'admin/dashboard' },
       :i18n => true,
       :html => { :class => 'left'}
