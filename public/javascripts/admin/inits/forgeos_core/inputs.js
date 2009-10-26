@@ -62,4 +62,22 @@ jQuery(document).ready(function(){
     }
     return false;
   });
+
+  $('#tag').keyup(function(){ 
+    var value = $(this).val();
+
+    $.ajax({
+      beforeSend:function(request){$('#tag').addClass('loading');},
+      data: { tag: value, authenticity_token: AUTH_TOKEN },
+      dataType:'text',
+      success:function(request){
+        var target = $('#tag');
+        target.val(request);
+        target.removeClass('loading');
+      },
+      type:'post',
+      url: '/admin/tags/tag'
+    });
+    
+  });
 });
