@@ -40,6 +40,7 @@ module Admin::BaseHelper
         'sDom': \"<'top'if>t<'bottom'p<'clear'>\",
         'aoColumns': [ #{columns.join(',')} ],
         'sProcessing': true,
+        'aaSorting': [[1,'asc']],
         'bStateSave': false,
         #{data_source}
         'oLanguage': {
