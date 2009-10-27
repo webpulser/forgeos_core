@@ -28,6 +28,7 @@ en:
       library: library
       attachments: library
       users: customers
+      menus: navigation
       account: your account
       logout: logout
       login: login

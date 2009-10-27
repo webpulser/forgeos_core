@@ -28,6 +28,7 @@ fr:
       library: librairie
       attachments: librairie
       users: clients
+      menus: navigation
       account: votre compte
       logout: déconnexion
       login: connexion

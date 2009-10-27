@@ -3,6 +3,8 @@
   padding: 0
   width: 22px
   height: 24px
+.create-menu
+  :background-position 0 -488px
 .create-page
   :background-position 0 -560px
 .create-block
@@ -137,19 +139,19 @@
 .create-list span:hover, .update-list span:hover, .create-list span:hover a, .update-list span:hover a
   :color = !blueLink
   :background-color = !lightBlueBg
-.products, .offers, .all-admins, .all-roles, .all-rights, .pages, .product-types
+.products, .offers, .all-admins, .all-roles, .all-rights, .all-menus, .pages, .product-types
   :color = !darkBrown
-.page-name, .widget-name, .product-name, .order-name, .media-name, .admin-name, .role-name, .right-name, .user-name
+.page-name, .widget-name, .menu-name, .product-name, .order-name, .media-name, .admin-name, .role-name, .right-name, .user-name
   :color = !lightGray
   padding-left: 0px
-.page-name a, .widget-name a, .product-name a, .order-name a, .media-name a, .admin-name a, .role-name a, .right-name a, .user-name a
+.page-name a, .widget-name a, .menu-name a, .product-name a, .order-name a, .media-name a, .admin-name a, .role-name a, .right-name a, .user-name a
   :color = !blueLink
   :font
     :size 1.3em !important
     :weight normal
   +block()
   +left()
-.page-name span, .widget-name span, .product-name span, .order-name span, .media-name span, .admin-name span, .role-name span, .right-name span, .user-name span
+.page-name span, .widget-name span, .menu-name span, .product-name span, .order-name span, .media-name span, .admin-name span, .role-name span, .right-name span, .user-name span
   :background-color = !blueLink
   :color = !white
   +left()
@@ -211,6 +213,8 @@ input.interact-button
   margin-right: 5px
 .folder
   background-position: 0 -272px
+.menu, .menu-ico, .all-menus
+  background-position: 0 -1152px
 .page
   background-position: 0 -1197px
   padding-top: 2px

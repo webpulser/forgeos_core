@@ -16,9 +16,10 @@ namespace :admin do |admin|
   admin.resources :roles, :member => { :activate => :post }
   admin.resources :rights
   admin.resources :users, :collection => { :filter => [:post, :get] }, :member => { :activate => :post }
+  admin.resources :menus, :member => { :activate => :post, :duplicate => :get }
 
   admin.resources :categories, :member => { :add_element => :post }
-  %w(picture media pdf doc video attachment admin role right user).each do |category|
+  %w(picture media pdf doc video attachment admin role right user menu).each do |category|
     admin.resources "#{category}_categories", :controller => 'categories', :requirements => { :type => "#{category}_category" }
   end
 
