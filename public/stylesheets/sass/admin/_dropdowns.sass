@@ -69,7 +69,7 @@ a.dropdown_toggle
     text-transform: uppercase
     a.dropdown_toggle
       span
-        :color = !white !important
+        :color = !white
       .options
         position: absolute
         left: 5px
@@ -96,18 +96,17 @@ a.dropdown_toggle
   background-image: url(/images/admin/selects/big-green-right.png)
   span
     background-image: url(/images/admin/selects/big-green-left.png)
-    :color= !white
 .to-validate a.dropdown_toggle
   background-image: url(/images/admin/selects/big-brown-right.png)
   span
     background-image: url(/images/admin/selects/big-brown-left.png)
 .canceled
   a.dropdown_toggle
-    background-image: url(/images/admin/selects/small-red-right.png)
+    background-image: url(/images/admin/selects/big-red-right.png)
   &.disabled a.dropdown_toggle
-    background-image: url(/images/admin/selects/small-red-right-on.png)
+    background-image: url(/images/admin/selects/big-red-right-on.png)
   a.dropdown_toggle span
-    background-image: url(/images/admin/selects/small-red-left.png)
+    background-image: url(/images/admin/selects/big-red-left.png)
     :color= !white
 .shipped
   a.dropdown_toggle
@@ -128,11 +127,13 @@ a.dropdown_toggle
 .unpaid
   a.dropdown_toggle
     background-image: url(/images/admin/selects/big-white-right.png)
+    :color = !black !important
   &.disabled a.dropdown_toggle
     background-image: url(/images/admin/selects/big-white-right-on.png)
+    :color = !black !important
   a.dropdown_toggle span
     background-image: url(/images/admin/selects/big-white-left.png)
-    :color = !black
+    :color = !black !important
 .paid
   a.dropdown_toggle
     background-image: url(/images/admin/selects/big-brown-right.png)

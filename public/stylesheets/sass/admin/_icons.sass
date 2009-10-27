@@ -43,15 +43,17 @@
 .action-button span.choices_list
   :position absolute
   :color = !black
-  :padding 0
+  :padding
+    right: 3px
+    bottom: 3px
   :top 32px
-  :background-color = !white
-  :border = 1px solid !contentHeaderBorder
-  :border-bottom 0
+  background-color: transparent
+  :border = 0
   :z-index 10
   :height auto
   :left 5px
   :display none
+  width: 200px
 .action-button span.choices_list
   :top 22px
   :left 0
@@ -116,11 +118,14 @@
   padding: 5px 10px 5px 24px
   top: 30px
   z-index: 10
-  :border-bottom = 1px solid !contentHeaderBorder
+  :border = 1px solid !contentHeaderBorder
+  background:
+    :color = !white
   text-align: left
   float: none
   height: auto !important
   cursor: pointer
+  font-size: .9em
   a
     :color = !black
     display: block

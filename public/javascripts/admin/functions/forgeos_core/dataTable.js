@@ -184,4 +184,7 @@ function hide_paginate(){
   if(paginate_childrens.length>1){
     $('.dataTables_paginate.paging_full_numbers').show()
   } 
+	else{
+		$('.dataTables_paginate.paging_full_numbers').hide()
+	}
 }
