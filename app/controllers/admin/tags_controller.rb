@@ -2,11 +2,15 @@ class Admin::TagsController < Admin::BaseController
 
   def tag
     tags = Tag.find(:all,:conditions => ['name like ? ',"#{params[:tag]}%"])
-    if tags.nil?
-      render :text => '' 
+    if tags.nil? || tags.blank? 
+      render :json => ""
     else
-      render :text =>  tags.first.name 
+      p tags.inspect
+      tab = []
+      tags.each do |tag|
+        tab << tag.name
+      end
+    render :json => tab
     end
   end
-
 end

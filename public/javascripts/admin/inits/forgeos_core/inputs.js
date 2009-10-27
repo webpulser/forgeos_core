@@ -63,21 +63,59 @@ jQuery(document).ready(function(){
     return false;
   });
 
-  $('#tag').keyup(function(){ 
-    var value = $(this).val();
+	$('#tag').parent().append('<div id="tag_autocomplete_container"><span class="shadow"></span><span id="tag_autocomplete"></span></div>');
+	$('#tag').attr("autocomplete","off")
 
-    $.ajax({
-      beforeSend:function(request){$('#tag').addClass('loading');},
-      data: { tag: value, authenticity_token: AUTH_TOKEN },
-      dataType:'text',
-      success:function(request){
-        var target = $('#tag');
-        target.val(request);
-        target.removeClass('loading');
-      },
-      type:'post',
-      url: '/admin/tags/tag'
-    });
-    
+  $('#tag').keyup(function(){ 
+		if($('#tag').val().length>2){
+			var value = $(this).val();
+			var target = $('#tag_autocomplete');
+			var out = "";
+	    $.ajax({
+	      beforeSend:function(request){$('#tag').addClass('loading');},
+	      data: { tag: value, authenticity_token: AUTH_TOKEN },
+	      dataType:'json',
+	      success:function(request){
+					if(request.length>0){
+		        for (var i=0; i<request.length; i++){
+							out += "<span>"+request[i]+"</span>";
+						}
+						$('#tag_autocomplete').html(out);
+						$('#tag_autocomplete_container').show();
+		        target.removeClass('loading');
+					}
+					else{
+						flush_tag_autocomplete();
+					}
+	      },
+				error:function(request){
+					flush_tag_autocomplete();
+				},
+	      type:'post',
+	      url: '/admin/tags/tag'
+	    });
+		}   
+		else{
+			flush_tag_autocomplete();
+		}
   });
+
+	$('#tag_autocomplete').find('span').live('click', function(){
+		$('#tag').val($(this).text());
+		flush_tag_autocomplete();
+		//TODO give the input focus back
+		//$('#tag').focus();
+		submit_tag($('#tag'));
+		$('#tag').blur();
+	})
+
+	function flush_tag_autocomplete(){
+		$('#tag_autocomplete').html('');	
+		$('#tag_autocomplete_container').hide();
+	}
+
 });
+
+
+
+

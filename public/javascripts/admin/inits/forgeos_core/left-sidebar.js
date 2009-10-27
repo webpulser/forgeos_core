@@ -20,9 +20,12 @@ jQuery(document).ready(function(){
     if(!$('.create-list').hasClass('displayed')){
       $('.update-list').removeClass('displayed');
       $('.create-list').addClass('displayed');
+			$('.update-list').find('.shadow').hide();
+			$(this).find('.shadow').show();
     }
     else{
       $('.create-list').removeClass('displayed');
+			$(this).find('.shadow').hide();
     }
   });
 
@@ -34,9 +37,12 @@ jQuery(document).ready(function(){
    if(!$('.update-list').hasClass('displayed')){
       $('.create-list').removeClass('displayed');
       $('.update-list').addClass('displayed');
+			$('.create-list').find('.shadow').hide();
+			$(this).find('.shadow').show();
     }
     else{
       $('.update-list').removeClass('displayed');
+			$(this).find('.shadow').hide();
     }
   });
 
