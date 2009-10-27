@@ -49,6 +49,7 @@ li
   +left()
   :font-size 1.3em
 .permalink
+  margin-top: 3em
   :border 1px solid #f9f9f9
   :color = !lightGray
   :font-size 0.6em
@@ -56,6 +57,9 @@ li
   :font-weight normal
   :display inline-block
   +borderCorner()
+  a
+    :color = !blueLink
+    text-decoration: underline
 .small-icons
   :background-image url(/images/admin/small-icons-16-16-verti.png)
   :background-repeat no-repeat
@@ -129,9 +133,6 @@ form#wrap
   cursor: default
   a
     cursor: default
-.permalink a
-  :color = !blueLink
-  text-decoration: underline
 .price
   font-weight: bold
   .tcurrency
