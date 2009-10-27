@@ -296,24 +296,5 @@ fr:
     misc:
       one: autre
       other: autres
-  statistic:
-    one: statistique
-    other: statistiques
-    trends: tendances
-    keyfacts: mots-clefs
-    average_order: commande moyenne
-    average_customer: utilisateur moyen
-    products_sold: produits vendus
-    revenue: recette
-    conversion_rate: taux de conversion
-    show:
-      all: voir les statistiques
-      for: voir pour
-    live:
-      one: statistique temps réel
-      other: statistiques temps réel
-    last:
-      month: les 30 derniers jours
-      week: les 7 derniers jours
   top_5_items: top 5 des produits recherchés
   please_select: veuillez choisir
