@@ -89,38 +89,19 @@ module ApplicationHelper
     return with_tag ? javascript_tag(script) : script
   end
   
-  def find_categories_from_content_type(media)
-    content_type = media.content_type
-    case content_type
-    when 'image/png','image/jpeg','image/pjpeg', 'image/gif'
-      categories = PictureCategory.find_all_by_parent_id(nil)
-    when 'application/pdf'
-      categories = PdfCategory.find_all_by_parent_id(nil)
-    when 'video/x-msvideo', 'video/quicktime'
-      categories = VideoCategory.find_all_by_parent_id(nil)
-    when 'application/msword', 'application/vnd.oasis.opendocument.text'
-      categories = DocCategory.find_all_by_parent_id(nil)
-    else
-      categories = MediaCategory.find_all_by_parent_id(nil)
+  def attachment_class_from_content_type(media)
+    media_class = Media
+    [Video,Pdf,Doc,Picture].each do |klass|
+      media_class = klass if klass.attachment_options[:content_type].include?(media.content_type)
     end
-    return categories
+    media_class
+  end
+
+  def find_categories_from_content_type(media)
+    "#{attachment_class_from_content_type(media)}Category".constantize.find_all_by_parent_id(nil)
   end
 
   def find_media_type_from_content_type(media)
-    content_type = media.content_type
-    case content_type
-    when 'image/png','image/jpeg','image/pjpeg', 'image/gif'
-      type = 'picure'
-    when 'application/pdf'
-      type = 'pdf'
-    when 'video/x-msvideo', 'video/quicktime'
-      type = 'video'
-    when 'application/msword', 'application/vnd.oasis.opendocument.text'
-      type = 'doc'
-    else
-      type = 'media'
-    end
-    return type
-  end
-  
+    attachment_class_from_content_type(media).to_s.underscore
+  end 
 end
