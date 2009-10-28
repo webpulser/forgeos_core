@@ -11,7 +11,7 @@
   #content.grid_16.alpha.omega
     #media-modify.grid_12.alpha
       .media-modify-wrap
-        - permalink = "#{request.protocol}#{request.host_with_port}/#{@media.public_filename}"
+        - permalink = "#{request.protocol}#{request.host_with_port}#{@media.public_filename}"
         %h2.permalink
           = I18n.t('permalink', :count => 1).capitalize
           \:

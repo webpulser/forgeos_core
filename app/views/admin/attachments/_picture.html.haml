@@ -16,10 +16,11 @@
       = object.filename
     .clear
   .large-info-block
+    - permalink = "#{request.protocol}#{request.host_with_port}#{object.public_filename}"
     %span.large-info-name
       = I18n.t('media.picture.original_size').capitalize
-    %span.large-info-value
-      = "#{object.width} x #{object.height} #{I18n.t('media.pixel', :count => 2)}"
+    - size = "#{object.width} x #{object.height} #{I18n.t('media.pixel', :count => 2)}"
+    = link_to size, permalink, :class => 'large-info-value'
     .clear
   .large-info-block
     %span.large-info-name
