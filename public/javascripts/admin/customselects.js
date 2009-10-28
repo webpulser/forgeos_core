@@ -1,4 +1,4 @@
-var z = 999;
+var z = 500;
 
 checkExternalClick = function(event)
 {
