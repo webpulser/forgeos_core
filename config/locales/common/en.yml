@@ -42,8 +42,8 @@ en:
     is_greater_than: is greater than
     is_less_than: is less than
   save_changes: save changes
-  _yes: yes
-  _no: no
+  _yes: 'yes'
+  _no: 'no'
   ok: ok
   by: by
   name: name

@@ -42,8 +42,8 @@ fr:
     is_greater_than: est supérieur à
     is_less_than: est inférieur à
   save_changes: enregistrer
-  _yes: 'oui'
-  _no: 'non'
+  _yes: oui
+  _no: non
   ok: ok
   by: par
   name: nom
