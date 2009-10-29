@@ -125,7 +125,7 @@
     :color = !white
   text-align: left
   float: none
-  height: auto !important
+  height: auto
   cursor: pointer
   font-size: .9em
   a
@@ -135,7 +135,8 @@
     :background-color = !lightBlueBg
     a
       :color = !blueLink
-
+.widget-item
+  background-color: #FFF
 .create-list span:hover, .update-list span:hover, .create-list span:hover a, .update-list span:hover a
   :color = !blueLink
   :background-color = !lightBlueBg
@@ -180,7 +181,7 @@
   :color = !white
   height: 32px
 input.interact-button
-  padding: 8px 5px
+  padding: 7px 5px 8px
   border: 0px
   cursor: pointer
   +borderCorner()
