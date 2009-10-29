@@ -58,6 +58,7 @@
             %span.large-info-value
               = "#{media.size/1024} #{I18n.t('media.byte.kilo')}"
             .clear
+          = f.file_field :uploaded_data
         .clear
 
         - thumbnails.each do |thumb|

@@ -35,11 +35,15 @@ class Admin::AttachmentsController < Admin::BaseController
         file_type = key
       end
     end
-    if @media.update_attributes(params[:attachment])
+    params[:attachment][:filename] = @media.filename
+    rack_file = params[:attachment][:uploaded_data]
+    if !(rack_file.respond_to?(:file_type) && !@media.class.attachment_options[:content_type].include?(rack_file.file_type)) &&
+      @media.update_attributes(params[:attachment])
       flash[:notice] = I18n.t('media.update.success').capitalize
       return redirect_to(admin_attachments_path(:file_type => file_type ))
     else
       flash[:error] = I18n.t('product.update.failed').capitalize
+      edit
       render :action => 'edit'
     end
   end
@@ -100,7 +104,7 @@ class Admin::AttachmentsController < Admin::BaseController
       flash[:notice] = I18n.t('media.destroy.failed').capitalize
     end
     return render :nothing => true if request.xhr?
-    return redirect_to(admin_attachments_path)
+    return redirect_to(admin_attachments_path(:file_type => @media.class.to_s.underscore))
   end
 
   private
@@ -109,7 +113,7 @@ class Admin::AttachmentsController < Admin::BaseController
     @media = Attachment.find_by_id params[:id]
     unless @media
       flash[:error] = I18n.t('media.not_exist').capitalize 
-      return redirect_to(admin_attachments_path)
+      return redirect_to(admin_library_path)
     end
   end
 
