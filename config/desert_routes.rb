@@ -11,6 +11,7 @@ namespace :admin do |admin|
   admin.statistics_graph '/statistics/graph', :controller => 'statistics', :action => 'graph'
  
   admin.resource :session
+  admin.resource :setting
   admin.resources :account
   admin.resources :admins
   admin.resources :roles, :member => { :activate => :post }

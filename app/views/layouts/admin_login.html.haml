@@ -5,7 +5,7 @@
     %meta{ :content => 'text/html; charset=utf-8', 'http-equiv' => 'Content-Type' }
     %link{ :href => '/images/admin/favicon.gif', :rel => 'shortcut icon', :type => 'image/gif' }
     = stylesheet_link_tag %w(960 admin/login)
-    %title= I18n.t(:login, :scope => ['back-office', 'title'])
+    %title= I18n.t(:login, :scope => ['back_office', 'menu'])
   %body
     = yield
     = javascript_include_tag %w(jquery admin/functions/forgeos_core/notifications admin/inits/forgeos_core/notifications admin/inits/forgeos_core/clicks)

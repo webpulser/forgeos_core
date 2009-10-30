@@ -7,7 +7,7 @@
     = stylesheet_link_tag %w(960 jquery-ui/themes/forgeos jquery.selectbox jstree/tree_component admin/base )
     = javascript_include_tag 'jquery'
     = javascript_tag "var AUTH_TOKEN = #{form_authenticity_token.inspect};" if protect_against_forgery?
-    %title= "#{I18n.t(:forgeos)} - #{I18n.t(@controller.controller_name, :scope => ['back-office', 'title']).capitalize}"
+    %title= "#{I18n.t(:forgeos)} - #{I18n.t(@controller.controller_name, :scope => ['back_office', 'menu']).capitalize}"
   %body
     #container.container_16
       .grid_16

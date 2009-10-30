@@ -17,14 +17,15 @@ fr:
       success: déconnection réussie, à bientôt !
 
 # Admin
-  back-office:
-    title:
+  back_office:
+    menu:
+      administration: administration
       dashboard: accueil
       statistics: statistiques
       admins: administrateurs
       roles: rôles
       rights: droits
-      preferences: préférences
+      settings: préférences
       library: librairie
       attachments: librairie
       users: clients
@@ -32,6 +33,7 @@ fr:
       account: votre compte
       logout: déconnexion
       login: connexion
+      support: support
   or: ou
   and: et
   ago: il y a {{time}}
@@ -60,7 +62,6 @@ fr:
   see_site: voir le site
   library: librairie
   administration: administration
-  preferences: préférences
   support: support
   site_builder: site builder
   statistics: statistiques
@@ -80,7 +81,18 @@ fr:
   roles: rôles
   controller_name: nom du contrôleur
   action_name: "nom de l'action"
-  general_settings: options générales
+  setting:
+    global: options globales
+    general: générale
+    display: affichage
+    mailer: envoie de mail
+    backup: sauvegarde
+    update:
+      success: les options ont bien été sauvegardées
+      failed: un problème est survenu lors de la mise à jour des options
+      action: mettre à jour les options
+  company_info: à propos de votre entreprise
+  contact_info: contact
   notification:
     one: notification
     other: notifications

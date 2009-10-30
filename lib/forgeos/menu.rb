@@ -3,17 +3,17 @@ require 'action_view/helpers/assert_tag_helper'
 module Forgeos
   # Set administration's menu
   AdminMenu = [
-    { :title => 'back-office.title.dashboard',
+    { :title => 'back_office.menu.dashboard',
       :url => { :controller => 'admin/dashboard' },
       :i18n => true,
       :html => { :class => 'left'}
     },
-    { :title => 'users',
+    { :title => 'back_office.menu.users',
       :url => { :controller => 'admin/users' }, 
       :i18n => true,
       :html => { :class => 'left'}
     },
-    { :title => 'statistics',
+    { :title => 'back_office.menu.statistics',
       :url => { :controller => 'admin/statistics' },
       :i18n => true,
       :html => { :class => 'right' }
@@ -21,7 +21,7 @@ module Forgeos
   ]
 
   AdminSubMenu = [
-    { :title => 'administration',
+    { :title => 'back_office.menu.administration',
       :i18n => true,
       :url => [
         { :controller => 'admin/admins' },
@@ -30,12 +30,12 @@ module Forgeos
       ],
       :html => { :class => 'left first'}
     },
-    { :title => 'preferences',
+    { :title => 'back_office.menu.settings',
       :i18n => true,
-      :url => { :controller => 'admin/preferences'},
+      :url => { :controller => 'admin/setting'},
       :html => { :class => 'left' }
     },
-    { :title => 'library',
+    { :title => 'back_office.menu.library',
       :i18n => true,
       :url => [
         { :controller => 'admin/library' },
@@ -47,17 +47,17 @@ module Forgeos
       ],
       :html => { :class => 'left' }
     },
-    { :title => 'your_account',
+    { :title => 'back_office.menu.account',
       :i18n => true,
       :url => { :controller => 'admin/account' },
       :html => { :class => 'left' }
     },
-    { :title => 'logout',
+    { :title => 'back_office.menu.logout',
       :i18n => true,
       :url => { :controller => 'admin/logout' },
       :html => { :class => 'right' }
     },
-    { :title => 'support',
+    { :title => 'back_office.menu.support',
       :i18n => true,
       :url => 'http://www.webpulser.com',
       :html => { :class => 'right first' }

@@ -17,14 +17,15 @@ en:
       success: you have been successfully disconnected
 
 # Admin
-  back-office:
-    title:
+  back_office:
+    menu:
+      administration: administration
       dashboard: dashboard
       statistics: statistics
       admins: administrators
       roles: roles
       rights: rights
-      preferences: preferences
+      settings: settings
       library: library
       attachments: library
       users: customers
@@ -32,6 +33,7 @@ en:
       account: your account
       logout: logout
       login: login
+      support: support
   or: or
   and: and
   ago: ago {{time}}
@@ -71,7 +73,6 @@ en:
   medias: medias
   statistics: statistics
   site_builder: site builder
-  preferences: preferences
   your_account: your account
   library: library
   marketing: marketing
@@ -81,7 +82,21 @@ en:
   rights: rights
   controller_name: 'controller name'
   action_name: 'action name'
-  general_settings: general settings
+  setting:
+    global: global settings
+    general: general
+    display: display
+    mailer: mailer
+    backup: backup
+    phone_number: phone number
+    fax_number: fax_number
+    email: email
+    update:
+      success: settings are successfully saved
+      failed: a problem occured during settings update
+      action: save settings
+  company_info: about your company
+  contact_info: contact
   notification:
     one: notification
     other: notifications
