@@ -16,7 +16,24 @@ jQuery(document).ready(function(){
     if (e.which == 13) {
 
       e.preventDefault();
-			submit_tag($(this));
+			var input = $(this);
+			var hidden_field_tag_name = '<input type="hidden" name="tag_list[]" value="'+input.val()+'" />';
+		  var destroy = '<a href="#" class="big-icons gray-destroy">&nbsp;</a>';
+		  var new_tag = '<span >'+input.val()+hidden_field_tag_name+destroy+'</span>';
+
+		  $('.tags .wrap_tags').append(new_tag);
+
+		  input.val('');
+		  var tags = [];
+		  $($(this.form).serializeArray()).each(function(){
+		    if (this.name == 'tag_list[]' && this.value != ''){
+		      tags.push(this.value);
+		    }
+		  });
+		  var element = $('textarea:regex(id,.+_meta_info_attributes_keywords)');
+		  if (element.is(':visible')){
+		    element.val(tags.join(', '));
+		  }
     }
   });
 });
@@ -31,9 +48,9 @@ function submit_tag(input){
 
   input.val('');
   var tags = [];
-  $($(this.form).serializeArray()).each(function(){
-    if (this.name == 'tag_list[]' && this.value != ''){
-      tags.push(this.value);
+  $($(input.form).serializeArray()).each(function(){
+    if (input.name == 'tag_list[]' && input.value != ''){
+      tags.push(input.value);
     }
   });
   var element = $('textarea:regex(id,.+_meta_info_attributes_keywords)');

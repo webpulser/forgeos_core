@@ -104,9 +104,7 @@ jQuery(document).ready(function(){
 		$('#tag').val($(this).text());
 		flush_tag_autocomplete();
 		//TODO give the input focus back
-		//$('#tag').focus();
-		submit_tag($('#tag'));
-		$('#tag').blur();
+		$('#tag').focus();
 	})
 
 	function flush_tag_autocomplete(){
