@@ -42,6 +42,7 @@ module Admin::BaseHelper
         'sProcessing': true,
         'aaSorting': [[1,'asc']],
         'bStateSave': false,
+        'bAutoWidth': false,
         #{data_source}
         'oLanguage': {
           'sProcessing' : '#{I18n.t('jquery.dataTables.oLanguage.sProcessing')}',
