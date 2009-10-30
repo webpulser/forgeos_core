@@ -1,16 +1,25 @@
 jQuery(document).ready(function(){
   //init the resizable sidebar
+  $("#content.grid_12").resizable({
+    handles:'w',
+    maxWidth: 790,
+    minWidth: 640
+  });
   $("#sidebar").resizable({
     handles:'e',
-    containment: '#page',
     maxWidth: 300,
     minWidth: 150
   });
+
   $("#sidebar").resize( function() {
     //when resize sidebar have to resize content
-    $("#content").width($("#page").width()-($("#sidebar").width()+1));
+    $("#content").width($("#page").width()-($(this).width()+1));
   });
 
+  $("#content").resize( function() {
+    $(this).css({ left: '0px' });
+    $("#sidebar").width($("#page").width()-($(this).width()+1));
+  });
 
   /*
    *Add click function on .create-action items
@@ -20,12 +29,12 @@ jQuery(document).ready(function(){
     if(!$('.create-list').hasClass('displayed')){
       $('.update-list').removeClass('displayed');
       $('.create-list').addClass('displayed');
-			$('.update-list').find('.shadow').hide();
-			$(this).find('.shadow').show();
+      $('.update-list').find('.shadow').hide();
+      $(this).find('.shadow').show();
     }
     else{
       $('.create-list').removeClass('displayed');
-			$(this).find('.shadow').hide();
+      $(this).find('.shadow').hide();
     }
   });
 
@@ -37,12 +46,12 @@ jQuery(document).ready(function(){
    if(!$('.update-list').hasClass('displayed')){
       $('.create-list').removeClass('displayed');
       $('.update-list').addClass('displayed');
-			$('.create-list').find('.shadow').hide();
-			$(this).find('.shadow').show();
+      $('.create-list').find('.shadow').hide();
+      $(this).find('.shadow').show();
     }
     else{
       $('.update-list').removeClass('displayed');
-			$(this).find('.shadow').hide();
+      $(this).find('.shadow').hide();
     }
   });
 
