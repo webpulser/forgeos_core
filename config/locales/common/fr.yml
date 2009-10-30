@@ -34,6 +34,7 @@ fr:
       login: connexion
   or: ou
   and: et
+  ago: il y a {{time}}
   conditions:
     is: est
     is_not: "n'est pas"

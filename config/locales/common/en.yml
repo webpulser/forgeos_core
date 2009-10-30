@@ -34,6 +34,7 @@ en:
       login: login
   or: or
   and: and
+  ago: ago {{time}}
   conditions:
     is: is
     is_not: is not
