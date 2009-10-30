@@ -17,7 +17,7 @@ jQuery(document).ready(function(){
       theme_name : 'menu-tree',
       selected_parent_close: false
     },
-    rules: {draggable : 'all', clickable: 'all'},
+    rules: {draggable: 'all', clickable: 'all'},
     callback: {
       onload: function(TREE_OBJ){
         tree_id = $(TREE_OBJ.container).attr('id');

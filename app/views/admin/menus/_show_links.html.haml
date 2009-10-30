@@ -1,0 +1,7 @@
+- unless links.nil? or links.blank?
+  %ul
+    - links.each do |link|
+      %li
+        = link_to content_tag(:span, link.title, :class => 'small-icons page'), link.url
+        %span.small-icons{:class => link.active ? 'see-on' : 'see-off' }
+        = render :partial => 'show_links', :locals => { :links => link.children }
