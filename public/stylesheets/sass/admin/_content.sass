@@ -63,5 +63,18 @@
   +element_form_name()
 .block-container
   position: relative
-.field_error
-  color: red
+.error.field
+  span
+    color: red
+  clear: left
+  background-color: transparent
+  border-color: transparent !important
+.big-header
+  .error.field
+    position: absolute
+    top: 5.1em
+    z-index: 2
+    width: auto !important
+    line-height: 1em
+    span
+      font-size: 1em
