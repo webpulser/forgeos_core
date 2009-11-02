@@ -6,14 +6,19 @@
       = I18n.t('or')
       = link_to I18n.t('cancel').capitalize, admin_menus_path, :class => 'back-link'
 
-  #content.grid_12.alpha.omega
-    .inner-content
-      TODO
+  #content.grid_16.alpha.omega
+    .grid_12.alpha
+      #menu-tree.padding-wrap
+        %ul.init-tree
+          = render :partial => 'menu_link', :collection => @menu.menu_links, :locals => { :mode => 'edit' }
 
-  #right-sidebar.grid_4.alpha.omega
-    .step
-      - unless menu.new_record?
-        = link_to I18n.t('menu.duplicate').capitalize, duplicate_admin_menu_path(menu), :class => 'small-icons duplicate'
-        = link_to I18n.t('menu.destroy.action').capitalize, [:admin, menu], :confirm => I18n.t('menu.destroy.confirm').capitalize, :method => :delete, :class => 'small-icons delete'
-      .clear
-  .clear
+        %a.small-icons.add-link{ :href => "#" }
+          Add link
+
+    #right-sidebar.grid_4.omega
+      .step
+        - unless menu.new_record?
+          = link_to I18n.t('menu.duplicate').capitalize, duplicate_admin_menu_path(menu), :class => 'small-icons duplicate'
+          = link_to I18n.t('menu.destroy.action').capitalize, [:admin, menu], :confirm => I18n.t('menu.destroy.confirm').capitalize, :method => :delete, :class => 'small-icons delete'
+        .clear
+    .clear

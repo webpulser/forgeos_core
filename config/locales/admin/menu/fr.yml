@@ -21,3 +21,11 @@ fr:
       failed: un problème est survenu lors de la suppression du menu
       confirm: êtes-vous sûr de vouloir supprimer ce menu ?
       action: supprimer le menu
+    title: titre du lien
+    linked_to: lié à
+    link_to_target: lier à un élément
+    visibility: visibilité
+    interactivity: interactivité
+    clickable: ce lien est cliquable
+    show: afficher
+    hide: cacher

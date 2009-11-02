@@ -21,3 +21,11 @@ en:
       failed: a problem occured during the menu deletion
       confirm: are you sure that you want to delete this menu?
       action: delete menu
+    title: link title
+    linked_to: linked to
+    link_to_target: link to an element
+    visibility: visibility
+    interactivity: interactivity
+    clickable: this item is clickable
+    show: show in menu
+    hide: hidde in menu

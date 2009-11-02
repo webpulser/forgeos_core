@@ -24,21 +24,24 @@
   li
     &.open
       background: url("dark-blue-minus.png") 0 2px no-repeat
-
     &.closed
       background: url("dark-blue-plus.png") 0 3px no-repeat
-
 
 #jstree-dragged.tree-menu-tree li li.open
   background: url("dark-blue-plus.png") 0 3px no-repeat
 
 
 .tree-menu-tree li
-  display: block
+  display: block !important
   position: relative !important
   position: relative
   background-color: #FFF
   margin: 2px 0
+
+  &.file
+    background: none
+  &.last
+    float: none !important
 
   .tree-link
     background: url("drag-drop.png") no-repeat left center
@@ -48,10 +51,17 @@
     border: 1px solid #E7E7E7
     -moz-border-radius: 3px
     -webkit-border-radius: 3px
-    display: block
+    display: block !important
     position: relative
-    background-color: #FAFAFA
     margin-right: 80px
+
+  &.folder
+    .tree-link
+      background-color: #FAFAFA
+
+  &.file
+    .tree-link
+      background-color: #FFF
 
   div.tree-link
     background: url("big-drag-and-drop.png") repeat-y left center
@@ -63,10 +73,22 @@
   .add-green-plus, .edit-link, .destroy-link
     width: 16px
 
-  .action-links
-    position: absolute
-    top: 2px
-    right: 0px
+  .menu_link
+    .action-links
+      position: absolute
+      top: 2px
+      right: 0px
+      display: none
+      
+      a
+        width: 16px
+        padding: 0
+    &:hover
+      .action-links
+        display: block
+
+  & .editing
+    display: none !important
 
 
 .tree-menu-tree-context
