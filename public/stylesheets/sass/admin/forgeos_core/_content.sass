@@ -1,0 +1,50 @@
+#content
+  :background-color = !white
+  width: 719px
+  min-height: 600px
+  height: auto !important
+  height: 600px
+  padding: 0px
+  :border-left = 1px solid !contentHeaderBorder
+  &.grid_16
+    width: 100%
+    border: 0
+  .header
+    position: relative
+    padding-left: 20px
+  h1
+    :color = !orange
+    :font
+      :size 1.2em
+      :weight bold
+    :border-bottom = 1px dashed !contentHeaderBorder
+    :margin
+      :left 20px
+      :bottom 5px
+      :right 15px
+    position: relative
+    span
+      :color = !lightGray
+      font-size: .5em
+      position: absolute
+      right: 0px
+      top: 13px
+.content
+  padding: 0 20px 20px
+.content-background
+  height: 0
+  :border-top = 1px solid !contentHeaderBorder
+.inner-content
+  padding: 10px 20px
+  p
+    font-size: 0.7em
+#role_name,
+#transporter_rule_name,
+#widget_actuality_title,
+#media-title,
+#menu_name
+  +element_form_name()
+.block-container
+  position: relative
+.field_error
+  color: red

@@ -1,0 +1,108 @@
+#user_lastname,
+#user_firstname,
+#account_lastname,
+#account_firstname,
+#admin_lastname,
+#admin_firstname
+  :color = !orange
+  font-size: 1.3em
+  font-weight: bold
+  height: 31px
+  min-width: 8em
+  max-width: 12.5em
+  width: auto
+  :padding-top 5px
+  +left()
+.big-header
+  .dropdown
+    width: auto
+    margin: 0 10px 0 0
+    ul li a span
+      line-height: 1em
+      float: none
+.fieldset.noborder
+  border-width: 0px
+#customer-see
+  width: 720px
+  .datatable td
+    vertical-align: middle
+.customer-header
+  background-position: 0 -1464px
+  background-color = !white
+  padding: 6px 15px
+  color = !lightGray
+  span
+    color = !orange
+    font-size: 1.2em
+    background-position: 0 -2447px
+    padding-left: 25px
+.main-infos p, .order-delivery p, .main-infos h4, .order-delivery h4
+  padding-top: 2px
+  margin: 0
+  clear: both
+#customer-see .padding-wrap
+  :border-top = 1px solid !whiteGray
+.big-separation
+  height: 200px !important
+.all-width
+  width: 100%
+.checkbox-container
+  +left()
+  width: 30%
+  margin: 1%
+  input
+    +left()
+  label
+    margin: 5px !important
+.multi-select-div
+  position: absolute
+  top: -10px
+  right: 20px
+  a
+    display: block
+    +left()
+    margin: 0 2px
+    :background-color = !whiteGray
+    padding: 2px 5px
+    :color = !lightGray
+.tool-tip-settings
+  font-size: 0.7em
+  margin-top: 20px
+  padding: 10px 10px
+  :background-color = !lightYellowBg
+  :color = !darkBrown
+.fieldset.grid_11
+  width: 635px
+#ui-datepicker-div
+  z-index: 999
+.email
+  width: 150px
+.fieldset
+  zoom: 1
+  label
+    display: block
+    :color = !lightGray
+    font-size: .9em
+    margin: 8px 2px 2px
+  input
+    :border = 1px solid !darkGray
+    +borderCorner(3px,3px,3px,3px)
+    :background
+      :position 0 -600px
+      :image url(/images/admin/backgrounds-verti.png)
+      :repeat repeat-x
+    padding: 2px 0
+  .firstname-input
+    clear: both
+    +left()
+    input
+      width: 186px
+  .lastname-input
+    +left()
+    margin-left: 20px
+    input
+      width: 186px
+  .email
+    a
+      text-decoration: underline
+      :color = !lightGray

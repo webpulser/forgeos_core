@@ -1,0 +1,28 @@
+=left()
+  :float left
+=block()
+  :display block
+=borderCorner(!topLeft=4px,!topRight=4px,!bottomRight=4px,!bottomLeft=4px)
+  :-moz-border-radius-topleft = !topLeft
+  :-moz-border-radius-topright = !topRight
+  :-moz-border-radius-bottomright = !bottomRight
+  :-moz-border-radius-bottomleft = !bottomLeft
+  :-webkit-border-top-left-radius = !topLeft
+  :-webkit-border-top-right-radius = !topRight
+  :-webkit-border-bottom-right-radius = !bottomRight
+  :-webkit-border-bottom-left-radius = !bottomLeft
+  :border-top-left-radius = !topLeft
+  :border-top-right-radius = !topRight
+  :border-bottom-right-radius = !bottomRight
+  :border-bottom-left-radius = !bottomLeft
+=element_form_name()
+  width: 600px
+  height: 31px
+  :padding-top 5px
+  +left()
+  :color = !orange
+  font-size: 1.3em
+  font-weight: bold
+=opacity(!opacity)
+  -ms-filter = "alpha(opacity=#{!opacity*100})"
+  opacity = !opacity

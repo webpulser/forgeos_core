@@ -1,0 +1,317 @@
+//--------------------- ----------       
+// COMMONS DROPDOWNS     
+//--------------------- ----------
+.enhanced a
+  font-size: 11px
+  text-decoration: none
+  :color = !lightGray
+.dropdown
+  +left()
+  position: relative
+  margin: 0 0 0 10px
+  width: 150px
+  .options
+    position: absolute
+    left: 5px
+    top: 21px
+    overflow: auto
+    :background = !white
+    :border = 1px solid !contentHeaderBorder
+    border-top: 0
+    padding: 0
+    ul
+      list-style: none
+      padding: 0
+      margin: 0
+      li
+        list-style: none
+        padding: 0
+        margin: 0
+        ul
+          padding-left: 10px
+    .opt-label
+      font-weight: bold
+    ul li
+      float: none
+      width: auto
+      a span
+        margin-left: 10px
+    a
+      +block()
+      font-size: 12px
+      padding: 2px 0
+      &:hover
+        :background-color = !contentHeaderBorder
+a.dropdown_toggle
+  +block()
+  height: 22px
+  background: url(/images/admin/selects/right-select.png) right top no-repeat
+  padding-right: 14px
+  span
+    background: url(/images/admin/selects/left-select.png) no-repeat
+    +block()
+    padding: 7px 5px 0 10px
+    height: 18px
+    line-height: 10px
+    cursor: pointer !important
+    margin: 0 !important
+    :color = !black
+.dropdown .hidden
+  display: none
+a.dropdown_toggle
+  +block()
+  height: 25px
+  padding-right: 24px  
+//--------------------- ----------       
+// RIGHT-SIDEBAR DROPDOWNS     
+//--------------------- ----------
+#right-sidebar
+  .dropdown
+    +left()
+    position: relative
+    margin: 0
+    width: 200px
+    width: 200px
+    text-transform: uppercase
+    a.dropdown_toggle
+      span
+        :color = !white
+      .options
+        position: absolute
+        left: 5px
+        top: 25px
+        overflow: auto
+        :background = !white
+        :border = 1px solid !contentHeaderBorder
+        border-top: 0
+        padding: 0
+  .published a.dropdown_toggle
+    background-image: url(/images/admin/selects/big-green-right.png)
+    span
+      background-image: url(/images/admin/selects/big-green-left.png)
+#right-sidebar div.step.status .unpublished a.dropdown_toggle
+  background-image: url(/images/admin/selects/unpublished-right.png)
+  span
+    background-image: url(/images/admin/selects/unpublished-left.png)
+.draft a.dropdown_toggle
+  background-image: url(/images/admin/selects/big-gray-right.png)
+  span
+    background-image: url(/images/admin/selects/big-gray-left.png)
+    :color= !white
+.active a.dropdown_toggle
+  background-image: url(/images/admin/selects/big-green-right.png)
+  span
+    background-image: url(/images/admin/selects/big-green-left.png)
+.to-validate a.dropdown_toggle
+  background-image: url(/images/admin/selects/big-brown-right.png)
+  span
+    background-image: url(/images/admin/selects/big-brown-left.png)
+.canceled
+  a.dropdown_toggle
+    background-image: url(/images/admin/selects/big-red-right.png)
+  &.disabled a.dropdown_toggle
+    background-image: url(/images/admin/selects/big-red-right-on.png)
+  a.dropdown_toggle span
+    background-image: url(/images/admin/selects/big-red-left.png)
+    :color= !white
+.shipped
+  a.dropdown_toggle
+    background-image: url(/images/admin/selects/big-green-right.png)
+  &.disabled a.dropdown_toggle
+    background-image: url(/images/admin/selects/big-green-right-on.png)
+  a.dropdown_toggle span
+    background-image: url(/images/admin/selects/big-green-left.png)
+    :color= !white
+.closed
+  a.dropdown_toggle
+    background-image: url(/images/admin/selects/big-gray-right.png)
+  &.disabled a.dropdown_toggle
+    background-image: url(/images/admin/selects/big-gray-right-on.png)
+  a.dropdown_toggle span
+    background-image: url(/images/admin/selects/big-gray-left.png)
+    :color= !white
+.unpaid
+  a.dropdown_toggle
+    background-image: url(/images/admin/selects/big-white-right.png)
+    :color = !black !important
+  &.disabled a.dropdown_toggle
+    background-image: url(/images/admin/selects/big-white-right-on.png)
+    :color = !black !important
+  a.dropdown_toggle span
+    background-image: url(/images/admin/selects/big-white-left.png)
+    :color = !black !important
+.paid
+  a.dropdown_toggle
+    background-image: url(/images/admin/selects/big-brown-right.png)
+  &.disabled a.dropdown_toggle
+    background-image: url(/images/admin/selects/big-brown-right-on.png)
+  a.dropdown_toggle span
+    background-image: url(/images/admin/selects/big-brown-left.png)
+    :color= !white
+#right-sidebar div.step .glossy a.dropdown_toggle
+  display: block
+  height: 25px
+  padding-right: 26px
+  background: url(/images/admin/selects/glossy-gray-right.png) right top no-repeat
+  span
+    background: url(/images/admin/selects/glossy-gray-left.png) no-repeat
+    :color = !black
+//--------------------- ----------       
+// DATA-TABLES DROPDOWNS     
+//--------------------- ----------
+.datatable
+  .dropdown
+    width: 110px
+    +block()
+    +left()
+  a.dropdown_toggle
+    padding-right: 20px
+  .dropdown .options
+    width: 100px
+    top: 20px
+  .published a.dropdown_toggle
+    background-image: url(/images/admin/selects/small-green-right.png)
+  tr:hover .published a.dropdown_toggle
+    background-image: url(/images/admin/selects/small-green-right-on.png)
+  .published a.dropdown_toggle span
+    background-image: url(/images/admin/selects/small-green-left.png)
+    :color= !white
+  .draft a.dropdown_toggle
+    background-image: url(/images/admin/selects/small-gray-right.png)
+  tr:hover .draft a.dropdown_toggle
+    background-image: url(/images/admin/selects/small-gray-right-on.png)
+  .draft a.dropdown_toggle span
+    background-image: url(/images/admin/selects/small-gray-left.png)
+    :color= !white
+  .to-validate a.dropdown_toggle
+    background-image: url(/images/admin/selects/small-brown-right.png)
+  tr:hover .to-validate a.dropdown_toggle
+    background-image: url(/images/admin/selects/small-brown-right-on.png)
+  .to-validate a.dropdown_toggle span
+    background-image: url(/images/admin/selects/small-brown-left.png)
+    :color= !white
+  .active a.dropdown_toggle, .inactive a.dropdown_toggle, tr:hover .active a.dropdown_toggle
+    background-image: url(/images/admin/selects/small-white-right-on.png)
+  .active a.dropdown_toggle span, .inactive a.dropdown_toggle span
+    background-image: url(/images/admin/selects/small-white-left.png)
+    :color = !lightGray
+    font-weight: bold
+  .canceled a.dropdown_toggle
+    background-image: url(/images/admin/selects/small-red-right.png)
+  tr:hover .canceled a.dropdown_toggle
+    background-image: url(/images/admin/selects/small-red-right-on.png)
+  .canceled a.dropdown_toggle span
+    background-image: url(/images/admin/selects/small-red-left.png)
+    :color= !white
+  .shipped a.dropdown_toggle
+    background-image: url(/images/admin/selects/small-green-right.png)
+  tr:hover .shipped a.dropdown_toggle
+    background-image: url(/images/admin/selects/small-green-right-on.png)
+  .shipped a.dropdown_toggle span
+    background-image: url(/images/admin/selects/small-green-left.png)
+    :color= !white
+  .closed a.dropdown_toggle
+    background-image: url(/images/admin/selects/small-gray-right.png)
+  tr:hover .closed a.dropdown_toggle
+    background-image: url(/images/admin/selects/small-gray-right-on.png)
+  .closed a.dropdown_toggle span
+    background-image: url(/images/admin/selects/small-gray-left.png)
+    :color= !white
+  .unpaid a.dropdown_toggle
+    background-image: url(/images/admin/selects/small-white-right.png)
+  tr:hover .unpaid a.dropdown_toggle
+    background-image: url(/images/admin/selects/small-white-right-on.png)
+  .unpaid a.dropdown_toggle span
+    background-image: url(/images/admin/selects/small-white-left.png)
+    :color = !black
+  .paid a.dropdown_toggle
+    background-image: url(/images/admin/selects/small-brown-right.png)
+  tr:hover .paid a.dropdown_toggle
+    background-image: url(/images/admin/selects/small-brown-right-on.png)
+  .paid a.dropdown_toggle span
+    background-image: url(/images/admin/selects/small-brown-left.png)
+    :color= !white
+//--------------------- ----------       
+// COUNTRY-SELECT DROPDOWNS     
+//--------------------- ----------
+.country-select .dropdown, .civility-select .dropdown, .delivery-method .dropdown
+  margin-left: 0px
+.country-select
+  .dropdown .options
+    height: 150px
+  a.dropdown_toggle
+    background: url(/images/admin/selects/product-select-right.png) right top no-repeat
+    padding-right: 26px
+    height: 23px
+.civility-select a.dropdown_toggle
+  background: url(/images/admin/selects/product-select-right.png) right top no-repeat
+  padding-right: 26px
+  height: 23px
+.country-select a.dropdown_toggle span, .civility-select a.dropdown_toggle span
+  background: url(/images/admin/selects/product-select-left.png) no-repeat
+  height: 16px
+  :color = !black
+  text-transform: none
+//--------------------- ----------       
+// THUMBNAILS DROPDOWNS     
+//--------------------- ----------
+.thumbnails .datatable
+  .dropdown
+    margin-left: 0
+  a.dropdown_toggle
+    background: url(/images/admin/small-icons/bottom-arrow.png) right 5px no-repeat
+    padding-right: 26px
+    height: 23px
+    span
+      background: none
+      text-decoration: underline
+      :color = !lightGray
+      text-transform: none
+div.tree-link
+  div.enhanced
+    +left()
+    .options ul
+      display: block !important
+    a.dropdown_toggle span
+      background: transparent none no-repeat scroll 0 0
+      :color = !lightGray
+      padding: 0
+      text-transform: none
+      text-decoration: underline
+    .Show a.dropdown_toggle span
+      background: transparent url(/images/admin/small-icons/eye.png) no-repeat scroll 0 -2px
+      :color = !lightGray
+      padding: 0 0 0 20px
+      text-transform: none
+      text-decoration: underline
+    a.dropdown_toggle
+      background: transparent url(/images/admin/small-icons/bottom-arrow.png) no-repeat scroll right center
+      padding-right: 20px
+  .dropdown .options ul li a span
+    padding: 0 !important
+    text-transform: none
+    font-weight: normal
+//--------------------- ----------       
+// STATISTICS DROPDOWNS
+//--------------------- ----------
+.statistics
+  .trend_filter
+    .dropdown
+      :margin-left 0
+      :width auto
+    a.dropdown_toggle
+      :background url(/images/admin/small-icons/bottom-arrow.png) right -2px no-repeat
+      :padding-right 26px
+      :height auto
+    a.dropdown_toggle span
+      :background none
+      :text-decoration underline
+      :color = !blueLink
+      :text-transform none
+      :height auto
+      :padding-top 0
+    .options
+      :top 1.2em
+    .dropdown .options ul li a span
+      :text-transform none
+      :color = !blueLink

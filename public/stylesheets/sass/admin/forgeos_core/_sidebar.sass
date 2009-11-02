@@ -1,0 +1,53 @@
+.sidebar-content
+  padding: 2px 5px
+  margin-bottom: 40px
+  h2
+    font-size: 0.8em
+    margin:
+      top: 5px
+      bottom: 10px
+    padding:
+      top: 2px
+      bottom: 2px
+    color = !darkBrown
+    a
+      color = !darkBrown
+.sidebar-background
+  background:
+    position: 0px -1042px
+    color: transparent
+  height: 16px
+  +opacity(0.6)
+.header
+  :border-bottom = 1px solid !contentHeaderBorder
+.ui-resizable-handle.ui-resizable-e
+  background:
+    image: url(/images/admin/borders/drag-and-drop.png)
+    position: right center
+    repeat: repeat-x
+  height: 40px
+  right: -27px
+  width: 40px
+  +block()
+  z-index: 1
+.action-button
+  :margin-left 5px
+.sidebar_dragg
+  background: #FFD976 !important
+span.shadow
+  background:
+    color = !black !important
+  height: 400px !important
+  width: 203px
+  position: absolute
+  top: 3px !important
+  left: 3px !important
+  z-index: -1 !important
+  +opacity(0.2)
+  display: none
+.create-list,
+.update-list
+  overflow: hidden  
+#yellow-sidebar
+  background = !lightYellowBg
+  font-size: .8em
