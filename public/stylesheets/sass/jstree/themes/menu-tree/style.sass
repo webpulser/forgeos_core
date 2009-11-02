@@ -51,7 +51,6 @@
     border: 1px solid #E7E7E7
     -moz-border-radius: 3px
     -webkit-border-radius: 3px
-    display: block !important
     position: relative
     margin-right: 80px
 
@@ -63,8 +62,14 @@
     .tree-link
       background-color: #FFF
 
+  a.tree-link
+    display: block
+
   div.tree-link
     background: url("big-drag-and-drop.png") repeat-y left center
+
+    &.editing
+      display: none
 
   &.leaf .tree-link
     background: url("drag-drop.png") no-repeat left center
@@ -86,10 +91,6 @@
     &:hover
       .action-links
         display: block
-
-  & .editing
-    display: none !important
-
 
 .tree-menu-tree-context
   width: 160px

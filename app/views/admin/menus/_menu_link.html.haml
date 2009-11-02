@@ -4,10 +4,8 @@
     = link_to content_tag(:span, menu_link.title, :class => 'small-icons page')+status_span, menu_link.url, :class => 'tree-link'
 
     - if mode && mode.eql?('edit')
-      -#= link_to(status_span, '#')
-
       .tree-link.editing
-        %label= "#{t('menu.title').capitalize} :"
+        %label= "#{t('menu.link.title').capitalize} :"
         = text_field_tag 'title', menu_link.title
         %label= "#{t('menu.linked_to').capitalize} :"
         - target = nil
@@ -15,7 +13,7 @@
           - if target
             = target.name
           - else
-            = link_to t('menu.link_to_target').capitalize, '#'
+            = link_to t('menu.link.to_target').capitalize, '#'
         %label= "#{t('menu.visibility').capitalize} :"
         %div
           %select
@@ -36,9 +34,6 @@
         = link_to '', '#', :class => 'small-icons add-green-plus'
         = link_to '', '#', :class => 'small-icons edit-link'
         = link_to '', '#', :class => 'small-icons destroy-link'
-
-    - else
-      = status_span
 
   - unless menu_link.children.nil? or menu_link.children.blank?
     %ul
