@@ -16,6 +16,7 @@ config.gem 'haml'
 # Load Haml and Sass
 require 'haml'
 Haml.init_rails(binding)
+Sass::Plugin.options[:style] = :compact
 
 # Add patch to ActionController to upload via Adobe Flash
 ActionController::Dispatcher.middleware.insert -1, 'FlashSessionCookieMiddleware'
