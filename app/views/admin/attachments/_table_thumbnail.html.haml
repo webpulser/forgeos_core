@@ -1,4 +1,4 @@
-= image_tag(media.public_filename(:small),:title=>media.filename)
+= image_tag(media.public_filename(:small),:title=>media.filename, :id => "attachment_#{media.id}")
 %br
 = media.content_type
 \-

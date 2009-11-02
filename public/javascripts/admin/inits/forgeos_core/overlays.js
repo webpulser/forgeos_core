@@ -8,29 +8,6 @@ jQuery(document).ready(function(){
       resizable:'se'
   });
 
-  $('#imageSelectDialog').dialog({
-    autoOpen:false,
-    modal:true,
-    minHeight: 380,
-    width: 800,
-    resizable:'se',
-    buttons: {
-      Ok: function(){
-        var current_table = $('#image-table:visible,#thumbnail-table:visible').dataTableInstance();
-        indexes = current_table.fnGetSelectedIndexes();
-        for(var i=0; i<indexes.length; i++){
-          path = current_table.fnGetData(indexes[i]).slice(-3,-2);
-          id = current_table.fnGetData(indexes[i]).slice(-2,-1);
-          name = current_table.fnGetData(indexes[i]).slice(-1);
-          add_picture_to_product(path,id,name);
-        }
-        check_product_first_image();
-        current_table.fnUnSelectNodes();
-        $('#imageSelectDialog').dialog('close');
-      }
-    }
-  });
-
   $('#imageUploadDialog').dialog({
     autoOpen:false,
     modal:true,
@@ -62,35 +39,6 @@ jQuery(document).ready(function(){
   });
 
 
-  $('#fileSelectDialog').dialog({
-    autoOpen:false,
-    modal:true,
-    minHeight: 380,
-    width: 800,
-    resizable:'se',
-    buttons: {
-     Ok: function(){
-       var current_table = $('#table-files').dataTableInstance();
-       indexes = current_table.fnGetSelectedIndexes();
-       for(var i=0; i<indexes.length; i++){
-         size = current_table.fnGetData(indexes[i]).slice(-6,-5);
-         type = current_table.fnGetData(indexes[i]).slice(-8,-7);
-         id = current_table.fnGetData(indexes[i]).slice(-2,-1);
-         name = current_table.fnGetData(indexes[i]).slice(-1);
-
-         add_attachment_to_product(id,name,size,type);
-       }
-       $(current_table.fnGetSelectedNodes()).toggleClass('row_selected');
-       $('#fileSelectDialog').dialog('close');
-     }
-    },
-    open: function(){
-     current_table_index = 2;
-    }
-  });
-
-  current_table_index = 0;
-
   $('.display-thumbnails').click( function() {
     if($(this).hasClass('off')){
       $(this).toggleClass('off');
@@ -99,7 +47,6 @@ jQuery(document).ready(function(){
       var search_element = $('#search.image');
       search_element.removeClass('image');
       search_element.addClass('thumbnails');
-      current_table_index = 0;
     }
     return false;
   });
@@ -112,7 +59,6 @@ jQuery(document).ready(function(){
       var search_element = $('#search.thumbnails');
       search_element.removeClass('thumbnails');
       search_element.addClass('image');
-      current_table_index = 1;
     }
     return false;
   });

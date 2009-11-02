@@ -183,7 +183,7 @@ function init_category_tree(selector, type, source) {
       oncopy: function(NODE,REF_NODE,TYPE,TREE_OBJ,RB) { duplicate_category(NODE, type); },
       onselect: function(NODE,TREE_OBJ) {
         var cat_id = get_rails_element_id(NODE);
-        var current_table = oTables[current_table_index];
+        var current_table = oTable;
         var url = current_table.fnSettings().sAjaxSource;
         var url_base = url.split('?')[0];
         var params;
@@ -194,7 +194,7 @@ function init_category_tree(selector, type, source) {
         params = stringify_params_from_json(params);
 
         // construct url and redraw table
-        update_current_dataTable_source(url_base + '?' + params);
+        update_current_dataTable_source('#'+oTable.sInstance,url_base + '?' + params);
         return true;
       },
       // remove count span
@@ -239,7 +239,7 @@ function select_all_elements_without_category(tree_id) {
   }
 
   // remove category from dataTables ajax source and redraw the table
-  var current_table = oTables[current_table_index];
+  var current_table = oTable;
   var url = current_table.fnSettings().sAjaxSource;
   var url_base = url.split('?')[0];
   var params;
@@ -250,7 +250,7 @@ function select_all_elements_without_category(tree_id) {
   params = stringify_params_from_json(params);
 
   // construct url and redraw table
-  update_current_dataTable_source(url_base + '?' + params);
+  update_current_dataTable_source('#'+oTable.sInstance,url_base + '?' + params);
   return true;
 }
 

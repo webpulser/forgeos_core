@@ -151,6 +151,9 @@ class Admin::AttachmentsController < Admin::BaseController
       conditions[:categories_elements] = { :category_id => params[:category_id] }
       includes << :attachment_categories
     end
+    if params[:ids]
+      conditions[:attachments] = { :id => params[:ids].split(',') }
+    end
 
     options[:conditions] = conditions unless conditions.empty?
     options[:include] = includes unless includes.empty?

@@ -43,8 +43,7 @@ jQuery.fn.dataTableExt.oApi.fnUnSelectNodes= function(){
 
   for ( var i=0 ; i<aTrs.length ; i++ )
   {
-    $(aTrs[i]).removeClass('row_selected');
-    $(aTrs[i]).find("input[type='checkbox']").attr('checked',0);
+    $(aTrs[i]).unselect();
   }
 }
 
@@ -76,6 +75,15 @@ jQuery.fn.dataSlideExt.oApi.fnGetSelectedNodes= function(){
   return aReturn;
 }
 
+jQuery.fn.dataSlideExt.oApi.fnUnSelectNodes= function(){
+  var aTrs = $(this).dataTableInstance().fnGetSelectedNodes();
+
+  for ( var i=0 ; i<aTrs.length ; i++ )
+  {
+    $(aTrs[i]).unselect();
+  }
+}
+
 jQuery.fn.dataSlideExt.oApi.fnGetSelectedIndexes= function(){
   var aReturn = new Array();
   var aTrs = $(this).dataTableInstance().fnGetNodes();
@@ -99,6 +107,34 @@ jQuery.fn.extend({
       }
     });
     return oTable;
+  },
+  select: function(){
+    $(this).addClass('row_selected');
+    var checkbox = $(this).find('input[type=checkbox]');
+    checkbox.attr('checked',1);
+
+    var datatable = $(this).parents('.datatable').dataTableInstance();
+    var datable_datas = $(this).parents('.datatable').data('selected_rows');
+    var index = $(this).attr('id');
+    datable_datas.push(index);
+  },
+  unselect: function(){
+    $(this).removeClass('row_selected');
+    var checkbox = $(this).find('input[type=checkbox]');
+    checkbox.attr('checked',0);
+
+    var datatable = $(this).parents('.datatable').dataTableInstance();
+    var datable_datas = $(this).parents('.datatable').data('selected_rows');
+    var index = $(this).attr('id');
+    var index_in_table = $(datable_datas).index(index);
+    datable_datas.splice(index_in_table,1);
+  },
+  toggleselect: function(){
+    if ($(this).hasClass('row_selected')) {
+      $(this).unselect();
+    } else {
+      $(this).select();
+    }
   }
 });
 
@@ -121,23 +157,25 @@ function removedataTablesRow(selector){
   );
 }
 
-function DataTablesDrawCallBack() {
+function DataTablesDrawCallBack(table) {
   InitCustomSelects();
   showObjectsAssociated();
   display_notifications();
-  hide_paginate();
+  hide_paginate(table);
 }
 
 // set id to each row and set it draggable
 function DataTablesRowCallBack(nRow, aData, iDisplayIndex){
-  div = $(nRow).children('td').children('div');
+  var table = $('#'+this.sInstance);
+  var div = $(nRow).find(":regex(id,.+_\\d+)");
+
   if (div.length != 0) {
     div_id = div[0].id;
     row_id = 'row_' + div_id;
     $(nRow).attr('id', row_id);
   }
 
-  if($(oTables[current_table_index]).hasClass('draggable_rows')){
+  if(table.hasClass('draggable_rows')){
     $(nRow).draggable({
       revert: 'invalid',
       cursor: 'move',
@@ -159,13 +197,24 @@ function DataTablesRowCallBack(nRow, aData, iDisplayIndex){
     });
   }
 
-  if ($(oTables[current_table_index]).hasClass('selectable_rows')){
-    $(nRow).children('td:first').prepend('<input id="select_'+$(nRow).attr('id')+'" type="checkbox" name="none"/>');
+  if (table.hasClass('selectable_rows')){
+    if (typeof(table.data('selected_rows')) == 'undefined') { 
+      table.data('selected_rows',[]);
+    }
+
+    var datable_datas = table.data('selected_rows');
+    var index = $(nRow).attr('id');
+    if ($(datable_datas).index(index) != -1) {
+      $(nRow).addClass('row_selected');
+      $(nRow).children('td:first').append('<input id="select_'+$(nRow).attr('id')+'" type="checkbox" name="none" checked="checked"/>');
+    } else {
+      $(nRow).children('td:first').append('<input id="select_'+$(nRow).attr('id')+'" type="checkbox" name="none"/>');
+    }
+
     $(nRow).click(function() {
-      $(this).toggleClass('row_selected');
-      var checkbox = $(this).find('input[type=checkbox]');
-      checkbox.attr('checked',(checkbox.is(':checked')?0:1));
+      $(this).toggleselect();
     });
+
     $(nRow).find('input[type=checkbox]').click(function(){
       $(this).attr('checked',($(this).is(':checked')?0:1));
     });
@@ -173,18 +222,44 @@ function DataTablesRowCallBack(nRow, aData, iDisplayIndex){
   return nRow;
 }
 
-function update_current_dataTable_source(source){
-  oTables[current_table_index].fnSettings().sAjaxSource = source;
-  oTables[current_table_index].fnDraw();
+function update_current_dataTable_source(selector,source){
+  var current_table = $(selector).dataTableInstance() ;
+  current_table.fnSettings().sAjaxSource = source;
+  current_table.fnDraw();
 }
 
-function hide_paginate(){
-  var paginate_childrens = oTables[current_table_index].fnSettings().nPaginateList.children;
+function hide_paginate(dataTables){
+  var table = $('#'+dataTables.sInstance).parents('.dataTables_wrapper');
+  var paginate_childrens = dataTables.nPaginateList.children;
    
   if(paginate_childrens.length>1){
-    $('.dataTables_paginate.paging_full_numbers').show()
+    table.find('.dataTables_paginate.paging_full_numbers').show();
   } 
-	else{
-		$('.dataTables_paginate.paging_full_numbers').hide()
-	}
+  else{
+    table.find('.dataTables_paginate.paging_full_numbers').hide();
+  }
+}
+
+function dataTableSelectRows(selector,callback){
+  var current_table = $(selector).dataTableInstance();
+  
+  source = current_table.fnSettings().sAjaxSource;
+  var ids = []
+  $($(selector).data('selected_rows')).each(function(){
+    if (this.split) ids.push(this.split('_').slice(-1));
+  });
+  current_table.fnSettings().sAjaxSource = source + '&ids=' + ids.join(',');
+
+  current_table.fnSettings().fnDrawCallback = function(){
+    var current_table = $(this).dataTableInstance();
+    var indexes = current_table.fnGetSelectedIndexes();
+
+    callback(current_table,indexes);
+
+    current_table.fnUnSelectNodes();
+    current_table.fnSettings().sAjaxSource = source;
+    current_table.fnSettings().fnDrawCallback = DataTablesDrawCallBack;
+    current_table.fnClearTable();
+  }
+  current_table.fnDraw(); 
 }
