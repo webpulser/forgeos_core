@@ -5,7 +5,7 @@ namespace :forgeos do
     end
 
     task :initialize => [ :environment, 'db:migrate' ] do
-      system 'rake forgeos:core:fixtures:load forgeos_core people,geo_zones'
+      system 'rake forgeos:core:fixtures:load forgeos_core people,geo_zones,settings'
       system "rake forgeos:core:generate:acl #{File.join('vendor','plugins','forgeos_core')}"
     end
 

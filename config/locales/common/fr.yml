@@ -82,17 +82,21 @@ fr:
   controller_name: nom du contrôleur
   action_name: "nom de l'action"
   setting:
+    shop_name: "nom de l'entreprise"
     global: options globales
     general: générale
     display: affichage
     mailer: envoie de mail
     backup: sauvegarde
+    email: courriel
+    phone_number: téléphone
+    fax_number: fax
+    company_info: à propos de votre entreprise
+    contact_info: contact
     update:
       success: les options ont bien été sauvegardées
       failed: un problème est survenu lors de la mise à jour des options
       action: mettre à jour les options
-  company_info: à propos de votre entreprise
-  contact_info: contact
   notification:
     one: notification
     other: notifications

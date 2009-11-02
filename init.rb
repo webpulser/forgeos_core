@@ -21,3 +21,6 @@ Sass::Plugin.options[:style] = :compact
 # Add patch to ActionController to upload via Adobe Flash
 ActionController::Dispatcher.middleware.insert -1, 'FlashSessionCookieMiddleware'
 require 'forgeos'
+
+config.time_zone = Setting.first.time_zone
+I18n.default_locale = Setting.first.lang.to_sym

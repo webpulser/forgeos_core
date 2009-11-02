@@ -1,0 +1,7 @@
+= f.label :lang, I18n.t(:lang, :count => 1)
+%div
+  = f.select :lang, I18n.available_locales.collect{ |locale| [I18n.t(locale, :scope => [:lang, :full]),locale.to_s]}, :prompt => I18n.t(:please_select)
+.clear
+= f.label :time_zone, I18n.t(:time_zone, :count => 1)
+%div
+  = f.time_zone_select :time_zone, ActiveSupport::TimeZone.all

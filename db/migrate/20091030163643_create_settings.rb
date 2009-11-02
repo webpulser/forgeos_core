@@ -3,6 +3,7 @@ class CreateSettings < ActiveRecord::Migration
     create_table :settings do |t|
       t.string :name,
         :lang,
+        :time_zone,
         :phone_number,
         :fax_number,
         :email
