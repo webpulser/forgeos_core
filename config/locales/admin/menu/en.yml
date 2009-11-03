@@ -24,7 +24,7 @@ en:
     link:
       title: link title
       add: add link
-      to_target: link to an element
+      change: change
     linked_to: linked to
     visibility: visibility
     interactivity: interactivity

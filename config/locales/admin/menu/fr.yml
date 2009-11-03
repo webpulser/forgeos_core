@@ -24,7 +24,7 @@ fr:
     link:
       title: titre du lien
       add: ajouter un ien
-      to_target: lier à un élément
+      change: changer
     linked_to: lié à
     visibility: visibilité
     interactivity: interactivité

@@ -104,11 +104,19 @@ div.tree-link
     +borderCorner(2px,2px,2px,2px)
     width: 390px
     padding: 2px
+
+    &.external
+      color: red
   .linked-to-span
     +left()
     :background-color = !lightBlueBg
     padding: 0 5px 2px 20px
-    :color = !blueLink
+    a
+      :color = !blueLink
+
+  .link
+    +left()
+    padding: 0 5px 2px 0px
     a
       :color = !blueLink
   .back-link

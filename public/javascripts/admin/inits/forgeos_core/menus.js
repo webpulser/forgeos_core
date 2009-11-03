@@ -50,4 +50,19 @@ jQuery(document).ready(function(){
     }
     return false;
   });
+
+  // Remove menu link
+  $('.tree-menu-tree li .menu_link .action-links .destroy-link').live('click',function(){
+    var menu_list = $(this).parents('li:first'); 
+
+    // set the menu link and all its children to deleted
+    $(menu_list).find('.menu_link').each(function(){
+      console.info($(this));
+      $(this).find('.delete').val(1);
+    });
+
+    // hide menu link and its children
+    $(menu_list).hide();
+    return false;
+  });
 });
