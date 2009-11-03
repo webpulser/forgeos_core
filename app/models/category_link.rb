@@ -1,0 +1,2 @@
+class CategoryLink < MenuLink
+end

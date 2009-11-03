@@ -10,7 +10,19 @@
     .grid_12.alpha
       #menu-tree.padding-wrap
         %ul.init-tree
-          = render :partial => 'menu_link', :collection => @menu.menu_links, :locals => { :mode => 'edit' }
+          = render :partial => 'form_menu_links', :locals => { :menu_links => @menu.menu_links, :form => f, :has_parent => false }
+
+    /
+      - f.fields_for :menu_links do |menu_link_form|
+        = menu_link_form.text_field :title
+
+        = menu_link_form.object_name
+        = menu_link_form.object
+        = menu_link_form.object.id
+        = menu_link_form.object.title
+
+
+
       = link_to t('menu.link.add').capitalize, '#', :class => 'small-icons add-link'
   
     #right-sidebar.grid_4.omega

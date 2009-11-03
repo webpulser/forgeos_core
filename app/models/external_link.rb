@@ -1,0 +1,2 @@
+class ExternalLink < MenuLink
+end

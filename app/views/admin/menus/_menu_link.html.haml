@@ -1,40 +1,7 @@
 %li{ :class => menu_link.children.empty? ? 'file' : 'folder' }
   .menu_link
-    - status_span = content_tag :span, '', :class => "small-icons #{menu_link.active ? 'see-on' : 'see-off'}"
-    = link_to content_tag(:span, menu_link.title, :class => 'small-icons page')+status_span, menu_link.url, :class => 'tree-link'
-
-    - if mode && mode.eql?('edit')
-      .tree-link.editing
-        %label= "#{t('menu.link.title').capitalize} :"
-        = text_field_tag 'title', menu_link.title
-        %label= "#{t('menu.linked_to').capitalize} :"
-        - target = nil
-        %span.small-icons.page.linked-to-span
-          - if target
-            = target.name
-          - else
-            = link_to t('menu.link.to_target').capitalize, '#'
-        %label= "#{t('menu.visibility').capitalize} :"
-        %div
-          %select
-            %option= t('menu.show').capitalize
-            %option= t('menu.hide').capitalize
-        %label= "#{t('menu.interactivity').capitalize} :"
-        %div
-          %select
-            %option= t('menu.clickable').capitalize
-        .clear
-
-        %div.actions
-          = link_to content_tag(:span, t(:save_changes), :class => 'small-icons save'), '#', :class => 'backgrounds action-button'
-          = I18n.t('or')
-          = link_to I18n.t('cancel').capitalize, '#', :class => 'back-link'
-
-      %span.action-links
-        = link_to '', '#', :class => 'small-icons add-green-plus'
-        = link_to '', '#', :class => 'small-icons edit-link'
-        = link_to '', '#', :class => 'small-icons destroy-link'
-
+    - span_title = content_tag(:span, menu_link.title, :class => 'small-icons page')
+    - span_status = content_tag :span, '', :class => "small-icons #{menu_link.active ? 'see-on' : 'see-off'}"
+    = link_to  span_title + span_status, menu_link.url, :class => 'tree-link'
   - unless menu_link.children.nil? or menu_link.children.blank?
-    %ul
-      = render :partial => 'menu_link', :collection => menu_link.children, :locals => { :mode => mode }
+    %ul= render :partial => 'menu_link', :collection => menu_link.children

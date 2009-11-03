@@ -1,0 +1,2 @@
+class ProductLink < MenuLink
+end

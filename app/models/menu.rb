@@ -14,4 +14,10 @@ class Menu < ActiveRecord::Base
   def activate
     self.update_attribute('active', !self.active)
   end
+
+  def clone
+    menu = super
+    menu.menu_links = self.menu_links.collect(&:clone)
+    return menu
+  end
 end

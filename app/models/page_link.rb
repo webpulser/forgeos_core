@@ -1,0 +1,2 @@
+class PageLink < MenuLink
+end

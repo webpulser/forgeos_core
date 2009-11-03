@@ -19,3 +19,13 @@ function rezindex(){
    nb--;
  });
 }
+
+function rebuild_custom_select(parent){
+  // remove custom select classes
+  $(parent).removeClass('enhanced');
+  $(parent).children('.dropdown').remove();
+  
+  // reinit custom select and rebuild indexes
+  InitCustomSelects();
+  rezindex();
+}
