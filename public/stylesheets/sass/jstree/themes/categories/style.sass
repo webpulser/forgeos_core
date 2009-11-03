@@ -11,19 +11,19 @@
     float: none !important
 
     &.open
-      background: url("brown-minus.png") 0px 1px no-repeat
+      background: url("brown-minus.png") 0px 3px no-repeat
 
     &.closed
-      background: url("brown-plus.png") 0 1px no-repeat
+      background: url("brown-plus.png") 0 3px no-repeat
 
 
 #jstree-dragged.tree-categories li li.open
-  background: url("brown-plus.png") 0 1px no-repeat
+  background: url("brown-plus.png") 0 3px no-repeat
 
 
-.tree.tree-categories .ltr li
+.tree.tree-categories li
   a
-    padding: 3px 24px
+    padding: 3px 24px !important
     color: #75491B
     font-weight: bold
     font-size: 0.8em
@@ -64,7 +64,7 @@
         color: #F16028
         padding: 0px 3px 0px 20px
 
-.tree.tree-categories .ltr li a.loading
+.tree.tree-categories li a.loading
   background: none
 
 
@@ -118,6 +118,8 @@
         background-image: url(rename.png)
       &.remove
         background-image: url(remove.png)
+      &.image
+        background-image: url(images.png)
     span
       margin: 0 !important
   .separator

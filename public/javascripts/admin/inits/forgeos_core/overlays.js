@@ -23,6 +23,21 @@ jQuery(document).ready(function(){
     resizable:'se'
   });
 
+  $('#imageUploadDialogLeftSidebar').dialog({
+    autoOpen:false,
+    modal:true,
+    width: 500,
+    buttons: {
+      Upload: function() {
+        $('#imageUploadLeftSidebar').uploadifyUpload();
+      },
+      'Clear queue': function() {
+        $('#imageUploadLeftSidebar').uploadifyClearQueue();
+      }
+    },
+    resizable:'se'
+  });
+	
   $('#fileUploadDialog').dialog({
     autoOpen:false,
     modal:true,

@@ -10,6 +10,11 @@ function openimageUploadDialog(link){
 }
 
 //open an upload dialog Box
+function openimageUploadDialogLeftSidebar(link){
+  initImageUploadLeftSidebar(link);
+}
+
+//open an upload dialog Box
 function openfileUploadDialog(){
   initFileUpload();
   $('#fileSelectDialog').dialog('open');

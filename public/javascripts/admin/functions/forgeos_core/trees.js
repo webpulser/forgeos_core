@@ -90,7 +90,7 @@ function init_category_tree(selector, type, source) {
 					},
 					add_image : {
 			    	label	: "Add image",
-			      icon	: "create",
+			      icon	: "image",
 			      visible	: function (NODE, TREE_OBJ) {
 			      	var ok = true;
 			        $.each(NODE, function () {
@@ -102,7 +102,9 @@ function init_category_tree(selector, type, source) {
 			        return ok;
 			      },
 			      action	: function (NODE, TREE_OBJ) {
-			      	alert('Je suis dans forgeos_core js/functions/trees L.105 edit me !')
+							var cat_id = get_rails_element_id(NODE);
+
+			      	openimageUploadDialogLeftSidebar(cat_id);
 					    return false;
             }
           }
