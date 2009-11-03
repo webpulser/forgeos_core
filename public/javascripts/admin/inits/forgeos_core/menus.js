@@ -57,7 +57,6 @@ jQuery(document).ready(function(){
 
     // set the menu link and all its children to deleted
     $(menu_list).find('.menu_link').each(function(){
-      console.info($(this));
       $(this).find('.delete').val(1);
     });
 

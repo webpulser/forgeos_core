@@ -9,6 +9,14 @@ class MenuLink < ActiveRecord::Base
 
   accepts_nested_attributes_for :children, :allow_destroy => true
 
+  def kind
+    read_attribute(:type)
+  end
+  
+  def kind=(kind)
+    write_attribute(:type, kind)
+  end
+
   def clone
     menu_link = super
     menu_link.children = self.children.collect(&:clone)

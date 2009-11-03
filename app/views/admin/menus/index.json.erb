@@ -13,7 +13,7 @@
            :class => "small-icons #{klass}",
            :id => "show_#{link_id}"
         }),
-        #link_to('', [:duplicate, :admin, menu], :class => 'small-icons duplicate-link') +
+        link_to('', [:duplicate, :admin, menu], :class => 'small-icons duplicate-link') +
         link_to('', [:edit, :admin, menu], :class => 'small-icons edit-link') +
         link_to_remote('', :url => [:admin, menu],
           :method => :delete,
