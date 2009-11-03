@@ -22,5 +22,7 @@ Sass::Plugin.options[:style] = :compact
 ActionController::Dispatcher.middleware.insert -1, 'FlashSessionCookieMiddleware'
 require 'forgeos'
 
-config.time_zone = Setting.first.time_zone
-I18n.default_locale = Setting.first.lang.to_sym
+if settings = Setting.first
+  config.time_zone = settings.time_zone
+  I18n.default_locale = settings.lang.to_sym
+end
