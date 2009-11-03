@@ -1,3 +1,4 @@
+# encoding: utf-8
 module Forgeos
   def self.url_generator(phrase = '')
     url = phrase.dup
