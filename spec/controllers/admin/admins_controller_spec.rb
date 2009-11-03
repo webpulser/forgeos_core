@@ -3,25 +3,17 @@ require File.expand_path(File.dirname(__FILE__) + '/../../spec_helper')
 describe Admin::AdminsController, "GET index" do
   should_require_admin_login :get, :index
   
-  describe "admin admin" do
-    before(:each) do
-      login_as_admin
-      Admin.stub!(:all).and_return @admins
-    end
-
-    it "should load all admins" do
-      Admin.should_receive(:all)
-      get :index
-    end
-    
+  describe 'index' do
     it "should assign @admins" do
-      get :index
-      assigns[:admins].should == @admins
+      get :index, :format => 'json'
+      assigns[:admins].should_not == nil
     end
     
     it "should render the index template" do
       get :index
-      response.should render_template("index")
+      response.should render_template(:index)
+      get :index, :format => 'json'
+      response.should render_template(:index)
     end
   end
 end

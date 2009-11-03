@@ -2,14 +2,18 @@
 class Admin::CategoriesController < Admin::BaseController
   before_filter :get_category, :only => [:edit, :update, :destroy, :add_element]
   before_filter :new_category, :only => [:new, :create]
-  skip_before_filter :login_required, :only => [:index]
   skip_before_filter :set_currency, :only => [:index]
   
   # List Categories like a Tree.
   def index
-    klass = params[:type].camelize.constantize
+    unless params[:type]
+      flash[:error] = t('category.found.failed')
+      return redirect_to(:root)
+    end
+    klass = params[:type].camelize.constantize 
     @categories = klass.find_all_by_parent_id(nil)
     respond_to do |format|
+      format.html{ redirect_to(:root) }
       format.json{ render :json => @categories.collect(&:to_jstree).to_json }
     end
   end
@@ -79,6 +83,7 @@ private
   def get_category
     unless @category = Category.find_by_id(params[:id])
       flash[:error] = I18n.t('category.found.failed').capitalize
+      return redirect_to(:action => :index)
     end
   end
   

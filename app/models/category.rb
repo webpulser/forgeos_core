@@ -17,7 +17,8 @@ class Category < ActiveRecord::Base
   end
 
   def total_elements_count
-    ([self.elements.count] + children.collect(&:total_elements_count)).inject(:+)
+    return 0 if self.elements.empty? & children.empty?
+    ([self.elements.size] + children.collect(&:total_elements_count)).sum
   end
   
   def category_picture

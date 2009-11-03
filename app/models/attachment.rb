@@ -14,7 +14,7 @@ class Attachment < ActiveRecord::Base
   
   def fill_blank_name_with_filename
     if self.name.nil? || self.name.blank?
-      self.name = self.filename.split('.').first
+      self.name = self.filename.split('.').first if self.filename
     end
   end  
 end

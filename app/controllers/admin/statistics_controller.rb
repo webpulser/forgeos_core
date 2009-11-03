@@ -33,7 +33,8 @@ private
   def generate_graph(element, y_max, colour)
     # Conf for X axis
     steps = 4
-    days_step = (@date.count / steps) > 0 ? @date.count / steps : 1
+    days_ratio = @date.to_a.size / steps
+    days_step = (days_ratio) > 0 ? days_ratio : 1
 
     x_labels = XAxisLabels.new
     x_labels.set_steps(days_step)
@@ -62,7 +63,7 @@ private
     y_axis.stroke = 0
 
     # Conf for Y right axis
-    if y_max.count > 1
+    if y_max.size > 1
       y_axis_right = YAxisRight.new
       y_axis_right.set_range(0, y_max[1], (y_max[1])/4) if y_max
       y_axis_right.tick_length = 0

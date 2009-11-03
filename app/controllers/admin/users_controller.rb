@@ -67,7 +67,7 @@ class Admin::UsersController < Admin::BaseController
       end
     end
     if request.xhr?
-      render(:partial => 'list', :locals => { :users => @users })
+      render :nothing => true
     else
       return redirect_to(:back)
     end
@@ -135,7 +135,7 @@ private
 
   def get_user
     unless @user = User.find_by_id(params[:id])
-      flash[:notice] = I18n.t('user.not_exist').capitalize
+      flash[:error] = I18n.t('user.not_exist').capitalize
       return redirect_to(admin_users_path)
     end
   end
@@ -171,10 +171,10 @@ private
   def sort
     columns = %w(lastname lastname email joined_on activated_at)
 
-    per_page = params[:iDisplayLength].to_i
-    offset =  params[:iDisplayStart].to_i
+    per_page = params[:iDisplayLength] ? params[:iDisplayLength].to_i : 10
+    offset = params[:iDisplayStart] ? params[:iDisplayStart].to_i : 0
     page = (offset / per_page) + 1
-    order = "#{columns[params[:iSortCol_0].to_i]} #{params[:iSortDir_0].upcase}"
+    order = "#{columns[params[:iSortCol_0].to_i]} #{params[:iSortDir_0] ? params[:iSortDir_0].upcase : 'ASC'}"
 
     conditions = {}
     includes = []

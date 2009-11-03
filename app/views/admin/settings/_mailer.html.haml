@@ -1,0 +1,38 @@
+- f.fields_for :mailer do |mailer|
+  = mailer.label :delivery_method
+  %div
+    = mailer.select :delivery_method, [['SMTP','smtp'],['sendmail','sendmail'],['Test','test']], { :prompt => t(:please_select) }
+  .clear
+  #smtp
+    - mailer.fields_for :smtp_settings do |smtp|
+      = smtp.label :address
+      %div
+        = smtp.text_field :address
+      = smtp.label :port
+      %div  
+        = smtp.text_field :port
+      = smtp.label :domain
+      %div
+        = smtp.text_field :domain
+      = smtp.label :authentication
+      %div
+        = smtp.select :authentication, [['plain','plain'],['login','login'],['cran_md5','cran_md5']], { :prompt => t(:please_select) }
+      .clear
+      = smtp.label :user_name
+      %div
+        = smtp.text_field :user_name
+      = smtp.label :password
+      %div
+        = smtp.text_field :password
+      = smtp.label :enable_starttls_auto
+      %div   
+        = smtp.check_box :enable_starttls_auto
+  #sendmail
+    - mailer.fields_for :sendmail_settings do |sendmail|
+      = sendmail.label :location
+      %div
+        = sendmail.text_field :location
+      = sendmail.label :arguments
+      %div
+        = sendmail.text_field :arguments
+  #test
