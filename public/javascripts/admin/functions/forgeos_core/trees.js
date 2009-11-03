@@ -103,7 +103,11 @@ function init_category_tree(selector, type, source) {
 			      },
 			      action	: function (NODE, TREE_OBJ) {
 							var cat_id = get_rails_element_id(NODE);
-
+							$('.tree-li-selected-to-add-image').each(function(){
+								$(this).removeClass('tree-li-selected-to-add-image');
+							});
+							$(NODE).addClass("tree-li-selected-to-add-image");
+							
 			      	openimageUploadDialogLeftSidebar(cat_id);
 					    return false;
             }

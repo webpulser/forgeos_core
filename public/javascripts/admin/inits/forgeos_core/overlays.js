@@ -36,7 +36,20 @@ jQuery(document).ready(function(){
       }
     },
     resizable:'se'
+  }); 
+
+ $('#imageSelectDialogLeftSidebar').dialog({
+    autoOpen:false,
+    modal:true,
+    width: 800,
+    buttons: {
+      Ok: function() {
+       	add_picture_to_category();
+      },
+    },
+    resizable:'se'
   });
+
 	
   $('#fileUploadDialog').dialog({
     autoOpen:false,
