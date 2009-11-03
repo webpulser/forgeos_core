@@ -22,7 +22,7 @@ Sass::Plugin.options[:style] = :compact
 ActionController::Dispatcher.middleware.insert -1, 'FlashSessionCookieMiddleware'
 require 'forgeos'
 
-if settings = Setting.first
+if ActiveRecord::Base.connection.tables.include?(Setting.table_name) && settings = Setting.first
   config.time_zone = settings.time_zone
   I18n.default_locale = settings.lang.to_sym
 end
