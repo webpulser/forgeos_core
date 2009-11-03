@@ -86,7 +86,6 @@ class Admin::AttachmentsController < Admin::BaseController
             end
             render :json => { :result => 'success', :id => @media.id, :path => @media.public_filename(''), :size => @media.size, :type => @media.type.to_s.upcase }
           else
-            logger.debug("\033[01;33m#{@media.errors.inspect}\033[00m")
             render :json => { :result => 'error', :error => @media.errors.first }
           end
         else

@@ -24,7 +24,6 @@ class Admin::UsersController < Admin::BaseController
       redirect_to(admin_users_path)
     else
       flash[:error] = I18n.t('user.create.failed').capitalize
-      logger.debug(@user.errors.inspect)
       render :action => 'new'
     end
   end
