@@ -1,4 +1,4 @@
-require 'osrtuct'
+require 'ostruct'
 class Setting < ActiveRecord::Base
   belongs_to :address
   serialize :mailer, OpenStruct
