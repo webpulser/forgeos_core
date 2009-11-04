@@ -7,7 +7,9 @@ class CreateSettings < ActiveRecord::Migration
         :phone_number,
         :fax_number,
         :email
-      t.text :mailer
+      t.text :mailer,
+        :smtp_settings,
+        :sendmail_settings
       t.belongs_to :address
     end
   end
