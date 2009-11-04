@@ -3,105 +3,60 @@ jQuery(document).ready(function(){
   // Add root menu link
   $('.button-menu-link').live('click',function(){
     var menu = $('#menu-tree').children('ul');
-    var new_menu_list = '<li class="file last closed">';
-    new_menu_list += $('#empty_menu_link').html().replace(/EMPTY_ID/g, false_id);
-    new_menu_list += '</li>';
+    var new_menu_link = '<li class="file last closed">';
+    new_menu_link += $('#empty_menu_link').html().replace(/EMPTY_ID/g, false_id).replace(/EMPTY_NAME/g, false_id);
+    new_menu_link += '</li>';
 
-    $(menu).append(new_menu_list);
+    $(menu).append(new_menu_link);
     false_id--;
     return false;
   });
 
-  // Add menu link
+  // Add sub menu link
   $('.tree-menu-tree li .menu_link .action-links .add-green-plus').live('click',function(){
-    // reference
-    var menu_list = $(this).parents('li:first');
-    var menuContainer = $(this).parents('.menu_link');
-
-    console.info('hu');
-    console.info($(this));
-
-    // new link
-    var new_menu_list = $('<li class="file last closed">').append(jquery_obj_to_str(menuContainer));
-    var new_menuContainer = $(new_menu_list).find('.menu_link');
+    var current_menu_link = $(this).parents('li:first');
    
-    var menuLinks = $(new_menuContainer).children('.tree-link');
-    var edition_block = $(menuLinks).filter('.editing');
-    var link = $(menuLinks).filter('a');
-    
-    $(menu_list).parent().append(new_menu_list);
+    // get list of the current menu_link or create one
+    var menu_list = $(current_menu_link).children('ul');
+    if (menu_list.length == 0) {
+      $(current_menu_link).append($('<ul>'));
+      menu_list = $(current_menu_link).children('ul');
+    }
 
-    // set attributes
-    $(edition_block).find('input, textarea, select').each(function(){
-      var id = $(this).attr('id');
-      var name = $(this).attr('name');
-
-      var attributes = name.split('[');
-      var attribute = attributes[attributes.length-1].replace(']','');
-
-      // replace rails_id in id and name html attributes
-      if (id != ""){      
-        var previous_id = attributes[attributes.length-2].replace(']','');
-        var re = new RegExp('^(.*)'+previous_id+'(.*?)$');
-
-        $(this).attr('id', id.replace(re, '$1'+false_id+'$2'));
-        $(this).attr('name', name.replace(re, '$1'+false_id+'$2'));
-      }
-
-      // reset attributes values
-      switch(attribute)
-        {
-        // FIXME: link_to, interactivity
-        case 'title':
-          $(this).val('');
-          link.find('.name').html('');
-          break;
-
-        case 'url':
-          $(this).val('');
-          link.attr('href', '');
-          break;
-
-        case 'active':
-          status_span = link.find('.status');
-          // update select
-          $(this).val(1);
-          rebuild_custom_select('.select-status');
-
-          // set visible
-          if (status_span.hasClass('see-off')){
-            status_span.removeClass('see-off');
-            status_span.addClass('see-on');
-          }
-          break;
-
-        case 'id':
-          $(this).remove();
-          break;
-         
-        case 'kind':
-          $(this).val('ExternalLink');
-          break;
-
-        case 'delete', 'target_id', 'target_type', 'position':
-          $(this).val('');
-          break;
-        }
+    // get menu_link ancestors
+    var ancestor_ids = [];
+    $(this).parents('li').each(function(){
+        var attributes = $(this).find('input:first').attr('name').split('[');
+        var ancestor_id = attributes[attributes.length-2].replace(']','');
+        ancestor_ids.push(ancestor_id);
     });
 
-    // set classes of spans to external
-    var linked_to_span = $(edition_block).find('.linked-to-span');
-    $(linked_to_span).removeClass();
-    $(linked_to_span).addClass('small-icons external linked-to-span');
-    $(linked_to_span).html('');
+    // constructs new menu_link id/name depending on its ancestors
+    var new_id = false_id;
+    var new_name = false_id;
+    if (ancestor_ids.length > 0){
+      ancestor_ids = ancestor_ids.reverse();
+      new_id = ancestor_ids.join('_children_attributes_') + '_children_attributes_' + false_id;
+      new_name = ancestor_ids.join('][children_attributes][') + '][children_attributes][' + false_id;
+    }
 
-    var name_span = $(menuLinks).find('.name');
-    $(name_span).removeClass();
-    $(name_span).addClass('small-icons external name');
-    $(name_span).html('');
+    // create new menu link and append it to the list of the current menu_link
+    var new_menu_link = '<li class="file last closed">';
+    new_menu_link += $('#empty_menu_link').html().replace(/EMPTY_ID/g, new_id).replace(/EMPTY_NAME/g, new_name);
+    new_menu_link += '</li>';
+    $(menu_list).append(new_menu_link);
 
-    // set edition block visible
-    menuLinks.toggle();
+    // TODO: refactor with remove menu link
+    // open current menu_link if closed
+    if (current_menu_link.hasClass('closed')){
+      current_menu_link.removeClass('closed');
+      current_menu_link.addClass('open');
+    }
+    if (current_menu_link.hasClass('file')){
+      current_menu_link.removeClass('file');
+      current_menu_link.addClass('folder');
+    }
+
     false_id--;
     return false;
   });
@@ -160,15 +115,31 @@ jQuery(document).ready(function(){
 
   // Remove menu link
   $('.tree-menu-tree li .menu_link .action-links .destroy-link').live('click',function(){
-    var menu_list = $(this).parents('li:first');
+    var menu_link = $(this).parents('li:first');
 
     // set the menu link and all its children to deleted
-    $(menu_list).find('.menu_link').each(function(){
+    $(menu_link).find('.menu_link').each(function(){
       $(this).find('.delete').val(1);
     });
 
     // hide menu link and its children
-    $(menu_list).hide();
+    $(menu_link).hide();
+
+    // close parent menu_link if there was only one sub menu_link
+    var parent_menu_link = menu_link.parents('li:first');
+    var sub_menu_links = parent_menu_link.find('li.open:visible, li.closed:visible');
+
+    // TODO: refactor with add sub menu link
+    if (sub_menu_links.length == 0){
+      if (parent_menu_link.hasClass('open')){
+        parent_menu_link.removeClass('open');
+        parent_menu_link.addClass('closed');
+      }
+      if (parent_menu_link.hasClass('folder')){
+        parent_menu_link.removeClass('folder');
+        parent_menu_link.addClass('file');
+      }
+    }
     return false;
   });
 });
