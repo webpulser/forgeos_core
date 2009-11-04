@@ -42,8 +42,7 @@
           %select
             %option= t('menu.clickable').capitalize
         .clear
-
-        %div.actions
+        .actions
           = link_to content_tag(:span, t(:save_changes), :class => 'small-icons save'), '#', :class => 'backgrounds action-button'
           = I18n.t('or')
           = link_to I18n.t('cancel').capitalize, '#', :class => 'back-link'

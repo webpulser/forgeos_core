@@ -6,29 +6,23 @@
       = I18n.t('or')
       = link_to I18n.t('cancel').capitalize, admin_menus_path, :class => 'back-link'
 
-  #content.grid_16.alpha.omega
-    .grid_12.alpha
+  #content.grid_12.alpha.omega
+    
+    .inner-content
       #menu-tree.padding-wrap
         %ul.init-tree
           = render :partial => 'form_menu_links', :locals => { :menu_links => @menu.menu_links, :form => f, :has_parent => false }
+      = link_to t('menu.link.add').capitalize, '#', :class => 'small-icons add-link button-menu-link'
 
-    /
-      - f.fields_for :menu_links do |menu_link_form|
-        = menu_link_form.text_field :title
+  #right-sidebar.grid_4.alpha.omega
+    .step
+      = link_to content_tag(:span, I18n.t('menu.link.add').capitalize, :class => 'small-icons add-menu-link'), '#', :class => 'backgrounds button button-menu-link'
+     
+    .step
+      - unless menu.new_record?
+        = link_to I18n.t('menu.duplicate').capitalize, duplicate_admin_menu_path(menu), :class => 'small-icons duplicate'
+        = link_to I18n.t('menu.destroy.action').capitalize, [:admin, menu], :confirm => I18n.t('menu.destroy.confirm').capitalize, :method => :delete, :class => 'small-icons delete'
+      .clear
+  .clear
 
-        = menu_link_form.object_name
-        = menu_link_form.object
-        = menu_link_form.object.id
-        = menu_link_form.object.title
-
-
-
-      = link_to t('menu.link.add').capitalize, '#', :class => 'small-icons add-link'
-  
-    #right-sidebar.grid_4.omega
-      .step
-        - unless menu.new_record?
-          = link_to I18n.t('menu.duplicate').capitalize, duplicate_admin_menu_path(menu), :class => 'small-icons duplicate'
-          = link_to I18n.t('menu.destroy.action').capitalize, [:admin, menu], :confirm => I18n.t('menu.destroy.confirm').capitalize, :method => :delete, :class => 'small-icons delete'
-        .clear
-    .clear
+= render :partial => 'empty_menu_link'

@@ -1,0 +1,39 @@
+- id = 'EMPTY_ID'
+%li.file.last.closed#empty_menu_link{:style => 'display: none'}
+  .menu_link
+    %a.tree-link{ :style => "display: none;" }
+      %span.small-icons.name.external
+      %span.small-icons.status.see-on
+    .tree-link.editing{ :style => "display: block;" }
+      %label= "#{t('menu.link.title').capitalize} :"
+      = text_field_tag "menu[menu_links_attributes][#{id}][title]", '', :id => "menu_menu_links_attributes_#{id}_title"
+
+      = hidden_field_tag "menu[menu_links_attributes][#{id}][url]", '', :id => "menu_menu_links_attributes_#{id}_url"
+      = hidden_field_tag "menu[menu_links_attributes][#{id}][_delete]", '', :id => "menu_menu_links_attributes_#{id}__delete", :class => 'delete'
+      = hidden_field_tag "menu[menu_links_attributes][#{id}][kind]", 'ExternalLink', :id => "menu_menu_links_attributes_#{id}_kind"
+      = hidden_field_tag "menu[menu_links_attributes][#{id}][parent_id]", '', :id => "menu_menu_links_attributes_#{id}_parent_id"
+      = hidden_field_tag "menu[menu_links_attributes][#{id}][target_id]", '', :id => "menu_menu_links_attributes_#{id}_target_id"
+      = hidden_field_tag "menu[menu_links_attributes][#{id}][target_type]", '', :id => "menu_menu_links_attributes_#{id}_target_type"
+      = hidden_field_tag "menu[menu_links_attributes][#{id}][position]", '', :id => "menu_menu_links_attributes_#{id}_position"
+
+      %label= "#{t('menu.linked_to').capitalize} :"
+      %span.external.linked-to-span.small-icons
+        %a
+      %span.link= link_to t('menu.link.change'), '#', :class => 'change-target'
+      %label= "#{t('menu.visibility').capitalize} :"
+      .select-status
+        = select_tag 'menu[menu_links_attributes][4][active]', options_for_select([[t('menu.show').capitalize, 1], [t('menu.hide').capitalize, 0]], :selected => 1)
+      %label= "#{t('menu.interactivity').capitalize} :"
+      %div
+        %select
+          %option= t('menu.clickable').capitalize
+      .clear
+      .actions
+        = link_to content_tag(:span, t(:save_changes), :class => 'small-icons save'), '#', :class => 'backgrounds action-button'
+        = I18n.t('or')
+        = link_to I18n.t('cancel').capitalize, '#', :class => 'back-link'
+
+    %span.action-links
+      = link_to '', '#', :class => 'small-icons add-green-plus'
+      = link_to '', '#', :class => 'small-icons edit-link'
+      = link_to '', '#', :class => 'small-icons destroy-link'
