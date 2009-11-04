@@ -1,18 +1,18 @@
-logout '/logout', :controller => 'sessions', :action => 'destroy'
-login '/login', :controller => 'sessions', :action => 'new'
+logout '/logout', :controller => 'person_sessions', :action => 'destroy'
+login '/login', :controller => 'person_sessions', :action => 'new'
 
-resource :session
+resource :person_session
 
 namespace :admin do |admin|
-  admin.logout '/logout', :controller => 'sessions', :action => 'destroy'
-  admin.login '/login', :controller => 'sessions', :action => 'new'
+  admin.logout '/logout', :controller => 'person_sessions', :action => 'destroy'
+  admin.login '/login', :controller => 'person_sessions', :action => 'new'
   admin.notifications '/notifications', :controller => 'base', :action => 'notifications'
   admin.statistics '/statistics', :controller => 'statistics'
   admin.statistics_graph '/statistics/graph', :controller => 'statistics', :action => 'graph'
  
-  admin.resource :session
+  admin.resource :person_session
   admin.resource :setting
-  admin.resources :account
+  admin.resource :account
   admin.resources :admins
   admin.resources :roles, :member => { :activate => :post }
   admin.resources :rights

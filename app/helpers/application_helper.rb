@@ -1,6 +1,9 @@
 # Methods added to this helper will be available to all templates in the application.
 module ApplicationHelper
-  
+   def logged_in?
+    current_user
+  end
+ 
   def build_menu(menu = Forgeos::Menu,options = { :menu => :menu}, html_options = {})
     menu_name = options.delete(:menu)
     menu.each do |tab|

@@ -1,0 +1,25 @@
+#container.container_16
+  #spacer.grid_16
+    #notifications.grid_16
+  .grid_3
+    &nbsp;
+  #login-container.grid_10
+    .sign-in-message
+      = t('log.in.action').capitalize
+    - form_for @person_session, :url => admin_person_session_path do |f|
+      = f.label :email, I18n.t('email').capitalize
+      %br
+      = f.text_field :email, :class => 'text'
+      %br
+      = f.label :password, I18n.t('password').capitalize
+      %br
+      = f.password_field :password, :class => 'text'
+      -#%a{ :href => "#" }
+      = link_to t('get_forgotten_password').capitalize, :action => 'reset_password'
+      %br
+      = f.check_box :remember_me
+      = t(:remember_me).capitalize
+      %br
+      = f.submit t('log.in.action').capitalize, :class => 'backgrounds submit-button'
+  .grid_3
+    &nbsp;
