@@ -3,6 +3,18 @@ fr:
   activerecord:
     models:
       user: client
+
+      media: media
+      doc: document
+      pdf: pdf
+      video: vidéo
+      picture: image
+
+      external_link: lien externe
+      category_link: lien vers une catégorie
+      page_link: lien vers une page
+      product_link: lien vers un produit
+
     errors:
       template:
         header:

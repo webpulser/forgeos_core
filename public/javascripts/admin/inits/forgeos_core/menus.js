@@ -1,5 +1,22 @@
 jQuery(document).ready(function(){
 
+  // Dialog to change menu link type
+  $('#menuLinkTypeDialog').dialog({
+    autoOpen:false,
+    modal:true,
+    minHeight: 380,
+    width: 800,
+    resizable:'se',
+    buttons: {
+      Ok: function(){
+        $('#fileSelectDialog').dialog('close');
+      }
+    },
+    open: function(){ 
+      $('#table-files').dataTableInstance().fnDraw(); 
+    }
+  });
+
   // Add root menu link
   $('.button-menu-link').live('click',function(){
     var menu = $('#menu-tree').children('ul');
@@ -140,6 +157,49 @@ jQuery(document).ready(function(){
         parent_menu_link.addClass('file');
       }
     }
+    return false;
+  });
+
+  // Change menu link type
+  $('.tree-menu-tree li .menu_link .editing .change-type').live('click',function(){
+    var edition_block = $(this).parents('.editing');
+    var link_type = $(edition_block).find('.input-type').val();
+
+    switch(link_type)
+      {
+      case 'ExternalLink':
+        // update url input text field
+        var url = $(edition_block).find('.input-url');
+        var overlay_url = $('#overlay-url');
+        overlay_url.val(url.val());
+
+        $('#menuLinkTypeDialog').dialog('option', 'buttons', {
+          "Ok": function(){         
+            var link = $(edition_block).find('.linked-to-span a');
+
+            link.html(overlay_url.val());
+            link.attr('href', overlay_url.val());
+            url.val(overlay_url.val());
+
+            $(this).dialog("close"); 
+          } 
+        });
+        break;
+
+      case 'PageLink':
+        // TODO
+        break;
+
+      case 'ProductLink':
+        // TODO
+        break;
+
+      case 'CategoryLink':
+        // TODO
+        break;
+      }
+
+    $('#menuLinkTypeDialog').dialog('open');      
     return false;
   });
 });

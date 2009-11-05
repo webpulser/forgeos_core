@@ -1,0 +1,26 @@
+#menuLinkTypeDialog.media-hoverlay
+  #inner-lightbox.backgrounds
+    = link_to_function ExternalLink.human_name, "toggle_menu_types_overlays()", :class => "small-icons external"
+    = link_to_function PageLink.human_name, "update_current_dataTable_source('#table-files','#{escape_javascript(admin_pages_path(:mode => 'selection',:format => :json))}'); toggle_menu_types_overlays()", :class => "small-icons page"
+    = link_to_function ProductLink.human_name, "update_current_dataTable_source('#table-files','#{escape_javascript(admin_products_path(:mode => 'selection',:format => :json))}'); toggle_menu_types_overlays()", :class => "small-icons product"
+    = link_to_function CategoryLink.human_name, "update_current_dataTable_source('#table-files','#{escape_javascript(admin_categories_path(:mode => 'selection',:format => :json))}'); toggle_menu_types_overlays()", :class => "small-icons category"
+
+
+    - %w(pdf video).each do |file_type|
+      = link_to_function I18n.t(:other, :scope => [:media,file_type]), "update_current_dataTable_source('#table-files','#{escape_javascript(admin_attachments_path(:mode => 'selection',:format => :json, :file_type => file_type))}'); toggle_menu_types_overlays()", :class => "small-icons #{file_type}"
+
+  .media-hoverlay-header
+    #search.right.files
+      = fg_search
+    .backgrounds.search-form-files
+
+  .media-hoverlay-content
+    #target-link{:style => 'display: none'}
+      %table#table-files.datatable.media.selectable_rows
+        %tr
+          %td
+    #external-link
+      %label= "#{t(:url).capitalize} :"
+      = text_field_tag "url", '', :id => "overlay-url"
+
+= dataTables_tag :id => 'table-files', :url => admin_attachments_path(:format => :json, :file_type => 'pdf', :mode => 'selection'), :columns => ["{'sClass':'th-checkbox-container', 'bSortable': false }","{ 'sTitle': '#{I18n.t('media.filename')}'}","{ 'sTitle': '#{I18n.t('media.content_type')}'}","{ 'sTitle': '#{I18n.t('media.updated_at')}'}","{ 'sTitle': '#{I18n.t('media.size')}'}", '{"bVisible": false}', '{ "bVisible": false }','{ "bVisible": false}','{ "bVisible": false}','{ "bVisible": false}']

@@ -24,5 +24,6 @@
         = link_to I18n.t('menu.destroy.action').capitalize, [:admin, menu], :confirm => I18n.t('menu.destroy.confirm').capitalize, :method => :delete, :class => 'small-icons delete'
       .clear
   .clear
+  = render :partial => 'types_popups', :locals => {:form => f}
 
 = render :partial => 'empty_menu_link'

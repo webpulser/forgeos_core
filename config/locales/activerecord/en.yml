@@ -2,9 +2,15 @@
 en:
   activerecord:
     models:
+      user: user
+
       media: media
       doc: document
       pdf: pdf
       video: video
       picture: picture
-      user: user
+
+      external_link: external link
+      category_link: category link
+      page_link: page link
+      product_link: product link
