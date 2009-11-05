@@ -47,32 +47,32 @@ function init_category_tree(selector, type, source) {
       'contextmenu': {
         items : {
           create : {
-            label	: "Créer",
-            icon	: "create",
-            visible	: function (NODE, TREE_OBJ) {
+            label : "Créer",
+            icon  : "create",
+            visible : function (NODE, TREE_OBJ) {
               if(NODE.length != 1) return 0;
               return TREE_OBJ.check("creatable", NODE);
             },
-            action	: function (NODE, TREE_OBJ) {
+            action  : function (NODE, TREE_OBJ) {
               TREE_OBJ.create(false, TREE_OBJ.get_node(NODE[0]));
             },
             separator_after : false
           },
           rename : {
-            label	: "Renommer",
-            icon	: "rename",
-            visible	: function (NODE, TREE_OBJ) {
+            label : "Renommer",
+            icon  : "rename",
+            visible : function (NODE, TREE_OBJ) {
               if(NODE.length != 1) return false;
               return TREE_OBJ.check("renameable", NODE);
             },
-            action	: function (NODE, TREE_OBJ) {
+            action  : function (NODE, TREE_OBJ) {
               TREE_OBJ.rename(NODE);
             }
           },
           remove : {
-            label	: "Supprimer",
-            icon	: "remove",
-            visible	: function (NODE, TREE_OBJ) {
+            label : "Supprimer",
+            icon  : "remove",
+            visible : function (NODE, TREE_OBJ) {
               var ok = true;
               $.each(NODE, function () {
                 if(TREE_OBJ.check("deletable", this) == false) {
@@ -82,34 +82,34 @@ function init_category_tree(selector, type, source) {
               });
               return ok;
             },
-            action	: function (NODE, TREE_OBJ) {
+            action  : function (NODE, TREE_OBJ) {
               $.each(NODE, function () {
                 TREE_OBJ.remove(this);
               });
-						}
-					},
-					add_image : {
-			    	label	: "Add image",
-			      icon	: "image",
-			      visible	: function (NODE, TREE_OBJ) {
-			      	var ok = true;
-			        $.each(NODE, function () {
-			        	if(TREE_OBJ.check("deletable", this) == false) {
-			          	ok = false;
-			            return false;
-			          }
-			        });
-			        return ok;
-			      },
-			      action	: function (NODE, TREE_OBJ) {
-							var cat_id = get_rails_element_id(NODE);
-							$('.tree-li-selected-to-add-image').each(function(){
-								$(this).removeClass('tree-li-selected-to-add-image');
-							});
-							$(NODE).addClass("tree-li-selected-to-add-image");
-							
-			      	openimageUploadDialogLeftSidebar(cat_id);
-					    return false;
+            }
+          },
+          add_image : {
+            label : "Add image",
+            icon  : "image",
+            visible : function (NODE, TREE_OBJ) {
+              var ok = true;
+              $.each(NODE, function () {
+                if(TREE_OBJ.check("deletable", this) == false) {
+                  ok = false;
+                  return false;
+                }
+              });
+              return ok;
+            },
+            action  : function (NODE, TREE_OBJ) {
+              var cat_id = get_rails_element_id(NODE);
+              $('.tree-li-selected-to-add-image').each(function(){
+                $(this).removeClass('tree-li-selected-to-add-image');
+              });
+              $(NODE).addClass("tree-li-selected-to-add-image");
+              
+              openimageUploadDialogLeftSidebar(cat_id);
+              return false;
             }
           }
         }
@@ -189,7 +189,7 @@ function init_category_tree(selector, type, source) {
       oncopy: function(NODE,REF_NODE,TYPE,TREE_OBJ,RB) { duplicate_category(NODE, type); },
       onselect: function(NODE,TREE_OBJ) {
         var cat_id = get_rails_element_id(NODE);
-        var current_table = oTable;
+        var current_table = $('#table').dataTableInstance();
         var url = current_table.fnSettings().sAjaxSource;
         var url_base = url.split('?')[0];
         var params;
@@ -200,7 +200,7 @@ function init_category_tree(selector, type, source) {
         params = stringify_params_from_json(params);
 
         // construct url and redraw table
-        update_current_dataTable_source('#'+oTable.sInstance,url_base + '?' + params);
+        update_current_dataTable_source('#table',url_base + '?' + params);
         return true;
       },
       // remove count span
