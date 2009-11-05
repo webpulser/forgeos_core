@@ -27,7 +27,7 @@ require 'forgeos'
 if ActiveRecord::Base.connection.tables.include?(Setting.table_name) && settings = Setting.first
   config.time_zone = settings.time_zone
   I18n.default_locale = settings.lang.to_sym
-  ActionMailer::Base.delivery_method = settings.mailer.delivery_method || :smtp
+  ActionMailer::Base.delivery_method = settings.mailer ? settings.mailer.delivery_method : :smtp
   ActionMailer::Base.smtp_settings = settings.smtp_settings
   ActionMailer::Base.sendmail_settings = settings.sendmail_settings
 end
