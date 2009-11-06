@@ -160,12 +160,12 @@ jQuery(document).ready(function(){
     }
   });
 
-  // FIXME
   // Change menu link type
   $('.tree-menu-tree li .menu_link .editing .change-type').live('click',function(){
     var edition_block = $(this).parents('.editing');
     var link_type = $(edition_block).find('.input-type');
 
+    var title = $(edition_block).find('.input-title');
     var url = $(edition_block).find('.input-url');
     var span = $(edition_block).find('.linked-to-span');
     var link = $(edition_block).find('.linked-to-span a');
@@ -214,7 +214,8 @@ jQuery(document).ready(function(){
         $(span).removeClass('external page product category');
 
         if (current_tab.hasClass('external')){
-          update_menu_link(span, link, url, link_type, target_id, target_type, {
+          update_menu_link(title, span, link, url, link_type, target_id, target_type, {
+            'title': title.val(),
             'type': 'external',
             'link_name': overlay_url.val(),
             'link_url': overlay_url.val(),
@@ -243,7 +244,8 @@ jQuery(document).ready(function(){
               type = 'category';
             }
 
-            update_menu_link(span, link, url, link_type, target_id, target_type, {
+            update_menu_link(title, span, link, url, link_type, target_id, target_type, {
+              'title': target.html(),
               'type': type,
               'link_name': target.html(),
               'link_url': target.attr('href'),
