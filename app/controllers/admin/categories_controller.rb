@@ -7,7 +7,7 @@ class Admin::CategoriesController < Admin::BaseController
   # List Categories like a Tree.
   def index
     unless params[:type]
-      flash[:error] = t('category.found.failed')
+      flash[:error] = t('category.not_exist')
       return redirect_to(:root)
     end
     klass = params[:type].camelize.constantize 
@@ -82,7 +82,7 @@ class Admin::CategoriesController < Admin::BaseController
 private
   def get_category
     unless @category = Category.find_by_id(params[:id])
-      flash[:error] = I18n.t('category.found.failed').capitalize
+      flash[:error] = I18n.t('category.not_exist').capitalize
       return redirect_to(:action => :index)
     end
   end

@@ -1,22 +1,5 @@
 jQuery(document).ready(function(){
 
-  // Dialog to change menu link type
-  $('#menuLinkTypeDialog').dialog({
-    autoOpen:false,
-    modal:true,
-    minHeight: 380,
-    width: 800,
-    resizable:'se',
-    buttons: {
-      Ok: function(){
-        $('#fileSelectDialog').dialog('close');
-      }
-    },
-    open: function(){ 
-      $('#table-files').dataTableInstance().fnDraw(); 
-    }
-  });
-
   // Add root menu link
   $('.button-menu-link').live('click',function(){
     var menu = $('#menu-tree').children('ul');
@@ -160,46 +143,129 @@ jQuery(document).ready(function(){
     return false;
   });
 
+  // Dialog to change menu link type
+  $('#menuLinkTypeDialog').dialog({
+    autoOpen:false,
+    modal:true,
+    minHeight: 380,
+    width: 800,
+    resizable:'se',
+    buttons: {
+      Ok: function(){
+        $('#fileSelectDialog').dialog('close');
+      }
+    },
+    open: function(){ 
+      $('#table-files').dataTableInstance().fnDraw();
+    }
+  });
+
+  // FIXME
   // Change menu link type
   $('.tree-menu-tree li .menu_link .editing .change-type').live('click',function(){
     var edition_block = $(this).parents('.editing');
-    var link_type = $(edition_block).find('.input-type').val();
+    var link_type = $(edition_block).find('.input-type');
 
-    switch(link_type)
-      {
-      case 'ExternalLink':
-        // update url input text field
-        var url = $(edition_block).find('.input-url');
-        var overlay_url = $('#overlay-url');
-        overlay_url.val(url.val());
+    var url = $(edition_block).find('.input-url');
+    var span = $(edition_block).find('.linked-to-span');
+    var link = $(edition_block).find('.linked-to-span a');
+    var target_id = $(edition_block).find('.input-target-id');
+    var target_type = $(edition_block).find('.input-target-type');
+    var overlay_url = $('#overlay-url');
+    
+    // on open - show overlay and hide other overlays
+    $('#menuLinkTypeDialog').bind('dialogopen', function(event, ui) {
+      var overlay_tab;
+      var overlay_type = 'target-link';
 
-        $('#menuLinkTypeDialog').dialog('option', 'buttons', {
-          "Ok": function(){         
-            var link = $(edition_block).find('.linked-to-span a');
+      switch(link_type.val())
+        {
+        case 'PageLink':
+          overlay_tab = 'page';
+          update_current_dataTable_source('#table-files','/admin/pages.json?mode=menu_link');
+          break;
 
-            link.html(overlay_url.val());
-            link.attr('href', overlay_url.val());
-            url.val(overlay_url.val());
+        case 'ProductLink':
+          overlay_tab = 'product';
+          update_current_dataTable_source('#table-files','/admin/products.json?mode=menu_link');
+          break;
+          
+        case 'CategoryLink':
+          overlay_tab = 'category';
+          update_current_dataTable_source('#table-files','/admin/categories.json?mode=menu_link');
+          break;
 
-            $(this).dialog("close"); 
-          } 
-        });
-        break;
+        default:
+          overlay_tab = 'external';
+          overlay_type = 'external-link';
+          // set overlay input value
+          overlay_url.val(url.val());
+        }
 
-      case 'PageLink':
-        // TODO
-        break;
+      toggleSelectedOverlay('#inner-lightbox.backgrounds .' + overlay_tab);
+      toggle_menu_types_overlays(overlay_type);
+    });
 
-      case 'ProductLink':
-        // TODO
-        break;
+    // on OK button pressed - update link, hidden fields and close dialog
+    $('#menuLinkTypeDialog').dialog('option', 'buttons', {
+      "Ok": function(){
+        var current_tab = $('#inner-lightbox.backgrounds .selected');
 
-      case 'CategoryLink':
-        // TODO
-        break;
+        $(span).removeClass('external page product category');
+
+        if (current_tab.hasClass('external')){
+          update_menu_link(span, link, url, link_type, target_id, target_type, {
+            'type': 'external',
+            'link_name': overlay_url.val(),
+            'link_url': overlay_url.val(),
+            'hidden_url': overlay_url.val(),
+            'hidden_type': 'ExternalLink',
+            'hidden_target_id': '',
+            'hidden_target_type': ''       
+            }
+          ); 
+        }
+        else{
+          dataTableSelectRows('#table-files:visible',function(current_table,indexes){
+            var row = current_table.fnGetData(indexes[0]);
+            var id = row.slice(-1)[0];
+            var name = row.slice(-2,-1)[0];
+            var target = $(name).find('a');
+
+            var type;
+            if (current_tab.hasClass('page')){
+              type = 'page';
+            }
+            else if (current_tab.hasClass('product')){
+              type = 'product';
+            }
+            else if (current_tab.hasClass('category')){
+              type = 'category';
+            }
+
+            update_menu_link(span, link, url, link_type, target_id, target_type, {
+              'type': type,
+              'link_name': target.html(),
+              'link_url': target.attr('href'),
+              'hidden_url': '',
+              'hidden_type': capitalize(type)+'Link',
+              'hidden_target_id': id,
+              'hidden_target_type': capitalize(type)
+              }
+            );
+          });
+        }
+
+        $(this).dialog("close"); 
       }
+    });
 
-    $('#menuLinkTypeDialog').dialog('open');      
+    // on close - reset overlay url input text field
+    $('#menuLinkTypeDialog').bind('dialogbeforeclose', function(event, ui) {
+      overlay_url.val('');
+    });
+
+    $('#menuLinkTypeDialog').dialog('open');
     return false;
   });
 });

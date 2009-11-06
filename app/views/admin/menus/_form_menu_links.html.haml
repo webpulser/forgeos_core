@@ -13,22 +13,22 @@
 
       .tree-link.editing
         %label= "#{t('menu.link.title').capitalize} :"
-        = menu_link_form.text_field :title
+        = menu_link_form.text_field :title, :class => 'input-title'
 
         = menu_link_form.hidden_field :url, :class => 'input-url'
         = menu_link_form.hidden_field :_delete, :class => 'delete'
         = menu_link_form.hidden_field :kind, :class => 'input-type'
         = menu_link_form.hidden_field :id
         = menu_link_form.hidden_field :parent_id
-        = menu_link_form.hidden_field :target_id
-        = menu_link_form.hidden_field :target_type, :value => menu_link.target_type.blank? ? nil : menu_link.target_type
+        = menu_link_form.hidden_field :target_id, :class => 'input-target-id'
+        = menu_link_form.hidden_field :target_type, :value => (menu_link.target_type.blank? ? nil : menu_link.target_type), :class => 'input-target-type'
         = menu_link_form.hidden_field :position
 
         %label= "#{t('menu.linked_to').capitalize} :"
         - target = (menu_link.target_type.nil? or menu_link.target_type.blank?) ? nil : menu_link.target
         %span.small-icons.linked-to-span{:class => link_class}
           - if target
-            = link_to target.respond_to?('title') ? target.title : target.name, [:admin, target]
+            = link_to target.name, [:admin, target]
           - else
             = link_to menu_link.url
         %span.link

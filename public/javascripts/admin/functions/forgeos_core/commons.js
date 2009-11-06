@@ -66,3 +66,7 @@ function stringify_params_from_json(json_params){
   });
   return params.join('&');
 }
+
+function capitalize(string){
+  return string.charAt(0).toUpperCase() + string.slice(1);
+}

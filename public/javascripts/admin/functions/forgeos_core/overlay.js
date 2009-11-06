@@ -24,3 +24,11 @@ function openfileUploadDialog(){
 function closeDialogBox(){
   $('.lightbox-container').dialog('close');
 }
+
+// Add class 'selected' to element and remove it from its siblings
+function toggleSelectedOverlay(element){
+  if(!$(element).hasClass('selected')){
+    $(element).addClass('selected');
+    $(element).siblings().removeClass('selected');
+  }
+}
