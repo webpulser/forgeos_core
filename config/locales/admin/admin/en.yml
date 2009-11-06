@@ -2,7 +2,7 @@ en:
   admin:
     one: user
     other: users
-    none: 'no user'
+    none: no user
     all: all users
     show: show user
     not_exist: the requested user does not exist

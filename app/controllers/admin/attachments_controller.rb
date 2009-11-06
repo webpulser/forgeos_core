@@ -67,22 +67,10 @@ class Admin::AttachmentsController < Admin::BaseController
             flash[:notice] = I18n.t('media.create.success').capitalize
 
             if params[:target] && params[:target_id] && !params[:target].blank?
-              
-              begin
-                target = params[:target].camelize
-                # check if model is an available type
-                unless Forgeos::AttachableTypes.include?(target)
-                  return render :json => { :result => 'error', :error => I18n.t('media.attach.unknown_type').capitalize }
-                end
-              rescue NameError
-                return render :json => { :result => 'error', :error => I18n.t('media.attach.failed').capitalize }
-              end
-
               type = target.constantize
               object = type.find_by_id(params[:target_id])
               attachments = (object.attachment_ids << @media.id)
               object.update_attribute('attachment_ids', attachments)
-              
             end
             render :json => { :result => 'success', :id => @media.id, :path => @media.public_filename(''), :size => @media.size, :type => @media.type.to_s.upcase }
           else
@@ -102,7 +90,7 @@ class Admin::AttachmentsController < Admin::BaseController
     else
       flash[:notice] = I18n.t('media.destroy.failed').capitalize
     end
-    return render :nothing => true if request.xhr?
+    return render(:nothing => true) if request.xhr?
     return redirect_to(admin_attachments_path(:file_type => @media.class.to_s.underscore))
   end
 
