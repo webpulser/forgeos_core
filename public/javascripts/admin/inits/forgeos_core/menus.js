@@ -46,16 +46,8 @@ jQuery(document).ready(function(){
     new_menu_link += '</li>';
     $(menu_list).append(new_menu_link);
 
-    // TODO: refactor with remove menu link
     // open current menu_link if closed
-    if (current_menu_link.hasClass('closed')){
-      current_menu_link.removeClass('closed');
-      current_menu_link.addClass('open');
-    }
-    if (current_menu_link.hasClass('file')){
-      current_menu_link.removeClass('file');
-      current_menu_link.addClass('folder');
-    }
+    toggle_menu_link(current_menu_link);
 
     false_id--;
     return false;
@@ -65,9 +57,12 @@ jQuery(document).ready(function(){
   $('.tree-menu-tree li .menu_link .action-links .edit-link, .tree-menu-tree li .menu_link .actions .back-link').live('click',function(){
     var menuContainer = $(this).parents('.menu_link');
     var menuLinks = menuContainer.children('.tree-link');
+    var link = $(menuLinks).filter('a');
+    var link_span = $(link).find('.name');
 
     var edition_block = $(menuLinks).filter('.editing');
-    var link = $(menuLinks).filter('a');
+    var edition_span = $(edition_block).find('.linked-to-span');
+    var edition_link = $(edition_span).find('a');
 
     menuLinks.toggle();
 
@@ -75,23 +70,46 @@ jQuery(document).ready(function(){
     if (!$(edition_block).is(':visible')){
       var back_link = $(this).hasClass('back-link');
 
+      // back-link is pressed then reset icon else update icon
+      if (back_link)
+        update_menu_span_icon(link_span, edition_span);
+      else
+        update_menu_span_icon(edition_span, link_span);
+
       // back-link is pressed then reset attributes else update attributes
       $(edition_block).find('input, textarea, select').each(function(){
         switch(get_rails_element_id($(this)))
           {
           // FIXME: link_to, interactivity
           case 'title':
-            if (back_link)
-              $(this).val(link.find('.name').html());
-            else
-              link.find('.name').html($(this).val());
+            if (back_link){
+              // reset title text field...
+              $(this).val(link_span.html());
+              
+              // and edition link title
+              if (edition_span.hasClass('external'))
+                // edition link url
+                edition_link.html(link.attr('href'));
+              else
+                // target name
+                edition_link.html($('#linked-to').html());
+            }
+            else{
+              // update view link title
+              link_span.html($(this).val());
+              $('#linked-to').html(edition_link.html());
+            }
             break;
 
           case 'url':
-            if (back_link)
+            if (back_link){
+              // reset url hidden field and edition link url
               $(this).val(link.attr('href'));
+              edition_link.attr('href', link.attr('href'));
+            }
             else
-              link.attr('href', $(this).val());
+              // update view link url
+              link.attr('href', edition_link.attr('href'));
             break;
 
           case 'active':
@@ -128,18 +146,8 @@ jQuery(document).ready(function(){
     // close parent menu_link if there was only one sub menu_link
     var parent_menu_link = menu_link.parents('li:first');
     var sub_menu_links = parent_menu_link.find('li.open:visible, li.closed:visible');
-
-    // TODO: refactor with add sub menu link
-    if (sub_menu_links.length == 0){
-      if (parent_menu_link.hasClass('open')){
-        parent_menu_link.removeClass('open');
-        parent_menu_link.addClass('closed');
-      }
-      if (parent_menu_link.hasClass('folder')){
-        parent_menu_link.removeClass('folder');
-        parent_menu_link.addClass('file');
-      }
-    }
+    if (sub_menu_links.length == 0)
+      toggle_menu_link(parent_menu_link);
     return false;
   });
 
@@ -211,7 +219,7 @@ jQuery(document).ready(function(){
       "Ok": function(){
         var current_tab = $('#inner-lightbox.backgrounds .selected');
 
-        $(span).removeClass('external page product category');
+        span.removeClass('external page product category');
 
         if (current_tab.hasClass('external')){
           update_menu_link(title, span, link, url, link_type, target_id, target_type, {
@@ -271,3 +279,4 @@ jQuery(document).ready(function(){
     return false;
   });
 });
+

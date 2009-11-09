@@ -21,3 +21,23 @@ function update_menu_link(title, link_span, link, url, link_type, target_id, tar
   target_id.val(data.hidden_target_id);
   target_type.val(data.hidden_target_type);
 }
+
+function update_menu_span_icon(base_span, span_to_update){
+  span_to_update.removeClass('external page product category');
+  if (base_span.hasClass('external'))
+    span_to_update.addClass('external');
+  else if (base_span.hasClass('page'))
+    span_to_update.addClass('page');
+  else if (base_span.hasClass('product'))
+    span_to_update.addClass('product');
+  else if (base_span.hasClass('category'))
+    span_to_update.addClass('category');
+}
+
+function toggle_menu_link(menu_link){
+  menu_link.toggleClass('closed');
+  menu_link.toggleClass('open');
+
+  menu_link.toggleClass('file');
+  menu_link.toggleClass('folder');
+}
