@@ -28,4 +28,21 @@ class Person < ActiveRecord::Base
   def fullname
     "#{lastname} #{firstname}"
   end
+
+  # Disactivates the user in the database.
+  def disactivate
+    self.active = false
+    save(false) unless self.new_record?
+  end
+
+  # Activates the user in the database.
+  def activate
+    self.active = true
+    save(false) unless self.new_record?
+  end
+
+  # return the user status
+  def active?
+    self.active
+  end
 end
