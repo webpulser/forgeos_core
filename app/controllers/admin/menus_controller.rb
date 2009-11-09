@@ -29,8 +29,6 @@ class Admin::MenusController < Admin::BaseController
       return redirect_to([:admin, @menu])
     else
       flash[:error] = I18n.t('menu.create.failed').capitalize
-      logger.debug "*"*400
-      logger.debug logger.debug @menu.errors.collect{ |e, m| "- #{e.humanize unless e == 'base'} #{m}\n" }.to_s
       render :action => 'new'
     end
   end
@@ -97,9 +95,9 @@ private
     options[:order] = order unless order.squeeze.blank?
 
     if params[:sSearch] && !params[:sSearch].blank?
-      @menus = Menu.search(params[:sSearch],options)
+      @menus = Menu.search(params[:sSearch], options)
     else
-      @menus = Menu.paginate(:all,options)
+      @menus = Menu.paginate(:all, options)
     end
   end
 end

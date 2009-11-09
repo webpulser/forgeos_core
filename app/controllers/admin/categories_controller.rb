@@ -3,18 +3,24 @@ class Admin::CategoriesController < Admin::BaseController
   before_filter :get_category, :only => [:edit, :update, :destroy, :add_element]
   before_filter :new_category, :only => [:new, :create]
   skip_before_filter :set_currency, :only => [:index]
-  
-  # List Categories like a Tree.
+ 
+  # List Categories
   def index
-    unless params[:type]
-      flash[:error] = t('category.not_exist')
-      return redirect_to(:root)
-    end
-    klass = params[:type].camelize.constantize 
-    @categories = klass.find_all_by_parent_id(nil)
     respond_to do |format|
       format.html{ redirect_to(:root) }
-      format.json{ render :json => @categories.collect(&:to_jstree).to_json }
+      format.json do
+        unless params[:type]
+          # list page and product categories
+          sort
+          render :layout => false
+        else
+          # list categories like a tree
+          klass = params[:type].camelize.constantize
+          @categories = klass.find_all_by_parent_id(nil)
+
+          render :json => @categories.collect(&:to_jstree).to_json
+        end
+      end
     end
   end
 
@@ -89,5 +95,30 @@ private
   
   def new_category
     @category = Category.new(params[:category])
+  end
+
+  def sort
+    columns = %w(categories.name categories.name)
+    per_page = params[:iDisplayLength].to_i
+    offset =  params[:iDisplayStart].to_i
+    page = (offset / per_page) + 1
+    order_column = params[:iSortCol_0].to_i
+    order = "#{columns[order_column]} #{params[:iSortDir_0].upcase}"
+
+    conditions = {}
+    conditions[:type] = params[:types].collect{ |type| "#{type}Category".camelize } if params[:types]
+
+    options = { :page => page, :per_page => per_page }
+    options[:conditions] = conditions unless conditions.empty?
+    options[:order] = order unless order.squeeze.blank?
+
+    logger.debug "*"*400
+    logger.debug conditions
+
+    if params[:sSearch] && !params[:sSearch].blank?
+      @categories = Category.search(params[:sSearch], options)
+    else
+      @categories = Category.paginate(:all, options)
+    end
   end
 end

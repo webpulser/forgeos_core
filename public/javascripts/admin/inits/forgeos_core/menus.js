@@ -200,7 +200,7 @@ jQuery(document).ready(function(){
           
         case 'CategoryLink':
           overlay_tab = 'category';
-          update_current_dataTable_source('#table-files','/admin/categories.json?mode=menu_link');
+          update_current_dataTable_source('#table-files',"/admin/categories.json?mode=menu_link&types[]='page'&types[]='product'");
           break;
 
         default:
