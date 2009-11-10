@@ -1,5 +1,4 @@
-# coding: utf-8
-require 'action_view/helpers/assert_tag_helper'
+# encoding: utf-8
 module Forgeos
   # Set administration's menu
   AdminMenu = [

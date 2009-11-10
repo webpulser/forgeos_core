@@ -12,3 +12,9 @@ ActionView::Base.field_error_proc = Proc.new do |html_tag, instance|
     html_tag
   end
 end
+
+require 'has_many_polymorphs'
+require 'has_many_polymorphs/extensions'
+class ActiveRecord::Base
+  extend ActiveRecord::Associations::PolymorphicClassMethods 
+end 

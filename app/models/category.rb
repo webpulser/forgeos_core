@@ -1,6 +1,5 @@
 class Category < ActiveRecord::Base
   acts_as_tree
-  has_and_belongs_to_many :attachments, :list => true, :order => 'position', :join_table => 'attachments_elements', :foreign_key => 'element_id'
   validates_presence_of :name
 
   # Returns the level of <i>Category</i>
@@ -38,5 +37,4 @@ class Category < ActiveRecord::Base
     end
     hash
   end
-  
 end

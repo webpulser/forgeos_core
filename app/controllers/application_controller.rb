@@ -41,3 +41,11 @@ private
     session[:return_to] = request.request_uri
   end
 end
+
+AttachmentLink
+
+Forgeos::HasSortableAttachments.each do |element|
+  klass = element.to_s.singularize.camelize.constantize
+  klass.send(:include,SortableAttachments)
+  klass.send(:alias_method_chain, :attachment_ids=, :position)
+end
