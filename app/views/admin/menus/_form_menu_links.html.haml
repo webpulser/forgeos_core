@@ -53,6 +53,7 @@
         = link_to '', '#', :class => 'small-icons edit-link'
         = link_to '', '#', :class => 'small-icons destroy-link'
 
-    - unless menu_link.children.nil? or menu_link.children.blank?
-      %ul= render :partial => 'form_menu_links', :locals => { :form => menu_link_form, :has_parent => true }
+    %ul
+      - unless menu_link.children.nil? or menu_link.children.blank?
+        = render :partial => 'form_menu_links', :locals => { :form => menu_link_form, :has_parent => true }
 

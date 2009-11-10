@@ -21,7 +21,7 @@
       %span.external.linked-to-span.small-icons
         %a
       %span#linked-to
-      %span.link= link_to t('menu.link.change'), '#', :class => 'change-target'
+      %span.link= link_to t('menu.link.change'), '#', :class => 'change-type'
       %label= "#{t('menu.visibility').capitalize} :"
       .select-status
         = select_tag "menu[menu_links_attributes][#{name}][active]", options_for_select([[t('menu.show').capitalize, 1], [t('menu.hide').capitalize, 0]], :selected => 1)
@@ -39,3 +39,4 @@
       = link_to '', '#', :class => 'small-icons add-green-plus'
       = link_to '', '#', :class => 'small-icons edit-link'
       = link_to '', '#', :class => 'small-icons destroy-link'
+  %ul

@@ -34,10 +34,17 @@ function update_menu_span_icon(base_span, span_to_update){
     span_to_update.addClass('category');
 }
 
-function toggle_menu_link(menu_link){
-  menu_link.toggleClass('closed');
-  menu_link.toggleClass('open');
+// mode is either 'open' or 'closed'
+function toggle_menu_link(menu_link, mode){
+  var folder = (mode == ('closed')) ? 'file' : 'folder';
 
-  menu_link.toggleClass('file');
-  menu_link.toggleClass('folder');
+  if (!menu_link.hasClass(mode)){
+    menu_link.toggleClass('closed');
+    menu_link.toggleClass('open');
+  }
+
+  if (!menu_link.hasClass(folder)){
+    menu_link.toggleClass('file');
+    menu_link.toggleClass('folder');
+  }
 }

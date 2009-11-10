@@ -1,5 +1,4 @@
 jQuery(document).ready(function(){
-
   // Add root menu link
   $('.button-menu-link').live('click',function(){
     var menu = $('#menu-tree').children('ul');
@@ -46,8 +45,8 @@ jQuery(document).ready(function(){
     new_menu_link += '</li>';
     $(menu_list).append(new_menu_link);
 
-    // open current menu_link if closed
-    toggle_menu_link(current_menu_link);
+    // open current menu_link
+    toggle_menu_link(current_menu_link, 'open');
 
     false_id--;
     return false;
@@ -147,7 +146,7 @@ jQuery(document).ready(function(){
     var parent_menu_link = menu_link.parents('li:first');
     var sub_menu_links = parent_menu_link.find('li.open:visible, li.closed:visible');
     if (sub_menu_links.length == 0)
-      toggle_menu_link(parent_menu_link);
+      toggle_menu_link(parent_menu_link, 'closed');
     return false;
   });
 
@@ -242,15 +241,12 @@ jQuery(document).ready(function(){
             var target = $(name).find('a');
 
             var type;
-            if (current_tab.hasClass('page')){
+            if (current_tab.hasClass('page'))
               type = 'page';
-            }
-            else if (current_tab.hasClass('product')){
+            else if (current_tab.hasClass('product'))
               type = 'product';
-            }
-            else if (current_tab.hasClass('category')){
+            else if (current_tab.hasClass('category'))
               type = 'category';
-            }
 
             update_menu_link(title, span, link, url, link_type, target_id, target_type, {
               'title': target.html(),
@@ -279,4 +275,3 @@ jQuery(document).ready(function(){
     return false;
   });
 });
-
