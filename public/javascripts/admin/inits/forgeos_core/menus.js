@@ -57,16 +57,17 @@ jQuery(document).ready(function(){
 
   // Edition mode in menu link edit
   $('.tree-menu-tree li .menu_link .action-links .edit-link, .tree-menu-tree li .menu_link .actions .back-link').live('click',function(){
-    var menuContainer = $(this).parents('.menu_link');
-    var menuLinks = menuContainer.children('.tree-link');
-    var link = $(menuLinks).filter('a');
+    var menu_link = $(this).parents('li:first');
+    var link = $(menu_link).find('a.tree-link:first');
     var link_span = $(link).find('.name');
 
-    var edition_block = $(menuLinks).filter('.editing');
+    var edition_block = $(menu_link).find('.editing:first');
     var edition_span = $(edition_block).find('.linked-to-span');
     var edition_link = $(edition_span).find('a');
 
-    menuLinks.toggle();
+    // toggle link and edition_block
+    link.toggle();
+    edition_block.toggle();
 
     // on closing edition part
     if (!$(edition_block).is(':visible')){
@@ -99,7 +100,7 @@ jQuery(document).ready(function(){
             else{
               // update view link title
               link_span.html($(this).val());
-              $('#linked-to').html(edition_link.html());
+              $(edition_block).find('.linked-to').html(edition_link.html());
             }
             break;
 

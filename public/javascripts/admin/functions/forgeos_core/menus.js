@@ -58,7 +58,7 @@ function update_menu_positions(list){
 
     position.val(index);
 
-    // update those of its children    
+    // update those of its children
     if (child_list.length > 0)
       update_menu_positions(child_list);
   });

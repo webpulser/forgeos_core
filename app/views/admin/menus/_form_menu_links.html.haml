@@ -7,7 +7,7 @@
 
   %li{ :class => menu_link.children.empty? ? 'file' : 'folder' }
     - link_to menu_link.url, :class => 'tree-link' do
-      %span.small-icons{ :class => link_class }
+      %span.small-icons.name{ :class => link_class }
         = menu_link.title
       %span.small-icons.status{ :class => menu_link.active ? 'see-on' : 'see-off' }
 
