@@ -7,6 +7,8 @@ jQuery(document).ready(function(){
     new_menu_link += '</li>';
 
     $(menu).append(new_menu_link);
+    update_menu_positions(menu);
+
     false_id--;
     return false;
   });
@@ -45,7 +47,8 @@ jQuery(document).ready(function(){
     new_menu_link += '</li>';
     $(menu_list).append(new_menu_link);
 
-    // open current menu_link
+    // update positions and open current menu_link
+    update_menu_positions($('#menu-tree').children('ul'));
     toggle_menu_link(current_menu_link, 'open');
 
     false_id--;
@@ -79,7 +82,7 @@ jQuery(document).ready(function(){
       $(edition_block).find('input, textarea, select').each(function(){
         switch(get_rails_element_id($(this)))
           {
-          // FIXME: link_to, interactivity
+          // TODO: interactivity
           case 'title':
             if (back_link){
               // reset title text field...
@@ -91,7 +94,7 @@ jQuery(document).ready(function(){
                 edition_link.html(link.attr('href'));
               else
                 // target name
-                edition_link.html($('#linked-to').html());
+                edition_link.html($(edition_block).find('.linked-to').html());
             }
             else{
               // update view link title
@@ -139,7 +142,8 @@ jQuery(document).ready(function(){
       $(this).find('.delete').val(1);
     });
 
-    // hide menu link and its children
+    // update positions and hide menu link and its children
+    update_menu_positions($('#menu-tree').children('ul'))
     $(menu_link).hide();
 
     // close parent menu_link if there was only one sub menu_link

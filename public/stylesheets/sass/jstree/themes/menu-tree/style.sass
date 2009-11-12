@@ -27,9 +27,20 @@
     &.closed
       background: url("dark-blue-plus.png") 0 3px no-repeat
 
-#jstree-dragged.tree-menu-tree li li.open
-  background: url("dark-blue-plus.png") 0 3px no-repeat
+#jstree-dragged.tree-menu-tree
+  background: white
+  .editing
+    display: none
+  li.open
+    background: url("dark-blue-plus.png") 0 3px no-repeat
 
+#jstree-marker
+  background-color: #FBEC88
+  background-position: 0 0 !important
+  height: 2px
+
+  &.marker
+    width: 500px !important
 
 #menu-tree.tree-menu-tree li
   display: block
@@ -37,6 +48,11 @@
   position: relative
   background-color: #FFF
   margin: 2px 0
+
+  &:hover
+    .menu_link
+      .action-links
+        display: block
 
   &.file
     background: none

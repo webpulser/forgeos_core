@@ -12,7 +12,6 @@ function showObjectsAssociated(){
   });
 }
 
-
 function get_rails_element_id(element){
   var id = $(element).attr('id').split('_');
   return id[id.length-1];
@@ -29,6 +28,11 @@ function get_rails_element_ids(list){
 function get_id_from_rails_url(){
   var numbers = document.location.pathname.match(/\d+/);
   return numbers == null ? '' : numbers[0];
+}
+
+function get_rails_attribute_from_name(name){
+  var attributes = name.split('[');
+  return attributes[attributes.length-1].replace(']','');
 }
 
 function jquery_obj_to_str(obj){

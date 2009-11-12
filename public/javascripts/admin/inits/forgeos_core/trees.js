@@ -17,11 +17,26 @@ jQuery(document).ready(function(){
       theme_name : 'menu-tree',
       selected_parent_close: false
     },
-    rules: {draggable: 'all', clickable: 'all'},
+    rules: {
+      draggable: 'all', 
+      clickable: 'all'
+    },
     callback: {
       onload: function(TREE_OBJ){
         tree_id = $(TREE_OBJ.container).attr('id');
         $(TREE_OBJ.container).removeClass('tree-default');
+        },
+      onmove: function(NODE, REF_NODE, TYPE, TREE_OBJ, RB){
+        var menu = $('#menu-tree').children('ul');
+        var parent = $(NODE).parents('li:first');
+
+        // update names, ids, parent_ids and positions
+        update_menu_names_and_ids(menu, 'menu[menu_links_attributes]', 'menu_menu_links_attributes_');
+        update_menu_positions(menu);
+
+        // open parent of moved node
+        if (parent)
+          toggle_menu_link(parent, 'open');
       }
     }
   });

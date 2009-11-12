@@ -48,3 +48,47 @@ function toggle_menu_link(menu_link, mode){
     menu_link.toggleClass('folder');
   }
 }
+
+// update position for each child of the list and for their children
+function update_menu_positions(list){
+  $(list).children('li').each(function(){
+    var index = $(this).parent().children('li').index(this);
+    var position = $(this).find('.menu_link:first').find('input:regex(id,.+_position)');
+    var child_list = $(this).children('ul:first');
+
+    position.val(index);
+
+    // update those of its children    
+    if (child_list.length > 0)
+      update_menu_positions(child_list);
+  });
+}
+
+// update name, id and parent_id for each child of the list and for their children
+function update_menu_names_and_ids(list, base_name, base_id){
+  $(list).children('li').each(function(){
+    var index = $(this).parent().children('li').index(this);
+    var name = base_name + '[' + index + ']';
+    var id = base_id + index;
+
+    var parent_id = $(this).parents('li:first').find('input:regex(id,.+_id)')[0];
+    var input_parent_id = $(this).find('.menu_link:first').find('input:regex(id,.+_parent_id)');
+
+    var child_list = $(this).children('ul:first');
+
+    // update parent_id
+    input_parent_id.val(parent_id ? $(parent_id).val() : '');
+
+    // update name and attribute of each form field
+    $(this).find('input, textarea, select').each(function(){
+      if (attribute = get_rails_attribute_from_name($(this).attr('name'))){
+        $(this).attr('name', name + '[' + attribute + ']');
+        $(this).attr('id', id + '_' + attribute);
+      }
+    });
+ 
+    // update those of its children
+    if (child_list.length > 0)
+      update_menu_names_and_ids(child_list, name + '[children_attributes]', id + '_children_attributes_');
+  });
+}
