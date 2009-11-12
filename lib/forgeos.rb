@@ -1,5 +1,4 @@
 # coding: utf-8
-require 'action_view/helpers/assert_tag_helper'
 require 'forgeos/menu'
 require 'forgeos/url_generator'
 require 'forgeos/statistics'
@@ -12,6 +11,10 @@ ActionView::Base.field_error_proc = Proc.new do |html_tag, instance|
     html_tag
   end
 end
+
+require 'action_view/helpers/assert_tag_helper'
+require 'action_view/helpers/form_helper'
+require 'action_view/helpers/form_helper_extensions'
 
 begin
   require 'has_many_polymorphs'
