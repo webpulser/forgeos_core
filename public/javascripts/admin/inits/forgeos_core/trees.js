@@ -17,10 +17,6 @@ jQuery(document).ready(function(){
       theme_name : 'menu-tree',
       selected_parent_close: false
     },
-    rules: {
-      draggable: 'all', 
-      clickable: 'all'
-    },
     callback: {
       onload: function(TREE_OBJ){
         tree_id = $(TREE_OBJ.container).attr('id');
@@ -41,6 +37,23 @@ jQuery(document).ready(function(){
     }
   });
 
+  //init the menu modify tree
+  $("#menu-tree-ro").tree({
+    ui: {
+      theme_path: '/stylesheets/jstree/themes/',
+      theme_name : 'menu-tree',
+      selected_parent_close: false
+    },
+    types: { 'default':
+      { draggable: false, clickable: false}
+    },
+    callback: {
+      onload: function(TREE_OBJ){
+        tree_id = $(TREE_OBJ.container).attr('id');
+        $(TREE_OBJ.container).removeClass('tree-default');
+      }
+    }
+  });
 	$("#association-media-tree").tree({
 	  ui: {
 	    theme_path: '/stylesheets/jstree/themes/',

@@ -1,7 +1,0 @@
-%li{ :class => menu_link.children.empty? ? 'file' : 'folder' }
-  .menu_link
-    - span_title = content_tag(:span, menu_link.title, :class => 'small-icons page')
-    - span_status = content_tag :span, '', :class => "small-icons #{menu_link.active ? 'see-on' : 'see-off'}"
-    = link_to  span_title + span_status, menu_link.url, :class => 'tree-link'
-  - unless menu_link.children.nil? or menu_link.children.blank?
-    %ul= render :partial => 'menu_link', :collection => menu_link.children

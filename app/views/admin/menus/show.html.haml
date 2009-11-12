@@ -9,9 +9,8 @@
       = link_to I18n.t('menu.back').capitalize, admin_menus_path, :class => 'back-link'
   #content.grid_16.alpha.omega
     .grid_12.alpha
-      #menu-tree.init-tree
-        %ul
-          = render :partial => 'menu_link', :collection => @menu.menu_links
+      #menu-tree-ro.tree.tree-menu-tree
+        %ul.ltr= render :partial => 'admin/menu_links/show', :collection => @menu.menu_links
 
     #right-sidebar.grid_4.omega
       .step

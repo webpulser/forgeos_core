@@ -1,3 +1,15 @@
+#jstree-dragged.tree-menu-tree
+  a
+    background: white
+  .see-on, .see-off, .editing
+    display: none
+  li.open
+    background: url("dark-blue-plus.png") 0 3px no-repeat
+#jstree-marker
+  background-color: #FBEC88
+  background-position: 0 0 !important
+  height: 2px
+
 .tree-menu-tree
   margin: 20px 0px 20px 0
   padding: 0
@@ -22,100 +34,88 @@
         background-position: right top
 
   li
+    display: block !important
+    position: relative !important
+    background-color: #FFF
+    margin: 2px 0
+    padding-left: 15px
     &.open
       background: url("dark-blue-minus.png") 0 2px no-repeat
     &.closed
       background: url("dark-blue-plus.png") 0 3px no-repeat
+    &.file
+      background: none
+      .tree-link
+        background-color: #FFF
+    &.folder
+      .tree-link
+        background-color: #FAFAFA
+    &.last
+      float: none !important
+    &.marker
+      width: 500px !important
+    &:hover
+      .menu_link
+        .action-links
+          display: block
 
-#jstree-dragged.tree-menu-tree
-  background: white
-  .editing
-    display: none
-  li.open
-    background: url("dark-blue-plus.png") 0 3px no-repeat
 
-#jstree-marker
-  background-color: #FBEC88
-  background-position: 0 0 !important
-  height: 2px
-
-  &.marker
-    width: 500px !important
-
-#menu-tree.tree-menu-tree li
-  display: block
-  position: relative !important
-  position: relative
-  background-color: #FFF
-  margin: 2px 0
-
-  &:hover
-    .menu_link
-      .action-links
-        display: block
-
-  &.file
-    background: none
-  &.last
-    float: none !important
-
-  .tree-link
-    background: url("drag-drop.png") no-repeat left center
-    padding-top: 2px
-    padding-bottom: 2px
-    padding-left: 40px
-    border: 1px solid #E7E7E7
-    -moz-border-radius: 3px
-    -webkit-border-radius: 3px
-    position: relative
-    margin-right: 80px
-
-  &.folder
     .tree-link
-      background-color: #FAFAFA
+      background: url("drag-drop.png") no-repeat left center
+      padding-top: 2px
+      padding-bottom: 2px
+      padding-left: 40px
+      border: 1px solid #E7E7E7
+      -moz-border-radius: 3px
+      -webkit-border-radius: 3px
+      position: relative
+      margin-right: 80px
+    a.tree-link
+      display: block
+    div.tree-link
+      background: url("big-drag-and-drop.png") repeat-y left center
+      &.editing
+        display: none
 
-  &.file
-    .tree-link
+    &.leaf .tree-link
+      background: url("drag-drop.png") no-repeat left center
       background-color: #FFF
 
-  a.tree-link
-    display: block
+    .add-green-plus, .edit-link, .destroy-link
+      width: 16px
 
-  div.tree-link
-    background: url("big-drag-and-drop.png") repeat-y left center
-
-    &.editing
-      display: none
-
-  &.leaf .tree-link
-    background: url("drag-drop.png") no-repeat left center
-    background-color: #FFF
-
-  .add-green-plus, .edit-link, .destroy-link
-    width: 16px
-
-  .menu_link
-    .action-links
-      position: absolute
-      top: 2px
-      right: 0px
-      display: none
-      
-      a
-        width: 16px
-        padding: 0
-    &:hover
+    .menu_link
       .action-links
-        display: block
+        position: absolute
+        top: 2px
+        right: 0px
+        display: none
+        
+        a
+          width: 16px
+          padding: 0
+      &:hover
+        .action-links
+          display: block
 
-    .actions
-      color: #4D4D4D
-      a
-        color: #006EBD
-    .action-button
-      font-size: 1em
-      line-height: 1em
-      margin:0 0.5em 0 0
+      .actions
+        color: #4D4D4D
+        a
+          color: #006EBD
+      .action-button
+        font-size: 1em
+        line-height: 1em
+        margin:0 0.5em 0 0
+
+    a span
+      padding: 0 0 0 20px
+      font-weight: bold
+
+    .see-on, .see-off
+      position: absolute
+      right: 2px
+      top: 2px
+      padding: 0
 
 .tree-menu-tree-context
   width: 160px
@@ -178,18 +178,3 @@
     margin: 0 2px 0 24px
     min-height: 1px
     display: block
-
-
-.tree-menu-tree li
-  li
-    padding-left: 15px
-
-  a span
-    padding: 0 0 0 20px
-    font-weight: bold
-
-  .see-on, .see-off
-    position: absolute
-    right: 2px
-    top: 2px
-    padding: 0
