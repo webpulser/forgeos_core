@@ -73,20 +73,19 @@ function update_menu_names_and_ids(list, base_name, base_id){
 
     var parent_id = $(this).parents('li:first').find('input:regex(id,.+_id)')[0];
     var input_parent_id = $(this).find('.menu_link:first').find('input:regex(id,.+_parent_id)');
+    var input_menu_id = $(this).find('.menu_link:first').find('input:regex(id,.+_menu_id)');
 
     var child_list = $(this).children('ul:first');
 
     // update parent_id
-    input_parent_id.val(parent_id ? $(parent_id).val() : '');
+    if (parent_id){
+      input_parent_id.val($(parent_id).val());
+      input_menu_id.val('');
+    }else{
+      input_parent_id.val('');
+      input_menu_id.val(get_id_from_rails_url());
+    }
 
-    // update name and attribute of each form field
-    $(this).find('input, textarea, select').each(function(){
-      if (attribute = get_rails_attribute_from_name($(this).attr('name'))){
-        $(this).attr('name', name + '[' + attribute + ']');
-        $(this).attr('id', id + '_' + attribute);
-      }
-    });
- 
     // update those of its children
     if (child_list.length > 0)
       update_menu_names_and_ids(child_list, name + '[children_attributes]', id + '_children_attributes_');

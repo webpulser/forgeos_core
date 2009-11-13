@@ -56,7 +56,7 @@ jQuery(document).ready(function(){
   });
 
   // Edition mode in menu link edit
-  $('.tree-menu-tree li .menu_link .action-links .edit-link, .tree-menu-tree li .menu_link .actions .back-link').live('click',function(){
+  $('.tree-menu-tree li .menu_link .action-links .edit-link, .tree-menu-tree li .menu_link .actions .back-link, .tree-menu-tree li .menu_link .editing .save').live('click',function(){
     var menu_link = $(this).parents('li:first');
     var link = $(menu_link).find('a.tree-link:first');
     var link_span = $(link).find('.name');
@@ -143,15 +143,16 @@ jQuery(document).ready(function(){
       $(this).find('.delete').val(1);
     });
 
-    // update positions and hide menu link and its children
-    update_menu_positions($('#menu-tree').children('ul'))
-    $(menu_link).hide();
+    // hide menu link and its children and update positions
+    $(menu_link).children().hide();   
+    update_menu_positions($('#menu-tree').children('ul'));
 
     // close parent menu_link if there was only one sub menu_link
     var parent_menu_link = menu_link.parents('li:first');
     var sub_menu_links = parent_menu_link.find('li.open:visible, li.closed:visible');
     if (sub_menu_links.length == 0)
       toggle_menu_link(parent_menu_link, 'closed');
+
     return false;
   });
 

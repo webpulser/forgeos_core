@@ -42,6 +42,9 @@ class Admin::MenusController < Admin::BaseController
       return redirect_to(edit_admin_menu_path(@menu))
 #      return redirect_to([:admin, @menu])
     else
+      hu = @menu.errors.collect{ |e, m| "- #{e.humanize unless e == 'base'} #{m}\n" }.to_s
+      logger.debug("\033[01;33m#{hu}\033[0m")
+
       flash[:error] = I18n.t('menu.update.failed').capitalize
       render :action => 'edit'
     end
