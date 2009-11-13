@@ -9,7 +9,7 @@ class Admin::PersonSessionsController < Admin::BaseController
   def create
     @person_session = PersonSession.new(params[:person_session])
     if @person_session.save
-      redirect_to(:root)
+      redirect_to(:admin_root)
       flash[:notice] = I18n.t('log.in.success').capitalize
     else
       flash[:error] = I18n.t('log.in.failed').capitalize
