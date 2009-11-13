@@ -11,7 +11,7 @@ private
   def set_locale
     session[:locale] = current_user.lang if current_user
     locale = params[:locale] || session[:locale] || I18n.default_locale
-    I18n.locale = locale if I18n.available_locales.include?(locale.to_sym)
+    I18n.locale = locale if !locale.blank? && I18n.available_locales.include?(locale.to_sym)
   end
 
   def current_user_session
