@@ -205,7 +205,7 @@ jQuery(document).ready(function(){
           
         case 'CategoryLink':
           overlay_tab = 'category';
-          update_current_dataTable_source('#table-files',"/admin/categories.json?mode=menu_link&types[]='page'&types[]='product'");
+          update_current_dataTable_source('#table-files',"/admin/categories.json?mode=menu_link&types[]=page&types[]=product");
           break;
 
         default:
@@ -242,9 +242,9 @@ jQuery(document).ready(function(){
         else{
           dataTableSelectRows('#table-files:visible',function(current_table,indexes){
             var row = current_table.fnGetData(indexes[0]);
-            var id = row.slice(-1)[0];
-            var name = row.slice(-2,-1)[0];
-            var target = $(name).find('a');
+            var id = row.slice(-2,-1)[0];
+            var name = row.slice(-3,-2)[0];
+            var target = row.slice(-1)[0];
 
             var type;
             if (current_tab.hasClass('page'))
@@ -255,10 +255,10 @@ jQuery(document).ready(function(){
               type = 'category';
 
             update_menu_link(title, span, link, url, link_type, target_id, target_type, {
-              'title': target.html(),
+              'title': $(name).html(),
               'type': type,
-              'link_name': target.html(),
-              'link_url': target.attr('href'),
+              'link_name': $(name).html(),
+              'link_url': $(target).attr('href'),
               'hidden_url': '',
               'hidden_type': capitalize(type)+'Link',
               'hidden_target_id': id,

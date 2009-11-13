@@ -3,11 +3,11 @@
     :iTotalDisplayRecords => @categories.total_entries || 0,
     :aaData => @categories.collect do |category|
       link_id = "menu_link_#{category.id}"
-
       [
         content_tag(:div, '<div class="handler"></div><div class="small-icons category"></div>', :id => link_id, :class => 'handler_container'),
         content_tag(:div, category.name, :class => 'category-name'),
-        category.id
+        category.id,
+        link_to(category.name, [:admin, category])
       ]
     end
   }
