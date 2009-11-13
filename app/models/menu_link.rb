@@ -21,4 +21,14 @@ class MenuLink < ActiveRecord::Base
     menu_link.children = self.children.collect(&:clone)
     return menu_link
   end
+
+  def url
+    url_attribute = super
+    if url_attribute.nil? || url_attribute.blank?
+      target_id.nil? ? '#' : target
+    else
+      url_attribute
+    end
+  end
+
 end

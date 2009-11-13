@@ -5,6 +5,6 @@ class AttachmentLink < ActiveRecord::Base
   acts_as_double_polymorphic_join(
     :attachments => [:pictures, :docs, :pdfs, :medias, :videos],
     :elements => Forgeos::HasSortableAttachments,
-    :order => 'position'
+    :order => '`attachment_links`.`position`'
   )
 end

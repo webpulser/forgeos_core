@@ -14,12 +14,12 @@ module ActiveRecord
         reflection = create_has_many_polymorphs_reflection(association_id, options, &extension)
         # puts "Created reflection #{reflection.inspect}"
         # configure_dependency_for_has_many(reflection)
-        collection_accessor_methods(reflection, PolymorphicAssociation)
+        polymorph_collection_accessor_methods(reflection, PolymorphicAssociation)
       end
       
       alias_method_chain :has_many_polymorphs, :accessor
 
-      def collection_accessor_methods(reflection, association_proxy_class, writer = true)
+      def polymorph_collection_accessor_methods(reflection, association_proxy_class, writer = true)
         collection_reader_method(reflection, association_proxy_class)
         if writer
           define_method("#{reflection.name}=") do |new_value|
@@ -35,7 +35,7 @@ module ActiveRecord
             models = []
             reflection.options[:from].each do |klass|
               models += klass.to_s.singularize.camelize.constantize.find_all_by_id(ids)
-            end unless ids.empty? && reflection.options[:from]
+            end unless ids.empty? && reflection.options[:from].nil?
             
             send("#{reflection.name}=", models)
           end
