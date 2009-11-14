@@ -23,7 +23,7 @@ fr:
       action: supprimer le menu
     link:
       title: titre du lien
-      add: ajouter un ien
+      add: ajouter un lien
       change: changer
     linked_to: lié à
     visibility: visibilité
