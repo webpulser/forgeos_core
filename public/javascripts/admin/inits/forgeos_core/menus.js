@@ -280,4 +280,15 @@ jQuery(document).ready(function(){
     $('#menuLinkTypeDialog').dialog('open');
     return false;
   });
+
+  //add hover on menu list elments
+  $('.tree-menu-tree').find('li').live('mouseover',function(){
+    $('.action-links').hide();
+    $(this).find('.action-links:first').show();
+
+  });
+
+   $('.tree-menu-tree').find('li').live('mouseout',function(){
+     $('.action-links').hide();
+  });
 });

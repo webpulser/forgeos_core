@@ -9,6 +9,10 @@
   background-color: #FBEC88
   background-position: 0 0 !important
   height: 2px
+  margin-left: -10px
+  z-index: 20 !important
+  &.marker_plus
+    width: 45px !important
 
 .tree-menu-tree
   margin: 20px 0px 20px 0
@@ -28,6 +32,7 @@
 
     li
       background-position: right 8px
+      position: relative
 
       &.last
         background-image: url("lastli_rtl.gif")
@@ -36,28 +41,29 @@
   li
     display: block !important
     position: relative !important
-    background-color: #FFF
-    margin: 2px 0
-    padding-left: 15px
+    background-color: transparent
+    //margin: 2px 0
+    padding:
+      left: 15px
+      top: 2px
+
     &.open
       background: url("dark-blue-minus.png") 0 2px no-repeat
     &.closed
       background: url("dark-blue-plus.png") 0 3px no-repeat
-    &.file
-      background: none
-      .tree-link
-        background-color: #FFF
     &.folder
       .tree-link
         background-color: #FAFAFA
+    &.file
+      background:
+        image: none
+      .tree-link
+        background-color: #FFF
     &.last
       float: none !important
     &.marker
       width: 500px !important
-    &:hover
-      .menu_link
-        .action-links
-          display: block
+
 
 
     .tree-link
