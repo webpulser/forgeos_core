@@ -48,7 +48,7 @@
           = link_to I18n.t('user.destroy.action').capitalize, [:admin, user], :confirm => I18n.t('user.destroy.confirm').capitalize, :method => :delete, :class => 'small-icons delete'
         .step.disabled
           = link_to I18n.t('newsletter', :count => 2).capitalize, '#', :class => 'small-icons step-title'
-        .step.open
+        #user_created_on.step.open
           = link_to I18n.t('user.history').capitalize, '#', :class => 'small-icons step-title'
           .inner-step
             %p

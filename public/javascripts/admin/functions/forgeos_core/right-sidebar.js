@@ -1,9 +1,25 @@
 /*
+ * Set closed_panels_cookie
+ **/
+var closed_panels_cookie_name = 'closed_panels_list';
+
+//init the cookie
+if ($.cookie(closed_panels_cookie_name) == null){
+  closed_panels_cookie = "";
+}
+
+/*
  *Init the steps in right sidebar
  **/
 function init_steps(){
+  var step = $(this).parent();
+  var closed_panels_cookie = $.cookie(closed_panels_cookie_name);
   if ($(this).parent().hasClass('disabled')) {
     $(this).next().hide();
+  }
+  else if(closed_panels_cookie.match(step.attr('id'))){
+    $(this).next().hide();
+    step.toggleClass('open');
   }
 }
 
@@ -20,6 +36,27 @@ function toggle_steps(){
     }
     $(this).next().toggle('blind');
     step.toggleClass('open');
+    set_cookie_for_panels($(this));
   }
   return false;
+}
+
+/*
+ *manage the cookie for panels
+ */
+function set_cookie_for_panels (panel){
+  var closed_panels_cookie = $.cookie(closed_panels_cookie_name);
+  var step = panel.parent();
+
+  closed_cookie_info = step.attr('id');
+
+  if(!step.hasClass('open')){
+    //Add closed_cookie_info in the cookie
+    $.cookie(closed_panels_cookie_name, closed_panels_cookie+';'+closed_cookie_info);
+  }
+  else{
+    //Remove closed_cookie_info from the cookie
+    $.cookie(closed_panels_cookie_name, closed_panels_cookie.replace(';'+closed_cookie_info,''));
+  }
+  console.info(closed_panels_cookie);
 }

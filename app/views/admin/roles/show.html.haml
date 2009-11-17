@@ -37,7 +37,7 @@
     .step
       /= link_to I18n.t('role.duplicate').capitalize, [:duplicate, :admin, @role], :class => 'small-icons duplicate'
       = link_to I18n.t('user.destroy.action').capitalize, [:admin, @role], :confirm => I18n.t('user.destroy.confirm').capitalize, :method => :delete, :class => 'small-icons delete'
-    .step.open
+    #role_show_attributed_to.step.open
       %a.small-icons.step-title{ :href => "#" }
         = I18n.t('role.attributed_to').capitalize
       .admins-list
