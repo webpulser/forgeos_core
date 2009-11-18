@@ -1,9 +1,6 @@
 jQuery(document).ready(function(){
   /* Inline create right*/
-  $('.create-right').live('click', function(){
-
-    /* Create the form, and move it around the table */
-    $('#table').wrap('<form action="/admin/rights/create" id="form_right" method="POST" onsubmit="' + form_ajax_right('/admin/rights/create', 'post') + '"></form>');
+  $('.create-right').bind('click', function(){
 
     /* Create new row-right */
     new_row = '<tr id="new_right" class="even ui-draggable">';
@@ -18,9 +15,12 @@ jQuery(document).ready(function(){
     new_row += '</tr>';
 
     $('#table').prepend(new_row);
+    /* Create the form, and move it around the table */
+    $('#table').wrap('<form action="/admin/rights/create" id="form_right" method="POST" onsubmit="' + form_ajax_right('/admin/rights/create', 'post') + '"></form>');
+
 
     disable_links();
-
+    return false;
   });
 
   /* Inline edit right */
