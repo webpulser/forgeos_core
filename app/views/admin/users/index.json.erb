@@ -5,7 +5,7 @@
       link_id = "user_#{user.id}"
       klass = user.active? ? 'see-on' : 'see-off'
       [
-      content_tag(:div, '<div class="handler"></div>', :id => link_id, :class => 'small-icons user-ico handler_container'),
+        content_tag(:div, content_tag(:div, '', :class=>'handler') + content_tag(:div, '', :class => 'small-icons user-ico'), :id => link_id, :class => 'handler_container'),
       content_tag(:div, link_to(user.fullname, [:admin, user]), :class => 'user-name'),
       content_tag(:div, mail_to(user.email, user.email, :class => 'truncate', :title => user.email), :class => 'email'),
         link_to_remote('', :url => activate_admin_user_path(user),

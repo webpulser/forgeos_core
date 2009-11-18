@@ -4,7 +4,10 @@
     :aaData => @admins.collect do |admin|
       link_id = "admin_#{admin.id}"
       [
-        content_tag(:div, '&nbsp;', :id => link_id, :class => 'small-icons admin-ico'),
+        content_tag(:div,
+          content_tag(:div, '', :class => 'handler') +
+          content_tag(:div, '&nbsp;', :id => link_id, :class => 'small-icons admin-ico'),
+          :class => 'handler_container'),
         content_tag(:div, link_to("#{admin.firstname} #{admin.lastname}", [:admin, admin]), :class => 'admin-name'),
         admin.role.name,
         content_tag(:div, mail_to(admin.email, admin.email), :class => 'email' ),

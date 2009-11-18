@@ -4,7 +4,10 @@
     :aaData => @rights.collect do |right|
       link_id = "right_#{right.id}"
       [
-        content_tag(:div, '&nbsp;', :id => link_id, :class => 'small-icons right-ico'),
+        content_tag(:div,
+          content_tag(:div, '', :class => 'handler') +
+          content_tag(:div, '&nbsp;', :id => link_id, :class => 'small-icons right-ico'),
+          :class => 'handler_container'),
         content_tag(:div, right.name, :class => 'right-name'),
         right.controller_name,
         right.action_name,
