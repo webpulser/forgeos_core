@@ -112,6 +112,12 @@ jQuery(document).ready(function(){
 		$('#tag_autocomplete_container').hide();
 	}
 
+    $('input.date-picker').datepicker({
+      showOn: 'both',
+      buttonText: '',
+      changeMonth: true,
+      changeYear: true
+    });
 });
 
 

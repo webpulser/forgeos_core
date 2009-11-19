@@ -58,5 +58,4 @@ function set_cookie_for_panels (panel){
     //Remove closed_cookie_info from the cookie
     $.cookie(closed_panels_cookie_name, closed_panels_cookie.replace(';'+closed_cookie_info,''));
   }
-  console.info(closed_panels_cookie);
 }
