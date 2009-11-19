@@ -110,13 +110,11 @@ jQuery(document).ready(function(){
     return false;
   });
 
-
-
   /*
   *Add click function on .fieldset a.backgrounds  items
   *Those items are links that shows dialogBox to add some blocks/widgets
   **/
-  $('.fieldset a.backgrounds').bind('click',function(){
+  $('#add-block, #add-widget').bind('click',function(){
     openBlockDialog($(this));
     return false;
   });
