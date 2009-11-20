@@ -9,8 +9,8 @@ jQuery(document).ready(function(){
      '<td><input type="text" name="right[controller_name]" size="15" /></td>' +
      '<td><input type="text" name="right[action_name]" size="15" /></td>' +
      '<td>' +
-     '<a href="#" onclick="$(\'#form_right\').trigger(\'onsubmit\'); return false;"><span class="small-icons green-add-right-icon">&nbsp;</span></a>' +
-     '<a href="#" onclick="discard(); return false;"><span class="small-icons red-delete-right-icon">&nbsp;</span></a>' +
+     '<a href="#" onclick="$(\'#form_right\').trigger(\'onsubmit\'); return false;"><span class="small-icons save">&nbsp;</span></a>' +
+     '<a href="#" onclick="discard(); return false;"><span class="small-icons cancel">&nbsp;</span></a>' +
      '</td>' +
     '</tr>';
 
@@ -53,8 +53,8 @@ jQuery(document).ready(function(){
       new_row += '<td><input type="text" value="'+ cell_controller_value +'" name="right[controller_name]" size="15"/></td>';
       new_row += '<td><input type="text" value="'+ cell_action_value +'" name="right[action_name]" size="15"/></td>';
       new_row += '<td>';
-         new_row += '<a href="#" onclick="$(\'#form_right\').trigger(\'onsubmit\'); return false;"><span class="small-icons green-add-right-icon">&nbsp;</span></a>';
-         new_row += '<a href="#" onclick="discard(); row.show(); return false;"><span class="small-icons red-delete-right-icon">&nbsp;</span></a>';
+         new_row += '<a href="#" onclick="$(\'#form_right\').trigger(\'onsubmit\'); return false;"><span class="small-icons save">&nbsp;</span></a>';
+         new_row += '<a href="#" onclick="discard(); row.show(); return false;"><span class="small-icons cancel">&nbsp;</span></a>';
       new_row += '</td>';
     new_row += '</tr>';
 
@@ -92,8 +92,8 @@ jQuery(document).ready(function(){
       new_row += '<td><input type="text" value="'+ cell_controller_value +'" name="right[controller_name]" size="15" /></td>';
       new_row += '<td><input type="text" value="'+ cell_action_value +'" name="right[action_name]" size="15" /></td>';
       new_row += '<td>';
-         new_row += '<a href="#" onclick="$(\'#form_right\').trigger(\'onsubmit\'); return false;"><span class="small-icons green-add-right-icon">&nbsp;</span></a>';
-         new_row += '<a href="#" onclick="discard(); return false;"><span class="small-icons red-delete-right-icon">&nbsp;</span></a>';
+         new_row += '<a href="#" onclick="$(\'#form_right\').trigger(\'onsubmit\'); return false;"><span class="small-icons save">&nbsp;</span></a>';
+         new_row += '<a href="#" onclick="discard(); return false;"><span class="small-icons cancel">&nbsp;</span></a>';
       new_row += '</td>';
     new_row += '</tr>';
 
