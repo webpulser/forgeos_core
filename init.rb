@@ -1,20 +1,20 @@
 I18n.load_path += Dir[File.join(RAILS_ROOT, 'vendor', 'plugins', 'forgeos_core', 'config', 'locales', '**', '*.{rb,yml}')]
 
 # Specify gems to use
-config.gem 'has_many_polymorphs'
+config.gem 'has_many_polymorphs', :source => 'http://gemcutter.org'
 config.gem 'bcrypt-ruby', :lib => 'bcrypt'
-config.gem 'authlogic'
+config.gem 'authlogic', :source => 'http://gemcutter.org'
 config.gem 'mime-types', :lib => 'mime/types'
-config.gem 'mislav-will_paginate', :source => "http://gems.github.com", :lib => "will_paginate"
-config.gem 'coupa-acts_as_list', :source => "http://gems.github.com"
-config.gem 'coupa-acts_as_tree', :source => "http://gems.github.com"
-config.gem 'jimiray-acts_as_commentable', :source => "http://gems.github.com", :lib => 'acts_as_commentable'
+config.gem 'will_paginate', :source => 'http://gemcutter.org'
+config.gem 'acts_as_list', :source => 'http://gemcutter.org'
+config.gem 'acts_as_tree', :source => 'http://gemcutter.org'
+config.gem 'acts_as_commentable', :source => 'http://gemcutter.org'
 config.gem 'webpulser-jrails', :source => "http://gems.github.com", :lib => 'jrails'
 config.gem 'webpulser-habtm_list', :source => "http://gems.github.com"
-config.gem 'freelancing-god-thinking-sphinx', :lib => 'thinking_sphinx', :source => "http://gems.github.com"
-config.gem 'ar-extensions'
-config.gem 'ruleby'
-config.gem 'haml'
+config.gem 'thinking-sphinx', :lib => 'thinking_sphinx', :source => 'http://gemcutter.org'
+config.gem 'ar-extensions', :source => 'http://gemcutter.org'
+config.gem 'ruleby', :source => 'http://gemcutter.org'
+config.gem 'haml', :source => 'http://gemcutter.org'
 
 # Load Haml and Sass
 require 'haml'

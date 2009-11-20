@@ -4,7 +4,7 @@ class ApplicationController < ActionController::Base
   protect_from_forgery
   filter_parameter_logging :password, :password_confirmation
   
-  before_filter :set_locale
+  before_filter :set_locale, :init_attachments
 
 private
 
@@ -40,12 +40,11 @@ private
   def store_location
     session[:return_to] = request.request_uri
   end
-end
 
-AttachmentLink
-
-Forgeos::HasSortableAttachments.each do |element|
-  klass = element.to_s.singularize.camelize.constantize
-  klass.send(:include,SortableAttachments)
-  klass.send(:alias_method_chain, :attachment_ids=, :position)
+  def init_attachments
+    AttachmentLink
+    Forgeos::HasSortableAttachments.each do |klass|
+      klass.to_s.singularize.camelize.constantize.send(:has_and_belongs_to_many_attachments)
+    end
+  end
 end

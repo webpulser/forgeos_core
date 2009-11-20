@@ -26,4 +26,6 @@ end
 if has_many_polymorphs_loaded
   require 'has_many_polymorphs/extensions'
   ActiveRecord::Base.send(:extend,ActiveRecord::Associations::PolymorphicClassMethods)
+  require 'sortable_attachments'
+  ActiveRecord::Base.send(:include,SortableAttachments)
 end
