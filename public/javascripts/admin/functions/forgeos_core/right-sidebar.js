@@ -17,10 +17,10 @@ function init_steps(){
   if ($(this).parent().hasClass('disabled')) {
     $(this).next().hide();
   }
-  else if(closed_panels_cookie.match(step.attr('id'))){
+  /*else if(closed_panels_cookie.match(step.attr('id'))){
     $(this).next().hide();
     step.toggleClass('open');
-  }
+  }*/
 }
 
 /*
