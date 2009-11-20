@@ -6,7 +6,8 @@ class CreateAddresses < ActiveRecord::Migration
         :zip_code,
         :city,
         :type
-      t.belongs_to :country
+      t.belongs_to :country,
+        :person
       t.timestamps
     end
   end
