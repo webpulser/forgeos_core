@@ -37,4 +37,8 @@ class Category < ActiveRecord::Base
     end
     hash
   end
+
+  def descendants
+    (children + children.map(&:children)).flatten
+  end
 end
