@@ -3,7 +3,7 @@ module SortableAttachments
     base.class_eval do
       class << self 
         def has_and_belongs_to_many_attachments
-          unless self.instance_methods.include?('attachment_ids_without_position=')
+          if self.instance_methods.include?('attachment_ids=') && !self.instance_methods.include?('attachment_ids_with_position=')
             self.class_eval <<DEF
                 def attachment_ids_with_position=(attachment_ids)
                   self.attachment_ids_without_position=(attachment_ids)
