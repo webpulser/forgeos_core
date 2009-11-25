@@ -1,4 +1,3 @@
---- 
 countries_075: 
   name: NETHERLANDS ANTILLES
   iso3: ANT
@@ -1580,3 +1579,4 @@ countries_074:
   iso: NL
   printable_name: Netherlands
   numcode: "528"
+  type: Country
