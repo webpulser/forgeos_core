@@ -12,6 +12,7 @@ module SortableAttachments
                 alias_method_chain :attachment_ids=, :position
                
                 def reset_attachment_positions_by_ids(ids)
+                  return unless self.id
                   ids.each_with_index do |id, i|
                     connection.update(
                       "UPDATE `attachment_links` SET `position` = \#{i} " +
