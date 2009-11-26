@@ -23,12 +23,13 @@ module SortableAttachments
     end
     
     def reset_attachment_positions_by_ids(ids)
+      return if self.new_record?
       ids.each_with_index do |id, i|
         connection.update(
-          "UPDATE `attachment_links` SET `position` = \#{i} " +
-          "WHERE `element_id` = \#{self.id} AND `element_type` = '\#{self.class.base_class}' AND `attachment_id` = \#{id}"
+          "UPDATE `attachment_links` SET `position` = #{i} " +
+          "WHERE `element_id` = #{self.id} AND `element_type` = '#{self.class.base_class}' AND `attachment_id` = #{id}"
         ) if id.to_i != 0
-      end unless self.id
+      end
     end
   end
 end
