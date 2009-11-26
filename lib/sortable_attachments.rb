@@ -4,9 +4,9 @@ module SortableAttachments
   end
   
   module ClassMethods
-    def has_and_belongs_to_many_attachments
+    def has_and_belongs_to_many_attachments(options = {})
       has_many :attachment_links, :as => :element
-      has_many :attachments, :through => :attachment_links, :class_name => 'Attachment'
+      has_many :attachments, { :through => :attachment_links, :class_name => 'Attachment' }.merge(options)
       has_many :pictures, :through => :attachment_links, :class_name => 'Picture', :source => :attachment 
 
       unless self.instance_methods.include?('attachment_ids_with_position=')
