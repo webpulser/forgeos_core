@@ -31,4 +31,11 @@ class MenuLink < ActiveRecord::Base
     end
   end
 
+  def url_and_children_urls
+    urls = [self.url]
+    self.children.each do |child|
+      urls += child.url_and_children_urls
+    end
+    return urls
+  end
 end
