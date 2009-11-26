@@ -1,7 +1,6 @@
 I18n.load_path += Dir[File.join(RAILS_ROOT, 'vendor', 'plugins', 'forgeos_core', 'config', 'locales', '**', '*.{rb,yml}')]
 
 # Specify gems to use
-config.gem 'has_many_polymorphs', :source => 'http://gemcutter.org'
 config.gem 'bcrypt-ruby', :lib => 'bcrypt'
 config.gem 'authlogic', :source => 'http://gemcutter.org'
 config.gem 'mime-types', :lib => 'mime/types'

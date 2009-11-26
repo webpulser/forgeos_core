@@ -4,6 +4,8 @@ class Person < ActiveRecord::Base
     c.crypto_provider = Authlogic::CryptoProviders::BCrypt
   end
   acts_as_tagger
+  
+  has_and_belongs_to_many_attachments
   has_one :address
   accepts_nested_attributes_for :address
 

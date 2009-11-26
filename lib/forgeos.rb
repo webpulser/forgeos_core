@@ -16,16 +16,5 @@ require 'action_view/helpers/assert_tag_helper'
 require 'action_view/helpers/form_helper'
 require 'action_view/helpers/form_helper_extensions'
 
-begin
-  require 'has_many_polymorphs'
-  has_many_polymorphs_loaded = true
-rescue LoadError
-  has_many_polymorphs_loaded = false
-end
-
-if has_many_polymorphs_loaded
-  require 'has_many_polymorphs/extensions'
-  ActiveRecord::Base.send(:extend,ActiveRecord::Associations::PolymorphicClassMethods)
-  require 'sortable_attachments'
-  ActiveRecord::Base.send(:include,SortableAttachments)
-end
+require 'sortable_attachments'
+ActiveRecord::Base.send(:include,SortableAttachments)
