@@ -106,8 +106,8 @@ module Admin::BaseHelper
     link_to(label, '#', :class => 'small-icons left search-link')
   end
 
-  def fg_submit_tag(*label)
-    submit_tag(I18n.t(label.length == 1 ? label.first : label).capitalize, :class => 'backgrounds interact-button')
+  def fg_submit_tag(label)
+    submit_tag(t(label).capitalize, :class => 'backgrounds interact-button')
   end
 
   def block_container(model_name, block_name, block, &proc)
