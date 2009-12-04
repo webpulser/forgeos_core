@@ -10,11 +10,6 @@ config.gem 'acts_as_tree', :source => 'http://gemcutter.org'
 config.gem 'acts_as_commentable', :source => 'http://gemcutter.org'
 config.gem 'webpulser-jrails', :source => "http://gems.github.com", :lib => 'jrails'
 config.gem 'webpulser-habtm_list', :source => "http://gems.github.com"
-config.gem 'riddle', :source => 'http://gemcutter.org'
-
-require 'riddle'
-require 'riddle/0.9.9'
-
 config.gem 'thinking-sphinx', :lib => 'thinking_sphinx', :source => 'http://gemcutter.org'
 config.gem 'ar-extensions', :source => 'http://gemcutter.org'
 config.gem 'ruleby', :source => 'http://gemcutter.org'
