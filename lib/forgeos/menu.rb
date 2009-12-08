@@ -46,7 +46,7 @@ module Forgeos
       ],
       :html => { :class => 'left' }
     },
-    { :title => 'back_office.menu.account',
+    { :title => 'back_office.menu.accounts',
       :i18n => true,
       :url => { :controller => 'admin/account' },
       :html => { :class => 'left' }

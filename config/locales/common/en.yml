@@ -30,7 +30,7 @@ en:
       attachments: library
       users: customers
       menus: navigation
-      account: your account
+      accounts: your account
       logout: logout
       login: login
       support: support
