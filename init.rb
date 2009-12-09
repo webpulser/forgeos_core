@@ -33,4 +33,3 @@ if ActiveRecord::Base.connection.tables.include?(Setting.table_name) && settings
   ActionMailer::Base.smtp_settings = settings.smtp_settings
   ActionMailer::Base.sendmail_settings = settings.sendmail_settings
 end
-
