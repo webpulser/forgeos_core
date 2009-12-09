@@ -1,6 +1,7 @@
 class Admin::BaseController < ApplicationController
   layout 'admin'
   before_filter :login_required, :except => [:notifications, :url]
+  skip_before_filter :validate_authenticity_token
 
   def notifications
     @notifications = {}

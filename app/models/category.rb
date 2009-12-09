@@ -1,4 +1,5 @@
 class Category < ActiveRecord::Base
+  translates :name
   acts_as_tree
   has_and_belongs_to_many_attachments
 

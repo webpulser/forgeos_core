@@ -14,6 +14,7 @@ config.gem 'thinking-sphinx', :lib => 'thinking_sphinx', :source => 'http://gemc
 config.gem 'ar-extensions', :source => 'http://gemcutter.org'
 config.gem 'ruleby', :source => 'http://gemcutter.org'
 config.gem 'haml', :source => 'http://gemcutter.org'
+config.gem "globalize2", :source => 'http://gemcutter.org', :lib => 'globalize/model/active_record'
 
 # Load Haml and Sass
 require 'haml'
