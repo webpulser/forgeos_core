@@ -8,7 +8,7 @@
 #content.grid_16.alpha.omega
   .grid_12.alpha
     .padding-wrap
-      - right_categories = RightCategory.all( :order => 'name' )
+      - right_categories = RightCategory.all(:include => :globalize_translations, :order => 'name' )
       - right_categories.each do |right_category|
         - unless right_category.rights.nil?
           .fieldset
