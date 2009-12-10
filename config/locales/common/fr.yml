@@ -219,7 +219,7 @@ fr:
     upload: 
       start: démarer le téléchargement
       clear_queue: nettoyer la liste
-      action: charger des fichiers'
+      action: charger des fichiers
     create:
       action: créer un média
       success: le média a bien été créé
