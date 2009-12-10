@@ -45,7 +45,7 @@ function toggle_steps(){
  *manage the cookie for panels
  */
 function set_cookie_for_panels (panel){
-  var closed_panels_cookie = $.cookie(closed_panels_cookie_name);
+  var closed_panels_cookie = $.cookie(closed_panels_cookie_name) || '';
   var step = panel.parent();
 
   closed_cookie_info = step.attr('id');
