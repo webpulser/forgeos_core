@@ -152,8 +152,9 @@ jQuery.expr[':'].regex = function(elem, index, match) {
 }
 
 function removedataTablesRow(selector){
-  oTable.fnDeleteRow(
-      oTable.fnGetPosition($(selector).parents('tr')[0])
+  var current_table = $(selector).parents('table:first').dataTableInstance();
+  current_table.fnDeleteRow(
+    current_table.fnGetPosition($(selector).parents('tr:first')[0])
   );
 }
 
