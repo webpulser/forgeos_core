@@ -4,7 +4,8 @@ en:
     one: keyword
     other: keywords
   login: login
-  logout: 'logout'
+  login_required: You must be logged in to access this page
+  logout: logout
   log:
     account:
       new: sign up

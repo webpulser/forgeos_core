@@ -4,6 +4,7 @@ fr:
     one: mot clé
     other: mots clés
   login: connexion
+  login_required: Vous devez être connecté pour accéder à cette page
   logout: déconnexion
   log:
     account:
