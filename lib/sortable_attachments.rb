@@ -5,7 +5,7 @@ module SortableAttachments
   
   module ClassMethods
     def has_and_belongs_to_many_attachments(options = {})
-      has_many :attachment_links, :as => :element
+      has_many :attachment_links, :as => :element, :order => 'position'
       has_many :attachments, { :through => :attachment_links, :class_name => 'Attachment' }.merge(options)
       has_many :pictures, :through => :attachment_links, :class_name => 'Picture', :source => :attachment 
 
