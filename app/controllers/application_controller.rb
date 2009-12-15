@@ -34,7 +34,7 @@ private
   def login_required
     unless current_user
       store_location
-      flash[:notice] = "You must be logged in to access this page"
+      flash[:notice] = t('login_required')
       redirect_to(login_path)
       return false
     end

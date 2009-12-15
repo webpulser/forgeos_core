@@ -193,17 +193,17 @@ h2.description
     font-size: 1.1em
     padding: 0 5px
 .block-container
-  border: 1px solid #f3f3f3
+  position: relative
+  border: 1px solid #E0E0E0
   margin: 5px 0px
   +borderCorner()
-  background: #E0E0E0
-.block-type
-  display: inline-block
-  background: #E0E0E0
-  :color = !lightGray
-  padding: 4px
-  +left()
-  clear: both
+  background: #white
+  .block-type
+    display: inline-block
+    background: #E0E0E0
+    :color = !lightGray
+    padding: 4px
+    clear: both
 form#wrap
   .field
     width: 200px

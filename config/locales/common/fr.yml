@@ -4,6 +4,7 @@ fr:
     one: mot clé
     other: mots clés
   login: connexion
+  login_required: Vous devez être connecté pour accéder à cette page
   logout: déconnexion
   log:
     account:
@@ -219,7 +220,7 @@ fr:
     upload: 
       start: démarer le téléchargement
       clear_queue: nettoyer la liste
-      action: charger des fichiers'
+      action: charger des fichiers
     create:
       action: créer un média
       success: le média a bien été créé
