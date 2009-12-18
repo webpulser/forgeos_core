@@ -61,7 +61,7 @@ class Admin::AttachmentsController < Admin::BaseController
           end
           
           @media = media_class.new(params[:attachment])
-          @media.uploaded_data = { 'tempfile' => params[:Filedata], 'content_type' => @content_type, 'filename' => params[:Filename]}
+          @media.uploaded_data = { 'tempfile' => params[:Filedata], 'content_type' => @content_type, 'filename' => Forgeos::url_generator(params[:Filename])}
           
           if @media.save
             flash[:notice] = I18n.t('media.create.success').capitalize
