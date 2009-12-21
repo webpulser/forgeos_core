@@ -1,0 +1,29 @@
+- form_tag nil, :id => 'map_fields_form', :method => :post do
+  .backgrounds.big-header
+    .interact-links
+      = fg_submit_tag 'import.button'
+  #content.grid_16.alpha.omega
+    .grid_12.alpha
+      .inner-content
+        - @parameters.each do |arr|
+          = hidden_field_tag arr[0], arr[1]
+        - unless @rows.empty?
+          .map_fields
+            %table
+              %thead
+                %tr
+                  - (1..@rows[0].size).each do |c|
+                    - selected_field = nil
+                    - @fields.find { |field| 
+                    -   selected_field = field[1] if field[0].kind_of?(String) && @rows[0][c-1].kind_of?(String) && field[0].match(Regexp.new(@rows[0][c-1],'i'))
+                    - }
+                    %th= select_tag "fields[#{c}]", options_for_select(@fields,selected_field), :include_blank => true
+              %tbody
+                - @rows.each do |row|
+                  %tr
+                    - row.each do |column|
+                      %td= h(column)
+    #right-sidebar.grid_4.omega
+      .step
+        = check_box_tag 'ignore_first_row', '1', true, :id => 'ignore_first_row_option'
+        %label{ :for => "ignore_first_row_option" } Ignore the first row (headings)
