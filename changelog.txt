@@ -1,0 +1,7 @@
+rc1 :
+  - add form fields notification
+  - add application settings
+  - add picture upload for categories
+  - replace resful_authentication by authlogic
+  - add multiple selection on dataTables & dataSlides
+
