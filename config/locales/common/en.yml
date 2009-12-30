@@ -35,6 +35,8 @@ en:
       logout: logout
       login: login
       support: support
+    account:
+      infos: account infos
   or: or
   and: and
   ago: ago {{time}}
