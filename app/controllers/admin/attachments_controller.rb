@@ -61,7 +61,7 @@ class Admin::AttachmentsController < Admin::BaseController
           end
           
           @media = media_class.new(params[:attachment])
-          @media.uploaded_data = { 'tempfile' => params[:Filedata], 'content_type' => @content_type, 'filename' => params[:Filename]}
+          @media.uploaded_data = { 'tempfile' => params[:Filedata], 'content_type' => @content_type, 'filename' => Forgeos::url_generator(params[:Filename])}
           
           if @media.save
             flash[:notice] = I18n.t('media.create.success').capitalize
@@ -72,6 +72,14 @@ class Admin::AttachmentsController < Admin::BaseController
               attachments = (object.attachment_ids << @media.id)
               object.update_attribute('attachment_ids', attachments)
             end
+
+            if params[:parent_id]
+              parent_category = Category.find_by_id(params[:parent_id])
+              if parent_category
+               @media.attachment_categories << parent_category
+              end
+            end
+
             render :json => { :result => 'success', :id => @media.id, :path => @media.public_filename(''), :size => @media.size, :type => @media.type.to_s.upcase }
           else
             render :json => { :result => 'error', :error => @media.errors.first }
@@ -115,7 +123,7 @@ class Admin::AttachmentsController < Admin::BaseController
   end
 
   def sort
-    columns = %w(filename filename content_type updated_at size used '')
+    columns = %w(filename filename content_type attachments.updated_at size used '')
     per_page = params[:iDisplayLength].to_i
     offset =  params[:iDisplayStart].to_i
     page = (offset / per_page) + 1

@@ -1,0 +1,13 @@
+fr:
+  import:
+    one: import
+    button: importer
+    send_file: envoyer le fichier
+    create:
+      success: "{{nb}} {{model}} ont été créés"
+    update:
+      success: "{{nb}} {{model}} ont été mis à jours"
+    failed:
+      retry: veuillez réessayer, le fichier doit être corrompu
+      give_file: "n'oubliez pas le fichier d'import"
+      errors: "{{nb}} erreurs durant le processus d'import"

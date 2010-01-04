@@ -107,7 +107,7 @@ function init_category_tree(selector, type, source) {
                 $(this).removeClass('tree-li-selected-to-add-image');
               });
               $(NODE).addClass("tree-li-selected-to-add-image");
-              
+
               openimageUploadDialogLeftSidebar(cat_id);
               return false;
             }
@@ -174,6 +174,23 @@ function init_category_tree(selector, type, source) {
               type:'put'
               });
       },
+      onmove: function(NODE,LANG,TREE_OBJ,RB){
+        var cat_id = get_rails_element_id(NODE);
+        var parent_id = '';
+        if ($(NODE).parent().parent('li').length > 0){
+          parent_id = get_rails_element_id($(NODE).parent().parent('li'));
+        }
+        $.ajax({
+            url: '/admin/categories/' + cat_id,
+              // update elements count
+              complete: function(request) {
+                $.tree.focused().refresh();
+              },
+              data: {authenticity_token:AUTH_TOKEN, format: 'json', 'category[parent_id]': parent_id},
+              dataType:'text',
+              type:'put'
+              });
+      },
       ondelete: function(NODE,TREE_OBJ){
         var cat_id = get_rails_element_id(NODE);
         $.ajax({
@@ -201,6 +218,14 @@ function init_category_tree(selector, type, source) {
 
         // construct url and redraw table
         update_current_dataTable_source('#table',url_base + '?' + params);
+
+        object_name = $(NODE).attr('id').split('_')[0];
+	      category_id = get_rails_element_id(NODE);
+	      $(NODE).append('<input type="hidden" id="parent_id_tmp" name="parent_id_tmp" value="'+category_id+'" />');
+        return true;
+      },
+      ondeselect: function(NODE,TREE_OBJ) {
+	      $("#parent_id_tmp").val("");
         return true;
       },
       // remove count span
@@ -226,7 +251,7 @@ function check_jsTree_selected(element){
   }
   return false;
 }
- 
+
 // unselect current node and refresh dataTables
 function select_all_elements_by_url(url) {
   // change dataTables ajax source en redraw the table

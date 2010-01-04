@@ -1,18 +1,24 @@
 .backgrounds.big-header
-  =h @user.firstname
-  =h @user.lastname
+  %h1
+    =h @user.firstname
+    =h @user.lastname
   .interact-links
     = link_to I18n.t('account.update.action').capitalize, edit_admin_account_path, :class => 'backgrounds interact-button'
 #content.grid_16.alpha.omega
   .grid_12.alpha
-    .inner-content
-      - if @user.avatar && !@user.avatar.filename.nil?
-        = I18n.t('avatar').capitalize
-        \:
-        %div
-          = image_tag(@user.avatar.public_filename(:thumb))
-
-      = I18n.t('email').capitalize
-      \:
-      %div
-        =h @user.email
+    #customer-see.inner-content
+      .padding-wrap
+        .fieldset
+          %h3= t(:infos, :scope => [:back_office, :account]).capitalize
+          .main-infos
+            .main-infos-cutomer
+              %h4{:class => 'small-icons'}= "#{t(:avatar).capitalize} :"
+              %div
+                - if @user.avatar && !@user.avatar.filename.nil?
+                  = image_tag(@user.avatar.public_filename(:thumb))
+            .main-info-separation.big-separation
+            .order-billing-adress
+              %h4{:class => 'small-icons'}= "#{t('email').capitalize} :"
+              %div
+                =h @user.email
+          .clear

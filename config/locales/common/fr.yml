@@ -35,6 +35,8 @@ fr:
       logout: déconnexion
       login: connexion
       support: support
+    account:
+      infos: Infos du compte
   or: ou
   and: et
   ago: il y a {{time}}
