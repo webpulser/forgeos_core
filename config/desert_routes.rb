@@ -14,6 +14,7 @@ namespace :admin do |admin|
   admin.resource :setting
   admin.resource :account
   admin.resources :admins
+  admin.import '/import', :controller => 'import'
   admin.resources :roles, :member => { :activate => :post }
   admin.resources :rights
   admin.resources :users, :collection => { :filter => [:post, :get] }, :member => { :activate => :post }
