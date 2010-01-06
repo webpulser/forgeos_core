@@ -83,6 +83,9 @@ module Admin::BaseHelper
         'aoColumns': [ #{columns.join(',')} ],
         'sProcessing': true,
         'bStateSave': false,
+        'bLengthChange': true,
+        'iDisplayLength': 12,
+        'iDisplayEnd': 12,
         #{data_source}
         'oLanguage': {
           'sProcessing' : '#{I18n.t('jquery.dataTables.oLanguage.sProcessing')}',
