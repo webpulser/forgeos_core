@@ -5,13 +5,13 @@ namespace :forgeos do
     namespace :generate do
 
       desc "Generates a role per controller and a right per controller action."
-      task :acl => :environment do
+      task :acl, :path, :needs => :environment do |t,args|
         
         # set project path
         # By default, plugin path
         # else path is set to the first argument provided.
-        if ARGV[1] && !ARGV[1].blank?
-          project_path = ARGV[1]
+        if args.path
+          project_path = args.path
         else
           puts 'usage : rake forgeos:core:generate:acl <project_path>'
           exit
