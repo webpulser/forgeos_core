@@ -25,10 +25,10 @@ class Admin::MenusController < Admin::BaseController
 
   def create
     if @menu.save
-      flash[:notice] = I18n.t('menu.create.success').capitalize
+      flash[:notice] = t('menu.create.success').capitalize
       return redirect_to([:admin, @menu])
     else
-      flash[:error] = I18n.t('menu.create.failed').capitalize
+      flash[:error] = t('menu.create.failed').capitalize
       render :action => 'new'
     end
   end
@@ -38,19 +38,19 @@ class Admin::MenusController < Admin::BaseController
   
   def update
     if @menu.update_attributes(params[:menu])
-      flash[:notice] = I18n.t('menu.update.success').capitalize
+      flash[:notice] = t('menu.update.success').capitalize
       return redirect_to([:admin, @menu])
     else
-      flash[:error] = I18n.t('menu.update.failed').capitalize
+      flash[:error] = t('menu.update.failed').capitalize
       render :action => 'edit'
     end
   end
 
   def destroy
     if @menu.destroy
-      flash[:notice] = I18n.t('menu.destroy.success').capitalize
+      flash[:notice] = t('menu.destroy.success').capitalize
     else
-      flash[:error] = I18n.t('menu.destroy.failed').capitalize
+      flash[:error] = t('menu.destroy.failed').capitalize
     end
     return redirect_to(admin_menus_path)
   end
@@ -62,8 +62,8 @@ class Admin::MenusController < Admin::BaseController
 private
 
   def get_menu
-    unless @menu = Menu.find_by_id(params[:id])
-      flash[:error] = I18n.t('menu.not_exist').capitalize
+    unless @menu = ::Menu.find_by_id(params[:id])
+      flash[:error] = t('menu.not_exist').capitalize
       return redirect_to(admin_menus_path)
     end
   end
