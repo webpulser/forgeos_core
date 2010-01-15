@@ -2,6 +2,7 @@
 require 'forgeos/menu'
 require 'forgeos/url_generator'
 require 'forgeos/statistics'
+require 'mysql_utf8' if RUBY_VERSION.to_f >= 1.9
 
 ActionView::Base.field_error_proc = Proc.new do |html_tag, instance|
   error_message = instance.object.errors.on(instance.method_name)

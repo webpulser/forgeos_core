@@ -1,4 +1,4 @@
-require 'fastercsv'
+require (RUBY_VERSION.to_f >= 1.9 ? 'csv' : 'fastercsv')
 
 module MapFields
   VERSION = '1.0.0'
@@ -50,7 +50,7 @@ module MapFields
 
         @rows = []
         parser_options = session[:parser_options] = params[:parser_options].symbolize_keys
-        FasterCSV.foreach(temp_path, parser_options) do |row|
+        (RUBY_VERSION.to_f >= 1.9 ? CSV : FasterCSV).foreach(temp_path, parser_options) do |row|
           @rows << row
           break if @rows.size == 10
         end
@@ -111,7 +111,7 @@ module MapFields
 
     def each
       row_number = 1
-      FasterCSV.foreach(@file,@parser_options) do |csv_row|
+      (RUBY_VERSION.to_f >= 1.9 ? CSV : FasterCSV).foreach(@file,@parser_options) do |csv_row|
         unless row_number == 1 && @ignore_first_row
           row = []
           @mapping.each do |k,v|
