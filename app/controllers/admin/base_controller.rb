@@ -12,7 +12,7 @@ class Admin::BaseController < ApplicationController
 
 private
   def login_required
-    unless current_user.is_a?(Admin) && current_user.rights.find_by_controller_name_and_action_name(params[:controller], params[:action])
+    unless current_user.is_a?(Administrator) && current_user.rights.find_by_controller_name_and_action_name(params[:controller], params[:action])
       store_location
       flash[:warning] = "You must be logged in to access this page"
       redirect_to(admin_login_path)

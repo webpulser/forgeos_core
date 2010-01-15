@@ -1,4 +1,4 @@
-class Admin < Person
+class Administrator < Person
   belongs_to :role
   #has_many :rights, :through => :role
   has_and_belongs_to_many :admin_categories, :readonly => true, :join_table => 'categories_elements', :foreign_key => 'element_id', :association_foreign_key => 'category_id'
