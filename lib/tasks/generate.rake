@@ -13,7 +13,7 @@ namespace :forgeos do
         if args.path
           project_path = args.path
         else
-          puts 'usage : rake forgeos:core:generate:acl <project_path>'
+          puts 'usage : rake forgeos:core:generate:acl[iproject_path>]'
           exit
         end
 
@@ -43,10 +43,10 @@ namespace :forgeos do
             end
             puts ' [ok]'
           end
-          unless role = Role.first
-            role = Role.create :name => 'super administrator'
-          end
-          admin = Admin.first
+
+          role = Role.first || Role.create(:name => 'super administrator')
+          admin = Administrator.first
+
           print "associate rights to #{role.name} "
           role.update_attributes(:right_ids => Right.all(:select => :id).collect(&:id))
           puts ' [ok]'

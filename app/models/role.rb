@@ -1,5 +1,5 @@
 class Role < ActiveRecord::Base
-  has_many :admins
+  has_many :administrators
   has_and_belongs_to_many :rights
 
   validates_presence_of :name

@@ -23,7 +23,7 @@ module Forgeos
     { :title => 'back_office.menu.administration',
       :i18n => true,
       :url => [
-        { :controller => 'admin/admins' },
+        { :controller => 'admin/administrators' },
         { :controller => 'admin/roles' },
         { :controller => 'admin/rights' }
       ],

@@ -1,4 +1,4 @@
-class Administrator::AdministratorsController < Administrator::BaseController
+class Admin::AdministratorsController < Admin::BaseController
   before_filter :get_admin, :only => [:show, :edit, :update, :destroy, :update_rights]
 
   def index
@@ -27,7 +27,7 @@ class Administrator::AdministratorsController < Administrator::BaseController
 
     if @admin.save
       flash[:notice] = t('admin.create.success').capitalize
-      redirect_to(admin_admins_path)
+      redirect_to(admin_administrators_path)
     else
       flash[:error] = t('admin.create.failed').capitalize
       render :action => "new"
@@ -37,7 +37,7 @@ class Administrator::AdministratorsController < Administrator::BaseController
   def update
     if @admin.update_attributes(params[:admin])
       flash[:notice] = t('admin.update.success').capitalize
-      redirect_to(admin_admins_path)
+      redirect_to(admin_administrators_path)
     else
       flash[:error] = t('admin.update.failed').capitalize
       render :action => "edit"
@@ -50,7 +50,7 @@ class Administrator::AdministratorsController < Administrator::BaseController
     else
       flash[:error] = t('admin.destroy.failed').capitalize
     end
-    redirect_to(admin_admins_path)
+    redirect_to(admin_administrators_path)
   end
 
 private
@@ -58,7 +58,7 @@ private
   def get_admin
     unless @admin = Administrator.find_by_id(params[:id])
       flash[:error] = t('admin.not_exist').capitalize
-      return redirect_to(admin_admins_path)
+      return redirect_to(admin_administrators_path)
     end
   end
 
@@ -86,9 +86,9 @@ private
     options[:order] = order unless order.squeeze.blank?
 
     if params[:sSearch] && !params[:sSearch].blank?
-      @admins = Administrator.search(params[:sSearch],options)
+      @administrators = Administrator.search(params[:sSearch],options)
     else
-      @admins = Administrator.paginate(:all,options)
+      @administrators = Administrator.paginate(:all,options)
     end
   end
 end

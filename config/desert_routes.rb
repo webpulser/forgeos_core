@@ -13,7 +13,7 @@ namespace :admin do |admin|
   admin.resource :person_session
   admin.resource :setting
   admin.resource :account
-  admin.resources :admins
+  admin.resources :administrators
   admin.import '/import', :controller => 'import'
   admin.resources :roles, :member => { :activate => :post }
   admin.resources :rights

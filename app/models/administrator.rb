@@ -6,4 +6,8 @@ class Administrator < Person
   attr_accessible :right_ids, :role_id
   before_create :activate
   delegate :rights, :right_ids, :to => :role
+
+  def access_path?(controller,action)
+    rights.find_by_controller_name_and_action_name(controller,action)
+  end
 end 
