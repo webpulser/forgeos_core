@@ -86,9 +86,9 @@ private
     options[:order] = order unless order.squeeze.blank?
 
     if params[:sSearch] && !params[:sSearch].blank?
-      @administrators = Administrator.search(params[:sSearch],options)
+      @admins = Administrator.search(params[:sSearch],options)
     else
-      @administrators = Administrator.paginate(:all,options)
+      @admins = Administrator.paginate(:all,options)
     end
   end
 end
