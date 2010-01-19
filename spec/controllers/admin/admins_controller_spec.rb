@@ -1,6 +1,6 @@
 require File.expand_path(File.dirname(__FILE__) + '/../../spec_helper')
 
-describe Admin::AdminsController, "GET index" do
+describe Administrator::AdministratorsController, "GET index" do
   should_require_admin_login :get, :index
   
   describe 'index' do
@@ -18,18 +18,18 @@ describe Admin::AdminsController, "GET index" do
   end
 end
 
-describe Admin::AdminsController, "GET show" do
+describe Administrator::AdministratorsController, "GET show" do
   should_require_admin_login :get, :index
 
   describe "admin admin" do
     before :each do
       login_as_admin
-      @admin = mock_model(Admin, :null_object => true)
-      Admin.stub!(:find_by_id).and_return @admin
+      @admin = mock_model(Administrator, :null_object => true)
+      Administrator.stub!(:find_by_id).and_return @admin
     end
 
     it "should load the required admin" do
-      Admin.should_receive(:find_by_id).with("1")
+      Administrator.should_receive(:find_by_id).with("1")
       get :show, :id => 1
     end
   
@@ -45,7 +45,7 @@ describe Admin::AdminsController, "GET show" do
 
     context "when admin does not exist" do
       before(:each) do
-        Admin.stub!(:find_by_id).and_return nil
+        Administrator.stub!(:find_by_id).and_return nil
       end
 
       it "should put a message in flash[:error]" do
@@ -56,15 +56,15 @@ describe Admin::AdminsController, "GET show" do
   end
 end
 
-describe Admin::AdminsController, "GET new" do
+describe Administrator::AdministratorsController, "GET new" do
   describe "admin admin" do 
     before(:each) do
       login_as_admin
-      Admin.stub!(:new).and_return @admin
+      Administrator.stub!(:new).and_return @admin
     end
 
     it "should load the required admin" do
-      Admin.should_receive(:new).and_return(@admin)
+      Administrator.should_receive(:new).and_return(@admin)
       get :new
     end
     
@@ -80,20 +80,20 @@ describe Admin::AdminsController, "GET new" do
   end
 end
 
-describe Admin::AdminsController, "GET edit" do
+describe Administrator::AdministratorsController, "GET edit" do
   should_require_admin_login :get, :edit
 
   describe "admin admin" do
   
     before(:each) do
       login_as_admin
-      @admin = mock_model(Admin, :save => nil)
-      Admin.stub!(:find_by_id).and_return @admin
+      @admin = mock_model(Administrator, :save => nil)
+      Administrator.stub!(:find_by_id).and_return @admin
       @admin.stub!(:user).and_return @user
     end
 
     it "should load the required admin" do
-      Admin.should_receive(:find_by_id).with("1")
+      Administrator.should_receive(:find_by_id).with("1")
       get :edit, :id => 1
     end
     
@@ -109,7 +109,7 @@ describe Admin::AdminsController, "GET edit" do
 
     context "when admin does not exist" do
       before(:each) do
-        Admin.stub!(:find_by_id).and_return nil
+        Administrator.stub!(:find_by_id).and_return nil
       end
 
       it "should put a message in flash[:error]" do
@@ -120,7 +120,7 @@ describe Admin::AdminsController, "GET edit" do
   end
 end
 
-describe Admin::AdminsController, "POST create" do
+describe Administrator::AdministratorsController, "POST create" do
   should_require_admin_login :post, :create
   
   describe "admin admin" do
@@ -132,17 +132,17 @@ describe Admin::AdminsController, "POST create" do
       @rights = []
       3.times { @rights << Right.create() }
 
-#      @admin = mock_model(Admin, :save => nil)
-      @admin = Admin.new
+#      @admin = mock_model(Administrator, :save => nil)
+      @admin = Administrator.new
       @avatar = mock_model(Picture, :save => nil)
-      Admin.stub!(:new).and_return @admin
+      Administrator.stub!(:new).and_return @admin
 
       # avatar file to upload
       @uploader = uploaded_file('rails.png')
     end
 
     it "should build a new admin" do
-      Admin.should_receive(:new).with('firstname' => 'John', 'lastname' => 'Doe', 'email' => 'john.doe@company.com', 'password' => 'johndoe', 'password_confirmation' => 'johndoe', 'role_ids' => ['1'], 'right_ids' => ['1', '2', '3']).and_return(@admin)
+      Administrator.should_receive(:new).with('firstname' => 'John', 'lastname' => 'Doe', 'email' => 'john.doe@company.com', 'password' => 'johndoe', 'password_confirmation' => 'johndoe', 'role_ids' => ['1'], 'right_ids' => ['1', '2', '3']).and_return(@admin)
       post :create, :admin => {'firstname' => 'John', 'lastname' => 'Doe', 'email' => 'john.doe@company.com', 'password' => 'johndoe', 'password_confirmation' => 'johndoe', 'role_ids' => ['1'], 'right_ids' => ['1', '2', '3']}
     end
 	
@@ -191,16 +191,16 @@ describe Admin::AdminsController, "POST create" do
   end
 end
 
-describe Admin::AdminsController, "PUT update" do
+describe Administrator::AdministratorsController, "PUT update" do
   should_require_admin_login :put, :update
   
   describe "admin admin" do
     before(:each) do
       login_as_admin
 			@user = mock_model(User, :null_object => true)
-      @admin = mock_model(Admin, :save => nil)
+      @admin = mock_model(Administrator, :save => nil)
       @admin.stub!(:user).and_return @user
-      Admin.stub!(:find_by_id).and_return @admin
+      Administrator.stub!(:find_by_id).and_return @admin
     end
     
     context "when the admin saves successfully" do
@@ -209,7 +209,7 @@ describe Admin::AdminsController, "PUT update" do
       end
 
       it "should load the required admin" do
-        Admin.should_receive(:find_by_id).with("1").and_return @admin
+        Administrator.should_receive(:find_by_id).with("1").and_return @admin
         put :update, :id => 1, :admin => {}
       end
 
@@ -231,7 +231,7 @@ describe Admin::AdminsController, "PUT update" do
 
     context "when the admin does not exist" do
       before(:each) do
-        Admin.stub!(:find_by_id).and_return nil
+        Administrator.stub!(:find_by_id).and_return nil
       end
 
       it "should put a message in flash[:error]" do
@@ -268,14 +268,14 @@ describe Admin::AdminsController, "PUT update" do
   end
 end
 
-describe Admin::AdminsController, "DELETE destroy" do
+describe Administrator::AdministratorsController, "DELETE destroy" do
   should_require_admin_login :delete, :destroy
 
   describe "admin admin" do
     before(:each) do
       login_as_admin
-      @admin = mock_model(Admin, :save => nil)
-      Admin.stub!(:find_by_id).and_return @admin
+      @admin = mock_model(Administrator, :save => nil)
+      Administrator.stub!(:find_by_id).and_return @admin
     end
     
     context "when the admin is successfully deleted" do
@@ -284,7 +284,7 @@ describe Admin::AdminsController, "DELETE destroy" do
       end
 
       it "should load the required admin" do
-        Admin.should_receive(:find_by_id).with("1")
+        Administrator.should_receive(:find_by_id).with("1")
         delete :destroy, :id => 1
       end
 
@@ -306,7 +306,7 @@ describe Admin::AdminsController, "DELETE destroy" do
 
     context "when admin does not exist" do
       before(:each) do
-        Admin.stub!(:find_by_id).and_return nil
+        Administrator.stub!(:find_by_id).and_return nil
       end
 
       it "should put a message in flash[:error]" do

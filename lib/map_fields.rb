@@ -1,4 +1,4 @@
-require 'fastercsv'
+require (RUBY_VERSION.to_f >= 1.9 ? 'csv' : 'fastercsv')
 
 module MapFields
   VERSION = '1.0.0'
@@ -7,86 +7,94 @@ module MapFields
     base.extend(ClassMethods)
   end
 
-  def map_fields
-    default_options = {
-      :file_field => 'file',
-      :params => []
-    }
-    options = default_options.merge( 
-      self.class.read_inheritable_attribute(:map_fields_options)
-    )
-
-    if session[:map_fields].nil? || params[options[:file_field]]
-      session[:map_fields] = {}
-      if params[options[:file_field]].blank?
-        @map_fields_error = MissingFileContentsError
-        return
-      end
-
-      file_field = params[options[:file_field]]
-
-      temp_path = File.join(Dir::tmpdir, "map_fields_#{Time.now.to_i}_#{$$}")
-      File.open(temp_path, 'wb') do |f|
-        f.write file_field.read
-      end
-
-      session[:map_fields][:file] = temp_path
-
-      @rows = []
-      parser_options = session[:parser_options] = params[:parser_options].symbolize_keys
-      FasterCSV.foreach(temp_path, parser_options) do |row|
-        @rows << row
-        break if @rows.size == 10
-      end
-      expected_fields = self.class.read_inheritable_attribute(:map_fields_fields)
-      @fields = ([nil] + expected_fields).inject([]){ |o, e| o << [e, o.size]}
-      @parameters = []
-      options[:params].each do |param|
-        @parameters += ParamsParser.parse(params, param)
-      end
-    else
-      if session[:map_fields][:file].nil? || params[:fields].nil?
-        session[:map_fields] = nil
-        @map_fields_error =  InconsistentStateError
-      else
-        @mapped_fields = MappedFields.new(session[:map_fields][:file], 
-                                          params[:fields],
-                                          params[:ignore_first_row],
-                                          session[:parser_options])
-      end
-    end
-  end
-
-  def mapped_fields
-    @mapped_fields
-  end
-
-  def fields_mapped?
-    raise @map_fields_error if @map_fields_error
-    @mapped_fields
-  end
-
-  def map_field_parameters(&block)
-    
-  end
-
-  def map_fields_cleanup
-    if @mapped_fields
-      if session[:map_fields][:file]
-        File.delete(session[:map_fields][:file]) 
-      end
-      session[:map_fields] = nil
-      @mapped_fields = nil
-      @map_fields_error = nil
-    end
-  end
-
   module ClassMethods
     def map_fields(action, fields, options = {})
-      write_inheritable_array(:map_fields_fields, fields)
-      write_inheritable_attribute(:map_fields_options, options)
-      before_filter :map_fields, :only => action
-      after_filter :map_fields_cleanup, :only => action
+      include MapFields::InstanceMethods
+      write_inheritable_array("map_fields_fields_#{action}", fields)
+      write_inheritable_attribute("map_fields_options_#{action}", options)
+      write_inheritable_attribute(:map_fields_actions, []) unless read_inheritable_attribute(:map_fields_actions)
+      write_inheritable_attribute(:map_fields_actions, (read_inheritable_attribute(:map_fields_actions) << action).uniq)
+      skip_filter :map_fields
+      skip_filter :map_fields_cleanup
+      before_filter :map_fields, :only =>  read_inheritable_attribute(:map_fields_actions)
+      after_filter :map_fields_cleanup, :only =>  read_inheritable_attribute(:map_fields_actions)
+    end
+  end
+
+
+  module InstanceMethods
+    def map_fields
+      default_options = {
+        :file_field => 'file',
+        :params => []
+      }
+      options = default_options.merge( 
+        self.class.read_inheritable_attribute("map_fields_options_#{params[:action]}")
+      )
+
+      if session[:map_fields].nil? || params[options[:file_field]]
+        session[:map_fields] = {}
+        if params[options[:file_field]].blank?
+          @map_fields_error = MissingFileContentsError
+          return
+        end
+
+        file_field = params[options[:file_field]]
+
+        temp_path = File.join(Dir::tmpdir, "map_fields_#{Time.now.to_i}_#{$$}")
+        File.open(temp_path, 'wb') do |f|
+          f.write file_field.read
+        end
+
+        session[:map_fields][:file] = temp_path
+
+        @rows = []
+        parser_options = session[:parser_options] = params[:parser_options].symbolize_keys
+        (RUBY_VERSION.to_f >= 1.9 ? CSV : FasterCSV).foreach(temp_path, parser_options) do |row|
+          @rows << row
+          break if @rows.size == 10
+        end
+        expected_fields = self.class.read_inheritable_attribute("map_fields_fields_#{params[:action]}")
+        @fields = ([nil] + expected_fields).inject([]){ |o, e| o << [e, o.size]}
+        @parameters = []
+        options[:params].each do |param|
+          @parameters += ParamsParser.parse(params, param)
+        end
+      else
+        if session[:map_fields][:file].nil? || params[:fields].nil?
+          session[:map_fields] = nil
+          @map_fields_error =  InconsistentStateError
+        else
+          @mapped_fields = MappedFields.new(session[:map_fields][:file], 
+                                            params[:fields],
+                                            params[:ignore_first_row],
+                                            session[:parser_options])
+        end
+      end
+    end
+
+    def mapped_fields
+      @mapped_fields
+    end
+
+    def fields_mapped?
+      raise @map_fields_error if @map_fields_error
+      @mapped_fields
+    end
+
+    def map_field_parameters(&block)
+      
+    end
+
+    def map_fields_cleanup
+      if @mapped_fields
+        if session[:map_fields][:file]
+          File.delete(session[:map_fields][:file]) 
+        end
+        session[:map_fields] = nil
+        @mapped_fields = nil
+        @map_fields_error = nil
+      end
     end
   end
 
@@ -103,7 +111,7 @@ module MapFields
 
     def each
       row_number = 1
-      FasterCSV.foreach(@file,@parser_options) do |csv_row|
+      (RUBY_VERSION.to_f >= 1.9 ? CSV : FasterCSV).foreach(@file,@parser_options) do |csv_row|
         unless row_number == 1 && @ignore_first_row
           row = []
           @mapping.each do |k,v|
@@ -163,5 +171,4 @@ end
 
 if defined?(Rails) and defined?(ActionController)
   ActionController::Base.send(:include, MapFields)
-  ActionController::Base.view_paths.push File.expand_path(File.join(File.dirname(__FILE__), '..', 'views'))
 end

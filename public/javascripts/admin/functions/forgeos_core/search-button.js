@@ -23,7 +23,7 @@ function toggle_search_elements(){
 
 function toggle_search_elements_ok(){
   var parent = $(this).data('parent');
-  if(parent!='' && classe!=undefined && classe!='open'){
+  if(parent!=''){
     $('#search.'+parent).toggleClass('open');
     $('.search-form-'+parent).toggle();
   }

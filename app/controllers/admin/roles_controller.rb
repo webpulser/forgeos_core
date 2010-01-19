@@ -100,7 +100,7 @@ private
     end
 
     if order_column == 2
-      includes << :admins 
+      includes << :administrators 
       group_by << 'roles.id'
     end
 

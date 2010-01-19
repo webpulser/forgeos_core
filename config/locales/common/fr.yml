@@ -74,7 +74,6 @@ fr:
   created_on: date de création
   updated_at: date de modification
   active: actif
-  users: clients
   inactive: inactif
   meta_description: meta description
   last_modification: dernière modification
@@ -133,7 +132,7 @@ fr:
   users: clients
   user:
     one: client
-    other: client
+    other: clients
     back: retour aux clients
     spent_on: dépensé en
     all: tous les clients

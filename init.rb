@@ -1,26 +1,26 @@
 I18n.load_path += Dir[File.join(RAILS_ROOT, 'vendor', 'plugins', 'forgeos_core', 'config', 'locales', '**', '*.{rb,yml}')]
 
 # Specify gems to use
-config.gem 'bcrypt-ruby', :lib => 'bcrypt'
-config.gem 'authlogic', :source => 'http://gemcutter.org'
-config.gem 'mime-types', :lib => 'mime/types'
-config.gem 'will_paginate', :source => 'http://gemcutter.org'
-config.gem 'acts_as_list', :source => 'http://gemcutter.org'
-config.gem 'acts_as_tree', :source => 'http://gemcutter.org'
-config.gem 'acts_as_commentable', :source => 'http://gemcutter.org'
-config.gem 'webpulser-jrails', :source => "http://gems.github.com", :lib => 'jrails'
-config.gem 'webpulser-habtm_list', :source => "http://gems.github.com"
-config.gem 'riddle', :source => 'http://gemcutter.org'
-config.gem 'thinking-sphinx', :lib => 'thinking_sphinx', :source => 'http://gemcutter.org', :version => '1.3.6'
-config.gem 'ar-extensions', :source => 'http://gemcutter.org'
-config.gem 'ruleby', :source => 'http://gemcutter.org'
-config.gem 'haml', :source => 'http://gemcutter.org'
+config.gem 'ar-extensions', :source => 'http://gemcutter.org', :version => '0.9.2'
+config.gem 'bcrypt-ruby', :lib => 'bcrypt', :version => '2.1.2'
+config.gem 'authlogic', :source => 'http://gemcutter.org', :version => '2.1.3'
+config.gem 'mime-types', :lib => 'mime/types', :version => '1.16'
+config.gem 'acts_as_list', :source => 'http://gemcutter.org', :version => '0.1.2'
+config.gem 'acts_as_tree', :source => 'http://gemcutter.org', :version => '0.1.0'
+config.gem 'acts_as_commentable', :source => 'http://gemcutter.org', :version => '2.0.2'
+config.gem 'webpulser-jrails', :source => 'http://gems.github.com', :version => '0.4.2', :lib => 'jrails'
+config.gem 'webpulser-habtm_list', :source => 'http://gems.github.com', :version => '0.1.2'
+config.gem 'thinking-sphinx', :lib => 'thinking_sphinx', :source => 'http://gemcutter.org', :version => '1.3.14'
+config.gem 'ruleby', :source => 'http://gemcutter.org', :version => '0.6'
+config.gem 'haml', :source => 'http://gemcutter.org', :version => '2.2.17'
+config.gem 'will_paginate', :source => 'http://gemcutter.org', :version => '2.3.11'
 config.gem "globalize2", :source => 'http://gemcutter.org', :lib => 'globalize/model/active_record'
 
 # Load Haml and Sass
 require 'haml'
 
 Haml.init_rails(binding)
+Haml::Template.options[:ugly] = true if Rails.env == :production
 Sass::Plugin.options[:style] = :compact
 
 # Add patch to ActionController to upload via Adobe Flash

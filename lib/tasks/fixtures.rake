@@ -2,23 +2,22 @@ namespace :forgeos do
   namespace :core do
     namespace :fixtures do
       desc "Load seed fixtures (from db/fixtures) into the current environment's database." 
-      task :load => :environment do
+      task :load, :plugin_name, :tables, :needs => :environment do |t,args|
         require 'active_record/fixtures'
         
-        unless ARGV[2].nil? && ARGV[2].blank?
-          PLUGIN_PATH = Desert::Manager.plugin_path(ARGV[1])
-          tables = ARGV[2].split(',')
+        if args.plugin_name && args.tables
+          PLUGIN_PATH = Desert::Manager.plugin_path(args.plugin_name)
+          tables = args.tables.split(' ')
         else
-          puts "usage: rake forgeos:core:fixtures:load PLUGIN_NAME table_name1,table_name2;"
+          puts "usage: rake forgeos:core:fixtures:load[PLUGIN_NAME,table_name1,table_name2];"
           exit
         end
         
         tables.each do |file|
           file_name = File.basename(file, '.yml')
-          puts file_name
           begin
-            puts "Load #{file_name} fixtures"
             Fixtures.create_fixtures(File.join(PLUGIN_PATH,'db','fixtures'), file_name)
+            puts "Loaded #{file_name} fixtures"
           rescue
             puts "#{file_name} fixtures not loaded"  
           end

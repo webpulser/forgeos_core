@@ -5,9 +5,9 @@
   .backgrounds.big-header
     = f.text_field :name
     .interact-links
-      = submit_tag I18n.t('save_changes').capitalize, :class => 'backgrounds interact-button'
-      = I18n.t('or')
-      = link_to I18n.t('cancel').capitalize, admin_roles_path, :class => 'back-link'
+      = submit_tag t('save_changes').capitalize, :class => 'backgrounds interact-button'
+      = t('or')
+      = link_to t('cancel').capitalize, admin_roles_path, :class => 'back-link'
 
   #content.grid_16.alpha.omega
     .grid_12.alpha
@@ -21,9 +21,9 @@
               .clear
               .multi-select-div
                 %a{ :href => '#' }
-                  = I18n.t('select_all').capitalize
+                  = t('select_all').capitalize
                 %a{ :href => '#' }
-                  = I18n.t('unselect_all').capitalize
+                  = t('unselect_all').capitalize
               - right_category.rights.each do |right|
                 .checkbox-container
                   = check_box_tag "role[right_ids][]", right.id, (role ? role.rights.include?(right) : false)
@@ -34,7 +34,7 @@
       - unless rights.nil?
         .fieldset
           %a.small-icons.panel{ :href => '#' }
-            = I18n.t('other')
+            = t('other')
           .option-panel-content
             .clear
             .multi-select-div
@@ -48,12 +48,12 @@
     #right-sidebar.grid_4.omega.alpha
       - unless role.new_record?
         .step
-          /= link_to I18n.t('role.duplicate').capitalize, [:duplicate, :admin, role], :class => 'small-icons duplicate'
-          = link_to I18n.t('user.destroy.action').capitalize, [:admin, role], :confirm => I18n.t('user.destroy.confirm').capitalize, :method => :delete, :class => 'small-icons delete'
+          /= link_to t('role.duplicate').capitalize, [:duplicate, :admin, role], :class => 'small-icons duplicate'
+          = link_to t('user.destroy.action').capitalize, [:admin, role], :confirm => t('user.destroy.confirm').capitalize, :method => :delete, :class => 'small-icons delete'
         #role_attributed_to.step.open
           %a.small-icons.step-title{ :href => "#" }
-            = I18n.t('role.attributed_to').capitalize
-          - role.admins.each do |admin|
+            = t('role.attributed_to').capitalize
+          - role.administrators.each do |admin|
             = admin.fullname
 
     .clear

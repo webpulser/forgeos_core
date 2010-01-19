@@ -10,9 +10,9 @@ class Admin::PersonSessionsController < Admin::BaseController
     @person_session = PersonSession.new(params[:person_session])
     if @person_session.save
       redirect_to(:admin_root)
-      flash[:notice] = I18n.t('log.in.success').capitalize
+      flash[:notice] = t('log.in.success').capitalize
     else
-      flash[:error] = I18n.t('log.in.failed').capitalize
+      flash[:error] = t('log.in.failed').capitalize
       if redirect = session[:return_to]
         session[:return_to] = nil
         redirect_to(redirect)
@@ -24,21 +24,21 @@ class Admin::PersonSessionsController < Admin::BaseController
 
   def destroy
     current_user_session.destroy
-    flash[:notice] = I18n.t('log.out.success').capitalize
+    flash[:notice] = t('log.out.success').capitalize
   end
   
   def reset_admin_password
-    user = Admin.find_by_email(params[:email])
+    user = Administrator.find_by_email(params[:email])
     if user
       generated_password = generate_password(8)
       if user.update_attributes(:password => generated_password, :password_confirmation => generated_password)
         UserNotifier.deliver_reset_password(user,generated_password)
-        flash[:notice] = I18n.t('admin.reset_password.success').capitalize
+        flash[:notice] = t('admin.reset_password.success').capitalize
       else
-        flash[:error] = I18n.t('admin.reset_password.failed').capitalize
+        flash[:error] = t('admin.reset_password.failed').capitalize
       end
     else
-      flash[:error] = I18n.t('admin.not_exist').capitalize
+      flash[:error] = t('admin.not_exist').capitalize
     end
     redirect_to :action => 'new'
   end

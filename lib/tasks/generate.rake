@@ -5,15 +5,15 @@ namespace :forgeos do
     namespace :generate do
 
       desc "Generates a role per controller and a right per controller action."
-      task :acl => :environment do
+      task :acl, :path, :needs => :environment do |t,args|
         
         # set project path
         # By default, plugin path
         # else path is set to the first argument provided.
-        if ARGV[1] && !ARGV[1].blank?
-          project_path = ARGV[1]
+        if args.path
+          project_path = args.path
         else
-          puts 'usage : rake forgeos:core:generate:acl <project_path>'
+          puts 'usage : rake forgeos:core:generate:acl[iproject_path>]'
           exit
         end
 
@@ -43,10 +43,10 @@ namespace :forgeos do
             end
             puts ' [ok]'
           end
-          unless role = Role.first
-            role = Role.create :name => 'super administrator'
-          end
-          admin = Admin.first
+
+          role = Role.first || Role.create(:name => 'super administrator')
+          admin = Administrator.first
+
           print "associate rights to #{role.name} "
           role.update_attributes(:right_ids => Right.all(:select => :id).collect(&:id))
           puts ' [ok]'

@@ -1,4 +1,4 @@
-class Admin::AdminsController < Admin::BaseController
+class Admin::AdministratorsController < Admin::BaseController
   before_filter :get_admin, :only => [:show, :edit, :update, :destroy, :update_rights]
 
   def index
@@ -15,50 +15,50 @@ class Admin::AdminsController < Admin::BaseController
   end
 
   def new
-    @admin = Admin.new(params[:admin])
+    @admin = Administrator.new(params[:admin])
   end
 
   def edit
   end
 
   def create
-    @admin = Admin.new(params[:admin])
+    @admin = Administrator.new(params[:admin])
     @admin.build_avatar(params[:avatar]) unless @admin.avatar
 
     if @admin.save
-      flash[:notice] = I18n.t('admin.create.success').capitalize
-      redirect_to(admin_admins_path)
+      flash[:notice] = t('admin.create.success').capitalize
+      redirect_to(admin_administrators_path)
     else
-      flash[:error] = I18n.t('admin.create.failed').capitalize
+      flash[:error] = t('admin.create.failed').capitalize
       render :action => "new"
     end
   end
 
   def update
     if @admin.update_attributes(params[:admin])
-      flash[:notice] = I18n.t('admin.update.success').capitalize
-      redirect_to(admin_admins_path)
+      flash[:notice] = t('admin.update.success').capitalize
+      redirect_to(admin_administrators_path)
     else
-      flash[:error] = I18n.t('admin.update.failed').capitalize
+      flash[:error] = t('admin.update.failed').capitalize
       render :action => "edit"
     end
   end
 
   def destroy
     if request.delete? && @admin.destroy
-      flash[:notice] = I18n.t('admin.destroy.success').capitalize
+      flash[:notice] = t('admin.destroy.success').capitalize
     else
-      flash[:error] = I18n.t('admin.destroy.failed').capitalize
+      flash[:error] = t('admin.destroy.failed').capitalize
     end
-    redirect_to(admin_admins_path)
+    redirect_to(admin_administrators_path)
   end
 
 private
 
   def get_admin
-    unless @admin = Admin.find_by_id(params[:id])
-      flash[:error] = I18n.t('admin.not_exist').capitalize
-      return redirect_to(admin_admins_path)
+    unless @admin = Administrator.find_by_id(params[:id])
+      flash[:error] = t('admin.not_exist').capitalize
+      return redirect_to(admin_administrators_path)
     end
   end
 
@@ -86,9 +86,9 @@ private
     options[:order] = order unless order.squeeze.blank?
 
     if params[:sSearch] && !params[:sSearch].blank?
-      @admins = Admin.search(params[:sSearch],options)
+      @admins = Administrator.search(params[:sSearch],options)
     else
-      @admins = Admin.paginate(:all,options)
+      @admins = Administrator.paginate(:all,options)
     end
   end
 end

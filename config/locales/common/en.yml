@@ -80,7 +80,6 @@ en:
   library: library
   marketing: marketing
   support: support
-  users: customers
   roles: roles
   rights: rights
   controller_name: 'controller name'

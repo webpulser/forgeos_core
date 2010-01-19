@@ -1,6 +1,6 @@
 jQuery(document).ready(function(){
   //init search form
-  $('.search-form').html($('.dataTables_filter').clone(true));
+  $('.search-form').html($('#table_wrapper .dataTables_filter').clone(true));
   $('.search-form').append('<a href="#" class="backgrounds button-ok">OK</a>');
   $('.search-form .button-ok').data('parent','');
 
@@ -25,6 +25,6 @@ jQuery(document).ready(function(){
   $('.top .dataSlides_filter').remove();
   $('.top .dataTables_filter').remove();
 
-  $('.search-link').bind('click',toggle_search_elements);
-  $('.button-ok').bind('click',toggle_search_elements_ok);
+  $('.search-link').live('click',toggle_search_elements);
+  $('.button-ok').live('click',toggle_search_elements_ok);
 })

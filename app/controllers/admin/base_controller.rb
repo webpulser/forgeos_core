@@ -13,10 +13,20 @@ class Admin::BaseController < ApplicationController
 
 private
   def login_required
-    unless current_user.is_a?(Admin) && current_user.rights.find_by_controller_name_and_action_name(params[:controller], params[:action])
+    unless current_user.is_a?(Administrator)
       store_location
-      flash[:warning] = "You must be logged in to access this page"
+      flash[:warning] = t(:login_required)
       redirect_to(admin_login_path)
+      return false
+    end
+    unless current_user.access_path?(params[:controller], params[:action])
+      store_location
+      flash[:warning] = t(:admin_access_denied)
+      if current_user.access_path?('admin/dashboard','index')
+        redirect_to(admin_root_path)
+      else
+        redirect_to(admin_login_path)
+      end
       return false
     end
   end
