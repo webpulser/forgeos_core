@@ -9,10 +9,13 @@ class ApplicationController < ActionController::Base
 private
 
   def set_locale
-    session[:locale] = current_user.lang if current_user
+    session[:locale] = current_user.lang if current_user && current_user.lang
     locale = params[:locale] || session[:locale] || I18n.default_locale
-    I18n.locale = locale if !locale.blank? && I18n.available_locales.include?(locale.to_sym)
+    if !locale.blank? && I18n.available_locales.include?(locale.to_sym)
+      session[:locale] = I18n.locale = locale
+    end
   end
+
 
   def current_user_session
     return @current_user_session if defined?(@current_user_session)

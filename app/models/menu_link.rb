@@ -1,4 +1,5 @@
 class MenuLink < ActiveRecord::Base
+  translates :title, :url
   acts_as_tree
 
   validates_presence_of :title
@@ -21,15 +22,16 @@ class MenuLink < ActiveRecord::Base
     menu_link.children = self.children.collect(&:clone)
     return menu_link
   end
-
-  def url
-    url_attribute = super
+  
+  def url_with_target
+    url_attribute = url_without_target
     if url_attribute.nil? || url_attribute.blank?
-      target_id.nil? ? '#' : target
+      target_id ? target : '#'
     else
       url_attribute
     end
-  end
+  end 
+  alias_method_chain :url, :target 
 
   def url_and_children_urls
     urls = [self.url]

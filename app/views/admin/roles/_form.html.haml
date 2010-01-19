@@ -12,7 +12,7 @@
   #content.grid_16.alpha.omega
     .grid_12.alpha
       .padding-wrap
-        - right_categories = RightCategory.all( :order => 'name' )
+        - right_categories = RightCategory.all(:joins => :globalize_translations, :order => 'name' )
         - right_categories.each do |right_category|
           .fieldset
             %a.small-icons.panel{ :href => '#' }

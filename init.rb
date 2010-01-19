@@ -14,6 +14,7 @@ config.gem 'thinking-sphinx', :lib => 'thinking_sphinx', :source => 'http://gemc
 config.gem 'ruleby', :source => 'http://gemcutter.org', :version => '0.6'
 config.gem 'haml', :source => 'http://gemcutter.org', :version => '2.2.17'
 config.gem 'will_paginate', :source => 'http://gemcutter.org', :version => '2.3.11'
+config.gem "globalize2", :source => 'http://gemcutter.org', :lib => 'globalize/model/active_record'
 
 # Load Haml and Sass
 require 'haml'
@@ -33,4 +34,3 @@ if ActiveRecord::Base.connection.tables.include?(Setting.table_name) && settings
   ActionMailer::Base.smtp_settings = settings.smtp_settings
   ActionMailer::Base.sendmail_settings = settings.sendmail_settings
 end
-
