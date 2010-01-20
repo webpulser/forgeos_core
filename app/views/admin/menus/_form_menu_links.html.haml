@@ -47,8 +47,8 @@
         .clear
         .actions
           = link_to content_tag(:span, t(:save_changes), :class => 'small-icons save'), '#', :class => 'backgrounds action-button'
-          = I18n.t('or')
-          = link_to I18n.t('cancel').capitalize, '#', :class => 'back-link'
+          = t('or')
+          = link_to t('cancel').capitalize, '#', :class => 'back-link'
 
       %span.action-links.hidden
         = link_to '', '#', :class => 'small-icons add-green-plus'

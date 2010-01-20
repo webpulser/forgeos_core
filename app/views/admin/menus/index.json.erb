@@ -17,7 +17,7 @@
         link_to('', [:edit, :admin, menu], :class => 'small-icons edit-link') +
         link_to_remote('', :url => [:admin, menu],
           :method => :delete,
-          :confirm => I18n.t('menu.destroy.confirm').capitalize,
+          :confirm => t('menu.destroy.confirm').capitalize,
           :success => "removedataTablesRow('#destroy_#{link_id}')",
           :html => {
           :class => 'small-icons destroy-link', :id => "destroy_#{link_id}"

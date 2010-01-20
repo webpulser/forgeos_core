@@ -417,3 +417,14 @@ a.truncate
 #footer
   clear: both
   :background-color = !white
+#lang-switcher
+  :background-color= !black
+  float: right
+  .dropdown
+    a.dropdown_toggle span
+      background-image: url(/images/admin/select/lang.png) 
+      :color= !white
+      font-weight: bold
+    &.fr
+      a.dropdown_toggle span
+        padding-left: 22px

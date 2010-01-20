@@ -1,6 +1,6 @@
 class Admin::BaseController < ApplicationController
   layout 'admin'
-  before_filter :login_required, :except => [:notifications, :url]
+  before_filter :login_required, :edition_locale, :except => [:notifications, :url]
   skip_before_filter :validate_authenticity_token
 
   def notifications
@@ -28,6 +28,12 @@ private
         redirect_to(admin_login_path)
       end
       return false
+    end
+  end
+
+  def edition_locale
+    if session[:lang]
+      ActiveRecord::Base.locale = session[:lang]
     end
   end
 end
