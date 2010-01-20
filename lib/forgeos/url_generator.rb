@@ -1,3 +1,4 @@
+# coding: utf-8
 # encoding: utf-8
 module Forgeos
   def self.url_generator(phrase = '')
@@ -6,6 +7,7 @@ module Forgeos
       %w(é è ê ë Ë É È Ê €) => 'e',
       %w(í ì î ï I Î Ì) => 'i',
       %w(ó ò ô ö õ Õ Ö Ô Ò) => 'o',
+      %w(ç) => 'c',
       %w(œ) => 'oe',
       %w(ß) => 'ss',
       %w(ú ù û ü U Û Ù) => 'u',
