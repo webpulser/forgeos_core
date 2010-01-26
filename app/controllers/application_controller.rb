@@ -13,6 +13,7 @@ private
     locale = params[:locale] || session[:locale] || I18n.default_locale
     if !locale.blank? && I18n.available_locales.include?(locale.to_sym)
       session[:locale] = I18n.locale = locale
+      ActiveRecord::Base.locale=locale
     end
   end
 
