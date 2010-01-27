@@ -13,7 +13,7 @@ config.gem 'webpulser-habtm_list', :source => 'http://gems.github.com', :version
 config.gem 'thinking-sphinx', :lib => 'thinking_sphinx', :source => 'http://gemcutter.org', :version => '1.3.14'
 config.gem 'ruleby', :source => 'http://gemcutter.org', :version => '0.6'
 config.gem 'haml', :source => 'http://gemcutter.org', :version => '2.2.17'
-config.gem 'will_paginate', :source => 'http://gemcutter.org', :version => '2.3.11'
+config.gem 'will_paginate', :source => 'http://gemcutter.org', :version => '2.3.12'
 config.gem "globalize2", :source => 'http://gemcutter.org', :lib => 'globalize/model/active_record'
 
 # Load Haml and Sass
@@ -31,6 +31,6 @@ if ActiveRecord::Base.connection.tables.include?(Setting.table_name) && settings
   config.time_zone = settings.time_zone
   I18n.default_locale = settings.lang.to_sym
   ActionMailer::Base.delivery_method = settings.mailer ? settings.mailer.delivery_method : :smtp
-  ActionMailer::Base.smtp_settings = settings.smtp_settings
-  ActionMailer::Base.sendmail_settings = settings.sendmail_settings
+  ActionMailer::Base.smtp_settings = settings.smtp_settings.to_h
+  ActionMailer::Base.sendmail_settings = settings.sendmail_settings.to_h
 end
