@@ -1,4 +1,4 @@
-require 'extentions'
+require 'extensions'
 require 'forgeos/menu'
 require 'forgeos/url_generator'
 require 'forgeos/statistics'
