@@ -10,7 +10,7 @@ private
 
   def set_locale
     session[:locale] = current_user.lang if current_user && current_user.lang
-    locale = params[:locale] || session[:locale] || I18n.default_locale
+    locale = params[:locale] || request.env['HTTP_ACCEPT_LANGUAGE'].scan(/^[a-z]{2}/).first || session[:locale] || I18n.default_locale
     if !locale.blank? && I18n.available_locales.include?(locale.to_sym)
       session[:locale] = I18n.locale = locale
       ActiveRecord::Base.locale=locale
