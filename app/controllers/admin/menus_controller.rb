@@ -1,5 +1,5 @@
 class Admin::MenusController < Admin::BaseController
-  cache_sweeper :page_sweeper, :only => [:create, :update, :destroy, :link, :activate]
+  cache_sweeper :page_sweeper, :only => [:create, :update, :destroy, :activate]
   before_filter :get_menu, :only => [:show, :edit, :update, :destroy, :duplicate, :activate]
   before_filter :new_menu, :only => [:new, :create]
 
