@@ -10,10 +10,10 @@ config.gem 'acts_as_tree', :source => 'http://gemcutter.org', :version => '0.1.0
 config.gem 'acts_as_commentable', :source => 'http://gemcutter.org', :version => '2.0.2'
 config.gem 'webpulser-jrails', :source => 'http://gems.github.com', :version => '0.4.2', :lib => 'jrails'
 config.gem 'webpulser-habtm_list', :source => 'http://gems.github.com', :version => '0.1.2'
-config.gem 'thinking-sphinx', :lib => 'thinking_sphinx', :source => 'http://gemcutter.org', :version => '1.3.14'
+config.gem 'thinking-sphinx', :lib => 'thinking_sphinx', :source => 'http://gemcutter.org', :version => '1.3.15'
 config.gem 'ruleby', :source => 'http://gemcutter.org', :version => '0.6'
-config.gem 'haml', :source => 'http://gemcutter.org', :version => '2.2.17'
-config.gem 'will_paginate', :source => 'http://gemcutter.org', :version => '2.3.11'
+config.gem 'haml', :source => 'http://gemcutter.org', :version => '2.2.18'
+config.gem 'will_paginate', :source => 'http://gemcutter.org', :version => '2.3.12'
 
 # Load Haml and Sass
 require 'haml'
