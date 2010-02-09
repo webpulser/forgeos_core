@@ -4,8 +4,8 @@ class CreateComments < ActiveRecord::Migration
       t.string   :title, :limit => 50, :default => ''
       t.text     :comment
       t.belongs_to :commentable, :polymorphic => true
-      t.belongs_to  :person
-      t.datetime :created_at, :null => false
+      t.belongs_to :person
+      t.timestamps
     end
 
     add_index :comments, %w(person_id), :name => 'fk_comments_person'
