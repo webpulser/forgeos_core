@@ -12,7 +12,7 @@ config.gem 'webpulser-jrails', :source => 'http://gems.github.com', :version => 
 config.gem 'webpulser-habtm_list', :source => 'http://gems.github.com', :version => '0.1.2'
 config.gem 'thinking-sphinx', :lib => 'thinking_sphinx', :source => 'http://gemcutter.org', :version => '1.3.15'
 config.gem 'ruleby', :source => 'http://gemcutter.org', :version => '0.6'
-config.gem 'haml', :source => 'http://gemcutter.org', :version => '2.2.17'
+config.gem 'haml', :source => 'http://gemcutter.org', :version => '2.2.18'
 config.gem 'will_paginate', :source => 'http://gemcutter.org', :version => '2.3.12'
 config.gem 'fastercsv', :source => 'http://gemcutter.org', :version => '1.5.1' if RUBY_VERSION.to_f < 1.9 
 config.gem "globalize2", :source => 'http://gemcutter.org', :lib => 'globalize/model/active_record'
@@ -32,6 +32,6 @@ if ActiveRecord::Base.connection.tables.include?(Setting.table_name) && settings
   config.time_zone = settings.time_zone
   I18n.default_locale = settings.lang.to_sym
   ActionMailer::Base.delivery_method = settings.mailer ? settings.mailer.delivery_method : :smtp
-  ActionMailer::Base.smtp_settings = settings.smtp_settings.marshal_dump
-  ActionMailer::Base.sendmail_settings = settings.sendmail_settings.marshal_dump
+  ActionMailer::Base.smtp_settings = settings.smtp_settings.marshal_dump if settings.smtp_settings
+  ActionMailer::Base.sendmail_settings = settings.sendmail_settings.marshal_dump if settings.sendmail_settings
 end

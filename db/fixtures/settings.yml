@@ -2,3 +2,6 @@ main_setting:
   name: Forgeos
   lang: en
   time_zone: UTC
+  sendmail_settings: {}
+  smtp_setting: {}
+  mailer: test
