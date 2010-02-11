@@ -52,7 +52,7 @@ module MapFields
         parser_options = session[:parser_options] = params[:parser_options].symbolize_keys
         (RUBY_VERSION.to_f >= 1.9 ? CSV : FasterCSV).foreach(temp_path, parser_options) do |row|
           @rows << row
-          break if @rows.size == 10
+          break if @rows.size == 5
         end
         expected_fields = self.class.read_inheritable_attribute("map_fields_fields_#{params[:action]}")
         @fields = ([nil] + expected_fields).inject([]){ |o, e| o << [e, o.size]}
