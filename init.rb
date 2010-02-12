@@ -12,7 +12,7 @@ config.gem 'webpulser-jrails', :source => 'http://gems.github.com', :version => 
 config.gem 'webpulser-habtm_list', :source => 'http://gems.github.com', :version => '0.1.2'
 config.gem 'thinking-sphinx', :lib => 'thinking_sphinx', :source => 'http://gemcutter.org', :version => '1.3.15'
 config.gem 'ruleby', :source => 'http://gemcutter.org', :version => '0.6'
-config.gem 'haml', :source => 'http://gemcutter.org', :version => '2.2.17'
+config.gem 'haml', :source => 'http://gemcutter.org'
 config.gem 'will_paginate', :source => 'http://gemcutter.org', :version => '2.3.12'
 config.gem 'fastercsv', :source => 'http://gemcutter.org', :version => '1.5.1' if RUBY_VERSION.to_f < 1.9 
 config.gem "globalize2", :source => 'http://gemcutter.org', :lib => 'globalize/model/active_record'
