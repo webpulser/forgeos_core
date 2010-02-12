@@ -12,12 +12,11 @@ config.gem 'webpulser-jrails', :source => 'http://gems.github.com', :version => 
 config.gem 'webpulser-habtm_list', :source => 'http://gems.github.com', :version => '0.1.2'
 config.gem 'thinking-sphinx', :lib => 'thinking_sphinx', :source => 'http://gemcutter.org', :version => '1.3.15'
 config.gem 'ruleby', :source => 'http://gemcutter.org', :version => '0.6'
-config.gem 'haml', :source => 'http://gemcutter.org', :version => '2.2.19'
+config.gem 'haml', :source => 'http://gemcutter.org'
 config.gem 'will_paginate', :source => 'http://gemcutter.org', :version => '2.3.12'
 
 # Load Haml and Sass
 require 'haml'
-
 Haml.init_rails(binding)
 Haml::Template.options[:ugly] = true if Rails.env == :production
 Sass::Plugin.options[:style] = :compact
