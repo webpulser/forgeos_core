@@ -1,17 +1,18 @@
 require 'map_fields'
 class Admin::ImportController < Admin::BaseController
-  map_fields :create_customer, %w(Lastname* Firstname* Email*)
+  map_fields :create_user, User.new.attributes.keys
   before_filter :models, :only => :index
 
   def index; end
   
-  def create_customer
+  def create_user
+    create_model(User,'email')
   end
 
   private
 
   def models
-    @models = ['customer']
+    @models = ['user']
   end
 
   def create_model(klass, uniq_field, &block)
@@ -22,8 +23,16 @@ class Admin::ImportController < Admin::BaseController
       errors = []
 
       mapped_fields.each do |row|
-        attributes = yield(row) || {}
-        if row[0] != nil && object = klass.send("find_by_#{uniq_field}",row[0])
+        if block_given?
+          attributes = yield(row) || {}
+        else
+          attributes = {} 
+          klass.new.attributes.keys.each_with_index do |attribute,i|
+            attributes[attribute.to_sym] = row[i] if row[i]
+          end
+        end
+        uniq_field_index = self.class.read_inheritable_attribute("map_fields_fields_#{params[:action]}").index(uniq_field)
+        if row[uniq_field_index] != nil && object = klass.send("find_by_#{uniq_field}",row[uniq_field_index])
           if object.update_attributes(attributes)
             updated+=1
           else
@@ -49,7 +58,7 @@ class Admin::ImportController < Admin::BaseController
       flash[:error] = t('import.failed.errors', :model => t(klass.to_s.underscore, :count => errors_count), :nb => errors_count) unless errors.empty?
       redirect_to(:action => :index)
     else
-      render
+      render(:action => 'create')
     end
     rescue MapFields::InconsistentStateError
       flash[:error] = t('import.retry')
