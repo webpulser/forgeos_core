@@ -22,7 +22,7 @@
                 - @rows.each do |row|
                   %tr
                     - row.each do |column|
-                      %td= h(column)
+                      %td= truncate(h(column),255)
     #right-sidebar.grid_4.omega
       .step
         = check_box_tag 'ignore_first_row', '1', true, :id => 'ignore_first_row_option'
