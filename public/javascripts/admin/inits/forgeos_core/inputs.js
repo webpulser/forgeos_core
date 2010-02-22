@@ -32,6 +32,14 @@ jQuery(document).ready(function(){
      }
   });
 
+  //init sortable
+  $('.sortable').each(function(){
+    $(this).sortable({
+      handle:'.handler',
+      placeholder: 'ui-state-highlight'
+    });
+  });
+
   //init nested_sortable
   $('.nested_sortable').each(function(){
     $(this).sortable({
