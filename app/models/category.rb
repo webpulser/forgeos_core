@@ -1,9 +1,9 @@
 class Category < ActiveRecord::Base
-  translates :name
+  translates :name, :description
   acts_as_tree
   has_and_belongs_to_many_attachments
 
-  validates_presence_of :name
+  #validates_presence_of :name
 
   # Returns the level of <i>Category</i>
   def level
