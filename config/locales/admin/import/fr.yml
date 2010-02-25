@@ -5,6 +5,8 @@ fr:
     send_file: envoyer le fichier
     file: fichier
     model: modèle
+    col_sep: séparés par
+    quote_char: entourés par
     create:
       success: "{{nb}} {{model}} ont été créés"
     update:
