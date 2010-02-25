@@ -3,6 +3,8 @@ en:
     other: import
     button: import
     send_file: send the file
+    file: file
+    model: model
     create:
       success: "{{nb}} {{model}} successfully created"
     update:

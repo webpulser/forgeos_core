@@ -3,6 +3,8 @@ fr:
     one: import
     button: importer
     send_file: envoyer le fichier
+    file: fichier
+    model: modèle
     create:
       success: "{{nb}} {{model}} ont été créés"
     update:

@@ -21,17 +21,17 @@ class Admin::ImportController < Admin::BaseController
       updated = 0
       count = 0
       errors = []
-
+      fields = self.class.read_inheritable_attribute("map_fields_fields_#{params[:action]}")
       mapped_fields.each do |row|
         if block_given?
           attributes = yield(row) || {}
         else
           attributes = {} 
-          klass.new.attributes.keys.each_with_index do |attribute,i|
+          fields.each_with_index do |attribute,i|
             attributes[attribute.to_sym] = row[i] if row[i]
           end
         end
-        uniq_field_index = self.class.read_inheritable_attribute("map_fields_fields_#{params[:action]}").index(uniq_field)
+        uniq_field_index = fields.index(uniq_field)
         if row[uniq_field_index] != nil && object = klass.send("find_by_#{uniq_field}",row[uniq_field_index])
           if object.update_attributes(attributes)
             updated+=1
