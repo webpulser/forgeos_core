@@ -12,7 +12,7 @@ module Forgeos
       %w(ß) => 'ss',
       %w(ú ù û ü U Û Ù) => 'u',
       %w(\/ \| \\ \\& = # ' ") => '',
-      %w(\s+) => '_'
+      %w(\s+ _) => '-'
     }.each do |ac,rep|
       url.gsub!(Regexp.new(ac.join('|')), rep)
     end
