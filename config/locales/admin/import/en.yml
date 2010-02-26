@@ -3,6 +3,10 @@ en:
     other: import
     button: import
     send_file: send the file
+    file: file
+    model: model
+    col_sep: separated by
+    quote_char: enclosed by
     create:
       success: "{{nb}} {{model}} successfully created"
     update:

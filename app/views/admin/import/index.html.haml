@@ -1,3 +1,4 @@
+= render :partial => 'admin/menus/lang_switcher'
 = render :partial => 'tabs'
 - form_tag({ :action => :create } , :multipart => true, :id => 'import_form') do
   .backgrounds.big-header
@@ -6,16 +7,16 @@
   #content.grid_16.alpha.omega
     .grid_12.alpha
       .inner-content
-        = label_tag :import, :model
+        = label :import, :model, t('import.model')
         %div
-          = select :import, :model, options_for_select(@models), { :prompt => true }, :onchange => "jQuery('#import_form').attr('action', 'import/create_'+this.value)"
+          = select :import, :model, options_for_select(@models.sort.map{|model| [t(model,:count => 2),model] }), { :prompt => true }, :onchange => "jQuery('#import_form').attr('action', 'import/create_'+this.value)"
         .clear
-        = label_tag :file
+        = label_tag :file, t('import.file')
         %div
           = file_field_tag :file
     #right-sidebar.grid_4.omega
       .step
-        = label :parser_options, :col_sep
+        = label :parser_options, :col_sep, t('import.col_sep')
         = text_field :parser_options, :col_sep, :value => ',', :size => 2
-        = label :parser_options, :quote_char
+        = label :parser_options, :quote_char, t('import.quote_char')
         = text_field :parser_options, :quote_char, :value => '"', :size => 2
