@@ -15,14 +15,14 @@ class Admin::AdministratorsController < Admin::BaseController
   end
 
   def new
-    @admin = Administrator.new(params[:admin])
+    @admin = Administrator.new(params[:administrator])
   end
 
   def edit
   end
 
   def create
-    @admin = Administrator.new(params[:admin])
+    @admin = Administrator.new(params[:administrator])
     @admin.build_avatar(params[:avatar]) unless @admin.avatar
 
     if @admin.save
@@ -35,7 +35,7 @@ class Admin::AdministratorsController < Admin::BaseController
   end
 
   def update
-    if @admin.update_attributes(params[:admin])
+    if @admin.update_attributes(params[:administrator])
       flash[:notice] = t('admin.update.success').capitalize
       redirect_to(admin_administrators_path)
     else
