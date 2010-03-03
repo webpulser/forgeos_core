@@ -24,8 +24,12 @@ config.gem "globalize2", :source => 'http://gemcutter.org', :lib => 'globalize/m
 # Load Haml and Sass
 require 'haml'
 Haml.init_rails(binding)
-Haml::Template.options[:ugly] = true if Rails.env == :production
-Sass::Plugin.options[:style] = :compact
+if Rails.env == :production
+  Haml::Template.options[:ugly] = true 
+  Sass::Plugin.options[:style] = :compressed
+else
+  Sass::Plugin.options[:style] = :compact
+end
 
 # Add patch to ActionController to upload via Adobe Flash
 ActionController::Dispatcher.middleware.insert -1, 'FlashSessionCookieMiddleware'
