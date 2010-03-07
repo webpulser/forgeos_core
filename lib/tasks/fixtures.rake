@@ -6,7 +6,7 @@ namespace :forgeos do
         require 'active_record/fixtures'
         
         if args.plugin_name && args.tables
-          PLUGIN_PATH = Desert::Manager.plugin_path(args.plugin_name)
+          PLUGIN_PATH = Engines.plugins[args.plugin_name.to_sym].directory
           tables = args.tables.split(' ')
         else
           puts "usage: rake forgeos:core:fixtures:load[PLUGIN_NAME,table_name1,table_name2];"
@@ -27,7 +27,7 @@ namespace :forgeos do
       desc 'Create YAML test fixtures from data in an existing database.  
       Defaults to development database. Set RAILS_ENV to override.'
       task :extract => :environment do
-        PLUGIN_PATH = Desert::Manager.plugin_path('forgeos_core')
+        PLUGIN_PATH = Engines.plugins[:forgeos_core].directory 
 
         skip_tables = ["schema_info", "sessions"]
         ActiveRecord::Base.establish_connection
