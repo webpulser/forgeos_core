@@ -1,9 +1,5 @@
 I18n.load_path += Dir[File.join(RAILS_ROOT, 'vendor', 'plugins', 'forgeos_core', 'config', 'locales', '**', '*.{rb,yml}')]
 
-if RAILS_ENV == 'development'
-  ActiveSupport::Dependencies.load_once_paths.reject!{|x| x =~ /^#{Regexp.escape(File.dirname(__FILE__))}/}
-end
-
 # Specify gems to use
 config.gem 'ar-extensions', :source => 'http://gemcutter.org', :version => '0.9.2'
 config.gem 'bcrypt-ruby', :lib => 'bcrypt', :version => '2.1.2'
