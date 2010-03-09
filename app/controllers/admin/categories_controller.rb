@@ -34,13 +34,13 @@ class Admin::CategoriesController < Admin::BaseController
   # The Category can be a child of another Category.
   def create
     if @category.save
-      flash[:notice] = I18n.t('category.create.success').capitalize
+      flash[:notice] = t('category.create.success').capitalize
       respond_to do |format|
         format.html { redirect_to([:edit, :admin, @category]) }
         format.json { render :text => @category.id }
       end
     else
-      flash[:error] = I18n.t('category.create.failed').capitalize
+      flash[:error] = t('category.create.failed').capitalize
       render :action => 'new'
     end
   end
@@ -56,9 +56,9 @@ class Admin::CategoriesController < Admin::BaseController
  
   def update
     if @category.update_attributes(params[:category])
-      flash[:notice] = I18n.t('category.update.success').capitalize
+      flash[:notice] = t('category.update.success').capitalize
     else
-      flash[:error] = I18n.t('category.update.failed').capitalize
+      flash[:error] = t('category.update.failed').capitalize
     end
 
     respond_to do |format|
@@ -74,9 +74,9 @@ class Admin::CategoriesController < Admin::BaseController
   #  if destroy succed, return the Categories list
   def destroy
     if @category.destroy
-      flash[:notice] = I18n.t('category.destroy.success').capitalize
+      flash[:notice] = t('category.destroy.success').capitalize
     else
-      flash[:error] = I18n.t('category.destroy.failed').capitalize
+      flash[:error] = t('category.destroy.failed').capitalize
     end
     render :text => true
   end
@@ -88,7 +88,7 @@ class Admin::CategoriesController < Admin::BaseController
 private
   def get_category
     unless @category = Category.find_by_id(params[:id])
-      flash[:error] = I18n.t('category.not_exist').capitalize
+      flash[:error] = t('category.not_exist').capitalize
       return redirect_to(:action => :index)
     end
   end
@@ -111,9 +111,6 @@ private
     options = { :page => page, :per_page => per_page }
     options[:conditions] = conditions unless conditions.empty?
     options[:order] = order unless order.squeeze.blank?
-
-    logger.debug "*"*400
-    logger.debug conditions
 
     if params[:sSearch] && !params[:sSearch].blank?
       @categories = Category.search(params[:sSearch], options)
