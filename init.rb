@@ -1,5 +1,3 @@
-I18n.load_path += Dir[File.join(RAILS_ROOT, 'vendor', 'plugins', 'forgeos_core', 'config', 'locales', '**', '*.{rb,yml}')]
-
 # Specify gems to use
 config.gem 'ar-extensions', :source => 'http://gemcutter.org', :version => '0.9.2'
 config.gem 'bcrypt-ruby', :lib => 'bcrypt', :version => '2.1.2'
