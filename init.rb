@@ -36,3 +36,4 @@ if ActiveRecord::Base.connection.tables.include?(Setting.table_name) && settings
   ActionMailer::Base.smtp_settings = settings.smtp_settings.marshal_dump if settings.smtp_settings
   ActionMailer::Base.sendmail_settings = settings.sendmail_settings.marshal_dump if settings.sendmail_settings
 end
+puts 'initialisation of forgeos Core'

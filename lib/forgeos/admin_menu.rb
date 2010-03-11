@@ -4,7 +4,7 @@ module Forgeos
     { :title => 'back_office.menu.dashboard',
       :url => { :controller => 'admin/dashboard' },
       :i18n => true,
-      :html => { :class => 'left'}
+      :html => { :class => 'left first'}
     },
     { :title => 'back_office.menu.users',
       :url => { :controller => 'admin/users' }, 
