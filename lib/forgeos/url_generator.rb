@@ -17,6 +17,6 @@ module Forgeos
       url.gsub!(Regexp.new(ac.join('|')), rep)
     end
 
-    url.gsub(/(^-+|-+$)/,'')
+    url.gsub(/(^-+|-+$)/,'').downcase
   end
 end
