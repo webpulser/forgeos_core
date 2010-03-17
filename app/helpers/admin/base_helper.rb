@@ -28,11 +28,11 @@ module Admin::BaseHelper
         'bAutoWidth': false,
         #{data_source}
         'oLanguage': {
-          'sProcessing' : '#{I18n.t('jquery.dataTables.oLanguage.sProcessing')}',
-          'sLengthMenu':'#{I18n.t('jquery.dataTables.oLanguage.sLengthMenu')}',
-          'sZeroRecords':'#{I18n.t('jquery.dataTables.oLanguage.sZeroRecords')}',
-          'sInfo':'#{I18n.t('jquery.dataTables.oLanguage.sInfo')}',
-          'sInfoEmpty':'#{I18n.t('jquery.dataTables.oLanguage.sInfoEmpty')}',
+          'sProcessing' : '#{t('jquery.dataTables.oLanguage.sProcessing')}',
+          'sLengthMenu':'#{t('jquery.dataTables.oLanguage.sLengthMenu')}',
+          'sZeroRecords':'#{t('jquery.dataTables.oLanguage.sZeroRecords')}',
+          'sInfo':'#{t('jquery.dataTables.oLanguage.sInfo')}',
+          'sInfoEmpty':'#{t('jquery.dataTables.oLanguage.sInfoEmpty')}',
           'sSearch':''
         }
       });
@@ -71,11 +71,11 @@ module Admin::BaseHelper
         'iDisplayEnd': 12,
         #{data_source}
         'oLanguage': {
-          'sProcessing' : '#{I18n.t('jquery.dataTables.oLanguage.sProcessing')}',
-          'sLengthMenu':'#{I18n.t('jquery.dataTables.oLanguage.sLengthMenu')}',
-          'sZeroRecords':'#{I18n.t('jquery.dataTables.oLanguage.sZeroRecords')}',
-          'sInfo':'#{I18n.t('jquery.dataTables.oLanguage.sInfo')}',
-          'sInfoEmpty':'#{I18n.t('jquery.dataTables.oLanguage.sInfoEmpty')}',
+          'sProcessing' : '#{t('jquery.dataTables.oLanguage.sProcessing')}',
+          'sLengthMenu':'#{t('jquery.dataTables.oLanguage.sLengthMenu')}',
+          'sZeroRecords':'#{t('jquery.dataTables.oLanguage.sZeroRecords')}',
+          'sInfo':'#{t('jquery.dataTables.oLanguage.sInfo')}',
+          'sInfoEmpty':'#{t('jquery.dataTables.oLanguage.sInfoEmpty')}',
           'sSearch':''
         }
       });
@@ -88,7 +88,7 @@ module Admin::BaseHelper
   end
 
   def fg_search
-    label = content_tag(:span, I18n.t('search').capitalize, :class => 'small-icons search-span')
+    label = content_tag(:span, t('search').capitalize, :class => 'small-icons search-span')
     link_to(label, '#', :class => 'small-icons left search-link')
   end
 
