@@ -116,6 +116,10 @@ en:
     one: civility
     other: civilities
     label:
+      '0': Mr
+      '1': Ms
+      '2': Mss
+    select:
       - [Mr, 0]
       - [Ms, 1]
       - [Mss, 2]
