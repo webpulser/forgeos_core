@@ -4,7 +4,7 @@ I18n.load_path += Dir[File.join(RAILS_ROOT, 'vendor', 'plugins', 'forgeos_core',
 config.gem 'ar-extensions', :version => '>=0.9.2'
 config.gem 'bcrypt-ruby', :lib => 'bcrypt', :version => '>=2.1.2'
 config.gem 'authlogic', :version => '>=2.1.3'
-config.gem 'fastercsv', :version => '>=1.5.1'
+config.gem 'fastercsv', :version => '>=1.5.1' if RUBY_VERSION.to_f < 1.9 
 config.gem 'haml', :version => '>=2.2.15'
 config.gem 'will_paginate', :version => '>2.3.11'
 config.gem 'mime-types', :lib => 'mime/types', :version => '>=1.16'
