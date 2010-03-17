@@ -12,6 +12,7 @@
   min-width: 150px
   .options
     max-height: 300px
+    min-width: 150px
     position: absolute
     left: 5px
     top: 21px
@@ -21,6 +22,7 @@
     border-top: 0
     padding: 0
     ul
+      width: auto
       list-style: none
       padding: 0
       margin: 0
@@ -28,15 +30,12 @@
         list-style: none
         padding: 0
         margin: 0
-        ul
-          padding-left: 10px
+        float: none
+        width: auto
+        a span
+          margin-left: 10px
     .opt-label
       font-weight: bold
-    ul li
-      float: none
-      width: auto
-      a span
-        margin-left: 10px
     a
       +block()
       font-size: 12px
