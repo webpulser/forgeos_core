@@ -8,13 +8,6 @@
   min-width: 8em
   max-width: 12.5em
   width: auto
-.big-header
-  .dropdown
-    width: auto
-    margin: 0 10px 0 0
-    ul li a span
-      line-height: 1em
-      float: none
 .fieldset.noborder
   border-width: 0px
 #customer-see
@@ -73,22 +66,6 @@
 .email
   width: 150px
 .fieldset
-  zoom: 1
-  label
-    display: block
-    :color = !lightGray
-    font-size: .9em
-    margin: 8px 2px 2px
-    &.radio
-      display: inline
-  input
-    :border = 1px solid !darkGray
-    +borderCorner(3px,3px,3px,3px)
-    :background
-      :position 0 -600px
-      :image url(/images/admin/backgrounds-verti.png)
-      :repeat repeat-x
-    padding: 2px 0
   .firstname-input
     clear: both
     +left()
