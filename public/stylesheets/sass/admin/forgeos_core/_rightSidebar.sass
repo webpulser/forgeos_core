@@ -25,144 +25,144 @@
     padding: 5px
     margin-left: -5px
     width: 188px
-.last-date,
-.username
-  a
-    text-decoration: underline
-.add_size
-  text-decoration: underline
-  color = !greenBlue
-  font-size: 0.8em
-.preview,
-.duplicate,
-.delete,
-.contact
-  margin: 5px 0px
-.step 
-  .enhanced
-    display: none !important
-.open 
-  .enhanced
-    display: block !important
-.step
-  .inner-step
-    display: none
-    margin-top: 5px
-    padding: 5px
-    p
-      padding: 0 0 0 5px
-      margin: 0 0 5px 0
-      border-left = 1px solid !greenBlue
-  &.open .inner-step
-    +block()
-.tags
-  a, label
-    display: inline-block !important
-    background-color = !white
-    border = 1px solid !white
-    -moz-border-radius: 5px
-    color = !greenBlue
-    padding: 0px 5px
-    margin: 2px 0px
-  span
-    padding: 5px
-    position: relative
-    +left()
-    +borderCorner(3px,3px,3px,3px)
-    background-color = !white
-    margin 2px
-.status p
-  padding: 0
-  margin: 5px 0 0 10px
-.meta p
-  border: 0 !important
-  padding: 0
-  margin: 0 0 2px 0
-  span
-    font-weight: bold
-.attribute-new
-  color = !blueLink
-  text-decoration: underline
-  margin-left: 22px
-.tags 
-  span,
-  .block-container
-    &:hover 
-      .gray-destroy
-        +opacity(1)
-form#wrap
-  .tags
-    background-color = !white
-    border = 1px solid !contentHeaderBorder
-    +borderCorner()
+  .last-date,
+  .username
     a
-      background-color =  !contentHeaderBorder
-      color = !black
-      background-position: right -208px
-      padding-right: 24px
-    span
-      padding: 2px 20px 2px 5px
-      border = 1px solid !contentHeaderBorder
-      color: #000 !important
-      font-weight: bold
-      margin: 2px
-      a
-        background-position: left -205px
-        height: 14px
-        width: 16px
-        padding: 0
-        background-color: transparent
-        border: 0
-        margin: 0
-        top: 2px !important
-        visibility: hidden
-      &:hover
-        a
-          visibility: visible
-    input
-      background none !important
-      color = !lightGray
-      font-style: italic
-      width: 85px
-      +left()
-      border: 0
-      padding: 2px 5px
-      margin: 2px    
-//----------------- ------
-// TAG AUTOCOMPLETE ------
-//----------------- ------
-.wrap_tags
-  position: relative
-  #tag_autocomplete_container
-    position: absolute
-    top: 16px
-    left: 0
-    padding:
-      bottom: 3px
-      right: 3px
-    display: none
-    overflow: hidden
-    z-index: 10
-    .shadow
-      position: absolute !important
+      text-decoration: underline
+  .add_size
+    text-decoration: underline
+    color = !greenBlue
+    font-size: 0.8em
+  .preview,
+  .duplicate,
+  .delete,
+  .contact
+    margin: 5px 0px
+  .step 
+    .enhanced
+      display: none !important
+  .open 
+    .enhanced
       display: block !important
-      margin: 0
-    #tag_autocomplete
-      width: 150px
-      background:
-        color: #FFF
-      padding: 0
-      border = 0
-      +borderCorner(0,0,0,0)
-      margin: 0
+  .step
+    .inner-step
+      display: none
+      margin-top: 5px
+      padding: 5px
+      p
+        padding: 0 0 0 5px
+        margin: 0 0 5px 0
+        border-left = 1px solid !greenBlue
+    &.open .inner-step
+      +block()
+  .tags
+    a, label
+      display: inline-block !important
+      background-color = !white
+      border = 1px solid !white
+      -moz-border-radius: 5px
+      color = !greenBlue
+      padding: 0px 5px
+      margin: 2px 0px
+    span
+      padding: 5px
+      position: relative
+      +left()
+      +borderCorner(3px,3px,3px,3px)
+      background-color = !white
+      margin 2px
+  .status p
+    padding: 0
+    margin: 5px 0 0 10px
+  .meta p
+    border: 0 !important
+    padding: 0
+    margin: 0 0 2px 0
+    span
+      font-weight: bold
+  .attribute-new
+    color = !blueLink
+    text-decoration: underline
+    margin-left: 22px
+  .tags 
+    span,
+    .block-container
+      &:hover 
+        .gray-destroy
+          +opacity(1)
+  form#wrap
+    .tags
+      background-color = !white
+      border = 1px solid !contentHeaderBorder
+      +borderCorner()
+      a
+        background-color =  !contentHeaderBorder
+        color = !black
+        background-position: right -208px
+        padding-right: 24px
       span
-        display: block
-        color: #000
-        float: none !important
-        margin: 0
-        padding: 5px
-        +borderCorner(0,0,0,0)
+        padding: 2px 20px 2px 5px
+        border = 1px solid !contentHeaderBorder
+        color: #000 !important
+        font-weight: bold
+        margin: 2px
+        a
+          background-position: left -205px
+          height: 14px
+          width: 16px
+          padding: 0
+          background-color: transparent
+          border: 0
+          margin: 0
+          top: 2px !important
+          visibility: hidden
         &:hover
-          color: #FFF !important
-          background:
-            color = !blueLink
+          a
+            visibility: visible
+      input
+        background none !important
+        color = !lightGray
+        font-style: italic
+        width: 85px
+        +left()
+        border: 0
+        padding: 2px 5px
+        margin: 2px    
+  //----------------- ------
+  // TAG AUTOCOMPLETE ------
+  //----------------- ------
+  .wrap_tags
+    position: relative
+    #tag_autocomplete_container
+      position: absolute
+      top: 16px
+      left: 0
+      padding:
+        bottom: 3px
+        right: 3px
+      display: none
+      overflow: hidden
+      z-index: 10
+      .shadow
+        position: absolute !important
+        display: block !important
+        margin: 0
+      #tag_autocomplete
+        width: 150px
+        background:
+          color: #FFF
+        padding: 0
+        border = 0
+        +borderCorner(0,0,0,0)
+        margin: 0
+        span
+          display: block
+          color: #000
+          float: none !important
+          margin: 0
+          padding: 5px
+          +borderCorner(0,0,0,0)
+          &:hover
+            color: #FFF !important
+            background:
+              color = !blueLink
