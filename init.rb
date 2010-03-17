@@ -1,32 +1,20 @@
 # Specify gems to use
-config.gem 'ar-extensions', :source => 'http://gemcutter.org', :version => '0.9.2'
-config.gem 'bcrypt-ruby', :lib => 'bcrypt', :version => '2.1.2'
-config.gem 'authlogic', :source => 'http://gemcutter.org', :version => '2.1.3'
-config.gem 'mime-types', :lib => 'mime/types', :version => '1.16'
-config.gem 'acts_as_list', :source => 'http://gemcutter.org', :version => '0.1.2'
-config.gem 'acts_as_tree', :source => 'http://gemcutter.org', :version => '0.1.1'
-config.gem 'acts_as_commentable', :source => 'http://gemcutter.org', :version => '2.0.2'
+config.gem 'ar-extensions', :version => '>=0.9.2'
+config.gem 'bcrypt-ruby', :lib => 'bcrypt', :version => '>=2.1.2'
+config.gem 'authlogic', :version => '>=2.1.3'
+config.gem 'fastercsv', :version => '>=1.5.1' if RUBY_VERSION.to_f < 1.9 
+config.gem 'haml', :version => '>=2.2.15'
+config.gem 'will_paginate', :version => '>2.3.11'
+config.gem 'mime-types', :lib => 'mime/types', :version => '>=1.16'
+config.gem 'acts_as_list', :version => '>=0.1.2'
+config.gem 'acts_as_tree', :version => '>=0.1.1'
+config.gem 'acts_as_commentable', :version => '3.0.0'
 config.gem 'webpulser-jrails', :source => 'http://gems.github.com', :version => '0.4.2', :lib => 'jrails'
 config.gem 'webpulser-habtm_list', :source => 'http://gems.github.com', :version => '0.1.2'
-config.gem 'thinking-sphinx', :lib => 'thinking_sphinx', :source => 'http://gemcutter.org', :version => '1.3.16'
-config.gem 'ruleby', :source => 'http://gemcutter.org', :version => '0.6'
-config.gem 'haml', :source => 'http://gemcutter.org'
-config.gem 'will_paginate', :source => 'http://gemcutter.org', :version => '2.3.12'
-config.gem 'fastercsv', :source => 'http://gemcutter.org', :version => '1.5.1' if RUBY_VERSION.to_f < 1.9 
-config.gem "globalize2", :source => 'http://gemcutter.org', :lib => 'globalize/model/active_record'
+config.gem 'globalize2', :lib => 'globalize/model/active_record'
+config.gem 'thinking-sphinx', :lib => 'thinking_sphinx', :version => '>=1.3.14'
+config.gem 'ruleby', :version => '0.6'
 
-# Load Haml and Sass
-require 'haml'
-Haml.init_rails(binding)
-if Rails.env == :production
-  Haml::Template.options[:ugly] = true 
-  Sass::Plugin.options[:style] = :compressed
-else
-  Sass::Plugin.options[:style] = :compact
-end
-
-# Add patch to ActionController to upload via Adobe Flash
-ActionController::Dispatcher.middleware.insert -1, 'FlashSessionCookieMiddleware'
 require 'forgeos'
 
 if ActiveRecord::Base.connection.tables.include?(Setting.table_name) && settings = Setting.first

@@ -43,6 +43,9 @@
       padding: 2px 0
       &:hover
         :background-color = !contentHeaderBorder
+.civility .dropdown
+  min-width: 60px
+  margin: 0 5px 0 0
 a.dropdown_toggle
   +block()
   height: 22px
@@ -75,7 +78,7 @@ a.dropdown_toggle
     text-transform: uppercase
     a.dropdown_toggle
       span
-        :color = !white
+        //:color = !white
       .options
         position: absolute
         left: 5px

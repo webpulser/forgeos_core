@@ -50,6 +50,7 @@ module MapFields
 
         @rows = []
         parser_options = session[:parser_options] = params[:parser_options].symbolize_keys
+        parser_options.delete(:quote_char) if parser_options[:quote_char].blank?
         (RUBY_VERSION.to_f >= 1.9 ? CSV : FasterCSV).foreach(temp_path, parser_options) do |row|
           @rows << row
           break if @rows.size == 5
