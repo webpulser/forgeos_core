@@ -1,4 +1,8 @@
 # coding: utf-8
+
+# Add patch to ActionController to upload via Adobe Flash
+ActionController::Dispatcher.middleware.insert -1, 'FlashSessionCookieMiddleware'
+require 'haml_options'
 require 'forgeos/menu'
 require 'forgeos/url_generator'
 require 'forgeos/statistics'
