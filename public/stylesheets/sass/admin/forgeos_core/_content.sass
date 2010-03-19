@@ -40,12 +40,12 @@
     font-size: 0.7em
   .map_fields
     overflow-x: auto
-.field_name, #role_name,
-#transporter_rule_name,
-#widget_actuality_title,
-#media-title,
-#menu_name,
-.orange_input
-  +element_form_name()
+.big-header
+  .field_name,.orange_input
+    +element_form_name()
+    &.firstname,&.lastname
+      min-width: 8em
+      max-width: 12.5em
+      width: auto
 .field_error
   color: red
