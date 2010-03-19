@@ -9,9 +9,9 @@ config.gem 'mime-types', :lib => 'mime/types', :version => '>=1.16'
 config.gem 'acts_as_list', :version => '>=0.1.2'
 config.gem 'acts_as_tree', :version => '>=0.1.1'
 config.gem 'acts_as_commentable', :version => '3.0.0'
-config.gem 'webpulser-jrails', :source => 'http://gems.github.com', :version => '0.4.2', :lib => 'jrails'
-config.gem 'webpulser-habtm_list', :source => 'http://gems.github.com', :version => '0.1.2'
 config.gem 'globalize2', :lib => 'globalize/model/active_record'
+config.gem 'webpulser-jrails', :version => '>=0.4.2', :lib => 'jrails'
+config.gem 'webpulser-habtm_list', :version => '0.1.2'
 config.gem 'thinking-sphinx', :lib => 'thinking_sphinx', :version => '>=1.3.14'
 config.gem 'ruleby', :version => '0.6'
 
@@ -24,4 +24,4 @@ if ActiveRecord::Base.connection.tables.include?(Setting.table_name) && settings
   ActionMailer::Base.smtp_settings = settings.smtp_settings.marshal_dump if settings.smtp_settings
   ActionMailer::Base.sendmail_settings = settings.sendmail_settings.marshal_dump if settings.sendmail_settings
 end
-puts 'initialisation of forgeos Core'
+puts 'Forgeos Core loaded'
