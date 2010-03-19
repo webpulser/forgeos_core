@@ -22,15 +22,14 @@ class MenuLink < ActiveRecord::Base
     return menu_link
   end
 
-  def url_with_target
-    url_attribute = url_without_target
+  def url
+    url_attribute = super
     if url_attribute.nil? || url_attribute.blank?
       target_id ? target : '#'
     else
       url_attribute
     end
   end 
-  alias_method_chain :url, :target 
 
   def url_and_children_urls
     (self.children.map(&:url) + [self.url])
