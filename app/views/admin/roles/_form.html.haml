@@ -3,7 +3,7 @@
   = hidden_field_tag "role[right_ids][]"
 
   .backgrounds.big-header
-    = f.text_field :name
+    = f.text_field :name, :class => 'field_name'
     .interact-links
       = submit_tag t('save_changes').capitalize, :class => 'backgrounds interact-button'
       = t('or')

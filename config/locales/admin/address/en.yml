@@ -1,0 +1,8 @@
+en:
+  address:
+    same_people_infos: people name is the same
+    address: address
+    address_2: address suite
+    zip_code: zip_code
+    city: city
+    country: country

@@ -1,0 +1,8 @@
+fr:
+  address:
+    same_people_infos: le nom est identique
+    address: adresse
+    address_2: "complément d'adresse"
+    zip_code: code postal
+    city: ville
+    country: pays
