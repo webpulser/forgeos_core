@@ -22,20 +22,34 @@ class MenuLink < ActiveRecord::Base
     return menu_link
   end
 
-  def url
-    url_attribute = super
+  def url_with_target
+    url_attribute = url_without_target
     if url_attribute.nil? || url_attribute.blank?
-      target_id.nil? ? '#' : target
+      target_id ? target : '#'
     else
       url_attribute
     end
-  end
+  end 
+  alias_method_chain :url, :target 
 
   def url_and_children_urls
-    urls = [self.url]
-    self.children.each do |child|
-      urls += child.url_and_children_urls
-    end
-    return urls
+    (self.children.map(&:url) + [self.url])
   end
+
+  def url_and_parent_urls
+    return [self.url] unless self.parent
+    (self.parent.url_and_parent_urls + [self.url])
+  end
+
+  def url_match?(url_pattern='')
+    case url_pattern
+    when String
+      url_and_children_urls.include?("/#{url_pattern}")
+    when Array
+      url_and_children_urls.include?("/#{url_pattern.last}")
+    else
+      false
+    end
+  end
+
 end
