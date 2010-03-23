@@ -1,5 +1,7 @@
 en:
   address:
+    one: address
+    other: addresses
     same_people_infos: people name is the same
     address: address
     address_2: address suite
