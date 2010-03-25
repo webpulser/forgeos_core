@@ -21,7 +21,7 @@ class Admin::UsersController < Admin::BaseController
   def create
     if @user.save
       flash[:notice] = I18n.t('user.create.success').capitalize
-      redirect_to(admin_users_path)
+      redirect_to edit_admin_user_path(@user)
     else
       flash[:error] = I18n.t('user.create.failed').capitalize
       render :action => 'new'
@@ -34,11 +34,10 @@ class Admin::UsersController < Admin::BaseController
   def update
     if @user.update_attributes(params[:user])
       flash[:notice] = I18n.t('user.update.success').capitalize
-      redirect_to(admin_users_path)
     else
       flash[:error] = I18n.t('user.update.failed').capitalize
-      render :action => 'edit'
     end
+    render :action => 'edit'
   end
 
   # Remotly Destroy an User

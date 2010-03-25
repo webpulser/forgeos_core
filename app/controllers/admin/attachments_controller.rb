@@ -40,12 +40,11 @@ class Admin::AttachmentsController < Admin::BaseController
     if !(rack_file.respond_to?(:file_type) && !@media.class.attachment_options[:content_type].include?(rack_file.file_type)) &&
       @media.update_attributes(params[:attachment])
       flash[:notice] = I18n.t('media.update.success').capitalize
-      return redirect_to(admin_attachments_path(:file_type => file_type ))
     else
       flash[:error] = I18n.t('product.update.failed').capitalize
       edit
-      render :action => 'edit'
     end
+    render :action => 'edit'
   end
 
   # POST /medias

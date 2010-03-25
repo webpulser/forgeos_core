@@ -33,7 +33,6 @@ class Admin::RightsController < Admin::BaseController
         return false
       else
         render :action => 'new'
-        render
       end
     end
   end

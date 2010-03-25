@@ -36,7 +36,7 @@ class Admin::CategoriesController < Admin::BaseController
     if @category.save
       flash[:notice] = t('category.create.success').capitalize
       respond_to do |format|
-        format.html { redirect_to([:edit, :admin, @category]) }
+        format.html { redirect_to edit_admin_category_path(@category)}
         format.json { render :text => @category.id }
       end
     else
