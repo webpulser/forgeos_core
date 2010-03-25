@@ -20,9 +20,11 @@ module Admin::BaseHelper
     jQuery(document).ready(function(){
       var table = $('##{id}').dataTable({
         'sPaginationType': 'full_numbers',
-        'sDom': \"<'top'if>t<'bottom'p<'clear'>\",
+        'sDom': \"<'top'if>t<'bottom'ip<'clear'>\",
         'aoColumns': [ #{columns.join(',')} ],
         'sProcessing': true,
+        'iDisplayLength': 30,
+        'bLengthChange': true,
         'aaSorting': [[1,'asc']],
         'bStateSave': false,
         'bAutoWidth': false,
@@ -110,7 +112,7 @@ module Admin::BaseHelper
 
   def Forgeos_save_buttons(back_path=admin_root_path)
     content_tag(:div, :class => 'interact-links') do
-      fg_submit_tag('save_changes') + t('or') + link_to(t('cancel').capitalize, back_path, :class => 'back-link')
+      fg_submit_tag('save') + t('or') + link_to(t('cancel').capitalize, back_path, :class => 'back-link')
     end
   end
 
