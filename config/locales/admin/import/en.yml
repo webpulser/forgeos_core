@@ -1,6 +1,7 @@
 en:
   import:
-    other: import
+    one: import
+    other: imports
     button: import
     send_file: send the file
     file: file
