@@ -11,6 +11,9 @@ table
 #table_wrapper
   .dataTables_filter, .dataTables_length, .dataTables_info
     display: none
+  .bottom
+    .dataTables_info
+      display: block
 .datatable
   border-collapse: collapse
   width: 100% !important
@@ -110,7 +113,7 @@ table
     :background = !lightBlueBg url(/images/admin/small-icons-16-16-verti.png) no-repeat
     color = !blueLink
   &.first, &.last
-    display: none
+    display: inline
   &.previous
     background-position: left -191px
     padding-left: 18px
