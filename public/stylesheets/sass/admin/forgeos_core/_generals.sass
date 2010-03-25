@@ -49,20 +49,17 @@ li
     +left()
     :color = !lightGray
     font-size: 1.2em
-  .order-price
-    font-size: 1.4em
-    :color = !orange
-    font-weight: bold
-  .order-currency
-    font-size: 1.4em
-    :color = !orange
-    font-weight: bold
-    padding-left: 5px
   .header-separator
     background: transparent url(/images/admin/borders/heading-separator.png) no-repeat scroll left top
     height: 100%
     width: 3px
     margin: 0 10px
+  .dropdown
+    width: auto
+    margin: 0 10px 0 0
+    a span
+      line-height: 1em
+      float: none
 //--------------------- ----------       
 // BACKGROUNDS
 //--------------------- ----------
@@ -178,22 +175,38 @@ h2.description
   :color = !lightGray
   margin: 5px 0
   font-weight: normal
+
 .fieldset
+  zoom: 1
   border: 3px solid #f3f3f3
-  padding: 10px 0 10px 17px
   position: relative
   margin: 20px 0
-  font-size: 0.7em
   clear: both
-  h2
-    position: absolute
+  h2,h3
     :background-color = !white
-    top: -10px
     text-transform: uppercase
-    :color = !lightGray
+    :color = !gray
+    font-size: .9em
     font-weight: normal
-    font-size: 1.1em
-    padding: 0 5px
+    padding: 10px
+    margin: -20px 0 0 20px
+    +left()
+  label
+    display: block
+    :color = !lightGray
+    font-size: .9em
+    margin: 8px 2px 2px
+    &.radio
+      display: inline
+  input
+    :border = 1px solid !darkGray
+    +borderCorner(3px,3px,3px,3px)
+    :background
+      :position 0 -600px
+      :image url(/images/admin/backgrounds-verti.png)
+      :repeat repeat-x
+    padding: 2px 0
+
 .block-container
   height: 24px
   position: relative

@@ -115,6 +115,10 @@ fr:
     one: civilité
     other: civilités
     label:
+      '0': M
+      '1': Mme
+      '2': Mlle
+    select:
       - [M, 0]
       - [Mme, 1]
       - [Mlle, 2]

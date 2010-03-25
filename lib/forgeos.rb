@@ -1,3 +1,7 @@
+# Add patch to ActionController to upload via Adobe Flash
+ActionController::Dispatcher.middleware.insert -1, 'FlashSessionCookieMiddleware'
+
+require File.join(File.dirname(__FILE__), 'haml_options')
 require File.join(File.dirname(__FILE__), 'engines_plugin_ext')
 require File.join(File.dirname(__FILE__), 'extensions')
 require File.join(File.dirname(__FILE__), 'forgeos','menu')

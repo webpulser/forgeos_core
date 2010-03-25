@@ -1,7 +1,7 @@
 = render :partial => 'tabs'
 - form_for @setting, :url => admin_setting_path do |f|
   .backgrounds.big-header
-    = f.text_field :name, :class => 'defaultValue', :title => t('setting.shop_name')
+    = f.text_field :name, :class => 'defaultValue field_name', :title => t('setting.shop_name')
     .interact-links
       = submit_tag I18n.t('save_changes').capitalize, :class => 'backgrounds interact-button'
       = t :or

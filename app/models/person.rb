@@ -21,7 +21,7 @@ class Person < ActiveRecord::Base
   # anything else you want your user to change should be added here.
   attr_accessible :lastname, :firstname, :email, :password, :password_confirmation,
     :civility, :country_id, :birthday, :phone, :other_phone, :email_confirmation,
-    :avatar_attributes, :lang, :time_zone
+    :avatar_attributes, :lang, :time_zone, :address_attributes
 
   define_index do
     indexes firstname, :sortable => true

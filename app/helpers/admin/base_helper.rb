@@ -1,27 +1,4 @@
 module Admin::BaseHelper
-  def Forgeos_save_buttons(back_path=admin_root_path)
-    content_tag(:div, :class => 'interact-links') do
-      fg_submit_tag('save_changes') + t('or') + link_to(t('cancel').capitalize, back_path, :class => 'back-link')
-    end
-  end
-
-  def hide_html_elements_onload(element_ids)
-    return javascript_tag("$('##{element_ids.join(",#")}').hide()")
-  end 
-
-  def link_to_effect_toggle(title,element_id,effect = :toggle_appear )
-    return link_to_function(title,visual_effect(effect,element_id))
-  end
-
-  def yield_for_tools
-    content_for :tools, link_to(I18n.t('back').capitalize,:back, :class => 'back')
-    out = ''
-    @content_for_tools.each do |content|
-      out += content_tag('li', content) unless content.blank?
-    end
-    return out
-  end
-  
   def dataTables_tag(options = {})
     id = options[:id].nil? ? 'table' : options[:id]
     columns = options[:columns]
@@ -51,11 +28,11 @@ module Admin::BaseHelper
         'bAutoWidth': false,
         #{data_source}
         'oLanguage': {
-          'sProcessing' : '#{I18n.t('jquery.dataTables.oLanguage.sProcessing')}',
-          'sLengthMenu':'#{I18n.t('jquery.dataTables.oLanguage.sLengthMenu')}',
-          'sZeroRecords':'#{I18n.t('jquery.dataTables.oLanguage.sZeroRecords')}',
-          'sInfo':'#{I18n.t('jquery.dataTables.oLanguage.sInfo')}',
-          'sInfoEmpty':'#{I18n.t('jquery.dataTables.oLanguage.sInfoEmpty')}',
+          'sProcessing' : '#{t('jquery.dataTables.oLanguage.sProcessing')}',
+          'sLengthMenu':'#{t('jquery.dataTables.oLanguage.sLengthMenu')}',
+          'sZeroRecords':'#{t('jquery.dataTables.oLanguage.sZeroRecords')}',
+          'sInfo':'#{t('jquery.dataTables.oLanguage.sInfo')}',
+          'sInfoEmpty':'#{t('jquery.dataTables.oLanguage.sInfoEmpty')}',
           'sSearch':''
         }
       });
@@ -94,11 +71,11 @@ module Admin::BaseHelper
         'iDisplayEnd': 12,
         #{data_source}
         'oLanguage': {
-          'sProcessing' : '#{I18n.t('jquery.dataTables.oLanguage.sProcessing')}',
-          'sLengthMenu':'#{I18n.t('jquery.dataTables.oLanguage.sLengthMenu')}',
-          'sZeroRecords':'#{I18n.t('jquery.dataTables.oLanguage.sZeroRecords')}',
-          'sInfo':'#{I18n.t('jquery.dataTables.oLanguage.sInfo')}',
-          'sInfoEmpty':'#{I18n.t('jquery.dataTables.oLanguage.sInfoEmpty')}',
+          'sProcessing' : '#{t('jquery.dataTables.oLanguage.sProcessing')}',
+          'sLengthMenu':'#{t('jquery.dataTables.oLanguage.sLengthMenu')}',
+          'sZeroRecords':'#{t('jquery.dataTables.oLanguage.sZeroRecords')}',
+          'sInfo':'#{t('jquery.dataTables.oLanguage.sInfo')}',
+          'sInfoEmpty':'#{t('jquery.dataTables.oLanguage.sInfoEmpty')}',
           'sSearch':''
         }
       });
@@ -111,7 +88,7 @@ module Admin::BaseHelper
   end
 
   def fg_search
-    label = content_tag(:span, I18n.t('search').capitalize, :class => 'small-icons search-span')
+    label = content_tag(:span, t('search').capitalize, :class => 'small-icons search-span')
     link_to(label, '#', :class => 'small-icons left search-link')
   end
 
@@ -128,6 +105,12 @@ module Admin::BaseHelper
       content_tag(:span, capture(&proc), :class => 'block-name') +
       link_to('', '#', :class => 'big-icons gray-destroy') +
       hidden_field_tag("#{model_name}[#{block_name}_ids][]", block.id, :class => 'block-selected')
+    end
+  end
+
+  def Forgeos_save_buttons(back_path=admin_root_path)
+    content_tag(:div, :class => 'interact-links') do
+      fg_submit_tag('save_changes') + t('or') + link_to(t('cancel').capitalize, back_path, :class => 'back-link')
     end
   end
 
