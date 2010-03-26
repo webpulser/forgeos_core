@@ -1,4 +1,4 @@
-h1. ForgeosCore
+h1. Introduction
 
 ForgeosCore is the core of Forgeos project "http://www.forgeos.com":http://www.forgeos.com
 
@@ -10,7 +10,9 @@ h2. Plugins
 
 * attachment_fu
 * localized_dates
+
 h2. Gems
+
 * acts-as-taggable-on
 * fastercsv >= 1.5.1
 * ar-extensions >= 0.9.2
@@ -29,7 +31,7 @@ h2. Gems
 * ruleby = 0.6
 * aasm = 2.1.5
 
-h2. Initialize
+h1. Initialize
 
  <pre><code>
   ./script/generate migration install_forgeos_core_plugin
