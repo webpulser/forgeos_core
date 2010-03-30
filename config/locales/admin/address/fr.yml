@@ -1,5 +1,7 @@
 fr:
   address:
+    one: adresse
+    other: adresses
     same_people_infos: le nom est identique
     address: adresse
     address_2: "complément d'adresse"
