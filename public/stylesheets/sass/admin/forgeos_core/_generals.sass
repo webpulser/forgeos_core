@@ -180,7 +180,8 @@ h2.description
   position: relative
   margin: 20px 0
   clear: both
-  h2,h3
+  min-height: 20px
+  h2,h3,.panel
     :background-color = !white
     text-transform: uppercase
     :color = !gray
@@ -189,6 +190,12 @@ h2.description
     padding: 10px
     margin: -20px 0 0 20px
     +left()
+  .panel
+    padding-left: 17px
+    background-position: 0 -805px
+  &.open
+    .panel
+      background-position: 0 -902px
   label
     display: block
     :color = !lightGray
