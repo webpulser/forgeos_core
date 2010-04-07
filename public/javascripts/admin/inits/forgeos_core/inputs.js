@@ -9,7 +9,7 @@ jQuery(document).ready(function(){
        element.val(value);
      }
 
-     
+
      $.ajax({
        beforeSend:function(request){$('input:regex(id,.+_url)').addClass('loading');},
        data: { url: value, authenticity_token: AUTH_TOKEN },
@@ -74,7 +74,7 @@ jQuery(document).ready(function(){
 	$('#tag').parent().append('<div id="tag_autocomplete_container"><span class="shadow"></span><span id="tag_autocomplete"></span></div>');
 	$('#tag').attr("autocomplete","off")
 
-  $('#tag').keyup(function(){ 
+  $('#tag').keyup(function(){
 		if($('#tag').val().length>2){
 			var value = $(this).val();
 			var target = $('#tag_autocomplete');
@@ -102,7 +102,7 @@ jQuery(document).ready(function(){
 	      type:'post',
 	      url: '/admin/tags/tag'
 	    });
-		}   
+		}
 		else{
 			flush_tag_autocomplete();
 		}
@@ -116,7 +116,7 @@ jQuery(document).ready(function(){
 	})
 
 	function flush_tag_autocomplete(){
-		$('#tag_autocomplete').html('');	
+		$('#tag_autocomplete').html('');
 		$('#tag_autocomplete_container').hide();
 	}
 

@@ -36,7 +36,7 @@ jQuery(document).ready(function(){
       }
     },
     resizable:'se'
-  }); 
+  });
 
  $('#imageSelectDialogLeftSidebar').dialog({
     autoOpen:false,
@@ -50,7 +50,7 @@ jQuery(document).ready(function(){
     resizable:'se'
   });
 
-	
+
   $('#fileUploadDialog').dialog({
     autoOpen:false,
     modal:true,
@@ -115,7 +115,7 @@ jQuery(document).ready(function(){
   *Those items are links that shows dialogBox to add some blocks/widgets
   **/
   $('#add-block, #add-widget').bind('click',function(){
-    openBlockDialog($(this));
+    openBlockDialog($(this), $(this).parent());
     return false;
   });
 
@@ -213,7 +213,7 @@ jQuery(document).ready(function(){
             add_picture_to_element(path,id,name);
           }
           //check_product_first_image();
-        });          
+        });
         $('#imageSelectDialog').dialog('close');
       }
     },
