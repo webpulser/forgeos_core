@@ -10,7 +10,7 @@ class Person < ActiveRecord::Base
   accepts_nested_attributes_for :address
 
   has_one :avatar, :dependent => :destroy
-  accepts_nested_attributes_for :avatar
+  accepts_nested_attributes_for :avatar, :reject_if => proc { |attributes| attributes['uploaded_data'].blank? }
   
   validates_presence_of     :lastname, :firstname, :email
   #validates_length_of       :email,    :within => 3..100, :too_long => "is too long", :too_short => "is too short"

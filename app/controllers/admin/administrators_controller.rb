@@ -23,8 +23,6 @@ class Admin::AdministratorsController < Admin::BaseController
 
   def create
     @admin = Administrator.new(params[:administrator])
-    @admin.build_avatar(params[:avatar]) unless @admin.avatar
-
     if @admin.save
       flash[:notice] = t('admin.create.success').capitalize
       redirect_to(admin_administrators_path)
