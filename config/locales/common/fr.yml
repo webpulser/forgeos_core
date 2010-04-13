@@ -23,7 +23,7 @@ fr:
       administration: administration
       dashboard: accueil
       statistics: statistiques
-      admins: administrateurs
+      administrators: administrateurs
       roles: rôles
       rights: droits
       settings: préférences
@@ -35,6 +35,7 @@ fr:
       logout: déconnexion
       login: connexion
       support: support
+      import: import
     account:
       infos: Infos du compte
   or: ou
