@@ -26,7 +26,7 @@ module Admin::BaseHelper
         'sProcessing': true,
         'iDisplayLength': 30,
         'bLengthChange': true,
-        'aaSorting': [[#{sort_col},#{sort_order}]],
+        'aaSorting': [[#{sort_col},'#{sort_order}']],
         'bStateSave': false,
         'bAutoWidth': false,
         #{data_source}
