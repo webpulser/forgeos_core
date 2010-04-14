@@ -20,7 +20,7 @@ function tmceInit(selector){
     convert_urls: 0,
     onchange_callback: function(inst){ $(inst.getElement()).trigger('change'); },
     theme_advanced_buttons1 : "undo,redo,|,cut,copy,paste,pastetext,pasteword,|,link,unlink,anchor,image,media,|,code,fullscreen",
-    theme_advanced_buttons2 : "bold,italic,underline,strikethrough,|,justifyleft,justifycenter,justifyright,justifyfull,|,styleselect,fontselect,fontsizeselect,forecolor,|,hr,|,removeformat,cleanup",
+    theme_advanced_buttons2 : "bold,italic,underline,strikethrough,|,justifyleft,justifycenter,justifyright,justifyfull,|,formatselect,fontselect,fontsizeselect,forecolor,|,hr,|,removeformat,cleanup",
     theme_advanced_buttons3 : "",
     theme_advanced_resize_horizontal : false,
     theme_advanced_resizing : true,

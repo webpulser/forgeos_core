@@ -5,8 +5,10 @@
   .street-input
     %label
       = I18n.t(:password).capitalize
-    = f.text_field :password
-    = f.hidden_field :password_confirmation
+    = f.password_field :password
+    %label
+      = I18n.t(:password_confirmation).capitalize
+    = f.password_field :password_confirmation
   .clear
   .street-input
     %label= I18n.t(:telephone).capitalize
