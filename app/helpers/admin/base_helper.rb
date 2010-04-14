@@ -1,8 +1,9 @@
-module Admin::BaseHelper 
+module Admin::BaseHelper
   def dataTables_tag(options = {})
     id = options[:id].nil? ? 'table' : options[:id]
     columns = options[:columns]
-
+    options[:sort_col].nil? ? sort_col = 1 : sort_col = options[:sort_col]
+    options[:sort_order].nil? ? sort_order = 'asc' : sort_order = options[:sort_order]
     # data source
     data_source = ''
     unless options[:url].nil? or options[:url].blank?
@@ -20,10 +21,12 @@ module Admin::BaseHelper
     jQuery(document).ready(function(){
       var table = $('##{id}').dataTable({
         'sPaginationType': 'full_numbers',
-        'sDom': \"<'top'if>t<'bottom'p<'clear'>\",
+        'sDom': \"<'top'if>t<'bottom'ip<'clear'>\",
         'aoColumns': [ #{columns.join(',')} ],
         'sProcessing': true,
-        'aaSorting': [[1,'asc']],
+        'iDisplayLength': 30,
+        'bLengthChange': true,
+        'aaSorting': [[#{sort_col},'#{sort_order}']],
         'bStateSave': false,
         'bAutoWidth': false,
         #{data_source}
@@ -110,8 +113,9 @@ module Admin::BaseHelper
 
   def Forgeos_save_buttons(back_path=admin_root_path)
     content_tag(:div, :class => 'interact-links') do
-      fg_submit_tag('save_changes') + t('or') + link_to(t('cancel').capitalize, back_path, :class => 'back-link')
+      fg_submit_tag('save') + t('or') + link_to(t('cancel').capitalize, back_path, :class => 'back-link')
     end
   end
 
 end
+
