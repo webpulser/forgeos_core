@@ -2,7 +2,8 @@ module Admin::BaseHelper
   def dataTables_tag(options = {})
     id = options[:id].nil? ? 'table' : options[:id]
     columns = options[:columns]
-
+    options[:sort_col].nil? ? sort_col = 1 : sort_col = options[:sort_col]
+    options[:sort_order].nil? ? sort_order = 'asc' : sort_order = options[:sort_order]
     # data source
     data_source = ''
     unless options[:url].nil? or options[:url].blank?
@@ -25,7 +26,7 @@ module Admin::BaseHelper
         'sProcessing': true,
         'iDisplayLength': 30,
         'bLengthChange': true,
-        'aaSorting': [[1,'asc']],
+        'aaSorting': [[#{sort_col},#{sort_order}]],
         'bStateSave': false,
         'bAutoWidth': false,
         #{data_source}
