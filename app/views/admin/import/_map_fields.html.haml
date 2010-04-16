@@ -17,7 +17,7 @@
                     - @fields.find { |field| 
                     -   selected_field = field[1] if field[0].kind_of?(String) && @rows[0][c-1].kind_of?(String) && field[0].match(Regexp.new(@rows[0][c-1],'i'))
                     - }
-                    %th= select_tag "fields[#{c}]", options_for_select(@fields,selected_field), :include_blank => true
+                    %th.enhanced= select_tag "fields[#{c}]", options_for_select(@fields,selected_field), :include_blank => true
               %tbody
                 - @rows.each do |row|
                   %tr

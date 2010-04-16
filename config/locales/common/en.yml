@@ -23,7 +23,7 @@ en:
       administration: administration
       dashboard: dashboard
       statistics: statistics
-      admins: administrators
+      administrators: administrators
       roles: roles
       rights: rights
       settings: settings
@@ -35,6 +35,7 @@ en:
       logout: logout
       login: login
       support: support
+      import: import
     account:
       infos: account infos
   or: or
