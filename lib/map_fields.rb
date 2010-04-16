@@ -1,3 +1,4 @@
+# coding: utf-8
 require (RUBY_VERSION.to_f >= 1.9 ? 'csv' : 'fastercsv')
 
 module MapFields
