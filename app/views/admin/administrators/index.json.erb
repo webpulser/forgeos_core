@@ -3,6 +3,7 @@
     :iTotalDisplayRecords => @admins.total_entries || 0,
     :aaData => @admins.collect do |admin|
       link_id = "admin_#{admin.id}"
+      klass = admin.active? ? 'see-on' : 'see-off'
       [
         content_tag(:div,
           content_tag(:div, '', :class => 'handler') +
@@ -11,7 +12,12 @@
         content_tag(:div, link_to("#{admin.firstname} #{admin.lastname}", [:admin, admin]), :class => 'admin-name'),
         admin.role.name,
         content_tag(:div, mail_to(admin.email, admin.email), :class => 'email' ),
-        admin.created_at.to_s(:short),
+        link_to_remote('', :url => activate_admin_administrator_path(admin),
+         :complete => "toggleActivate('#show_#{link_id}')",
+         :html => {
+           :class => "small-icons #{klass}",
+           :id => "show_#{link_id}"
+        }),
         link_to('', '#', :class => 'small-icons duplicate-link') +
         link_to('', [:edit, :admin, admin], :class => 'small-icons edit-link') +
         link_to_remote('', :url => [:admin, admin],

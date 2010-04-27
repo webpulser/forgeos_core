@@ -51,6 +51,9 @@ class Admin::AdministratorsController < Admin::BaseController
     redirect_to(admin_administrators_path)
   end
 
+  def activate
+    render :text => @admin.activate
+  end
 private
 
   def get_admin
