@@ -1,5 +1,5 @@
 class Admin::AdministratorsController < Admin::BaseController
-  before_filter :get_admin, :only => [:show, :edit, :update, :destroy, :update_rights]
+  before_filter :get_admin, :only => [:show, :edit, :update, :destroy, :activate]
 
   def index
     respond_to do |format|
@@ -52,7 +52,7 @@ class Admin::AdministratorsController < Admin::BaseController
   end
 
   def activate
-    render :text => @admin.activate
+    render :text => (@admin.active? ? @admin.disactivate : @admin.activate)
   end
 private
 
@@ -64,7 +64,7 @@ private
   end
 
   def sort
-    columns = %w(id lastname roles.name email created_at)
+    columns = %w(id lastname roles.name email active)
     per_page = params[:iDisplayLength].to_i
     offset =  params[:iDisplayStart].to_i
     page = (offset / per_page) + 1
