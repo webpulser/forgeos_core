@@ -15,7 +15,7 @@ class Admin::ImportController < Admin::BaseController
     @models = ['user']
   end
 
-  def create_model(klass, uniq_field, &block)
+  def create_model(klass, uniq_field = nil, &block)
     if fields_mapped?
       created = 0
       updated = 0
@@ -32,7 +32,7 @@ class Admin::ImportController < Admin::BaseController
           end
         end
         uniq_field_index = fields.index(uniq_field)
-        if row[uniq_field_index] != nil && object = klass.send("find_by_#{uniq_field}",row[uniq_field_index])
+        if uniq_field != nil && row[uniq_field_index] != nil && object = klass.send("find_by_#{uniq_field}",row[uniq_field_index])
           if object.update_attributes(attributes)
             updated+=1
           else
