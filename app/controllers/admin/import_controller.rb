@@ -32,7 +32,7 @@ class Admin::ImportController < Admin::BaseController
           end
         end
         uniq_field_index = self.class.read_inheritable_attribute("map_fields_fields_#{params[:action]}").index(uniq_field)
-        if row[uniq_field_index] != nil && object = klass.send("find_by_#{uniq_field}",row[uniq_field_index])
+        if uniq_field != nil && row[uniq_field_index] != nil && object = klass.send("find_by_#{uniq_field}",row[uniq_field_index])
           if object.update_attributes(attributes)
             updated+=1
           else
