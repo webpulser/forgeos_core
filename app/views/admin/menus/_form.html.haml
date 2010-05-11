@@ -11,7 +11,7 @@
     .inner-content
       #menu-tree.padding-wrap
         %ul.init-tree
-          = render :partial => 'form_menu_links', :locals => { :menu_links => @menu.menu_links, :form => f, :has_parent => false }
+          = render :partial => 'form_menu_links', :locals => { :menu_links => @menu.menu_links.all(:order => 'position'), :form => f, :has_parent => false }
       = link_to t('menu.link.add').capitalize, '#', :class => 'small-icons add-link button-menu-link'
 
   #right-sidebar.grid_4.alpha.omega
