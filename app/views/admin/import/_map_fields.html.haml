@@ -1,5 +1,7 @@
 - form_tag nil, :id => 'map_fields_form', :method => :post do
   .backgrounds.big-header
+    = text_field_tag :set_name,(@set ? @set.name : ''), :class => 'field_name'
+    = hidden_field_tag :set_id, @set.id if @set
     .interact-links
       = fg_submit_tag 'import.button'
   #content.grid_16.alpha.omega
@@ -15,15 +17,18 @@
                   - (1..@rows[0].size).each do |c|
                     - selected_field = nil
                     - @fields.find { |field| 
-                    -   selected_field = field[1] if field[0].kind_of?(String) && @rows[0][c-1].kind_of?(String) && field[0].match(Regexp.new(@rows[0][c-1],'i'))
+                    -   selected_field = @set ? @set.fields[c.to_s].to_i : (field[1] if field[0].kind_of?(String) && @rows[0][c-1].kind_of?(String) && field[0].match(Regexp.new(@rows[0][c-1],'i')))
                     - }
                     %th.enhanced= select_tag "fields[#{c}]", options_for_select(@fields,selected_field), :include_blank => true
               %tbody
                 - @rows.each do |row|
                   %tr
                     - row.each do |column|
-                      %td= truncate(h(column),:lenght => 255)
+                      %td= truncate(h(column), :lenght => 255).force_encoding('utf-8')
     #right-sidebar.grid_4.omega
       .step
-        = check_box_tag 'ignore_first_row', '1', true, :id => 'ignore_first_row_option'
-        %label{ :for => "ignore_first_row_option" } Ignore the first row (headings)
+        = check_box_tag :ignore_first_row, true,(@set ? @set.ignore_first_row : true), :id => 'ignore_first_row_option'
+        = label_tag :ignore_first_row, t('import.ignore_first_row')
+        %br
+        = check_box_tag :save_set
+        = label_tag :save_set, t('import_set.save')

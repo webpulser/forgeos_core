@@ -1,6 +1,8 @@
 fr:
   import:
     one: import
+    model: modèle
+    file: fichier
     button: importer
     send_file: envoyer le fichier
     create:
@@ -11,3 +13,10 @@ fr:
       retry: veuillez réessayer, le fichier doit être corrompu
       give_file: "n'oubliez pas le fichier d'import"
       errors: "{{nb}} erreurs durant le processus d'import"
+    ignore_first_row: Ignorer la première ligne (headings)
+  import_set:
+    one: "configuration d'import"
+    other: "configurations d'import"
+    save: sauvegarder la configuration ?
+    col_sep: séparateur de colonnes
+    quote_char: caractère d'encapsulation
