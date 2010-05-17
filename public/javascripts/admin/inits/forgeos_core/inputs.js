@@ -121,13 +121,10 @@ jQuery(document).ready(function(){
 	}
 
     $('input.date-picker').datepicker({
+      dateFormat: 'dd/mm/yy',
       showOn: 'both',
       buttonText: '',
       changeMonth: true,
       changeYear: true
     });
 });
-
-
-
-

@@ -9,4 +9,4 @@
   .content-background
   %table#table.datatable.draggable_rows
     
-= dataTables_tag :url => admin_administrators_path(:format => :json), :columns => ["{'bSearchable':false,'bSortable':false}","{'sTitle':'#{t :name}'}","{'sTitle':'#{t :role, :count => 1}'}","{'sTitle':'#{t :email}'}","{'sTitle':'#{t :created_on}'}","{'sClass':'actions-td','bSearchable':false,'bSortable':false}"]
+= dataTables_tag :url => admin_administrators_path(:format => :json), :columns => ["{'bSearchable':false,'bSortable':false}","{'sTitle':'#{t :name}'}","{'sTitle':'#{t :role, :count => 1}'}","{'sTitle':'#{t :email}'}","{'sTitle':'#{t :active}'}","{'sClass':'actions-td','bSearchable':false,'bSortable':false}"]

@@ -2,12 +2,11 @@ en:
   import:
     one: import
     other: imports
+    other: import
+    model: model
+    file: file
     button: import
     send_file: send the file
-    file: file
-    model: model
-    col_sep: separated by
-    quote_char: enclosed by
     create:
       success: "{{nb}} {{model}} successfully created"
     update:
@@ -16,3 +15,10 @@ en:
       retry: try again, the file maybe corrupted
       give_file: please upload the file
       errors: "{{nb}} errors during import process"
+    ignore_first_row: Ignore the first row (headings)
+  import_set:
+    one: import set
+    other: import sets
+    save: save import config ?
+    col_sep: column separator
+    quote_char: quote character

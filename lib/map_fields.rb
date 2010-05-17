@@ -32,7 +32,6 @@ module MapFields
       options = default_options.merge( 
         self.class.read_inheritable_attribute("map_fields_options_#{params[:action]}")
       )
-
       if session[:map_fields].nil? || params[options[:file_field]]
         session[:map_fields] = {}
         if params[options[:file_field]].blank?
@@ -48,7 +47,9 @@ module MapFields
         end
 
         session[:map_fields][:file] = temp_path
+      end
 
+      if params[:fields].nil?
         @rows = []
         parser_options = session[:parser_options] = params[:parser_options].symbolize_keys
         parser_options.delete(:quote_char) if parser_options[:quote_char].blank?
@@ -63,14 +64,22 @@ module MapFields
           @parameters += ParamsParser.parse(params, param)
         end
       else
-        if session[:map_fields][:file].nil? || params[:fields].nil?
-          session[:map_fields] = nil
-          @map_fields_error =  InconsistentStateError
-        else
+        if @set 
           @mapped_fields = MappedFields.new(session[:map_fields][:file], 
-                                            params[:fields],
-                                            params[:ignore_first_row],
-                                            session[:parser_options])
+                                            @set.fields,
+                                            @set.ignore_first_row,
+                                            @set.parser_options)
+
+        else
+          if session[:map_fields][:file].nil? || params[:fields].nil?
+            session[:map_fields] = nil
+            @map_fields_error =  InconsistentStateError
+          else
+            @mapped_fields = MappedFields.new(session[:map_fields][:file], 
+                                              params[:fields],
+                                              params[:ignore_first_row],
+                                              session[:parser_options])
+          end
         end
       end
     end

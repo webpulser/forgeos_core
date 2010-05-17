@@ -1,5 +1,6 @@
 require 'map_fields'
 class Admin::ImportController < Admin::BaseController
+  before_filter :save_import_set, :except => :index
   map_fields :create_user, User.new.attributes.keys
   before_filter :models, :only => :index
 
@@ -31,7 +32,7 @@ class Admin::ImportController < Admin::BaseController
             attributes[attribute.to_sym] = row[i] if row[i]
           end
         end
-        uniq_field_index = fields.index(uniq_field)
+        uniq_field_index = self.class.read_inheritable_attribute("map_fields_fields_#{params[:action]}").index(uniq_field)
         if uniq_field != nil && row[uniq_field_index] != nil && object = klass.send("find_by_#{uniq_field}",row[uniq_field_index])
           if object.update_attributes(attributes)
             updated+=1
@@ -66,5 +67,24 @@ class Admin::ImportController < Admin::BaseController
     rescue MapFields::MissingFileContentsError
       flash[:error] = t('import.give_file')
       redirect_to(:action => :index)
+  end
+  
+  private
+  
+  def save_import_set
+    @set = ImportSet.find_by_id(params[:set_id])
+    if params[:save_set]
+      set_attributes = {
+        :fields => params[:fields],
+        :parser_options => session[:parser_options],
+        :ignore_first_row => params[:ignore_first_row],
+        :name => params[:set_name]
+      }
+      if @set = ImportSet.find_by_id(params[:set_id])
+        @set.update_attributes(set_attributes)
+      else
+        @set = ImportSet.create(set_attributes)
+      end
+    end
   end
 end
