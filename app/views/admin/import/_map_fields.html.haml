@@ -28,6 +28,8 @@
                         %td= truncate(h(column), :lenght => 255).force_encoding('utf-8')
                       - else
                         %td= truncate(h(column), :lenght => 255)
+        .progressbar_container
+          #progressbar
     #right-sidebar.grid_4.omega
       .step
         = check_box_tag :ignore_first_row, true,(@set ? @set.ignore_first_row : true), :id => 'ignore_first_row_option'

@@ -1,5 +1,6 @@
 require 'map_fields'
 class Admin::ImportController < Admin::BaseController
+  UPLOAD_PROGRESS_FILE = File.join(Rails.root,'tmp','import_progress.txt')
   before_filter :save_import_set, :except => :index
   map_fields :create_user, User.new.attributes.keys
   before_filter :models, :only => :index
@@ -10,6 +11,14 @@ class Admin::ImportController < Admin::BaseController
     create_model(User,'email')
   end
 
+  def progress
+    if File.exist?(UPLOAD_PROGRESS_FILE)
+      render :text => File.open(UPLOAD_PROGRESS_FILE,'r').read
+    else
+      render :nothing => true
+    end
+  end
+
   private
 
   def models
@@ -18,21 +27,23 @@ class Admin::ImportController < Admin::BaseController
 
   def create_model(klass, uniq_field, &block)
     if fields_mapped?
+      total = File.open(session[:map_fields][:file]).read.count('\n')
       created = 0
       updated = 0
       count = 0
       errors = []
       methods = self.class.read_inheritable_attribute("map_fields_fields_#{params[:action]}")
       mapped_fields.each do |row|
-        if block_given?
-          attributes = yield(row) || {}
-        else
-          attributes = {} 
-          methods.each_with_index do |attribute,i|
-            exist = params[:fields].values.include?((i+1).to_s)
-            attributes[attribute.to_sym] = row[i] if exist
-          end
+        attributes = {} 
+        methods.each_with_index do |attribute,i|
+          exist = params[:fields].values.include?((i+1).to_s)
+          attributes[attribute.to_sym] = row[i] if exist
         end
+
+        if block_given?
+          attributes = yield(attributes) || {}
+        end
+
         uniq_field_index = methods.index(uniq_field)
         
         if uniq_field != nil && row[uniq_field_index] != nil && object = klass.send("find_by_#{uniq_field}",row[uniq_field_index])
@@ -52,6 +63,7 @@ class Admin::ImportController < Admin::BaseController
           end
         end
         count+=1
+        File.open(UPLOAD_PROGRESS_FILE, 'w') {|f| f.write(count.to_f / total.to_f * 100.0) } 
       end
 
       flash[:notice] = t('import.create.success', :model => t(klass.to_s.underscore, :count => created), :nb => "#{created}/#{count}") if created != 0
