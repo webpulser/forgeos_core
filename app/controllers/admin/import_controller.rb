@@ -22,17 +22,19 @@ class Admin::ImportController < Admin::BaseController
       updated = 0
       count = 0
       errors = []
-
+      methods = self.class.read_inheritable_attribute("map_fields_fields_#{params[:action]}")
       mapped_fields.each do |row|
         if block_given?
           attributes = yield(row) || {}
         else
           attributes = {} 
-          klass.new.attributes.keys.each_with_index do |attribute,i|
-            attributes[attribute.to_sym] = row[i] if row[i]
+          methods.each_with_index do |attribute,i|
+            exist = params[:fields].values.include?((i+1).to_s)
+            attributes[attribute.to_sym] = row[i] if exist
           end
         end
-        uniq_field_index = self.class.read_inheritable_attribute("map_fields_fields_#{params[:action]}").index(uniq_field)
+        uniq_field_index = methods.index(uniq_field)
+        
         if uniq_field != nil && row[uniq_field_index] != nil && object = klass.send("find_by_#{uniq_field}",row[uniq_field_index])
           if object.update_attributes(attributes)
             updated+=1
@@ -52,11 +54,10 @@ class Admin::ImportController < Admin::BaseController
         count+=1
       end
 
-      logger.debug("\033[01;33m#{count}\033[0m")
-      flash[:notice] = t('import.create.success', :model => t(klass.to_s.underscore, :count => created), :nb => created) if created != 0
-      flash[:warning] = t('import.update.success', :model => t(klass.to_s.underscore, :count => updated), :nb => updated) if updated != 0
+      flash[:notice] = t('import.create.success', :model => t(klass.to_s.underscore, :count => created), :nb => "#{created}/#{count}") if created != 0
+      flash[:warning] = t('import.update.success', :model => t(klass.to_s.underscore, :count => updated), :nb => "#{updated}/#{count}") if updated != 0
       errors_count = errors.flatten.size
-      flash[:error] = t('import.failed.errors', :model => t(klass.to_s.underscore, :count => errors_count), :nb => errors_count) unless errors.empty?
+      flash[:error] = t('import.failed.errors', :model => t(klass.to_s.underscore, :count => errors_count), :nb =>"#{ errors_count}/#{count}") unless errors.empty?
       redirect_to(:action => :index)
     else
       render(:action => 'create')
