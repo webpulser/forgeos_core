@@ -27,6 +27,7 @@ class Person < ActiveRecord::Base
     indexes firstname, :sortable => true
     indexes lastname, :sortable => true
     indexes email, :sortable => true
+    set_property :delta => true
   end
 
   def fullname
