@@ -3,6 +3,7 @@ require (RUBY_VERSION.to_f >= 1.9 ? 'csv' : 'fastercsv')
 
 module MapFields
   VERSION = '1.0.0'
+  CsvParser = (RUBY_VERSION.to_f >= 1.9 ? CSV : FasterCSV)
 
   def self.included(base)
     base.extend(ClassMethods)
@@ -52,8 +53,7 @@ module MapFields
       if params[:fields].nil?
         @rows = []
         parser_options = session[:parser_options] = params[:parser_options].symbolize_keys
-        parser_options.delete(:quote_char) if parser_options[:quote_char].blank?
-        (RUBY_VERSION.to_f >= 1.9 ? CSV : FasterCSV).foreach(temp_path, parser_options) do |row|
+        CsvParser.foreach(temp_path, parser_options) do |row|
           @rows << row
           break if @rows.size == 5
         end
@@ -122,7 +122,7 @@ module MapFields
 
     def each
       row_number = 1
-      (RUBY_VERSION.to_f >= 1.9 ? CSV : FasterCSV).foreach(@file,@parser_options) do |csv_row|
+      CsvParser.foreach(@file,@parser_options) do |csv_row|
         unless row_number == 1 && @ignore_first_row
           row = []
           @mapping.each do |k,v|
@@ -133,6 +133,10 @@ module MapFields
         end
         row_number += 1
       end
+    end
+
+    def size
+      value = CsvParser.read(@file,@parser_options).size
     end
   end
 
