@@ -1,7 +1,8 @@
 function check_import_progress(data){
   var pgb = $('#progressbar');
-  pgb.css({width: data+'%'});
-  pgb.text(data.toFixed(0)+'%');
+  var value = parseFloat(data).toFixed(0)+'%';
+  pgb.css({width: value});
+  pgb.text(value);
   setTimeout("$.get('/admin/import/progress',check_import_progress);",5000);
 }
 jQuery(document).ready(function(){

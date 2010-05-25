@@ -27,13 +27,14 @@ class Admin::ImportController < Admin::BaseController
 
   def create_model(klass, uniq_field, &block)
     if fields_mapped?
-      total = File.open(session[:map_fields][:file]).read.count('\n')
+      total = mapped_fields.size
       created = 0
       updated = 0
-      count = 0
       errors = []
       methods = self.class.read_inheritable_attribute("map_fields_fields_#{params[:action]}")
       mapped_fields.each do |row|
+        logger.debug("\033[01;33m Number : #{row.number} / #{total}\033[0m")
+
         attributes = {} 
         methods.each_with_index do |attribute,i|
           exist = params[:fields].values.include?((i+1).to_s)
@@ -62,15 +63,14 @@ class Admin::ImportController < Admin::BaseController
             logger.debug("\033[01;33m#{object.errors.inspect}\033[0m")
           end
         end
-        count+=1
-        File.open(UPLOAD_PROGRESS_FILE, 'w') {|f| f.write(count.to_f / total.to_f * 100.0) } if (count%100).zero?
+        File.open(UPLOAD_PROGRESS_FILE, 'w') {|f| f.write((row.number.to_f / total.to_f) * 100.0) } if (row.number%100).zero?
       end
 
-      flash[:notice] = t('import.create.success', :model => t(klass.to_s.underscore, :count => created), :nb => "#{created}/#{count}") if created != 0
-      flash[:warning] = t('import.update.success', :model => t(klass.to_s.underscore, :count => updated), :nb => "#{updated}/#{count}") if updated != 0
+      flash[:notice] = t('import.create.success', :model => t(klass.to_s.underscore, :count => created), :nb => "#{created}/#{total}") if created != 0
+      flash[:warning] = t('import.update.success', :model => t(klass.to_s.underscore, :count => updated), :nb => "#{updated}/#{total}") if updated != 0
       errors_count = errors.flatten.size
-      flash[:error] = t('import.failed.errors', :model => t(klass.to_s.underscore, :count => errors_count), :nb =>"#{ errors_count}/#{count}") unless errors.empty?
-      redirect_to(:action => :index)
+      flash[:error] = t('import.failed.errors', :model => t(klass.to_s.underscore, :count => errors_count), :nb =>"#{ errors_count}/#{total}") unless errors.empty?
+      render(:nothing => true)
     else
       render(:action => 'create')
     end
