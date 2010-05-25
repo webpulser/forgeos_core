@@ -63,7 +63,7 @@ class Admin::ImportController < Admin::BaseController
           end
         end
         count+=1
-        File.open(UPLOAD_PROGRESS_FILE, 'w') {|f| f.write(count.to_f / total.to_f * 100.0) } 
+        File.open(UPLOAD_PROGRESS_FILE, 'w') {|f| f.write(count.to_f / total.to_f * 100.0) } if (count%100).zero?
       end
 
       flash[:notice] = t('import.create.success', :model => t(klass.to_s.underscore, :count => created), :nb => "#{created}/#{count}") if created != 0
