@@ -1,5 +1,6 @@
 class Person < ActiveRecord::Base
   acts_as_authentic do |c|
+    c.merge_validates_uniqueness_of_email_field_options( :if => :skip_uniquess_of_email? )
     c.transition_from_restful_authentication = true
     c.crypto_provider = Authlogic::CryptoProviders::BCrypt
   end
@@ -12,11 +13,9 @@ class Person < ActiveRecord::Base
   has_one :avatar, :dependent => :destroy
   accepts_nested_attributes_for :avatar, :reject_if => proc { |attributes| attributes['uploaded_data'].blank? }
   
-  validates_presence_of     :lastname, :firstname, :email
-  #validates_length_of       :email,    :within => 3..100, :too_long => "is too long", :too_short => "is too short"
-  validates_uniqueness_of   :email, :case_sensitive => false, :message => "is invalid"
-  #validates_format_of :email, :with => /\A([^@\s]+)@((?:[-a-z0-9]+\.)+[a-z]{2,})\Z/i
-  
+  validates_presence_of :lastname, :if => :skip_presence_of_lastname?
+  validates_presence_of :firstname, :if => :skip_presence_of_firstname? 
+
   # prevents a user from submitting a crafted form that bypasses activation
   # anything else you want your user to change should be added here.
   attr_accessible :lastname, :firstname, :email, :password, :password_confirmation,
@@ -49,5 +48,16 @@ class Person < ActiveRecord::Base
   # return the user status
   def active?
     self.active
+  end
+
+protected
+  def skip_uniquess_of_email?
+    true
+  end
+  def skip_presence_of_lastname?
+    true
+  end
+  def skip_presence_of_firstname?
+    true
   end
 end
