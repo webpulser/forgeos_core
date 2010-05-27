@@ -7,8 +7,8 @@
       table =
       [
       content_tag(:div, content_tag(:div, '', :class=>'handler') + content_tag(:div, '', :class => 'small-icons user-ico'), :id => link_id, :class => 'handler_container'),
-      content_tag(:div, link_to(user.fullname, [:edit, :admin, user]), :class => 'user-name'),
-      content_tag(:div, mail_to(user.email, user.email, :class => 'truncate', :title => user.email), :class => 'email'),
+      content_tag(:div, (params[:mode] == 'selection' ? user.fullname : link_to(user.fullname, [:admin, user])), :class => 'user-name'),
+      content_tag(:div, (params[:mode] == 'selection' ? user.email : mail_to(user.email, user.email, :class => 'truncate', :title => user.email)), :class => 'email'),
       ]
 
       unless params[:mode] == 'selection'

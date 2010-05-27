@@ -183,6 +183,10 @@ private
       conditions[:categories_elements] = { :category_id => params[:category_id] }
       includes << :user_categories
     end
+    
+    if params[:ids]
+      conditions[:people] = { :id => params[:ids] }
+    end
 
     options[:conditions] = conditions unless conditions.empty?
     options[:include] = includes unless includes.empty?

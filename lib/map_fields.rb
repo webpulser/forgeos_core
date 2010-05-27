@@ -3,6 +3,7 @@ require (RUBY_VERSION.to_f >= 1.9 ? 'csv' : 'fastercsv')
 
 module MapFields
   VERSION = '1.0.0'
+  CsvParser = (RUBY_VERSION.to_f >= 1.9 ? CSV : FasterCSV)
 
   def self.included(base)
     base.extend(ClassMethods)
@@ -32,7 +33,6 @@ module MapFields
       options = default_options.merge( 
         self.class.read_inheritable_attribute("map_fields_options_#{params[:action]}")
       )
-
       if session[:map_fields].nil? || params[options[:file_field]]
         session[:map_fields] = {}
         if params[options[:file_field]].blank?
@@ -48,11 +48,12 @@ module MapFields
         end
 
         session[:map_fields][:file] = temp_path
+      end
 
+      if params[:fields].nil?
         @rows = []
         parser_options = session[:parser_options] = params[:parser_options].symbolize_keys
-        parser_options.delete(:quote_char) if parser_options[:quote_char].blank?
-        (RUBY_VERSION.to_f >= 1.9 ? CSV : FasterCSV).foreach(temp_path, parser_options) do |row|
+        CsvParser.foreach(temp_path, parser_options) do |row|
           @rows << row
           break if @rows.size == 5
         end
@@ -63,14 +64,22 @@ module MapFields
           @parameters += ParamsParser.parse(params, param)
         end
       else
-        if session[:map_fields][:file].nil? || params[:fields].nil?
-          session[:map_fields] = nil
-          @map_fields_error =  InconsistentStateError
-        else
+        if @set 
           @mapped_fields = MappedFields.new(session[:map_fields][:file], 
-                                            params[:fields],
-                                            params[:ignore_first_row],
-                                            session[:parser_options])
+                                            @set.fields,
+                                            @set.ignore_first_row,
+                                            @set.parser_options)
+
+        else
+          if session[:map_fields][:file].nil? || params[:fields].nil?
+            session[:map_fields] = nil
+            @map_fields_error =  InconsistentStateError
+          else
+            @mapped_fields = MappedFields.new(session[:map_fields][:file], 
+                                              params[:fields],
+                                              params[:ignore_first_row],
+                                              session[:parser_options])
+          end
         end
       end
     end
@@ -113,7 +122,7 @@ module MapFields
 
     def each
       row_number = 1
-      (RUBY_VERSION.to_f >= 1.9 ? CSV : FasterCSV).foreach(@file,@parser_options) do |csv_row|
+      CsvParser.foreach(@file,@parser_options) do |csv_row|
         unless row_number == 1 && @ignore_first_row
           row = []
           @mapping.each do |k,v|
@@ -124,6 +133,10 @@ module MapFields
         end
         row_number += 1
       end
+    end
+
+    def size
+      value = CsvParser.read(@file,@parser_options).size
     end
   end
 

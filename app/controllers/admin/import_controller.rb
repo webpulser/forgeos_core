@@ -1,5 +1,7 @@
 require 'map_fields'
 class Admin::ImportController < Admin::BaseController
+  UPLOAD_PROGRESS_FILE = File.join(Rails.root,'tmp','import_progress.txt')
+  before_filter :save_import_set, :except => :index
   map_fields :create_user, User.new.attributes.keys
   before_filter :models, :only => :index
 
@@ -7,6 +9,14 @@ class Admin::ImportController < Admin::BaseController
   
   def create_user
     create_model(User,'email')
+  end
+
+  def progress
+    if File.exist?(UPLOAD_PROGRESS_FILE)
+      render :text => File.open(UPLOAD_PROGRESS_FILE,'r').read
+    else
+      render :nothing => true
+    end
   end
 
   private
@@ -17,21 +27,26 @@ class Admin::ImportController < Admin::BaseController
 
   def create_model(klass, uniq_field = nil, &block)
     if fields_mapped?
+      total = mapped_fields.size
       created = 0
       updated = 0
-      count = 0
       errors = []
-      fields = self.class.read_inheritable_attribute("map_fields_fields_#{params[:action]}")
+      methods = self.class.read_inheritable_attribute("map_fields_fields_#{params[:action]}")
       mapped_fields.each do |row|
-        if block_given?
-          attributes = yield(row) || {}
-        else
-          attributes = {} 
-          fields.each_with_index do |attribute,i|
-            attributes[attribute.to_sym] = row[i] if row[i]
-          end
+        logger.debug("\033[01;33m Number : #{row.number} / #{total}\033[0m")
+
+        attributes = {} 
+        methods.each_with_index do |attribute,i|
+          exist = params[:fields].values.include?((i+1).to_s)
+          attributes[attribute.to_sym] = row[i] if exist
         end
-        uniq_field_index = fields.index(uniq_field)
+
+        if block_given?
+          attributes = yield(attributes) || {}
+        end
+
+        uniq_field_index = methods.index(uniq_field)
+        
         if uniq_field != nil && row[uniq_field_index] != nil && object = klass.send("find_by_#{uniq_field}",row[uniq_field_index])
           if object.update_attributes(attributes)
             updated+=1
@@ -48,15 +63,14 @@ class Admin::ImportController < Admin::BaseController
             logger.debug("\033[01;33m#{object.errors.inspect}\033[0m")
           end
         end
-        count+=1
+        File.open(UPLOAD_PROGRESS_FILE, 'w') {|f| f.write((row.number.to_f / total.to_f) * 100.0) } if (row.number%100).zero?
       end
 
-      logger.debug("\033[01;33m#{count}\033[0m")
-      flash[:notice] = t('import.create.success', :model => t(klass.to_s.underscore, :count => created), :nb => created) if created != 0
-      flash[:warning] = t('import.update.success', :model => t(klass.to_s.underscore, :count => updated), :nb => updated) if updated != 0
+      flash[:notice] = t('import.create.success', :model => t(klass.to_s.underscore, :count => created), :nb => "#{created}/#{total}") if created != 0
+      flash[:warning] = t('import.update.success', :model => t(klass.to_s.underscore, :count => updated), :nb => "#{updated}/#{total}") if updated != 0
       errors_count = errors.flatten.size
-      flash[:error] = t('import.failed.errors', :model => t(klass.to_s.underscore, :count => errors_count), :nb => errors_count) unless errors.empty?
-      redirect_to(:action => :index)
+      flash[:error] = t('import.failed.errors', :model => t(klass.to_s.underscore, :count => errors_count), :nb =>"#{ errors_count}/#{total}") unless errors.empty?
+      render(:nothing => true)
     else
       render(:action => 'create')
     end
@@ -66,5 +80,24 @@ class Admin::ImportController < Admin::BaseController
     rescue MapFields::MissingFileContentsError
       flash[:error] = t('import.give_file')
       redirect_to(:action => :index)
+  end
+  
+  private
+  
+  def save_import_set
+    @set = ImportSet.find_by_id(params[:set_id])
+    if params[:save_set]
+      set_attributes = {
+        :fields => params[:fields],
+        :parser_options => session[:parser_options],
+        :ignore_first_row => params[:ignore_first_row],
+        :name => params[:set_name]
+      }
+      if @set = ImportSet.find_by_id(params[:set_id])
+        @set.update_attributes(set_attributes)
+      else
+        @set = ImportSet.create(set_attributes)
+      end
+    end
   end
 end
