@@ -6,6 +6,13 @@ module Admin::BaseHelper
     columns = options[:columns]
     options[:sort_col].nil? ? sort_col = 1 : sort_col = options[:sort_col]
     options[:sort_order].nil? ? sort_order = 'asc' : sort_order = options[:sort_order]
+    
+      
+    if options[:save_state].nil?
+      save_state = false
+    else
+      save_state = options[:save_state]
+    end
     # data source
     data_source = ''
     unless options[:url].nil? or options[:url].blank?
@@ -29,7 +36,7 @@ module Admin::BaseHelper
         'iDisplayLength': 30,
         'bLengthChange': true,
         'aaSorting': [[#{sort_col},'#{sort_order}']],
-        'bStateSave': false,
+        'bStateSave': #{save_state},
         'bAutoWidth': false,
         #{data_source}
         'oLanguage': {
