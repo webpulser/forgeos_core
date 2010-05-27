@@ -1,6 +1,6 @@
 jQuery(document).ready(function(){
   // init delayedObserver to generate url from name
-  $('input:regex(id,.+_(name|title))').change(function() {
+  $('.field_name').change(function() {
      var value = $(this).val();
      var id = $(this).attr('id');
      var element_name = id.split('_')[0];
