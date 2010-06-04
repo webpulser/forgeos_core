@@ -70,6 +70,7 @@ class Admin::ImportController < Admin::BaseController
       flash[:warning] = t('import.update.success', :model => t(klass.to_s.underscore, :count => updated), :nb => "#{updated}/#{total}") if updated != 0
       errors_count = errors.flatten.size
       flash[:error] = t('import.failed.errors', :model => t(klass.to_s.underscore, :count => errors_count), :nb =>"#{ errors_count}/#{total}") unless errors.empty?
+      File.open(UPLOAD_PROGRESS_FILE, 'w') {|f| f.write(100.0) }
       render(:nothing => true)
     else
       render(:action => 'create')
