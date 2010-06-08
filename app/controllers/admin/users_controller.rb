@@ -168,7 +168,7 @@ private
   end
 
   def sort
-    columns = %w(lastname lastname email joined_on activate)
+    columns = %w(id concat(lastname,firstname) email active)
 
     per_page = params[:iDisplayLength] ? params[:iDisplayLength].to_i : 10
     offset = params[:iDisplayStart] ? params[:iDisplayStart].to_i : 0
