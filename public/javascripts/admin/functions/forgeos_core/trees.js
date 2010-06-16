@@ -220,12 +220,16 @@ function init_category_tree(selector, type, source) {
         update_current_dataTable_source('#table',url_base + '?' + params);
 
         object_name = $(NODE).attr('id').split('_')[0];
-	      category_id = get_rails_element_id(NODE);
-	      $(NODE).append('<input type="hidden" id="parent_id_tmp" name="parent_id_tmp" value="'+category_id+'" />');
+        category_id = get_rails_element_id(NODE);
+        if ($("#parent_id_tmp").length == 0) {
+          $(NODE).append('<input type="hidden" id="parent_id_tmp" name="parent_id_tmp" value="'+category_id+'" />');
+        } else {
+          $("#parent_id_tmp").val(category_id);
+        }
         return true;
       },
       ondeselect: function(NODE,TREE_OBJ) {
-	      $("#parent_id_tmp").val("");
+        $("#parent_id_tmp").remove();
         return true;
       },
       // remove count span
