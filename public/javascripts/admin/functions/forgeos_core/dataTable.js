@@ -264,3 +264,24 @@ function dataTableSelectRows(selector,callback){
   }
   current_table.fnDraw(); 
 }
+
+function save_category_sort(type,id_pos){
+  if (typeof(type)=='undefined')
+    return true;
+  var current_table = $('#table').dataTableInstance();
+  var url = current_table.fnSettings().sAjaxSource;
+  var params = get_json_params_from_url(url);
+  var positions = [];
+  var nNodes = current_table.fnGetNodes();
+  for(i=0; i < nNodes.length; i++) {
+    var node = nNodes[i];
+    var pos = current_table.fnGetPosition(node);
+    positions.push(current_table.fnGetData(pos).slice(id_pos,id_pos+1));
+  };
+  $.ajax({
+    url: '/admin/categories/' + params.category_id,
+      data: { authenticity_token: AUTH_TOKEN, format: 'json', 'category[element_ids][]': positions},
+      dataType:'text',
+      type:'put'
+  });
+}

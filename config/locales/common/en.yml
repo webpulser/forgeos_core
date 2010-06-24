@@ -210,6 +210,8 @@ en:
     sub:
       create:
         action: 'create a subcategory'
+    save_sort:
+      action: 'save order for site display'
   media:
     list: list of media
     one: media
@@ -323,3 +325,17 @@ en:
   top_5_items: Top 5 search items
   tag_enter: enter tag ...
   please_select: 'please select'
+
+  jquery:
+    dataTables:
+      oLanguage:
+        sProcessing: 'Processing...'
+        sLengthMenu: 'Show _MENU_ entries'
+        sZeroRecords: 'No matching records found'
+        sInfo: 'Showing _START_ to _END_ of _TOTAL_ entries'
+        sInfoEmpty: 'Showing 0 to 0 of 0 entries'
+        sSearch: ' '
+        sNext: 'next'
+        sPrevious: 'previous'
+        sFirst: 'first'
+        sLast: 'last'

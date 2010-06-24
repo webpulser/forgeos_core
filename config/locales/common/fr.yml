@@ -211,6 +211,8 @@ fr:
     sub:
       create:
         action: 'créer une catégorie sous-jacente'
+    save_sort:
+      action: "sauvegarder l'ordre pour le site"
   media:
     list: liste des médias
     one: média
@@ -324,3 +326,17 @@ fr:
   top_5_items: top 5 des produits recherchés
   tag_enter: Entrez un tag ...
   please_select: veuillez choisir
+
+  jquery:
+    dataTables:
+      oLanguage:
+        sProcessing: 'En cours...'
+        sLengthMenu: 'Afficher _MENU_ entrées'
+        sZeroRecords: 'Aucun résultat trouvé'
+        sInfo: 'Visualisation de _START_ à _END_ sur _TOTAL_ entrées'
+        sInfoEmpty: 'Visualistation de 0 à 0 sur 0 entrées'
+        sSearch: ' '
+        sNext: 'suivant'
+        sPrevious: 'précédent'
+        sFirst: 'premier'
+        sLast: 'dernier'

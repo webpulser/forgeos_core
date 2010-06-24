@@ -209,10 +209,10 @@ function init_category_tree(selector, type, source) {
         var current_table = $('#table').dataTableInstance();
         var url = current_table.fnSettings().sAjaxSource;
         var url_base = url.split('?')[0];
-        var params;
 
+        $('#category_sort').show();
         // update category id
-        params = get_json_params_from_url(url);
+        var params = get_json_params_from_url(url);
         params.category_id = cat_id;
         params = stringify_params_from_json(params);
 
@@ -220,12 +220,13 @@ function init_category_tree(selector, type, source) {
         update_current_dataTable_source('#table',url_base + '?' + params);
 
         object_name = $(NODE).attr('id').split('_')[0];
-	      category_id = get_rails_element_id(NODE);
-	      $(NODE).append('<input type="hidden" id="parent_id_tmp" name="parent_id_tmp" value="'+category_id+'" />');
+        category_id = get_rails_element_id(NODE);
+        $(NODE).append('<input type="hidden" id="parent_id_tmp" name="parent_id_tmp" value="'+category_id+'" />');
         return true;
       },
       ondeselect: function(NODE,TREE_OBJ) {
-	      $("#parent_id_tmp").val("");
+        $("#parent_id_tmp").val("");
+        $('#category_sort').hide();
         return true;
       },
       // remove count span

@@ -30,10 +30,10 @@ module Admin::BaseHelper
     jQuery(document).ready(function(){
       var table = $('##{id}').dataTable({
         'sPaginationType': 'full_numbers',
-        'sDom': \"<'top'if>t<'bottom'ip<'clear'>\",
+        'sDom': \"<'top'f>tpl<'clear'>i\",
         'aoColumns': [ #{columns.join(',')} ],
         'sProcessing': true,
-        'iDisplayLength': 30,
+        'iDisplayLength': 50,
         'bLengthChange': true,
         'aaSorting': [[#{sort_col},'#{sort_order}']],
         'bStateSave': #{save_state},
@@ -42,10 +42,16 @@ module Admin::BaseHelper
         'oLanguage': {
           'sProcessing' : '#{t('jquery.dataTables.oLanguage.sProcessing')}',
           'sLengthMenu':'#{t('jquery.dataTables.oLanguage.sLengthMenu')}',
-          'sZeroRecords':'#{t('jquery.dataTables.oLanguage.sZeroRecords')}',
-          'sInfo':'#{t('jquery.dataTables.oLanguage.sInfo')}',
-          'sInfoEmpty':'#{t('jquery.dataTables.oLanguage.sInfoEmpty')}',
-          'sSearch':''
+          'sZeroRecords': '#{t('jquery.dataTables.oLanguage.sZeroRecords')}',
+          'sInfo': '#{t('jquery.dataTables.oLanguage.sInfo')}',
+          'sInfoEmpty': '#{t('jquery.dataTables.oLanguage.sInfoEmpty')}',
+          'sSearch': '#{t('jquery.dataTables.oLanguage.sSearch')}',
+          'oPaginate': {
+            'sFirst': '#{t('jquery.dataTables.oLanguage.sFirst')}',
+            'sPrevious': '#{t('jquery.dataTables.oLanguage.sPrevious')}',
+            'sNext': '#{t('jquery.dataTables.oLanguage.sNext')}',
+            'sLast': '#{t('jquery.dataTables.oLanguage.sLast')}'
+          }
         }
       });
       if(typeof oTables == 'undefined')
@@ -88,7 +94,13 @@ module Admin::BaseHelper
           'sZeroRecords':'#{t('jquery.dataTables.oLanguage.sZeroRecords')}',
           'sInfo':'#{t('jquery.dataTables.oLanguage.sInfo')}',
           'sInfoEmpty':'#{t('jquery.dataTables.oLanguage.sInfoEmpty')}',
-          'sSearch':''
+          'sSearch': '#{t('jquery.dataTables.oLanguage.sSearch')}',
+          'oPaginate': {
+            'sFirst': '#{t('jquery.dataTables.oLanguage.sFirst')}',
+            'sPrevious': '#{t('jquery.dataTables.oLanguage.sPrevious')}',
+            'sNext': '#{t('jquery.dataTables.oLanguage.sNext')}',
+            'sLast': '#{t('jquery.dataTables.oLanguage.sLast')}'
+          }
         }
       });
       if(typeof oTables == 'undefined')
