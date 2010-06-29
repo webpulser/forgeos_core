@@ -1,0 +1,20 @@
+- unless @attachments.empty?
+  %ul.attachment_list
+    - @attachments.each do |p|
+      %li.attachment_list{:id => p.id}
+        - if params[:media] == 'Picture'
+          .thumbs
+            Insert:
+            %br/
+            = link_to "Detail", p.public_filename(''), :onclick => "select_thumb(this);return false;"
+          %br/
+          = link_to 'Cancel', 'javascript:void(0)', :onclick => "cancel_image();return false;"
+          =# link_to_function( image_tag( p.image.url( :small_thumb ), :alt => p.image.name ), "select_image(this)" )
+        - else
+          = link_to p.filename, p.public_filename(''), :onclick => "select_thumb(this);return false;"
+          \&nbsp;&nbsp;&nbsp;
+  %br{:style => "clear:both;"}/
+  %div{:style => "float:right;margin-bottom:10px;"}
+    = will_paginate @attachments, :class => "pagination", :previous_label => "&laquo; previous", :next_label => "next &raquo;", :renderer => 'TinyMCELinkRenderer'
+- else
+  No Image Uploaded Yet.
