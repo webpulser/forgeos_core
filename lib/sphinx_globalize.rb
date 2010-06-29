@@ -12,7 +12,7 @@ module Sphinx
           self.define_index "#{klass_name}_#{locale}" do
             where "`#{translation_table_name}`.`locale` = '#{locale}'"
             attr_names.each do |attr|
-              indexes globalize_translations(attr), :as => attr, :sortable => true
+              indexes translations(attr), :as => attr, :sortable => true
             end
           end
         end
