@@ -1,6 +1,7 @@
 class Admin::AttachmentsController < Admin::BaseController
   before_filter :get_media, :only => [:show, :download, :edit, :update, :destroy]
   before_filter :get_categories, :only => [:index]
+  skip_before_filter :verify_authenticity_token, :only => [:create]
 
   def manage
     @attachments = "#{params[:file_type]}".classify.constantize.paginate :page => params[:page], :order => 'created_at DESC', :per_page => 10, :conditions => { :parent_id => nil}
@@ -58,14 +59,15 @@ class Admin::AttachmentsController < Admin::BaseController
       format.json do
         if params[:Filedata]
           require 'mime/types'
-          @content_type = MIME::Types.type_for(params[:Filename]).first.to_s
+          filename = params[:Filename] || params[:Filedata].original_path
+          @content_type = MIME::Types.type_for(filename).first.to_s
           media_class = Media
           [Video,Pdf,Doc,Picture].each do |klass|
             media_class = klass if klass.attachment_options[:content_type].include?(@content_type)
           end
           
           @media = media_class.new(params[:attachment])
-          @media.uploaded_data = { 'tempfile' => params[:Filedata], 'content_type' => @content_type, 'filename' => Forgeos::url_generator(params[:Filename])}
+          @media.uploaded_data = { 'tempfile' => params[:Filedata], 'content_type' => @content_type, 'filename' => Forgeos::url_generator(filename)}
           
           if @media.save
             flash[:notice] = I18n.t('media.create.success').capitalize
@@ -91,6 +93,27 @@ class Admin::AttachmentsController < Admin::BaseController
         else
           render :json => { :result => 'error', :error => 'bad parameters' }
         end
+      end
+      format.js do
+        if params[:Filedata]
+          require 'mime/types'
+          filename = params[:Filedata].original_path
+          @content_type = MIME::Types.type_for(filename).first.to_s
+          media_class = Media
+          [Video,Pdf,Doc,Picture].each do |klass|
+            media_class = klass if klass.attachment_options[:content_type].include?(@content_type)
+          end
+          
+          @media = media_class.new(params[:attachment])
+          @media.uploaded_data = { 'tempfile' => params[:Filedata], 'content_type' => @content_type, 'filename' => Forgeos::url_generator(filename)}
+          
+          @media.save
+        end
+          responds_to_parent do 
+            render(:update) do |page|
+              page << "upload_callback();"
+            end
+          end
       end
     end
   end

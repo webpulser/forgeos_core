@@ -18,7 +18,8 @@
       <fieldset>
       <legend>Upload New Image</legend>
       <form id='image_upload_form' enctype="multipart/form-data" method="post" onsubmit="if($('#media_photo').val()!=''){ts_onload(); return true;}else{alert('Please, select file to upload');return false;}" target="html_editor_image_upload_frame">
-          <input class="input-file" id="media_photo" name="print[image]" size="22" type="file"/>
+          <input class="input-file" id="media_photo" name="Filedata" size="22" type="file"/>
+          <input name="format" type="hidden" value="js"/>
           <input class="submit" name="commit" type="submit" value="Upload"/>
         </form>
       </fieldset>

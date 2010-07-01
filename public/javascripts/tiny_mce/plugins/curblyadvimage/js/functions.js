@@ -24,7 +24,7 @@ function select_thumb(element) {
 
 function upload_callback(){
     //$('#dynamic_images_list').html('');
-    $.ajax({type: "GET", url: "/admin/attachment/attachments/manage?page=1", success: function(request){ $('#dynamic_images_list').html(request); },dataType: "html"});
+    $.ajax({type: "GET", url: "/admin/pictures/attachments/manage?page=1", success: function(request){ $('#dynamic_images_list').html(request); },dataType: "html"});
 }
 
 function curbly_insert_image(url, alt_text){
@@ -54,7 +54,7 @@ function ts_onload(){
 }
 function ts_upload_image_path() {
   path=window.parent.location.pathname.split('/')
-  return "/admin/picture/attachments/create";
+  return "/admin/attachments/create";
 }
 function ts_ce(tag,name){
     if (name && window.ActiveXObject){

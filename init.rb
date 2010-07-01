@@ -14,6 +14,7 @@ config.gem 'webpulser-jrails', :version => '>=0.4.2', :lib => 'jrails'
 config.gem 'webpulser-habtm_list', :version => '0.1.2'
 config.gem 'thinking-sphinx', :lib => 'thinking_sphinx', :version => '>=1.3.14'
 config.gem 'ruleby', :version => '0.6'
+config.gem 'responds_to_parent'
 
 require 'forgeos'
 

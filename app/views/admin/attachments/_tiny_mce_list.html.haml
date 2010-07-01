@@ -7,7 +7,10 @@
             - p.thumbnails.all(:order => '(width*height) DESC').each do |thumb|
               = link_to thumb.thumbnail, thumb.public_filename(''), :title => thumb.name, :onclick => "select_thumb(this);return false;"
               %br
-            = link_to 'Cancel', 'javascript:void(0)', :onclick => "cancel_image();return false;"
+            = link_to 'original', p.public_filename(''), :title => p.filename, :onclick => "select_thumb(this);return false;"
+            %br
+
+            = link_to 'X', 'javascript:void(0)', :onclick => "cancel_image();return false;"
           = link_to_function( image_tag( p.public_filename(''), :alt => p.name ), "select_image(this)" )
         - else
           = link_to p.name, p.public_filename(''), :onclick => "select_thumb(this);return false;"

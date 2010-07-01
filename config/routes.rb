@@ -27,7 +27,7 @@ ActionController::Routing::Routes.draw do |map|
     end
 
     admin.library '/library', :controller => 'attachments', :file_type => 'picture'
-    %w(medias pictures docs pdfs videos attachments role right).each do |resources_alias|
+    %w(medias pictures docs pdfs videos attachments).each do |resources_alias|
       route_options = { :controller => :attachments, :collection => { :manage => :get }, :member => { :download => :get }, :except => [:new] }
       route_options[:path_prefix] = 'admin/:file_type' if %w(attachments).include?(resources_alias)
       admin.resources resources_alias.to_sym, route_options
