@@ -3,7 +3,7 @@ class Admin::AttachmentsController < Admin::BaseController
   before_filter :get_categories, :only => [:index]
 
   def manage
-    @attachments = "#{params[:file_type]}".classify.constantize.paginate :page => params[:page], :order => 'created_at DESC', :per_page => 10
+    @attachments = "#{params[:file_type]}".classify.constantize.paginate :page => params[:page], :order => 'created_at DESC', :per_page => 10, :conditions => { :parent_id => nil}
     render :partial => 'tiny_mce_list'
   end
 
