@@ -3,9 +3,9 @@ class ApplicationController < ActionController::Base
   helper_method :current_user_session, :current_user
   protect_from_forgery
   filter_parameter_logging :password, :password_confirmation
-  
-  before_filter :set_locale
 
+  before_filter :set_locale
+  after_filter :discard_flash_if_xhr
 private
 
   def set_locale
@@ -44,5 +44,11 @@ private
 
   def store_location
     session[:return_to] = request.request_uri
+  end
+
+protected
+
+  def discard_flash_if_xhr
+    flash.discard if request.xhr?
   end
 end
