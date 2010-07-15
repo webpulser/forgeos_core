@@ -13,4 +13,14 @@ class Rule < ActiveRecord::Base
   def activate
     self.update_attribute(:active, !self.active?)
   end
+
+  def name
+    return super unless parent
+    super || parent.name
+  end
+
+  def description
+    return super unless parent
+    super || parent.description
+  end
 end
