@@ -109,6 +109,7 @@ private
     options[:order] = order unless order.squeeze.blank?
 
     if params[:sSearch] && !params[:sSearch].blank?
+      options[:star] = true
       @roles = Role.search(params[:sSearch],options)
     else
       @roles = Role.paginate(:all,options)

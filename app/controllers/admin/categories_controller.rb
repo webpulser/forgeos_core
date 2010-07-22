@@ -3,7 +3,7 @@ class Admin::CategoriesController < Admin::BaseController
   before_filter :get_category, :only => [:edit, :update, :destroy, :add_element]
   before_filter :new_category, :only => [:new, :create]
   skip_before_filter :set_currency, :only => [:index]
- 
+
   # List Categories
   def index
     respond_to do |format|
@@ -53,7 +53,7 @@ class Admin::CategoriesController < Admin::BaseController
   # The Category can be a child of another Category.
   def edit
   end
- 
+
   def update
     if @category.update_attributes(params[:category])
       flash[:notice] = t('category.update.success').capitalize
@@ -92,7 +92,7 @@ private
       return redirect_to(:action => :index)
     end
   end
-  
+
   def new_category
     @category = Category.new(params[:category])
   end
@@ -113,6 +113,7 @@ private
     options[:order] = order unless order.squeeze.blank?
 
     if params[:sSearch] && !params[:sSearch].blank?
+      options[:star] = true
       @categories = Category.search(params[:sSearch], options)
     else
       @categories = Category.paginate(:all, options)

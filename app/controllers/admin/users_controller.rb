@@ -50,7 +50,7 @@ class Admin::UsersController < Admin::BaseController
     end
     return redirect_to(admin_users_path)
   end
-	
+
   def activate
     unless @user.active?
       if @user.activate
@@ -78,7 +78,7 @@ class Admin::UsersController < Admin::BaseController
     require 'fastercsv'
     return flash[:error] = I18n.t('user.export.failed').capitalize if @users.empty?
     stream_csv do |csv|
-      csv << %w[name email]	
+      csv << %w[name email]
       @users.each do |u|
         csv << [u.fullname,u.email]
       end
@@ -105,7 +105,7 @@ class Admin::UsersController < Admin::BaseController
     unless @v_age.nil? && @c_age.nil?
 
       old_date = (Date.today << @v_age*12)
-      
+
       case @c_age
         when '=='
           conditions_ini[:birthday] = old_date.ago(12.month)..old_date
@@ -123,7 +123,7 @@ class Admin::UsersController < Admin::BaseController
     end
 
     @users = User.all( :conditions => conditions_ini )
-    
+
     flash[:error] = I18n.t('user.search.failed').capitalize if @users.empty?
 
     return export_newsletter if params[:commit] == I18n.t('export').capitalize
@@ -145,8 +145,8 @@ private
 
   def stream_csv
      filename = params[:action] + ".csv"
-      
-     #this is required if you want this to work with IE		
+
+     #this is required if you want this to work with IE
      if request.env['HTTP_USER_AGENT'] =~ /msie/i
        headers['Pragma'] = 'public'
        headers["Content-type"] = 'text/plain'
@@ -155,7 +155,7 @@ private
        headers['Expires'] = "0"
      else
        headers['Content-Type'] ||= 'text/csv'
-       headers['Content-Disposition'] = "attachment; filename=\"#{filename}\"" 
+       headers['Content-Disposition'] = "attachment; filename=\"#{filename}\""
      end
 
     render :text => Proc.new { |response, output|
@@ -183,7 +183,7 @@ private
       conditions[:categories_elements] = { :category_id => params[:category_id] }
       includes << :user_categories
     end
-    
+
     if params[:ids]
       conditions[:people] = { :id => params[:ids] }
     end
@@ -192,6 +192,7 @@ private
     options[:include] = includes unless includes.empty?
 
     if params[:sSearch] && !params[:sSearch].blank?
+      options[:star] = true
       @users = User.search(params[:sSearch],options)
     else
       @users = User.paginate(:all,options)
