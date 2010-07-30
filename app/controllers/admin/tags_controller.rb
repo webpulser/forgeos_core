@@ -1,7 +1,7 @@
 class Admin::TagsController < Admin::BaseController
 
   def tag
-    tags = Tag.find(:all,:conditions => ['name like ? ',"#{params[:tag]}%"])
+    tags = ActsAsTaggableOn::Tag.find(:all,:conditions => ['name like ? ',"#{params[:tag]}%"])
     if tags.nil? || tags.blank? 
       render :json => ""
     else
