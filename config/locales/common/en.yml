@@ -40,7 +40,7 @@ en:
       infos: account infos
   or: or
   and: and
-  ago: ago {{time}}
+  ago: ago %{time}
   conditions:
     is: is
     is_not: is not
@@ -130,8 +130,8 @@ en:
     export: export for newsletter
   visitor:
     online:
-     one: '{{count}} visitor online'
-     other: '{{count}} visitors online'
+     one: '%{count} visitor online'
+     other: '%{count} visitors online'
     one: visitor
     other: visitors
   users: customers
@@ -181,8 +181,8 @@ en:
     search:
       failed: no customers found
     online:
-      one: '{{count}} user online'
-      other: '{{count}} users online'
+      one: '%{count} user online'
+      other: '%{count} users online'
   folder:
     create: create a folder
     smart: create a smart folder

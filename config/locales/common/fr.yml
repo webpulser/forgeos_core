@@ -40,7 +40,7 @@ fr:
       infos: Infos du compte
   or: ou
   and: et
-  ago: il y a {{time}}
+  ago: il y a %{time}
   conditions:
     is: est
     is_not: "n'est pas"
@@ -129,9 +129,9 @@ fr:
     export: exporter pour la newsletter
   visitor:
     online:
-      zero: '{{count}} visiteur en ligne'
-      one: '{{count}} visiteur en ligne'
-      other: '{{count}} visiteurs en ligne'
+      zero: '%{count} visiteur en ligne'
+      one: '%{count} visiteur en ligne'
+      other: '%{count} visiteurs en ligne'
     one: visiteur
     other: visiteurs
   users: clients
@@ -181,9 +181,9 @@ fr:
     search:
       failed: aucun client trouvé
     online:
-      zero: '{{count}} client connecté'
-      one: '{{count}} client connecté'
-      other: '{{count}} clients connectés'
+      zero: '%{count} client connecté'
+      one: '%{count} client connecté'
+      other: '%{count} clients connectés'
   folder:
     create: créer un dossier
     smart: créer un dossier dynamique
