@@ -14,5 +14,25 @@ namespace :forgeos do
         #sleep 2
       end
     end
+    task :update_thumbnails_with_options, [:start, :end, :thumb] => :environment do |t,options|
+      unless options[:start] && options[:start] && options[:thumb]
+        puts 'usage : rake forgeos:core:update_thumbnails_with_options[start,end,thumb]'
+        exit
+      end
+      pictures = Picture.find_all_by_parent_id(nil)
+      options[:start].blank? ? _start = 0 : _start = options[:start].to_i
+      options[:end].blank? ? _end = (pictures.size-1) : _end = options[:end].to_i
+      format = options[:thumb].to_sym
+
+      pictures[_start.._end].each_with_index do |picture,i |
+        i = _start if i == 0
+        puts "Fixing #{i}/#{_end} : #{picture.filename}"
+        temp_file = picture.create_temp_file
+        
+        size = picture.attachment_options[:thumbnails][format.to_sym]
+        picture.create_or_update_thumbnail(temp_file, options[:thumb] , *size)
+        puts "  #{options[:thumb]} .... [ok]"
+      end
+    end
   end 
 end
