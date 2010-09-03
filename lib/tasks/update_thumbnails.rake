@@ -15,7 +15,7 @@ namespace :forgeos do
       end
     end
     task :update_thumbnails_with_options, [:start, :end, :thumb] => :environment do |t,options|
-      unless options[:start] && options[:start] && options[:thumb]
+      unless options[:start] && options[:end] && options[:thumb]
         puts 'usage : rake forgeos:core:update_thumbnails_with_options[start,end,thumb]'
         exit
       end
