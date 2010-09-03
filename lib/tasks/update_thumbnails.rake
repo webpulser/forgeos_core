@@ -24,14 +24,26 @@ namespace :forgeos do
       options[:end].blank? ? _end = (pictures.size-1) : _end = options[:end].to_i
       format = options[:thumb].to_sym
 
-      pictures[_start.._end].each_with_index do |picture,i |
-        i = _start if i == 0
+      i = _start
+      pictures[_start.._end].each do |picture|
         puts "Fixing #{i}/#{_end} : #{picture.filename}"
         temp_file = picture.create_temp_file
         
         size = picture.attachment_options[:thumbnails][format.to_sym]
-        picture.create_or_update_thumbnail(temp_file, options[:thumb] , *size)
-        puts "  #{options[:thumb]} .... [ok]"
+        unless size.nil?
+          picture.create_or_update_thumbnail(temp_file, options[:thumb] , *size)
+          puts "=> #{options[:thumb]} ...... [ok]"
+        else
+          puts "================================="
+          puts "* cannot find this thumb format *"
+          puts "================================="
+          puts ""
+          puts "=> below the list of thumb formats"
+          picture.attachment_options[:thumbnails].keys.each do |key|
+            puts "- #{key}"
+          end
+        end
+        i = _start + 1
       end
     end
   end 
