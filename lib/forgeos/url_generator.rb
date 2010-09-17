@@ -1,7 +1,8 @@
 # coding: utf-8
 # encoding: utf-8
 module Forgeos
-  def self.url_generator(phrase = '')
+  def self.url_generator(phrase = '', sep = '-')
+    return '' if phrase.nil?
     url = phrase.dup
     { %w(á à â ä ã Ã Ä Â À) => 'a',
       %w(é è ê ë Ë É È Ê €) => 'e',
@@ -11,12 +12,12 @@ module Forgeos
       %w(œ) => 'oe',
       %w(ß) => 'ss',
       %w(ú ù û ü U Û Ù) => 'u',
-      %w(\/ \| \\ \\& = # ' ") => '',
-      %w(\s+ _) => '-'
+      %w(\/ \| & = # ' " \?) => '',
+      %w(\s+ _) => sep
     }.each do |ac,rep|
       url.gsub!(Regexp.new(ac.join('|')), rep)
     end
 
-    url.gsub(/(^-+|-+$)/,'').downcase
+    url.squeeze(sep).gsub(/(^#{sep}+|#{sep}+$)/,'').downcase
   end
 end
