@@ -11,9 +11,9 @@ class CreateRules < ActiveRecord::Migration
       t.string :name,
         :type,
         :code
-      t.boolean :active
+      t.boolean :active, :default => true, :null => false
       t.belongs_to :parent
-    end  
+    end
   end
 
   def self.down

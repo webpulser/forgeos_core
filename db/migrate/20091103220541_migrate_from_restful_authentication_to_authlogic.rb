@@ -14,7 +14,7 @@ class MigrateFromRestfulAuthenticationToAuthlogic < ActiveRecord::Migration
         :last_login_at
       t.string :current_login_ip,
         :last_login_ip
-      t.boolean :active
+      t.boolean :active, :default => false, :null => false
       t.remove :remember_token,
         :activation_code,
         :remember_token_expires_at,
@@ -24,7 +24,7 @@ class MigrateFromRestfulAuthenticationToAuthlogic < ActiveRecord::Migration
 
   def self.down
     change_table :people do |t|
-      t.rename :password_salt,:salt 
+      t.rename :password_salt,:salt
       t.change :salt, :string, :limit => 40
       t.change :crypted_password, :string, :limit => 40
       t.remove :persistence_token,
