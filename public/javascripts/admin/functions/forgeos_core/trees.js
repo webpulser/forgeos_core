@@ -44,6 +44,7 @@ function init_category_tree(selector, type, source) {
       }
     },
     plugins: {
+      'cookie': {},
       'contextmenu': {
         items : {
           create : {
@@ -210,6 +211,7 @@ function init_category_tree(selector, type, source) {
         var url = current_table.fnSettings().sAjaxSource;
         var url_base = url.split('?')[0];
         var params;
+
 
         // update category id
         params = get_json_params_from_url(url);
