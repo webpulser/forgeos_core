@@ -20,6 +20,7 @@ module Forgeos
         { :controller => 'admin/library' },
         { :controller => 'admin/images/attachments' },
         { :controller => 'admin/pdf/attachments' },
+        { :controller => 'admin/audio/attachments' },
         { :controller => 'admin/video/attachments' },
         { :controller => 'admin/media/attachments' },
         { :controller => 'admin/doc/attachments' }
@@ -46,5 +47,5 @@ module Forgeos
     #  :url => :root,
     #  :html => { :class => 'right first' }
     #}
-  ] 
+  ]
 end

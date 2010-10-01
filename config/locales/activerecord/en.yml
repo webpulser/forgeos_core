@@ -9,6 +9,7 @@ en:
       pdf: pdf
       video: video
       picture: picture
+      audio: audio file
 
       external_link: external link
       category_link: category link

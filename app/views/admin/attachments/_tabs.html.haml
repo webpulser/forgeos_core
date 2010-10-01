@@ -1,5 +1,5 @@
 %ul.ui-tabs-nav.ui-helper-reset.ui-helper-clearfix.ui-widget-header.ui-corner-all
-  - %w(picture pdf video media doc).each do |file_type|
+  - %w(picture pdf video audio media doc).each do |file_type|
     - span = content_tag(:span, I18n.t(:other, :scope => [:media, file_type]).capitalize, :class => "small-icons #{file_type}")
     - if (file_type == @file_type.to_s) || (@media && file_type == @media.class.to_s.downcase)
       %li.ui-state-default.ui-corner-top.ui-tabs-selected.ui-state-active= link_to span, '#content'

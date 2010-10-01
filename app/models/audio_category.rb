@@ -1,0 +1,2 @@
+class AudioCategory < AttachmentCategory
+end

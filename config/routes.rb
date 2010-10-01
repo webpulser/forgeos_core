@@ -22,12 +22,12 @@ ActionController::Routing::Routes.draw do |map|
     admin.resources :menus, :member => { :activate => :post, :duplicate => :get }
 
     admin.resources :categories, :member => { :add_element => :post }
-    %w(picture media pdf doc video attachment admin role right user menu).each do |category|
+    %w(picture media pdf doc audio video attachment admin role right user menu).each do |category|
       admin.resources "#{category}_categories", :controller => 'categories', :requirements => { :type => "#{category}_category" }
     end
 
     admin.library '/library', :controller => 'attachments', :file_type => 'picture'
-    %w(medias pictures docs pdfs videos attachments).each do |resources_alias|
+    %w(medias pictures docs pdfs audios videos attachments).each do |resources_alias|
       route_options = { :controller => :attachments, :collection => { :manage => :get }, :member => { :download => :get }, :except => [:new] }
       route_options[:path_prefix] = 'admin/:file_type' if %w(attachments).include?(resources_alias)
       admin.resources resources_alias.to_sym, route_options

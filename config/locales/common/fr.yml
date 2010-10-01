@@ -293,6 +293,12 @@ fr:
       all: toutes les vidéos
       create:
         action: ajouter une vidéo
+    audio:
+      one: fichier audio
+      other: fichiers audio
+      all: toutes les fichiers audio
+      create:
+        action: ajouter un fichier audio
     picture:
       one: image
       other: images

@@ -1,0 +1,38 @@
+.large-image.grid_7.omega
+  #audio-player
+
+.large-info-container.grid_5.alpha.omega
+  .large-info-block
+    %span.large-info-name.truncate
+      = I18n.t('media.filename').capitalize
+    %span.large-info-value
+      = object.filename
+    .clear
+  .large-info-block
+    %span.large-info-name
+      = I18n.t('media.picture.original_size').capitalize
+    %span.large-info-value
+      = "#{object.width} x #{object.height} #{I18n.t('media.pixel', :count => 2)}"
+    .clear
+  .large-info-block
+    %span.large-info-name
+      = I18n.t('media.file_type').capitalize
+    %span.large-info-value
+      = object.file_type.upcase
+    .clear
+  .large-info-block
+    %span.large-info-name
+      = I18n.t('media.updated_at').capitalize
+    %span.large-info-value
+      = object.updated_at.to_s(:short)
+    .clear
+  .large-info-block
+    %span.large-info-name
+      = I18n.t('media.size').capitalize
+    %span.large-info-value
+      = "#{object.size/1024} #{I18n.t('media.byte.kilo')}"
+    .clear
+.clear
+
+= javascript_include_tag %w(swfobject audio-player)
+= javascript_tag "AudioPlayer.setup('/flashes/audio-player.swf', { width: 290 }); AudioPlayer.embed('audio-player', { soundFile: '#{object.public_filename()}', autostart: 'yes' })"

@@ -292,6 +292,12 @@ en:
       all: all videos
       create:
         action: add a video
+    audio:
+      one: audio file
+      other: audio files
+      all: all audio files
+      create:
+        action: add an audio file
     picture:
       one: picture
       other: pictures

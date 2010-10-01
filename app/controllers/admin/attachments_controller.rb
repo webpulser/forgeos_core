@@ -35,7 +35,7 @@ class Admin::AttachmentsController < Admin::BaseController
 
   def update
     file_type = nil
-    %w(media picture pdf video doc).each do |key|
+    %w(media picture pdf audio video doc).each do |key|
       if params[key]
         params[:attachment] = params[key]
         file_type = key
@@ -62,7 +62,7 @@ class Admin::AttachmentsController < Admin::BaseController
           filename = params[:Filename] || params[:Filedata].original_path
           @content_type = MIME::Types.type_for(filename).first.to_s
           media_class = Media
-          [Video,Pdf,Doc,Picture].each do |klass|
+          [Audio,Video,Pdf,Doc,Picture].each do |klass|
             media_class = klass if klass.attachment_options[:content_type].include?(@content_type)
           end
 
