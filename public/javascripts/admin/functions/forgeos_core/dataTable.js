@@ -126,7 +126,7 @@ jQuery.fn.extend({
     var datatable = $(this).parents('.datatable').dataTableInstance();
     var datable_datas = $(this).parents('.datatable').data('selected_rows');
     var index = $(this).attr('id');
-    var index_in_table = $(datable_datas).index(index);
+    var index_in_table = jQuery.inArray(index, datable_datas);
     datable_datas.splice(index_in_table,1);
   },
   toggleselect: function(){
@@ -205,11 +205,11 @@ function DataTablesRowCallBack(nRow, aData, iDisplayIndex){
 
     var datable_datas = table.data('selected_rows');
     var index = $(nRow).attr('id');
-    if ($(datable_datas).index(index) != -1) {
+    if (jQuery.inArray(index, datable_datas) < 0) {
+      $(nRow).children('td:first').append('<input id="select_'+$(nRow).attr('id')+'" type="checkbox" name="none"/>');
+    } else {
       $(nRow).addClass('row_selected');
       $(nRow).children('td:first').append('<input id="select_'+$(nRow).attr('id')+'" type="checkbox" name="none" checked="checked"/>');
-    } else {
-      $(nRow).children('td:first').append('<input id="select_'+$(nRow).attr('id')+'" type="checkbox" name="none"/>');
     }
 
     $(nRow).click(function() {
