@@ -1,9 +1,9 @@
 # Methods added to this helper will be available to all templates in the application.
 module ApplicationHelper
-   def logged_in?
+  def logged_in?
     current_user
   end
- 
+
   def build_menu(menu = Forgeos::Menu,options = { :menu => :menu}, html_options = {})
     menu_name = options.delete(:menu)
     menu.each do |tab|
@@ -19,7 +19,7 @@ module ApplicationHelper
     html_options = tab[:html] ? tab[:html].dup : {}
     tab_name = (tab.delete(:i18n) ? I18n.t(*tab[:title]) : tab[:title])
     html_options[:class] = '' unless html_options[:class]
-    urls = tab.delete(:url) 
+    urls = tab.delete(:url)
 
     if urls.is_a?(Array)
       urls.each do |url|
@@ -91,7 +91,7 @@ module ApplicationHelper
     end
     return with_tag ? javascript_tag(script) : script
   end
-  
+
   def attachment_class_from_content_type(media)
     media_class = Media
     [Video,Pdf,Doc,Picture].each do |klass|
@@ -106,5 +106,9 @@ module ApplicationHelper
 
   def find_media_type_from_content_type(media)
     attachment_class_from_content_type(media).to_s.underscore
-  end 
+  end
+
+  def statistics_collector_tag(object)
+    javascript_include_tag(statistics_collector_path(:type => object.class.to_s.underscore, :id => object.id))
+  end
 end

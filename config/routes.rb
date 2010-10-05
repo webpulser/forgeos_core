@@ -2,6 +2,7 @@ ActionController::Routing::Routes.draw do |map|
   map.logout '/logout', :controller => 'person_sessions', :action => 'destroy'
   map.login '/login', :controller => 'person_sessions', :action => 'new'
 
+  map.statistics_collector '/statistics/:type/:id.:format', :controller => 'statistics_collector', :action => 'index'
   map.resource :person_session
 
   map.namespace :admin do |admin|
@@ -10,7 +11,7 @@ ActionController::Routing::Routes.draw do |map|
     admin.notifications '/notifications', :controller => 'base', :action => 'notifications'
     admin.statistics '/statistics', :controller => 'statistics'
     admin.statistics_graph '/statistics/graph', :controller => 'statistics', :action => 'graph'
-   
+
     admin.resource :person_session
     admin.resource :setting
     admin.resource :account
