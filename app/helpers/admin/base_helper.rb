@@ -7,12 +7,9 @@ module Admin::BaseHelper
     options[:sort_col].nil? ? sort_col = 1 : sort_col = options[:sort_col]
     options[:sort_order].nil? ? sort_order = 'asc' : sort_order = options[:sort_order]
     
-      
-    if options[:save_state].nil?
-      save_state = false
-    else
-      save_state = options[:save_state]
-    end
+    save_state = options[:save_state] || false
+    display_length = options[:display_length] || 50
+
     # data source
     data_source = ''
     unless options[:url].nil? or options[:url].blank?
@@ -33,7 +30,7 @@ module Admin::BaseHelper
         'sDom': \"<'top'f>tpl<'clear'>i\",
         'aoColumns': [ #{columns.join(',')} ],
         'sProcessing': true,
-        'iDisplayLength': 50,
+        'iDisplayLength': #{display_length},
         'bLengthChange': true,
         'aaSorting': [[#{sort_col},'#{sort_order}']],
         'bStateSave': #{save_state},
