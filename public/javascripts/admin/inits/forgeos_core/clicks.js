@@ -7,4 +7,16 @@ jQuery(document).ready(function(){
     $(this).parent().remove();
     return false;
   });
+  $('a.destroy').live('click', function(e){
+    e.preventDefault();
+    line = $($(this).parent());
+    var del = line.find('input.destroy');
+    if (del.length > 0) {
+      del.val(1);
+      line.hide('highlight',{speed: 3000});
+    } else {
+      line.hide('highlight',{speed: 3000},function(){ $(this).remove(); });
+    }
+    return false;
+  });
 })
