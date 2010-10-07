@@ -8,7 +8,7 @@ module Admin::BaseHelper
     options[:sort_order].nil? ? sort_order = 'asc' : sort_order = options[:sort_order]
     
     save_state = options[:save_state] || false
-    display_length = options[:display_length] || 50
+    per_page = options[:per_page] || 50
 
     # data source
     data_source = ''
@@ -30,7 +30,7 @@ module Admin::BaseHelper
         'sDom': \"<'top'f>tpl<'clear'>i\",
         'aoColumns': [ #{columns.join(',')} ],
         'sProcessing': true,
-        'iDisplayLength': #{display_length},
+        'iDisplayLength': #{per_page},
         'bLengthChange': true,
         'aaSorting': [[#{sort_col},'#{sort_order}']],
         'bStateSave': #{save_state},
