@@ -1,4 +1,5 @@
 class Admin::CachingsController < Admin::BaseController
+  autoload :FileUtils, 'fileutils'
 
   def index
     @files = []
@@ -31,6 +32,14 @@ class Admin::CachingsController < Admin::BaseController
         flash[:error] = t('caching.delete.failed').capitalize
       end
     end
+
+
+    begin
+      FileUtils.remove_dir(Rails.cache.cache_path, true)
+    rescue
+      p 'file does not exist'
+    end
+
     flash[:success] = t('caching.delete.create').capitalize
     return redirect_to :action => 'index'
   end
