@@ -2,6 +2,7 @@ fr:
   caching:
     one: cache
     two: caches
+    no_files: il n'y a pas de pages à supprimer
     delete:
       success: Le cache a été supprimé
       failed: "un problème est survenu lors de la mise à suppression du cache"
