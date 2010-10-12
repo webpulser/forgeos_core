@@ -11,7 +11,11 @@ class Rule < ActiveRecord::Base
   end
 
   def activate
-    self.update_attribute(:active, !self.active?)
+    activation_state = !self.active?
+    self.update_attribute(:active, activation_state)
+    children.each do |child|
+      child.update_attribute(:active,activation_state)
+    end
   end
 
   def name
