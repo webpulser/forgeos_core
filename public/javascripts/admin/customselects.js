@@ -18,7 +18,7 @@ function InitCustomSelects()
 
   $('select').each(function()
   {
-    if(!$(this).parent().hasClass('enhanced') && !$(this).parent().hasClass('dataTables_length'))
+    if(!$(this).parent().hasClass('enhanced') && !$(this).parent().hasClass('dataTables_length') && $(this).parents('.no-customselect').length == 0)
     {
       targetselect = $(this);
       targetselect.hide();
