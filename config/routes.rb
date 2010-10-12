@@ -12,6 +12,7 @@ ActionController::Routing::Routes.draw do |map|
     admin.statistics '/statistics', :controller => 'statistics'
     admin.statistics_graph '/statistics/graph', :controller => 'statistics', :action => 'graph'
 
+    admin.resources :cachings
     admin.resource :person_session
     admin.resource :setting
     admin.resource :account
