@@ -1,4 +1,12 @@
 en:
+  caching:
+    one: caching
+    two: cachings
+    delete:
+      success: The cache was successfully deleted
+      failed: a problem occured during the cache deletion
+      one: delete those pages
+      all: delete all the pages
   admin:
     one: user
     other: users
