@@ -89,7 +89,6 @@
   var cat_id = get_rails_element_id($('.tree-li-selected-to-add-image'));
   $.ajax({
   success: function(result){
-  console.info($.tree.focused());
   $.tree.focused().refresh();
   $('#imageSelectDialogLeftSidebar').dialog('close');
   },
