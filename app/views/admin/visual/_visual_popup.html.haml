@@ -4,7 +4,7 @@
     /= hidden_field_tag :target, params[:target]
     /= hidden_field_tag :target_id, params[:target_id]
     /= form.submit t('save').capitalize
-  
+
   %span= t('or')
   = link_to_function t('media.add_form_library'), "$('#imagepictureSelectDialog').dialog('open');"
 
@@ -79,7 +79,7 @@
 
   function add_picture_picture_to_element(path,id,name){
   = "object_name='#{form.object_name}';"
-  $('#picture-picture ul.sortable').html('<li><a href="#" onclick="$(this).parents(\'li\').remove();  $(\'#picture\').val(\'null\'); return false;" class="big-icons trash"></a><img src="'+path+'" alt="'+name+'"/></li>');
+  $('#picture-picture ul.sortable').html('<li><img src="'+path+'" alt="'+name+'"/><a href="#" onclick="$(this).parents(\'li\').remove();  $(\'#picture\').val(\'null\'); return false;" class="big-icons delete"></a></li>');
   $("#picture").val(id);
   }
 
@@ -89,7 +89,7 @@
     /= hidden_field_tag :target, params[:target]
     /= hidden_field_tag :target_id, params[:target_id]
     /= form.submit t('save').capitalize
-  
+
   %span= t('or')
   = link_to_function t('media.add_form_library'), "$('#imageimageSelectDialog').dialog('open');"
 
@@ -164,7 +164,7 @@
 
   function add_image_picture_to_element(path,id,name){
   = "object_name='#{form.object_name}';"
-  $('#image-picture ul.sortable').html('<li><a href="#" onclick="$(this).parents(\'li\').remove();  $(\'#image\').val(\'null\'); return false;" class="big-icons trash"></a><img src="'+path+'" alt="'+name+'"/></li>');
+  $('#image-picture ul.sortable').html('<li><img src="'+path+'" alt="'+name+'"/><a href="#" onclick="$(this).parents(\'li\').remove();  $(\'#image\').val(\'null\'); return false;" class="big-icons delete"></a></li>');
   $("#image").val(id);
   }
 

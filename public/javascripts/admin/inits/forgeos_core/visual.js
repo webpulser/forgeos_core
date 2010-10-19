@@ -4,7 +4,7 @@ jQuery(document).ready(function(){
   $('.add-picturepicture').live('click',function(){
      openpictureimageUploadDialog($(this));
      return false;
-  });	
+  });
 
   // Dialog to select picture
   $('#imagepictureSelectDialog.project').dialog({
@@ -23,13 +23,13 @@ jQuery(document).ready(function(){
             var name = row.slice(-1);
             add_picture_picture_to_element(path,id,name);
           }
-        });          
+        });
         $('#imagepictureSelectDialog').dialog('close');
       }
     },
     open: function(){ $('#image-table-picture:visible,#thumbnail-table-picture:visible').dataTableInstance().fnDraw(); }
   });
- 
+
   $('#imagepictureUploadDialog').dialog({
     autoOpen:false,
     modal:true,
@@ -49,7 +49,7 @@ jQuery(document).ready(function(){
   $('.add-imagepicture').live('click',function(){
      openimageimageUploadDialog($(this));
      return false;
-  });	
+  });
 
   // Dialog to select picture
   $('#imageimageSelectDialog.project').dialog({
@@ -68,13 +68,13 @@ jQuery(document).ready(function(){
             var name = row.slice(-1);
             add_image_picture_to_element(path,id,name);
           }
-        });          
+        });
         $('#imageimageSelectDialog').dialog('close');
       }
     },
     open: function(){ $('#image-table-image:visible,#thumbnail-table-image:visible').dataTableInstance().fnDraw(); }
   });
- 
+
   $('#imageimageUploadDialog').dialog({
     autoOpen:false,
     modal:true,
@@ -90,12 +90,12 @@ jQuery(document).ready(function(){
     resizable:'se'
   });
 
-  // add visuals button	
+  // add visuals button
   $('.add-visualpictures').live('click',function(){
      openvisualsimageUploadDialog($(this));
      return false;
   });
-	
+
   // Dialog to select pictures
   $('#imagevisualsSelectDialog.project').dialog({
     autoOpen:false,
@@ -113,13 +113,13 @@ jQuery(document).ready(function(){
             var name = row.slice(-1);
             add_picture_to_element(path,id,name);
           }
-        });          
+        });
         $('#imagevisualsSelectDialog').dialog('close');
       }
     },
     open: function(){ $('#image-table-visuals:visible,#thumbnail-table-visuals:visible').dataTableInstance().fnDraw(); }
   });
- 
+
   $('#imagevisualsUploadDialog').dialog({
     autoOpen:false,
     modal:true,
