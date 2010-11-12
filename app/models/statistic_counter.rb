@@ -1,6 +1,5 @@
 class StatisticCounter < ActiveRecord::Base
-  
-  belongs_to :element, :polymorphic => true, :dependent => :destroy
+  belongs_to :element, :polymorphic => true
 
   def initialize(options = {})
     super(options = {})

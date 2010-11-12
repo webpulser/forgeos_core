@@ -12,6 +12,7 @@ module SortableAttachments
       has_many :videos, :through => :attachment_links, :class_name => 'Video', :source => :attachment, :order => :position
       has_many :pdfs, :through => :attachment_links, :class_name => 'Pdf', :source => :attachment, :order => :position
       has_many :audios, :through => :attachment_links, :class_name => 'Audio', :source => :attachment, :order => :position
+      has_many :medias, :through => :attachment_links, :class_name => 'Media', :source => :attachment, :order => :position
 
       unless self.instance_methods.include?('attachment_ids_with_position=')
         include SortableAttachments::InstanceMethods
