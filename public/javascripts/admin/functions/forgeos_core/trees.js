@@ -177,19 +177,22 @@ function init_category_tree(selector, type, source) {
       onmove: function(NODE,LANG,TREE_OBJ,RB){
         var cat_id = get_rails_element_id(NODE);
         var parent_id = '';
+        var parent_ul = $(NODE).parents('ul:first');
+        var position = $(parent_ul).children('li').index($(NODE));
+        position = position+1;
         if ($(NODE).parent().parent('li').length > 0){
           parent_id = get_rails_element_id($(NODE).parent().parent('li'));
         }
         $.ajax({
-            url: '/admin/categories/' + cat_id,
-              // update elements count
-              complete: function(request) {
-                $.tree.focused().refresh();
-              },
-              data: {authenticity_token:AUTH_TOKEN, format: 'json', 'category[parent_id]': parent_id},
-              dataType:'text',
-              type:'put'
-              });
+          url: '/admin/categories/' + cat_id,
+            // update elements count
+            complete: function(request) {
+              $.tree.focused().refresh();
+            },
+            data: {authenticity_token:AUTH_TOKEN, format: 'json', 'category[parent_id]': parent_id, 'category[position]': position},
+            dataType:'text',
+            type:'put'
+        });
       },
       ondelete: function(NODE,TREE_OBJ){
         var cat_id = get_rails_element_id(NODE);

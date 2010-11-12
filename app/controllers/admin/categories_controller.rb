@@ -55,7 +55,11 @@ class Admin::CategoriesController < Admin::BaseController
   end
 
   def update
+    if params[:category] && params[:category][:position]
+      position = params[:category].delete(:position)
+    end
     if @category.update_attributes(params[:category])
+      @category.insert_at(position) unless position.nil?
       flash[:notice] = t('category.update.success').capitalize
     else
       flash[:error] = t('category.update.failed').capitalize
@@ -102,16 +106,15 @@ private
     per_page = params[:iDisplayLength].to_i
     offset =  params[:iDisplayStart].to_i
     page = (offset / per_page) + 1
-    order_column = params[:iSortCol_0].to_i
-    order = "#{columns[order_column]} #{params[:iSortDir_0].upcase}"
-
+    #order_column = params[:iSortCol_0].to_i
+    #order = "#{columns[order_column]} #{params[:iSortDir_0].upcase}"
+    order = 'position ASC'
     conditions = {}
     conditions[:type] = params[:types].collect{ |type| "#{type}Category".camelize } if params[:types]
 
     options = { :page => page, :per_page => per_page }
     options[:conditions] = conditions unless conditions.empty?
     options[:order] = order unless order.squeeze.blank?
-
     if params[:sSearch] && !params[:sSearch].blank?
       options[:star] = true
       @categories = Category.search(params[:sSearch], options)
