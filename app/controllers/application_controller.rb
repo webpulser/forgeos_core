@@ -25,8 +25,12 @@ private
   end
 
   def current_user
-    return @current_user if defined?(@current_user)
-    @current_user = current_user_session && current_user_session.record
+    session_key = ActionController::Base.session_options[:key]
+    unless defined?(@current_user)
+      @current_user = current_user_session && current_user_session.record
+    end
+    cookies["#{session_key}_admin"] = @current_user.is_a?(Administrator)
+    return @current_user
   end
 
   def logged_in?
