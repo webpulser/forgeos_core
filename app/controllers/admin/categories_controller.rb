@@ -102,7 +102,7 @@ private
   end
 
   def sort
-    columns = %w(categories.name categories.name)
+    columns = %w(category_translations.name category_translations.name)
     per_page = params[:iDisplayLength].to_i
     offset =  params[:iDisplayStart].to_i
     page = (offset / per_page) + 1
@@ -115,8 +115,11 @@ private
     options = { :page => page, :per_page => per_page }
     options[:conditions] = conditions unless conditions.empty?
     options[:order] = order unless order.squeeze.blank?
+    options[:include] = :translations
+
     if params[:sSearch] && !params[:sSearch].blank?
       options[:star] = true
+      options[:sql_order] = options.delete(:order)
       @categories = Category.search(params[:sSearch], options)
     else
       @categories = Category.paginate(:all, options)
