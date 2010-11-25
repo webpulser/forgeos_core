@@ -1,6 +1,7 @@
 class Admin::AttachmentsController < Admin::BaseController
   before_filter :get_media, :only => [:show, :download, :edit, :update, :destroy]
   before_filter :get_categories, :only => [:index]
+  before_filter :get_thumbnails, :only => [:show, :edit, :update]
   skip_before_filter :verify_authenticity_token, :only => [:create]
 
   def manage
@@ -20,7 +21,6 @@ class Admin::AttachmentsController < Admin::BaseController
 
   # GET /medias/1
   def show
-    @thumbnails = @media.thumbnails.all :order => '(width*height) DESC'
   end
 
   # GET /medias/1
@@ -30,7 +30,6 @@ class Admin::AttachmentsController < Admin::BaseController
 
   # GET /medias/1/edit
   def edit
-    @thumbnails = @media.thumbnails.all :order => '(width*height) DESC'
   end
 
   def update
@@ -137,6 +136,10 @@ class Admin::AttachmentsController < Admin::BaseController
       flash[:error] = I18n.t('media.not_exist').capitalize
       return redirect_to(admin_library_path)
     end
+  end
+
+  def get_thumbnails
+    @thumbnails = @media ? @media.thumbnails.all(:order => '(width*height) DESC') : []
   end
 
   def get_categories

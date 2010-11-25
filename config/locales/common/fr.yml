@@ -225,7 +225,9 @@ fr:
     not_exist: "le média sélectionné n'existe pas"
     used: utilisé(e)
     linked: fichiers liés
-    upload: 
+    description: description
+    alt: texte alternatif
+    upload:
       start: démarer le téléchargement
       clear_queue: nettoyer la liste
       action: charger des fichiers
