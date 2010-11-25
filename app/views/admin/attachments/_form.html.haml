@@ -56,7 +56,17 @@
             %span.large-info-value
               = "#{media.size/1024} #{I18n.t('media.byte.kilo')}"
             .clear
-          = f.file_field :uploaded_data
+          .large-info-block
+            = f.label :uploaded_data, nil, :class => 'large-info-name'
+            = f.file_field :uploaded_data, :size => 10
+            %br
+          .large-info-block
+            = f.label :alt, nil, :class => 'large-info-name'
+            = f.text_field :alt, :size => 32
+            %br
+          .large-info-block
+            = f.label :description, nil, :class => 'large-info-name'
+            = f.text_area :description, :rows => 5, :cols => 32
         .clear
 
         - thumbnails.each do |thumb|
@@ -72,7 +82,7 @@
     #right-sidebar.grid_4.omega
       .step
         = link_to I18n.t('media.destroy.action').capitalize, [:admin, media], :confirm => I18n.t('media.destroy.confirm').capitalize, :method => :delete, :class => 'small-icons delete'
-        .clear    
+        .clear
       #attachment_associated_collection.step.open
         %a.small-icons.step-title{ :href => "#" }
           Associated to collection
