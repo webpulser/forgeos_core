@@ -4,7 +4,7 @@
       = I18n.t("activerecord.models.#{type.underscore}").capitalize
       \:
 
-    - elements = @media.sortable_attachments.collect{ |sp| sp.attachable if sp.attachable.kind_of?(type.camelize.constantize)}.compact
+    - elements = @media.attachment_links.collect{ |sp| sp.attachable if sp.attachable.kind_of?(type.camelize.constantize)}.compact
     - unless elements.nil? or elements.empty?
       %ul.no-list-style-type
         - elements.each do |element|

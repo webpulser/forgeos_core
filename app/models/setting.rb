@@ -1,6 +1,6 @@
 require 'ostruct'
 class Setting < ActiveRecord::Base
-  belongs_to :address
+  belongs_to :address, :dependent => :destroy
   serialize :mailer, OpenStruct
   serialize :smtp_settings, OpenStruct
   serialize :sendmail_settings, OpenStruct
