@@ -6,7 +6,7 @@ class Admin::ImportController < Admin::BaseController
   before_filter :models, :only => :index
 
   def index; end
-  
+
   def create_user
     create_model(User,'email')
   end
@@ -35,7 +35,7 @@ class Admin::ImportController < Admin::BaseController
       mapped_fields.each do |row|
         logger.debug("\033[01;33m Number : #{row.number} / #{total}\033[0m")
 
-        attributes = {} 
+        attributes = ActiveSupport::OrderedHash.new
         methods.each_with_index do |attribute,i|
           exist = params[:fields].values.include?((i+1).to_s)
           attributes[attribute.to_sym] = row[i] if exist
@@ -46,7 +46,7 @@ class Admin::ImportController < Admin::BaseController
         end
 
         uniq_field_index = methods.index(uniq_field)
-        
+
         if uniq_field != nil && row[uniq_field_index] != nil && object = klass.send("find_by_#{uniq_field}",row[uniq_field_index])
           if object.update_attributes(attributes)
             updated+=1
@@ -82,9 +82,9 @@ class Admin::ImportController < Admin::BaseController
       flash[:error] = t('import.give_file')
       redirect_to(:action => :index)
   end
-  
+
   private
-  
+
   def save_import_set
     @set = ImportSet.find_by_id(params[:set_id])
     if params[:save_set]
