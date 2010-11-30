@@ -224,6 +224,7 @@ en:
     not_exist: the requested media does not exist
     used: used
     linked: linked files
+    name: name
     description: description
     alt: alternatif text
     upload:

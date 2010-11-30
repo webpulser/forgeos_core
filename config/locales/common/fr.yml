@@ -225,6 +225,7 @@ fr:
     not_exist: "le média sélectionné n'existe pas"
     used: utilisé(e)
     linked: fichiers liés
+    name: nom
     description: description
     alt: texte alternatif
     upload:

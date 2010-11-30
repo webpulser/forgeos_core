@@ -4,6 +4,8 @@ class Attachment < ActiveRecord::Base
 
   before_save :fill_blank_name_with_filename
 
+  named_scope :linked_to, lambda { |element_type| {:include => :attachment_links, :conditions => {:attachment_links => {:element_type => element_type.to_s.classify }}}}
+
   define_index do
     indexes filename, :sortable => true
     indexes content_type, :sortable => true
