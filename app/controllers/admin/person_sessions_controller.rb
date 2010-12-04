@@ -1,4 +1,4 @@
-# This controller handles the login/logout function of the site.  
+# This controller handles the login/logout function of the site.
 class Admin::PersonSessionsController < Admin::BaseController
   layout 'admin_login'
   skip_before_filter :login_required, :only => [:destroy, :new, :create, :reset_password, :reset_admin_password]
@@ -9,16 +9,16 @@ class Admin::PersonSessionsController < Admin::BaseController
   def create
     @person_session = PersonSession.new(params[:person_session])
     if @person_session.save
-      redirect_to(:admin_root)
       flash[:notice] = t('log.in.success').capitalize
     else
       flash[:error] = t('log.in.failed').capitalize
-      if redirect = session[:return_to]
-        session[:return_to] = nil
-        redirect_to(redirect)
-      else
-        redirect_to :action => 'new'
-      end
+    end
+
+    if redirect = session[:return_to]
+      session[:return_to] = nil
+      redirect_to(redirect)
+    else
+      redirect_to(:admin_root)
     end
   end
 
@@ -26,7 +26,7 @@ class Admin::PersonSessionsController < Admin::BaseController
     current_user_session.destroy
     flash[:notice] = t('log.out.success').capitalize
   end
-  
+
   def reset_admin_password
     user = Administrator.find_by_email(params[:email])
     if user
@@ -42,12 +42,12 @@ class Admin::PersonSessionsController < Admin::BaseController
     end
     redirect_to :action => 'new'
   end
-  
+
 private
   def generate_password(size)
     s = ""
     size.times { s << (i = Kernel.rand(62); i += ((i < 10) ? 48 : ((i < 36) ? 55 : 61 ))).chr }
-    return s    
+    return s
   end
 
 end
