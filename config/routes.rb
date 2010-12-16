@@ -2,6 +2,7 @@ ActionController::Routing::Routes.draw do |map|
   map.logout '/logout', :controller => 'person_sessions', :action => 'destroy'
   map.login '/login', :controller => 'person_sessions', :action => 'new'
 
+  map.notifications '/notifications', :controller => 'application', :action => 'notifications'
   map.statistics_collector '/statistics/:type/:id.:format', :controller => 'statistics_collector', :action => 'index'
   map.resource :person_session
 

@@ -6,6 +6,15 @@ class ApplicationController < ActionController::Base
 
   before_filter :set_locale
   after_filter :discard_flash_if_xhr
+
+  def notifications
+    @notifications = {}
+    [:error, :notice, :warning].each do |key|
+      @notifications[key] = flash.delete(key)
+    end
+    render :json => @notifications.to_json
+  end
+
 private
 
   def set_locale
