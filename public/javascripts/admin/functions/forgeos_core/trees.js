@@ -208,6 +208,7 @@ function init_category_tree(selector, type, source) {
       },
       oncopy: function(NODE,REF_NODE,TYPE,TREE_OBJ,RB) { duplicate_category(NODE, type); },
       onselect: function(NODE,TREE_OBJ) {
+        $(".parent_id_hidden").remove();
         var cat_id = get_rails_element_id(NODE);
         var current_table = $('#table').dataTableInstance();
         var url = current_table.fnSettings().sAjaxSource;
@@ -224,11 +225,13 @@ function init_category_tree(selector, type, source) {
 
         object_name = $(NODE).attr('id').split('_')[0];
         category_id = get_rails_element_id(NODE);
-        $(NODE).append('<input type="hidden" id="parent_id_tmp" name="parent_id_tmp" value="'+category_id+'" />');
+        var nb_of_parent_id_hidden = $(NODE).find(".parent_id_hidden").length
+        if( nb_of_parent_id_hidden == 0){
+          $(NODE).append('<input type="hidden" id="parent_id_tmp" name="parent_id_tmp" class="parent_id_hidden" "value="'+category_id+'" />');
+        }
         return true;
       },
       ondeselect: function(NODE,TREE_OBJ) {
-        $("#parent_id_tmp").val("");
         $('#category_sort').hide();
         return true;
       },
