@@ -8,11 +8,13 @@ function update_block_container_positions(container){
 }
 
 function remove_rails_nested_object(selector){
-  if ($(selector).find('input.delete').size() > 0) {
-    $(selector).find('input.delete').val(1);
+  var line = $(selector);
+  var del = line.find('input.destroy');
+  if (del.length > 0) {
+    del.val(1);
     tmce_unload_children(selector);
-    $(selector).hide('explode', 500);
+    line.hide('explode',{}, 3000);
   } else {
-    $(selector).hide('explode',500).remove();
+    line.hide('explode',{}, 3000,function(){ $(this).remove(); });
   }
 }
