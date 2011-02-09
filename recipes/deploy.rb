@@ -17,8 +17,10 @@ namespace :forgeos do
   end
 
   task :assets, :roles => [:web, :app] do
+    rake = fetch(:rake, "rake")
+    rails_env = fetch(:rails_env, "production")
     run "mkdir #{release_path}/tmp/attachment_fu"
-    run "cd #{release_path}; rake forgeos:core:sync RAILS_ENV=production;"
+    run "cd #{release_path}; #{rake} forgeos:core:sync RAILS_ENV=#{rails_env};"
   end
 end
 
