@@ -124,6 +124,7 @@ module Admin::BaseHelper
         block.class.human_name
       end +
       content_tag(:span, capture(&proc), :class => 'block-name') +
+      link_to('', [:edit, :admin, block], :class => 'small-icons edit-link', :popup => true) +
       link_to('', '#', :class => 'big-icons gray-destroy') +
       hidden_field_tag("#{model_name}[#{block_name}_ids][]", block.id, :class => 'block-selected')
     end

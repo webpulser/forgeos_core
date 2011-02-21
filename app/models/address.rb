@@ -1,6 +1,7 @@
 class Address < ActiveRecord::Base
-  
+
   belongs_to :country
+  belongs_to :person
 
   validates_presence_of :country_id, :address, :city
 
@@ -8,12 +9,12 @@ class Address < ActiveRecord::Base
   def to_s
     "#{I18n.t civility, :scope => [:civility, :label]} #{firstname} #{name} #{address} #{zip_code} #{city} #{country.name.upcase}"
   end
-  
+
   def kind
     read_attribute(:type)
   end
-  
+
   def kind=(kind)
     write_attribute(:type, kind)
-  end 
+  end
 end

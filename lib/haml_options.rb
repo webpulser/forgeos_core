@@ -2,8 +2,9 @@
 require 'haml'
 Haml.init_rails(binding)
 if Rails.env == :production
-  Haml::Template.options[:ugly] = true 
+  Haml::Template.options[:ugly] = true
   Sass::Plugin.options[:style] = :compressed
 else
   Sass::Plugin.options[:style] = :compact
+  Sass::Plugin.options[:debug_info] = true
 end

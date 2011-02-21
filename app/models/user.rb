@@ -1,5 +1,5 @@
 class User < Person
-  has_many :addresses
+  has_many :addresses, :foreign_key => 'person_id'
   accepts_nested_attributes_for :addresses
   attr_accessible :addresses_attributes
 
