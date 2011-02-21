@@ -26,6 +26,7 @@ class Admin::ImportController < Admin::BaseController
   end
 
   def create_model(klass, uniq_field = nil, &block)
+    File.open(UPLOAD_PROGRESS_FILE, 'w') {|f| f.write(0) }
     if fields_mapped?
       total = mapped_fields.size
       created = 0
@@ -63,7 +64,7 @@ class Admin::ImportController < Admin::BaseController
             logger.debug("\033[01;33m#{object.errors.inspect}\033[0m")
           end
         end
-        File.open(UPLOAD_PROGRESS_FILE, 'w') {|f| f.write((row.number.to_f / total.to_f) * 100.0) } if (row.number%100).zero?
+        File.open(UPLOAD_PROGRESS_FILE, 'w') {|f| f.write((row.number.to_f / total.to_f) * 100.0) } if row.number.modulo(10).zero?
       end
 
       flash[:notice] = t('import.create.success', :model => t(klass.to_s.underscore, :count => created), :nb => "#{created}/#{total}") if created != 0
@@ -75,12 +76,9 @@ class Admin::ImportController < Admin::BaseController
     else
       render(:action => 'create')
     end
-    rescue MapFields::InconsistentStateError
-      flash[:error] = t('import.retry')
-      redirect_to(:action => :index)
-    rescue MapFields::MissingFileContentsError
-      flash[:error] = t('import.give_file')
-      redirect_to(:action => :index)
+    rescue StandardError => error
+      File.open(UPLOAD_PROGRESS_FILE, 'w') {|f| f.write(100.0) }
+      render(:text => error.inspect, :status => 500)
   end
 
   private

@@ -50,13 +50,11 @@
 .field_error
   color: red
 
-.progressbar_container
-  border: 1px solid black
-  height: 50px
-  #progressbar
-    width: 0
-    height: 100%
-    background-color: green
-    color: white
-    text-align: center
-    line-height: 50px
+#progressbar
+  position: relative
+  span
+    position: absolute
+    right: 10px
+    top: 4px
+  &.running
+    background: url('/images/spinner.gif') no-repeat center center
