@@ -57,8 +57,8 @@ class Admin::CategoriesController < Admin::BaseController
   def update
     if categories = params[:categories_hash]
       paramz = ActiveSupport::JSON.decode(categories)
-      parent_id = nil
       paramz.each_with_index do | param, position |
+        parent_id = nil
         update_category_from_params(param, position, parent_id)
       end
     elsif @category.update_attributes(params[:category])
@@ -111,11 +111,10 @@ private
           children.each_with_index do | child, position_child |
             if child_id = child["attributes"]["id"].split("_").last
               children_ids << child_id
-              if _child = Category.find_by_id(child_id)
-                _child.update_attributes(:parent_id => id, :position => (position+1+position_child+1))
-              end
               if child["children"].present?
                 update_category_from_params(child, (position+1+position_child+1), id)
+              elsif _child = Category.find_by_id(child_id)
+                _child.update_attributes(:parent_id => id, :position => (position+1+position_child+1))
               end
             end
           end
