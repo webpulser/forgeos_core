@@ -55,11 +55,13 @@ class Admin::CategoriesController < Admin::BaseController
   end
 
   def update
-    if params[:category] && params[:category][:position]
-      position = params[:category].delete(:position)
-    end
-    if @category.update_attributes(params[:category])
-      @category.insert_at(position) unless position.nil?
+    if categories = params[:categories_hash]
+      paramz = ActiveSupport::JSON.decode(categories)
+      parent_id = nil
+      paramz.each_with_index do | param, position |
+        update_category_from_params(param, position, parent_id)
+      end
+    elsif @category.update_attributes(params[:category])
       flash[:notice] = t('category.update.success').capitalize
     else
       flash[:error] = t('category.update.failed').capitalize
@@ -100,10 +102,32 @@ private
   def new_category
     @category = Category.new(params[:category])
   end
+  
+  def update_category_from_params(param, position, parent_id)
+    if id = param["attributes"]["id"].split("_").last
+      if category = Category.find_by_id(id)
+        children_ids = []
+        if children = param["children"]
+          children.each_with_index do | child, position_child |
+            if child_id = child["attributes"]["id"].split("_").last
+              children_ids << child_id
+              if _child = Category.find_by_id(child_id)
+                _child.update_attributes(:parent_id => id, :position => (position+1+position_child+1))
+              end
+              if child["children"].present?
+                update_category_from_params(child, (position+1+position_child+1), id)
+              end
+            end
+          end
+        end
+        category.update_attributes(:position => position+1, :parent_id => parent_id )
+      end
+    end
+  end  
 
   def sort
     columns = %w(category_translations.name category_translations.name)
-    per_page = params[:iDisplayLength].to_i
+    per_page = params[:iDisplayLength].present? ? params[:iDisplayLength].to_i : 50
     offset =  params[:iDisplayStart].to_i
     page = (offset / per_page) + 1
     #order_column = params[:iSortCol_0].to_i

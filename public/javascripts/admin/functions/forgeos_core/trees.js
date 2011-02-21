@@ -179,6 +179,8 @@ function init_category_tree(selector, type, source) {
         var parent_id = '';
         var parent_ul = $(NODE).parents('ul:first');
         var position = $(parent_ul).children('li').index($(NODE));
+        var tree_id = $(RB.container).attr('id');
+        
         position = position+1;
         if ($(NODE).parent().parent('li').length > 0){
           parent_id = get_rails_element_id($(NODE).parent().parent('li'));
@@ -187,9 +189,9 @@ function init_category_tree(selector, type, source) {
           url: '/admin/categories/' + cat_id,
             // update elements count
             complete: function(request) {
-              $.tree.focused().refresh();
+              //$.tree.focused().refresh();
             },
-            data: {authenticity_token:AUTH_TOKEN, format: 'json', 'category[parent_id]': parent_id, 'category[position]': position},
+            data: {authenticity_token:AUTH_TOKEN, format: 'json', 'categories_hash': get_current_categories( tree_id ) },
             dataType:'text',
             type:'put'
         });
@@ -344,6 +346,34 @@ function addPageClasses(block_id){
         $(this).addClass('active');
       }
     });
+  });
+}
+
+//Return current tree to json
+function get_current_categories( tree_id ){
+  return JSON.stringify(jQuery.tree.reference("#"+tree_id ).get());
+}
+
+function createNewLevel(parent,item, TREE_OBJ, level) {
+  $(item).each(function(){
+    var cat_id = get_rails_element_id($(this));
+    var parent_ul = $(TREE_OBJ).children();
+    var position = $(parent_ul).children('li').index($(this));
+    position = position+1;
+    
+    if($(this).attr('tagName') == 'UL'){
+      //parent["categorie_"+cat_id] = {};
+      //createNewLevel(parent["categorie_"+cat_id],$(this).children().children(), TREE_OBJ); 
+    }
+    else{
+      if($(this).children().length > 1){
+        parent["category_"+cat_id] = {};
+        createNewLevel(parent["category_"+cat_id],$(this).children().children(), TREE_OBJ); 
+      }
+      else{
+        parent["category_"+cat_id] = cat_id;
+      }
+    }
   });
 }
 
