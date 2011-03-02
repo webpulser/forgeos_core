@@ -1,17 +1,22 @@
 require 'ar-extensions'
 class ActiveRecord::Base
 
+  def self.get_nested_conditions(args)
+    sanitize_sql(args)
+  end
+
+  private
+
   def self.sanitize_sql_from_hash(hsh, table_name = quoted_table_name, klass = self) #:nodoc:
     conditions, values = [], []
     hsh = expand_hash_conditions_for_aggregates(hsh) # introduced in Rails 2.0.2
-
     hsh.each_pair do |key,val|
       if val.respond_to?( :to_sql )
         conditions << sanitize_sql_by_way_of_duck_typing( val )
         next
       elsif val.is_a?(Hash) # don't mess with ActiveRecord hash nested hash functionality
         if assoc = self.reflections.map(&:last).find { |ref| ref.table_name == key.to_s }
-          conditions << sanitize_sql_from_hash(val,key, assoc.class_name.constantize)
+          conditions << assoc.class_name.constantize.get_nested_conditions(val)
         else
           conditions << sanitize_sql_hash_for_conditions({key => val}, table_name)
         end
