@@ -10,10 +10,12 @@ namespace :forgeos do
   end
 
   task :generate_acl, :roles => [:web, :app] do
-    run "export RAILS_ENV=production;
+    rake = fetch(:rake, "rake")
+    rails_env = fetch(:rails_env, "production")
+    run "export RAILS_ENV=#{rails_env};
     cd #{current_path};
-    rake forgeos:core:generate:acl[.];
-    rake forgeos:core:generate:acl[vendor/plugins/forgeos_core];"
+    #{rake} forgeos:core:generate:acl[.];
+    #{rake} forgeos:core:generate:acl[vendor/plugins/forgeos_core];"
   end
 
   task :assets, :roles => [:web, :app] do
