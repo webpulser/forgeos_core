@@ -9,23 +9,25 @@
     %div
       = smtp.text_field :address
     = smtp.label :port
-    %div  
+    %div
       = smtp.text_field :port
     = smtp.label :domain
     %div
       = smtp.text_field :domain
     = smtp.label :authentication
     %div
-      = smtp.select :authentication, [['plain','plain'],['login','login'],['cran_md5','cran_md5']], { :prompt => t(:please_select) }
+      = smtp.select :authentication, [['none', 'none'],['plain','plain'],['login','login'],['cran_md5','cran_md5']], {}, :onchange => "if(this.value == 'none'){$('#authentication').addClass('hidden');} else {$('#authentication').removeClass('hidden');}"
     .clear
-    = smtp.label :user_name
-    %div
-      = smtp.text_field :user_name
-    = smtp.label :password
-    %div
-      = smtp.text_field :password
+    - authentication_class = (smtp.object.authentication.nil? ? 'hidden' : nil)
+    #authentication{ :class => authentication_class }
+      = smtp.label :user_name
+      %div
+        = smtp.text_field :user_name
+      = smtp.label :password
+      %div
+        = smtp.text_field :password
     = smtp.label :enable_starttls_auto
-    %div   
+    %div
       = smtp.check_box :enable_starttls_auto
 #sendmail.delivery_method_settings.hidden
   - f.fields_for :sendmail_settings, f.object.sendmail_settings do |sendmail|

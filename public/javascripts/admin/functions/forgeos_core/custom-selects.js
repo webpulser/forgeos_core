@@ -9,6 +9,7 @@ function change_rule(element, name){
   //check_remove_icon_status(name);
   check_icons('rule-conditions');
   check_icons('end-conditions');
+  InitCustomSelects();
   rezindex();
 }
 
@@ -24,7 +25,7 @@ function rebuild_custom_select(parent){
   // remove custom select classes
   $(parent).removeClass('enhanced');
   $(parent).children('.dropdown').remove();
-  
+
   // reinit custom select and rebuild indexes
   InitCustomSelects();
   rezindex();

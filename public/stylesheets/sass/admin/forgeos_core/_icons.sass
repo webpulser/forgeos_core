@@ -84,7 +84,7 @@
 .action-button span
   +block()
   :padding-top 1px
-  +left()
+  float: left
 .create-folder
   :background-position 0 -268px
 .create-smart-folder
@@ -187,7 +187,7 @@ input.interact-button
   width: auto
 .interact-links
   float: right
-  font-size: 0.7em
+  font-size: 13px
   line-height: 35px
   :color = !lightGray
   height: 32px
@@ -196,9 +196,19 @@ input.interact-button
   &.in-content
     margin-top: 20px
     margin-right: 30px
-.back-link
-  text-decoration: underline
-  :color = !lightGray
+  .back-link
+    +borderCorner(8px,8px,8px,8px)
+    text-decoration: underline
+    :color = !lightGray
+    border: 0 !important
+    font-size: 12px
+    font-weight: bold
+    padding: 0 10px
+    &:hover, &.selected
+      color = !white
+      background-color = !lightGray
+
+
 .interact-button-left
   background-position: 0 -52px
   width: 3px
@@ -246,6 +256,8 @@ input.interact-button
   background-position: 0 -2546px
 .video
   background-position: 0 -3552px
+.audio
+  background-position: 0 -4371px
 .media
   background-position: 0 -1969px
 .doc
@@ -265,8 +277,6 @@ input.interact-button
   width: 18px
   padding: 0
   +opacity(0.6)
-.static-content, .widget-content
-  font-size: 1.1em
 .static-content .big-icons, .widget-content .big-icons
   display: inline-block
   height: 100%
@@ -280,6 +290,8 @@ input.interact-button
   background-position: 0 -1206px
 .add-video
   background-position: 0 -1708px
+.add-audio
+  background-position: 0 -1846px
 .add-media
   background-position: 0 -1131px
 .add-doc
@@ -297,13 +309,6 @@ input.interact-button
 .add-menu-link
   background-position: 0 -1442px
   :color = !blueLink
-.add-link
-  background-position: 0 -1445px
-  text-decoration: underline
-  :color = !blueLink
-  font-size: 0.8em
-  clear: both
-  +block()
 .media-hoverlay
   #inner-lightbox a
     &.picture

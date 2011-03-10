@@ -5,14 +5,12 @@
   .backgrounds.big-header
     = f.text_field :name, :class => 'field_name'
     .interact-links
-      = submit_tag t('save_changes').capitalize, :class => 'backgrounds interact-button'
-      = t('or')
-      = link_to t('cancel').capitalize, admin_roles_path, :class => 'back-link'
+      = Forgeos_save_buttons admin_roles_path
 
   #content.grid_16.alpha.omega
     .grid_12.alpha
       .padding-wrap
-        - right_categories = RightCategory.all( :order => 'name' )
+        - right_categories = RightCategory.all(:joins => :translations, :order => 'name' )
         - right_categories.each do |right_category|
           .fieldset
             %a.small-icons.panel{ :href => '#' }

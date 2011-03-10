@@ -1,8 +1,9 @@
 class Category < ActiveRecord::Base
-  acts_as_tree
+  translates :name, :description, :url
+  acts_as_tree :order => "position"
   has_and_belongs_to_many_attachments
-
-  validates_presence_of :name
+  acts_as_list :scope => [:type]
+  #validates_presence_of :name
 
   # Returns the level of <i>Category</i>
   def level
@@ -35,7 +36,7 @@ class Category < ActiveRecord::Base
     hash[:attributes] = { :id => "#{self.class.to_s.underscore}_#{id}", :type => 'folder' }
     hash[:data] = { :title => "#{name}<span>#{total_elements_count}</span>", :attributes => { :class => 'big-icons', :style => category_picture }}
     unless children.empty?
-     hash[:children] = children.collect(&:to_jstree)
+     hash[:children] = children.all(:order => 'position ASC').collect(&:to_jstree)
     end
     hash
   end

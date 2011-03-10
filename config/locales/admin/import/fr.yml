@@ -1,18 +1,19 @@
 fr:
   import:
     one: import
+    other: imports
     model: modèle
     file: fichier
     button: importer
     send_file: envoyer le fichier
     create:
-      success: "{{nb}} {{model}} ont été créés"
+      success: "%{nb} %{model} ont été créés"
     update:
-      success: "{{nb}} {{model}} ont été mis à jours"
+      success: "%{nb} %{model} ont été mis à jours"
     failed:
       retry: veuillez réessayer, le fichier doit être corrompu
       give_file: "n'oubliez pas le fichier d'import"
-      errors: "{{nb}} erreurs durant le processus d'import"
+      errors: "%{nb} erreurs durant le processus d'import"
     ignore_first_row: Ignorer la première ligne (headings)
   import_set:
     one: "configuration d'import"

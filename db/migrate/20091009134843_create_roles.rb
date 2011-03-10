@@ -3,9 +3,9 @@ class CreateRoles < ActiveRecord::Migration
     create_table :roles do |t|
       t.string   :name
       t.boolean  :active,
-        :default => true
+        :default => true, :null => false
       t.timestamps
-    end  
+    end
   end
 
   def self.down

@@ -126,7 +126,7 @@ jQuery.fn.extend({
     var datatable = $(this).parents('.datatable').dataTableInstance();
     var datable_datas = $(this).parents('.datatable').data('selected_rows');
     var index = $(this).attr('id');
-    var index_in_table = $(datable_datas).index(index);
+    var index_in_table = jQuery.inArray(index, datable_datas);
     datable_datas.splice(index_in_table,1);
   },
   toggleselect: function(){
@@ -180,7 +180,7 @@ function DataTablesRowCallBack(nRow, aData, iDisplayIndex){
     $(nRow).draggable({
       revert: 'invalid',
       cursor: 'move',
-      handle: '.handler', 
+      handle: '.handler',
       cursorAt: {top: 15, left: 75},
       helper: function(e){
         var element = $($(e.currentTarget).find('td a')[0]);
@@ -199,17 +199,17 @@ function DataTablesRowCallBack(nRow, aData, iDisplayIndex){
   }
 
   if (table.hasClass('selectable_rows')){
-    if (typeof(table.data('selected_rows')) == 'undefined') { 
+    if (typeof(table.data('selected_rows')) == 'undefined') {
       table.data('selected_rows',[]);
     }
 
     var datable_datas = table.data('selected_rows');
     var index = $(nRow).attr('id');
-    if ($(datable_datas).index(index) != -1) {
+    if (jQuery.inArray(index, datable_datas) < 0) {
+      $(nRow).children('td:first').append('<input id="select_'+$(nRow).attr('id')+'" type="checkbox" name="none"/>');
+    } else {
       $(nRow).addClass('row_selected');
       $(nRow).children('td:first').append('<input id="select_'+$(nRow).attr('id')+'" type="checkbox" name="none" checked="checked"/>');
-    } else {
-      $(nRow).children('td:first').append('<input id="select_'+$(nRow).attr('id')+'" type="checkbox" name="none"/>');
     }
 
     $(nRow).click(function() {
@@ -230,20 +230,14 @@ function update_current_dataTable_source(selector,source){
 }
 
 function hide_paginate(dataTables){
-  var table = $('#'+dataTables.sInstance).parents('.dataTables_wrapper');
-  var paginate_childrens = dataTables.nPaginateList.children;
-   
-  if(paginate_childrens.length>1){
-    table.find('.dataTables_paginate.paging_full_numbers').show();
-  } 
-  else{
-    table.find('.dataTables_paginate.paging_full_numbers').hide();
-  }
+  var pagination = $(dataTables.nPaginateList).parents(':first');
+  var pages_number = dataTables.nPaginateList.children.length;
+  (pages_number>1) ? pagination.show() : pagination.hide();
 }
 
 function dataTableSelectRows(selector,callback){
   var current_table = $(selector).dataTableInstance();
-  
+
   source = current_table.fnSettings().sAjaxSource;
   var ids = []
   $($(selector).data('selected_rows')).each(function(){
@@ -262,5 +256,26 @@ function dataTableSelectRows(selector,callback){
     current_table.fnSettings().fnDrawCallback = DataTablesDrawCallBack;
     current_table.fnClearTable();
   }
-  current_table.fnDraw(); 
+  current_table.fnDraw();
+}
+
+function save_category_sort(type,id_pos){
+  if (typeof(type)=='undefined')
+    return true;
+  var current_table = $('#table').dataTableInstance();
+  var url = current_table.fnSettings().sAjaxSource;
+  var params = get_json_params_from_url(url);
+  var positions = [];
+  var nNodes = current_table.fnGetNodes();
+  for(i=0; i < nNodes.length; i++) {
+    var node = nNodes[i];
+    var pos = current_table.fnGetPosition(node);
+    positions.push(current_table.fnGetData(pos).slice(id_pos,id_pos+1));
+  };
+  $.ajax({
+    url: '/admin/categories/' + params.category_id,
+      data: { authenticity_token: AUTH_TOKEN, format: 'json', 'category[element_ids][]': positions},
+      dataType:'text',
+      type:'put'
+  });
 }

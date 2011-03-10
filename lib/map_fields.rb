@@ -136,7 +136,9 @@ module MapFields
     end
 
     def size
-      value = CsvParser.read(@file,@parser_options).size
+      @size = CsvParser.read(@file,@parser_options).size
+      @size -= 1 if @ignore_first_row
+      return @size
     end
   end
 

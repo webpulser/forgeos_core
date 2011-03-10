@@ -1,3 +1,4 @@
+= render :partial => 'admin/menus/lang_switcher'
 = render :partial => 'tabs'
 - form_tag({ :action => :create } , :multipart => true, :id => 'import_form') do
   .backgrounds.big-header
@@ -13,7 +14,7 @@
             .clear
         = label :import, :model, t('import.model')
         %div
-          = select :import, :model, options_for_select(@models.sort), { :prompt => true }, :onchange => "jQuery('#import_form').attr('action', 'import/create_'+this.value)"
+          = select :import, :model, options_for_select(@models.sort.map{|model| [t(model,:count => 2),model] }), { :prompt => true }, :onchange => "jQuery('#import_form').attr('action', 'import/create_'+this.value)"
         .clear
         = label_tag :file, t('import.file')
         %div

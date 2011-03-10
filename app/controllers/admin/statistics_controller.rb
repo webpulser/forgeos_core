@@ -100,4 +100,15 @@ private
 
     return chart.render
   end
+
+  def get_html(url, div_name, base, swf_file_name, width, height, protocol, obj_id)
+
+    <<-HTML
+    <div id="#{div_name}"></div>
+    <script type="text/javascript">
+      swfobject.embedSWF("#{base}#{swf_file_name}", "#{div_name}", "#{width}", "#{height}", "9.0.0", "expressInstall.swf",{"data-file":"#{url}"}, {"wmode":"transparent"});
+    </script>
+    HTML
+  end
+
 end

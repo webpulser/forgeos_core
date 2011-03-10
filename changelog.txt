@@ -2,6 +2,8 @@
   - fix ruby 1.9.1 compatibility
   - specify gems versions
   - move menus to forgeos_cms
+  - replace Desert by Engines
+  - add multilang support (globalize2)
 0.9.0-rc1 :
   - replace resful_authentication by authlogic
   - fix ruby 1.8.6 compatibility

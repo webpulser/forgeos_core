@@ -5,16 +5,16 @@ class Person < ActiveRecord::Base
     c.crypto_provider = Authlogic::CryptoProviders::BCrypt
   end
   acts_as_tagger
-  
+
   has_and_belongs_to_many_attachments
-  has_one :address
+  has_one :address, :dependent => :destroy
   accepts_nested_attributes_for :address
 
   has_one :avatar, :dependent => :destroy
   accepts_nested_attributes_for :avatar, :reject_if => proc { |attributes| attributes['uploaded_data'].blank? }
-  
+
   validates_presence_of :lastname, :if => :skip_presence_of_lastname?
-  validates_presence_of :firstname, :if => :skip_presence_of_firstname? 
+  validates_presence_of :firstname, :if => :skip_presence_of_firstname?
 
   # prevents a user from submitting a crafted form that bypasses activation
   # anything else you want your user to change should be added here.

@@ -2,3 +2,11 @@ main_setting:
   name: Forgeos
   lang: en
   time_zone: UTC
+  mailer: !ruby/object:OpenStruct
+    table:
+      :delivery_method: test
+  smtp_settings: !ruby/object:OpenStruct
+    table: nil
+  sendmail_settings: !ruby/object:OpenStruct
+    table: nil
+

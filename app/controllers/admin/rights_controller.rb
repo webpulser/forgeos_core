@@ -33,7 +33,6 @@ class Admin::RightsController < Admin::BaseController
         return false
       else
         render :action => 'new'
-        render
       end
     end
   end
@@ -98,6 +97,7 @@ private
     options[:order] = order unless order.squeeze.blank?
 
     if params[:sSearch] && !params[:sSearch].blank?
+      options[:star] = true
       @rights = Right.search(params[:sSearch],options)
     else
       @rights = Right.paginate(:all,options)

@@ -29,7 +29,7 @@ class Admin::RolesController < Admin::BaseController
   def create
     if @role.save
       flash[:notice] = I18n.t('role.create.success').capitalize
-      return redirect_to([:admin, @role])
+      redirect_to edit_admin_role_path(@role)
     else
       flash[:error] = I18n.t('role.create.failed').capitalize
       render :action => "new"
@@ -39,11 +39,10 @@ class Admin::RolesController < Admin::BaseController
   def update
     if @role.update_attributes(params[:role])
       flash[:notice] = I18n.t('role.update.success').capitalize
-      return redirect_to([:admin, @role])
     else
       flash[:error] = I18n.t('role.update.failed').capitalize
-      render :action => "edit"
     end
+    render :action => "edit"
   end
 
   def destroy
@@ -110,6 +109,7 @@ private
     options[:order] = order unless order.squeeze.blank?
 
     if params[:sSearch] && !params[:sSearch].blank?
+      options[:star] = true
       @roles = Role.search(params[:sSearch],options)
     else
       @roles = Role.paginate(:all,options)

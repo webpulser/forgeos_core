@@ -41,23 +41,20 @@
   .map_fields
     overflow-x: auto
 .big-header
-  .field_name
+  .field_name,.orange_input
     +element_form_name()
     &.firstname,&.lastname
       min-width: 8em
       max-width: 12.5em
       width: auto
-
 .field_error
   color: red
 
-.progressbar_container
-  border: 1px solid black
-  height: 50px
-  #progressbar
-    width: 0
-    height: 100%
-    background-color: green
-    color: white
-    text-align: center
-    line-height: 50px
+#progressbar
+  position: relative
+  span
+    position: absolute
+    right: 10px
+    top: 4px
+  &.running
+    background: url('/images/spinner.gif') no-repeat center center

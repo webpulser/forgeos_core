@@ -25,7 +25,7 @@ class Admin::AdministratorsController < Admin::BaseController
     @admin = Administrator.new(params[:administrator])
     if @admin.save
       flash[:notice] = t('admin.create.success').capitalize
-      redirect_to(admin_administrators_path)
+      redirect_to edit_admin_administrator_path(@admin)
     else
       flash[:error] = t('admin.create.failed').capitalize
       render :action => "new"
@@ -35,11 +35,10 @@ class Admin::AdministratorsController < Admin::BaseController
   def update
     if @admin.update_attributes(params[:administrator])
       flash[:notice] = t('admin.update.success').capitalize
-      redirect_to(admin_administrators_path)
     else
       flash[:error] = t('admin.update.failed').capitalize
-      render :action => "edit"
     end
+    render :action => "edit"
   end
 
   def destroy
@@ -87,6 +86,7 @@ private
     options[:order] = order unless order.squeeze.blank?
 
     if params[:sSearch] && !params[:sSearch].blank?
+      options[:star] = true
       @admins = Administrator.search(params[:sSearch],options)
     else
       @admins = Administrator.paginate(:all,options)

@@ -1,5 +1,5 @@
 fr:
-  forgeos: Forgeos Commerce
+  forgeos: Forgeos Core
   keyword:
     one: mot clé
     other: mots clés
@@ -40,7 +40,7 @@ fr:
       infos: Infos du compte
   or: ou
   and: et
-  ago: il y a {{time}}
+  ago: il y a %{time}
   conditions:
     is: est
     is_not: "n'est pas"
@@ -129,9 +129,9 @@ fr:
     export: exporter pour la newsletter
   visitor:
     online:
-      zero: '{{count}} visiteur en ligne'
-      one: '{{count}} visiteur en ligne'
-      other: '{{count}} visiteurs en ligne'
+      zero: '%{count} visiteur en ligne'
+      one: '%{count} visiteur en ligne'
+      other: '%{count} visiteurs en ligne'
     one: visiteur
     other: visiteurs
   users: clients
@@ -181,9 +181,9 @@ fr:
     search:
       failed: aucun client trouvé
     online:
-      zero: '{{count}} client connecté'
-      one: '{{count}} client connecté'
-      other: '{{count}} clients connectés'
+      zero: '%{count} client connecté'
+      one: '%{count} client connecté'
+      other: '%{count} clients connectés'
   folder:
     create: créer un dossier
     smart: créer un dossier dynamique
@@ -211,6 +211,8 @@ fr:
     sub:
       create:
         action: 'créer une catégorie sous-jacente'
+    save_sort:
+      action: "sauvegarder l'ordre pour le site"
   media:
     list: liste des médias
     one: média
@@ -223,7 +225,10 @@ fr:
     not_exist: "le média sélectionné n'existe pas"
     used: utilisé(e)
     linked: fichiers liés
-    upload: 
+    name: nom
+    description: description
+    alt: texte alternatif
+    upload:
       start: démarer le téléchargement
       clear_queue: nettoyer la liste
       action: charger des fichiers
@@ -291,6 +296,12 @@ fr:
       all: toutes les vidéos
       create:
         action: ajouter une vidéo
+    audio:
+      one: fichier audio
+      other: fichiers audio
+      all: toutes les fichiers audio
+      create:
+        action: ajouter un fichier audio
     picture:
       one: image
       other: images
@@ -324,3 +335,17 @@ fr:
   top_5_items: top 5 des produits recherchés
   tag_enter: Entrez un tag ...
   please_select: veuillez choisir
+
+  jquery:
+    dataTables:
+      oLanguage:
+        sProcessing: 'En cours...'
+        sLengthMenu: 'Afficher _MENU_ entrées'
+        sZeroRecords: 'Aucun résultat trouvé'
+        sInfo: 'Visualisation de _START_ à _END_ sur _TOTAL_ entrées'
+        sInfoEmpty: 'Visualistation de 0 à 0 sur 0 entrées'
+        sSearch: ' '
+        sNext: 'suivant'
+        sPrevious: 'précédent'
+        sFirst: 'premier'
+        sLast: 'dernier'

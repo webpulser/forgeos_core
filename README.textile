@@ -8,6 +8,7 @@ h1. Prerequisites
 
 h2. Plugins
 
+* engines
 * attachment_fu
 * localized_dates
 
@@ -34,7 +35,7 @@ h2. Gems
 h1. Initialize
 
  <pre><code>
-  ./script/generate migration install_forgeos_core_plugin
+  ./script/generate plugin_migration forgeos_core
   rake forgeos:core:install
  </code></pre>
 

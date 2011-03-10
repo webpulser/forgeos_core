@@ -1,15 +1,7 @@
 class Admin::BaseController < ApplicationController
   layout 'admin'
-  before_filter :login_required, :except => [:notifications, :url]
-
-  def notifications
-    @notifications = {}
-    [:error, :notice, :warning].each do |key|
-      @notifications[key] = flash.delete(key)
-    end
-    render :json => @notifications.to_json
-  end
-
+  before_filter :login_required, :edition_locale, :except => [:notifications, :url]
+  skip_before_filter :validate_authenticity_token
 private
   def login_required
     unless current_user.is_a?(Administrator)
@@ -27,6 +19,12 @@ private
         redirect_to(admin_login_path)
       end
       return false
+    end
+  end
+
+  def edition_locale
+    if session[:lang]
+      ActiveRecord::Base.locale = session[:lang]
     end
   end
 end

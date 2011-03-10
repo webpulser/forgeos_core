@@ -1,5 +1,5 @@
 en:
-  forgeos: Forgeos Commerce
+  forgeos: Forgeos Core
   keyword:
     one: keyword
     other: keywords
@@ -12,7 +12,7 @@ en:
       show: your account
     in:
       action: log in
-      success: you are successfully connected 
+      success: you are successfully connected
       failed: connection failed, check your email and password
     out:
       success: you have been successfully disconnected
@@ -40,7 +40,7 @@ en:
       infos: account infos
   or: or
   and: and
-  ago: ago {{time}}
+  ago: ago %{time}
   conditions:
     is: is
     is_not: is not
@@ -130,8 +130,8 @@ en:
     export: export for newsletter
   visitor:
     online:
-     one: '{{count}} visitor online'
-     other: '{{count}} visitors online'
+     one: '%{count} visitor online'
+     other: '%{count} visitors online'
     one: visitor
     other: visitors
   users: customers
@@ -181,8 +181,8 @@ en:
     search:
       failed: no customers found
     online:
-      one: '{{count}} user online'
-      other: '{{count}} users online' 
+      one: '%{count} user online'
+      other: '%{count} users online'
   folder:
     create: create a folder
     smart: create a smart folder
@@ -210,6 +210,8 @@ en:
     sub:
       create:
         action: 'create a subcategory'
+    save_sort:
+      action: 'save order for site display'
   media:
     list: list of media
     one: media
@@ -222,7 +224,10 @@ en:
     not_exist: the requested media does not exist
     used: used
     linked: linked files
-    upload: 
+    name: name
+    description: description
+    alt: alternatif text
+    upload:
       start: start upload
       clear_queue: clear queue
       action: upload files
@@ -290,6 +295,12 @@ en:
       all: all videos
       create:
         action: add a video
+    audio:
+      one: audio file
+      other: audio files
+      all: all audio files
+      create:
+        action: add an audio file
     picture:
       one: picture
       other: pictures
@@ -323,3 +334,17 @@ en:
   top_5_items: Top 5 search items
   tag_enter: enter tag ...
   please_select: 'please select'
+
+  jquery:
+    dataTables:
+      oLanguage:
+        sProcessing: 'Processing...'
+        sLengthMenu: 'Show _MENU_ entries'
+        sZeroRecords: 'No matching records found'
+        sInfo: 'Showing _START_ to _END_ of _TOTAL_ entries'
+        sInfoEmpty: 'Showing 0 to 0 of 0 entries'
+        sSearch: ' '
+        sNext: 'next'
+        sPrevious: 'previous'
+        sFirst: 'first'
+        sLast: 'last'

@@ -3,9 +3,7 @@
   .backgrounds.big-header
     = f.text_field :name, :id => 'media-title', :class => 'field_name'
     .interact-links
-      = fg_submit_tag (media.new_record? ? 'media.create.action' :'save_changes')
-      = I18n.t('or')
-      = link_to I18n.t('media.back').capitalize, admin_attachments_path(:file_type => find_media_type_from_content_type(media) ), :class => 'back-link'
+      = Forgeos_save_buttons admin_attachments_path(:file_type => find_media_type_from_content_type(media) )
 
   #content.grid_16.alpha.omega
     #media-modify.grid_12.alpha
@@ -58,7 +56,18 @@
             %span.large-info-value
               = "#{media.size/1024} #{I18n.t('media.byte.kilo')}"
             .clear
-          = f.file_field :uploaded_data
+          .large-info-block
+            = f.label :uploaded_data, nil, :class => 'large-info-name'
+            = f.file_field :uploaded_data, :size => 10
+            %br
+          - if f.object.is_a?(Picture)
+            .large-info-block
+              = f.label :alt, t('media.alt').capitalize, :class => 'large-info-name'
+              = f.text_field :alt, :size => 24
+              %br
+          .large-info-block
+            = f.label :description, t('media.description').capitalize, :class => 'large-info-name'
+            = f.text_area :description, :rows => 5, :cols => 34
         .clear
 
         - thumbnails.each do |thumb|
@@ -74,7 +83,7 @@
     #right-sidebar.grid_4.omega
       .step
         = link_to I18n.t('media.destroy.action').capitalize, [:admin, media], :confirm => I18n.t('media.destroy.confirm').capitalize, :method => :delete, :class => 'small-icons delete'
-        .clear    
+        .clear
       #attachment_associated_collection.step.open
         %a.small-icons.step-title{ :href => "#" }
           Associated to collection

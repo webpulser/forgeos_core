@@ -1,6 +1,13 @@
 class Admin::AttachmentsController < Admin::BaseController
   before_filter :get_media, :only => [:show, :download, :edit, :update, :destroy]
   before_filter :get_categories, :only => [:index]
+  before_filter :get_thumbnails, :only => [:show, :edit, :update]
+  skip_before_filter :verify_authenticity_token, :only => [:create]
+
+  def manage
+    @attachments = "#{params[:file_type]}".classify.constantize.paginate :page => params[:page], :order => 'created_at DESC', :per_page => 10, :conditions => { :parent_id => nil}
+    render :partial => 'tiny_mce_list'
+  end
 
   def index
     respond_to do |format|
@@ -14,7 +21,6 @@ class Admin::AttachmentsController < Admin::BaseController
 
   # GET /medias/1
   def show
-    @thumbnails = @media.thumbnails.all :order => '(width*height) DESC'
   end
 
   # GET /medias/1
@@ -24,14 +30,13 @@ class Admin::AttachmentsController < Admin::BaseController
 
   # GET /medias/1/edit
   def edit
-    @thumbnails = @media.thumbnails.all :order => '(width*height) DESC'
   end
-  
+
   def update
     file_type = nil
-    %w(media picture pdf video doc).each do |key|
+    %w(media picture pdf audio video doc).each do |key|
       if params[key]
-        params[:attachment] = params[key] 
+        params[:attachment] = params[key]
         file_type = key
       end
     end
@@ -40,12 +45,11 @@ class Admin::AttachmentsController < Admin::BaseController
     if !(rack_file.respond_to?(:file_type) && !@media.class.attachment_options[:content_type].include?(rack_file.file_type)) &&
       @media.update_attributes(params[:attachment])
       flash[:notice] = I18n.t('media.update.success').capitalize
-      return redirect_to(admin_attachments_path(:file_type => file_type ))
     else
       flash[:error] = I18n.t('product.update.failed').capitalize
       edit
-      render :action => 'edit'
     end
+    render :action => 'edit'
   end
 
   # POST /medias
@@ -54,15 +58,16 @@ class Admin::AttachmentsController < Admin::BaseController
       format.json do
         if params[:Filedata]
           require 'mime/types'
-          @content_type = MIME::Types.type_for(params[:Filename]).first.to_s
+          filename = params[:Filename] || params[:Filedata].original_path
+          @content_type = MIME::Types.type_for(filename).first.to_s
           media_class = Media
-          [Video,Pdf,Doc,Picture].each do |klass|
+          [Audio,Video,Pdf,Doc,Picture].each do |klass|
             media_class = klass if klass.attachment_options[:content_type].include?(@content_type)
           end
-          
+
           @media = media_class.new(params[:attachment])
-          @media.uploaded_data = { 'tempfile' => params[:Filedata], 'content_type' => @content_type, 'filename' => Forgeos::url_generator(params[:Filename])}
-          
+          @media.uploaded_data = { 'tempfile' => params[:Filedata], 'content_type' => @content_type, 'filename' => Forgeos::url_generator(filename)}
+
           if @media.save
             flash[:notice] = I18n.t('media.create.success').capitalize
 
@@ -88,6 +93,27 @@ class Admin::AttachmentsController < Admin::BaseController
           render :json => { :result => 'error', :error => 'bad parameters' }
         end
       end
+      format.js do
+        if params[:Filedata]
+          require 'mime/types'
+          filename = params[:Filedata].original_path
+          @content_type = MIME::Types.type_for(filename).first.to_s
+          media_class = Media
+          [Video,Pdf,Doc,Picture].each do |klass|
+            media_class = klass if klass.attachment_options[:content_type].include?(@content_type)
+          end
+
+          @media = media_class.new(params[:attachment])
+          @media.uploaded_data = { 'tempfile' => params[:Filedata], 'content_type' => @content_type, 'filename' => Forgeos::url_generator(filename)}
+
+          @media.save
+        end
+          responds_to_parent do
+            render(:update) do |page|
+              page << "upload_callback();"
+            end
+          end
+      end
     end
   end
 
@@ -107,9 +133,13 @@ class Admin::AttachmentsController < Admin::BaseController
   def get_media
     @media = Attachment.find_by_id params[:id]
     unless @media
-      flash[:error] = I18n.t('media.not_exist').capitalize 
+      flash[:error] = I18n.t('media.not_exist').capitalize
       return redirect_to(admin_library_path)
     end
+  end
+
+  def get_thumbnails
+    @thumbnails = @media ? @media.thumbnails.all(:order => '(width*height) DESC') : []
   end
 
   def get_categories
@@ -132,7 +162,7 @@ class Admin::AttachmentsController < Admin::BaseController
     conditions = { :parent_id => nil }
     includes = []
     options = { :page => page, :per_page => per_page }
-    
+
     # file type
     unless @file_type.nil?
       conditions[:type] = @file_type
@@ -155,6 +185,7 @@ class Admin::AttachmentsController < Admin::BaseController
     options[:order] = order unless order.squeeze.blank?
 
     if params[:sSearch] && !params[:sSearch].blank?
+      options[:star] = true
       @medias = type.search(params[:sSearch],options)
     else
       @medias = type.paginate(:all,options)

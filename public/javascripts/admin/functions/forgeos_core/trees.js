@@ -44,7 +44,6 @@ function init_category_tree(selector, type, source) {
       }
     },
     plugins: {
-      'cookie': {},
       'contextmenu': {
         items : {
           create : {
@@ -178,19 +177,24 @@ function init_category_tree(selector, type, source) {
       onmove: function(NODE,LANG,TREE_OBJ,RB){
         var cat_id = get_rails_element_id(NODE);
         var parent_id = '';
+        var parent_ul = $(NODE).parents('ul:first');
+        var position = $(parent_ul).children('li').index($(NODE));
+        var tree_id = $(RB.container).attr('id');
+        
+        position = position+1;
         if ($(NODE).parent().parent('li').length > 0){
           parent_id = get_rails_element_id($(NODE).parent().parent('li'));
         }
         $.ajax({
-            url: '/admin/categories/' + cat_id,
-              // update elements count
-              complete: function(request) {
-                $.tree.focused().refresh();
-              },
-              data: {authenticity_token:AUTH_TOKEN, format: 'json', 'category[parent_id]': parent_id},
-              dataType:'text',
-              type:'put'
-              });
+          url: '/admin/categories/' + cat_id,
+            // update elements count
+            complete: function(request) {
+              //$.tree.focused().refresh();
+            },
+            data: {authenticity_token:AUTH_TOKEN, format: 'json', 'categories_hash': get_current_categories( tree_id ) },
+            dataType:'text',
+            type:'put'
+        });
       },
       ondelete: function(NODE,TREE_OBJ){
         var cat_id = get_rails_element_id(NODE);
@@ -206,15 +210,15 @@ function init_category_tree(selector, type, source) {
       },
       oncopy: function(NODE,REF_NODE,TYPE,TREE_OBJ,RB) { duplicate_category(NODE, type); },
       onselect: function(NODE,TREE_OBJ) {
+        $(".parent_id_hidden").remove();
         var cat_id = get_rails_element_id(NODE);
         var current_table = $('#table').dataTableInstance();
         var url = current_table.fnSettings().sAjaxSource;
         var url_base = url.split('?')[0];
-        var params;
 
-
+        $('#category_sort').show();
         // update category id
-        params = get_json_params_from_url(url);
+        var params = get_json_params_from_url(url);
         params.category_id = cat_id;
         params = stringify_params_from_json(params);
 
@@ -223,15 +227,14 @@ function init_category_tree(selector, type, source) {
 
         object_name = $(NODE).attr('id').split('_')[0];
         category_id = get_rails_element_id(NODE);
-        if ($("#parent_id_tmp").length == 0) {
-          $(NODE).append('<input type="hidden" id="parent_id_tmp" name="parent_id_tmp" value="'+category_id+'" />');
-        } else {
-          $("#parent_id_tmp").val(category_id);
+        var nb_of_parent_id_hidden = $(NODE).find(".parent_id_hidden").length
+        if( nb_of_parent_id_hidden == 0){
+          $(NODE).append('<input type="hidden" id="parent_id_tmp" name="parent_id_tmp" class="parent_id_hidden" "value="'+category_id+'" />');
         }
         return true;
       },
       ondeselect: function(NODE,TREE_OBJ) {
-        $("#parent_id_tmp").remove();
+        $('#category_sort').hide();
         return true;
       },
       // remove count span
@@ -343,6 +346,34 @@ function addPageClasses(block_id){
         $(this).addClass('active');
       }
     });
+  });
+}
+
+//Return current tree to json
+function get_current_categories( tree_id ){
+  return JSON.stringify(jQuery.tree.reference("#"+tree_id ).get());
+}
+
+function createNewLevel(parent,item, TREE_OBJ, level) {
+  $(item).each(function(){
+    var cat_id = get_rails_element_id($(this));
+    var parent_ul = $(TREE_OBJ).children();
+    var position = $(parent_ul).children('li').index($(this));
+    position = position+1;
+    
+    if($(this).attr('tagName') == 'UL'){
+      //parent["categorie_"+cat_id] = {};
+      //createNewLevel(parent["categorie_"+cat_id],$(this).children().children(), TREE_OBJ); 
+    }
+    else{
+      if($(this).children().length > 1){
+        parent["category_"+cat_id] = {};
+        createNewLevel(parent["category_"+cat_id],$(this).children().children(), TREE_OBJ); 
+      }
+      else{
+        parent["category_"+cat_id] = cat_id;
+      }
+    }
   });
 }
 

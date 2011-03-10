@@ -6,7 +6,7 @@ class Admin::ImportController < Admin::BaseController
   before_filter :models, :only => :index
 
   def index; end
-  
+
   def create_user
     create_model(User,'email')
   end
@@ -25,7 +25,8 @@ class Admin::ImportController < Admin::BaseController
     @models = ['user']
   end
 
-  def create_model(klass, uniq_field, &block)
+  def create_model(klass, uniq_field = nil, &block)
+    File.open(UPLOAD_PROGRESS_FILE, 'w') {|f| f.write(0) }
     if fields_mapped?
       total = mapped_fields.size
       created = 0
@@ -35,7 +36,7 @@ class Admin::ImportController < Admin::BaseController
       mapped_fields.each do |row|
         logger.debug("\033[01;33m Number : #{row.number} / #{total}\033[0m")
 
-        attributes = {} 
+        attributes = ActiveSupport::OrderedHash.new
         methods.each_with_index do |attribute,i|
           exist = params[:fields].values.include?((i+1).to_s)
           attributes[attribute.to_sym] = row[i] if exist
@@ -46,7 +47,7 @@ class Admin::ImportController < Admin::BaseController
         end
 
         uniq_field_index = methods.index(uniq_field)
-        
+
         if uniq_field != nil && row[uniq_field_index] != nil && object = klass.send("find_by_#{uniq_field}",row[uniq_field_index])
           if object.update_attributes(attributes)
             updated+=1
@@ -63,27 +64,25 @@ class Admin::ImportController < Admin::BaseController
             logger.debug("\033[01;33m#{object.errors.inspect}\033[0m")
           end
         end
-        File.open(UPLOAD_PROGRESS_FILE, 'w') {|f| f.write((row.number.to_f / total.to_f) * 100.0) } if (row.number%100).zero?
+        File.open(UPLOAD_PROGRESS_FILE, 'w') {|f| f.write((row.number.to_f / total.to_f) * 100.0) } if row.number.modulo(10).zero?
       end
 
       flash[:notice] = t('import.create.success', :model => t(klass.to_s.underscore, :count => created), :nb => "#{created}/#{total}") if created != 0
       flash[:warning] = t('import.update.success', :model => t(klass.to_s.underscore, :count => updated), :nb => "#{updated}/#{total}") if updated != 0
       errors_count = errors.flatten.size
       flash[:error] = t('import.failed.errors', :model => t(klass.to_s.underscore, :count => errors_count), :nb =>"#{ errors_count}/#{total}") unless errors.empty?
+      File.open(UPLOAD_PROGRESS_FILE, 'w') {|f| f.write(100.0) }
       render(:nothing => true)
     else
       render(:action => 'create')
     end
-    rescue MapFields::InconsistentStateError
-      flash[:error] = t('import.retry')
-      redirect_to(:action => :index)
-    rescue MapFields::MissingFileContentsError
-      flash[:error] = t('import.give_file')
-      redirect_to(:action => :index)
+    rescue StandardError => error
+      File.open(UPLOAD_PROGRESS_FILE, 'w') {|f| f.write(100.0) }
+      render(:text => error.inspect, :status => 500)
   end
-  
+
   private
-  
+
   def save_import_set
     @set = ImportSet.find_by_id(params[:set_id])
     if params[:save_set]

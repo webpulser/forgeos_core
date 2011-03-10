@@ -6,3 +6,15 @@ function update_block_container_positions(container){
     item_position.val(index);
   });
 }
+
+function remove_rails_nested_object(selector){
+  var line = $(selector);
+  var del = line.find('input.destroy');
+  if (del.length > 0) {
+    del.val(1);
+    tmce_unload_children(selector);
+    line.hide('explode',{}, 3000);
+  } else {
+    line.hide('explode',{}, 3000,function(){ $(this).remove(); });
+  }
+}

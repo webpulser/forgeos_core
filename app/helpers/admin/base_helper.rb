@@ -1,15 +1,14 @@
 module Admin::BaseHelper
+  include AttachmentHelper
+  
   def dataTables_tag(options = {})
     id = options[:id].nil? ? 'table' : options[:id]
     columns = options[:columns]
     options[:sort_col].nil? ? sort_col = 1 : sort_col = options[:sort_col]
     options[:sort_order].nil? ? sort_order = 'asc' : sort_order = options[:sort_order]
-
-    if options[:save_state].nil?
-      save_state = false
-    else
-      save_state = options[:save_state]
-    end
+    
+    save_state = options[:save_state] || false
+    per_page = options[:per_page] || 50
 
     # data source
     data_source = ''
@@ -28,10 +27,10 @@ module Admin::BaseHelper
     jQuery(document).ready(function(){
       var table = $('##{id}').dataTable({
         'sPaginationType': 'full_numbers',
-        'sDom': \"<'top'if>t<'bottom'ip<'clear'>\",
+        'sDom': \"<'top'f>tpl<'clear'>i\",
         'aoColumns': [ #{columns.join(',')} ],
         'sProcessing': true,
-        'iDisplayLength': 30,
+        'iDisplayLength': #{per_page},
         'bLengthChange': true,
         'aaSorting': [[#{sort_col},'#{sort_order}']],
         'bStateSave': #{save_state},
@@ -40,10 +39,16 @@ module Admin::BaseHelper
         'oLanguage': {
           'sProcessing' : '#{t('jquery.dataTables.oLanguage.sProcessing')}',
           'sLengthMenu':'#{t('jquery.dataTables.oLanguage.sLengthMenu')}',
-          'sZeroRecords':'#{t('jquery.dataTables.oLanguage.sZeroRecords')}',
-          'sInfo':'#{t('jquery.dataTables.oLanguage.sInfo')}',
-          'sInfoEmpty':'#{t('jquery.dataTables.oLanguage.sInfoEmpty')}',
-          'sSearch':''
+          'sZeroRecords': '#{t('jquery.dataTables.oLanguage.sZeroRecords')}',
+          'sInfo': '#{t('jquery.dataTables.oLanguage.sInfo')}',
+          'sInfoEmpty': '#{t('jquery.dataTables.oLanguage.sInfoEmpty')}',
+          'sSearch': '#{t('jquery.dataTables.oLanguage.sSearch')}',
+          'oPaginate': {
+            'sFirst': '#{t('jquery.dataTables.oLanguage.sFirst')}',
+            'sPrevious': '#{t('jquery.dataTables.oLanguage.sPrevious')}',
+            'sNext': '#{t('jquery.dataTables.oLanguage.sNext')}',
+            'sLast': '#{t('jquery.dataTables.oLanguage.sLast')}'
+          }
         }
       });
       if(typeof oTables == 'undefined')
@@ -86,7 +91,13 @@ module Admin::BaseHelper
           'sZeroRecords':'#{t('jquery.dataTables.oLanguage.sZeroRecords')}',
           'sInfo':'#{t('jquery.dataTables.oLanguage.sInfo')}',
           'sInfoEmpty':'#{t('jquery.dataTables.oLanguage.sInfoEmpty')}',
-          'sSearch':''
+          'sSearch': '#{t('jquery.dataTables.oLanguage.sSearch')}',
+          'oPaginate': {
+            'sFirst': '#{t('jquery.dataTables.oLanguage.sFirst')}',
+            'sPrevious': '#{t('jquery.dataTables.oLanguage.sPrevious')}',
+            'sNext': '#{t('jquery.dataTables.oLanguage.sNext')}',
+            'sLast': '#{t('jquery.dataTables.oLanguage.sLast')}'
+          }
         }
       });
       if(typeof oTables == 'undefined')
@@ -113,6 +124,7 @@ module Admin::BaseHelper
         block.class.human_name
       end +
       content_tag(:span, capture(&proc), :class => 'block-name') +
+      link_to('', [:edit, :admin, block], :class => 'small-icons edit-link', :popup => true) +
       link_to('', '#', :class => 'big-icons gray-destroy') +
       hidden_field_tag("#{model_name}[#{block_name}_ids][]", block.id, :class => 'block-selected')
     end

@@ -3,6 +3,8 @@
 # contributor: Sebastien Grosjean - ZenCocoon.com
 fr:
   date:
+    one: date
+    other: dates
     formats:
       default: "%d/%m/%Y"
       short: "%e %b"

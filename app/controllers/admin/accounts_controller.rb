@@ -28,12 +28,11 @@ class Admin::AccountsController < Admin::BaseController
     respond_to do |format|
       if @user.update_attributes(params[:account])
         flash[:notice] = t('my_account.update.success').capitalize
-        format.html { redirect_to(admin_account_path) }
         format.xml  { head :ok }
       else
-        format.html { render :action => 'edit' }
         format.xml  { render :xml => @user.errors, :status => :unprocessable_entity }
       end
+        format.html { render :action => 'edit' }
     end
   end
 

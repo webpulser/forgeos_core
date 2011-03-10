@@ -1,16 +1,18 @@
-//--------------------- ----------       
+//--------------------- ----------
 // GENERALS
 //--------------------- ----------
 .odd
   :background-color = !oddBg
-table 
+table
   .image
     text-align: right
     width: 70px
     padding: 0
 #table_wrapper
-  .dataTables_filter, .dataTables_length, .dataTables_info
+  .dataTables_filter
     display: none
+  .dataTables_paginate, .dataTables_length
+    float: left
 .datatable
   border-collapse: collapse
   width: 100% !important
@@ -88,7 +90,7 @@ table
     height: 16px
     margin-top: 10px
     margin-left: 22px
-//--------------------- ----------       
+//--------------------- ----------
 // PAGINATE BUTTONS
 //--------------------- ----------
 .paginate_active
@@ -110,7 +112,7 @@ table
     :background = !lightBlueBg url(/images/admin/small-icons-16-16-verti.png) no-repeat
     color = !blueLink
   &.first, &.last
-    display: none
+    display: inline
   &.previous
     background-position: left -191px
     padding-left: 18px
@@ -120,9 +122,7 @@ table
 .paginate_active
   :background-color = !blueLink
   :color = !white
-.dataTables_paginate.paging_full_numbers
-  display: none
-//--------------------- ----------       
+//--------------------- ----------
 // BUTTONS
 //--------------------- ----------
 tr
@@ -152,7 +152,7 @@ tr
       background: url(/images/admin/small-icons/dark-blue-minus.png) no-repeat -1px
     p
       display: block !important
-//--------------------- ----------             
+//--------------------- ----------
 // SOME VARIANTS
 //--------------------- ----------
 .one-product
@@ -163,7 +163,7 @@ tr
 .image img
   width: 55px
   height: 55px
-//--------------------- ----------       
+//--------------------- ----------
 // DATASLIDES
 //--------------------- ----------
 .dataSlides_info
@@ -172,10 +172,10 @@ tr
 .dataSlides_paginate.paging_full_numbers
   margin: 20px
   clear: both
-.thumbnails 
+.thumbnails
   .datatable
     width: 100% !important
-    .thead 
+    .thead
       .tr
         display: none
     .tr
@@ -200,7 +200,7 @@ tr
         border = 2px solid !blueLink
       span
         font-weight: bold
-//--------------------- ----------       
+//--------------------- ----------
 // SELECTABLE ROWS
 //--------------------- ----------
 #select_row_
@@ -210,7 +210,7 @@ tr
 .selectable_rows
   tr
     cursor: pointer
-//--------------------- ----------       
+//--------------------- ----------
 // DRAGGABLE ROWS
 //--------------------- ----------
 .datatable.draggable_rows
@@ -221,7 +221,7 @@ tr
       td:first-child
         background:
           color = !selectedRow - #3D0F38 !important
-    //--------------------- ----------       
+    //--------------------- ----------
     // HANDLER
     //--------------------- ----------
     .handler_container
@@ -257,3 +257,5 @@ tr
   background-repeat: no-repeat
   border: 0
   color: white !important
+#category_sort
+  display: none

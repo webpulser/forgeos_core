@@ -123,7 +123,7 @@ li
   a
     :color = !blueLink
     text-decoration: underline
-.add-choice
+.add-link
   background-position: 0 -1434px
   text-decoration: underline
   :color = !blueLink
@@ -133,6 +133,9 @@ li
   display: block
   margin-bottom: 10px
   outline: 0
+  &.gray
+    background-position: 0 -1816px
+    :color = !gray
 //--------------------- ----------       
 // HANDLERS
 //--------------------- ----------
@@ -157,10 +160,8 @@ li
 .padding-wrap
   padding: 10px
 .permalink
-  margin-top: 3em
   :border 1px solid #f9f9f9
   :color = !lightGray
-  :font-size 0.6em
   :padding 5px 10px
   :font-weight normal
   :display inline-block
@@ -168,6 +169,10 @@ li
   a
     :color = !blueLink
     text-decoration: underline
+  font-size: 1em
+  input
+    float: none
+
 h2.description
   font-size: 1em
   :color = !lightGray
@@ -176,7 +181,8 @@ h2.description
 
 .fieldset
   zoom: 1
-  border: 3px solid #f3f3f3
+  border: 3px solid !lightLightGray
+  +borderCorner(8px,8px,8px,8px)
   position: relative
   margin: 20px 0
   clear: both
@@ -206,11 +212,27 @@ h2.description
   input
     :border = 1px solid !darkGray
     +borderCorner(3px,3px,3px,3px)
-    :background
-      :position 0 -600px
-      :image url(/images/admin/backgrounds-verti.png)
-      :repeat repeat-x
+    background:
+      position: 0 -600px
+      image: url(/images/admin/backgrounds-verti.png)
+      repeat: repeat-x
     padding: 2px 0
+  .line
+    label
+      color: !lightGray
+      display: inline
+      font-weight: bold
+      margin: 4px
+    border-bottom: 1px solid !lightLightGray
+    padding: 5px 0px
+    .destroy-link, .edit-link, .duplicate-link
+      display: none
+    &:hover
+      .destroy-link, .edit-link, .duplicate-link
+        display: inline
+
+input.center
+  text-align: center
 
 .block-container
   height: 24px
@@ -219,6 +241,12 @@ h2.description
   margin: 5px 0px
   +borderCorner()
   background: white
+  .edit-link
+    position: absolute
+    top: 5px
+    right: 10px
+    width: 18px
+    height: 18px
   .block-type
     display: inline-block
     background: #E0E0E0
@@ -440,3 +468,21 @@ a.truncate
 #footer
   clear: both
   :background-color = !white
+#lang-switcher
+  :background-color= !black
+  float: right
+  .dropdown
+    a.dropdown_toggle span
+      background-image: url(/images/admin/select/lang.png) 
+      :color= !white
+      font-weight: bold
+    &.fr
+      a.dropdown_toggle span
+        padding-left: 22px
+        
+//--------------------- ---------
+// BIG ORANGE INPUT
+//--------------------- ---------
+
+.big_orange_input
+  +element_form_name()

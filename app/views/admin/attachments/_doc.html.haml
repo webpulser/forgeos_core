@@ -25,4 +25,11 @@
     %span.large-info-value
       = "#{object.size/1024} #{I18n.t('media.byte.kilo')}"
     .clear
+  .large-info-block
+    %span.large-info-name
+      = I18n.t('media.description').capitalize
+    %span.large-info-value
+      = object.description
+    .clear
+
 .clear

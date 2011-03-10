@@ -7,9 +7,18 @@ class Admin::SettingsController < Admin::BaseController
   def edit
     @setting.build_address unless @setting.address
   end
-  
+
   def update
-    if @setting.update_attributes(params[:setting])
+    settings = params[:setting]
+    if settings
+      smtp_settings = settings[:smtp_settings]
+      if smtp_settings and settings[:smtp_settings][:authentication] == 'none'
+        [:authentication, :password, :user_name].each do |key|
+          smtp_settings[key] = nil
+        end
+      end
+    end
+    if @setting.update_attributes(settings)
       flash[:notice] = t('setting.update.success')
     else
       flash[:error] = t('setting.update.failed')
@@ -17,7 +26,7 @@ class Admin::SettingsController < Admin::BaseController
     render :action => :edit
   end
 private
-  
+
   def get_setting
     @setting = Setting.first
   end

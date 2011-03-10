@@ -10,4 +10,4 @@ class Administrator < Person
   def access_path?(controller,action)
     rights.find_by_controller_name_and_action_name(controller,action)
   end
-end 
+end

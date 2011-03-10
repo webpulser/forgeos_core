@@ -1,18 +1,20 @@
 en:
   import:
+    one: import
+    other: imports
     other: import
     model: model
     file: file
     button: import
     send_file: send the file
     create:
-      success: "{{nb}} {{model}} successfully created"
+      success: "%{nb} %{model} successfully created"
     update:
-      success: "{{nb}} {{model}} successfully updated"
+      success: "%{nb} %{model} successfully updated"
     failed:
       retry: try again, the file maybe corrupted
       give_file: please upload the file
-      errors: "{{nb}} errors during import process"
+      errors: "%{nb} errors during import process"
     ignore_first_row: Ignore the first row (headings)
   import_set:
     one: import set
