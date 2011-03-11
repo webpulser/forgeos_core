@@ -1,3 +1,4 @@
+require 'digest/sha2'
 module Technoweenie # :nodoc:
   module AttachmentFu # :nodoc:
     module Backends
@@ -118,13 +119,13 @@ module Technoweenie # :nodoc:
 
         # The attachment ID used in the full path of a file
         def attachment_path_id
-          ((respond_to?(:parent_id) && parent_id) || id).to_s
+          ((respond_to?(:parent_id) && parent_id) || id)
         end
 
         # The pseudo hierarchy containing the file relative to the bucket name
         # Example: <tt>:table_name/:id</tt>
         def base_path
-          File.join(path_prefix, attachment_path_id)
+          File.join(path_prefix)
         end
 
         def base_url
@@ -138,7 +139,7 @@ module Technoweenie # :nodoc:
         # The full path to the file relative to the bucket name
         # Example: <tt>:table_name/:id/:filename</tt>
         def full_filename(thumbnail = nil)
-          File.join(base_path, thumbnail_name_for(thumbnail))
+          File.join(base_path, *partitioned_path(thumbnail_name_for(thumbnail)))
         end
 
         def ftp_url(thumbnail = nil)
@@ -154,6 +155,38 @@ module Technoweenie # :nodoc:
           raise 'current_data not implemented' # not sure what this is for
         end
 
+        # Partitions the given path into an array of path components.
+        #
+        # For example, given an <tt>*args</tt> of ["foo", "bar"], it will return
+        # <tt>["0000", "0001", "foo", "bar"]</tt> (assuming that that id returns 1).
+        #
+        # If the id is not an integer, then path partitioning will be performed by
+        # hashing the string value of the id with SHA-512, and splitting the result
+        # into 4 components. If the id a 128-bit UUID (as set by :uuid_primary_key => true)
+        # then it will be split into 2 components.
+        # 
+        # To turn this off entirely, set :partition => false.
+        def partitioned_path(*args)
+          if respond_to?(:attachment_options) && attachment_options[:partition] == false 
+            args
+          elsif attachment_options[:uuid_primary_key]
+            # Primary key is a 128-bit UUID in hex format. Split it into 2 components.
+            path_id = attachment_path_id.to_s
+            component1 = path_id[0..15] || "-"
+            component2 = path_id[16..-1] || "-"
+            [component1, component2] + args
+          else
+            path_id = attachment_path_id
+            if path_id.is_a?(Integer)
+              # Primary key is an integer. Split it after padding it with 0.
+              ("%08d" % path_id).scan(/..../) + args
+            else
+              # Primary key is a String. Hash it, then split it into 4 components.
+              hash = Digest::SHA512.hexdigest(path_id.to_s)
+              [hash[0..31], hash[32..63], hash[64..95], hash[96..127]] + args
+            end
+          end
+        end
         protected
           # Called in the after_destroy callback
           def destroy_file
