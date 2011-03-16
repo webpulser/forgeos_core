@@ -132,7 +132,7 @@ function init_category_tree(selector, type, source) {
             drop:function(ev, ui){
               $.ajax({
               data: {element_id:get_rails_element_id($(ui.draggable)), authenticity_token: encodeURIComponent(AUTH_TOKEN)},
-              success:function(request){$.tree.focused().refresh();},
+              success:function(request){$(ev.target).find('span').html(request);},
               type:'post',
               url:'/admin/categories/' + category_id + '/add_element'
               });

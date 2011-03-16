@@ -88,7 +88,8 @@ class Admin::CategoriesController < Admin::BaseController
   end
 
   def add_element
-    render :text => @category.update_attribute(:element_ids, @category.element_ids << params[:element_id].to_i)
+    @category.update_attribute(:element_ids, @category.element_ids << params[:element_id].to_i)
+    render :text => @category.elements.count
   end
 
 private
