@@ -4,7 +4,7 @@ config.gem 'bcrypt-ruby', :lib => 'bcrypt', :version => '>=2.1.2'
 config.gem 'authlogic', :version => '>=2.1.3'
 config.gem 'fastercsv', :version => '>=1.5.1' if RUBY_VERSION.to_f < 1.9
 config.gem 'haml', :version => '>=2.2.15'
-config.gem 'will_paginate', :version => '>2.3.11'
+config.gem 'will_paginate', :version => '<=2.3.15'
 config.gem 'mime-types', :lib => 'mime/types', :version => '>=1.16'
 config.gem 'acts_as_list', :version => '>=0.1.2'
 config.gem 'acts_as_tree', :version => '>=0.1.1'
