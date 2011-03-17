@@ -15,7 +15,7 @@ class ActiveRecord::Base
         conditions << sanitize_sql_by_way_of_duck_typing( val )
         next
       elsif val.is_a?(Hash) # don't mess with ActiveRecord hash nested hash functionality
-        if assoc = self.reflections.map(&:last).find { |ref| ref.table_name == key.to_s }
+        if assoc = self.reflections.map(&:last).find { |ref| !(ref.options[:polymorphic]) && (ref.table_name == key.to_s) }
           conditions << assoc.class_name.constantize.get_nested_conditions(val)
         else
           conditions << sanitize_sql_hash_for_conditions({key => val}, table_name)
