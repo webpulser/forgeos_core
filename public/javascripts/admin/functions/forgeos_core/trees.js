@@ -180,7 +180,7 @@ function init_category_tree(selector, type, source) {
         var parent_ul = $(NODE).parents('ul:first');
         var position = $(parent_ul).children('li').index($(NODE));
         var tree_id = $(RB.container).attr('id');
-        
+
         position = position+1;
         if ($(NODE).parent().parent('li').length > 0){
           parent_id = get_rails_element_id($(NODE).parent().parent('li'));
@@ -360,15 +360,15 @@ function createNewLevel(parent,item, TREE_OBJ, level) {
     var parent_ul = $(TREE_OBJ).children();
     var position = $(parent_ul).children('li').index($(this));
     position = position+1;
-    
+
     if($(this).attr('tagName') == 'UL'){
       //parent["categorie_"+cat_id] = {};
-      //createNewLevel(parent["categorie_"+cat_id],$(this).children().children(), TREE_OBJ); 
+      //createNewLevel(parent["categorie_"+cat_id],$(this).children().children(), TREE_OBJ);
     }
     else{
       if($(this).children().length > 1){
         parent["category_"+cat_id] = {};
-        createNewLevel(parent["category_"+cat_id],$(this).children().children(), TREE_OBJ); 
+        createNewLevel(parent["category_"+cat_id],$(this).children().children(), TREE_OBJ);
       }
       else{
         parent["category_"+cat_id] = cat_id;
@@ -382,4 +382,36 @@ function createNewLevel(parent,item, TREE_OBJ, level) {
  *param : message
  **/
 function error_on_jsTree_action(message){
+}
+
+// initialize tree for category associations
+function init_association_category_tree(selector, object_name, category_name, theme){
+  $(selector).tree({
+    ui: {
+      theme_path: '/stylesheets/jstree/themes/',
+      theme_name : theme,
+      selected_parent_close: false
+    },
+    rules: { multiple:'on' },
+    callback: {
+      onload: function(TREE_OBJ){
+        tree_id = $(TREE_OBJ.container).attr('id');
+        $(TREE_OBJ.container).removeClass('tree-default');
+      },
+      onrgtclk: function(NODE,TREE_OBJ,EV){
+        EV.preventDefault(); EV.stopPropagation(); return false
+      },
+      onselect: function(NODE,TREE_OBJ){
+        category_id = get_rails_element_id(NODE);
+        $(NODE).append('<input type="hidden" id="'+object_name+'_'+category_name+'_ids_'+category_id+'" name="'+object_name+'['+category_name+'_ids][]" value="'+category_id+'" />');
+        $(NODE).addClass('clicked');
+      },
+      ondeselect: function(NODE,TREE_OBJ){
+        object_name = $(NODE).attr('id').split('_')[0];
+        category_id = get_rails_element_id(NODE);
+        $(NODE).children('input').remove();
+        $(NODE).removeClass('clicked');
+      }
+    }
+  });
 }
