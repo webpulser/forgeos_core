@@ -23,7 +23,7 @@ class Admin::SettingsController < Admin::BaseController
     else
       flash[:error] = t('setting.update.failed')
     end
-    render :action => :edit
+    redirect_to :action => :edit
   end
 private
 
