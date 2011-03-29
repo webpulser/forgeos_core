@@ -14,6 +14,7 @@ namespace :db do
       db = YAML::load(database_yml)['production']
       mysql_options = "-u #{db['username']} --password=#{db['password']} #{db['database']}"
       mysql_options = "-h #{db['host']} #{mysql_options}" if db['host']
+      mysql_options = "-P #{db['port']} #{mysql_options}" if db['port']
       # Set paths
       now = Time.now.strftime('%Y%m%d%H%M%S')
       filename = "dump_#{application}_#{stage}_#{now}.sql"
