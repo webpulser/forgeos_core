@@ -14,12 +14,7 @@ class Admin::PersonSessionsController < Admin::BaseController
       flash[:error] = t('log.in.failed').capitalize
     end
 
-    if redirect = session[:return_to]
-      session[:return_to] = nil
-      redirect_to(redirect)
-    else
-      redirect_to(:admin_root)
-    end
+    redirect_to_stored_location(:admin_root)
   end
 
   def destroy

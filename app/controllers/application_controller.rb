@@ -59,6 +59,19 @@ private
     session[:return_to] = request.request_uri
   end
 
+  def redirect_to_stored_location(default_path = :login, &block)
+    if redirect = session[:return_to]
+      session[:return_to] = nil
+      redirect_to(redirect)
+    else
+      if block_given?
+        yield
+      else
+        redirect_to(default_path)
+      end
+    end
+  end
+
 protected
 
   def discard_flash_if_xhr

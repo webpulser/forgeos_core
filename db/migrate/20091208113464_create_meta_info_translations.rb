@@ -4,6 +4,6 @@ class CreateMetaInfoTranslations < ActiveRecord::Migration
   end
 
   def self.down
-    MetaInfo.drop_table!
+    MetaInfo.drop_translation_table!
   end
 end

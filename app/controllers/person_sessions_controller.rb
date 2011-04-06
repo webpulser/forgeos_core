@@ -7,21 +7,11 @@ class PersonSessionsController < ApplicationController
   def create
     @person_session = PersonSession.new(params[:person_session])
     if @person_session.save
-      if redirect = session[:return_to]
-        session[:return_to] = nil
-        redirect_to(redirect)
-      else
-        redirect_to(:root)
-      end
+      redirect_to_stored_location(:root)
       flash[:notice] = t('log.in.success').capitalize
     else
       flash[:error] = t('log.in.failed').capitalize
-      if redirect = session[:return_to]
-        session[:return_to] = nil
-        redirect_to(redirect)
-      else
-        redirect_to :action => 'new'
-      end
+      redirect_to_stored_location({:action => new})
     end
   end
 
