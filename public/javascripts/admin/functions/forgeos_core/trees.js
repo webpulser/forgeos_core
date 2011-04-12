@@ -399,16 +399,19 @@ function init_association_category_tree(selector, object_name, category_name, th
         $(TREE_OBJ.container).removeClass('tree-default');
       },
       onrgtclk: function(NODE,TREE_OBJ,EV){
-        EV.preventDefault(); EV.stopPropagation(); return false
+        EV.preventDefault(); EV.stopPropagation(); return false;
       },
       onselect: function(NODE,TREE_OBJ){
-        category_id = get_rails_element_id(NODE);
-        $(NODE).append('<input type="hidden" id="'+object_name+'_'+category_name+'_ids_'+category_id+'" name="'+object_name+'['+category_name+'_ids][]" value="'+category_id+'" />');
+        if (typeof(object_name) == 'undefined') {
+          var oname = $(NODE).attr('id').split('_')[0];
+        } else {
+          var oname = object_name;
+        }
+        var category_id = get_rails_element_id(NODE);
+        $(NODE).append('<input type="hidden" id="'+oname+'_'+category_name+'_ids_'+category_id+'" name="'+oname+'['+category_name+'_ids][]" value="'+category_id+'" />');
         $(NODE).addClass('clicked');
       },
       ondeselect: function(NODE,TREE_OBJ){
-        object_name = $(NODE).attr('id').split('_')[0];
-        category_id = get_rails_element_id(NODE);
         $(NODE).children('input').remove();
         $(NODE).removeClass('clicked');
       }
