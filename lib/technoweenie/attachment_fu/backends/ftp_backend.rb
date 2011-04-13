@@ -152,7 +152,18 @@ module Technoweenie # :nodoc:
         end
 
         def current_data
-          raise 'current_data not implemented' # not sure what this is for
+          ftp = Net::FTP.new(ftp_config[:server])
+          ftp.login(ftp_config[:login], ftp_config[:password])
+          dest_path = File.join(ftp_config[:base_upload_path], full_filename)
+          puts(dest_path.inspect)
+          f = Tempfile.open('w')
+          f.close
+          ftp.getbinaryfile(dest_path, f.path)
+          ftp.close
+          f.open
+          v = f.read()
+          f.delete
+          v
         end
 
         # Partitions the given path into an array of path components.
