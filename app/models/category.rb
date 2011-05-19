@@ -13,7 +13,7 @@ class Category < ActiveRecord::Base
   def kind
     read_attribute(:type)
   end
-  
+
   def kind=(kind)
     write_attribute(:type, kind)
   end
@@ -22,7 +22,7 @@ class Category < ActiveRecord::Base
     return 0 if self.elements.empty? & children.empty?
     ([self.elements.size] + children.collect(&:total_elements_count)).sum
   end
-  
+
   def category_picture
     unless self.attachments.empty?
       "background-image: url('#{self.attachments.first.public_filename(:categories_icon)}') !important;background-position: 0 3px"
@@ -42,6 +42,6 @@ class Category < ActiveRecord::Base
   end
 
   def descendants
-    (children + children.map(&:children)).flatten
+    (children + children.map(&:descendants)).flatten
   end
 end
