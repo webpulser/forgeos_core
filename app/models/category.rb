@@ -19,8 +19,7 @@ class Category < ActiveRecord::Base
   end
 
   def total_elements_count
-    return 0 if self.elements.empty? & children.empty?
-    ([self.elements.size] + children.collect(&:total_elements_count)).sum
+    ([elements.count('id')] + children.all(:select => 'id,type').map(&:total_elements_count)).sum
   end
 
   def category_picture
