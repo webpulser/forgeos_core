@@ -1,13 +1,13 @@
 namespace :db do
   desc 'Get SQL dump of the current database'
-  task :get_dump, :roles => :app do
+  task :get_dump, :roles => :db do
     filename = capture("ls -c1 dump_#{application}_#{stage}_*.sql | head -1").strip
     get(filename, "/tmp/#{filename}")
   end
 
   namespace :mysql do
     desc 'Backup the current database'
-    task :backup, :roles => :app do
+    task :backup, :roles => :db do
       # Get MySQL params
       database_yml = ""
       run "cat #{current_path}/config/database.yml" do |_, _, database_yml| end
