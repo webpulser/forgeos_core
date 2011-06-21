@@ -1,24 +1,24 @@
 function check_import_progress(data){
-  var pgb = $('#progressbar');
+  var pgb = jQuery('#progressbar');
   var value = parseFloat(data).toFixed(0);
   pgb.progressbar('value', value);
   pgb.find('span').text(value + '%');
-  if (value != 100) setTimeout("$.get('/admin/import/progress',check_import_progress);",5000);
+  if (value != 100) setTimeout("jQuery.get('/admin/import/progress',check_import_progress);",5000);
 }
 jQuery(document).ready(function(){
-  $('#map_fields_form .interact-links input').live('click',function(e){
+  jQuery('#map_fields_form .interact-links input').live('click',function(e){
     e.preventDefault();
-    $.ajax({
+    jQuery.ajax({
       type: 'POST',
-      url: $('#map_fields_form').attr('action'),
-      data: $('#map_fields_form').serialize(),
+      url: jQuery('#map_fields_form').attr('action'),
+      data: jQuery('#map_fields_form').serialize(),
       complete: function(data, statusText){
-        if (statusText == 'error') $('#progressbar').text(data.responseText);
-        $('#progressbar').removeClass('running');
+        if (statusText == 'error') jQuery('#progressbar').text(data.responseText);
+        jQuery('#progressbar').removeClass('running');
         display_notifications();
       }
     });
-    $('#progressbar').progressbar().addClass('running').append('<span>0%</span>');
+    jQuery('#progressbar').progressbar().addClass('running').append('<span>0%</span>');
     check_import_progress('0');
     return false;
   });

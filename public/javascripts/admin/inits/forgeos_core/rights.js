@@ -1,6 +1,6 @@
 jQuery(document).ready(function(){
   /* Inline create right*/
-  $('.create-right').live('click', function(){
+  jQuery('.create-right').live('click', function(){
 
     /* Create new row-right */
     new_row = '<tr id="new_row" class="even ui-draggable">' +
@@ -9,15 +9,15 @@ jQuery(document).ready(function(){
      '<td><input type="text" name="right[controller_name]" size="15" /></td>' +
      '<td><input type="text" name="right[action_name]" size="15" /></td>' +
      '<td>' +
-     '<a href="#" onclick="$(\'#form_right\').trigger(\'onsubmit\'); return false;"><span class="small-icons save">&nbsp;</span></a>' +
+     '<a href="#" onclick="jQuery(\'#form_right\').trigger(\'onsubmit\'); return false;"><span class="small-icons save">&nbsp;</span></a>' +
      '<a href="#" onclick="discard(); return false;"><span class="small-icons cancel">&nbsp;</span></a>' +
      '</td>' +
     '</tr>';
 
-    $('#table').prepend(new_row);
+    jQuery('#table').prepend(new_row);
     
     /* Create the form, and move it around the table */
-    $('#table').wrap('<form action="/admin/rights/create" id="form_right" method="POST" onsubmit="' + form_ajax_right('/admin/rights/create', 'post') + '"></form>');
+    jQuery('#table').wrap('<form action="/admin/rights/create" id="form_right" method="POST" onsubmit="' + form_ajax_right('/admin/rights/create', 'post') + '"></form>');
 
 
     disable_links();
@@ -25,9 +25,9 @@ jQuery(document).ready(function(){
   });
 
   /* Inline edit right */
-  $('.edit-right').live('click', function(){
+  jQuery('.edit-right').live('click', function(){
 
-    row = $(this).parents('tr');
+    row = jQuery(this).parents('tr');
     row_id = row.attr('id');
 
     right_id = get_rails_element_id(row);
@@ -36,15 +36,15 @@ jQuery(document).ready(function(){
     cell_name = row.children().get(1);
     cell_controller = row.children().get(2);
     cell_action = row.children().get(3);
-    cell_actions = $(this).parent();
+    cell_actions = jQuery(this).parent();
 
     /* Get each value */
-    cell_name_value = $(cell_name).children('div').html();
-    cell_controller_value = $(cell_controller).html();
-    cell_action_value = $(cell_action).html();
+    cell_name_value = jQuery(cell_name).children('div').html();
+    cell_controller_value = jQuery(cell_controller).html();
+    cell_action_value = jQuery(cell_action).html();
 
     /* Create form, & move it around the table */
-    $('table').wrap('<form action="/admin/rights/'+right_id+'" id="form_right" method="PUT" onsubmit="'+form_ajax_right('/admin/rights/'+right_id, 'put')+'"></form>');
+    jQuery('table').wrap('<form action="/admin/rights/'+right_id+'" id="form_right" method="PUT" onsubmit="'+form_ajax_right('/admin/rights/'+right_id, 'put')+'"></form>');
 
     /* Create a row with values of the selected rights */
     new_row = '<tr id="new_row" class="odd ui-draggable">';
@@ -53,7 +53,7 @@ jQuery(document).ready(function(){
       new_row += '<td><input type="text" value="'+ cell_controller_value +'" name="right[controller_name]" size="15"/></td>';
       new_row += '<td><input type="text" value="'+ cell_action_value +'" name="right[action_name]" size="15"/></td>';
       new_row += '<td>';
-         new_row += '<a href="#" onclick="$(\'#form_right\').trigger(\'onsubmit\'); return false;"><span class="small-icons save">&nbsp;</span></a>';
+         new_row += '<a href="#" onclick="jQuery(\'#form_right\').trigger(\'onsubmit\'); return false;"><span class="small-icons save">&nbsp;</span></a>';
          new_row += '<a href="#" onclick="discard(); row.show(); return false;"><span class="small-icons cancel">&nbsp;</span></a>';
       new_row += '</td>';
     new_row += '</tr>';
@@ -67,23 +67,23 @@ jQuery(document).ready(function(){
 
   /* Inline duplicate right*/
   // :right => right_clone
-  $('.duplicate-right').live('click', function(){
+  jQuery('.duplicate-right').live('click', function(){
 
-    row = $(this).parents('tr');
+    row = jQuery(this).parents('tr');
 
     /* Get each cell */
     cell_name = row.children().get(1);
     cell_controller = row.children().get(2);
     cell_action = row.children().get(3);
-    cell_actions = $(this).parent();
+    cell_actions = jQuery(this).parent();
 
     /* Get each value */
-    cell_name_value = $(cell_name).children('div').html();
-    cell_controller_value = $(cell_controller).html();
-    cell_action_value = $(cell_action).html();
+    cell_name_value = jQuery(cell_name).children('div').html();
+    cell_controller_value = jQuery(cell_controller).html();
+    cell_action_value = jQuery(cell_action).html();
 
     /* Create the form, and move it around the table */
-    $('#table').wrap('<form action="/admin/rights/create" id="form_right" method="POST" onsubmit="' + form_ajax_right('/admin/rights/create', 'post') + '"></form>');
+    jQuery('#table').wrap('<form action="/admin/rights/create" id="form_right" method="POST" onsubmit="' + form_ajax_right('/admin/rights/create', 'post') + '"></form>');
 
     /* Create new row-right */
     new_row = '<tr id="new_row" class="'+ row.attr('class') +' ui-draggable">';
@@ -92,7 +92,7 @@ jQuery(document).ready(function(){
       new_row += '<td><input type="text" value="'+ cell_controller_value +'" name="right[controller_name]" size="15" /></td>';
       new_row += '<td><input type="text" value="'+ cell_action_value +'" name="right[action_name]" size="15" /></td>';
       new_row += '<td>';
-         new_row += '<a href="#" onclick="$(\'#form_right\').trigger(\'onsubmit\'); return false;"><span class="small-icons save">&nbsp;</span></a>';
+         new_row += '<a href="#" onclick="jQuery(\'#form_right\').trigger(\'onsubmit\'); return false;"><span class="small-icons save">&nbsp;</span></a>';
          new_row += '<a href="#" onclick="discard(); return false;"><span class="small-icons cancel">&nbsp;</span></a>';
       new_row += '</td>';
     new_row += '</tr>';

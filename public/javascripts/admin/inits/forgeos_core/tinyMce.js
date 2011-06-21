@@ -1,5 +1,5 @@
 jQuery(document).ready(function(){
-  $('textarea.mceEditor').each(function(){
-    tmceInit('#'+$(this).attr('id'));
+  jQuery('textarea.mceEditor').each(function(){
+    tmceInit('#'+jQuery(this).attr('id'));
   })
 });

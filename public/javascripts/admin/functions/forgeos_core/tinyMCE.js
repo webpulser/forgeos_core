@@ -1,16 +1,16 @@
 function tmce_load_children(selector){
-  $(selector).find('textarea.mceEditor').each(function(){
-    setTimeout("tinyMCE.execCommand('mceAddControl',false,'"+$(this).attr('id')+"');",1000);
+  jQuery(selector).find('textarea.mceEditor').each(function(){
+    setTimeout("tinyMCE.execCommand('mceAddControl',false,'"+ jQuery(this).attr('id')+"');",1000);
   });
 }
 function tmce_unload_children(selector){
-  $(selector).find('textarea.mceEditor').each(function(){
-    tinyMCE.execCommand('mceRemoveControl',true,$(this).attr('id'));
+  jQuery(selector).find('textarea.mceEditor').each(function(){
+    tinyMCE.execCommand('mceRemoveControl',true, jQuery(this).attr('id'));
   });
 }
 
 function tmceInit(selector){
-  $(selector).tinymce({
+  jQuery(selector).tinymce({
     script_url : '/javascripts/tiny_mce/tiny_mce.js',
     language : 'fr',
     mode : 'textareas',
@@ -18,7 +18,7 @@ function tmceInit(selector){
     theme : 'advanced',
     content_css : "/stylesheets/tinyMCE/styles.css",
     convert_urls: 0,
-    onchange_callback: function(inst){ $(inst.getElement()).trigger('change'); },
+    onchange_callback: function(inst){ jQuery(inst.getElement()).trigger('change'); },
     theme_advanced_buttons1 : "undo,redo,|,pasteword,|,anchor,image,media,|,code,preview,|,removeformat,cleanup",
     theme_advanced_buttons2 : "bold,italic,underline,strikethrough,|,styleselect,formatselect,fontselect,fontsizeselect,forecolor,|,hr",
     theme_advanced_buttons3 : "",

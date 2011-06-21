@@ -1,6 +1,6 @@
 jQuery(document).ready(function(){
   //init dialog Box
-  $('.lightbox-container').dialog({
+  jQuery('.lightbox-container').dialog({
      autoOpen:false,
      modal:true,
      minHeight: 380,
@@ -8,37 +8,37 @@ jQuery(document).ready(function(){
       resizable:'se'
   });
 
-  $('#imageUploadDialog').dialog({
+  jQuery('#imageUploadDialog').dialog({
     autoOpen:false,
     modal:true,
     width: 500,
     buttons: {
       Upload: function() {
-        $('#imageUpload').uploadifyUpload();
+        jQuery('#imageUpload').uploadifyUpload();
       },
       'Clear queue': function() {
-        $('#imageUpload').uploadifyClearQueue();
+        jQuery('#imageUpload').uploadifyClearQueue();
       }
     },
     resizable:'se'
   });
 
-  $('#imageUploadDialogLeftSidebar').dialog({
+  jQuery('#imageUploadDialogLeftSidebar').dialog({
     autoOpen:false,
     modal:true,
     width: 500,
     buttons: {
       Upload: function() {
-        $('#imageUploadLeftSidebar').uploadifyUpload();
+        jQuery('#imageUploadLeftSidebar').uploadifyUpload();
       },
       'Clear queue': function() {
-        $('#imageUploadLeftSidebar').uploadifyClearQueue();
+        jQuery('#imageUploadLeftSidebar').uploadifyClearQueue();
       }
     },
     resizable:'se'
   });
 
- $('#imageSelectDialogLeftSidebar').dialog({
+ jQuery('#imageSelectDialogLeftSidebar').dialog({
     autoOpen:false,
     modal:true,
     width: 800,
@@ -51,40 +51,40 @@ jQuery(document).ready(function(){
   });
 
 
-  $('#fileUploadDialog').dialog({
+  jQuery('#fileUploadDialog').dialog({
     autoOpen:false,
     modal:true,
     width: 500,
     buttons: {
       Upload: function() {
-        $('#fileUpload').uploadifyUpload();
+        jQuery('#fileUpload').uploadifyUpload();
       },
       'Clear queue': function() {
-        $('#fileUpload').uploadifyClearQueue();
+        jQuery('#fileUpload').uploadifyClearQueue();
       }
     },
     resizable:'se'
   });
 
 
-  $('.display-thumbnails').click( function() {
-    if($(this).hasClass('off')){
-      $(this).toggleClass('off');
-      $('.display-list').toggleClass('off');
-      $('.media-hoverlay-content').toggleClass('hidden');
-      var search_element = $('#search.image');
+  jQuery('.display-thumbnails').click( function() {
+    if(jQuery(this).hasClass('off')){
+      jQuery(this).toggleClass('off');
+      jQuery('.display-list').toggleClass('off');
+      jQuery('.media-hoverlay-content').toggleClass('hidden');
+      var search_element = jQuery('#search.image');
       search_element.removeClass('image');
       search_element.addClass('thumbnails');
     }
     return false;
   });
 
-  $('.display-list').click( function() {
-    if($(this).hasClass('off')){
-      $(this).toggleClass('off');
-      $('.display-thumbnails').toggleClass('off');
-      $('.media-hoverlay-content').toggleClass('hidden');
-      var search_element = $('#search.thumbnails');
+  jQuery('.display-list').click( function() {
+    if(jQuery(this).hasClass('off')){
+      jQuery(this).toggleClass('off');
+      jQuery('.display-thumbnails').toggleClass('off');
+      jQuery('.media-hoverlay-content').toggleClass('hidden');
+      var search_element = jQuery('#search.thumbnails');
       search_element.removeClass('thumbnails');
       search_element.addClass('image');
     }
@@ -95,17 +95,17 @@ jQuery(document).ready(function(){
    *Add click function on .add-picture items
    *Those items are links that show dialog Box to uploads media
    **/
-  $('#add-picture').live('click',function(){
-     openimageUploadDialog($(this));
+  jQuery('#add-picture').live('click',function(){
+     openimageUploadDialog(jQuery(this));
      return false;
   });
 
-  $('#add-attachment').live('click',function(){
-    openimageUploadDialog($(this));
+  jQuery('#add-attachment').live('click',function(){
+    openimageUploadDialog(jQuery(this));
     return false;
   });
 
-  $('#add-file').live('click',function(){
+  jQuery('#add-file').live('click',function(){
     openfileUploadDialog();
     return false;
   });
@@ -114,15 +114,15 @@ jQuery(document).ready(function(){
   *Add click function on .fieldset a.backgrounds  items
   *Those items are links that shows dialogBox to add some blocks/widgets
   **/
-  $('#add-block, #add-widget').bind('click',function(){
-    openBlockDialog($(this), $(this).parent());
+  jQuery('#add-block, #add-widget').bind('click',function(){
+    openBlockDialog(jQuery(this), jQuery(this).parent());
     return false;
   });
 
 
-  $('#fileSelectDialog #inner-lightbox a').live('click',function(){
-    $('#fileSelectDialog #inner-lightbox a').removeClass('selected');
-    $(this).addClass('selected');
+  jQuery('#fileSelectDialog #inner-lightbox a').live('click',function(){
+    jQuery('#fileSelectDialog #inner-lightbox a').removeClass('selected');
+    jQuery(this).addClass('selected');
   });
 
   jQuery(document).ready(function(){
@@ -130,8 +130,8 @@ jQuery(document).ready(function(){
   *Add click function on a.page-link  items
   *Those items are links that shows dialogBox to add a page to blocks
   **/
-  $('a.page-link').live('click',function(){
-    openPageDialog($(this));
+  jQuery('a.page-link').live('click',function(){
+    openPageDialog(jQuery(this));
     return false;
   });
 
@@ -142,15 +142,15 @@ jQuery(document).ready(function(){
   * add the new linked page in pages list
   *and close the dialogg box
   **/
-  $('.link-page.small-icons.page').bind('click',function(){
-    if(!$(this).hasClass('active')){
-      var url = $(this).attr('href');
+  jQuery('.link-page.small-icons.page').bind('click',function(){
+    if(!jQuery(this).hasClass('active')){
+      var url = jQuery(this).attr('href');
       var block_id = url.split('/')[5];
-      var page_id = $(this).parent().attr('id').substr(5);
-      $.ajax({
+      var page_id = jQuery(this).parent().attr('id').substr(5);
+      jQuery.ajax({
           url: url,
-            complete: putInPageList($(this).text(), $(this).attr('title'), block_id, page_id),
-            data: 'authenticity_token=' + encodeURIComponent(AUTH_TOKEN),
+            complete: putInPageList(jQuery(this).text(), jQuery(this).attr('title'), block_id, page_id),
+            data: 'authenticity_token=' + encodeURIComponent(window._forgeos_js_vars.token),
             dataType:'script',
             type:'post'
             });
@@ -164,12 +164,12 @@ jQuery(document).ready(function(){
   *Those items are headers links in blocks/widget dialog box
   *that display the widgets or blocks trees
   **/
-  $('.static-tab,.widget-tab').bind('click',function(){
-    toggleHoverlayTrees($(this).attr('class'));
+  jQuery('.static-tab,.widget-tab').bind('click',function(){
+    toggleHoverlayTrees(jQuery(this).attr('class'));
     return false;
   });
 
- $('.lightbox-actuality').dialog({
+ jQuery('.lightbox-actuality').dialog({
        autoOpen:false,
        modal:true,
        minHeight: 400,
@@ -179,24 +179,24 @@ jQuery(document).ready(function(){
        resizable: 'se'
   });
 
-  $('.add-actuality').live('click',function(){
+  jQuery('.add-actuality').live('click',function(){
     empty_actuality_overlay_fields();
     tmce_unload_children('#form_actuality');
-    $('.lightbox-actuality').dialog('open');
-    $('#submit_actuality').addClass('create-actuality');
-    $('#submit_actuality').removeClass('update-actuality');
+    jQuery('.lightbox-actuality').dialog('open');
+    jQuery('#submit_actuality').addClass('create-actuality');
+    jQuery('#submit_actuality').removeClass('update-actuality');
     return false;
   });
 
-  $('.edit-actuality').live('click',function(){
+  jQuery('.edit-actuality').live('click',function(){
     tmce_unload_children('#form_actuality');
-    $('.lightbox-actuality').dialog('open');
-    $('#submit_actuality').removeClass('create-actuality');
-    $('#submit_actuality').addClass('update-actuality');
+    jQuery('.lightbox-actuality').dialog('open');
+    jQuery('#submit_actuality').removeClass('create-actuality');
+    jQuery('#submit_actuality').addClass('update-actuality');
     return false;
   });
 
-  $('#imageSelectDialog').dialog({
+  jQuery('#imageSelectDialog').dialog({
     autoOpen:false,
     modal:true,
     minHeight: 380,
@@ -214,13 +214,13 @@ jQuery(document).ready(function(){
           }
           //check_product_first_image();
         });
-        $('#imageSelectDialog').dialog('close');
+        jQuery('#imageSelectDialog').dialog('close');
       }
     },
-    open: function(){ $('#image-table:visible,#thumbnail-table:visible').dataTableInstance().fnDraw(); }
+    open: function(){ jQuery('#image-table:visible,#thumbnail-table:visible').dataTableInstance().fnDraw(); }
   });
 
-  $('#fileSelectDialog').dialog({
+  jQuery('#fileSelectDialog').dialog({
     autoOpen:false,
     modal:true,
     minHeight: 380,
@@ -239,10 +239,10 @@ jQuery(document).ready(function(){
             add_attachment_to_product(id,name,size,type);
           }
         });
-        $('#fileSelectDialog').dialog('close');
+        jQuery('#fileSelectDialog').dialog('close');
       }
     },
-    open: function(){ $('#table-files').dataTableInstance().fnDraw(); }
+    open: function(){ jQuery('#table-files').dataTableInstance().fnDraw(); }
   });
 
 

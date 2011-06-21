@@ -1,40 +1,40 @@
 jQuery(document).ready(function(){
   //init the resizable sidebar
-  $("#content.grid_12").resizable({
+  jQuery("#content.grid_12").resizable({
     handles:'w',
     maxWidth: 790,
     minWidth: 640
   });
-  $("#sidebar").resizable({
+  jQuery("#sidebar").resizable({
     handles:'e',
     maxWidth: 300,
     minWidth: 150
   });
 
-  $("#sidebar").resize( function() {
+  jQuery("#sidebar").resize( function() {
     //when resize sidebar have to resize content
-    $("#content").width($("#page").width()-($(this).width()+1));
+    jQuery("#content").width(jQuery("#page").width()-(jQuery(this).width()+1));
   });
 
-  $("#content").resize( function() {
-    $(this).css({ left: '0px' });
-    $("#sidebar").width($("#page").width()-($(this).width()+1));
+  jQuery("#content").resize( function() {
+    jQuery(this).css({ left: '0px' });
+    jQuery("#sidebar").width(jQuery("#page").width()-(jQuery(this).width()+1));
   });
 
   /*
    *Add click function on .create-action items
    *Those items are links that show jstree control panel (creation)
    **/
-  $('.create-action').bind('click',function(){
-    if(!$('.create-list').hasClass('displayed')){
-      $('.update-list').removeClass('displayed');
-      $('.create-list').addClass('displayed');
-      $('.update-list').find('.shadow').hide();
-      $(this).find('.shadow').show();
+  jQuery('.create-action').bind('click',function(){
+    if(!jQuery('.create-list').hasClass('displayed')){
+      jQuery('.update-list').removeClass('displayed');
+      jQuery('.create-list').addClass('displayed');
+      jQuery('.update-list').find('.shadow').hide();
+      jQuery(this).find('.shadow').show();
     }
     else{
-      $('.create-list').removeClass('displayed');
-      $(this).find('.shadow').hide();
+      jQuery('.create-list').removeClass('displayed');
+      jQuery(this).find('.shadow').hide();
     }
   });
 
@@ -42,16 +42,16 @@ jQuery(document).ready(function(){
    *Add click function on .update-action items
    *Those items are links that show jstree control panel (update)
    **/
-  $('.update-action').live('click',function(){
-   if(!$('.update-list').hasClass('displayed')){
-      $('.create-list').removeClass('displayed');
-      $('.update-list').addClass('displayed');
-      $('.create-list').find('.shadow').hide();
-      $(this).find('.shadow').show();
+  jQuery('.update-action').live('click',function(){
+   if(!jQuery('.update-list').hasClass('displayed')){
+      jQuery('.create-list').removeClass('displayed');
+      jQuery('.update-list').addClass('displayed');
+      jQuery('.create-list').find('.shadow').hide();
+      jQuery(this).find('.shadow').show();
     }
     else{
-      $('.update-list').removeClass('displayed');
-      $(this).find('.shadow').hide();
+      jQuery('.update-list').removeClass('displayed');
+      jQuery(this).find('.shadow').hide();
     }
   });
 
@@ -59,23 +59,23 @@ jQuery(document).ready(function(){
    *Add click function on .widget-action items
    *Those items are links that show jstree control panel (widget)
    **/
-  $('.widget-action').live('click',function(){
-   if(!$('.widget-types').hasClass('displayed')){
-      $('.create-list').removeClass('displayed');
-      $('.widget-types').addClass('displayed');
+  jQuery('.widget-action').live('click',function(){
+   if(!jQuery('.widget-types').hasClass('displayed')){
+      jQuery('.create-list').removeClass('displayed');
+      jQuery('.widget-types').addClass('displayed');
     }
     else{
-      $('.widget-types').removeClass('displayed');
+      jQuery('.widget-types').removeClass('displayed');
     }
   });
 
-  $('.select_choice').live('click',function(){
-   if(!$(this).find('.choices_list').hasClass('displayed')){
-      $('.choices_list').removeClass('displayed');
-      $(this).find('.choices_list').addClass('displayed');
+  jQuery('.select_choice').live('click',function(){
+   if(!jQuery(this).find('.choices_list').hasClass('displayed')){
+      jQuery('.choices_list').removeClass('displayed');
+      jQuery(this).find('.choices_list').addClass('displayed');
     }
     else{
-      $(this).find('.choices_list').removeClass('displayed');
+      jQuery(this).find('.choices_list').removeClass('displayed');
     }
   });
 
@@ -84,9 +84,9 @@ jQuery(document).ready(function(){
    *Those items are links that create categories in jstree
    *param : tree_id => id of current-tree line 104
    **/
-  $('.create-folder, .create-smart').live('click',function(){
-    var tree_id = $('.category-tree').attr('id');
-    var tree = $.tree.reference(tree_id);
+  jQuery('.create-folder, .create-smart').live('click',function(){
+    var tree_id = jQuery('.category-tree').attr('id');
+    var tree = jQuery.tree.reference(tree_id);
     if (tree){
       if(tree.selected){
         tree.create();
@@ -102,8 +102,8 @@ jQuery(document).ready(function(){
    *Those items are links that rename categories in jstree
    *param : tree_id => id of current-tree  line 104
    **/
-  $('.modify-folder').live('click',function(){
-    var t = $.tree.focused();
+  jQuery('.modify-folder').live('click',function(){
+    var t = jQuery.tree.focused();
     if(t.selected){
        t.rename()
     }
@@ -117,8 +117,8 @@ jQuery(document).ready(function(){
    *Those items are links that destroy categories in jstree
    *param : tree_id => id of current-tree line 104
    **/
-  $('.delete-folder').live('click',function(){
-    var t = $.tree.focused();
+  jQuery('.delete-folder').live('click',function(){
+    var t = jQuery.tree.focused();
     if(t.selected){
        t.remove();
     }
@@ -132,8 +132,8 @@ jQuery(document).ready(function(){
    *Those items are links that duplicate categories in jstree
    *param : tree_id => id of current-tree line 104
    **/
-   $('.duplicate-folder').live('click',function(){
-    var t = $.tree.focused();
+   jQuery('.duplicate-folder').live('click',function(){
+    var t = jQuery.tree.focused();
     if(t.selected){
       t.copy();
       t.paste(-1);
