@@ -47,6 +47,7 @@ jQuery(document).ready(function(){
        	add_picture_to_category();
       },
     },
+    open: function() { eval(jQuery('#image-table:visible,#thumbnail-table:visible').data('dataTables_init_function')+'()'); },
     resizable:'se'
   });
 
