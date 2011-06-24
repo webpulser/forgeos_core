@@ -1,11 +1,11 @@
 jQuery(document).ready(function(){
   //init dialog Box
   jQuery('.lightbox-container').dialog({
-     autoOpen:false,
-     modal:true,
-     minHeight: 380,
-     width: 500,
-      resizable:'se'
+    autoOpen:false,
+    modal:true,
+    minHeight: 380,
+    width: 500,
+    resizable:'se'
   });
 
   jQuery('#imageUploadDialog').dialog({
@@ -38,7 +38,7 @@ jQuery(document).ready(function(){
     resizable:'se'
   });
 
- jQuery('#imageSelectDialogLeftSidebar').dialog({
+  jQuery('#imageSelectDialogLeftSidebar').dialog({
     autoOpen:false,
     modal:true,
     width: 800,
@@ -66,8 +66,8 @@ jQuery(document).ready(function(){
     resizable:'se'
   });
 
-
-  jQuery('.display-thumbnails').click( function() {
+  jQuery('.display-thumbnails').click(function(e) {
+    e.preventDefault();
     if(jQuery(this).hasClass('off')){
       jQuery(this).toggleClass('off');
       jQuery('.display-list').toggleClass('off');
@@ -75,11 +75,13 @@ jQuery(document).ready(function(){
       var search_element = jQuery('#search.image');
       search_element.removeClass('image');
       search_element.addClass('thumbnails');
+      eval(jQuery('#image-table:visible,#thumbnail-table:visible').data('dataTables_init_function')+'()');
     }
     return false;
   });
 
-  jQuery('.display-list').click( function() {
+  jQuery('.display-list').click(function(e) {
+    e.preventDefault();
     if(jQuery(this).hasClass('off')){
       jQuery(this).toggleClass('off');
       jQuery('.display-thumbnails').toggleClass('off');
@@ -87,6 +89,7 @@ jQuery(document).ready(function(){
       var search_element = jQuery('#search.thumbnails');
       search_element.removeClass('thumbnails');
       search_element.addClass('image');
+      eval(jQuery('#image-table:visible,#thumbnail-table:visible').data('dataTables_init_function')+'()');
     }
     return false;
   });
@@ -95,17 +98,20 @@ jQuery(document).ready(function(){
    *Add click function on .add-picture items
    *Those items are links that show dialog Box to uploads media
    **/
-  jQuery('#add-picture').live('click',function(){
-     openimageUploadDialog(jQuery(this));
-     return false;
-  });
-
-  jQuery('#add-attachment').live('click',function(){
+  jQuery('#add-picture').live('click',function(e){
+    e.preventDefault();
     openimageUploadDialog(jQuery(this));
     return false;
   });
 
-  jQuery('#add-file').live('click',function(){
+  jQuery('#add-attachment').live('click',function(e){
+    e.preventDefault();
+    openimageUploadDialog(jQuery(this));
+    return false;
+  });
+
+  jQuery('#add-file').live('click',function(e){
+    e.preventDefault();
     openfileUploadDialog();
     return false;
   });
@@ -114,7 +120,8 @@ jQuery(document).ready(function(){
   *Add click function on .fieldset a.backgrounds  items
   *Those items are links that shows dialogBox to add some blocks/widgets
   **/
-  jQuery('#add-block, #add-widget').bind('click',function(){
+  jQuery('#add-block, #add-widget').bind('click',function(e){
+    e.preventDefault();
     openBlockDialog(jQuery(this), jQuery(this).parent());
     return false;
   });
@@ -125,12 +132,12 @@ jQuery(document).ready(function(){
     jQuery(this).addClass('selected');
   });
 
-  jQuery(document).ready(function(){
   /*
   *Add click function on a.page-link  items
   *Those items are links that shows dialogBox to add a page to blocks
   **/
-  jQuery('a.page-link').live('click',function(){
+  jQuery('a.page-link').live('click',function(e){
+    e.preventDefault();
     openPageDialog(jQuery(this));
     return false;
   });
@@ -164,19 +171,20 @@ jQuery(document).ready(function(){
   *Those items are headers links in blocks/widget dialog box
   *that display the widgets or blocks trees
   **/
-  jQuery('.static-tab,.widget-tab').bind('click',function(){
+  jQuery('.static-tab,.widget-tab').live('click',function(e){
+    e.preventDefault();
     toggleHoverlayTrees(jQuery(this).attr('class'));
     return false;
   });
 
- jQuery('.lightbox-actuality').dialog({
-       autoOpen:false,
-       modal:true,
-       minHeight: 400,
-       width: 950,
-       open: function(){ tmce_load_children('#form_actuality'); },
-       beforeclose: function(){ tmce_unload_children('#form_actuality'); },
-       resizable: 'se'
+  jQuery('.lightbox-actuality').dialog({
+    autoOpen:false,
+    modal:true,
+    minHeight: 400,
+    width: 950,
+    open: function(){ tmce_load_children('#form_actuality'); },
+    beforeclose: function(){ tmce_unload_children('#form_actuality'); },
+    resizable: 'se'
   });
 
   jQuery('.add-actuality').live('click',function(){
@@ -217,7 +225,9 @@ jQuery(document).ready(function(){
         jQuery('#imageSelectDialog').dialog('close');
       }
     },
-    open: function(){ jQuery('#image-table:visible,#thumbnail-table:visible').dataTableInstance().fnDraw(); }
+    open: function(e,ui){
+      eval(jQuery('#image-table:visible,#thumbnail-table:visible').data('dataTables_init_function')+'()');
+    }
   });
 
   jQuery('#fileSelectDialog').dialog({
@@ -242,10 +252,8 @@ jQuery(document).ready(function(){
         jQuery('#fileSelectDialog').dialog('close');
       }
     },
-    open: function(){ jQuery('#table-files').dataTableInstance().fnDraw(); }
+    open: function(e,ui){
+      eval(jQuery('#table-files').data('dataTables_init_function')+'()');
+    }
   });
-
-
-});
-
 });

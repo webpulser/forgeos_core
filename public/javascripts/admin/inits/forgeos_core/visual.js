@@ -27,7 +27,9 @@ jQuery(document).ready(function(){
         jQuery('#imagepictureSelectDialog').dialog('close');
       }
     },
-    open: function(){ jQuery('#image-table-picture:visible,#thumbnail-table-picture:visible').dataTableInstance().fnDraw(); }
+    open: function(e,ui){
+      eval(jQuery('#image-table-picture:visible,#thumbnail-table-picture:visible').data('dataTables_init_function')+'()');
+    }
   });
 
   jQuery('#imagepictureUploadDialog').dialog({
@@ -72,7 +74,9 @@ jQuery(document).ready(function(){
         jQuery('#imageimageSelectDialog').dialog('close');
       }
     },
-    open: function(){ jQuery('#image-table-image:visible,#thumbnail-table-image:visible').dataTableInstance().fnDraw(); }
+    open: function(e,ui){
+      eval(jQuery('#image-table-image:visible,#thumbnail-table-image:visible').data('dataTables_init_function')+'()');
+    }
   });
 
   jQuery('#imageimageUploadDialog').dialog({
@@ -117,7 +121,9 @@ jQuery(document).ready(function(){
         jQuery('#imagevisualsSelectDialog').dialog('close');
       }
     },
-    open: function(){ jQuery('#image-table-visuals:visible,#thumbnail-table-visuals:visible').dataTableInstance().fnDraw(); }
+    open: function(e,ui){
+      eval(jQuery('#image-table-visuals:visible,#thumbnail-table-visuals:visible').data('dataTables_init_function')+'()');
+    }
   });
 
   jQuery('#imagevisualsUploadDialog').dialog({

@@ -29,7 +29,7 @@ function disable_links() {
 function form_ajax_right(url, method){
   onsubmit_ajax = "jQuery.ajax({\n\
       success: function(result){\n\
-        jQuery('#table').dataTableInstance().fnDraw(); \n\
+        eval(jQuery('#table').data('dataTables_init_function')+'()'); \n\
         jQuery('#table').unwrap(); \n\
         jQuery('.create-right').parent().show();\n\
       }, \n\

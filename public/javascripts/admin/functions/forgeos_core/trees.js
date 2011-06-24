@@ -8,22 +8,22 @@ function duplicate_category(node, type, parent_id){
     parent_id = get_rails_element_id(parent_node);
 
   jQuery.ajax({
-      url: '/admin/categories/create',
-        // update node id and duplicate node children
-        complete: function(request){
-          var cat_id = request.responseText;
-          jQuery(node).attr('id', 'cageory_' + cat_id);
-          children.each(function(){ duplicate_category(jQuery(this), type, cat_id); });
+    "url": '/admin/categories/create',
+    // update node id and duplicate node children
+    "complete": function(request){
+      var cat_id = request.responseText;
+      jQuery(node).attr('id', 'cageory_' + cat_id);
+      children.each(function(){ duplicate_category(jQuery(this), type, cat_id); });
 
-          jQuery(node).children('a').attr('id', 'link_category_' + cat_id);
-          jQuery(node).children('a').children('span').attr('id', 'span_category_' + cat_id);
+      jQuery(node).children('a').attr('id', 'link_category_' + cat_id);
+      jQuery(node).children('a').children('span').attr('id', 'span_category_' + cat_id);
 
-          set_category_droppable(cat_id, type);
-        },
-        data: get_category_data(name, type, parent_id),
-        dataType: 'text',
-        type: 'post'
-        });
+      set_category_droppable(cat_id, type);
+    },
+    "data": get_category_data(name, type, parent_id),
+    "dataType": 'text',
+    "type": 'post'
+  });
 }
 
 // return category data with or without parent category
@@ -123,7 +123,7 @@ function init_category_tree(selector, type, source) {
     callback: {
       onload: function(TREE_OBJ){
         tree_id = jQuery(TREE_OBJ.container).attr('id');
-        display_notifications();
+        //display_notifications();
         jQuery(TREE_OBJ.container).removeClass('tree-default');
         jQuery(TREE_OBJ.container).find('a').each(function(index,selector){
           var category_id = get_rails_element_id(jQuery(selector).parent('li'));
@@ -148,18 +148,25 @@ function init_category_tree(selector, type, source) {
           parent_id = get_rails_element_id(parent_node);
 
         jQuery.ajax({
-            url: '/admin/categories/create',
-              complete: function(request){
-                var cat_id = request.responseText
+          url: '/admin/categories/create',
+          complete: function(request){
+            var cat_id = request.responseText
 
-                jQuery(NODE).attr('id', 'cageory_' + cat_id);
-                jQuery(NODE).children('a').attr('id', 'link_category_' + cat_id);
-                set_category_droppable(cat_id, type);
-              },
-              data: get_category_data('New folder', type, parent_id),
-              dataType: 'text',
-              type: 'post'
-              });
+            jQuery(NODE).attr('id', 'cageory_' + cat_id);
+            jQuery(NODE).children('a').attr('id', 'link_category_' + cat_id);
+            set_category_droppable(cat_id, type);
+
+            if( jQuery(".parent_id_hidden").size() == 0){
+              jQuery(document.body).append('<input type="hidden" id="parent_id_tmp" name="parent_id_tmp" class="parent_id_hidden" value="'+cat_id+'" />');
+            } else {
+              jQuery('#parent_id_tmp').val(cat_id);
+            }
+
+          },
+          data: get_category_data('New folder', type, parent_id),
+          dataType: 'text',
+          type: 'post'
+        });
       },
       onrename: function(NODE,LANG,TREE_OBJ,RB){
         var cat_id = get_rails_element_id(NODE);
@@ -227,11 +234,10 @@ function init_category_tree(selector, type, source) {
 
         object_name = jQuery(NODE).attr('id').split('_')[0];
         category_id = get_rails_element_id(NODE);
-        var nb_of_parent_id_hidden = jQuery(NODE).find(".parent_id_hidden").length
-        if( nb_of_parent_id_hidden == 0){
+        if(jQuery(".parent_id_hidden").size() == 0){
           jQuery(document.body).append('<input type="hidden" id="parent_id_tmp" name="parent_id_tmp" class="parent_id_hidden" value="'+category_id+'" />');
         } else {
-          jQuery('parent_id_tmp').val(category_id);
+          jQuery('#parent_id_tmp').val(category_id);
         }
         return true;
       },
@@ -293,6 +299,7 @@ function select_all_elements_without_category(tree_id) {
 
   // construct url and redraw table
   update_current_dataTable_source('#'+oTable.sInstance,url_base + '?' + params);
+  jQuery('#parent_id_tmp').remove();
   return true;
 }
 

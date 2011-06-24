@@ -101,6 +101,7 @@ jQuery.fn.dataSlideExt.oApi.fnGetSelectedIndexes= function(){
 jQuery.fn.extend({
   dataTableInstance : function(){
     var element = this;
+    oTable = undefined;
     jQuery(oTables).each(function(){
       if (jQuery(this).attr('id') == jQuery(element).attr('id')) {
         oTable = this;
@@ -156,13 +157,14 @@ function removedataTablesRow(selector){
   current_table.fnDeleteRow(
     current_table.fnGetPosition(jQuery(selector).parents('tr:first')[0])
   );
+  display_notifications();
 }
 
 function DataTablesDrawCallBack(table) {
   InitCustomSelects();
   showObjectsAssociated();
-  display_notifications();
   hide_paginate(table);
+  moveDataTablesSearchField();
 }
 
 // set id to each row and set it draggable
@@ -278,4 +280,41 @@ function save_category_sort(type,id_pos){
       dataType:'text',
       type:'put'
   });
+}
+
+function replaceDataTablesSearchField(field_selector,input_selector,_parent){
+  var input = jQuery(input_selector);
+  var field = jQuery(field_selector);
+  if (input.size()  != 0) {
+    field.html(input.clone(true));
+    field.
+      append('<a href="#" class="backgrounds button-ok">OK</a>').
+      find('.button-ok').data('parent',_parent).
+      live('click',toggle_search_elements_ok);
+    input.remove();
+  }
+}
+
+function moveDataTablesSearchField(){
+  replaceDataTablesSearchField(
+    '.search-form',
+    '#table_wrapper .dataTables_filter',
+    ''
+  );
+  replaceDataTablesSearchField(
+    '.search-form-image',
+    '#image-table_wrapper .dataTables_filter',
+    'image'
+  );
+  replaceDataTablesSearchField(
+    '.search-form-thumbnails',
+    '#thumbnail-table_wrapper .dataSlides_filter',
+    'thumbnails'
+  );
+  replaceDataTablesSearchField(
+    '.search-form-files',
+    '#table-files_wrapper .dataTables_filter',
+    'files'
+  );
+  jQuery('.search-link').live('click',toggle_search_elements);
 }

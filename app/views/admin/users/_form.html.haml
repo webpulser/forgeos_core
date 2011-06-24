@@ -1,6 +1,6 @@
 - form_for [:admin, user], :html => { :id => 'wrap', :autocomplete => 'off' } do |f|
   .backgrounds.big-header
-    .civility= f.select :civility, t('civility.select'), { :prompt => t(:please_select) }
+    = f.select :civility, t('civility.select'), { :prompt => t(:please_select) }
     = f.text_field :firstname, :title => t('firstname'), :class => 'defaultValue field_name firstname'
     = f.text_field :lastname, :title => t('lastname'), :class => 'defaultValue field_name lastname'
     .interact-links
