@@ -1,7 +1,5 @@
 class ApplicationController < ActionController::Base
-  helper :all
   helper_method :current_user_session, :current_user
-  protect_from_forgery
   filter_parameter_logging :password, :password_confirmation
 
   before_filter :set_locale
@@ -21,7 +19,7 @@ private
     session[:locale] = current_user.lang if current_user && current_user.lang
     session[:detected_locale] = request.env['HTTP_ACCEPT_LANGUAGE'].scan(/^[a-z]{2}/).first if request.env['HTTP_ACCEPT_LANGUAGE']
     locale = params[:locale] || session[:locale] || session[:detected_locale] || I18n.default_locale
-    if !locale.blank? && I18n.available_locales.include?(locale.to_sym)
+    if locale.present? and I18n.available_locales.include?(locale.to_sym)
       session[:locale] = I18n.locale = locale
       ActiveRecord::Base.locale=locale
     end

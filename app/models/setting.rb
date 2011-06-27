@@ -17,4 +17,8 @@ class Setting < ActiveRecord::Base
   def sendmail_settings=(sendmail_settings)
     write_attribute(:sendmail_settings, OpenStruct.new(sendmail_settings))
   end
+
+  def self.current
+    first
+  end
 end

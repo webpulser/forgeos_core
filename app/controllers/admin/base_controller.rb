@@ -2,6 +2,8 @@ class Admin::BaseController < ApplicationController
   layout 'admin'
   before_filter :login_required, :edition_locale, :except => [:notifications, :url]
   skip_before_filter :validate_authenticity_token
+  protect_from_forgery
+
 private
   def login_required
     unless current_user.is_a?(Administrator)
