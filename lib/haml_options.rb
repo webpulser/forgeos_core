@@ -1,5 +1,7 @@
 # Load Haml and Sass
 require 'haml'
+require 'sass'
+require 'sass/plugin'
 Haml.init_rails(binding)
 if Rails.env == 'production'
   Haml::Template.options[:ugly] = true
