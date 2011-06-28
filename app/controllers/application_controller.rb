@@ -3,7 +3,7 @@ class ApplicationController < ActionController::Base
   filter_parameter_logging :password, :password_confirmation
 
   before_filter :set_locale
-  after_filter :discard_flash_if_xhr
+  after_filter :discard_flash_if_xhr, :log_visit
 
   def notifications
     @notifications = {}
@@ -25,6 +25,12 @@ private
     end
   end
 
+  def log_visit
+    unless cookies[:visitor_counter]
+      VisitorCounter.new.increment_counter
+      cookies[:visitor_counter] = { :value => true, :expire => Date.current.end_of_day }
+    end
+  end
 
   def current_user_session
     return @current_user_session if defined?(@current_user_session)
