@@ -1,4 +1,4 @@
 class Audio < Attachment
-  has_attachment YAML.load_file(File.join(Rails.root, 'config', 'attachments.yml'))['audio'].symbolize_keys
+  has_attachment self.options_for('audio')
   validates_as_attachment
 end

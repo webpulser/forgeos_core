@@ -4,6 +4,7 @@ class Setting < ActiveRecord::Base
   serialize :mailer, OpenStruct
   serialize :smtp_settings, OpenStruct
   serialize :sendmail_settings, OpenStruct
+  serialize :attachments
   accepts_nested_attributes_for :address
 
   def mailer=(mailer)

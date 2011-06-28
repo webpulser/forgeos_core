@@ -1,4 +1,4 @@
 class Pdf < Attachment
-  has_attachment YAML.load_file(File.join(Rails.root, 'config', 'attachments.yml'))['pdf'].symbolize_keys
+  has_attachment self.options_for('pdf')
   validates_as_attachment
 end
