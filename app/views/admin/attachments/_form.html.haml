@@ -1,5 +1,5 @@
 = render :partial => 'tabs'
-- form_for [:admin, media], :html => { :multipart => true, :id => 'wrap'} do |f|
+= form_for [:admin, media], :html => { :multipart => true, :id => 'wrap'} do |f|
   .backgrounds.big-header
     = f.text_field :name, :id => 'media-title', :class => 'field_name'
     .interact-links

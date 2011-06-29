@@ -1,5 +1,5 @@
 = render :partial => 'tabs'
-- form_for [:admin, role],  :html => { :id => 'wrap' } do |f|
+= form_for [:admin, role],  :html => { :id => 'wrap' } do |f|
   = hidden_field_tag "role[right_ids][]"
 
   .backgrounds.big-header
