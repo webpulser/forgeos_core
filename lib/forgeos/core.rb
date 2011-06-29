@@ -1,4 +1,4 @@
-#require 'forgeos/core/engine'
+require 'forgeos/core/engine'
 
 module Forgeos
   module Core
