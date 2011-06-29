@@ -11,15 +11,15 @@
   a
     padding: 0 10px
     padding-left: 25px
-    color = !lightGray
+    color: $lightGray
     background-color: transparent
-    border = 1px solid !contentHeaderBorder
+    border: 1px solid $contentHeaderBorder
     +borderCorner(8px,8px,8px,8px)
     font-weight: bold
     outline: none
     &:hover, &.selected
-      color = !white
-      background-color = !lightGray
+      color: $white
+      background-color: $lightGray
   &.backgrounds.big-header
     padding-bottom: 0
     padding-top: 0
@@ -28,15 +28,15 @@
 .media-hoverlay
   padding: 0px !important
 .media-hoverlay-header
-  :background-color = !white
+  background-color: $white
   height: 35px
   padding-top: 6px
-  :border-bottom = 1px solid !contentHeaderBorder
+  border-bottom: 1px solid $contentHeaderBorder
   position: relative
   font:
     size: 1.1em
     weight: bold
-  :color = !blueLink
+  color: $blueLink
   padding: 5px 15px 0
   .search,
   #search
@@ -52,7 +52,7 @@
     span
       padding: 1px 20px 0 30px
 .media-hoverlay-content
-  :background-color = !white
+  background-color: $white
   float: right
   width: 70%
   min-height: 400px
@@ -97,12 +97,12 @@ div.tree-link
   label
     +left()
     margin-bottom: 8px
-    :color = !lightGray
+    color: $lightGray
     width: 95px
     clear: left
   input, textarea
     +left()
-    :border = 2px solid !gray
+    border: 2px solid $gray
     +borderCorner(2px,2px,2px,2px)
     width: 390px
     padding: 2px
@@ -111,10 +111,10 @@ div.tree-link
       color: red
   .linked-to-span
     +left()
-    :background-color = !lightBlueBg
+    background-color: $lightBlueBg
     padding: 0 5px 2px 20px
     a
-      :color = !blueLink
+      color: $blueLink
 
   .linked-to
     display: none
@@ -123,7 +123,7 @@ div.tree-link
     +left()
     padding: 0 5px 2px 0px
     a
-      :color = !blueLink
+      color: $blueLink
   .back-link
     text-decoration: underline
   .button
@@ -131,10 +131,10 @@ div.tree-link
     -moz-border-radius-bottomright: 2px
     -moz-border-radius-topleft: 2px
     -moz-border-radius-topright: 2px
-    :background-color = !whiteGray
+    background-color: $whiteGray
     background-position: 0 -10px
-    :border = 1px solid !gray
-    :color = !blueLink
+    border: 1px solid $gray
+    color: $blueLink
     display: inline-block
     font-size: 0.8em
     margin-top: 8px

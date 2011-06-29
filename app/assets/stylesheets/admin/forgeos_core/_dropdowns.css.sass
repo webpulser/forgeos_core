@@ -4,7 +4,7 @@
 .enhanced a
   font-size: 11px
   text-decoration: none
-  :color = !lightGray
+  color: $lightGray
 .dropdown
   +left()
   position: relative
@@ -17,8 +17,8 @@
     left: 5px
     top: 21px
     overflow: auto
-    :background = !white
-    :border = 1px solid !contentHeaderBorder
+    background: $white
+    border: 1px solid $contentHeaderBorder
     border-top: 0
     padding: 0
     ul
@@ -41,7 +41,7 @@
       font-size: 12px
       padding: 2px 0
       &:hover
-        :background-color = !contentHeaderBorder
+        background-color: $contentHeaderBorder
 .big-header .dropdown span
   float: none !important
 a.dropdown_toggle
@@ -57,7 +57,7 @@ a.dropdown_toggle
     line-height: 10px
     cursor: pointer !important
     margin: 0 !important
-    :color = !black
+    color: $black
 .dropdown .hidden
   display: none
 a.dropdown_toggle
@@ -76,14 +76,14 @@ a.dropdown_toggle
     text-transform: uppercase
     a.dropdown_toggle
       span
-        //:color = !white
+        //color: $white
       .options
         position: absolute
         left: 5px
         top: 25px
         overflow: auto
-        :background = !white
-        :border = 1px solid !contentHeaderBorder
+        background: $white
+        border: 1px solid $contentHeaderBorder
         border-top: 0
         padding: 0
   .published a.dropdown_toggle
@@ -98,7 +98,7 @@ a.dropdown_toggle
   background-image: url(/images/admin/selects/big-gray-right.png)
   span
     background-image: url(/images/admin/selects/big-gray-left.png)
-    :color= !white
+    color:  $white
 .active a.dropdown_toggle
   background-image: url(/images/admin/selects/big-green-right.png)
   span
@@ -114,7 +114,7 @@ a.dropdown_toggle
     background-image: url(/images/admin/selects/big-red-right-on.png)
   a.dropdown_toggle span
     background-image: url(/images/admin/selects/big-red-left.png)
-    :color= !white
+    color:  $white
 .shipped
   a.dropdown_toggle
     background-image: url(/images/admin/selects/big-green-right.png)
@@ -122,7 +122,7 @@ a.dropdown_toggle
     background-image: url(/images/admin/selects/big-green-right-on.png)
   a.dropdown_toggle span
     background-image: url(/images/admin/selects/big-green-left.png)
-    :color= !white
+    color:  $white
 .closed
   a.dropdown_toggle
     background-image: url(/images/admin/selects/big-gray-right.png)
@@ -130,17 +130,17 @@ a.dropdown_toggle
     background-image: url(/images/admin/selects/big-gray-right-on.png)
   a.dropdown_toggle span
     background-image: url(/images/admin/selects/big-gray-left.png)
-    :color= !white
+    color:  $white
 .unpaid
   a.dropdown_toggle
     background-image: url(/images/admin/selects/big-white-right.png)
-    :color = !black !important
+    color: $black !important
   &.disabled a.dropdown_toggle
     background-image: url(/images/admin/selects/big-white-right-on.png)
-    :color = !black !important
+    color: $black !important
   a.dropdown_toggle span
     background-image: url(/images/admin/selects/big-white-left.png)
-    :color = !black !important
+    color: $black !important
 .paid
   a.dropdown_toggle
     background-image: url(/images/admin/selects/big-brown-right.png)
@@ -148,7 +148,7 @@ a.dropdown_toggle
     background-image: url(/images/admin/selects/big-brown-right-on.png)
   a.dropdown_toggle span
     background-image: url(/images/admin/selects/big-brown-left.png)
-    :color= !white
+    color:  $white
 #right-sidebar div.step .glossy a.dropdown_toggle
   display: block
   height: 25px
@@ -156,7 +156,7 @@ a.dropdown_toggle
   background: url(/images/admin/selects/glossy-gray-right.png) right top no-repeat
   span
     background: url(/images/admin/selects/glossy-gray-left.png) no-repeat
-    :color = !black
+    color: $black
 //--------------------- ----------
 // DATA-TABLES DROPDOWNS
 //--------------------- ----------
@@ -172,66 +172,66 @@ a.dropdown_toggle
     top: 20px
   .published a.dropdown_toggle
     background-image: url(/images/admin/selects/small-green-right.png)
-  tr:hover .published a.dropdown_toggle
+  trhover: .published a.dropdown_toggle
     background-image: url(/images/admin/selects/small-green-right-on.png)
   .published a.dropdown_toggle span
     background-image: url(/images/admin/selects/small-green-left.png)
-    :color= !white
+    color:  $white
   .draft a.dropdown_toggle
     background-image: url(/images/admin/selects/small-gray-right.png)
-  tr:hover .draft a.dropdown_toggle
+  trhover: .draft a.dropdown_toggle
     background-image: url(/images/admin/selects/small-gray-right-on.png)
   .draft a.dropdown_toggle span
     background-image: url(/images/admin/selects/small-gray-left.png)
-    :color= !white
+    color:  $white
   .to-validate a.dropdown_toggle
     background-image: url(/images/admin/selects/small-brown-right.png)
-  tr:hover .to-validate a.dropdown_toggle
+  trhover: .to-validate a.dropdown_toggle
     background-image: url(/images/admin/selects/small-brown-right-on.png)
   .to-validate a.dropdown_toggle span
     background-image: url(/images/admin/selects/small-brown-left.png)
-    :color= !white
-  .active a.dropdown_toggle, .inactive a.dropdown_toggle, tr:hover .active a.dropdown_toggle
+    color:  $white
+  .active a.dropdown_toggle, .inactive a.dropdown_toggle, trhover: .active a.dropdown_toggle
     background-image: url(/images/admin/selects/small-white-right-on.png)
   .active a.dropdown_toggle span, .inactive a.dropdown_toggle span
     background-image: url(/images/admin/selects/small-white-left.png)
-    :color = !lightGray
+    color: $lightGray
     font-weight: bold
   .canceled a.dropdown_toggle
     background-image: url(/images/admin/selects/small-red-right.png)
-  tr:hover .canceled a.dropdown_toggle
+  trhover: .canceled a.dropdown_toggle
     background-image: url(/images/admin/selects/small-red-right-on.png)
   .canceled a.dropdown_toggle span
     background-image: url(/images/admin/selects/small-red-left.png)
-    :color= !white
+    color:  $white
   .shipped a.dropdown_toggle
     background-image: url(/images/admin/selects/small-green-right.png)
-  tr:hover .shipped a.dropdown_toggle
+  trhover: .shipped a.dropdown_toggle
     background-image: url(/images/admin/selects/small-green-right-on.png)
   .shipped a.dropdown_toggle span
     background-image: url(/images/admin/selects/small-green-left.png)
-    :color= !white
+    color:  $white
   .closed a.dropdown_toggle
     background-image: url(/images/admin/selects/small-gray-right.png)
-  tr:hover .closed a.dropdown_toggle
+  trhover: .closed a.dropdown_toggle
     background-image: url(/images/admin/selects/small-gray-right-on.png)
   .closed a.dropdown_toggle span
     background-image: url(/images/admin/selects/small-gray-left.png)
-    :color= !white
+    color:  $white
   .unpaid a.dropdown_toggle
     background-image: url(/images/admin/selects/small-white-right.png)
-  tr:hover .unpaid a.dropdown_toggle
+  trhover: .unpaid a.dropdown_toggle
     background-image: url(/images/admin/selects/small-white-right-on.png)
   .unpaid a.dropdown_toggle span
     background-image: url(/images/admin/selects/small-white-left.png)
-    :color = !black
+    color: $black
   .paid a.dropdown_toggle
     background-image: url(/images/admin/selects/small-brown-right.png)
-  tr:hover .paid a.dropdown_toggle
+  trhover: .paid a.dropdown_toggle
     background-image: url(/images/admin/selects/small-brown-right-on.png)
   .paid a.dropdown_toggle span
     background-image: url(/images/admin/selects/small-brown-left.png)
-    :color= !white
+    color:  $white
 //--------------------- ----------
 // COUNTRY-SELECT DROPDOWNS
 //--------------------- ----------
@@ -247,7 +247,7 @@ a.dropdown_toggle
 .country-select a.dropdown_toggle span
   background: url(/images/admin/selects/product-select-left.png) no-repeat
   height: 16px
-  :color = !black
+  color: $black
   text-transform: none
 //--------------------- ----------
 // THUMBNAILS DROPDOWNS
@@ -262,7 +262,7 @@ a.dropdown_toggle
     span
       background: none
       text-decoration: underline
-      :color = !lightGray
+      color: $lightGray
       text-transform: none
 div.tree-link
   div.enhanced
@@ -271,13 +271,13 @@ div.tree-link
       display: block !important
     a.dropdown_toggle span
       background: transparent none no-repeat scroll 0 0
-      :color = !lightGray
+      color: $lightGray
       padding: 0
       text-transform: none
       text-decoration: underline
     .Show a.dropdown_toggle span
       background: transparent url(/images/admin/small-icons/eye.png) no-repeat scroll 0 -2px
-      :color = !lightGray
+      color: $lightGray
       padding: 0 0 0 20px
       text-transform: none
       text-decoration: underline
@@ -294,21 +294,21 @@ div.tree-link
 .statistics
   .trend_filter
     .dropdown
-      :margin-left 0
-      :width auto
+      margin-left: 0
+      width: auto
     a.dropdown_toggle
-      :background url(/images/admin/small-icons/bottom-arrow.png) right -2px no-repeat
-      :padding-right 26px
-      :height auto
+      background: url(/images/admin/small-icons/bottom-arrow.png) right -2px no-repeat
+      padding-right: 26px
+      height: auto
     a.dropdown_toggle span
-      :background none
-      :text-decoration underline
-      :color = !blueLink
-      :text-transform none
-      :height auto
-      :padding-top 0
+      background: none
+      text-decoration: underline
+      color: $blueLink
+      text-transform: none
+      height: auto
+      padding-top: 0
     .options
-      :top 1.2em
+      top: 1.2em
     .dropdown .options ul li a span
-      :text-transform none
-      :color = !blueLink
+      text-transform: none
+      color: $blueLink

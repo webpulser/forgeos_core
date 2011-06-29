@@ -2,52 +2,52 @@
 // COMMONS
 //--------------------- ----------
 body
-  :font-size 62,5%
-  :background-image url(/images/admin/backgrounds/background.png)
-  :font-family Arial, Helvetica, sans-serif
-  :margin 0px
-  :padding 0px
+  font-size: 62,5%
+  background-image: url(/images/admin/backgrounds/background.png)
+  font-family: Arial, Helvetica, sans-serif
+  margin: 0px
+  padding: 0px
 h1,h2,h3
-  :padding 0px
-  :margin 0px
+  padding: 0px
+  margin: 0px
 .left
-  :float left
+  float: left
 .right
-  :float right
+  float: right
 a
-  :text-decoration none
-  :color = !blueLink
+  text-decoration: none
+  color: $blueLink
 img
-  :border 0px
+  border: 0px
 li
-  :list-style none
+  list-style: none
 .hidden
   display: none
 //--------------------- ----------
 // HEADER
 //--------------------- ----------
 .header
-  :background-position 0px 0px
-  :height 35px
-  :padding
-    :top 5px
+  background-position: 0px 0px
+  height: 35px
+  padding:
+    top: 5px
 .big-header
-  :background-position 0px -251px
-  :padding 10px 15px 0
-  :height 48px
+  background-position: 0px -251px
+  padding: 10px 15px 0
+  height: 48px
   margin-top: 0
-  :line-height 48px
-  :border-bottom = !grayBorder
-  :font-size 1em
-  :background-color = !white
+  line-height: 48px
+  border-bottom: $grayBorder
+  font-size: 1em
+  background-color: $white
   h1
-    :color = !orange
+    color: $orange
     +left()
-    :font-size 1.3em
+    font-size: 1.3em
   span
     display: block
     +left()
-    :color = !lightGray
+    color: $lightGray
     font-size: 1.2em
   .header-separator
     background: transparent url(/images/admin/borders/heading-separator.png) no-repeat scroll left top
@@ -64,45 +64,45 @@ li
 // BACKGROUNDS
 //--------------------- ----------
 .small-icons
-  :background-image url(/images/admin/small-icons-16-16-verti.png)
-  :background-repeat no-repeat
-  :padding-left 20px
+  background-image: url(/images/admin/small-icons-16-16-verti.png)
+  background-repeat: no-repeat
+  padding-left: 20px
 .big-icons
-  :background-image url(/images/admin/big-icons-24-24-verti.png) !important
-  :background-repeat no-repeat
-  :padding-left 28px
+  background-image: url(/images/admin/big-icons-24-24-verti.png) !important
+  background-repeat: no-repeat
+  padding-left: 28px
 .borders
-  :background-image url(/images/admin/borders-verti.png)
-  :background-repeat no-repeat
+  background-image: url(/images/admin/borders-verti.png)
+  background-repeat: no-repeat
 .backgrounds
-  :background-image url(/images/admin/backgrounds-verti.png) !important
-  :background-repeat repeat-x
+  background-image: url(/images/admin/backgrounds-verti.png) !important
+  background-repeat: repeat-x
 .arrow
-  :background-position 0 -478px
+  background-position: 0 -478px
 //--------------------- ----------
 // BUTTON
 //--------------------- ----------
 .action-button
-  :background-position 0 -1308px
-  :height 19px
+  background-position: 0 -1308px
+  height: 19px
   +block()
-  :margin 3px 0 0 20px
-  :text-align center
-  :border = 1px solid !contentHeaderBorder
+  margin: 3px 0 0 20px
+  text-align: center
+  border: 1px solid $contentHeaderBorder
   +borderCorner("3px","3px","3px","3px")
   +left()
-  :padding  3px 5px 0 5px
-  :font-size 0.8em
-  :color = !blueLink
-  :font-weight bold
-  :background-color white
-  :cursor pointer
+  padding:  3px 5px 0 5px
+  font-size: 0.8em
+  color: $blueLink
+  font-weight: bold
+  background-color: white
+  cursor: pointer
 .button
   +borderCorner("2px","2px","2px","2px")
   background-color: #EAEBEC
   background-position: 0 -10px
-  :border = 1px solid !contentHeaderBorder
-  :color = !blueLink
+  border: 1px solid $contentHeaderBorder
+  color: $blueLink
   display: inline-block
   font-size: 0.8em
   margin-top: 15px
@@ -113,7 +113,7 @@ li
     padding-top: 5px
     padding-bottom: 5px
 .library-add
-  :color = !lightGray
+  color: $lightGray
   position: absolute
   top: 45px
   left: 160px
@@ -121,12 +121,12 @@ li
   span
     margin: 0 5px
   a
-    :color = !blueLink
+    color: $blueLink
     text-decoration: underline
 .add-link
   background-position: 0 -1434px
   text-decoration: underline
-  :color = !blueLink
+  color: $blueLink
   padding-top: 10px
   font-size: 0.8em
   clear: both
@@ -135,7 +135,7 @@ li
   outline: 0
   &.gray
     background-position: 0 -1816px
-    :color = !gray
+    color: $gray
 //--------------------- ----------
 // HANDLERS
 //--------------------- ----------
@@ -147,27 +147,27 @@ li
 // CONTENT
 //--------------------- ----------
 #page
-  background = !lightOrangeBg
+  background $lightOrangeBg
   padding: 0
   border: 0 !important
   +borderCorner(0,0,0,0)
 .ui-tabs-nav.ui-helper-reset.ui-helper-clearfix.ui-widget-header.ui-corner-all
   +borderCorner(0,0,0,0)
 #wrap
-  :background-color  = !white !important
+  background-color:  $white !important
   margin: 0
   width: 100%
 .padding-wrap
   padding: 10px
 .permalink
-  :border 1px solid #f9f9f9
-  :color = !lightGray
-  :padding 5px 10px
-  :font-weight normal
-  :display inline-block
+  border: 1px solid #f9f9f9
+  color: $lightGray
+  padding: 5px 10px
+  font-weight: normal
+  display: inline-block
   +borderCorner()
   a
-    :color = !blueLink
+    color: $blueLink
     text-decoration: underline
   font-size: 1em
   input
@@ -175,22 +175,22 @@ li
 
 h2.description
   font-size: 1em
-  :color = !lightGray
+  color: $lightGray
   margin: 5px 0
   font-weight: normal
 
 .fieldset
   zoom: 1
-  border: 3px solid !lightLightGray
+  border: 3px solid $lightLightGray
   +borderCorner(8px,8px,8px,8px)
   position: relative
   margin: 20px 0
   clear: both
   min-height: 20px
   h2,h3,.panel
-    :background-color = !white
+    background-color: $white
     text-transform: uppercase
-    :color = !gray
+    color: $gray
     font-size: .9em
     font-weight: normal
     padding: 10px
@@ -204,13 +204,13 @@ h2.description
       background-position: 0 -902px
   label
     display: block
-    :color = !lightGray
+    color: $lightGray
     font-size: .9em
     margin: 8px 2px 2px
     &.radio
       display: inline
   input
-    :border = 1px solid !darkGray
+    border: 1px solid $darkGray
     +borderCorner(3px,3px,3px,3px)
     background:
       position: 0 -600px
@@ -219,11 +219,11 @@ h2.description
     padding: 2px 0
   .line
     label
-      color: !lightGray
+      color: $lightGray
       display: inline
       font-weight: bold
       margin: 4px
-    border-bottom: 1px solid !lightLightGray
+    border-bottom: 1px solid $lightLightGray
     padding: 5px 0px
     .destroy-link, .edit-link, .duplicate-link
       display: none
@@ -250,7 +250,7 @@ input.center
   .block-type
     display: inline-block
     background: #E0E0E0
-    :color = !lightGray
+    color: $lightGray
     padding: 4px
     clear: both
     +left()
@@ -261,7 +261,7 @@ form#wrap
     width: 200px
     +borderCorner("3px","3px","3px","3px")
     background-position: 0 -595px
-    :border = 1px solid !contentHeaderBorder
+    border: 1px solid $contentHeaderBorder
 .disabled
   +opacity(0.7)
   cursor: default
@@ -274,7 +274,7 @@ form#wrap
 .option-panel
   clear: both
   background-position: 0 -400px
-  :border-top = 1px solid !contentHeaderBorder
+  border-top: 1px solid $contentHeaderBorder
   position: relative
 .content-header
   background-position: 0 -588px
@@ -284,12 +284,12 @@ form#wrap
   z-index: 0
 .panel
   text-transform: uppercase
-  :color = !lightGray
+  color: $lightGray
   background-position: 0 -816px
   position: relative
   z-index: 1
   +left()
-  :background-color = white
+  background-color: white
   padding-right: 5px
   margin: -18px 0 5px 10px
 .open .panel, .disabled .panel
@@ -317,10 +317,10 @@ form#wrap
   position: relative
   clear: both
 .tool-tip-content
-  :background
-    :image  url(/images/admin/backgrounds/left-bubble-tool-tip.png)
-    :repeat no-repeat
-    :position left top
+  background:
+    image:  url(/images/admin/backgrounds/left-bubble-tool-tip.png)
+    repeat: no-repeat
+    position: left top
   position: absolute
   z-index: 10
   top: 20px
@@ -328,8 +328,8 @@ form#wrap
   display: none
   padding-left: 14px
   .content
-    :background-color = !white
-    :border = 1px solid !whiteGray
+    background-color: $white
+    border: 1px solid $whiteGray
     border-left: 0
     padding: 5px
 .option-panel-content .button.right
@@ -345,9 +345,9 @@ form#wrap
   height: 16px
   margin-right: 5px
   .inner
-    :background
-      :image  url(/images/admin/backgrounds/drag-and-drop.png)
-      :repeat repeat
+    background:
+      image:  url(/images/admin/backgrounds/drag-and-drop.png)
+      repeat: repeat
     height: 16px
     margin: 0 0
     width: 5px
@@ -357,14 +357,14 @@ form#wrap
   span
     margin-left: 15px
   input
-    :border = 1px solid !contentHeaderBorder
+    border: 1px solid $contentHeaderBorder
     +borderCorner()
     width: 80px
     text-align: center
-    :color = !lightGray
+    color: $lightGray
 .linked_to, .widget-type
   +left()
-  :color = !lightGray
+  color: $lightGray
 .action-button.tattributes
   margin-left: 4px
   &.first
@@ -374,7 +374,7 @@ form#wrap
 .choices
   margin: 20px 0
   input
-    :border = 1px solid !lightGray
+    border: 1px solid $lightGray
     +borderCorner()
     padding: 3px
 .legend textarea
@@ -385,11 +385,11 @@ form#wrap
   input
     font-weight: bold
   h2
-    :color = !lightGray
+    color: $lightGray
     font-weight: normal
     font-size: 1.1em
 .legend label
-  :color = !lightGray
+  color: $lightGray
   font-weight: normal
   font-size: .9em
   display: block
@@ -406,14 +406,14 @@ a.truncate
 //--------------------- ----------
 #footer
   clear: both
-  :background-color = !white
+  background-color: $white
 #lang-switcher
-  :background-color= !black
+  background-color:  $black
   float: right
   .dropdown
     a.dropdown_toggle span
       background-image: url(/images/admin/select/lang.png)
-      :color= !white
+      color:  $white
       font-weight: bold
     &.fr
       a.dropdown_toggle span
