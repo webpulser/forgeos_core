@@ -10,7 +10,7 @@
   #content.grid_16.alpha.omega
     .grid_12.alpha
       .padding-wrap
-        - right_categories = RightCategory.all(:joins => :translations, :order => 'name' )
+        - right_categories = RightCategory.order('name').joins(:translations)
         - right_categories.each do |right_category|
           .fieldset
             %a.small-icons.panel{ :href => '#' }
@@ -28,7 +28,7 @@
                   %label= right.name
               .clear
 
-      - rights = Right.all(:include => :right_categories, :conditions => { :categories => {:id => nil} })
+      - rights = Right.where(:conditions => { :categories => {:id => nil} }).includes(:right_categories)
       - unless rights.nil?
         .fieldset
           %a.small-icons.panel{ :href => '#' }

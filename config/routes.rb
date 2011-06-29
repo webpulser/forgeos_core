@@ -1,41 +1,127 @@
-ActionController::Routing::Routes.draw do |map|
-  map.logout '/logout', :controller => 'person_sessions', :action => 'destroy'
-  map.login '/login', :controller => 'person_sessions', :action => 'new'
+Rails.application.routes.draw do
+  match '/logout' => 'person_sessions#destroy', :as => :logout
+  match '/login' => 'person_sessions#new', :as => :login
+  match '/notifications' => 'application#notifications', :as => :notifications
+  match '/statistics/:type/:id.:format' => 'statistics_collector#index', :as => :statistics_collector
 
-  map.notifications '/notifications', :controller => 'application', :action => 'notifications'
-  map.statistics_collector '/statistics/:type/:id.:format', :controller => 'statistics_collector', :action => 'index'
-  map.resource :person_session
-
-  map.namespace :admin do |admin|
-    admin.logout 'logout', :controller => 'person_sessions', :action => 'destroy'
-    admin.login 'login', :controller => 'person_sessions', :action => 'new'
-    admin.notifications '/notifications', :controller => 'base', :action => 'notifications'
-    admin.statistics '/statistics', :controller => 'statistics'
-    admin.statistics_graph '/statistics/graph', :controller => 'statistics', :action => 'graph'
-
-    admin.resources :cachings
-    admin.resource :person_session
-    admin.resource :setting
-    admin.resource :account
-    admin.resources :administrators, :member => { :activate => :post }
-    admin.import '/import', :controller => 'import'
-    admin.resources :roles, :member => { :activate => :post }
-    admin.resources :rights
-    admin.resources :users, :collection => { :filter => [:post, :get] }, :member => { :activate => :post }
-    admin.resources :menus, :member => { :activate => :post, :duplicate => :get }
-
-    admin.resources :categories, :member => { :add_element => :post }
-    %w(picture media pdf doc audio video attachment admin role right user menu).each do |category|
-      admin.resources "#{category}_categories", :controller => 'categories', :requirements => { :type => "#{category}_category" }
+  ## ADMIN ROUTES ##
+  namespace :admin do
+    match 'logout' => 'person_sessions#destroy', :as => :logout
+    match 'login' => 'person_sessions#new', :as => :login
+    match '/notifications' => 'base#notifications', :as => :notifications
+    match '/statistics' => 'statistics#index', :as => :statistics
+    match '/statistics/graph' => 'statistics#graph', :as => :statistics_graph
+    resources :cachings
+    resource :person_session
+    resource :setting
+    resource :account
+    resources :administrators do
+    
+      member do
+        post :activate
+      end
+    
     end
-
-    admin.library '/library', :controller => 'attachments', :file_type => 'picture'
-    %w(medias pictures docs pdfs audios videos attachments).each do |resources_alias|
-      route_options = { :controller => :attachments, :collection => { :manage => :get }, :member => { :download => :get }, :except => [:new] }
-      route_options[:path_prefix] = 'admin/:file_type' if %w(attachments).include?(resources_alias)
-      admin.resources resources_alias.to_sym, route_options
+    match '/import' => 'import#index', :as => :import
+    resources :roles do
+      member do
+        post :activate
+      end
     end
-
-    admin.root :controller => 'dashboard'
+    resources :rights
+    resources :users do
+      collection do
+        post :filter
+        get :filter
+      end
+      member do
+        post :activate
+      end
+    end
+    resources :menus do
+      member do
+        get :duplicate
+        post :activate
+      end
+    end
+    resources :categories do
+      member do
+        post :add_element
+      end
+    end
+    resources :picture_categories
+    resources :media_categories
+    resources :pdf_categories
+    resources :doc_categories
+    resources :audio_categories
+    resources :video_categories
+    resources :attachment_categories
+    resources :admin_categories
+    resources :role_categories
+    resources :right_categories
+    resources :user_categories
+    resources :menu_categories
+    match '/library' => 'attachments#index', :as => :library, :file_type => 'picture'
+    resources :medias, :except => [:new] do
+      collection do
+        get :manage
+      end
+      member do
+        get :download
+      end
+    
+    end
+    resources :pictures, :except => [:new] do
+      collection do
+        get :manage
+      end
+      member do
+        get :download
+      end
+    end
+    resources :docs, :except => [:new] do
+      collection do
+        get :manage
+      end
+      member do
+        get :download
+      end
+    end
+    resources :pdfs, :except => [:new] do
+      collection do
+        get :manage
+      end
+      member do
+        get :download
+      end
+    end
+    resources :audios, :except => [:new] do
+      collection do
+        get :manage
+      end
+      member do
+        get :download
+      end
+    end
+    resources :videos, :except => [:new] do
+      collection do
+        get :manage
+      end
+      member do
+        get :download
+      end
+    end
+    resources :attachments, :except => [:new] do
+      collection do
+        get :manage
+      end
+      member do
+        get :download
+      end
+    end
   end
+  
+  root :to => 'person_sessions#new'
+
+  ## END ADMIN ROUTES ##
 end

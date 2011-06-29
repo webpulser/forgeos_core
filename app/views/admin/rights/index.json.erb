@@ -13,7 +13,8 @@
         right.action_name,
         content_tag(:span, '&nbsp;', :class => 'small-icons duplicate-link duplicate-right') +
         content_tag(:span, '&nbsp;', :class => 'small-icons edit-link edit-right') +
-        link_to_remote('', :url => [:admin, right],
+        link_to('', :url => [:admin, right],
+          :remote => true,
           :method => :delete,
           :confirm => I18n.t('right.destroy.confirm').capitalize,
           :success => "removedataTablesRow('#destroy_#{link_id}')", 

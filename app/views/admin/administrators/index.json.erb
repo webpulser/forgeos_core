@@ -12,15 +12,17 @@
         content_tag(:div, link_to("#{admin.firstname} #{admin.lastname}", [:edit, :admin, admin]), :class => 'admin-name'),
         admin.role.name,
         content_tag(:div, mail_to(admin.email, admin.email), :class => 'email' ),
-        link_to_remote('', :url => activate_admin_administrator_path(admin),
-         :complete => "toggleActivate('#show_#{link_id}')",
-         :html => {
-           :class => "small-icons #{klass}",
-           :id => "show_#{link_id}"
+        link_to('', :url => activate_admin_administrator_path(admin),
+          :remote => true,
+          :complete => "toggleActivate('#show_#{link_id}')",
+          :html => {
+            :class => "small-icons #{klass}",
+            :id => "show_#{link_id}"
         }),
         link_to('', '#', :class => 'small-icons duplicate-link') +
         link_to('', [:edit, :admin, admin], :class => 'small-icons edit-link') +
-        link_to_remote('', :url => [:admin, admin],
+        link_to('', :url => [:admin, admin],
+          :remote => true,
           :method => :delete,
           :confirm => I18n.t('admin.destroy.confirm').capitalize,
           :success => "removedataTablesRow('#destroy_#{link_id}')", 

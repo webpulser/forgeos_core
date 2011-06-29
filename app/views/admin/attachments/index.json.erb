@@ -14,7 +14,8 @@
         "#{media.size/1024} #{I18n.t('media.byte.kilo')}" <<
         "N/A" <<
         link_to('', [:edit, :admin, media], :class => 'small-icons edit-link') +
-        link_to_remote('', :url => [:admin, media],
+        link_to('', :url => [:admin, media],
+          :remote => true,
           :method => :delete,
           :confirm => I18n.t('media.destroy.confirm').capitalize,
           :success => "removedataTablesRow('#destroy_#{link_id}')",

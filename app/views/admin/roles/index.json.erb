@@ -10,15 +10,17 @@
           content_tag(:p,role.administrators.all.collect{ |admin| link_to("#{admin.firstname} #{admin.lastname}", [:admin, admin]) }.join('<br />') , :style=>'display:none'),
         role.administrators.count,
         role.created_at.to_s(:short),
-        link_to_remote('', :url => activate_admin_role_path(role),
-         :complete => "toggleActivate('#show_#{link_id}')",
-         :html => {
-           :class => "small-icons #{klass}",
-           :id => "show_#{link_id}"
+        link_to('', :url => activate_admin_role_path(role),
+          :remote => true,
+          :complete => "toggleActivate('#show_#{link_id}')",
+          :html => {
+            :class => "small-icons #{klass}",
+            :id => "show_#{link_id}"
         }),
         #link_to('', [:duplicate, :admin, role], :class => 'small-icons duplicate-link') +
         link_to('', [:edit, :admin, role], :class => 'small-icons edit-link') +
-        link_to_remote('', :url => [:admin, role],
+        link_to('', :url => [:admin, role],
+          :remote => true,
           :method => :delete,
           :confirm => I18n.t('role.destroy.confirm').capitalize,
           :success => "removedataTablesRow('#destroy_#{link_id}')",

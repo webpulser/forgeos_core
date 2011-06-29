@@ -34,7 +34,7 @@ private
   end
 
   def current_user
-    session_key = ActionController::Base.session_options[:key]
+    session_key = Rails.application.config.session_store
     unless defined?(@current_user)
       @current_user = current_user_session && current_user_session.record
     end
