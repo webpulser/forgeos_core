@@ -13,7 +13,7 @@
 
       unless params[:mode] == 'selection'
         table <<
-        link_to('', :url => activate_admin_user_path(user),
+        link_to('', :url => forgeos_core.activate_admin_user_path(user),
           :remote => true,
           :complete => "toggleActivate('#show_#{link_id}')",
           :html => {

@@ -27,7 +27,7 @@ private
   end
 
   def get_graph
-    @graph = open_flash_chart_object(666, 250, admin_statistics_graph_path(:timestamp => params[:timestamp]), true,'/flashes/')
+    @graph = open_flash_chart_object(666, 250, forgeos_core.admin_statistics_graph_path(:timestamp => params[:timestamp]), true,'/flashes/')
   end
 
   def generate_graph(element, y_max, colour)

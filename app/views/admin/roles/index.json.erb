@@ -10,7 +10,7 @@
           content_tag(:p,role.administrators.all.collect{ |admin| link_to("#{admin.firstname} #{admin.lastname}", [:admin, admin]) }.join('<br />') , :style=>'display:none'),
         role.administrators.count,
         role.created_at.to_s(:short),
-        link_to('', :url => activate_admin_role_path(role),
+        link_to('', :url => forgeos_core.activate_admin_role_path(role),
           :remote => true,
           :complete => "toggleActivate('#show_#{link_id}')",
           :html => {

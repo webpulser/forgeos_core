@@ -4,4 +4,4 @@
     - if (file_type == @file_type.to_s) || (@media && file_type == @media.class.to_s.downcase)
       %li.ui-state-default.ui-corner-top.ui-tabs-selected.ui-state-active= link_to span, '#content'
     - else
-      %li.ui-state-default.ui-corner-top= link_to span, admin_attachments_path(:file_type => file_type)
+      %li.ui-state-default.ui-corner-top= link_to span, forgeos_core.admin_attachments_path(:file_type => file_type)

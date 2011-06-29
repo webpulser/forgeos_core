@@ -12,7 +12,7 @@
         content_tag(:div, link_to("#{admin.firstname} #{admin.lastname}", [:edit, :admin, admin]), :class => 'admin-name'),
         admin.role.name,
         content_tag(:div, mail_to(admin.email, admin.email), :class => 'email' ),
-        link_to('', :url => activate_admin_administrator_path(admin),
+        link_to('', :url => forgeos_core.activate_admin_administrator_path(admin),
           :remote => true,
           :complete => "toggleActivate('#show_#{link_id}')",
           :html => {

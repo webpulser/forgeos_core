@@ -6,7 +6,7 @@
   #login-container.grid_10
     .sign-in-message
       = t('log.in.action').capitalize
-    - form_for @person_session, :url => admin_person_session_path do |f|
+    - form_for @person_session, :url => forgeos_core.admin_person_session_path do |f|
       = f.label :email, I18n.t('email').capitalize
       %br
       = f.text_field :email, :class => 'text'

@@ -10,4 +10,4 @@
   .content-background
   %table#table.datatable.draggable_rows
 
-= dataTables_tag :url => admin_rights_path(:format => :json), :columns => ["{'bSearchable':false,'bSortable':false}","{'sTitle':'#{escape_javascript(I18n.t :name)}'}","{'sTitle':'#{escape_javascript(I18n.t :controller_name)}'}","{'sTitle':'#{escape_javascript(I18n.t :action_name)}'}","{'sClass':'actions-td','bSearchable':false,'bSortable':false}"]
+= dataTables_tag :url => forgeos_core.admin_rights_path(:format => :json), :columns => ["{'bSearchable':false,'bSortable':false}","{'sTitle':'#{escape_javascript(I18n.t :name)}'}","{'sTitle':'#{escape_javascript(I18n.t :controller_name)}'}","{'sTitle':'#{escape_javascript(I18n.t :action_name)}'}","{'sClass':'actions-td','bSearchable':false,'bSortable':false}"]
