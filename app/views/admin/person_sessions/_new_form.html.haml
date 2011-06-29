@@ -6,7 +6,7 @@
   #login-container.grid_10
     .sign-in-message
       = t('log.in.action').capitalize
-    - form_for @person_session, :url => forgeos_core.admin_person_session_path do |f|
+    = form_for @person_session, :url => forgeos_core.admin_person_session_path do |f|
       = f.label :email, I18n.t('email').capitalize
       %br
       = f.text_field :email, :class => 'text'
@@ -14,8 +14,7 @@
       = f.label :password, I18n.t('password').capitalize
       %br
       = f.password_field :password, :class => 'text'
-      -#%a{ :href => "#" }
-      = link_to t('get_forgotten_password').capitalize, :action => 'reset_password'
+      = link_to t('get_forgotten_password').capitalize, forgeos_core.reset_password_admin_person_session_path
       %br
       = f.check_box :remember_me
       = t(:remember_me).capitalize

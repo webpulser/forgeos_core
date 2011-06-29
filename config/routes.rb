@@ -15,7 +15,11 @@ Forgeos::Core::Engine.routes.draw do
     match '/import' => 'import#index', :as => :import
 
     resources :cachings
-    resource :person_session
+    resource :person_session do
+      collection do
+        get :reset_password
+      end
+    end
     resource :setting
     resource :account
     resources :administrators do

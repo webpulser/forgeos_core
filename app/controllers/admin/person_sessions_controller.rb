@@ -22,7 +22,7 @@ class Admin::PersonSessionsController < Admin::BaseController
     flash[:notice] = t('log.out.success').capitalize
   end
 
-  def reset_admin_password
+  def reset_password
     user = Administrator.find_by_email(params[:email])
     if user
       generated_password = generate_password(8)
