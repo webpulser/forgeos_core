@@ -1,19 +1,19 @@
 function toggleActivate(selector){
-  var link = $(selector);
+  var link = jQuery(selector);
   link.toggleClass('see-on');
   link.toggleClass('see-off');
 }
 
 function showObjectsAssociated(){
-  $('.plus').bind('click',function(){
-    var element=$(this);
+  jQuery('.plus').bind('click',function(){
+    var element= jQuery(this);
     var tr=element.parents('tr');
     tr.toggleClass('open');
   });
 }
 
 function get_rails_element_id(element){
-  var id = $(element).attr('id').split('_');
+  var id = jQuery(element).attr('id').split('_');
   return id[id.length-1];
 }
 
@@ -36,7 +36,7 @@ function get_rails_attribute_from_name(name){
 }
 
 function jquery_obj_to_str(obj){
-  return $('<div>').append($(obj).clone()).remove().html();
+  return jQuery('<div>').append(jQuery(obj).clone()).remove().html();
 }
 
 function get_json_params_from_url(url){

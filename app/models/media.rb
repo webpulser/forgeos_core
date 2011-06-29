@@ -1,4 +1,4 @@
 class Media < Attachment
-  has_attachment YAML.load_file(File.join(Rails.root, 'config', 'attachments.yml'))['media'].symbolize_keys
+  has_attachment self.options_for('media')
   validates_as_attachment
 end

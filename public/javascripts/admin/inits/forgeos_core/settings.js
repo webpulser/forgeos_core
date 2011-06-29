@@ -1,15 +1,15 @@
 jQuery(document).ready(function(){
-  $("#blocks-header.backgrounds.settings").tabs();
+  jQuery("#blocks-header.backgrounds.settings").tabs();
  
-  $('#setting_mailer_delivery_method').change(function(){
-    var value = $('#setting_mailer_delivery_method').val();
-    $('.delivery_method_settings').hide();
-    $('#'+value).show();
+  jQuery('#setting_mailer_delivery_method').change(function(){
+    var value = jQuery('#setting_mailer_delivery_method').val();
+    jQuery('.delivery_method_settings').hide();
+    jQuery('#'+value).show();
   })
 
-  if ($('#setting_mailer_delivery_method').val() != null){
-    var value = $('#setting_mailer_delivery_method').val();
-    $('.delivery_method_settings').hide();
-    $('#'+value).show();
+  if (jQuery('#setting_mailer_delivery_method').val() != null){
+    var value = jQuery('#setting_mailer_delivery_method').val();
+    jQuery('.delivery_method_settings').hide();
+    jQuery('#'+value).show();
   }
 });

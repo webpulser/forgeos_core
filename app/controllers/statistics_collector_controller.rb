@@ -6,8 +6,10 @@ class StatisticsCollectorController < ActionController::Base
         (cookies[cookie_name].blank? or
          !cookies[cookie_name].split(',').include?(object.id.to_s))
         object.viewed_counters.new.increment_counter
-        cookies[cookie_name] ||= ""
-        cookies[cookie_name] += ",#{object.id}"
+        cookies[cookie_name] = {
+          :value => (cookies[cookie_name] || '') + ",#{object.id}",
+          :expires => Date.current.end_of_day
+        }
       end
     end
     render(:nothing => true)

@@ -1,13 +1,13 @@
 jQuery(document).ready(function(){
 
   // add a picture button
-  $('.add-picturepicture').live('click',function(){
-     openpictureimageUploadDialog($(this));
+  jQuery('.add-picturepicture').live('click',function(){
+     openpictureimageUploadDialog(jQuery(this));
      return false;
   });
 
   // Dialog to select picture
-  $('#imagepictureSelectDialog.project').dialog({
+  jQuery('#imagepictureSelectDialog.project').dialog({
     autoOpen:false,
     modal:true,
     minHeight: 380,
@@ -24,35 +24,37 @@ jQuery(document).ready(function(){
             add_picture_picture_to_element(path,id,name);
           }
         });
-        $('#imagepictureSelectDialog').dialog('close');
+        jQuery('#imagepictureSelectDialog').dialog('close');
       }
     },
-    open: function(){ $('#image-table-picture:visible,#thumbnail-table-picture:visible').dataTableInstance().fnDraw(); }
+    open: function(e,ui){
+      eval(jQuery('#image-table-picture:visible,#thumbnail-table-picture:visible').data('dataTables_init_function')+'()');
+    }
   });
 
-  $('#imagepictureUploadDialog').dialog({
+  jQuery('#imagepictureUploadDialog').dialog({
     autoOpen:false,
     modal:true,
     width: 500,
     buttons: {
       Upload: function() {
-        $('#imagepictureUpload').uploadifyUpload();
+        jQuery('#imagepictureUpload').uploadifyUpload();
       },
       'Clear queue': function() {
-        $('#imagepictureUpload').uploadifyClearQueue();
+        jQuery('#imagepictureUpload').uploadifyClearQueue();
       }
     },
     resizable:'se'
   });
 
   // add a image button
-  $('.add-imagepicture').live('click',function(){
-     openimageimageUploadDialog($(this));
+  jQuery('.add-imagepicture').live('click',function(){
+     openimageimageUploadDialog(jQuery(this));
      return false;
   });
 
   // Dialog to select picture
-  $('#imageimageSelectDialog.project').dialog({
+  jQuery('#imageimageSelectDialog.project').dialog({
     autoOpen:false,
     modal:true,
     minHeight: 380,
@@ -69,35 +71,37 @@ jQuery(document).ready(function(){
             add_image_picture_to_element(path,id,name);
           }
         });
-        $('#imageimageSelectDialog').dialog('close');
+        jQuery('#imageimageSelectDialog').dialog('close');
       }
     },
-    open: function(){ $('#image-table-image:visible,#thumbnail-table-image:visible').dataTableInstance().fnDraw(); }
+    open: function(e,ui){
+      eval(jQuery('#image-table-image:visible,#thumbnail-table-image:visible').data('dataTables_init_function')+'()');
+    }
   });
 
-  $('#imageimageUploadDialog').dialog({
+  jQuery('#imageimageUploadDialog').dialog({
     autoOpen:false,
     modal:true,
     width: 500,
     buttons: {
       Upload: function() {
-        $('#imageimageUpload').uploadifyUpload();
+        jQuery('#imageimageUpload').uploadifyUpload();
       },
       'Clear queue': function() {
-        $('#imageimageUpload').uploadifyClearQueue();
+        jQuery('#imageimageUpload').uploadifyClearQueue();
       }
     },
     resizable:'se'
   });
 
   // add visuals button
-  $('.add-visualpictures').live('click',function(){
-     openvisualsimageUploadDialog($(this));
+  jQuery('.add-visualpictures').live('click',function(){
+     openvisualsimageUploadDialog(jQuery(this));
      return false;
   });
 
   // Dialog to select pictures
-  $('#imagevisualsSelectDialog.project').dialog({
+  jQuery('#imagevisualsSelectDialog.project').dialog({
     autoOpen:false,
     modal:true,
     minHeight: 380,
@@ -114,22 +118,24 @@ jQuery(document).ready(function(){
             add_picture_to_element(path,id,name);
           }
         });
-        $('#imagevisualsSelectDialog').dialog('close');
+        jQuery('#imagevisualsSelectDialog').dialog('close');
       }
     },
-    open: function(){ $('#image-table-visuals:visible,#thumbnail-table-visuals:visible').dataTableInstance().fnDraw(); }
+    open: function(e,ui){
+      eval(jQuery('#image-table-visuals:visible,#thumbnail-table-visuals:visible').data('dataTables_init_function')+'()');
+    }
   });
 
-  $('#imagevisualsUploadDialog').dialog({
+  jQuery('#imagevisualsUploadDialog').dialog({
     autoOpen:false,
     modal:true,
     width: 500,
     buttons: {
       Upload: function() {
-        $('#imagevisualsUpload').uploadifyUpload();
+        jQuery('#imagevisualsUpload').uploadifyUpload();
       },
       'Clear queue': function() {
-        $('#imagevisualsUpload').uploadifyClearQueue();
+        jQuery('#imagevisualsUpload').uploadifyClearQueue();
       }
     },
     resizable:'se'

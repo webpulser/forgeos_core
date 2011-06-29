@@ -9,4 +9,63 @@ main_setting:
     table: nil
   sendmail_settings: !ruby/object:OpenStruct
     table: nil
+  attachments:
+    picture:
+      storage: :file_system
+      file_system_path: 'public/uploads/images'
+      content_type: :image
+      thumbnails:
+        :big: '500x500'
+        :normal: '200x200'
+        :small: '100x100'
+        :thumb: '50x50'
+        :categories_icon: '16x16'
+      max_size: 52428800
 
+    avatar:
+      storage: :file_system
+      file_system_path: 'public/uploads/avatars'
+      content_type: :image
+      thumbnails:
+        :small: '100x100'
+        :thumb: '50x50'
+      max_size: 52428800
+
+    doc:
+      content_type:
+        - 'application/msword'
+        - 'application/vnd.oasis.opendocument.text'
+      file_system_path: 'public/uploads/docs'
+      storage: :file_system
+      max_size: 52428800
+
+    pdf:
+      content_type: 'application/pdf'
+      file_system_path: 'public/uploads/pdfs'
+      storage: :file_system
+      max_size: 52428800
+
+    video:
+      content_type:
+        - 'video/x-msvideo'
+        - 'video/mpeg'
+        - 'video/x-flv'
+        - 'video/quicktime'
+      file_system_path: 'public/uploads/videos'
+      storage: :file_system
+      max_size: 52428800
+
+    audio:
+      content_type:
+        - 'audio/mpeg'
+        - 'audio/x-wav'
+        - 'audio/ogg'
+        - 'application/ogg'
+      file_system_path: 'public/uploads/audio'
+      storage: :file_system
+      max_size: 52428800
+
+    media:
+      file_system_path: 'public/uploads/medias'
+      storage: :file_system
+      max_size: 52428800

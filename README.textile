@@ -2,7 +2,7 @@ h1. Introduction
 
 ForgeosCore is the core of Forgeos project "http://www.forgeos.com":http://www.forgeos.com
 
-VERSION : 0.9.0-rc2
+VERSION : 0.9.6
 
 h1. Prerequisites
 

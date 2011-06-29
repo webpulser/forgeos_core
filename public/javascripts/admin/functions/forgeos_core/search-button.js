@@ -3,7 +3,7 @@
  **/
 function toggle_search_elements(){
   //Get back the parent's clicked element
-  var parent = $(this).parents('#search');
+  var parent = jQuery(this).parents('#search');
   //get its classes
   var classe = parent.attr('class');
   var classes = new Array();
@@ -11,25 +11,25 @@ function toggle_search_elements(){
   //get the second class (first is right, and third is open or nothing =>useless for references
   classe= classes[1];
   //Add the open class to the parent
-  $(parent).toggleClass('open');
+  jQuery(parent).toggleClass('open');
   if(classe!='' && classe!=undefined && classe!='open'){
-    $('.search-form-'+classe).toggle();
+    jQuery('.search-form-'+classe).toggle();
   }
   else{
-    $('.search-form').toggle();
+    jQuery('.search-form').toggle();
   }
   return false;
 }
 
 function toggle_search_elements_ok(){
-  var parent = $(this).data('parent');
+  var parent = jQuery(this).data('parent');
   if(parent!=''){
-    $('#search.'+parent).toggleClass('open');
-    $('.search-form-'+parent).toggle();
+    jQuery('#search.'+parent).toggleClass('open');
+    jQuery('.search-form-'+parent).toggle();
   }
   else{
-    $('#search').toggleClass('open');
-    $('.search-form').toggle();
+    jQuery('#search').toggleClass('open');
+    jQuery('.search-form').toggle();
   }
   return false;
 }

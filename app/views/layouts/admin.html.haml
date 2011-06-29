@@ -6,7 +6,6 @@
     %link{ :href => "/images/admin/favicon.gif", :rel => "shortcut icon", :type => "image/gif" }
     = stylesheet_link_tag %w(960 jquery-ui/themes/forgeos jquery.selectbox jstree/tree_component admin/base), :cache => 'admin'
     = javascript_include_tag 'jquery'
-    = javascript_tag "var AUTH_TOKEN = #{form_authenticity_token.inspect};" if protect_against_forgery?
     %title= "#{I18n.t(:forgeos)} - #{I18n.t(@controller.controller_name, :scope => ['back_office', 'menu']).capitalize}"
   %body
     #container.container_16
@@ -28,3 +27,14 @@
       = javascript_include_tag %w(tiny_mce/jquery.tinymce jquery-ui jrails jquery.dataTables.min jquery.dataSlides jstree/jquery.tree jstree/plugins/jquery.tree.contextmenu), :cache => 'admin/lib'
       = javascript_include_dir_tag('admin/functions/', :cache => 'admin/functions')
       = javascript_include_dir_tag('admin/inits/', :cache => 'admin/inits')
+      :javascript
+        window._forgeos_js_vars = {
+         "session_key": '#{ActionController::Base.session_options[:key]}',
+         "session": encodeURIComponent('#{cookies[ActionController::Base.session_options[:key]]}'),
+         "locale": '#{I18n.locale}',
+         "token": encodeURIComponent('#{form_authenticity_token.inspect}')
+        }
+        jQuery(document).ready(function(){
+          InitCustomSelects();
+          display_notifications();
+        });

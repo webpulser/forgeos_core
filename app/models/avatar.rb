@@ -1,4 +1,4 @@
 class Avatar < Attachment
-  has_attachment YAML.load_file(File.join(Rails.root, 'config', 'attachments.yml'))['avatar'].symbolize_keys
+  has_attachment self.options_for('avatar')
   validates_as_attachment
 end

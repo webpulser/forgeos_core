@@ -1,22 +1,24 @@
 class Admin::BaseController < ApplicationController
   layout 'admin'
   before_filter :login_required, :edition_locale, :except => [:notifications, :url]
-  skip_before_filter :validate_authenticity_token
+  skip_after_filter :log_visit
+  protect_from_forgery
+
 private
   def login_required
     unless current_user.is_a?(Administrator)
       store_location
       flash[:warning] = t(:login_required)
-      redirect_to(admin_login_path)
+      redirect_to([:admin,:login])
       return false
     end
     unless current_user.access_path?(params[:controller], params[:action])
       store_location
       flash[:warning] = t(:admin_access_denied)
       if current_user.access_path?('admin/dashboard','index')
-        redirect_to(admin_root_path)
+        redirect_to([:admin,:root])
       else
-        redirect_to(admin_login_path)
+        redirect_to([:admin, :login])
       end
       return false
     end

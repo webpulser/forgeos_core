@@ -1,12 +1,12 @@
 module Admin::BaseHelper
   include AttachmentHelper
-  
+
   def dataTables_tag(options = {})
     id = options[:id].nil? ? 'table' : options[:id]
     columns = options[:columns]
     options[:sort_col].nil? ? sort_col = 1 : sort_col = options[:sort_col]
     options[:sort_order].nil? ? sort_order = 'asc' : sort_order = options[:sort_order]
-    
+
     save_state = options[:save_state] || false
     per_page = options[:per_page] || 50
 
@@ -23,42 +23,54 @@ module Admin::BaseHelper
       data_source += "'fnDrawCallback': #{options[:callback]},"
     end
 
+    dataTables_init_function = "initDataTables_on_#{id.gsub('-','_')}"
+
     javascript_tag "
-    jQuery(document).ready(function(){
-      var table = $('##{id}').dataTable({
-        'sPaginationType': 'full_numbers',
-        'sDom': \"<'top'f>tpl<'clear'>i\",
-        'aoColumns': [ #{columns.join(',')} ],
-        'sProcessing': true,
-        'iDisplayLength': #{per_page},
-        'bLengthChange': true,
-        'aaSorting': [[#{sort_col},'#{sort_order}']],
-        'bStateSave': #{save_state},
-        'bAutoWidth': false,
-        #{data_source}
-        'oLanguage': {
-          'sProcessing' : '#{t('jquery.dataTables.oLanguage.sProcessing')}',
-          'sLengthMenu':'#{t('jquery.dataTables.oLanguage.sLengthMenu')}',
-          'sZeroRecords': '#{t('jquery.dataTables.oLanguage.sZeroRecords')}',
-          'sInfo': '#{t('jquery.dataTables.oLanguage.sInfo')}',
-          'sInfoEmpty': '#{t('jquery.dataTables.oLanguage.sInfoEmpty')}',
-          'sSearch': '#{t('jquery.dataTables.oLanguage.sSearch')}',
-          'oPaginate': {
-            'sFirst': '#{t('jquery.dataTables.oLanguage.sFirst')}',
-            'sPrevious': '#{t('jquery.dataTables.oLanguage.sPrevious')}',
-            'sNext': '#{t('jquery.dataTables.oLanguage.sNext')}',
-            'sLast': '#{t('jquery.dataTables.oLanguage.sLast')}'
-          }
+      function #{dataTables_init_function}(){
+        var target = jQuery('##{id}');
+        if (typeof(target.dataTableInstance) != 'undefined' && typeof(target.dataTableInstance()) != 'undefined') {
+          oTable.fnDraw();
+        } else {
+          var table = target.dataTable({
+            'sPaginationType': 'full_numbers',
+            'sDom': \"<'top'f>tpl<'clear'>i\",
+            'aoColumns': [ #{columns.join(',')} ],
+            'sProcessing': true,
+            'iDisplayLength': #{per_page},
+            'bLengthChange': true,
+            'aaSorting': [[#{sort_col},'#{sort_order}']],
+            'bStateSave': #{save_state},
+            'bAutoWidth': false,
+            #{data_source}
+            'oLanguage': {
+              'sProcessing' : '#{t('jquery.dataTables.oLanguage.sProcessing')}',
+              'sLengthMenu':'#{t('jquery.dataTables.oLanguage.sLengthMenu')}',
+              'sZeroRecords': '#{t('jquery.dataTables.oLanguage.sZeroRecords')}',
+              'sInfo': '#{t('jquery.dataTables.oLanguage.sInfo')}',
+              'sInfoEmpty': '#{t('jquery.dataTables.oLanguage.sInfoEmpty')}',
+              'sSearch': '#{t('jquery.dataTables.oLanguage.sSearch')}',
+              'oPaginate': {
+                'sFirst': '#{t('jquery.dataTables.oLanguage.sFirst')}',
+                'sPrevious': '#{t('jquery.dataTables.oLanguage.sPrevious')}',
+                'sNext': '#{t('jquery.dataTables.oLanguage.sNext')}',
+                'sLast': '#{t('jquery.dataTables.oLanguage.sLast')}'
+              }
+            }
+          });
+          oTables.push(table);
+          oTable = table;
         }
+      }
+
+      jQuery(document).ready(function(){
+        if(typeof(oTables) == 'undefined') {
+          oTables = new Array();
+        }
+        jQuery('##{id}').data('dataTables_init_function','#{dataTables_init_function}');
+        #{"eval(jQuery('##{id}').data('dataTables_init_function')+'()');" if options[:autostart] != false}
       });
-      if(typeof oTables == 'undefined')
-        oTables = new Array();
-
-      oTables.push(table);
-      oTable = oTables[0];
-    });"
+    "
   end
-
 
   def dataSlides_tag(options = {})
     id = options[:id].nil? ? 'table' : options[:id]
@@ -73,39 +85,52 @@ module Admin::BaseHelper
       data_source += "'fnRowCallback': DataTablesRowCallBack,"
     end
 
-    javascript_tag "
-    jQuery(document).ready(function(){
-      var table = $('##{id}').dataSlide({
-        'sPaginationType': 'full_numbers',
-        'sDom': \"<'top'if>t<'bottom'p<'clear'>\",
-        'aoColumns': [ #{columns.join(',')} ],
-        'sProcessing': true,
-        'bStateSave': false,
-        'bLengthChange': true,
-        'iDisplayLength': 12,
-        'iDisplayEnd': 12,
-        #{data_source}
-        'oLanguage': {
-          'sProcessing' : '#{t('jquery.dataTables.oLanguage.sProcessing')}',
-          'sLengthMenu':'#{t('jquery.dataTables.oLanguage.sLengthMenu')}',
-          'sZeroRecords':'#{t('jquery.dataTables.oLanguage.sZeroRecords')}',
-          'sInfo':'#{t('jquery.dataTables.oLanguage.sInfo')}',
-          'sInfoEmpty':'#{t('jquery.dataTables.oLanguage.sInfoEmpty')}',
-          'sSearch': '#{t('jquery.dataTables.oLanguage.sSearch')}',
-          'oPaginate': {
-            'sFirst': '#{t('jquery.dataTables.oLanguage.sFirst')}',
-            'sPrevious': '#{t('jquery.dataTables.oLanguage.sPrevious')}',
-            'sNext': '#{t('jquery.dataTables.oLanguage.sNext')}',
-            'sLast': '#{t('jquery.dataTables.oLanguage.sLast')}'
-          }
-        }
-      });
-      if(typeof oTables == 'undefined')
-        oTables = new Array();
+    dataTables_init_function = "initDataSlides_on_#{id.gsub('-','_')}"
 
-      oTables.push(table);
-      oTable = oTables[0];
-    });"
+    javascript_tag "
+      function #{dataTables_init_function}(){
+        var target = jQuery('##{id}');
+        if (typeof(target.dataTableInstance) != 'undefined' && typeof(target.dataTableInstance()) != 'undefined') {
+          oTable.fnDraw();
+        } else {
+          var table = target.dataSlide({
+            'sPaginationType': 'full_numbers',
+            'sDom': \"<'top'if>t<'bottom'p<'clear'>\",
+            'aoColumns': [ #{columns.join(',')} ],
+            'sProcessing': true,
+            'bStateSave': false,
+            'bLengthChange': true,
+            'iDisplayLength': 12,
+            'iDisplayEnd': 12,
+            #{data_source}
+            'oLanguage': {
+              'sProcessing' : '#{t('jquery.dataTables.oLanguage.sProcessing')}',
+              'sLengthMenu':'#{t('jquery.dataTables.oLanguage.sLengthMenu')}',
+              'sZeroRecords':'#{t('jquery.dataTables.oLanguage.sZeroRecords')}',
+              'sInfo':'#{t('jquery.dataTables.oLanguage.sInfo')}',
+              'sInfoEmpty':'#{t('jquery.dataTables.oLanguage.sInfoEmpty')}',
+              'sSearch': '#{t('jquery.dataTables.oLanguage.sSearch')}',
+              'oPaginate': {
+                'sFirst': '#{t('jquery.dataTables.oLanguage.sFirst')}',
+                'sPrevious': '#{t('jquery.dataTables.oLanguage.sPrevious')}',
+                'sNext': '#{t('jquery.dataTables.oLanguage.sNext')}',
+                'sLast': '#{t('jquery.dataTables.oLanguage.sLast')}'
+              }
+            }
+          });
+          oTables.push(table);
+          oTable = table;
+        }
+      }
+
+      jQuery(document).ready(function(){
+        if(typeof(oTables) == 'undefined') {
+          oTables = new Array();
+        }
+        jQuery('##{id}').data('dataTables_init_function','#{dataTables_init_function}');
+        #{"eval(jQuery('##{id}').data('dataTables_init_function')+'()');" if options[:autostart] != false}
+      });
+    "
   end
 
   def fg_search

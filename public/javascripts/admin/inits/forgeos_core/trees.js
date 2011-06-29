@@ -11,7 +11,7 @@ jQuery(document).ready(function(){
   init_category_tree('#doc-attachment-tree','DocCategory','/admin/doc_categories.json');
 
   //init the menu modify tree
-  $("#menu-tree").tree({
+  jQuery("#menu-tree").tree({
     ui: {
       theme_path: '/stylesheets/jstree/themes/',
       theme_name : 'menu-tree',
@@ -19,12 +19,12 @@ jQuery(document).ready(function(){
     },
     callback: {
       onload: function(TREE_OBJ){
-        tree_id = $(TREE_OBJ.container).attr('id');
-        $(TREE_OBJ.container).removeClass('tree-default');
+        tree_id = jQuery(TREE_OBJ.container).attr('id');
+        jQuery(TREE_OBJ.container).removeClass('tree-default');
         },
       onmove: function(NODE, REF_NODE, TYPE, TREE_OBJ, RB){
-        var menu = $('#menu-tree').children('ul');
-        var parent = $(NODE).parents('li:first');
+        var menu = jQuery('#menu-tree').children('ul');
+        var parent = jQuery(NODE).parents('li:first');
 
         // update names, ids, parent_ids and positions
         update_menu_names_and_ids(menu, 'menu[menu_links_attributes]', 'menu_menu_links_attributes_');
@@ -38,7 +38,7 @@ jQuery(document).ready(function(){
   });
 
   //init the menu modify tree
-  $("#menu-tree-ro").tree({
+  jQuery("#menu-tree-ro").tree({
     ui: {
       theme_path: '/stylesheets/jstree/themes/',
       theme_name : 'menu-tree',
@@ -49,8 +49,8 @@ jQuery(document).ready(function(){
     },
     callback: {
       onload: function(TREE_OBJ){
-        tree_id = $(TREE_OBJ.container).attr('id');
-        $(TREE_OBJ.container).removeClass('tree-default');
+        tree_id = jQuery(TREE_OBJ.container).attr('id');
+        jQuery(TREE_OBJ.container).removeClass('tree-default');
       }
     }
   });

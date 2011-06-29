@@ -1,5 +1,6 @@
 class Attachment < ActiveRecord::Base
-  has_and_belongs_to_many   :attachment_categories, :readonly => true, :join_table => 'categories_elements', :foreign_key => 'element_id', :association_foreign_key => 'category_id'
+  has_and_belongs_to_many :attachment_categories, :readonly => true, :join_table => 'categories_elements', :foreign_key => 'element_id', :association_foreign_key => 'category_id'
+  has_and_belongs_to_many :categories, :readonly => true, :join_table => 'categories_elements', :foreign_key => 'element_id', :association_foreign_key => 'category_id'
   has_many :attachment_links, :dependent => :destroy
 
   before_save :fill_blank_name_with_filename
@@ -13,12 +14,18 @@ class Attachment < ActiveRecord::Base
   end
 
   def file_type
-    self.content_type.split('/').last
+    content_type.split('/').last
   end
 
   def fill_blank_name_with_filename
-    if self.name.nil? || self.name.blank?
-      self.name = self.filename.split('.').first if self.filename
+    if name.blank? and filename
+      self.name = filename.split('.').first
     end
+  end
+
+  private
+
+  def self.options_for(target = class_name)
+    (Setting.current.attachments[target] || {}).symbolize_keys
   end
 end

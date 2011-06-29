@@ -1,8 +1,8 @@
 jQuery(document).ready(function(){
   //when click on selects, resize the otions container to stretch with the select's size
-  $('.dropdown').bind('click', function()
+  jQuery('.dropdown').bind('click', function()
   {
-    var divOption=$(this).find('.options');
-    divOption.width($(this).width()-15);
+    var divOption=jQuery(this).find('.options');
+    divOption.width(jQuery(this).width()-15);
   });
 });
