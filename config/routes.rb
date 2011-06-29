@@ -1,8 +1,9 @@
-Rails.application.routes.draw do
+Forgeos::Core::Engine.routes.draw do
   match '/logout' => 'person_sessions#destroy', :as => :logout
   match '/login' => 'person_sessions#new', :as => :login
   match '/notifications' => 'application#notifications', :as => :notifications
   match '/statistics/:type/:id.:format' => 'statistics_collector#index', :as => :statistics_collector
+  resource :person_session
 
   ## ADMIN ROUTES ##
   namespace :admin do
@@ -11,18 +12,19 @@ Rails.application.routes.draw do
     match '/notifications' => 'base#notifications', :as => :notifications
     match '/statistics' => 'statistics#index', :as => :statistics
     match '/statistics/graph' => 'statistics#graph', :as => :statistics_graph
+    match '/import' => 'import#index', :as => :import
+
     resources :cachings
     resource :person_session
     resource :setting
     resource :account
     resources :administrators do
-    
+
       member do
         post :activate
       end
-    
+
     end
-    match '/import' => 'import#index', :as => :import
     resources :roles do
       member do
         post :activate
@@ -49,79 +51,26 @@ Rails.application.routes.draw do
         post :add_element
       end
     end
-    resources :picture_categories
-    resources :media_categories
-    resources :pdf_categories
-    resources :doc_categories
-    resources :audio_categories
-    resources :video_categories
-    resources :attachment_categories
-    resources :admin_categories
-    resources :role_categories
-    resources :right_categories
-    resources :user_categories
-    resources :menu_categories
+
+    %w(media picture doc pdf audio video attachment admin role right user menu).each do |model|
+      resources "#{model}_categories".to_sym, :controller => 'admin/categories' do
+        member do
+          post :add_element
+        end
+      end
+    end
+
     match '/library' => 'attachments#index', :as => :library, :file_type => 'picture'
-    resources :medias, :except => [:new] do
-      collection do
-        get :manage
-      end
-      member do
-        get :download
-      end
-    
-    end
-    resources :pictures, :except => [:new] do
-      collection do
-        get :manage
-      end
-      member do
-        get :download
-      end
-    end
-    resources :docs, :except => [:new] do
-      collection do
-        get :manage
-      end
-      member do
-        get :download
-      end
-    end
-    resources :pdfs, :except => [:new] do
-      collection do
-        get :manage
-      end
-      member do
-        get :download
-      end
-    end
-    resources :audios, :except => [:new] do
-      collection do
-        get :manage
-      end
-      member do
-        get :download
-      end
-    end
-    resources :videos, :except => [:new] do
-      collection do
-        get :manage
-      end
-      member do
-        get :download
-      end
-    end
-    resources :attachments, :except => [:new] do
-      collection do
-        get :manage
-      end
-      member do
-        get :download
+    %w(media picture doc pdf audio video attachment).each do |attachment|
+      resources attachment.pluralize.to_sym, :except => [:new] do
+        collection do
+          get :manage
+        end
+        member do
+          get :download
+        end
       end
     end
   end
-  
-  root :to => 'person_sessions#new'
-
   ## END ADMIN ROUTES ##
 end

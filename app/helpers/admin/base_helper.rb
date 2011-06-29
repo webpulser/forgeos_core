@@ -1,5 +1,4 @@
 module Admin::BaseHelper
-  include AttachmentHelper
 
   def dataTables_tag(options = {})
     id = options[:id].nil? ? 'table' : options[:id]
