@@ -1,10 +1,14 @@
 class Person < ActiveRecord::Base
   acts_as_authentic do |c|
+    c.login_field :email
     c.merge_validates_uniqueness_of_email_field_options( :if => :skip_uniquess_of_email? )
-    c.transition_from_restful_authentication = true
     c.crypto_provider = Authlogic::CryptoProviders::BCrypt
   end
   acts_as_tagger
+
+  def self.find_by_login_or_email(login)
+   find_by_email(login)
+  end
 
   has_and_belongs_to_many_attachments
   has_one :address, :dependent => :destroy
