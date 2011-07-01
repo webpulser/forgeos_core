@@ -21,7 +21,7 @@ table
   thead
     height: 30px
     background: #EFEFEF
-    color $lightGray
+    color: $lightGray
     cursor: pointer
     th
       padding: 5px
@@ -50,12 +50,12 @@ table
   tbody
     tr.row_selected
       background:
-        color $selectedRow
-      color $white
+        color: $selectedRow
+      color: $white
   td
     vertical-align: top
     padding: 5px
-    color $lightGray
+    color: $lightGray
     span.odd
       background-color: transparent
       border: 0
@@ -75,11 +75,11 @@ table
     &.enhanced
       padding: 5px 0
   img
-    border 1px solid $contentHeaderBorder
+    border: 1px solid $contentHeaderBorder
     height: 45px
     width: 45px
     background:
-      color $white
+      color: $white
   .actions
     width: 65px !important
 .dataTables_wrapper
@@ -107,10 +107,10 @@ table
   margin: 0 2px
   display: inline-block
   cursor: pointer
-  color $blueLink
+  color: $blueLink
   &.previous, &.next
     background: $lightBlueBg url(/assets/admin/small-icons-16-16-verti.png) no-repeat
-    color $blueLink
+    color: $blueLink
   &.first, &.last
     display: inline
   &.previous
@@ -193,11 +193,11 @@ tr
       img
         width: 100px
         height: 100px
-        border 2px solid $whiteGray
+        border: 2px solid $whiteGray
       &.row_selected
         span
-          color $blueLink
-        border 2px solid $blueLink
+          color: $blueLink
+        border: 2px solid $blueLink
       span
         font-weight: bold
 //--------------------- ----------
@@ -217,10 +217,10 @@ tr
   tr
     &.dragging
       background:
-        color $selectedRow !important
+        color: $selectedRow !important
       td:first-child
         background:
-          color $selectedRow - #3D0F38 !important
+          color: $selectedRow - #3D0F38 !important
     //--------------------- ----------
     // HANDLER
     //--------------------- ----------
@@ -233,8 +233,7 @@ tr
       .small-icons
         height: 16px
       .handler
-        background:
-          image: url("/assets/admin/backgrounds/drag-and-drop.png")
+        background-image: url("/assets/admin/backgrounds/drag-and-drop.png")
         width: 6px
         height: 100%
         position: absolute !important
@@ -243,17 +242,17 @@ tr
 .ui-helper
   font-weight: bold
   font-size: 110%
-  color $blueLink
-  background-color $selectedRow
+  color: $blueLink
+  background-color: $selectedRow
   padding: .5em 1em
-  border 1px solid $selectedRow - #3D0F38
+  border: 1px solid $selectedRow - #3D0F38
   overflow: hidden
   white-space: nowrap
   overflow: hidden
   width: 150px
   +opacity(0.7)
 .ui-droppable.ui-state-hover
-  background-color  #FF3E00 !important
+  background-color: #FF3E00 !important
   background-repeat: no-repeat
   border: 0
   color: white !important
