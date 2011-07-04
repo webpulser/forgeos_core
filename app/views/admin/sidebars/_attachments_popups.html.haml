@@ -36,15 +36,15 @@
 :javascript
   function initImageUploadLeftSidebar(link){
     $('#imageUploadDialogLeftSidebar').dialog('open');
-    $('#imageUploadDialogLeftSidebar').html('<div id="imageUploadLeftSidebar"></div><div class="library-add"><span>or</span><a href="#" onclick="$(\'#imageUploadDialogLeftSidebar\').dialog(\'close\'); $(\'#imageSelectDialogLeftSidebar\').dialog(\'open\'); return false;">add from library</a></div>');
+    $('#imageUploadDialogLeftSidebar').html('<div id="imageUploadLeftSidebar"></div><div class="library-add"><span>#{t(:or)}</span><a href="#" onclick="$(\'#imageUploadDialogLeftSidebar\').dialog(\'close\'); $(\'#imageSelectDialogLeftSidebar\').dialog(\'open\'); return false;">#{t('media.add_from_library')}</a></div>');
     var uploadify_datas = { "format": "json" };
     uploadify_datas[window._forgeos_js_vars.session_key] = window._forgeos_js_vars.session;
 
   $('#imageUploadLeftSidebar').uploadify({
-    "uploader": "/images/uploadify/uploadify.swf",
-    "cancelImg": "#{image_path("admin/big-icons/delete-icon.png")}",
-    "script": "#{admin_attachments_path(:file_type => "picture")}",
-    "buttonImg" :"#{image_path("uploadify/upload-picture_#{I18n.locale}.png")}",
+    "uploader": "/assets/forgeos/uploadify/uploadify.swf",
+    "cancelImg": "/assets/forgeos/admin/big-icons/delete-icon.png",
+    "script": "#{forgeos_core.admin_attachments_path(:file_type => "picture")}",
+    "buttonImg": "#{image_path("forgeos/uploadify/upload-picture_#{I18n.locale}.png")}",
     "width" :"154",
     "height" :"24",
     "scriptData": uploadify_datas,
@@ -99,5 +99,3 @@
       "url": '/admin/categories/'+ cat_id +'.json',
     });
   }
-
-= javascript_include_tag %w(swfobject jquery.uploadify)

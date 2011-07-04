@@ -6,8 +6,8 @@
       klass = user.active? ? 'see-on' : 'see-off'
       table =
       [
-      content_tag(:div, content_tag(:div, '', :class=>'handler') + content_tag(:div, '', :class => 'small-icons user-ico'), :id => link_id, :class => 'handler_container'),
-      content_tag(:div, (params[:mode] == 'selection' ? user.fullname : link_to(user.fullname, [:admin, user])), :class => 'user-name'),
+      content_tag(:div, tag(:div, :class=>'handler') + tag(:div, :class => 'small-icons user-ico'), :id => link_id, :class => 'handler_container'),
+      content_tag(:div, (params[:mode] == 'selection' ? user.fullname : link_to(user.fullname, [forgeos_core, :admin, user])), :class => 'user-name'),
       content_tag(:div, (params[:mode] == 'selection' ? user.email : mail_to(user.email, user.email, :class => 'truncate', :title => user.email)), :class => 'email'),
       ]
 
@@ -21,8 +21,8 @@
             :id => "show_#{link_id}"
          }
         ) <<
-        link_to('', [:edit, :admin, user], :class => 'small-icons edit-link') +
-        link_to('', :url => [:admin, user],
+        link_to('', [forgeos_core, :edit, :admin, user], :class => 'small-icons edit-link') +
+        link_to('', :url => [forgeos_core, :admin, user],
           :remote => true,
           :method => :delete,
           :confirm => I18n.t('user.destroy.confirm').capitalize,
@@ -37,4 +37,4 @@
     end
 }
 -%>
-<%= output.to_json -%>
+<%= raw output.to_json -%>

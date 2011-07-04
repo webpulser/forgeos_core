@@ -29,7 +29,7 @@ class Admin::RolesController < Admin::BaseController
   def create
     if @role.save
       flash[:notice] = I18n.t('role.create.success').capitalize
-      redirect_to edit_admin_role_path(@role)
+      redirect_to [forgeos_core, :edit, :admin, @role]
     else
       flash[:error] = I18n.t('role.create.failed').capitalize
       render :action => "new"
@@ -51,7 +51,7 @@ class Admin::RolesController < Admin::BaseController
     else
       flash[:error] = I18n.t('role.destroy.failed').capitalize
     end
-    return redirect_to(admin_roles_path)
+    return redirect_to([forgeos_core,:admin,:roles])
   end
 
   def rights
@@ -60,7 +60,7 @@ class Admin::RolesController < Admin::BaseController
   def add_right
     @role.update_attributes(params[:role])
     @role.save
-    return redirect_to([:admin, @role])
+    return redirect_to([forgeos_core, :admin, @role])
   end
 
   def activate
@@ -72,7 +72,7 @@ private
   def get_role
     unless @role = Role.find_by_id(params[:id])
       flash[:error] = I18n.t('role.not_exist').capitalize
-      return redirect_to(admin_roles_path)
+      return redirect_to([forgeos_core,:admin,:roles])
     end
   end
 

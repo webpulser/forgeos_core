@@ -1,5 +1,5 @@
 # Methods added to this helper will be available to all templates in the application.
-module ApplicationHelper
+module Forgeos::ApplicationHelper
   def logged_in?
     current_user
   end
@@ -109,6 +109,6 @@ module ApplicationHelper
   end
 
   def statistics_collector_tag(object)
-    javascript_include_tag(statistics_collector_path(:type => object.class.to_s.underscore, :id => object.id))
+    javascript_include_tag(forgeos_core.statistics_collector_path(:type => object.class.to_s.underscore, :id => object.id))
   end
 end

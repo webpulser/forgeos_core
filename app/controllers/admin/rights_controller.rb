@@ -25,7 +25,7 @@ class Admin::RightsController < Admin::BaseController
     @right = Right.new(params[:right])
     if @right.save
       flash[:notice] = I18n.t('right.create.success').capitalize
-      return request.xhr? ? (render :nothing => true) : redirect_to(admin_right_path(@right))
+      return request.xhr? ? (render :nothing => true) : redirect_to([forgeos_core, :admin, @right])
     else
       flash[:error] = I18n.t('right.create.failed').capitalize
       if request.xhr?
@@ -40,7 +40,7 @@ class Admin::RightsController < Admin::BaseController
   def update
     if @right.update_attributes(params[:right])
       flash[:notice] = I18n.t('right.update.success').capitalize
-      return request.xhr? ? (render :nothing => true) : redirect_to(admin_right_path(@right))
+      return request.xhr? ? (render :nothing => true) : redirect_to([forgeos_core, :admin, @right])
     else
       flash[:error] = I18n.t('right.update.failed').capitalize
       if request.xhr?
@@ -55,14 +55,14 @@ class Admin::RightsController < Admin::BaseController
   def destroy
     if @right.destroy
       flash[:notice] = I18n.t('right.destroy.success').capitalize
-      return request.xhr? ? (render :nothing => true) : redirect_to(admin_rights_path)
+      return request.xhr? ? (render :nothing => true) : redirect_to([forgeos_core, :admin, :rights])
     else
       flash[:error] = I18n.t('right.destroy.failed').capitalize
       if request.xhr?
         render :nothing => true, :json => { :result => 'error' }
         return false
       else
-        redirect_to(admin_rights_path)
+        redirect_to([forgeos_core, :admin, :rights])
       end
     end
   end
@@ -72,7 +72,7 @@ private
   def get_right
     unless @right = Right.find_by_id(params[:id])
       flash[:error] = I18n.t('right.not_exist').capitalize
-      return redirect_to(admin_rights_path)
+      return redirect_to([forgeos_core, :admin, :rights])
     end
   end
 

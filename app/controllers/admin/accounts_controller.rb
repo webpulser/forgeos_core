@@ -3,7 +3,7 @@ class Admin::AccountsController < Admin::BaseController
   # GET /account
   # GET /account.xml
   def index
-    redirect_to(admin_account_path)
+    redirect_to([forgeos_core, :admin, :account])
   end
 
   # GET /account/1
@@ -43,7 +43,7 @@ class Admin::AccountsController < Admin::BaseController
     @user.destroy
 
     respond_to do |format|
-      format.html { redirect_to([:admin,:login]) }
+      format.html { redirect_to([forgeos_core, :admin, :login]) }
       format.xml  { head :ok }
     end
   end

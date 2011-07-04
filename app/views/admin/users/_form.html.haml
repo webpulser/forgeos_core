@@ -1,4 +1,4 @@
-= form_for [:admin, user], :html => { :id => 'wrap', :autocomplete => 'off' } do |f|
+= form_for [forgeos_core, :admin, user], :html => { :id => 'wrap', :autocomplete => 'off' } do |f|
   .backgrounds.big-header
     = f.select :civility, t('civility.select'), { :prompt => t(:please_select) }
     = f.text_field :firstname, :title => t('firstname'), :class => 'defaultValue field_name firstname'
@@ -43,7 +43,7 @@
       #right-sidebar.grid_4.omega.alpha
         .step
           = mail_to @user.email, 'Contact customer', :class => 'small-icons contact'
-          = link_to t('user.destroy.action').capitalize, [:admin, user], :confirm => t('user.destroy.confirm').capitalize, :method => :delete, :class => 'small-icons delete'
+          = link_to t('user.destroy.action').capitalize, [forgeos_core, :admin, user], :confirm => t('user.destroy.confirm').capitalize, :method => :delete, :class => 'small-icons delete'
         .step.disabled
           = link_to t('newsletter', :count => 2).capitalize, '#', :class => 'small-icons step-title'
         #user_created_on.step.open

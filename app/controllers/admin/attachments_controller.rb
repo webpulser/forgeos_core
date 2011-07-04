@@ -125,7 +125,7 @@ class Admin::AttachmentsController < Admin::BaseController
       flash[:notice] = I18n.t('media.destroy.failed').capitalize
     end
     return render(:nothing => true) if request.xhr?
-    return redirect_to(admin_attachments_path(:file_type => @media.class.to_s.underscore))
+    return redirect_to(forgeos_core.admin_attachments_path(:file_type => @media.class.to_s.underscore))
   end
 
   private
@@ -134,7 +134,7 @@ class Admin::AttachmentsController < Admin::BaseController
     @media = Attachment.find_by_id params[:id]
     unless @media
       flash[:error] = I18n.t('media.not_exist').capitalize
-      return redirect_to(admin_library_path)
+      return redirect_to([forgeos_core, :admin, :library])
     end
   end
 

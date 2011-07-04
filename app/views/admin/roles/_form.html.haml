@@ -1,11 +1,11 @@
 = render :partial => 'tabs'
-= form_for [:admin, role],  :html => { :id => 'wrap' } do |f|
+= form_for [forgeos_core, :admin, role],  :html => { :id => 'wrap' } do |f|
   = hidden_field_tag "role[right_ids][]"
 
   .backgrounds.big-header
     = f.text_field :name, :class => 'field_name'
     .interact-links
-      = Forgeos_save_buttons forgeos_core.admin_roles_path
+      = Forgeos_save_buttons [forgeos_core,:admin,:roles]
 
   #content.grid_16.alpha.omega
     .grid_12.alpha
@@ -47,7 +47,7 @@
       - unless role.new_record?
         .step
           /= link_to t('role.duplicate').capitalize, [:duplicate, :admin, role], :class => 'small-icons duplicate'
-          = link_to t('user.destroy.action').capitalize, [:admin, role], :confirm => t('user.destroy.confirm').capitalize, :method => :delete, :class => 'small-icons delete'
+          = link_to t('user.destroy.action').capitalize, [forgeos_core, :admin, role], :confirm => t('user.destroy.confirm').capitalize, :method => :delete, :class => 'small-icons delete'
         #role_attributed_to.step.open
           %a.small-icons.step-title{ :href => "#" }
             = t('role.attributed_to').capitalize

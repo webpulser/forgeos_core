@@ -8,7 +8,7 @@ class Admin::StatisticsController < Admin::BaseController
 
 private
   def get_date
-    @date = 
+    @date =
       case params[:timestamp]
       when 'month'
         Date.current.ago(1.month).to_date..Date.current
@@ -27,7 +27,7 @@ private
   end
 
   def get_graph
-    @graph = open_flash_chart_object(666, 250, forgeos_core.admin_statistics_graph_path(:timestamp => params[:timestamp]), true,'/flashes/')
+    @graph = open_flash_chart_object(666, 250, forgeos_core.admin_statistics_graph_path(:timestamp => params[:timestamp]), true,'/assets/forgeos/flashes/')
   end
 
   def generate_graph(element, y_max, colour)
@@ -46,7 +46,7 @@ private
       x_labels.set_steps(10)
     end
     x_labels.colour = '#7D5223'
-    
+
     x_axis = XAxis.new
     x_axis.colour = '#7D5223'
     x_axis.grid_colour = '#C8A458'

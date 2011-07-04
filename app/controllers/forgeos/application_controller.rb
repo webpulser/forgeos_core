@@ -1,6 +1,5 @@
-class ApplicationController < ActionController::Base
+class Forgeos::ApplicationController < ActionController::Base
   helper_method :current_user_session, :current_user
-  filter_parameter_logging :password, :password_confirmation
 
   before_filter :set_locale
   after_filter :discard_flash_if_xhr, :log_visit
@@ -8,12 +7,13 @@ class ApplicationController < ActionController::Base
   def notifications
     @notifications = {}
     [:error, :notice, :warning].each do |key|
-      @notifications[key] = flash.delete(key)
+      message = flash.delete(key)
+      @notifications[key] = message unless message.blank?
     end
     render :json => @notifications.to_json
   end
 
-private
+  private
 
   def set_locale
     session[:locale] = current_user.lang if current_user && current_user.lang
@@ -21,7 +21,6 @@ private
     locale = params[:locale] || session[:locale] || session[:detected_locale] || I18n.default_locale
     if locale.present? and I18n.available_locales.include?(locale.to_sym)
       session[:locale] = I18n.locale = locale
-      ActiveRecord::Base.locale=locale
     end
   end
 
@@ -54,13 +53,13 @@ private
     unless current_user
       store_location
       flash[:notice] = t('login_required')
-      redirect_to(login_path)
+      redirect_to([forgeos_core, :login])
       return false
     end
   end
 
   def store_location
-    session[:return_to] = request.request_uri
+    session[:return_to] = request.fullpath
   end
 
   def redirect_to_stored_location(default_path = :login, &block)
@@ -75,8 +74,6 @@ private
       end
     end
   end
-
-protected
 
   def discard_flash_if_xhr
     flash.discard if request.xhr?

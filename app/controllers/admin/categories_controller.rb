@@ -7,7 +7,7 @@ class Admin::CategoriesController < Admin::BaseController
   # List Categories
   def index
     respond_to do |format|
-      format.html{ redirect_to(:root) }
+      format.html{ redirect_to([forgeos_core, :root]) }
       format.json do
         unless params[:type]
           # list page and product categories
@@ -36,7 +36,7 @@ class Admin::CategoriesController < Admin::BaseController
     if @category.save
       flash[:notice] = t('category.create.success').capitalize
       respond_to do |format|
-        format.html { redirect_to edit_admin_category_path(@category)}
+        format.html { redirect_to [forgeos_core, :edit, :admin, @category] }
         format.json { render :text => @category.id }
       end
     else
@@ -103,7 +103,7 @@ private
   def new_category
     @category = Category.new(params[:category])
   end
-  
+
   def update_category_from_params(param, position, parent_id)
     if id = param["attributes"]["id"].split("_").last
       if category = Category.find_by_id(id)
@@ -123,7 +123,7 @@ private
         category.update_attributes(:position => position+1, :parent_id => parent_id )
       end
     end
-  end  
+  end
 
   def sort
     columns = %w(category_translations.name category_translations.name)

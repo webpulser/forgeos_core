@@ -1,4 +1,4 @@
-= form_for [:admin, Attachment.new], :html => { :multipart => true } do |f|
+= form_for [forgeos_core, :admin, Attachment.new], :html => { :multipart => true } do |f|
   #imageUploadDialog.upload-lightbox-container.white
     #imageUpload
       = f.file_field :uploaded_data
@@ -17,10 +17,10 @@
     uploadify_datas[window._forgeos_js_vars.session_key] = window._forgeos_js_vars.session;
 
     jQuery('#imageUpload').uploadify({
-      "uploader": "/images/uploadify/uploadify.swf",
-      "cancelImg": "#{image_path("admin/big-icons/delete-icon.png")}",
-      "script": "#{admin_attachments_path(:file_type => "picture")}",
-      "buttonImg": "#{image_path("uploadify/upload-#{file_type}_#{I18n.locale}.png")}",
+      "uploader": "/assets/forgeos/uploadify/uploadify.swf",
+      "cancelImg": "#{image_path("forgeos/admin/big-icons/delete-icon.png")}",
+      "script": "#{forgeos_core.admin_attachments_path(:file_type => "picture")}",
+      "buttonImg": "#{image_path("forgeos/uploadify/upload-#{file_type}_#{I18n.locale}.png")}",
       "width": "154",
       "height": "24",
       "scriptData": uploadify_datas,
@@ -45,6 +45,3 @@
       }
     });
   }
-
-= stylesheet_link_tag 'admin/uploadify'
-= javascript_include_tag %w(swfobject jquery.uploadify)

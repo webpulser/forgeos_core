@@ -2,7 +2,7 @@
 .backgrounds.big-header
   %h1= @user.fullname
   .interact-links
-    = link_to I18n.t('user.update.action'), [:edit, :admin, @user], :class => 'backgrounds interact-button'
+    = link_to I18n.t('user.update.action'), [forgeos_core, :edit, :admin, @user], :class => 'backgrounds interact-button'
     = I18n.t(:or)
     = link_to I18n.t('user.back'), forgeos_core.admin_users_path, :class => 'back-link'
 #content.grid_16.alpha.omega
@@ -21,7 +21,7 @@
   #right-sidebar.grid_4.omega.alpha
     .step
       =mail_to @user.email, I18n.t('user.contact').capitalize, :class => 'small-icons contact'
-      = link_to I18n.t('user.destroy.action').capitalize, [:admin, @user], :confirm => I18n.t('user.destroy.confirm').capitalize, :method => :delete, :class => 'small-icons delete'
+      = link_to I18n.t('user.destroy.action').capitalize, [forgeos_core, :admin, @user], :confirm => I18n.t('user.destroy.confirm').capitalize, :method => :delete, :class => 'small-icons delete'
     .step.disabled
       = link_to I18n.t('newsletter', :count => 2).capitalize, '#', :class => 'small-icons step-title'
     #user_history.step.open

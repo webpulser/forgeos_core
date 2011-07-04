@@ -154,7 +154,7 @@ module Admin::BaseHelper
     end
   end
 
-  def Forgeos_save_buttons(back_path=admin_root_path,label='save')
+  def Forgeos_save_buttons(back_path= [forgeos_core, :admin, :root], label= 'save')
     content_tag(:div, :class => 'interact-links') do
       fg_submit_tag(label) + t('or') + link_to(t('cancel').capitalize, back_path, :class => 'back-link')
     end

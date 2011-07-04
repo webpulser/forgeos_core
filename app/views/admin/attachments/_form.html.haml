@@ -1,5 +1,5 @@
 = render :partial => 'tabs'
-= form_for [:admin, media], :html => { :multipart => true, :id => 'wrap'} do |f|
+= form_for [forgeos_core, :admin, media], :html => { :multipart => true, :id => 'wrap'} do |f|
   .backgrounds.big-header
     = f.text_field :name, :id => 'media-title', :class => 'field_name'
     .interact-links
@@ -82,7 +82,7 @@
 
     #right-sidebar.grid_4.omega
       .step
-        = link_to I18n.t('media.destroy.action').capitalize, [:admin, media], :confirm => I18n.t('media.destroy.confirm').capitalize, :method => :delete, :class => 'small-icons delete'
+        = link_to I18n.t('media.destroy.action').capitalize, [forgeos_core, :admin, media], :confirm => I18n.t('media.destroy.confirm').capitalize, :method => :delete, :class => 'small-icons delete'
         .clear
       #attachment_associated_collection.step.open
         %a.small-icons.step-title{ :href => "#" }

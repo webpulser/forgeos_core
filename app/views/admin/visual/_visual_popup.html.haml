@@ -44,9 +44,9 @@
   $('#imagepictureUploadDialog').html('<div id="imagepictureUpload"></div><div class="library-add"><span>or</span><a href="#" onclick="$(\'#imagepictureUploadDialog\').dialog(\'close\'); $(\'#imagepictureSelectDialog\').dialog(\'open\'); return false;">add from library</a></div>');
 
   $('#imagepictureUpload').uploadify({
-  uploader: '/images/uploadify/uploadify.swf',
-  = "cancelImg: '#{image_path('admin/big-icons/delete-icon.png')}',"
-  = "script: '#{admin_attachments_path(:file_type => 'picture')}',"
+  uploader: '/assets/forgeos/uploadify/uploadify.swf',
+  cancelImg: '/assets/forgeos/big-icons/delete-icon.png',
+  = "script: '#{forgeos_core.admin_attachments_path(:file_type => 'picture')}',"
   = "buttonImg:'#{image_path("uploadify/choose-picture_#{I18n.locale}.png")}',"
   width: 154,
   height:24,
@@ -129,9 +129,9 @@
   $('#imageimageUploadDialog').html('<div id="imageimageUpload"></div><div class="library-add"><span>or</span><a href="#" onclick="$(\'#imageimageUploadDialog\').dialog(\'close\'); $(\'#imageimageSelectDialog\').dialog(\'open\'); return false;">add from library</a></div>');
 
   $('#imageimageUpload').uploadify({
-  uploader: '/images/uploadify/uploadify.swf',
-  = "cancelImg: '#{image_path('admin/big-icons/delete-icon.png')}',"
-  = "script: '#{admin_attachments_path(:file_type => 'picture')}',"
+  uploader: '/assets/forgeos/uploadify/uploadify.swf',
+  cancelImg: '/assets/forgeos/admin/big-icons/delete-icon.png',
+  = "script: '#{forgeos_core.admin_attachments_path(:file_type => 'picture')}',"
   = "buttonImg:'#{image_path("uploadify/choose-picture_#{I18n.locale}.png")}',"
   width: 154,
   height:24,
@@ -168,9 +168,3 @@
   $('#image-picture ul.sortable').html('<li><img src="'+path+'" alt="'+name+'"/><a href="#" onclick="$(this).parents(\'li\').remove();  $(\'#image\').val(\'null\'); return false;" class="big-icons delete"></a></li>');
   $("#image").val(id);
   }
-
-
-
-
-
-= javascript_include_tag %w(swfobject jquery.uploadify)

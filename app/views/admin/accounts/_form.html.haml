@@ -9,14 +9,14 @@
     .grid_12.alpha
       .inner-content
         - admin.build_avatar unless admin.avatar
-        - f.fields_for :avatar do |avatar|
+        = f.fields_for :avatar do |avatar|
           = avatar.label :uploaded_data, I18n.t('avatar').capitalize
           %div
             - if admin.avatar && !admin.avatar.new_record?
-              = image_tag(admin.avatar.public_filename(:small)) 
+              = image_tag(admin.avatar.public_filename(:small))
             = avatar.file_field :uploaded_data
         = f.label :email, I18n.t('email')
-        %div 
+        %div
           = f.text_field :email
         = f.label :password, I18n.t('password')
         %div

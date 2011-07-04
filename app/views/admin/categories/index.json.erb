@@ -4,12 +4,12 @@
     :aaData => @categories.collect do |category|
       link_id = "menu_link_#{category.id}"
       [
-        content_tag(:div, '<div class="handler"></div><div class="small-icons category"></div>', :id => link_id, :class => 'handler_container'),
+        content_tag(:div, tag(:div, :class=>'handler') + tag(:div, :class=>'small-icons category'), :id => link_id, :class => 'handler_container'),
         content_tag(:div, category.name, :class => 'category-name'),
         category.id,
-        link_to(category.name, [:admin, category])
+        link_to(category.name, [forgeos_core, :admin, category])
       ]
     end
   }
 -%>
-<%= output.to_json -%>
+<%= raw output.to_json -%>

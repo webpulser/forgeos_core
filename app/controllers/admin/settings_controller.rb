@@ -1,7 +1,7 @@
 class Admin::SettingsController < Admin::BaseController
   before_filter :get_setting, :only => [:edit, :update]
   def show
-    redirect_to(:action => :edit)
+    redirect_to([forgeos_core, :edit, :admin, :setting])
   end
 
   def edit
@@ -23,7 +23,7 @@ class Admin::SettingsController < Admin::BaseController
     else
       flash[:error] = t('setting.update.failed')
     end
-    redirect_to :action => :edit
+    redirect_to([forgeos_core, :edit, :admin, :setting])
   end
 private
 

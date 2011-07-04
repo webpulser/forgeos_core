@@ -1,5 +1,4 @@
-# This controller handles the login/logout function of the site.
-class PersonSessionsController < ApplicationController
+class PersonSessionsController < Forgeos::ApplicationController
   def new
     @person_session = PersonSession.new
   end

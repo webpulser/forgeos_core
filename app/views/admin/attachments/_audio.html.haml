@@ -41,5 +41,5 @@
 
 .clear
 
-= javascript_include_tag %w(swfobject audio-player)
-= javascript_tag "AudioPlayer.setup('/flashes/audio-player.swf', { width: 290 }); AudioPlayer.embed('audio-player', { soundFile: '#{object.public_filename()}', autostart: 'yes' })"
+= javascript_include_tag 'audio-player'
+= javascript_tag "AudioPlayer.setup('/assets/forgeos/flashes/audio-player.swf', { width: 290 }); AudioPlayer.embed('audio-player', { soundFile: '#{object.public_filename()}', autostart: 'yes' })"

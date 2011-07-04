@@ -8,13 +8,13 @@
         media_array << render(:partial => 'table_thumbnail.html.haml', :locals => { :media => media })
       else
         media_array << content_tag(params[:mode] == 'selection' ? :span: :div, '<div class="handler"></div><div class="small-icons '+ @file_type +'"></div>', :id => link_id, :class => "handler_container") <<
-        content_tag(:div, params[:mode] == 'selection' ? media.filename : link_to(media.name, [:edit, :admin, media], :class => "truncate", :title => media.filename), :class => 'media-name') <<
+        content_tag(:div, params[:mode] == 'selection' ? media.filename : link_to(media.name, [forgeos_core, :edit, :admin, media], :class => "truncate", :title => media.filename), :class => 'media-name') <<
         media.file_type.upcase <<
         media.updated_at.to_s(:short) <<
         "#{media.size/1024} #{I18n.t('media.byte.kilo')}" <<
         "N/A" <<
-        link_to('', [:edit, :admin, media], :class => 'small-icons edit-link') +
-        link_to('', :url => [:admin, media],
+        link_to('', [forgeos_core, :edit, :admin, media], :class => 'small-icons edit-link') +
+        link_to('', :url => [forgeos_core, :admin, media],
           :remote => true,
           :method => :delete,
           :confirm => I18n.t('media.destroy.confirm').capitalize,
@@ -27,4 +27,4 @@
     end
   }
 -%>
-<%= output.to_json -%>
+<%= raw output.to_json -%>

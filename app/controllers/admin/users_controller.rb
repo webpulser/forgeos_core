@@ -21,7 +21,7 @@ class Admin::UsersController < Admin::BaseController
   def create
     if @user.save
       flash[:notice] = I18n.t('user.create.success').capitalize
-      redirect_to edit_admin_user_path(@user)
+      redirect_to([forgeos_core, :edit, :admin, @user])
     else
       flash[:error] = I18n.t('user.create.failed').capitalize
       render :action => 'new'
@@ -48,7 +48,7 @@ class Admin::UsersController < Admin::BaseController
     else
       flash[:error] = I18n.t('user.destroy.failed').capitalize
     end
-    return redirect_to(admin_users_path)
+    return redirect_to([forgeos_core, :admin, :users])
   end
 
   def activate
@@ -135,7 +135,7 @@ private
   def get_user
     unless @user = User.find_by_id(params[:id])
       flash[:error] = I18n.t('user.not_exist').capitalize
-      return redirect_to(admin_users_path)
+      return redirect_to([forgeos_core, :admin, :users])
     end
   end
 

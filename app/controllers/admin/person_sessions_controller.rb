@@ -1,7 +1,7 @@
 # This controller handles the login/logout function of the site.
 class Admin::PersonSessionsController < Admin::BaseController
   layout 'admin_login'
-  skip_before_filter :login_required, :only => [:destroy, :new, :create, :reset_password, :reset_admin_password]
+  skip_before_filter :login_required, :only => [ :new, :create, :reset_password ]
   def new
     @person_session = PersonSession.new
   end

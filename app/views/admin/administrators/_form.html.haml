@@ -1,4 +1,4 @@
-= form_for [:admin, admin], :html => { :multipart=>true } do |f|
+= form_for [forgeos_core, :admin, admin], :html => { :multipart=>true } do |f|
   .backgrounds.big-header
     = f.select :civility, t('civility.select'), { :prompt => t(:please_select) }
     = f.text_field :firstname, :title => t('firstname'), :class => 'defaultValue field_name firstname'
@@ -9,7 +9,7 @@
     .grid_12.alpha
       .inner-content
         - admin.build_avatar unless admin.avatar
-        - f.fields_for :avatar do |avatar|
+        = f.fields_for :avatar do |avatar|
           = avatar.label :uploaded_data, I18n.t('avatar').capitalize
           %div
             = image_tag(admin.avatar.public_filename(:thumb)) unless admin.avatar.new_record?
@@ -31,4 +31,4 @@
         .step
           = mail_to admin.email,I18n.t('admin.contact.action'),  :class => 'small-icons contact'
           =# link_to I18n.t('admin.duplicate.action'), [:duplicate,:admin,admin], :class => 'small-icons duplicate'
-          = link_to I18n.t('admin.destroy.action').capitalize, [:admin, admin], :confirm => I18n.t('admin.destroy.confirm').capitalize, :method => :delete, :class => 'small-icons delete'
+          = link_to I18n.t('admin.destroy.action').capitalize, [forgeos_core, :admin, admin], :confirm => I18n.t('admin.destroy.confirm').capitalize, :method => :delete, :class => 'small-icons delete'

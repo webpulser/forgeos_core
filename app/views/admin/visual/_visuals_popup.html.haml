@@ -44,9 +44,9 @@
   $('#imagevisualsUploadDialog').html('<div id="imagevisualsUpload"></div><div class="library-add"><span>or</span><a href="#" onclick="$(\'#imagevisualsUploadDialog\').dialog(\'close\'); $(\'#imagevisualsSelectDialog\').dialog(\'open\'); return false;">add from library</a></div>');
 
   $('#imagevisualsUpload').uploadify({
-  uploader: '/images/uploadify/uploadify.swf',
-  = "cancelImg: '#{image_path('admin/big-icons/delete-icon.png')}',"
-  = "script: '#{admin_attachments_path(:file_type => 'picture')}',"
+  uploader: '/assets/forgeos/uploadify/uploadify.swf',
+  cancelImg: '/assets/forgeos/min/big-icons/delete-icon.png',
+  = "script: '#{forgeos_core.admin_attachments_path(:file_type => 'picture')}',"
   = "buttonImg:'#{image_path("uploadify/choose-picture_#{I18n.locale}.png")}',"
   width: 154,
   height:24,
@@ -81,7 +81,3 @@
   function add_picture_to_element(path,id,name){
   = "object_name='#{form.object_name}';"
   $('#visuals-picture ul.sortable').before('<li><a href="#" onclick="$(this).parents(\'li\').remove(); return false;" class="big-icons trash"></a><input type="hidden" name="'+object_name+'[attachment_ids][]" value="'+id+'"/><img src="'+path+'" alt="'+name+'"/><div class="handler"><div class="inner"></div></div></li>');  }
-
-
-
-= javascript_include_tag %w(swfobject jquery.uploadify)

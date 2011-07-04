@@ -25,7 +25,7 @@ class Admin::AdministratorsController < Admin::BaseController
     @admin = Administrator.new(params[:administrator])
     if @admin.save
       flash[:notice] = t('admin.create.success').capitalize
-      redirect_to edit_admin_administrator_path(@admin)
+      redirect_to [forgeos_core, :edit, :admin, @admin]
     else
       flash[:error] = t('admin.create.failed').capitalize
       render :action => "new"
@@ -47,7 +47,7 @@ class Admin::AdministratorsController < Admin::BaseController
     else
       flash[:error] = t('admin.destroy.failed').capitalize
     end
-    redirect_to(admin_administrators_path)
+    redirect_to([forgeos_core, :admin, :administrators])
   end
 
   def activate
@@ -58,7 +58,7 @@ private
   def get_admin
     unless @admin = Administrator.find_by_id(params[:id])
       flash[:error] = t('admin.not_exist').capitalize
-      return redirect_to(admin_administrators_path)
+      return redirect_to([forgeos_core, :admin, :administrators])
     end
   end
 
