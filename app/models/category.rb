@@ -3,9 +3,7 @@ class Category < ActiveRecord::Base
   acts_as_tree :order => "position"
   has_and_belongs_to_many_attachments
   acts_as_list :scope => [:type]
-  #validates_presence_of :name
 
-  # Returns the level of <i>Category</i>
   def level
     return self.ancestors.length
   end

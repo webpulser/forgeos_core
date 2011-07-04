@@ -3,7 +3,7 @@ class Rule < ActiveRecord::Base
   before_save :usage
   serialize :variables
 
-  validates_presence_of :name, :conditions
+  validates :name, :conditions, :presence => true
 
   def usage
     #activated = false if max_use && max_use > 0 && use >= max_use

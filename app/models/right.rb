@@ -4,7 +4,7 @@ class Right < ActiveRecord::Base
   has_and_belongs_to_many :right_categories, :readonly => true, :join_table => 'categories_elements', :foreign_key => 'element_id', :association_foreign_key => 'category_id'
 
   #check that fields have data in them
-  validates_presence_of :name, :controller_name, :action_name
+  validates :name, :controller_name, :action_name, :presence => true
 
   define_index do
     indexes name, :sortable => true

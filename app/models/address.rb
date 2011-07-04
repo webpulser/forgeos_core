@@ -1,10 +1,10 @@
 class Address < ActiveRecord::Base
-
-  belongs_to :country
-  belongs_to :person
+  belongs_to :country,
+    :person
   serialize :form_attributes
 
-  validates_presence_of :country_id, :address, :city
+  validates :country_id, :address, :city,
+    :presence => true
 
   # Returns address in a string <i>#{firstname} #{name} #{address} #{zip_code} #{city}</i>
   def to_s

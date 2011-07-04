@@ -11,10 +11,11 @@ class Person < ActiveRecord::Base
   end
 
   has_and_belongs_to_many_attachments
-  has_one :address, :dependent => :destroy
+  has_one :avatar,
+    :dependent => :destroy
+  has_one :address,
+    :dependent => :destroy
   accepts_nested_attributes_for :address
-
-  has_one :avatar, :dependent => :destroy
   accepts_nested_attributes_for :avatar, :reject_if => proc { |attributes| attributes['uploaded_data'].blank? }
 
   validates_presence_of :lastname, :if => :skip_presence_of_lastname?
