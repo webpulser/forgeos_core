@@ -1,5 +1,5 @@
-require 'map_fields'
 class Admin::ImportController < Admin::BaseController
+  include MapFields
   UPLOAD_PROGRESS_FILE = File.join(Rails.root,'tmp','import_progress.txt')
   before_filter :save_import_set, :except => :index
   map_fields :create_user, User.new.attributes.keys

@@ -30,7 +30,7 @@ module MapFields
         :file_field => 'file',
         :params => []
       }
-      options = default_options.merge( 
+      options = default_options.merge(
         self.class.read_inheritable_attribute("map_fields_options_#{params[:action]}")
       )
       if session[:map_fields].nil? || params[options[:file_field]]
@@ -64,8 +64,8 @@ module MapFields
           @parameters += ParamsParser.parse(params, param)
         end
       else
-        if @set 
-          @mapped_fields = MappedFields.new(session[:map_fields][:file], 
+        if @set
+          @mapped_fields = MappedFields.new(session[:map_fields][:file],
                                             @set.fields,
                                             @set.ignore_first_row,
                                             @set.parser_options)
@@ -75,7 +75,7 @@ module MapFields
             session[:map_fields] = nil
             @map_fields_error =  InconsistentStateError
           else
-            @mapped_fields = MappedFields.new(session[:map_fields][:file], 
+            @mapped_fields = MappedFields.new(session[:map_fields][:file],
                                               params[:fields],
                                               params[:ignore_first_row],
                                               session[:parser_options])
@@ -94,13 +94,13 @@ module MapFields
     end
 
     def map_field_parameters(&block)
-      
+
     end
 
     def map_fields_cleanup
       if @mapped_fields
         if session[:map_fields][:file]
-          File.delete(session[:map_fields][:file]) 
+          File.delete(session[:map_fields][:file])
         end
         session[:map_fields] = nil
         @mapped_fields = nil
@@ -184,8 +184,4 @@ module MapFields
       end
     end
   end
-end
-
-if defined?(Rails) and defined?(ActionController)
-  ActionController::Base.send(:include, MapFields)
 end
