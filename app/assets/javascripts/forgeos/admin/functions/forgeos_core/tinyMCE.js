@@ -11,7 +11,7 @@ function tmce_unload_children(selector){
 
 function tmceInit(selector){
   jQuery(selector).tinymce({
-    script_url : '/javascripts/tiny_mce/tiny_mce.js',
+    script_url : '/assets/forgeos/tiny_mce/tiny_mce.js',
     language : 'fr',
     mode : 'textareas',
     plugins : "table,fullscreen,paste,media,preview,advimage,curblyadvimage,advlink,contextmenu",

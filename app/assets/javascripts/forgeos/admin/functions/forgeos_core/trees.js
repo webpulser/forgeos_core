@@ -116,7 +116,7 @@ function init_category_tree(selector, type, source) {
       }
     },
     ui: {
-      theme_path: '/stylesheets/jstree/themes/',
+      theme_path: '/assets/forgeos/jstree/themes/',
       theme_name : 'categories',
       selected_parent_close: false
     },
@@ -397,7 +397,7 @@ function error_on_jsTree_action(message){
 function init_association_category_tree(selector, object_name, category_name, theme){
   jQuery(selector).tree({
     ui: {
-      theme_path: '/stylesheets/jstree/themes/',
+      theme_path: '/assets/forgeos/jstree/themes/',
       theme_name : theme,
       selected_parent_close: false
     },

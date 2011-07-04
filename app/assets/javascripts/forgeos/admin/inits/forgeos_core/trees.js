@@ -13,7 +13,7 @@ jQuery(document).ready(function(){
   //init the menu modify tree
   jQuery("#menu-tree").tree({
     ui: {
-      theme_path: '/stylesheets/jstree/themes/',
+      theme_path: '/assets/forgeos/jstree/themes/',
       theme_name : 'menu-tree',
       selected_parent_close: false
     },
@@ -40,7 +40,7 @@ jQuery(document).ready(function(){
   //init the menu modify tree
   jQuery("#menu-tree-ro").tree({
     ui: {
-      theme_path: '/stylesheets/jstree/themes/',
+      theme_path: '/assets/forgeos/jstree/themes/',
       theme_name : 'menu-tree',
       selected_parent_close: false
     },
