@@ -3,13 +3,13 @@
 %html{ 'xml:lang' => I18n.locale, :xmlns => 'http://www.w3.org/1999/xhtml' }
   %head
     %meta{ :content => 'text/html; charset=utf-8', 'http-equiv' => 'Content-Type' }
-    %link{ :href => '/images/admin/favicon.gif', :rel => 'shortcut icon', :type => 'image/gif' }
-    = stylesheet_link_tag '960', 'admin/login'
-    = javascript_include_tag 'jquery'
+    %link{ :href => '/forgeos/admin/favicon.gif', :rel => 'shortcut icon', :type => 'image/gif' }
+    = stylesheet_link_tag 'forgeos/960', 'forgeos/admin/login'
+    = javascript_include_tag 'forgeos/jquery'
     %title= I18n.t(:login, :scope => ['back_office', 'menu'])
   %body
     = yield
-    = javascript_include_tag 'admin/functions/forgeos_core/notifications', 'admin/inits/forgeos_core/clicks', :cache => 'admin/login'
+    = javascript_include_tag 'forgeos/admin/functions/forgeos_core/notifications', 'forgeos/admin/inits/forgeos_core/clicks', :cache => 'forgeos/admin/login'
     :javascript
       window._forgeos_js_vars = {
        "locale": '#{I18n.locale}',

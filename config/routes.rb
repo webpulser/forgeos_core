@@ -1,12 +1,14 @@
 Forgeos::Core::Engine.routes.draw do
   match '/logout' => 'person_sessions#destroy', :as => :logout
   match '/login' => 'person_sessions#new', :as => :login
-  match '/notifications' => 'application#notifications', :as => :notifications
+  match '/notifications' => 'forgeos/application#notifications', :as => :notifications
   match '/statistics/:type/:id.:format' => 'statistics_collector#index', :as => :statistics_collector
   resource :person_session
 
   ## ADMIN ROUTES ##
   namespace :admin do
+    root :to => 'dashboard#index'
+    match 'dashboard' => 'dashboard#index', :as => :dashboard
     match 'logout' => 'person_sessions#destroy', :as => :logout
     match 'login' => 'person_sessions#new', :as => :login
     match '/notifications' => 'base#notifications', :as => :notifications
@@ -44,20 +46,15 @@ Forgeos::Core::Engine.routes.draw do
         post :activate
       end
     end
-    resources :menus do
-      member do
-        get :duplicate
-        post :activate
-      end
-    end
+
     resources :categories do
       member do
         post :add_element
       end
     end
 
-    %w(media picture doc pdf audio video attachment admin role right user menu).each do |model|
-      resources "#{model}_categories".to_sym, :controller => 'admin/categories' do
+    %w(media picture doc pdf audio video attachment admin role right user menu).each do |category|
+      resources "#{category}_categories", :controller => 'categories', :requirements => { :type => "#{category}_category" } do
         member do
           post :add_element
         end

@@ -1,3 +1,4 @@
+require 'action_view/helpers/form_helper'
 module ActionView
   module Helpers
     class FormBuilder #:nodoc:
