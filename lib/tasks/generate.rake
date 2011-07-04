@@ -5,8 +5,8 @@ namespace :forgeos do
     namespace :generate do
 
       desc "Generates a role per controller and a right per controller action."
-      task :acl, :path, :needs => :environment do |t,args|
-        
+      task :acl, [:path] => :environment do |t,args|
+
         # set project path
         # By default, plugin path
         # else path is set to the first argument provided.
@@ -22,7 +22,7 @@ namespace :forgeos do
 
         if File.directory? path
           # create a role for each controller and its associated actions rights
-          Dir.foreach(path) do |filename| 
+          Dir.foreach(path) do |filename|
             next if filename.match(/^\./) or !filename.match(/\.rb$/) or File.directory?(File.join(path, filename))
 
             controller_underscore = filename.gsub(".rb", "")
@@ -34,7 +34,7 @@ namespace :forgeos do
             unless right_category = RightCategory.find_by_name(controller_name)
               right_category = RightCategory.create( :name => controller_name )
             end
-       
+
             # create a right per controller action, & link it with the right RightCategory
             controller.action_methods.reject { |action| ApplicationController.action_methods.include?(action) }.each do |action|
               right = Right.find_or_create_by_name_and_controller_name_and_action_name "#{controller_name}_#{action}", "admin/#{controller_name}", action

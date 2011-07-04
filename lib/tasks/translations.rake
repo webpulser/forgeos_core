@@ -1,4 +1,4 @@
-task :model_translations, :model, :needs => :environment do |t,args|
+task :model_translations, [:model] => :environment do |t,args|
   klass = args.model.camelize.constantize
   puts klass
   klass.all.each do |model|

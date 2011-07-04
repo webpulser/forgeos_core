@@ -4,12 +4,12 @@ namespace :forgeos do
     task :update_thumbnails => :environment do
       pictures = Picture.find_all_by_parent_id(nil)
       pictures.each_with_index do |picture,i|
-        puts "Fixing #{i}/#{pictures.size} : #{picture.filename}" 
+        puts "Fixing #{i}/#{pictures.size} : #{picture.filename}"
         temp_file = picture.create_temp_file
 
         picture.attachment_options[:thumbnails].each { |suffix, size|
           picture.create_or_update_thumbnail(temp_file, suffix, *size)
-          puts "  #{suffix}" 
+          puts "  #{suffix}"
         }
         #sleep 2
       end
@@ -28,7 +28,7 @@ namespace :forgeos do
       pictures[_start.._end].each do |picture|
         puts "Fixing #{i}/#{_end} : #{picture.filename}"
         temp_file = picture.create_temp_file
-        
+
         size = picture.attachment_options[:thumbnails][format.to_sym]
         unless size.nil?
           picture.create_or_update_thumbnail(temp_file, options[:thumb] , *size)
@@ -46,5 +46,5 @@ namespace :forgeos do
         i = _start + 1
       end
     end
-  end 
+  end
 end

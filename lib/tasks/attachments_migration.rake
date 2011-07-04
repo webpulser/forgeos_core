@@ -1,4 +1,4 @@
-namespace :forgeos do 
+namespace :forgeos do
   namespace :core do
     desc 'copy attachments association table values into an unique table'
     task :attachments_migration => :environment do
