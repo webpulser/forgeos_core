@@ -1,7 +1,7 @@
 Gem::Specification.new do |s|
   s.add_dependency 'rails', '>= 3.1.0.rc4'
   s.name = 'forgeos_core'
-  s.version = '1.9.0'
+  s.version = '1.9.1'
   s.date = '2011-07-05'
 
   s.summary = 'Core of Forgeos plugins suite'
