@@ -1,11 +1,11 @@
 #content
-  :background-color = !white
+  background-color: $white
   width: 719px
   min-height: 600px
   height: auto !important
   height: 600px
   padding: 0px
-  :border-left = 1px solid !contentHeaderBorder
+  border-left: 1px solid $contentHeaderBorder
   &.grid_16
     width: 100%
     border: 0
@@ -13,40 +13,45 @@
     position: relative
     padding-left: 20px
   h1
-    :color = !orange
-    :font
-      :size 1.2em
-      :weight bold
-    :border-bottom = 1px dashed !contentHeaderBorder
-    :margin
-      :left 20px
-      :bottom 5px
-      :right 15px
+    color: $orange
+    font:
+      size: 1.2em
+      weight: bold
+    border-bottom: 1px dashed $contentHeaderBorder
+    margin:
+      left: 20px
+      bottom: 5px
+      right: 15px
     position: relative
     span
-      :color = !lightGray
-      font-size: .5em
+      color: $lightGray
+      font-size: 0.5em
       position: absolute
       right: 0px
       top: 13px
+
 .content
   padding: 0 20px 20px
+
 .content-background
   height: 0
-  :border-top = 1px solid !contentHeaderBorder
+  border-top: 1px solid $contentHeaderBorder
+
 .inner-content
   padding: 10px 20px
   p
     font-size: 0.7em
   .map_fields
     overflow-x: auto
+
 .big-header
   .field_name,.orange_input
-    +element_form_name()
+    +element_form_name
     &.firstname,&.lastname
       min-width: 8em
       max-width: 12.5em
       width: auto
+
 .field_error
   color: red
 
@@ -57,4 +62,4 @@
     right: 10px
     top: 4px
   &.running
-    background: url('/images/spinner.gif') no-repeat center center
+    background: url("/images/spinner.gif") no-repeat center center

@@ -1,6 +1,6 @@
 #picture-picture,#image-picture
   li
-    +left()
+    +left
     position: relative
     width: 200px
     margin: 5px 2px 0 0
@@ -8,7 +8,7 @@
       height: 0px
     img
       width: 200px
-      :border = 1px solid !contentHeaderBorder
+      border: 1px solid $contentHeaderBorder
     &.first-image
       width: 100%
       height: 100%
@@ -34,8 +34,8 @@
         height: 24px !important
         width: 24px !important
     .handler
-      background-color: #F2F2F2
-      :border = 1px solid !contentHeaderBorder
+      background-color: #f2f2f2
+      border: 1px solid $contentHeaderBorder
       margin-top: -5px
       padding: 3px 0
       width: 100%
@@ -49,11 +49,11 @@
     width: 110px
     margin: auto
     font-size: 0.9em
-    +block()
+    +block
 
 #visuals-picture
   li
-    +left()
+    +left
     position: relative
     width: 50px
     height: 65px
@@ -63,7 +63,7 @@
     img
       width: 50px
       height: 50px
-      :border = 1px solid !contentHeaderBorder
+      border: 1px solid $contentHeaderBorder
     &.first-image
       width: 100%
       height: 100%
@@ -88,8 +88,8 @@
         height: 24px !important
         width: 24px !important
     .handler
-      background-color: #F2F2F2
-      :border = 1px solid !contentHeaderBorder
+      background-color: #f2f2f2
+      border: 1px solid $contentHeaderBorder
       margin-top: -5px
       padding: 3px 0
       width: 100%
@@ -103,7 +103,7 @@
     width: 110px
     margin: auto
     font-size: 0.9em
-    +block()
+    +block
 
 .element_form_name
   width: 600px

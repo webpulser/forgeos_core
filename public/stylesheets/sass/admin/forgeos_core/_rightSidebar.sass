@@ -1,26 +1,26 @@
-#right-sidebar 
+#right-sidebar
   .step
-    background = !lightBlueBg url(/images/admin/backgrounds/background-right-sidebar.png) repeat-x top
+    background: $lightBlueBg url(/images/admin/backgrounds/background-right-sidebar.png) repeat-x top
     padding: 5px 10px
     font-size: 0.7em
     margin-bottom: 1px
-    color = !greenBlue
+    color: $greenBlue
     &.status
       padding-top: 30px
     a
       display: block
-      color = !blueLink
+      color: $blueLink
       &.step-title
         background-position: 0 -816px
-        color = !greenBlue
+        color: $greenBlue
         font-weight: bold
     &.open
       a.step-title
         background-position: 0 -912px
   .text
-    background-color = !white
-    border = 1px solid !contentHeaderBorder
-    +borderCorner()
+    background-color: $white
+    border: 1px solid $contentHeaderBorder
+    +borderCorner
     height: 130px
     padding: 5px
     margin-left: -5px
@@ -31,17 +31,17 @@
       text-decoration: underline
   .add_size
     text-decoration: underline
-    color = !greenBlue
+    color: $greenBlue
     font-size: 0.8em
   .preview,
   .duplicate,
   .delete,
   .contact
     margin: 5px 0px
-  .step 
+  .step
     .enhanced
       display: none !important
-  .open 
+  .open
     .enhanced
       display: block !important
   .step
@@ -52,24 +52,24 @@
       p
         padding: 0 0 0 5px
         margin: 0 0 5px 0
-        border-left = 1px solid !greenBlue
+        border-left: 1px solid $greenBlue
     &.open .inner-step
-      +block()
+      +block
   .tags
     a, label
       display: inline-block !important
-      background-color = !white
-      border = 1px solid !white
+      background-color: $white
+      border: 1px solid $white
       -moz-border-radius: 5px
-      color = !greenBlue
+      color: $greenBlue
       padding: 0px 5px
       margin: 2px 0px
     span
       padding: 5px
       position: relative
-      +left()
-      +borderCorner(3px,3px,3px,3px)
-      background-color = !white
+      +left
+      +borderCorner(3px, 3px, 3px, 3px)
+      background-color: $white
       margin 2px
   .status p
     padding: 0
@@ -81,29 +81,29 @@
     span
       font-weight: bold
   .attribute-new
-    color = !blueLink
+    color: $blueLink
     text-decoration: underline
     margin-left: 22px
-  .tags 
+  .tags
     span,
     .block-container
-      &:hover 
+      &:hover
         .gray-destroy
           +opacity(1)
   form#wrap
     .tags
-      background-color = !white
-      border = 1px solid !contentHeaderBorder
-      +borderCorner()
+      background-color: $white
+      border: 1px solid $contentHeaderBorder
+      +borderCorner
       a
-        background-color =  !contentHeaderBorder
-        color = !black
+        background-color: $contentHeaderBorder
+        color: $black
         background-position: right -208px
         padding-right: 24px
       span
         padding: 2px 20px 2px 5px
-        border = 1px solid !contentHeaderBorder
-        color: #000 !important
+        border: 1px solid $contentHeaderBorder
+        color: black !important
         font-weight: bold
         margin: 2px
         a
@@ -121,13 +121,13 @@
             visibility: visible
       input
         background: none !important
-        color = !lightGray
+        color: $lightGray
         font-style: italic
         width: 85px
-        +left()
+        +left
         border: 0
         padding: 2px 5px
-        margin: 2px    
+        margin: 2px
   //----------------- ------
   // TAG AUTOCOMPLETE ------
   //----------------- ------
@@ -150,19 +150,19 @@
       #tag_autocomplete
         width: 150px
         background:
-          color: #FFF
+          color: white
         padding: 0
-        border = 0
-        +borderCorner(0,0,0,0)
+        border: 0
+        +borderCorner(0, 0, 0, 0)
         margin: 0
         span
           display: block
-          color: #000
+          color: black
           float: none !important
           margin: 0
           padding: 5px
-          +borderCorner(0,0,0,0)
+          +borderCorner(0, 0, 0, 0)
           &:hover
-            color: #FFF !important
+            color: white !important
             background:
-              color = !blueLink
+              color: $blueLink

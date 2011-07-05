@@ -4,6 +4,7 @@
   .add-link
     padding-left: 30px
     background-position: 10px -1434px
+
 #inner-lightbox, #blocks-header
   background-position: 0 0
   font-size: 0.9em
@@ -11,38 +12,40 @@
   a
     padding: 0 10px
     padding-left: 25px
-    color = !lightGray
+    color: $lightGray
     background-color: transparent
-    border = 1px solid !contentHeaderBorder
-    +borderCorner(8px,8px,8px,8px)
+    border: 1px solid $contentHeaderBorder
+    +borderCorner(8px, 8px, 8px, 8px)
     font-weight: bold
     outline: none
     &:hover, &.selected
-      color = !white
-      background-color = !lightGray
+      color: $white
+      background-color: $lightGray
   &.backgrounds.big-header
     padding-bottom: 0
     padding-top: 0
     background-position: 0 -251px
-    font-size: .8em
+    font-size: 0.8em
+
 .media-hoverlay
   padding: 0px !important
+
 .media-hoverlay-header
-  :background-color = !white
+  background-color: $white
   height: 35px
   padding-top: 6px
-  :border-bottom = 1px solid !contentHeaderBorder
+  border-bottom: 1px solid $contentHeaderBorder
   position: relative
   font:
     size: 1.1em
     weight: bold
-  :color = !blueLink
+  color: $blueLink
   padding: 5px 15px 0
   .search,
   #search
     margin-right: 0
     font:
-      size: .9em
+      size: 0.9em
       weight: normal
   .button
     margin: 5px 5px 5px 15px
@@ -51,21 +54,24 @@
     float: left
     span
       padding: 1px 20px 0 30px
+
 .media-hoverlay-content
-  :background-color = !white
+  background-color: $white
   float: right
   width: 70%
   min-height: 400px
   height: auto !important
   height: 400px
-  font-size: .8em
+  font-size: 0.8em
   table
     width: 100% !important
   .datatable
-    font-size: .8em
+    font-size: 0.8em
+
 .media-hoverlay-sidebar
   padding: 10px
   width: 25%
+
 .display-mode
   float: right
   width: 90px
@@ -75,9 +81,9 @@
     height: 100%
     margin: 0 10px
     width: 3px
-    +left()
+    +left
   .display-list
-    +left()
+    +left
     background: transparent url(/images/admin/big-icons-27-27-verti.png) 0 -80px no-repeat
     width: 27px
     height: 27px
@@ -85,45 +91,43 @@
     &.off
       background: transparent url(/images/admin/big-icons-27-27-verti.png) 0 1px no-repeat
   .display-thumbnails
-    +left()
+    +left
     background: transparent url(/images/admin/big-icons-27-27-verti.png) 0 -242px no-repeat
     width: 27px
     height: 27px
     &.off
       background: transparent url(/images/admin/big-icons-27-27-verti.png) 0 -161px no-repeat
+
 div.tree-link
   padding-top: 10px !important
   padding-bottom: 10px !important
   label
-    +left()
+    +left
     margin-bottom: 8px
-    :color = !lightGray
+    color: $lightGray
     width: 95px
     clear: left
   input, textarea
-    +left()
-    :border = 2px solid !gray
-    +borderCorner(2px,2px,2px,2px)
+    +left
+    border: 2px solid $gray
+    +borderCorner(2px, 2px, 2px, 2px)
     width: 390px
     padding: 2px
-
     &.external
       color: red
   .linked-to-span
-    +left()
-    :background-color = !lightBlueBg
+    +left
+    background-color: $lightBlueBg
     padding: 0 5px 2px 20px
     a
-      :color = !blueLink
-
+      color: $blueLink
   .linked-to
     display: none
-
   .link
-    +left()
+    +left
     padding: 0 5px 2px 0px
     a
-      :color = !blueLink
+      color: $blueLink
   .back-link
     text-decoration: underline
   .button
@@ -131,10 +135,10 @@ div.tree-link
     -moz-border-radius-bottomright: 2px
     -moz-border-radius-topleft: 2px
     -moz-border-radius-topright: 2px
-    :background-color = !whiteGray
+    background-color: $whiteGray
     background-position: 0 -10px
-    :border = 1px solid !gray
-    :color = !blueLink
+    border: 1px solid $gray
+    color: $blueLink
     display: inline-block
     font-size: 0.8em
     margin-top: 8px
@@ -142,6 +146,7 @@ div.tree-link
     text-align: center
     text-decoration: none
     font-size: 1.1em
+
 .upload-lightbox-container,
 .media-hoverlay
   display: none
