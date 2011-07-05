@@ -1,7 +1,7 @@
 .fieldset.grid_11
   %h2= t 'setting.company_info'
   .clear
-  - fields_for :address do |address|
+  = f.fields_for :address do |address|
     .street-input
       = address.label :address, t(:address, :count => 1).capitalize
       = address.text_field :address

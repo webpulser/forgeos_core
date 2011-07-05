@@ -1,7 +1,7 @@
 class Forgeos::ApplicationController < ActionController::Base
   helper_method :current_user_session, :current_user
 
-  before_filter :set_locale
+  before_filter :set_locale, :set_time_zone
   after_filter :discard_flash_if_xhr, :log_visit
 
   def notifications
@@ -22,6 +22,10 @@ class Forgeos::ApplicationController < ActionController::Base
     if locale.present? and I18n.available_locales.include?(locale.to_sym)
       session[:locale] = I18n.locale = locale
     end
+  end
+
+  def set_time_zone
+    Time.zone = current_user.time_zone if current_user and current_user.time_zone
   end
 
   def log_visit

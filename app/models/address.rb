@@ -1,6 +1,6 @@
 class Address < ActiveRecord::Base
-  belongs_to :country,
-    :person
+  belongs_to :country
+  belongs_to :person
   serialize :form_attributes
 
   validates :country_id, :address, :city,

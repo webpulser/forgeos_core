@@ -1,10 +1,10 @@
-= f.fields_for :mailer, f.object.mailer do |mailer|
-  = mailer.label :delivery_method
+= f.fields_for :mailer do |mailer_form|
+  = mailer_form.label :delivery_method
   %div
-    = mailer.select :delivery_method, [['SMTP','smtp'],['sendmail','sendmail'],['Test','test']], { :prompt => t(:please_select) }
+    = mailer_form.select :delivery_method, [['SMTP','smtp'],['sendmail','sendmail'],['Test','test']], { :prompt => t(:please_select) }
   .clear
 #smtp.delivery_method_settings.hidden
-  = f.fields_for :smtp_settings, f.object.smtp_settings do |smtp|
+  = f.fields_for :smtp_settings do |smtp|
     = smtp.label :address
     %div
       = smtp.text_field :address
@@ -18,7 +18,7 @@
     %div
       = smtp.select :authentication, [['none', 'none'],['plain','plain'],['login','login'],['cran_md5','cran_md5']], {}, :onchange => "if(this.value == 'none'){$('#authentication').addClass('hidden');} else {$('#authentication').removeClass('hidden');}"
     .clear
-    - authentication_class = (smtp.object.authentication.nil? ? 'hidden' : nil)
+    - authentication_class = (smtp.object and smtp.object.authentication ? nil : 'hidden')
     #authentication{ :class => authentication_class }
       = smtp.label :user_name
       %div
@@ -30,7 +30,7 @@
     %div
       = smtp.check_box :enable_starttls_auto
 #sendmail.delivery_method_settings.hidden
-  = f.fields_for :sendmail_settings, f.object.sendmail_settings do |sendmail|
+  = f.fields_for :sendmail_settings do |sendmail|
     = sendmail.label :location
     %div
       = sendmail.text_field :location
