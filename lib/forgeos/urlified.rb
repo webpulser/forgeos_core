@@ -1,7 +1,7 @@
 module Forgeos
   module Urlified
     def self.included(base)
-      base.before_save :force_url_format, :generate_url
+      base.before_validation :force_url_format, :generate_url
     end
 
     def force_url_format
