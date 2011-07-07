@@ -248,7 +248,6 @@ function dataTableSelectRows(selector,callback){
   current_table.fnSettings().sAjaxSource = source + '&ids=' + ids.join(',');
 
   current_table.fnSettings().fnDrawCallback = function(){
-    var current_table = jQuery(this).dataTableInstance();
     var indexes = current_table.fnGetSelectedIndexes();
 
     callback(current_table,indexes);
