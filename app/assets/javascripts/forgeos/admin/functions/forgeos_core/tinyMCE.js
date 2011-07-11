@@ -16,7 +16,7 @@ function tmceInit(selector){
     mode : 'textareas',
     plugins : "table,fullscreen,paste,media,preview,advimage,curblyadvimage,advlink,contextmenu",
     theme : 'advanced',
-    content_css : "/stylesheets/tinyMCE/styles.css",
+    content_css : "/assets/forgeos/tinyMCE/styles.css",
     convert_urls: 0,
     onchange_callback: function(inst){ jQuery(inst.getElement()).trigger('change'); },
     theme_advanced_buttons1 : "undo,redo,|,pasteword,|,anchor,image,media,|,code,preview,|,removeformat,cleanup",

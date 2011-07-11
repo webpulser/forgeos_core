@@ -24,14 +24,14 @@ class Category < ActiveRecord::Base
     unless self.attachments.empty?
       "background-image: url('#{self.attachments.first.public_filename(:categories_icon)}') !important;background-position: 0 3px"
     else
-      ''
+      nil
     end
   end
 
   def to_jstree
     hash = {}
-    hash[:attributes] = { :id => "#{self.class.to_s.underscore}_#{id}", :type => 'folder' }
-    hash[:data] = { :title => "#{name}<span>#{total_elements_count}</span>", :attributes => { :class => 'big-icons', :style => category_picture }}
+    hash[:attr] = { :id => "#{self.class.to_s.underscore}_#{id}", :type => 'folder' }
+    hash[:data] = { :title => name, :attr => { :style => category_picture, :title => total_elements_count } }
     unless children.empty?
      hash[:children] = children.all(:order => 'position ASC').collect(&:to_jstree)
     end

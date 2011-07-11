@@ -47,14 +47,10 @@ Forgeos::Core::Engine.routes.draw do
       end
     end
 
-    resources :categories do
-      member do
-        post :add_element
-      end
-    end
+    resources :categories
 
     %w(media picture doc pdf audio video attachment admin role right user menu).each do |category|
-      resources "#{category}_categories", :controller => 'categories', :requirements => { :type => "#{category}_category" } do
+      resources "#{category}_categories", :controller => 'categories', :type => "#{category}_category" do
         member do
           post :add_element
         end

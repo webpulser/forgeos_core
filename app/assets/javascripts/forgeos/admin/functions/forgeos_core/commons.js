@@ -12,9 +12,14 @@ function showObjectsAssociated(){
   });
 }
 
-function get_rails_element_id(element){
-  var id = jQuery(element).attr('id').split('_');
-  return id[id.length-1];
+function get_rails_element_id(element) {
+  var id = jQuery(element).attr('id');
+  if (typeof(id) != 'undefined') {
+    id = id.split('_');
+    return id[id.length-1];
+  } else {
+    return '';
+  }
 }
 
 function get_rails_element_ids(list){

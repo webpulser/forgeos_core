@@ -1,74 +1,73 @@
-.tree-categories
+.jstree.jstree-categories
   ul
-    display: block
     padding: 0
     margin: 0
 
   li
     margin: 2px 0
-    display: block !important
     width: auto !important
     float: none !important
 
-    &.open
-      background: url("brown-minus.png") 0px 3px no-repeat
-
-    &.closed
-      background: url("brown-plus.png") 0 3px no-repeat
-
-
-#jstree-dragged.tree-categories li li.open
-  background: url("brown-plus.png") 0 3px no-repeat
-
-
-.tree.tree-categories li
-  a
-    padding: 3px 24px !important
-    color: #75491B
-    font-weight: bold
-    font-size: 0.8em
-    background-position: 0 -271px
-    display: block
-    position: relative
-    &:hover, &.hover
-      background-color: #FDD794
-      color: #F16028
-
-    &.clicked
-      background-color: #FDD794
-      color: #F16028
-
-      &:hover
-        background-color: #FDD794
-        color: #F16028
-    ins
-      margin: 0
-      display: none
-
-    span
-      height: 13px
-      width: 19px
-      font-size: 0.7em
-      background-image: url("bubble-quantity-elements.png")
-      background-repeat: no-repeat
-      background-position: -1px -5px
-      text-align: center
+    &.jstree-open
+      ins
+        background: url("brown-minus.png") 0px 3px no-repeat
+    &.jstree-closed
+      ins
+        background: url("brown-plus.png") 0 3px no-repeat
+      ul
+        display: none
+    ul li > ins.jstree-icon
+      background: none
+    a
       color: #75491B
-      position: absolute
-      right: 5px
-      top: 5px
-      line-height: 1.4em
-      padding: 0px 5px 2px 1px
-      &.clicked
+      font-weight: bold
+      font-size: 0.8em
+      position: relative
+      &:hover, &.hover
         background-color: #FDD794
         color: #F16028
-        padding: 0px 3px 0px 20px
 
-.tree.tree-categories li a.loading
-  background: none
+      &.jstree-clicked
+        background-color: #FDD794
+        color: #F16028
+
+        &:hover
+          background-color: #FDD794
+          color: #F16028
+      ins.jstree-icon
+        margin: 0
+        background-image: url(/assets/forgeos/admin/big-icons-24-24-verti.png) !important
+        background-repeat: no-repeat
+        width: 25px
+        background-position: 0 -271px
+
+      span
+        float: right
+        height: 13px
+        width: 19px
+        font-size: 0.7em
+        background:
+          image: url("bubble-quantity-elements.png")
+          repeat: no-repeat
+          position: -1px -5px
+        text-align: center
+        color: #75491B
+        position: absolute
+        right: 5px
+        top: 5px
+        line-height: 1.4em
+        padding: 0px 5px 2px 1px
+      &.jstree-clicked
+        span
+          background-color: #FDD794
+          color: #F16028
+          padding: 0px 3px 0px 20px
+
+      &.jstree-loading
+        background: none
 
 
-.tree-categories-context
+.jstree-categories-context
   width: 160px
   background: #FFF
   border: 1px solid #AEB0B2
@@ -83,7 +82,7 @@
     line-height: 20px
     margin: 0
 
-    &.disabled:hover
+    &.jstree-disabled:hover
       display: block
       text-decoration: none
       border-bottom: 1px solid #AEB0B2
@@ -97,7 +96,7 @@
       color: #2973BD
       border-bottom: 1px solid #AEB0B2
 
-    &.disabled
+    &.jstree-disabled
       color: silver
       opacity: 0.5
       -ms-filter: 'alpha(opacity=50)'
@@ -124,3 +123,5 @@
       margin: 0 !important
   .separator
     display: none !important
+#jstree-dragged.jstree-categories li li.open
+  background: url("brown-plus.png") 0 3px no-repeat

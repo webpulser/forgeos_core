@@ -3,9 +3,10 @@
 %html{ "xml:lang" => I18n.locale, :xmlns => "http://www.w3.org/1999/xhtml" }
   %head
     %meta{ :content => "text/html; charset=UTF-8", "http-equiv" => "Content-Type" }
-    %link{ :href => "/forgeos/admin/favicon.gif", :rel => "shortcut icon", :type => "image/gif" }
-    = stylesheet_link_tag 'forgeos/960', 'forgeos/jquery-ui/themes/forgeos', 'forgeos/jquery.selectbox', 'forgeos/jstree/tree_component', 'forgeos/admin/base', :cache => 'forgeos/admin'
-    = javascript_include_tag 'forgeos/jquery', 'forgeos/swfobject'
+    %link{ :href => "/assets/forgeos/admin/favicon.gif", :rel => "shortcut icon", :type => "image/gif" }
+    = stylesheet_link_tag 'forgeos/960', 'forgeos/jquery-ui/themes/forgeos', 'forgeos/admin/base', :cache => 'forgeos/admin'
+    = javascript_include_tag 'jquery', 'forgeos/swfobject'
+    = csrf_meta_tag
     %title= "#{I18n.t(:forgeos)} - #{I18n.t(controller.controller_name, :scope => ['back_office', 'menu']).capitalize}"
   %body
     #container.container_16
@@ -24,7 +25,7 @@
       #footer
       #dialog
       = javascript_include_tag 'forgeos/admin/customselects', 'forgeos/admin/jquery-cookie-plugin', :cache => 'forgeos/admin/no-concat-lib'
-      = javascript_include_tag 'forgeos/tiny_mce/jquery.tinymce', 'forgeos/jquery-ui', 'forgeos/jquery.dataTables.min', 'forgeos/jquery.dataSlides', 'forgeos/jstree/jquery.tree', 'forgeos/jstree/plugins/jquery.tree.contextmenu', 'forgeos/jquery.uploadify', :cache => 'forgeos/admin/lib'
+      = javascript_include_tag 'forgeos/tiny_mce/jquery.tinymce.js', 'jquery-ui', 'jquery_ujs', 'forgeos/jquery.dataTables.min.js', 'forgeos/jquery.dataSlides.js', 'forgeos/jstree/jquery.jstree.js', 'forgeos/jquery.uploadify.js', :cache => 'forgeos/admin/lib'
       = eval("javascript_include_tag '#{forgeos_js_functions_files.join("','")}', :cache => 'forgeos/admin/functions'")
       = eval("javascript_include_tag '#{forgeos_js_inits_files.join("','")}', :cache => 'forgeos/admin/inits'")
       :javascript
