@@ -1,8 +1,22 @@
 Gem::Specification.new do |s|
   s.add_dependency 'rails', '>= 3.1.0.rc4'
+  s.add_dependency 'acts-as-taggable-on', '>= 2.0.6'
+  s.add_dependency 'acts_as_list', '>= 0.1.3'
+  s.add_dependency 'acts_as_tree', '>= 0.1.1'
+  s.add_dependency 'bcrypt-ruby', '>= 2.1.4'
+  s.add_dependency 'fastercsv', '>= 1.5.4'
+  s.add_dependency 'globalize3', '>= 0.1.0'
+  s.add_dependency 'haml', '>= 3.1.2'
+  s.add_dependency 'sass', '>= 3.1.4'
+  s.add_dependency 'mime-types', '>= 1.16'
+  s.add_dependency 'thinking-sphinx', '>= 2.0.5'
+  s.add_dependency 'webpulser-habtm_list', '>= 0.1.2'
+  s.add_dependency 'will_paginate', '~> 3.0.pre2'
+  s.add_dependency 'authlogic', '>= 3.0.3'
+
   s.name = 'forgeos_core'
-  s.version = '1.9.1'
-  s.date = '2011-07-05'
+  s.version = '1.9.2'
+  s.date = '2011-07-11'
 
   s.summary = 'Core of Forgeos plugins suite'
   s.description = 'Forgeos Core provide users, libraries and administration rights and roles based management'
@@ -11,5 +25,5 @@ Gem::Specification.new do |s|
   s.email = 'dev@webpulser.com'
   s.homepage = 'http://github.com/webpulser/forgeos_core'
 
-  s.files = Dir['{app,lib,config,db,recipes}/**/*', 'README*', 'LICENSE*']
+  s.files = Dir['{app,lib,config,db,recipes}/**/*', 'README*', 'LICENSE', 'COPYING*']
 end
