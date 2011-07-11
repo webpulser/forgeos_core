@@ -4,27 +4,6 @@
   .add-link
     padding-left: 30px
     background-position: 10px -1434px
-#inner-lightbox, #blocks-header
-  background-position: 0 0
-  font-size: 0.9em
-  padding: 10px 5px 10px 10px
-  a
-    padding: 0 10px
-    padding-left: 25px
-    color: $lightGray
-    background-color: transparent
-    border: 1px solid $contentHeaderBorder
-    +borderCorner(8px,8px,8px,8px)
-    font-weight: bold
-    outline: none
-    &:hover, &.selected
-      color: $white
-      background-color: $lightGray
-  &.backgrounds.big-header
-    padding-bottom: 0
-    padding-top: 0
-    background-position: 0 -251px
-    font-size: .8em
 .media-hoverlay
   padding: 0px !important
 .media-hoverlay-header
@@ -100,6 +79,8 @@ div.tree-link
     color: $lightGray
     width: 95px
     clear: left
+  select
+    +left()
   input, textarea
     +left()
     border: 2px solid $gray

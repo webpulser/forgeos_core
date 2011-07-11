@@ -141,24 +141,9 @@ module Admin::BaseHelper
     submit_tag(t(label).capitalize, :class => 'backgrounds interact-button')
   end
 
-  def block_container(model_name, block_name, block, &proc)
-    content_tag :div, :class => 'block-container ui-corner-all' do
-      content_tag(:span, :class => 'block-type') do
-        content_tag(:span, content_tag(:span, '&nbsp;', :class => 'inner'), :class => 'handler') +
-        block.class.human_name
-      end +
-      content_tag(:span, capture(&proc), :class => 'block-name') +
-      link_to('', [:edit, :admin, block], :class => 'small-icons edit-link', :popup => true) +
-      link_to('', '#', :class => 'big-icons gray-destroy') +
-      hidden_field_tag("#{model_name}[#{block_name}_ids][]", block.id, :class => 'block-selected')
-    end
-  end
-
   def Forgeos_save_buttons(back_path= [forgeos_core, :admin, :root], label= 'save')
     content_tag(:div, :class => 'interact-links') do
       fg_submit_tag(label) + t('or') + link_to(t('cancel').capitalize, back_path, :class => 'back-link')
     end
   end
-
 end
-

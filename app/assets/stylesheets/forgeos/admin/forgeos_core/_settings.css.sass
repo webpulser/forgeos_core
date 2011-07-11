@@ -1,43 +1,81 @@
 #blocks-header
-  &.backgrounds
-    &.settings
+  padding: 0px
+  border: 0
+  background-color: white
+  ul
+    &.ui-widget-header
+      background: none
+    padding: 0
+    height: auto
+    line-height: 1em
+    &.ui-tabs-nav a
+      padding: 0 12px
+      color: $lightGray
+      background-color: transparent
+      border: 1px solid $contentHeaderBorder
+      +borderCorner(8px,8px,8px,8px)
+      font-weight: bold
+      outline: none
+
+
+    li
+      padding: 0
+      margin: 5px 0 5px 5px
+      background: none
       border: 0
-      ul
-        float: left
-        padding: 0
-        margin: 0
-        background: none
+      font-size: 1em
+      height: auto
+      line-height: 1em
+      &.ui-state-active
+        top: 4px
+      a
+        font-size: 0.9em
         height: auto
         line-height: 1em
-        li
-          float: left
-          padding: 0
-          margin: 0
-          background: none
-          border: 0
-          font-size: 1em
-          position: static
-          height: auto
-          line-height: 1em
-          a
-            height: auto
-            line-height: 1em
-          &.ui-tabs-selected
-            a
-              color: $white !important
-              background-color: $lightGray !important
-          &.ui-state-default
-            a
-              color: $lightGray
-              background-color: transparent
-      &.big-header
-        ul
-          margin-top: 15px
-          li
-            margin: 0 2px
-            a
-              line-height: 18px
-        .interact-links
-          margin-top: 7px
-.content_setting_div
-  padding: 0 !important
+      &.ui-state-default a
+        color: $lightGray
+        background-color: transparent
+      &.ui-tabs-selected a, &.ui-state-hover a
+        color: $white
+        background-color: $lightGray
+
+  .ui-tabs-panel
+    padding: 0
+    min-height: 600px
+  .big-header
+    background-position: 0 -234px
+    height: auto
+    padding: 0 0
+    font-size: 0.8em
+    .interact-links
+      margin-top: 7px
+
+#sub-links, #inner-lightbox
+  padding: 0
+  border: 0
+  background-color: white
+  ul
+    padding: 0
+    margin: 0
+    height: auto
+    line-height: 1em
+    li
+      padding: 0
+      margin: 5px 0 5px 5px
+      display: inline-block
+      a
+        padding: 0 12px
+        color: $lightGray
+        background-color: transparent
+        border: 1px solid $contentHeaderBorder
+        +borderCorner(8px,8px,8px,8px)
+        font-weight: bold
+        outline: none
+        font-size: 0.9em
+        height: auto
+        line-height: 1em
+        color: $lightGray
+        background-color: transparent
+        &:hover, &.selected
+          color: $white
+          background-color: $lightGray

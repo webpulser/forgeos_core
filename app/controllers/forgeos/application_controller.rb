@@ -7,8 +7,7 @@ class Forgeos::ApplicationController < ActionController::Base
   def notifications
     @notifications = {}
     [:error, :notice, :warning].each do |key|
-      message = flash.delete(key)
-      @notifications[key] = message unless message.blank?
+      @notifications[key] = flash[key] unless flash[key].blank?
     end
     render :json => @notifications.to_json
   end

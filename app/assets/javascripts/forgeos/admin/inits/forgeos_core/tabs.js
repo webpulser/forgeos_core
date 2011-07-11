@@ -15,9 +15,9 @@ jQuery(document).ready(function(){
 
   //tabs for dashboard
   jQuery(".to-tab").tabs({
-    ui: { theme_path: '/stylesheets/jquery-ui/themes/', theme_name : 'dashboard'}
+    ui: { theme_path: '/assets/forgeos/jquery-ui/themes/', theme_name : 'dashboard'}
   });
   jQuery("#to-tab").tabs({
-    ui: { theme_path: '/stylesheets/jquery-ui/themes/', theme_name : 'dashboard'}
+    ui: { theme_path: '/assets/forgeos/jquery-ui/themes/', theme_name : 'dashboard'}
   });
 });

@@ -1,15 +1,15 @@
 jQuery(document).ready(function(){
-  jQuery("#blocks-header.backgrounds.settings").tabs();
- 
+  jQuery("#blocks-header").tabs();
+
   jQuery('#setting_mailer_delivery_method').change(function(){
     var value = jQuery('#setting_mailer_delivery_method').val();
     jQuery('.delivery_method_settings').hide();
     jQuery('#'+value).show();
   })
 
-  if (jQuery('#setting_mailer_delivery_method').val() != null){
-    var value = jQuery('#setting_mailer_delivery_method').val();
+  var current_mailer_setting = jQuery('#setting_mailer_delivery_method').val();
+  if (current_mailer_setting != null){
     jQuery('.delivery_method_settings').hide();
-    jQuery('#'+value).show();
+    jQuery('#'+current_mailer_setting).show();
   }
 });

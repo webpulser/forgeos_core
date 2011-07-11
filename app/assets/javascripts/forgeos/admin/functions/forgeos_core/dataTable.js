@@ -163,7 +163,7 @@ function removedataTablesRow(selector){
 function DataTablesDrawCallBack(table) {
   InitCustomSelects();
   showObjectsAssociated();
-  hide_paginate(table);
+  //hide_paginate(table);
   moveDataTablesSearchField();
 }
 
@@ -232,6 +232,7 @@ function update_current_dataTable_source(selector,source){
 }
 
 function hide_paginate(dataTables){
+  console.info(dataTables);
   var pagination = jQuery(dataTables.nPaginateList).parents(':first');
   var pages_number = dataTables.nPaginateList.children.length;
   (pages_number>1) ? pagination.show() : pagination.hide();
@@ -248,7 +249,6 @@ function dataTableSelectRows(selector,callback){
   current_table.fnSettings().sAjaxSource = source + '&ids=' + ids.join(',');
 
   current_table.fnSettings().fnDrawCallback = function(){
-    var current_table = jQuery(this).dataTableInstance();
     var indexes = current_table.fnGetSelectedIndexes();
 
     callback(current_table,indexes);

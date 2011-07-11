@@ -5,10 +5,10 @@
  *  Author:       Allan Jardine
  *  Created:      Tue May 12 06:47:22 BST 2009
  *  Modified:     $Date$ by $Author$
- *  Language:     C#
- *  Project:      RCAD/USB VPN creation utility
+ *  Language:     CSS
+ *  Project:      DataTables
  *
- *  Copyright 2009 U4EA. All Rights Reserved.
+ *  Copyright 2009 Allan Jardine. All Rights Reserved.
  *
  * ***************************************************************************
  * DESCRIPTION
@@ -23,7 +23,7 @@
  *     ensure that you either have "example_alt_pagination" as a body class name, or better yet,
  *     modify that selector.
  *   Note that the path used for Images is relative. All images are by default located in
- *     /assets/dataTables/ - relative to this CSS file.
+ *     /assets/forgeos/dataTables/ - relative to this CSS file.
  */
 
 /* * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * *
@@ -33,21 +33,25 @@
 .dataTables_wrapper {
 	position: relative;
 	min-height: 302px;
-	_height: 302px;
 	clear: both;
+	_height: 302px;
+	zoom: 1; /* Feeling sorry for IE */
 }
 
 .dataTables_processing {
 	position: absolute;
-	top: 0px;
+	top: 50%;
 	left: 50%;
 	width: 250px;
+	height: 30px;
 	margin-left: -125px;
+	margin-top: -15px;
+	padding: 14px 0 2px 0;
 	border: 1px solid #ddd;
 	text-align: center;
 	color: #999;
-	font-size: 11px;
-	padding: 2px 0;
+	font-size: 14px;
+	background-color: white;
 }
 
 .dataTables_length {
@@ -82,19 +86,19 @@
 }
 
 .paginate_disabled_previous {
-	background-image: url('/assets/dataTables/back_disabled.jpg');
+	background-image: url('/assets/forgeos/dataTables/back_disabled.jpg');
 }
 
 .paginate_enabled_previous {
-	background-image: url('/assets/dataTables/back_enabled.jpg');
+	background-image: url('/assets/forgeos/dataTables/back_enabled.jpg');
 }
 
 .paginate_disabled_next {
-	background-image: url('/assets/dataTables/forward_disabled.jpg');
+	background-image: url('/assets/forgeos/dataTables/forward_disabled.jpg');
 }
 
 .paginate_enabled_next {
-	background-image: url('/assets/dataTables/forward_enabled.jpg');
+	background-image: url('/assets/forgeos/dataTables/forward_enabled.jpg');
 }
 
 
@@ -104,8 +108,21 @@
  */
 table.display {
 	margin: 0 auto;
-	width: 100%;
 	clear: both;
+	width: 100%;
+	
+	/* Note Firefox 3.5 and before have a bug with border-collapse
+	 * ( https://bugzilla.mozilla.org/show%5Fbug.cgi?id=155955 ) 
+	 * border-spacing: 0; is one possible option. Conditional-css.com is
+	 * useful for this kind of thing
+	 *
+	 * Further note IE 6/7 has problems when calculating widths with border width.
+	 * It subtracts one px relative to the other browsers from the first column, and
+	 * adds one to the end...
+	 *
+	 * If you want that effect I'd suggest setting a border-top/left on th/td's and 
+	 * then filling in the gaps with other borders.
+	 */
 }
 
 table.display thead th {
@@ -117,7 +134,7 @@ table.display thead th {
 }
 
 table.display tfoot th {
-	padding: 3px 10px;
+	padding: 3px 18px 3px 10px;
 	border-top: 1px solid black;
 	font-weight: bold;
 }
@@ -141,16 +158,25 @@ table.display td.center {
  */
 
 .sorting_asc {
-	background: url('/assets/dataTables/sort_asc.jpg') no-repeat center right;
+	background: url('/assets/forgeos/dataTables/sort_asc.png') no-repeat center right;
 }
 
 .sorting_desc {
-	background: url('/assets/dataTables/sort_desc.jpg') no-repeat center right;
+	background: url('/assets/forgeos/dataTables/sort_desc.png') no-repeat center right;
 }
 
 .sorting {
-	background: url('/assets/dataTables/sort_both.jpg') no-repeat center right;
+	background: url('/assets/forgeos/dataTables/sort_both.png') no-repeat center right;
 }
+
+.sorting_asc_disabled {
+	background: url('/assets/forgeos/dataTables/sort_asc_disabled.png') no-repeat center right;
+}
+
+.sorting_desc_disabled {
+	background: url('/assets/forgeos/dataTables/sort_desc_disabled.png') no-repeat center right;
+}
+
 
 
 
@@ -158,17 +184,6 @@ table.display td.center {
 /* * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * *
  * DataTables row classes
  */
-table.display tr.odd.gradeA {
-	background-color: #ddffdd;
-}
-
-table.display tr.even.gradeA {
-	background-color: #eeffee;
-}
-
-
-
-
 table.display tr.odd.gradeA {
 	background-color: #ddffdd;
 }
@@ -217,6 +232,14 @@ tr.even {
 /* * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * *
  * Misc
  */
+.dataTables_scroll {
+	clear: both;
+}
+
+.dataTables_scrollBody {
+	*margin-top: -1px;
+}
+
 .top, .bottom {
 	padding: 15px;
 	background-color: #F5F5F5;
@@ -346,11 +369,19 @@ tr.odd.gradeA td.sorting_2 {
 	background-color: #d1ffd1;
 }
 
+tr.odd.gradeA td.sorting_3 {
+	background-color: #d1ffd1;
+}
+
 tr.even.gradeA td.sorting_1 {
 	background-color: #d5ffd5;
 }
 
 tr.even.gradeA td.sorting_2 {
+	background-color: #e2ffe2;
+}
+
+tr.even.gradeA td.sorting_3 {
 	background-color: #e2ffe2;
 }
 
@@ -362,11 +393,19 @@ tr.odd.gradeC td.sorting_2 {
 	background-color: #d1d1ff;
 }
 
+tr.odd.gradeC td.sorting_3 {
+	background-color: #d1d1ff;
+}
+
 tr.even.gradeC td.sorting_1 {
 	background-color: #d5d5ff;
 }
 
 tr.even.gradeC td.sorting_2 {
+	background-color: #e2e2ff;
+}
+
+tr.even.gradeC td.sorting_3 {
 	background-color: #e2e2ff;
 }
 
@@ -378,11 +417,19 @@ tr.odd.gradeX td.sorting_2 {
 	background-color: #ffd1d1;
 }
 
+tr.odd.gradeX td.sorting_3 {
+	background-color: #ffd1d1;
+}
+
 tr.even.gradeX td.sorting_1 {
 	background-color: #ffd5d5;
 }
 
 tr.even.gradeX td.sorting_2 {
+	background-color: #ffe2e2;
+}
+
+tr.even.gradeX td.sorting_3 {
 	background-color: #ffe2e2;
 }
 
@@ -394,11 +441,19 @@ tr.odd.gradeU td.sorting_2 {
 	background-color: #d1d1d1;
 }
 
+tr.odd.gradeU td.sorting_3 {
+	background-color: #d1d1d1;
+}
+
 tr.even.gradeU td.sorting_1 {
 	background-color: #d5d5d5;
 }
 
 tr.even.gradeU td.sorting_2 {
+	background-color: #e2e2e2;
+}
+
+tr.even.gradeU td.sorting_3 {
 	background-color: #e2e2e2;
 }
 
@@ -412,4 +467,72 @@ tr.even.gradeU td.sorting_2 {
 
 .ex_highlight #example tbody tr.odd:hover, #example tbody tr.odd td.highlighted {
 	background-color: #E6FF99;
+}
+
+.ex_highlight_row #example tr.even:hover {
+	background-color: #ECFFB3;
+}
+
+.ex_highlight_row #example tr.even:hover td.sorting_1 {
+	background-color: #DDFF75;
+}
+
+.ex_highlight_row #example tr.even:hover td.sorting_2 {
+	background-color: #E7FF9E;
+}
+
+.ex_highlight_row #example tr.even:hover td.sorting_3 {
+	background-color: #E2FF89;
+}
+
+.ex_highlight_row #example tr.odd:hover {
+	background-color: #E6FF99;
+}
+
+.ex_highlight_row #example tr.odd:hover td.sorting_1 {
+	background-color: #D6FF5C;
+}
+
+.ex_highlight_row #example tr.odd:hover td.sorting_2 {
+	background-color: #E0FF84;
+}
+
+.ex_highlight_row #example tr.odd:hover td.sorting_3 {
+	background-color: #DBFF70;
+}
+
+
+/*
+ * KeyTable
+ */
+table.KeyTable td {
+	border: 3px solid transparent;
+}
+
+table.KeyTable td.focus {
+	border: 3px solid #3366FF;
+}
+
+table.display tr.gradeA {
+	background-color: #eeffee;
+}
+
+table.display tr.gradeC {
+	background-color: #ddddff;
+}
+
+table.display tr.gradeX {
+	background-color: #ffdddd;
+}
+
+table.display tr.gradeU {
+	background-color: #ddd;
+}
+
+div.box {
+	height: 100px;
+	padding: 10px;
+	overflow: auto;
+	border: 1px solid #8080FF;
+	background-color: #E5E5FF;
 }

@@ -26,7 +26,7 @@ class Admin::AccountsController < Admin::BaseController
   def update
     @user = current_user
     respond_to do |format|
-      if @user.update_attributes(params[:account])
+      if @user.update_attributes(params[:administrator])
         flash[:notice] = t('my_account.update.success').capitalize
         format.xml  { head :ok }
       else
