@@ -2,7 +2,7 @@
   output = {
     :iTotalDisplayRecords => @roles.total_entries || 0,
     :aaData => @roles.collect do |role|
-      link_id = role.id
+      link_id = "role_#{role.id}"
       klass = role.active? ? 'see-on' : 'see-off'
       [
         content_tag(:div, '<div class="image">&nbsp;<span class="small-icons role-ico">&nbsp;</span></div>', :id => link_id, :class => role.administrators.count > 0 ? 'some-variants plus' : ''),
@@ -10,23 +10,21 @@
           content_tag(:p,role.administrators.all.collect{ |admin| link_to("#{admin.firstname} #{admin.lastname}", [forgeos_core, :admin, admin]) }.join('<br />') , :style=>'display:none'),
         role.administrators.count,
         role.created_at.to_s(:short),
-        link_to('', :url => forgeos_core.activate_admin_role_path(role),
+        link_to('', [forgeos_core, :activate ,:admin, role],
           :remote => true,
-          :complete => "toggleActivate('#show_#{link_id}')",
-          :html => {
-            :class => "small-icons #{klass}",
-            :id => "show_#{link_id}"
-        }),
+          :method => :post,
+          :class => "small-icons #{klass}",
+          :id => "show_#{link_id}"
+        ),
         #link_to('', [:duplicate, :admin, role], :class => 'small-icons duplicate-link') +
         link_to('', [forgeos_core, :edit, :admin, role], :class => 'small-icons edit-link') +
-        link_to('', :url => [forgeos_core, :admin, role],
+        link_to('', [forgeos_core, :admin, role],
           :remote => true,
           :method => :delete,
           :confirm => I18n.t('role.destroy.confirm').capitalize,
-          :success => "removedataTablesRow('#destroy_#{link_id}')",
-          :html => {
-          :class => 'small-icons destroy-link', :id => "destroy_#{link_id}"
-        })
+          :class => 'small-icons destroy-link',
+          :id => "destroy_#{link_id}"
+        )
       ]
     end
   }

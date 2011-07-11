@@ -48,7 +48,12 @@ class Admin::UsersController < Admin::BaseController
     else
       flash[:error] = I18n.t('user.destroy.failed').capitalize
     end
-    return redirect_to([forgeos_core, :admin, :users])
+    respond_to do |wants|
+      wants.html do
+        redirect_to([forgeos_core, :admin, :users])
+      end
+      wants.js
+    end
   end
 
   def activate
@@ -65,10 +70,11 @@ class Admin::UsersController < Admin::BaseController
         flash[:error] = I18n.t('user.disactivation.failed').capitalize
       end
     end
-    if request.xhr?
-      render :nothing => true
-    else
-      return redirect_to(:back)
+    respond_to do |wants|
+      wants.html do
+        redirect_to(:back)
+      end
+      wants.js
     end
   end
 

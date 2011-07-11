@@ -55,15 +55,15 @@ class Admin::RightsController < Admin::BaseController
   def destroy
     if @right.destroy
       flash[:notice] = I18n.t('right.destroy.success').capitalize
-      return request.xhr? ? (render :nothing => true) : redirect_to([forgeos_core, :admin, :rights])
     else
       flash[:error] = I18n.t('right.destroy.failed').capitalize
-      if request.xhr?
-        render :nothing => true, :json => { :result => 'error' }
-        return false
-      else
+    end
+
+    respond_to do |wants|
+      wants.html do
         redirect_to([forgeos_core, :admin, :rights])
       end
+      wants.js
     end
   end
 

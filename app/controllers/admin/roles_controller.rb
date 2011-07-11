@@ -51,7 +51,12 @@ class Admin::RolesController < Admin::BaseController
     else
       flash[:error] = I18n.t('role.destroy.failed').capitalize
     end
-    return redirect_to([forgeos_core,:admin,:roles])
+    respond_to do |wants|
+      wants.html do
+        redirect_to([forgeos_core,:admin,:roles])
+      end
+      wants.js
+    end
   end
 
   def rights
@@ -64,7 +69,7 @@ class Admin::RolesController < Admin::BaseController
   end
 
   def activate
-    render :text => @role.activate
+    @role.activate
   end
 
 private

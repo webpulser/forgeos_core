@@ -40,28 +40,24 @@ class Person < ActiveRecord::Base
 
   # Disactivates the user in the database.
   def disactivate
-    self.active = false
-    save(false) unless self.new_record?
+    update_attribute(:active, false)
   end
 
   # Activates the user in the database.
   def activate
-    self.active = true
-    save(false) unless self.new_record?
+    update_attribute(:active, true)
   end
 
-  # return the user status
-  def active?
-    self.active
-  end
+  protected
 
-protected
   def skip_uniquess_of_email?
     true
   end
+
   def skip_presence_of_lastname?
     true
   end
+
   def skip_presence_of_firstname?
     true
   end

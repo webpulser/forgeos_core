@@ -42,16 +42,25 @@ class Admin::AdministratorsController < Admin::BaseController
   end
 
   def destroy
-    if request.delete? && @admin.destroy
+    if @admin.destroy
       flash[:notice] = t('admin.destroy.success').capitalize
     else
       flash[:error] = t('admin.destroy.failed').capitalize
     end
-    redirect_to([forgeos_core, :admin, :administrators])
+    respond_to do |wants|
+      wants.html do
+        redirect_to([forgeos_core, :admin, :administrators])
+      end
+      wants.js
+    end
   end
 
   def activate
-    render :text => (@admin.active? ? @admin.disactivate : @admin.activate)
+    if @admin.active?
+      @admin.disactivate
+    else
+      @admin.activate
+    end
   end
 private
 

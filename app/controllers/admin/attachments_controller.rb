@@ -124,8 +124,12 @@ class Admin::AttachmentsController < Admin::BaseController
     else
       flash[:notice] = I18n.t('media.destroy.failed').capitalize
     end
-    return render(:nothing => true) if request.xhr?
-    return redirect_to(forgeos_core.admin_attachments_path(:file_type => @media.class.to_s.underscore))
+    respond_to do |wants|
+      wants.html do
+        redirect_to(forgeos_core.admin_attachments_path(:file_type => @media.class.to_s.underscore))
+      end
+      wants.js
+    end
   end
 
   private

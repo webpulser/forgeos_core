@@ -6,21 +6,20 @@
       [
         content_tag(:div,
           tag(:div, :class => 'handler') +
-          content_tag(:div, '&nbsp;', :id => link_id, :class => 'small-icons right-ico'),
+          tag(:div, :id => link_id, :class => 'small-icons right-ico'),
           :class => 'handler_container'),
         content_tag(:div, right.name, :class => 'right-name'),
         right.controller_name,
         right.action_name,
         content_tag(:span, '&nbsp;', :class => 'small-icons duplicate-link duplicate-right') +
         content_tag(:span, '&nbsp;', :class => 'small-icons edit-link edit-right') +
-        link_to('', :url => [forgeos_core, :admin, right],
+        link_to('', [forgeos_core, :admin, right],
           :remote => true,
           :method => :delete,
           :confirm => I18n.t('right.destroy.confirm').capitalize,
-          :success => "removedataTablesRow('#destroy_#{link_id}')",
-          :html => {
-          :class => 'small-icons destroy-link', :id => "destroy_#{link_id}"
-        })
+          :class => 'small-icons destroy-link',
+          :id => "destroy_#{link_id}"
+        )
       ]
     end
  }

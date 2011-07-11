@@ -7,7 +7,7 @@
         content_tag(:div, tag(:div, :class=>'handler') + tag(:div, :class=>'small-icons category'), :id => link_id, :class => 'handler_container'),
         content_tag(:div, category.name, :class => 'category-name'),
         category.id,
-        link_to(category.name, [forgeos_core, :admin, category])
+        link_to(category.name, '#')#[forgeos_core, :admin, category])
       ]
     end
   }

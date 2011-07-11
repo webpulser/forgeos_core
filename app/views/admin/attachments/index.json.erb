@@ -14,14 +14,13 @@
         "#{media.size/1024} #{I18n.t('media.byte.kilo')}" <<
         "N/A" <<
         link_to('', [forgeos_core, :edit, :admin, media], :class => 'small-icons edit-link') +
-        link_to('', :url => [forgeos_core, :admin, media],
+        link_to('', [forgeos_core, :admin, media],
           :remote => true,
           :method => :delete,
           :confirm => I18n.t('media.destroy.confirm').capitalize,
-          :success => "removedataTablesRow('#destroy_#{link_id}')",
-          :html => {
-          :class => 'small-icons destroy-link', :id => "destroy_#{link_id}"
-        })
+          :class => 'small-icons destroy-link',
+          :id => "destroy_#{link_id}"
+        )
       end
       media_array << media.public_filename << media.id << media.filename
     end

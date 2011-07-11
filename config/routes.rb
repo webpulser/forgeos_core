@@ -25,22 +25,23 @@ Forgeos::Core::Engine.routes.draw do
     resource :setting
     resource :account
     resources :administrators do
-
       member do
         post :activate
       end
-
     end
+
     resources :roles do
       member do
         post :activate
       end
     end
     resources :rights
+
     resources :users do
       collection do
         post :filter
         get :filter
+        get :export_newsletter
       end
       member do
         post :activate

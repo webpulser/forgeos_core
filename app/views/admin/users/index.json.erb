@@ -13,23 +13,20 @@
 
       unless params[:mode] == 'selection'
         table <<
-        link_to('', :url => forgeos_core.activate_admin_user_path(user),
+        link_to('', [forgeos_core, :activate, :admin, user],
           :remote => true,
-          :complete => "toggleActivate('#show_#{link_id}')",
-          :html => {
-            :class => "small-icons #{klass}",
-            :id => "show_#{link_id}"
-         }
+          :method => :post,
+          :class => "small-icons #{klass}",
+          :id => "show_#{link_id}"
         ) <<
         link_to('', [forgeos_core, :edit, :admin, user], :class => 'small-icons edit-link') +
-        link_to('', :url => [forgeos_core, :admin, user],
+        link_to('', [forgeos_core, :admin, user],
           :remote => true,
           :method => :delete,
           :confirm => I18n.t('user.destroy.confirm').capitalize,
-          :success => "removedataTablesRow('#destroy_#{link_id}')",
-          :html => {
-            :class => 'small-icons destroy-link', :id => "destroy_#{link_id}"
-        })
+          :class => 'small-icons destroy-link',
+          :id => "destroy_#{link_id}"
+        )
       else
         table << user.id
       end
