@@ -19,7 +19,7 @@ function tmceInit(selector){
     content_css : "/stylesheets/tinyMCE/styles.css",
     convert_urls: 0,
     onchange_callback: function(inst){ jQuery(inst.getElement()).trigger('change'); },
-    theme_advanced_buttons1 : "undo,redo,|,pasteword,|,anchor,image,media,|,code,preview,|,removeformat,cleanup",
+    theme_advanced_buttons1 : "undo,redo,|,pasteword,|,anchor,image,media,|,code,preview,|,removeformat,cleanup,|, cut,copy,paste,|,bullist,numlist,|,outdent,indent,|,undo,redo,link,unlink,anchor,image,code,preview,|,forecolor,backcolor",
     theme_advanced_buttons2 : "bold,italic,underline,strikethrough,|,styleselect,formatselect,fontselect,fontsizeselect,forecolor,|,hr",
     theme_advanced_buttons3 : "",
     theme_advanced_resize_horizontal : false,
