@@ -1,6 +1,8 @@
 <%
   output = {
-    :iTotalDisplayRecords => @medias.total_entries || 0,
+    :sEcho => params[:sEcho],
+    :iTotalRecords => @medias.total_entries || 0,
+    :iTotalDisplayRecords => @medias.size,
     :aaData => @medias.collect do |media|
       link_id = "attachment_#{media.id}"
       media_array = []

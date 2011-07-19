@@ -1,18 +1,20 @@
 <%
   output = {
-    :iTotalDisplayRecords => @rights.total_entries || 0,
+    :sEcho => params[:sEcho],
+    :iTotalRecords => @rights.total_entries || 0,
+    :iTotalDisplayRecords => @rights.size,
     :aaData => @rights.collect do |right|
       link_id = "right_#{right.id}"
       [
         content_tag(:div,
-          tag(:div, :class => 'handler') +
-          tag(:div, :id => link_id, :class => 'small-icons right-ico'),
+          content_tag(:div, '', :class => 'handler') +
+          content_tag(:div, '', :id => link_id, :class => 'small-icons right-ico'),
           :class => 'handler_container'),
         content_tag(:div, right.name, :class => 'right-name'),
         right.controller_name,
         right.action_name,
-        content_tag(:span, '&nbsp;', :class => 'small-icons duplicate-link duplicate-right') +
-        content_tag(:span, '&nbsp;', :class => 'small-icons edit-link edit-right') +
+        content_tag(:span, "&nbsp;".html_safe, :class => 'small-icons duplicate-link duplicate-right') +
+        content_tag(:span, "&nbsp;".html_safe, :class => 'small-icons edit-link edit-right') +
         link_to('', [forgeos_core, :admin, right],
           :remote => true,
           :method => :delete,

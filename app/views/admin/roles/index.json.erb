@@ -1,13 +1,15 @@
 <%
   output = {
-    :iTotalDisplayRecords => @roles.total_entries || 0,
+    :sEcho => params[:sEcho],
+    :iTotalRecords => @roles.total_entries || 0,
+    :iTotalDisplayRecords => @roles.size,
     :aaData => @roles.collect do |role|
       link_id = "role_#{role.id}"
       klass = role.active? ? 'see-on' : 'see-off'
       [
-        content_tag(:div, '<div class="image">&nbsp;<span class="small-icons role-ico">&nbsp;</span></div>', :id => link_id, :class => role.administrators.count > 0 ? 'some-variants plus' : ''),
+        content_tag(:div, '<div class="image">&nbsp;<span class="small-icons role-ico">&nbsp;</span></div>'.html_safe, :id => link_id, :class => role.administrators.count > 0 ? 'some-variants plus' : ''),
         content_tag(:div, link_to(role.name, [forgeos_core, :edit, :admin, role]), :class => 'role-name') +
-          content_tag(:p,role.administrators.all.collect{ |admin| link_to("#{admin.firstname} #{admin.lastname}", [forgeos_core, :admin, admin]) }.join('<br />') , :style=>'display:none'),
+          content_tag(:p,role.administrators.all.collect{ |admin| link_to("#{admin.firstname} #{admin.lastname}", [forgeos_core, :admin, admin]) }.join('<br />').html_safe, :style=>'display:none'),
         role.administrators.count,
         role.created_at.to_s(:short),
         link_to('', [forgeos_core, :activate ,:admin, role],

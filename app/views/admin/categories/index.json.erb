@@ -1,6 +1,8 @@
 <%
   output = {
-    :iTotalDisplayRecords => @categories.total_entries || 0,
+    :sEcho => params[:sEcho],
+    :iTotalRecords => @categories.total_entries || 0,
+    :iTotalDisplayRecords => @categories.size,
     :aaData => @categories.collect do |category|
       link_id = "menu_link_#{category.id}"
       [

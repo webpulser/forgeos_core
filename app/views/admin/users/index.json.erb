@@ -1,6 +1,8 @@
 <%
   output = {
-    :iTotalDisplayRecords => @users.total_entries || 0,
+    :sEcho => params[:sEcho],
+    :iTotalRecords => @users.total_entries || 0,
+    :iTotalDisplayRecords => @users.size,
     :aaData => @users.collect do |user|
       link_id = "user_#{user.id}"
       klass = user.active? ? 'see-on' : 'see-off'
