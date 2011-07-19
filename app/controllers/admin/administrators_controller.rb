@@ -85,7 +85,7 @@ private
 
     if params[:category_id]
       conditions[:categories_elements] = { :category_id => params[:category_id] }
-      includes << :admin_categories
+      includes << :categories
     end
 
     includes << :role if order_column == 2

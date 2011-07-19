@@ -100,11 +100,11 @@ private
 
     if params[:category_id]
       conditions[:categories_elements] = { :category_id => params[:category_id] }
-      includes << :role_categories
+      includes << :categories
     end
 
     if order_column == 2
-      includes << :administrators 
+      includes << :administrators
       group_by << 'roles.id'
     end
 
