@@ -1,7 +1,7 @@
 = render :partial => 'tabs'
 
 #content.grid_16.alpha.omega
-  = form_for :caching do |f|
+  = form_for :caching, :url => [forgeos_core, :admin, :cachings] do |f|
     .backgrounds.header
       .interact-links
         = f.submit t('caching.delete.one').capitalize, :class => 'backgrounds interact-button'
