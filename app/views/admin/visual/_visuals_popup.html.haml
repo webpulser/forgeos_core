@@ -80,7 +80,7 @@
 
   function add_picture_to_element(path,id,name){
   = "object_name='#{form.object_name}';"
-  $('#visuals-picture ul.sortable').before('<li><a href="#" onclick="$(this).parents(\'li\').remove(); return false;" class="big-icons trash"></a><input type="hidden" name="'+object_name+'[attachment_ids][]" value="'+id+'"/><img src="'+path+'" alt="'+name+'"/><div class="handler"><div class="inner"></div></div></li>');  }
+  $('#visuals-picture ul.sortable').prepend('<li><a href="#" onclick="$(this).parents(\'li\').remove(); return false;" class="big-icons delete"></a><input type="hidden" name="'+object_name+'[attachment_ids][]" value="'+id+'"/><img src="'+path+'" alt="'+name+'"/><div class="handler"><div class="inner"></div></div></li>');  }
 
 
 
