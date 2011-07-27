@@ -112,6 +112,8 @@ function InitCustomSelects() {
 
     // set the proper index
     realselect.selectedIndex = option.find('span.index').text();
+    realselect.find('option').attr('selected', false);
+    realselect.find('option:eq('+option.find('span.index').text()+')').attr('selected', true);
     /* Begin of Webpulser code */
     realselect.trigger('change');
     enhanced.find('.dropdown').addClass(realselect.val());
