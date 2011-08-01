@@ -5,6 +5,10 @@ class Category < ActiveRecord::Base
   acts_as_list :scope => [:type]
   #validates_presence_of :name
 
+  validates_each :parent_id do |record, attr, value|
+    record.errors.add(attr, 'Can\'t be his self parent') if record.id == value
+  end
+
   # Returns the level of <i>Category</i>
   def level
     return self.ancestors.length
