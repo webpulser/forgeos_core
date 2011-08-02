@@ -9,10 +9,10 @@ jQuery(document).ready(function(){
   });
 
   setup_upload_dialog('#imageUpload');
-  setup_upload_dialog('#imageUploadLeftSidebar');
+  setup_upload_dialog('#imageLeftSidebarUpload');
   setup_upload_dialog('#fileUpload');
 
-  jQuery('#imageSelectLeftSidebarDialog').dialog({
+  jQuery('#imageLeftSidebarSelectDialog').dialog({
     autoOpen:false,
     modal:true,
     width: 800,

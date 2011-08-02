@@ -1,7 +1,7 @@
 #imagepictureUploadDialog.upload-lightbox-container.white
   #imagepictureUpload
   %span= t('or')
-  = link_to_function t('media.add_form_library'), "$('#imagepictureSelectDialog').dialog('open');"
+  = link_to_function t('media.add_from_library'), "$('#imagepictureSelectDialog').dialog('open');"
 
 #imagepictureSelectDialog.media-hoverlay.project
   .media-hoverlay-header
@@ -30,7 +30,7 @@
 #imageimageUploadDialog.upload-lightbox-container.white
   #imageimageUpload
   %span= t('or')
-  = link_to_function t('media.add_form_library'), "$('#imageimageSelectDialog').dialog('open');"
+  = link_to_function t('media.add_from_library'), "$('#imageimageSelectDialog').dialog('open');"
 
 #imageimageSelectDialog.media-hoverlay.project
   .media-hoverlay-header
@@ -56,13 +56,13 @@
       %tr
         %td
 
-= dataSlides_tag :url => forgeos_core.admin_attachments_path(:format => :json, :skin => 'thumbnail', :file_type => 'picture', :mode => 'selection'), :columns => [ '{ "bSortable": true, "bSearchable": true, "sType": "string", "bUseRendered": true, "fnRender": null, "iDataSort": 0, "nTf": null, "nTh": function(){$(".thead").find(".th");}, "sWidth": "0px"}','{"bVisible": false}', '{ "bVisible": false }', '{ "bVisible": false}' ], :id => 'thumbnail-table-image'
+= dataSlides_tag :url => forgeos_core.admin_pictures_path(:format => :json, :skin => 'thumbnail', :mode => 'selection'), :columns => [ '{ "bSortable": true, "bSearchable": true, "sType": "string", "bUseRendered": true, "fnRender": null, "iDataSort": 0, "nTf": null, "nTh": function(){$(".thead").find(".th");}, "sWidth": "0px"}','{"bVisible": false}', '{ "bVisible": false }', '{ "bVisible": false}' ], :id => 'thumbnail-table-image'
 
-= dataTables_tag :id => 'image-table-image', :url => forgeos_core.admin_attachments_path(:format => :json, :file_type => 'picture',:mode => 'selection'),:columns => ["{'sClass':'th-checkbox-container', 'bSortable': false }",    "{ 'sTitle': '#{t('media.filename')}'}",    "{ 'sTitle': '#{t('media.content_type')}'}",    "{ 'sTitle': '#{t('media.updated_at')}'}",   "{ 'sTitle': '#{t('media.size')}'}",   '{"bVisible": false}', '{ "bVisible": false }', '{ "bVisible": false}','{ "bVisible": false}',    '{ "bVisible": false}']
+= dataTables_tag :id => 'image-table-image', :url => forgeos_core.admin_pictures_path(:format => :json, :mode => 'selection'),:columns => ["{'sClass':'th-checkbox-container', 'bSortable': false }",    "{ 'sTitle': '#{t('media.filename')}'}",    "{ 'sTitle': '#{t('media.content_type')}'}",    "{ 'sTitle': '#{t('media.updated_at')}'}",   "{ 'sTitle': '#{t('media.size')}'}",   '{"bVisible": false}', '{ "bVisible": false }', '{ "bVisible": false}','{ "bVisible": false}',    '{ "bVisible": false}']
 
-= dataSlides_tag :url => forgeos_core.admin_attachments_path(:format => :json, :skin => 'thumbnail', :file_type => 'picture', :mode => 'selection'), :columns => [ '{ "bSortable": true, "bSearchable": true, "sType": "string", "bUseRendered": true, "fnRender": null, "iDataSort": 0, "nTf": null, "nTh": function(){$(".thead").find(".th");}, "sWidth": "0px"}','{"bVisible": false}', '{ "bVisible": false }', '{ "bVisible": false}' ], :id => 'thumbnail-table-picture', :autostart => false
+= dataSlides_tag :url => forgeos_core.admin_pictures_path(:format => :json, :skin => 'thumbnail', :mode => 'selection'), :columns => [ '{ "bSortable": true, "bSearchable": true, "sType": "string", "bUseRendered": true, "fnRender": null, "iDataSort": 0, "nTf": null, "nTh": function(){$(".thead").find(".th");}, "sWidth": "0px"}','{"bVisible": false}', '{ "bVisible": false }', '{ "bVisible": false}' ], :id => 'thumbnail-table-picture', :autostart => false
 
-= dataTables_tag :id => 'image-table-picture', :url => forgeos_core.admin_attachments_path(:format => :json, :file_type => 'picture',:mode => 'selection'),:columns => ["{'sClass':'th-checkbox-container', 'bSortable': false }",    "{ 'sTitle': '#{t('media.filename')}'}",    "{ 'sTitle': '#{t('media.content_type')}'}",    "{ 'sTitle': '#{t('media.updated_at')}'}",   "{ 'sTitle': '#{t('media.size')}'}",   '{"bVisible": false}', '{ "bVisible": false }', '{ "bVisible": false}','{ "bVisible": false}',    '{ "bVisible": false}'], :autostart => false
+= dataTables_tag :id => 'image-table-picture', :url => forgeos_core.admin_pictures_path(:format => :json, :mode => 'selection'),:columns => ["{'sClass':'th-checkbox-container', 'bSortable': false }",    "{ 'sTitle': '#{t('media.filename')}'}",    "{ 'sTitle': '#{t('media.content_type')}'}",    "{ 'sTitle': '#{t('media.updated_at')}'}",   "{ 'sTitle': '#{t('media.size')}'}",   '{"bVisible": false}', '{ "bVisible": false }', '{ "bVisible": false}','{ "bVisible": false}',    '{ "bVisible": false}'], :autostart => false
 
 :javascript
   function add_image_to_element(path,id,name,object_name,input) {

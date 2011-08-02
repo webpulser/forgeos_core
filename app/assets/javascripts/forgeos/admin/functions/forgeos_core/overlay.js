@@ -10,8 +10,9 @@ function openimageUploadDialog(link){
 }
 
 //open an upload dialog Box
-function openimageUploadDialogLeftSidebar(link){
-  initImageUploadLeftSidebar(link);
+function openimageLeftSidebarUploadDialog(link){
+  jQuery('#imageLeftSidebarUploadDialog').dialog('open');
+  forgeosInitUpload('#imageLeftSidebar','add_picture_to_category');
 }
 
 //open an upload dialog Box
@@ -31,4 +32,22 @@ function toggleSelectedOverlay(element){
     jQuery(element).addClass('selected');
     jQuery(element).siblings().removeClass('selected');
   }
+}
+
+function add_picture_to_category(path, id, name){
+  var cat_id = get_rails_element_id($('.tree-li-selected-to-add-image'));
+  jQuery.ajax({
+    "success": function(result){
+      jQuery.jstree._focused().refresh();
+      jQuery('#imageLeftSidebarSelectDialog').dialog('close');
+    },
+    "error": function(){},
+    "data":  {
+      'category[attachment_ids]': [id],
+      authenticity_token: window._forgeos_js_vars.token
+    },
+    "dataType": 'json',
+    "type": 'put',
+    "url": '/admin/categories/'+ cat_id +'.json',
+  });
 }

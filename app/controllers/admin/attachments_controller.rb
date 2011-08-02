@@ -126,7 +126,7 @@ class Admin::AttachmentsController < Admin::BaseController
     end
     respond_to do |wants|
       wants.html do
-        redirect_to(forgeos_core.admin_attachments_path(:file_type => @media.class.to_s.underscore))
+        redirect_to([forgeos_core, :admin, @media.class.to_s.underscore.pluralize])
       end
       wants.js
     end

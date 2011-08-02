@@ -59,8 +59,19 @@ Forgeos::Core::Engine.routes.draw do
     end
 
     match '/library' => 'attachments#index', :as => :library, :file_type => 'picture'
+
+    resources :attachments, :except => [:new] do
+      collection do
+        get :manage
+      end
+      member do
+        get :download
+      end
+    end
+
+
     %w(media picture doc pdf audio video attachment).each do |attachment|
-      resources attachment.pluralize.to_sym, :except => [:new] do
+      resources attachment.pluralize.to_sym, :controller => 'attachments', :file_type => attachment, :except => [:new] do
         collection do
           get :manage
         end

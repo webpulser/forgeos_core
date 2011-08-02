@@ -6,7 +6,7 @@
     .interact-links
       = link_to I18n.t('media.update.action').capitalize, [forgeos_core, :edit, :admin, @media ], :class => 'backgrounds interact-button'
       = I18n.t('or')
-      = link_to I18n.t('media.back').capitalize, forgeos_core.admin_attachments_path(:file_type => find_media_type_from_content_type(@media) ), :class => 'back-link'
+      = link_to I18n.t('media.back').capitalize, [forgeos_core, :admin, find_media_type_from_content_type(@media).pluralize], :class => 'back-link'
 
   #content.grid_16.alpha.omega
     #media-modify.grid_12.alpha

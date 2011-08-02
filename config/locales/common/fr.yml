@@ -215,6 +215,7 @@ fr:
       action: "sauvegarder l'ordre pour le site"
   media:
     list: liste des médias
+    add_from_library: ajouter depuis la librairie
     one: média
     other: médias
     none: aucun média

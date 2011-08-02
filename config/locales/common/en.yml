@@ -214,6 +214,7 @@ en:
       action: 'save order for site display'
   media:
     list: list of media
+    add_from_library: add from library
     one: media
     other: media
     none: no media

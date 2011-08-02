@@ -22,16 +22,16 @@ class Category < ActiveRecord::Base
 
   def category_picture
     unless self.attachments.empty?
-      "background-image: url('#{self.attachments.first.public_filename(:categories_icon)}') !important;background-position: 0 3px"
+      self.attachments.first.public_filename(:categories_icon)
     else
-      nil
+      'folder'
     end
   end
 
   def to_jstree
     hash = {}
     hash[:attr] = { :id => "#{self.class.to_s.underscore}_#{id}", :type => 'folder' }
-    hash[:data] = { :title => name, :attr => { :style => category_picture, :title => total_elements_count } }
+    hash[:data] = { :title => name, :icon => category_picture, :attr => { :title => total_elements_count } }
     unless children.empty?
      hash[:children] = children.all(:order => 'position ASC').collect(&:to_jstree)
     end

@@ -1,7 +1,7 @@
 #imageLeftSidebarUploadDialog.upload-lightbox-container.white
-  #imageUploadLeftSidebar
+  #imageLeftSidebarUpload
   %span= I18n.t('or')
-  = link_to_function I18n.t('media.add_form_library'), "$('#imageLeftSidebarSelectDialog').dialog('open');"
+  = link_to_function I18n.t('media.add_from_library'), "$('#imageLeftSidebarSelectDialog').dialog('open');"
 
 #imageLeftSidebarSelectDialog.media-hoverlay
   .media-hoverlay-header
@@ -27,31 +27,6 @@
       %tr
         %td
 
-= dataSlides_tag :url => forgeos_core.admin_attachments_path(:format => :json, :skin => 'thumbnail', :file_type => 'picture', :mode => 'selection'), :columns => [ '{ "bSortable": true, "bSearchable": true, "sType": "string", "bUseRendered": true, "fnRender": null, "iDataSort": 0, "nTf": null, "nTh": function(){$(".thead").find(".th");}, "sWidth": "0px"}','{"bVisible": false}', '{ "bVisible": false }', '{ "bVisible": false}' ], :id => 'thumbnail-table', :autostart => false
+= dataSlides_tag :url => forgeos_core.admin_pictures_path(:format => :json, :skin => 'thumbnail', :mode => 'selection'), :columns => [ '{ "bSortable": true, "bSearchable": true, "sType": "string", "bUseRendered": true, "fnRender": null, "iDataSort": 0, "nTf": null, "nTh": function(){$(".thead").find(".th");}, "sWidth": "0px"}','{"bVisible": false}', '{ "bVisible": false }', '{ "bVisible": false}' ], :id => 'thumbnail-table', :autostart => false
 
-= dataTables_tag :id => 'image-table', :url => forgeos_core.admin_attachments_path(:format => :json, :file_type => 'picture',:mode => 'selection'),:columns => ["{'sClass':'th-checkbox-container', 'bSortable': false }",    "{ 'sTitle': '#{I18n.t('media.filename')}'}",    "{ 'sTitle': '#{I18n.t('media.content_type')}'}",    "{ 'sTitle': '#{I18n.t('media.updated_at')}'}",   "{ 'sTitle': '#{I18n.t('media.size')}'}",   '{"bVisible": false}', '{ "bVisible": false }', '{ "bVisible": false}','{ "bVisible": false}',    '{ "bVisible": false}'], :autostart => false
-
-
-:javascript
-  function add_picture_to_category(path, id, name){
-    var cat_id = get_rails_element_id($('.tree-li-selected-to-add-image'));
-    $.ajax({
-      "success": function(result){
-        jQuery.tree.focused().refresh();
-        jQuery('#imageLeftSidebarSelectDialog').dialog('close');
-      },
-      "error": function(){},
-      "data":  {
-        'category[attachment_ids]': [id],
-        authenticity_token: window._forgeos_js_vars.token
-      },
-      "dataType": 'json',
-      "type": 'put',
-      "url": '/admin/categories/'+ cat_id +'.json',
-    });
-  }
-
-  function initImageLeftSidebarUpload(link){
-    jQuery('#imageLeftSidebarUploadDialog').dialog('open');
-    forgeosInitUpload('#imageLeftSidebar','add_picture_to_category');
-  }
+= dataTables_tag :id => 'image-table', :url => forgeos_core.admin_pictures_path(:format => :json, :mode => 'selection'), :columns => ["{'sClass':'th-checkbox-container', 'bSortable': false }", "{ 'sTitle': '#{I18n.t('media.filename')}'}", "{ 'sTitle': '#{I18n.t('media.content_type')}'}", "{ 'sTitle': '#{I18n.t('media.updated_at')}'}", "{ 'sTitle': '#{I18n.t('media.size')}'}", '{"bVisible": false}', '{ "bVisible": false }', '{ "bVisible": false}','{ "bVisible": false}', '{ "bVisible": false}'], :autostart => false

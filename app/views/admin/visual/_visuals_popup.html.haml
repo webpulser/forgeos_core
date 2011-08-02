@@ -6,7 +6,7 @@
     /= form.submit I18n.t('save').capitalize
 
   %span= I18n.t('or')
-  = link_to_function I18n.t('media.add_form_library'), "$('#imagevisualsSelectDialog').dialog('open');"
+  = link_to_function I18n.t('media.add_from_library'), "$('#imagevisualsSelectDialog').dialog('open');"
 
 #imagevisualsSelectDialog.media-hoverlay.project
   .media-hoverlay-header
@@ -32,9 +32,9 @@
       %tr
         %td
 
-= dataSlides_tag :url => forgeos_core.admin_attachments_path(:format => :json, :skin => 'thumbnail', :file_type => 'picture', :mode => 'selection'), :columns => [ '{ "bSortable": true, "bSearchable": true, "sType": "string", "bUseRendered": true, "fnRender": null, "iDataSort": 0, "nTf": null, "nTh": function(){$(".thead").find(".th");}, "sWidth": "0px"}','{"bVisible": false}', '{ "bVisible": false }', '{ "bVisible": false}' ], :id => 'thumbnail-table-visuals', :autostart => false
+= dataSlides_tag :url => forgeos_core.admin_pictures_path(:format => :json, :skin => 'thumbnail', :mode => 'selection'), :columns => [ '{ "bSortable": true, "bSearchable": true, "sType": "string", "bUseRendered": true, "fnRender": null, "iDataSort": 0, "nTf": null, "nTh": function(){$(".thead").find(".th");}, "sWidth": "0px"}','{"bVisible": false}', '{ "bVisible": false }', '{ "bVisible": false}' ], :id => 'thumbnail-table-visuals', :autostart => false
 
-= dataTables_tag :id => 'image-table-visuals', :url => forgeos_core.admin_attachments_path(:format => :json, :file_type => 'picture',:mode => 'selection'),:columns => ["{'sClass':'th-checkbox-container', 'bSortable': false }",    "{ 'sTitle': '#{I18n.t('media.filename')}'}",    "{ 'sTitle': '#{I18n.t('media.content_type')}'}",    "{ 'sTitle': '#{I18n.t('media.updated_at')}'}",   "{ 'sTitle': '#{I18n.t('media.size')}'}",   '{"bVisible": false}', '{ "bVisible": false }', '{ "bVisible": false}','{ "bVisible": false}',    '{ "bVisible": false}'], :autostart => false
+= dataTables_tag :id => 'image-table-visuals', :url => forgeos_core.admin_pictures_path(:format => :json, :mode => 'selection'),:columns => ["{'sClass':'th-checkbox-container', 'bSortable': false }",    "{ 'sTitle': '#{I18n.t('media.filename')}'}",    "{ 'sTitle': '#{I18n.t('media.content_type')}'}",    "{ 'sTitle': '#{I18n.t('media.updated_at')}'}",   "{ 'sTitle': '#{I18n.t('media.size')}'}",   '{"bVisible": false}', '{ "bVisible": false }', '{ "bVisible": false}','{ "bVisible": false}',    '{ "bVisible": false}'], :autostart => false
 
 :javascript
   function add_picture_to_element(path,id,name){
