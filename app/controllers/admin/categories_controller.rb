@@ -146,7 +146,7 @@ private
       options[:sql_order] = options.delete(:order)
       @categories = Category.search(params[:sSearch], options)
     else
-      @categories = Category.paginate(:all, options)
+      @categories = Category.paginate(options)
     end
   end
 end

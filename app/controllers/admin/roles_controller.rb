@@ -117,7 +117,7 @@ private
       options[:star] = true
       @roles = Role.search(params[:sSearch],options)
     else
-      @roles = Role.paginate(:all,options)
+      @roles = Role.paginate(options)
     end
   end
 end

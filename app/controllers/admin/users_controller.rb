@@ -201,7 +201,7 @@ private
       options[:star] = true
       @users = User.search(params[:sSearch],options)
     else
-      @users = User.paginate(:all,options)
+      @users = User.paginate(options)
     end
   end
 end

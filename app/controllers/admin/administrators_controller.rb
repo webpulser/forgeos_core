@@ -98,7 +98,7 @@ private
       options[:star] = true
       @admins = Administrator.search(params[:sSearch],options)
     else
-      @admins = Administrator.paginate(:all,options)
+      @admins = Administrator.paginate(options)
     end
   end
 end

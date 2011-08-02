@@ -65,7 +65,7 @@ class Forgeos::ApplicationController < ActionController::Base
     session[:return_to] = request.fullpath
   end
 
-  def redirect_to_stored_location(default_path = :login, &block)
+  def redirect_to_stored_location(default_path = [forgeos_core, :login], &block)
     if redirect = session[:return_to]
       session[:return_to] = nil
       redirect_to(redirect)

@@ -14,7 +14,7 @@ class Admin::PersonSessionsController < Admin::BaseController
       flash[:error] = t('log.in.failed').capitalize
     end
 
-    redirect_to_stored_location(:admin_root)
+    redirect_to_stored_location([forgeos_core, :admin, :root])
   end
 
   def destroy

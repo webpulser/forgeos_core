@@ -192,7 +192,7 @@ class Admin::AttachmentsController < Admin::BaseController
       options[:star] = true
       @medias = type.search(params[:sSearch],options)
     else
-      @medias = type.paginate(:all,options)
+      @medias = type.paginate(options)
     end
   end
 

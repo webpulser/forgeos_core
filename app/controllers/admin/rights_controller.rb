@@ -100,7 +100,7 @@ private
       options[:star] = true
       @rights = Right.search(params[:sSearch],options)
     else
-      @rights = Right.paginate(:all,options)
+      @rights = Right.paginate(options)
     end
   end
 end
