@@ -1,11 +1,11 @@
-#imageUploadDialogLeftSidebar.upload-lightbox-container.white
+#imageLeftSidebarUploadDialog.upload-lightbox-container.white
   #imageUploadLeftSidebar
   %span= I18n.t('or')
-  = link_to_function I18n.t('media.add_form_library'), "$('#imageSelectDialogLeftSidebar').dialog('open');"
+  = link_to_function I18n.t('media.add_form_library'), "$('#imageLeftSidebarSelectDialog').dialog('open');"
 
-#imageSelectDialogLeftSidebar.media-hoverlay
+#imageLeftSidebarSelectDialog.media-hoverlay
   .media-hoverlay-header
-    = link_to_function content_tag(:span, I18n.t('media.picture.upload.action').capitalize, :class=>'big-icons add-picture'), "$(\'#imageUploadDialogLeftSidebar\').dialog(\'open\'); $(\'#imageSelectDialogLeftSidebar\').dialog(\'close\')", :class=>'backgrounds button'
+    = link_to_function content_tag(:span, I18n.t('media.picture.upload.action').capitalize, :class=>'big-icons add-picture'), "$(\'#imageLeftSidebarUploadDialog\').dialog(\'open\'); $(\'#imageLeftSidebarSelectDialog\').dialog(\'close\')", :class=>'backgrounds button'
     .display-mode
       .heading-separator
       .display-thumbnails
@@ -32,70 +32,26 @@
 = dataTables_tag :id => 'image-table', :url => forgeos_core.admin_attachments_path(:format => :json, :file_type => 'picture',:mode => 'selection'),:columns => ["{'sClass':'th-checkbox-container', 'bSortable': false }",    "{ 'sTitle': '#{I18n.t('media.filename')}'}",    "{ 'sTitle': '#{I18n.t('media.content_type')}'}",    "{ 'sTitle': '#{I18n.t('media.updated_at')}'}",   "{ 'sTitle': '#{I18n.t('media.size')}'}",   '{"bVisible": false}', '{ "bVisible": false }', '{ "bVisible": false}','{ "bVisible": false}',    '{ "bVisible": false}'], :autostart => false
 
 
--# TODO move to base.js
 :javascript
-  function initImageUploadLeftSidebar(link){
-    $('#imageUploadDialogLeftSidebar').dialog('open');
-    $('#imageUploadDialogLeftSidebar').html('<div id="imageUploadLeftSidebar"></div><div class="library-add"><span>#{t(:or)}</span><a href="#" onclick="$(\'#imageUploadDialogLeftSidebar\').dialog(\'close\'); $(\'#imageSelectDialogLeftSidebar\').dialog(\'open\'); return false;">#{t('media.add_from_library')}</a></div>');
-    var uploadify_datas = { "format": "json" };
-    uploadify_datas[window._forgeos_js_vars.session_key] = window._forgeos_js_vars.session;
-
-  $('#imageUploadLeftSidebar').uploadify({
-    "uploader": "/assets/forgeos/uploadify/uploadify.swf",
-    "cancelImg": "/assets/forgeos/admin/big-icons/delete-icon.png",
-    "script": "#{forgeos_core.admin_attachments_path(:file_type => "picture")}",
-    "buttonImg": "#{image_path("forgeos/uploadify/upload-picture_#{I18n.locale}.png")}",
-    "width" :"154",
-    "height" :"24",
-    "scriptData": uploadify_datas,
-    "ScriptAccess": "always",
-    "multi": "true",
-    "displayData": "speed",
-    "onComplete": function(e,queueID,fileObj,response,data){
-      if(typeof JSON=="object" && typeof JSON.parse=="function") {
-        result = JSON.parse(response);
-      } else {
-        result = eval('(' + response + ')');
-      }
-      if (result.result == 'success'){
-        $.ajax({
-          "success": function(result){
-            jQuery.tree.focused().refresh();
-          },
-          "error": function(){},
-          "data":  {
-            'category[attachment_ids]': [result.id],
-            authenticity_token: window._forgeos_js_vars.token
-          },
-          "dataType": 'json',
-          "type": 'put',
-          "url": '/admin/categories/'+ link +'.json',
-        });
-      } else {
-        display_notification_message('error',result.error)
-      }
-    },
-    "onAllComplete": function(){
-      $('#imageUploadDialogLeftSidebar').dialog('close');
-    }
-  });
-  }
-
-  function add_picture_to_category(){
-    var image_id = get_rails_element_id($('.row_selected')[0]);
+  function add_picture_to_category(path, id, name){
     var cat_id = get_rails_element_id($('.tree-li-selected-to-add-image'));
     $.ajax({
       "success": function(result){
         jQuery.tree.focused().refresh();
-        jQuery('#imageSelectDialogLeftSidebar').dialog('close');
+        jQuery('#imageLeftSidebarSelectDialog').dialog('close');
       },
       "error": function(){},
       "data":  {
-        'category[attachment_ids]': [image_id],
+        'category[attachment_ids]': [id],
         authenticity_token: window._forgeos_js_vars.token
       },
       "dataType": 'json',
       "type": 'put',
       "url": '/admin/categories/'+ cat_id +'.json',
     });
+  }
+
+  function initImageLeftSidebarUpload(link){
+    jQuery('#imageLeftSidebarUploadDialog').dialog('open');
+    forgeosInitUpload('#imageLeftSidebar','add_picture_to_category');
   }

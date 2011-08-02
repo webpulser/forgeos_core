@@ -8,37 +8,11 @@ jQuery(document).ready(function(){
     resizable:'se'
   });
 
-  jQuery('#imageUploadDialog').dialog({
-    autoOpen:false,
-    modal:true,
-    width: 500,
-    buttons: {
-      Upload: function() {
-        jQuery('#imageUpload').uploadifyUpload();
-      },
-      'Clear queue': function() {
-        jQuery('#imageUpload').uploadifyClearQueue();
-      }
-    },
-    resizable:'se'
-  });
+  setup_upload_dialog('#imageUpload');
+  setup_upload_dialog('#imageUploadLeftSidebar');
+  setup_upload_dialog('#fileUpload');
 
-  jQuery('#imageUploadDialogLeftSidebar').dialog({
-    autoOpen:false,
-    modal:true,
-    width: 500,
-    buttons: {
-      Upload: function() {
-        jQuery('#imageUploadLeftSidebar').uploadifyUpload();
-      },
-      'Clear queue': function() {
-        jQuery('#imageUploadLeftSidebar').uploadifyClearQueue();
-      }
-    },
-    resizable:'se'
-  });
-
-  jQuery('#imageSelectDialogLeftSidebar').dialog({
+  jQuery('#imageSelectLeftSidebarDialog').dialog({
     autoOpen:false,
     modal:true,
     width: 800,
@@ -48,22 +22,6 @@ jQuery(document).ready(function(){
       },
     },
     open: function() { eval(jQuery('#image-table:visible,#thumbnail-table:visible').data('dataTables_init_function')+'()'); },
-    resizable:'se'
-  });
-
-
-  jQuery('#fileUploadDialog').dialog({
-    autoOpen:false,
-    modal:true,
-    width: 500,
-    buttons: {
-      Upload: function() {
-        jQuery('#fileUpload').uploadifyUpload();
-      },
-      'Clear queue': function() {
-        jQuery('#fileUpload').uploadifyClearQueue();
-      }
-    },
     resizable:'se'
   });
 

@@ -1,8 +1,25 @@
 jQuery(document).ready(function(){
 
+  setup_upload_dialog('#imagepictureUpload');
+  setup_upload_dialog('#imageimageUpload');
+  setup_upload_dialog('#imagevisualsUpload');
+
+
   // add a picture button
   jQuery('.add-picturepicture').live('click',function(){
      openpictureimageUploadDialog(jQuery(this));
+     return false;
+  });
+
+  // add visuals button
+  jQuery('.add-visualpictures').live('click',function(){
+     openvisualsimageUploadDialog(jQuery(this));
+     return false;
+  });
+
+  // add a image button
+  jQuery('.add-imagepicture').live('click',function(){
+     openimageimageUploadDialog(jQuery(this));
      return false;
   });
 
@@ -32,27 +49,6 @@ jQuery(document).ready(function(){
     }
   });
 
-  jQuery('#imagepictureUploadDialog').dialog({
-    autoOpen:false,
-    modal:true,
-    width: 500,
-    buttons: {
-      Upload: function() {
-        jQuery('#imagepictureUpload').uploadifyUpload();
-      },
-      'Clear queue': function() {
-        jQuery('#imagepictureUpload').uploadifyClearQueue();
-      }
-    },
-    resizable:'se'
-  });
-
-  // add a image button
-  jQuery('.add-imagepicture').live('click',function(){
-     openimageimageUploadDialog(jQuery(this));
-     return false;
-  });
-
   // Dialog to select picture
   jQuery('#imageimageSelectDialog.project').dialog({
     autoOpen:false,
@@ -79,27 +75,6 @@ jQuery(document).ready(function(){
     }
   });
 
-  jQuery('#imageimageUploadDialog').dialog({
-    autoOpen:false,
-    modal:true,
-    width: 500,
-    buttons: {
-      Upload: function() {
-        jQuery('#imageimageUpload').uploadifyUpload();
-      },
-      'Clear queue': function() {
-        jQuery('#imageimageUpload').uploadifyClearQueue();
-      }
-    },
-    resizable:'se'
-  });
-
-  // add visuals button
-  jQuery('.add-visualpictures').live('click',function(){
-     openvisualsimageUploadDialog(jQuery(this));
-     return false;
-  });
-
   // Dialog to select pictures
   jQuery('#imagevisualsSelectDialog.project').dialog({
     autoOpen:false,
@@ -124,21 +99,6 @@ jQuery(document).ready(function(){
     open: function(e,ui){
       eval(jQuery('#image-table-visuals:visible,#thumbnail-table-visuals:visible').data('dataTables_init_function')+'()');
     }
-  });
-
-  jQuery('#imagevisualsUploadDialog').dialog({
-    autoOpen:false,
-    modal:true,
-    width: 500,
-    buttons: {
-      Upload: function() {
-        jQuery('#imagevisualsUpload').uploadifyUpload();
-      },
-      'Clear queue': function() {
-        jQuery('#imagevisualsUpload').uploadifyClearQueue();
-      }
-    },
-    resizable:'se'
   });
 
 });
