@@ -37,11 +37,7 @@
 = dataTables_tag :id => 'image-table-visuals', :url => forgeos_core.admin_pictures_path(:format => :json, :mode => 'selection'),:columns => ["{'sClass':'th-checkbox-container', 'bSortable': false }",    "{ 'sTitle': '#{I18n.t('media.filename')}'}",    "{ 'sTitle': '#{I18n.t('media.content_type')}'}",    "{ 'sTitle': '#{I18n.t('media.updated_at')}'}",   "{ 'sTitle': '#{I18n.t('media.size')}'}",   '{"bVisible": false}', '{ "bVisible": false }', '{ "bVisible": false}','{ "bVisible": false}',    '{ "bVisible": false}'], :autostart => false
 
 :javascript
-  function add_picture_to_element(path,id,name){
+  function add_picture_to_visuals(path,id,name){
     var object_name='#{form.object_name}';
     jQuery('#visuals-picture ul.sortable').before('<li><a href="#" onclick="jQuery(this).parents(\'li\').remove(); return false;" class="big-icons trash"></a><input type="hidden" name="'+object_name+'[attachment_ids][]" value="'+id+'"/><img src="'+path+'" alt="'+name+'"/><div class="handler"><div class="inner"></div></div></li>');
-  }
-
-  function initvisualsImageUpload(){
-    initUpload('#imagevisuals', 'add_picture_to_element');
   }

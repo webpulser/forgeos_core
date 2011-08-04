@@ -66,7 +66,7 @@
 
 :javascript
   function add_image_to_element(path,id,name,object_name,input) {
-    jQuery(input + '-picture ul.sortable').html('<li><img src="'+path+'" alt="'+name+'"/><a href="#" onclick="$(this).parents(\'li\').remove();  $("'+input+'').val(\'null\'); return false;" class="big-icons delete"></a></li>');
+    jQuery(input + '-picture ul.sortable').html('<li><img src="'+path+'" alt="'+name+'"/><a href="#" onclick="$(this).parents(\'li\').remove();  $("'+input+'").val(\'null\'); return false;" class="big-icons delete"></a></li>');
     jQuery(input).val(id);
   }
 
@@ -78,12 +78,4 @@
   function add_picture_picture_to_element(path,id,name){
     var object_name='#{form.object_name}';
     add_image_to_element(path,id,name,object_name, '#picture');
-  }
-
-  function initimageImageUpload(){
-    forgeosInitUpload('#imageimage','add_image_picture_to_element');
-  }
-
-  function initpictureImageUpload(){
-    forgeosInitUpload('#imagepicture', 'add_picture_picture_to_element');
   }

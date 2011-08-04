@@ -1,12 +1,12 @@
 function openpictureimageUploadDialog(link){
-  initpictureImageUpload(link);
+  forgeosInitUpload('#imagepicture', 'add_picture_picture_to_element');
   jQuery('#imagepictureSelectDialog').dialog('open');
 }
 function openimageimageUploadDialog(link){
-  initimageImageUpload(link);
+  forgeosInitUpload('#imageimage','add_image_picture_to_element');
   jQuery('#imageimageSelectDialog').dialog('open');
 }
 function openvisualsimageUploadDialog(link){
-  initvisualsImageUpload(link);
+  forgeosInitUpload('#imagevisuals', 'add_picture_to_visuals');
   jQuery('#imagevisualsSelectDialog').dialog('open');
 }
