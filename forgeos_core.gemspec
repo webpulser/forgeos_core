@@ -15,7 +15,7 @@ Gem::Specification.new do |s|
   s.add_dependency 'authlogic', '>= 3.0.3'
 
   s.name = 'forgeos_core'
-  s.version = '1.9.3'
+  s.version = '1.9.4'
   s.date = '2011-08-05'
 
   s.summary = 'Core of Forgeos plugins suite'
