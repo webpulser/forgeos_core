@@ -11,12 +11,12 @@ Gem::Specification.new do |s|
   s.add_dependency 'mime-types', '>= 1.16'
   s.add_dependency 'thinking-sphinx', '>= 2.0.5'
   s.add_dependency 'webpulser-habtm_list', '>= 0.1.2'
-  s.add_dependency 'will_paginate', '~> 3.0.pre2'
+  s.add_dependency 'will_paginate', '~> 3.0.pre4'
   s.add_dependency 'authlogic', '>= 3.0.3'
 
   s.name = 'forgeos_core'
-  s.version = '1.9.2'
-  s.date = '2011-07-11'
+  s.version = '1.9.3'
+  s.date = '2011-08-05'
 
   s.summary = 'Core of Forgeos plugins suite'
   s.description = 'Forgeos Core provide users, libraries and administration rights and roles based management'
