@@ -22,6 +22,7 @@ namespace :forgeos do
             puts "#{file_name} fixtures not loaded"
           end
         end
+        Rake::Task['forgeos:core:fixtures:load'].reenable
       end
 
       desc 'Create YAML test fixtures from data in an existing database.

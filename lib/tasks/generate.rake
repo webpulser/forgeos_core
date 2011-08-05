@@ -54,6 +54,7 @@ namespace :forgeos do
           admin.update_attribute(:role_id,role.id)
           puts ' [ok]'
         end
+        Rake::Task['forgeos:core:generate:acl'].reenable
       end
     end
   end
