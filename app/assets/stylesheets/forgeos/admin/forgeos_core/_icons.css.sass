@@ -3,42 +3,60 @@
   padding: 0
   width: 22px
   height: 24px
+
 .create-menu
   background-position: 0 -488px
+
 .create-page
   background-position: 0 -560px
+
 .create-block
   background-position: 0 -344px
+
 .create-widget
   background-position: 0 -704px
+
 .create-picture
   background-position: 0 -1244px
+
 .create-product
   background-position: 0 -632px
+
 .create-pack
   background-position: 0 -632px
+
 .add-product
   background-position: 0 -632px
+
 .create-product-type
   background-position: 0 -1349px
+
 .create-rights
   background-position: 0 -1421px
+
 .create-admin,
 .create-user
   background-position: 0 -1638px
+
 .create-role
   background-position: 0 -1494px
+
 .create-offer
   background-position: 0 -1565px
+
 .create-order
   background-position: 0 -918px
+
 .right-ico, .all-rights
   background-position: 0 -2833px
+
 .admin-ico, .all-admins,
 .user-ico, .all-users
   background-position: 0 -3503px
+
 .role-ico, .all-roles
   background-position: 0 -2881px
+
 .action-button span.create-list,
 .action-button span.update-list,
 .action-button span.widget-types,
@@ -56,18 +74,21 @@
   left: 5px
   display: none
   width: 200px
+
 .action-button span.choices_list
   top: 22px
   left: 0
   width: 100%
+
 .select_choice
   position: relative
   span.big-icons
     padding-bottom: 2px
+
 .action-button span.choices_list
   a
     display: block
-    border-bottom: 1px solid #D5D5D5
+    border-bottom: 1px solid #d5d5d5
     color: black
     cursor: pointer
     float: none
@@ -81,39 +102,50 @@
       color: $blueLink
   span
     float: none
+
 .action-button span
-  +block()
+  +block
   padding-top: 1px
   float: left
+
 .create-folder
   background-position: 0 -268px
+
 .create-smart-folder
   background-position: 4px -3595px
+
 .delete-folder
   background-position: 4px -428px
+
 .modify-folder
   background-position: 4px -332px
+
 .duplicate-folder
   background-position: 4px -284px
+
 .displayed
   display: block !important
+
 .more-actions
   background-position: 0 -3072px
   padding: 0
   width: 20px
   height: 24px
+
 .action-button .arrow
   padding: 0
   width: 10px
   height: 16px
   background-position: -3px -478px
+
 .action-button span
   &.update-list
     left: 54px
   &.widget-types
     left: 20px
+
 .create-list span, .update-list span, .widget-types span
-  +block()
+  +block
   color: $black
   padding: 5px 10px 5px 24px
   top: 30px
@@ -125,7 +157,7 @@
   float: none
   height: auto
   cursor: pointer
-  font-size: .9em
+  font-size: 0.9em
   a
     color: $black
     display: block
@@ -133,58 +165,70 @@
     background-color: $lightBlueBg
     a
       color: $blueLink
+
 .widget-item
-  background-color: #FFF
+  background-color: white
+
 .create-list span:hover, .update-list span:hover, .create-list span:hover a, .update-list span:hover a
   color: $blueLink
   background-color: $lightBlueBg
+
 .products, .offers, .all-admins, .all-roles, .all-rights, .all-menus, .pages, .product-types
   color: $darkBrown
+
 .page-name, .widget-name, .menu-name, .product-name, .order-name, .media-name, .admin-name, .role-name, .right-name, .user-name, .category-name
   color: $lightGray
   padding-left: 0px
+
 .page-name a, .widget-name a, .menu-name a, .product-name a, .order-name a, .media-name a, .admin-name a, .role-name a, .right-name a, .user-name a, .category-name a
   color: $blueLink
   font:
     size: 1.3em !important
     weight: normal
-  +block()
-  +left()
+  +block
+  +left
+
 .page-name span, .widget-name span, .menu-name span, .product-name span, .order-name span, .media-name span, .admin-name span, .role-name span, .right-name span, .user-name span, .category-name span
   background-color: $blueLink
   color: $white
-  +left()
-  +borderCorner(5px,5px,5px,5px)
+  +left
+  +borderCorner(5px, 5px, 5px, 5px)
   padding: 0 5px
   margin: 3px 0 0 10px
+
 .see-on, .see-off
   width: 16px
   height: 16px
   display: block
   padding: 0px
-  +left()
+  +left
   margin-right: 3px
+
 .see-on
   background-position: 0px -1008px
+
 .see-off
   background-position: 0px -960px
+
 .interact-button
   background-position: 0 -359px
   padding: 0 5px
-  +left()
-  +borderCorner()
+  +left
+  +borderCorner
   font-size: 1.1em
   font-weight: bold
   margin: 0 5px
   color: $white
   height: 32px
+
 input.interact-button
   padding: 7px 5px 8px
   border: 0px
   cursor: pointer
-  +borderCorner()
+  +borderCorner
   margin: 0 5px
   width: auto
+
 .interact-links
   float: right
   font-size: 13px
@@ -197,7 +241,7 @@ input.interact-button
     margin-top: 20px
     margin-right: 30px
   .back-link
-    +borderCorner(8px,8px,8px,8px)
+    +borderCorner(8px, 8px, 8px, 8px)
     text-decoration: underline
     color: $lightGray
     border: 0 !important
@@ -213,61 +257,86 @@ input.interact-button
   background-position: 0 -52px
   width: 3px
   height: 32px
-  +left()
+  +left
   margin-left: 5px
+
 .interact-button-right
   background-position: 0 -533px
   width: 3px
   height: 32px
-  +left()
+  +left
   margin-right: 5px
+
 .admin
   background-position: 0 -4301px
+
 .folder
   background-position: 0 -272px
+
 .menu, .menu-ico, .all-menus
   background-position: 0 -1152px
+
 .external
   background-position: 0 -1492px
+
 .category
   background-position: 0 -4257px
+
 .page
   background-position: 0 -1197px
   padding-top: 2px
+
 .pages
   background-position: 0 -1248px
+
 .block
   background-position: 0 -3685px
+
 .blocks
   background-position: 0 -3687px
+
 .widget, .widgets
   background-position: 0 -1588px
+
 .order
   background-position: 0 -2449px
+
 .products, .product
   background-position: 0 -525px
+
 .product-types
   background-position: 0 -2687px
+
 .offers
   background-position: 0 -3121px
+
 .picture
   background-position: 0 -2592px
+
 .pdf
   background-position: 0 -2546px
+
 .video
   background-position: 0 -3552px
+
 .audio
   background-position: 0 -4371px
+
 .media
   background-position: 0 -1969px
+
 .doc
   background-position: 0 -1200px
+
 .duplicate-link
   background-position: 0 -289px
+
 .edit-link
   background-position: 0 -336px
+
 .destroy-link
   background-position: 0 -432px
+
 .gray-destroy, .gray-destroy-tattribute
   background-position: 0 -205px !important
   position: absolute
@@ -277,38 +346,53 @@ input.interact-button
   width: 18px
   padding: 0
   +opacity(0.6)
+
 .static-content .big-icons, .widget-content .big-icons
   display: inline-block
   height: 100%
+
 .static-content .big-icons
   background-position: 0 -345px
+
 .widget-content .big-icons
   background-position: 0 -705px
+
 .add-picture
   background-position: 0 -1277px
+
 .add-pdf
   background-position: 0 -1206px
+
 .add-video
   background-position: 0 -1708px
+
 .add-audio
   background-position: 0 -1846px
+
 .add-media
   background-position: 0 -1131px
+
 .add-doc
   background-position: 0 -560px
+
 .add-carousel-item
   background-position: 0 -1277px
+
 .big-icons-verti-delete-icon
   background-position: 0 -206px
+
 .big-icons-verti-folder
   background-position: 0 -272px
   width: 17px
+
 .small-icons-verti-small-blue-plus
   background-position: 0 -1444px
   display: block
+
 .add-menu-link
   background-position: 0 -1442px
   color: $blueLink
+
 .media-hoverlay
   #inner-lightbox a
     &.picture
@@ -317,26 +401,37 @@ input.interact-button
       background-position: 5px -2544px
     &.video
       background-position: 5px -3551px
+
 .attribute-attribute
   background-position: 0 -3738px
+
 .text_attribute
   background-position: 0 -3784px
+
 .longtext_attribute
   background-position: 0 -3829px
+
 .number_attribute
   background-position: 0 -3875px
+
 .picklist_attribute
   background-position: 0 -3914px
+
 .checkbox_attribute
   background-position: 0 -3951px
+
 .radiobutton_attribute
   background-position: 0 -3985px
+
 .date_attribute
   background-position: 0 -4022px
+
 .picture_attribute
   background-position: 0 -2592px
+
 .url_attribute
   background-position: 0 -1970px
+
 h2
   &.orders
     background-position: 0 -2449px
@@ -346,30 +441,43 @@ h2
     background-position: 0 -3452px
   &.live-stats
     background-position: 0 -2110px
+
 .main-infos-cutomer h4
   background-position: 0 -3361px
+
 .main-infos-payment h4
   background-position: 0 -2496px
+
 .main-infos-note h4
   background-position: 0 -2160px
+
 .order-delivery-adress h4
   background-position: 0 -2066px
+
 .order-billing-adress h4
   background-position: 0 -1779px
+
 .order-delivery-method h4
   background-position: 0 -1875px
+
 .add-green-plus
   background-position: 0 -4062px
+
 .planet
   background-position: 0 -1493px
+
 .red-delete-icon
   background-position: 10px -4105px
+
 .green-add-icon
   background-position: 0px -4064px
+
 .tattributes
   background-position: 0px -4208px
+
 .create-text-attribute
   background-position: 0px -487px
+
 .create-choice-attribute
   background-position: 0px -488px
   .sortable-choices .block-container
@@ -390,15 +498,21 @@ h2
     &:hover
       .red-delete-icon,.green-add-icon
         display: block
+
 .preview
   background-position: 0px -144px
+
 .duplicate
   background-position: 0px -288px
+
 .delete
   background-position: 0px -864px
+
 .contact
   background-position: 0px -2977px
+
 .save
   background-position: 0 -96px
+
 .cancel
   background-position: 0 -4339px

@@ -25,28 +25,33 @@
     position: relative
     span
       color: $lightGray
-      font-size: .5em
+      font-size: 0.5em
       position: absolute
       right: 0px
       top: 13px
+
 .content
   padding: 0 20px 20px
+
 .content-background
   height: 0
   border-top: 1px solid $contentHeaderBorder
+
 .inner-content
   padding: 10px 20px
   p
     font-size: 0.7em
   .map_fields
     overflow-x: auto
+
 .big-header
   .field_name,.orange_input
-    +element_form_name()
+    +element_form_name
     &.firstname,&.lastname
       min-width: 8em
       max-width: 12.5em
       width: auto
+
 .field_error
   color: red
 

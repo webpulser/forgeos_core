@@ -12,7 +12,7 @@ namespace :db do
       database_yml = ""
       run "cat #{current_path}/config/database.yml" do |_, _, database_yml| end
       db = YAML::load(database_yml)['production']
-      mysql_options = "-u #{db['username']} --password=#{db['password']} #{db['database']}"
+      mysql_options = "-u #{db['username']} --password=\"#{db['password']}\" #{db['database']}"
       mysql_options = "-h #{db['host']} #{mysql_options}" if db['host']
       mysql_options = "-P #{db['port']} #{mysql_options}" if db['port']
       # Set paths

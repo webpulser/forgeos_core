@@ -3,12 +3,13 @@
   height: auto !important
   height: 500px
   background-color: $white
-  font-size: .9em
+  font-size: 0.9em
   color: $lightGray
   padding-bottom: 20px
   h2
     &.orders
       background-position: 0 -2446px
+
 .summary
   em
     color: $black
@@ -18,43 +19,50 @@
     color: $black
     text-decoration: underline
     background-color: $lightYellowBg
+
 .quick-action-button
   padding: 12px 5px
-  font-size: .9em
-  +block()
-  +left()
+  font-size: 0.9em
+  +block
+  +left
   margin: 0 5px
-  border: 1px solid $lightBlueBg - #1A0601
-  +borderCorner()
-  background:  $lightBlueBg url(/assets/forgeos/admin/backgrounds/background-right-sidebar.png) repeat-x scroll center top
+  border: 1px solid $lightBlueBg - #1a0601
+  +borderCorner
+  background: $lightBlueBg url(/images/admin/backgrounds/background-right-sidebar.png) repeat-x scroll center top
   span
     color: $blueLink
     padding-top: 2px
+
 .see-stats
   background-position: 0 -3215px
+
 #dashboard h2
   clear: both
   color: $gray
   font-size: 1.5em
   font-weight: normal
   margin: 10px 0
+
 #dashboard table
   border-collapse: collapse
   width: 100%
-  font-size: .9em
+  font-size: 0.9em
   margin-bottom: 5px
   td
     padding: 5px
   .even
     background-color: $whiteGray
+
 .table-price
   font-weight: bold
+
 .table-product
   width: 35%
   color: $blueLink
   font-weight: bold
   span
     padding-top: 2px
+
 .shipped
   color: $shipped
 .closed
@@ -69,38 +77,45 @@
   color: $orangeRed
 .table-time
   font-weight: bold
+
 .see-all-orders
   color: $blueLink
   background-color: $lightBlueBg
   padding: 3px 8px
   margin-left: 8px
-  font-size: .8em
+  font-size: 0.8em
+
 .latest-activity
   border: 1px solid $contentHeaderBorder
   padding: 8px 0
+
 .sales-info-block
   border: 1px solid $lightOrangeRedBg
-  +borderCorner()
+  +borderCorner
   background-color: $lightOrangeYellowBg
   margin: 5px 0
   padding: 5px
   color: $darkBrown
-  font-size: .8em
+  font-size: 0.8em
   position: relative
+
 .first-block
   height: 2em
   line-height: 2em
   padding-bottom: 2px
   padding-left: 8px
-  border-bottom: 1px solid $lightOrangeYellowBg - #001B57
+  border-bottom: 1px solid $lightOrangeYellowBg - #001b57
+
 .second-block
   height: 2em
   line-height: 2em
   padding-top: 8px
   padding-left: 8px
+
 .today-sales span
   color: $orangeRed
-.sales-info-block 
+
+.sales-info-block
   span
     display: block
     &.right
@@ -114,15 +129,17 @@
       line-height: 2.2em
   sup
     font-weight: normal
-    font-size: .4em
+    font-size: 0.4em
     width: 2.9em
     display: block
     position: absolute
     line-height: 1.2em
     top: 0
     right: 0
+
 .last-week-sales, .week-sales, .month-sales, .last-month-sales
   width: 77%
+
 .diff-negative
   width: 20%
   position: absolute
@@ -135,6 +152,7 @@
   color: $orangeRed
   text-align: center
   font-weight: bold
+
 .diff-positive
   width: 20%
   position: absolute
@@ -147,14 +165,17 @@
   color: $lightGreen
   text-align: center
   font-weight: bold
+
 .live-stats-content span
   display: block
   border-bottom: 1px solid $contentHeaderBorder
   padding: 2px 0
-  font-size: .8em
+  font-size: 0.8em
+
 #order-see .order-see-wrap, #media-modify .media-modify-wrap
   font-size: 1em
   padding-left: 10px
+
 .big-header
   .order-price
     font-size: 1.4em
@@ -165,5 +186,6 @@
     color: $orange
     font-weight: bold
     padding-left: 5px
+
 .product-th
   width: 30%

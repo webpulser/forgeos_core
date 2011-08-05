@@ -4,6 +4,10 @@ class Category < ActiveRecord::Base
   has_and_belongs_to_many_attachments
   acts_as_list :scope => [:type]
 
+  validates_each :parent_id do |record, attr, value|
+    record.errors.add(attr, 'Can\'t be his self parent') if record.id == value
+  end
+
   def level
     return self.ancestors.length
   end

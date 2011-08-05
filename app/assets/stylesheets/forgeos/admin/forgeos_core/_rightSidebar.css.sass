@@ -1,4 +1,4 @@
-#right-sidebar 
+#right-sidebar
   .step
     background: $lightBlueBg url(/assets/forgeos/admin/backgrounds/background-right-sidebar.png) repeat-x top
     padding: 5px 10px
@@ -20,7 +20,7 @@
   .text
     background-color: $white
     border: 1px solid $contentHeaderBorder
-    +borderCorner()
+    +borderCorner
     height: 130px
     padding: 5px
     margin-left: -5px
@@ -54,7 +54,7 @@
         margin: 0 0 5px 0
         border-left: 1px solid $greenBlue
     &.open .inner-step
-      +block()
+      +block
   .tags
     a, label
       display: inline-block !important
@@ -67,10 +67,10 @@
     span
       padding: 5px
       position: relative
-      +left()
-      +borderCorner(3px,3px,3px,3px)
+      +left
+      +borderCorner(3px, 3px, 3px, 3px)
       background-color: $white
-      margin: 2px
+      margin 2px
   .status p
     padding: 0
     margin: 5px 0 0 10px
@@ -94,7 +94,7 @@
     .tags
       background-color: $white
       border: 1px solid $contentHeaderBorder
-      +borderCorner()
+      +borderCorner
       a
         background-color: $contentHeaderBorder
         color: $black
@@ -103,7 +103,7 @@
       span
         padding: 2px 20px 2px 5px
         border: 1px solid $contentHeaderBorder
-        color: #000 !important
+        color: black !important
         font-weight: bold
         margin: 2px
         a
@@ -124,7 +124,7 @@
         color: $lightGray
         font-style: italic
         width: 85px
-        +left()
+        +left
         border: 0
         padding: 2px 5px
         margin: 2px
@@ -150,19 +150,19 @@
       #tag_autocomplete
         width: 150px
         background:
-          color: #FFF
+          color: white
         padding: 0
         border: 0
-        +borderCorner(0,0,0,0)
+        +borderCorner(0, 0, 0, 0)
         margin: 0
         span
           display: block
-          color: #000
+          color: black
           float: none !important
           margin: 0
           padding: 5px
-          +borderCorner(0,0,0,0)
+          +borderCorner(0, 0, 0, 0)
           &:hover
-            color: #FFF !important
+            color: white !important
             background:
               color: $blueLink

@@ -4,8 +4,10 @@
   .add-link
     padding-left: 30px
     background-position: 10px -1434px
+
 .media-hoverlay
   padding: 0px !important
+
 .media-hoverlay-header
   background-color: $white
   height: 35px
@@ -21,7 +23,7 @@
   #search
     margin-right: 0
     font:
-      size: .9em
+      size: 0.9em
       weight: normal
   .button
     margin: 5px 5px 5px 15px
@@ -30,6 +32,7 @@
     float: left
     span
       padding: 1px 20px 0 30px
+
 .media-hoverlay-content
   background-color: $white
   float: right
@@ -37,14 +40,16 @@
   min-height: 400px
   height: auto !important
   height: 400px
-  font-size: .8em
+  font-size: 0.8em
   table
     width: 100% !important
   .datatable
-    font-size: .8em
+    font-size: 0.8em
+
 .media-hoverlay-sidebar
   padding: 10px
   width: 25%
+
 .display-mode
   float: right
   width: 90px
@@ -54,9 +59,10 @@
     height: 100%
     margin: 0 10px
     width: 3px
-    +left()
+    +left
   .display-list
-    +left()
+    +left
+    background: transparent url(/images/admin/big-icons-27-27-verti.png) 0 -80px no-repeat
     background: transparent url(/assets/forgeos/admin/big-icons-27-27-verti.png) 0 -80px no-repeat
     width: 27px
     height: 27px
@@ -64,34 +70,34 @@
     &.off
       background: transparent url(/assets/forgeos/admin/big-icons-27-27-verti.png) 0 1px no-repeat
   .display-thumbnails
-    +left()
+    +left
     background: transparent url(/assets/forgeos/admin/big-icons-27-27-verti.png) 0 -242px no-repeat
     width: 27px
     height: 27px
     &.off
       background: transparent url(/assets/forgeos/admin/big-icons-27-27-verti.png) 0 -161px no-repeat
+
 div.tree-link
   padding-top: 10px !important
   padding-bottom: 10px !important
   label
-    +left()
+    +left
     margin-bottom: 8px
     color: $lightGray
     width: 95px
     clear: left
   select
-    +left()
+    +left
   input, textarea
-    +left()
+    +left
     border: 2px solid $gray
-    +borderCorner(2px,2px,2px,2px)
+    +borderCorner(2px, 2px, 2px, 2px)
     width: 390px
     padding: 2px
-
     &.external
       color: red
   .linked-to-span
-    +left()
+    +left
     background-color: $lightBlueBg
     padding: 0 5px 2px 20px
     a
@@ -99,19 +105,15 @@ div.tree-link
 
   .linked-to
     display: none
-
   .link
-    +left()
+    +left
     padding: 0 5px 2px 0px
     a
       color: $blueLink
   .back-link
     text-decoration: underline
   .button
-    -moz-border-radius-bottomleft: 2px
-    -moz-border-radius-bottomright: 2px
-    -moz-border-radius-topleft: 2px
-    -moz-border-radius-topright: 2px
+    +borderCorner(2px, 2px, 2px, 2px)
     background-color: $whiteGray
     background-position: 0 -10px
     border: 1px solid $gray
@@ -123,6 +125,7 @@ div.tree-link
     text-align: center
     text-decoration: none
     font-size: 1.1em
+
 .upload-lightbox-container,
 .media-hoverlay
   display: none

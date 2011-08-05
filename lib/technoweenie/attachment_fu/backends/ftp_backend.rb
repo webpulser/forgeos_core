@@ -152,18 +152,12 @@ module Technoweenie # :nodoc:
         end
 
         def current_data
-          ftp = Net::FTP.new(ftp_config[:server])
-          ftp.login(ftp_config[:login], ftp_config[:password])
-          dest_path = File.join(ftp_config[:base_upload_path], full_filename)
-          puts(dest_path.inspect)
-          f = Tempfile.open('w')
-          f.close
-          ftp.getbinaryfile(dest_path, f.path)
-          ftp.close
-          f.open
-          v = f.read()
-          f.delete
-          v
+          Net::FTP.open(ftp_config[:server]) do |ftp|
+            ftp.login(ftp_config[:login], ftp_config[:password])
+            ftp.getbinaryfile(File.join(ftp_config[:base_upload_path], full_filename)) do |data|
+              return data
+            end
+          end
         end
 
         # Partitions the given path into an array of path components.
@@ -201,6 +195,7 @@ module Technoweenie # :nodoc:
         protected
           # Called in the after_destroy callback
           def destroy_file
+            return true if ftp_config[:read_only]
             ftp = Net::FTP.new(ftp_config[:server])
             ftp.login(ftp_config[:login], ftp_config[:password])
             dest_path = File.join(ftp_config[:base_upload_path], full_filename)
@@ -208,6 +203,7 @@ module Technoweenie # :nodoc:
           end
 
           def rename_file
+            return true if ftp_config[:read_only]
             return unless @old_filename && @old_filename != filename
             old_full_filename = File.join(base_path, @old_filename)
 

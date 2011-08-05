@@ -3,16 +3,19 @@
 //--------------------- ----------
 .odd
   background-color: $oddBg
+
 table
   .image
     text-align: right
     width: 70px
     padding: 0
+
 #table_wrapper
   .dataTables_filter
     display: none
   .dataTables_paginate, .dataTables_length
     float: left
+
 .datatable
   border-collapse: collapse
   width: 100% !important
@@ -20,19 +23,19 @@ table
   text-align: left
   thead
     height: 30px
-    background: #EFEFEF
+    background: #efefef
     color: $lightGray
     cursor: pointer
     th
       padding: 5px
-      border-left: 2px solid #E7E7E7
+      border-left: 2px solid #e7e7e7
       padding: 5px
       text-align: left
       text-transform: capitalize
       &:first-child
         border-left: 0
       &.sorting_desc, &.sorting_asc
-        background-color: #E0E0E0
+        background-color: #e0e0e0
         background-image: url(/assets/forgeos/admin/small-icons-16-16-verti.png)
         background-repeat: no-repeat
       &.sorting_desc
@@ -59,7 +62,7 @@ table
     span.odd
       background-color: transparent
       border: 0
-      color: #000
+      color: black
     span.even
       background-color: transparent
       border: 0
@@ -82,6 +85,7 @@ table
       color: $white
   .actions
     width: 65px !important
+
 .dataTables_wrapper
   margin: 0 0 30px 1px
   .top
@@ -90,6 +94,7 @@ table
     height: 16px
     margin-top: 10px
     margin-left: 22px
+
 //--------------------- ----------
 // PAGINATE BUTTONS
 //--------------------- ----------
@@ -100,6 +105,7 @@ table
   margin: 0 2px
   display: inline-block
   cursor: pointer
+
 .paginate_button
   padding: 2px 5px
   font-size: 0.7em
@@ -119,9 +125,11 @@ table
   &.next
     background-position: right -1342px
     padding-right: 18px
+
 .paginate_active
   background-color: $blueLink
   color: $white
+
 //--------------------- ----------
 // BUTTONS
 //--------------------- ----------
@@ -130,8 +138,8 @@ tr
     height: 0 !important
     padding: 0
     width: 16px
-    +block()
-    +left()
+    +block
+    +left
     margin: 0 3px
     outline: none
   p
@@ -152,26 +160,32 @@ tr
       background: url(/assets/forgeos/admin/small-icons/dark-blue-minus.png) no-repeat -1px
     p
       display: block !important
+
 //--------------------- ----------
 // SOME VARIANTS
 //--------------------- ----------
 .one-product
   padding-left: 25px
+
 .some-variants
   .image
     background: url(/assets/forgeos/admin/small-icons/dark-blue-plus.png) no-repeat -1px
+
 .image img
   width: 55px
   height: 55px
+
 //--------------------- ----------
 // DATASLIDES
 //--------------------- ----------
 .dataSlides_info
   display: none
   clear: both
+
 .dataSlides_paginate.paging_full_numbers
   margin: 20px
   clear: both
+
 .thumbnails
   .datatable
     width: 100% !important
@@ -181,9 +195,9 @@ tr
     .tr
       width: 123px
       height: 170px
-      +left()
+      +left
       margin: 1%
-      border: 2px solid #FFF
+      border: 2px solid white
       text-align: center
       color: $lightGray
       background-color: transparent !important
@@ -200,6 +214,7 @@ tr
         border: 2px solid $blueLink
       span
         font-weight: bold
+
 //--------------------- ----------
 // SELECTABLE ROWS
 //--------------------- ----------
@@ -210,6 +225,7 @@ tr
 .selectable_rows
   tr
     cursor: pointer
+
 //--------------------- ----------
 // DRAGGABLE ROWS
 //--------------------- ----------
@@ -220,7 +236,7 @@ tr
         color: $selectedRow !important
       td:first-child
         background:
-          color: $selectedRow - #3D0F38 !important
+          color: $selectedRow - #3d0f38 !important
     //--------------------- ----------
     // HANDLER
     //--------------------- ----------
@@ -239,22 +255,25 @@ tr
         position: absolute !important
         top: 0
         left: 0
+
 .ui-helper
   font-weight: bold
   font-size: 110%
   color: $blueLink
   background-color: $selectedRow
-  padding: .5em 1em
-  border: 1px solid $selectedRow - #3D0F38
+  padding: 0.5em 1em
+  border: 1px solid $selectedRow - #3d0f38
   overflow: hidden
   white-space: nowrap
   overflow: hidden
   width: 150px
   +opacity(0.7)
+
 .ui-droppable.ui-state-hover
-  background-color: #FF3E00 !important
+  background-color: #ff3e00 !important
   background-repeat: no-repeat
   border: 0
   color: white !important
+
 #category_sort
   display: none
