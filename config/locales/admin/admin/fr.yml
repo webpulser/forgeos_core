@@ -3,11 +3,13 @@ fr:
     one: cache
     two: caches
     no_files: il n'y a pas de pages à supprimer
+    tmp_directory: Répertoire de cache partiel
+    public_directory: Répertoire de cache de pages entières
     delete:
       success: Le cache a été supprimé
       failed: "un problème est survenu lors de la mise à suppression du cache"
-      one: supprimer ces pages
-      all: supprimer toutes les pages
+      one: supprimer le cache des pages sélectionnées
+      all: supprimer la totalité du cache
   admin:
     one: administrateur
     other: administrateurs

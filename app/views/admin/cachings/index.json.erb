@@ -1,0 +1,25 @@
+<%-
+  output = @files.map do |file|
+    is_file = !File.directory?(file)
+    file_label = if file == Rails.cache.cache_path
+      t('caching.tmp_directory')
+    elsif file == Rails.configuration.action_controller.page_cache_directory
+      t('caching.public_directory')
+    else
+      file.gsub(/(\/|.)+\//,'')
+    end
+
+    data = {
+      :data => {
+        :title => file_label,
+        :icon => (is_file ? 'file' : 'folder')
+      },
+      :metadata => { :name => file }
+    }
+
+    data[:state] = 'closed' unless is_file
+
+    data
+  end
+-%>
+<%= raw output.to_json -%>
