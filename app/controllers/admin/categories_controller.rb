@@ -35,13 +35,12 @@ class Admin::CategoriesController < Admin::BaseController
   def create
     if @category.save
       flash[:notice] = t('category.create.success').capitalize
-      respond_to do |format|
-        format.html { redirect_to [forgeos_core, :edit, :admin, @category] }
-        format.json { render :text => @category.id }
-      end
     else
       flash[:error] = t('category.create.failed').capitalize
-      render :action => 'new'
+    end
+    respond_to do |format|
+      format.html { redirect_to [forgeos_core, :edit, :admin, @category] }
+      format.json { render :text => @category.id }
     end
   end
 

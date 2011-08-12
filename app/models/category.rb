@@ -5,7 +5,7 @@ class Category < ActiveRecord::Base
   acts_as_list :scope => [:type]
 
   validates_each :parent_id do |record, attr, value|
-    record.errors.add(attr, 'Can\'t be his self parent') if record.id == value
+    record.errors.add(attr, 'Can\'t be his self parent') if not value.nil? and record.id == value
   end
 
   def level
