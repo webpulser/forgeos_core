@@ -79,9 +79,8 @@ class Admin::AttachmentsController < Admin::BaseController
             end
 
             if params[:parent_id]
-              parent_category = Category.find_by_id(params[:parent_id])
-              if parent_category
-               @media.attachment_categories << parent_category
+              if parent_category = Category.find_by_id(params[:parent_id])
+                @media.categories << parent_category
               end
             end
 

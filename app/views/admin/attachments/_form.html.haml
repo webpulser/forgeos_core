@@ -89,7 +89,7 @@
           Associated to collection
         #association-media-tree.inner-step
           %ul
-            = hidden_field_tag "#{f.object_name}[attachment_category_ids][]"
-            = render :partial => 'admin/categories/associated_elements', :locals => { :association_id => 'attachment_category_ids', :element => media, :category_ids => media.attachment_category_ids, :categories => find_categories_from_content_type(media) }
+            = hidden_field_tag "#{f.object_name}[category_ids][]"
+            = render :partial => 'admin/categories/associated_elements', :locals => { :association_id => 'category_ids', :element => media, :category_ids => media.category_ids, :categories => find_categories_from_content_type(media) }
             .clear
     .clear
