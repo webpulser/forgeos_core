@@ -146,4 +146,8 @@ module Admin::BaseHelper
       fg_submit_tag(label) + t('or') + link_to(t('cancel').capitalize, back_path, :class => 'back-link')
     end
   end
+
+  def polymorphic_html_id(object, prefix = '')
+    [prefix, object.class.to_s.underscore, object.id] * '_'
+  end
 end

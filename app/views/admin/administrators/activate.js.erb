@@ -1,1 +1,1 @@
-toggleActivate('#show_admin_<%= @admin.id -%>');
+toggleActivate('#<%= polymorphic_html_id @admin, 'show' -%>');

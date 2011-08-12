@@ -1,1 +1,1 @@
-toggleActivate('#show_role_<%= @role.id -%>');
+toggleActivate('#<%= polymorphic_html_id @role, 'show' -%>');

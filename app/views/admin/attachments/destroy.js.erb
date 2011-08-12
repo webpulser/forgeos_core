@@ -1,1 +1,1 @@
-removedataTablesRow('#destroy_attachment_<%= @media.id -%>');
+removedataTablesRow('#<%= polymorphic_html_id @media, 'destroy' -%>');

@@ -4,10 +4,9 @@
     :iTotalRecords => @roles.total_entries || 0,
     :iTotalDisplayRecords => @roles.size,
     :aaData => @roles.collect do |role|
-      link_id = "role_#{role.id}"
       klass = role.active? ? 'see-on' : 'see-off'
       [
-        content_tag(:div, '<div class="image">&nbsp;<span class="small-icons role-ico">&nbsp;</span></div>'.html_safe, :id => link_id, :class => role.administrators.count > 0 ? 'some-variants plus' : ''),
+        content_tag(:div, '<div class="image">&nbsp;<span class="small-icons role-ico">&nbsp;</span></div>'.html_safe, :id => polymorphic_html_id(role), :class => role.administrators.count > 0 ? 'some-variants plus' : ''),
         content_tag(:div, link_to(role.name, [forgeos_core, :edit, :admin, role]), :class => 'role-name') +
           content_tag(:p,role.administrators.all.collect{ |admin| link_to("#{admin.firstname} #{admin.lastname}", [forgeos_core, :admin, admin]) }.join('<br />').html_safe, :style=>'display:none'),
         role.administrators.count,
@@ -16,7 +15,7 @@
           :remote => true,
           :method => :post,
           :class => "small-icons #{klass}",
-          :id => "show_#{link_id}"
+          :id => polymorphic_html_id(role, 'show')
         ),
         #link_to('', [:duplicate, :admin, role], :class => 'small-icons duplicate-link') +
         link_to('', [forgeos_core, :edit, :admin, role], :class => 'small-icons edit-link') +
@@ -25,7 +24,7 @@
           :method => :delete,
           :confirm => I18n.t('role.destroy.confirm').capitalize,
           :class => 'small-icons destroy-link',
-          :id => "destroy_#{link_id}"
+          :id => polymorphic_html_id(role, 'destroy')
         )
       ]
     end

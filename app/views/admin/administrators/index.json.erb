@@ -4,12 +4,11 @@
     :iTotalRecords => @admins.total_entries || 0,
     :iTotalDisplayRecords => @admins.size,
     :aaData => @admins.collect do |admin|
-      link_id = "admin_#{admin.id}"
       klass = admin.active? ? 'see-on' : 'see-off'
       [
         content_tag(:div,
           content_tag(:div, '', :class => 'handler') +
-          content_tag(:div, "&nbsp;".html_safe, :id => link_id, :class => 'small-icons admin-ico'),
+          content_tag(:div, "&nbsp;".html_safe, :id => polymorphic_html_id(admin), :class => 'small-icons admin-ico'),
           :class => 'handler_container'),
         content_tag(:div, link_to("#{admin.firstname} #{admin.lastname}", [forgeos_core, :edit, :admin, admin]), :class => 'admin-name'),
         admin.role.name,
@@ -18,7 +17,7 @@
           :remote => true,
           :method => :post,
           :class => "small-icons #{klass}",
-          :id => "show_#{link_id}"
+          :id => polymorphic_html_id(admin, 'show')
         ),
         link_to('', '#', :class => 'small-icons duplicate-link') +
         link_to('', [forgeos_core, :edit, :admin, admin], :class => 'small-icons edit-link') +
@@ -27,7 +26,7 @@
           :method => :delete,
           :confirm => I18n.t('admin.destroy.confirm').capitalize,
           :class => 'small-icons destroy-link',
-          :id => "destroy_#{link_id}"
+          :id => polymorphic_html_id(admin, 'destroy')
         )
       ]
   end

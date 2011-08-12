@@ -4,11 +4,10 @@
     :iTotalRecords => @users.total_entries || 0,
     :iTotalDisplayRecords => @users.size,
     :aaData => @users.collect do |user|
-      link_id = "user_#{user.id}"
       klass = user.active? ? 'see-on' : 'see-off'
       table =
       [
-      content_tag(:div, tag(:div, :class=>'handler') + tag(:div, :class => 'small-icons user-ico'), :id => link_id, :class => 'handler_container'),
+      content_tag(:div, tag(:div, :class=>'handler') + tag(:div, :class => 'small-icons user-ico'), :id => polymorphic_html_id(user), :class => 'handler_container'),
       content_tag(:div, (params[:mode] == 'selection' ? user.fullname : link_to(user.fullname, [forgeos_core, :admin, user])), :class => 'user-name'),
       content_tag(:div, (params[:mode] == 'selection' ? user.email : mail_to(user.email, user.email, :class => 'truncate', :title => user.email)), :class => 'email'),
       ]
@@ -19,7 +18,7 @@
           :remote => true,
           :method => :post,
           :class => "small-icons #{klass}",
-          :id => "show_#{link_id}"
+          :id => polymorphic_html_id(user, 'show')
         ) <<
         link_to('', [forgeos_core, :edit, :admin, user], :class => 'small-icons edit-link') +
         link_to('', [forgeos_core, :admin, user],
@@ -27,7 +26,7 @@
           :method => :delete,
           :confirm => I18n.t('user.destroy.confirm').capitalize,
           :class => 'small-icons destroy-link',
-          :id => "destroy_#{link_id}"
+          :id => polymorphic_html_id(user, 'destroy')
         )
       else
         table << user.id

@@ -1,1 +1,1 @@
-removedataTablesRow('#destroy_role_<%= @role.id -%>');
+removedataTablesRow('#<%= polymorphic_html_id @role, 'destroy' -%>');
