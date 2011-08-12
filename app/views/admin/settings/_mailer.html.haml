@@ -3,7 +3,9 @@
   %div
     = mailer_form.select :delivery_method, [['SMTP','smtp'],['sendmail','sendmail'],['Test','test']], { :prompt => t(:please_select) }
   .clear
-#smtp.delivery_method_settings.hidden
+#smtp.delivery_method_settings.hidden.fieldset.grid_7
+  %h2
+    SMTP Configuration
   = f.fields_for :smtp_settings do |smtp|
     = smtp.label :address
     %div
@@ -29,7 +31,9 @@
     = smtp.label :enable_starttls_auto
     %div
       = smtp.check_box :enable_starttls_auto
-#sendmail.delivery_method_settings.hidden
+#sendmail.delivery_method_settings.hidden.fieldset.grid_7
+  %h2
+    Sendmail Configuration
   = f.fields_for :sendmail_settings do |sendmail|
     = sendmail.label :location
     %div
@@ -38,3 +42,4 @@
     %div
       = sendmail.text_field :arguments
 #test.delivery_method_settings.hidden
+

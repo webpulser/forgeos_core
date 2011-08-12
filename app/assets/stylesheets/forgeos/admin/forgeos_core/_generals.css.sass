@@ -448,12 +448,19 @@ a.truncate
   float: right
   .dropdown
     a.dropdown_toggle span
-      background-image: url(/assets/forgeos/admin/select/lang.png)
-      color:  $white
+      color:  #333
       font-weight: bold
+      &:hover
+        color: #666
     &.fr
       a.dropdown_toggle span
         padding-left: 22px
+    .options
+      left: 0
+      top: 21px
+      min-width: 148px
+      opacity: 0.9
+
 
 //--------------------- ---------
 // BIG ORANGE INPUT
@@ -461,3 +468,4 @@ a.truncate
 
 .big_orange_input
   +element_form_name
+
