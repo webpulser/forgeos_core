@@ -13,6 +13,7 @@ Gem::Specification.new do |s|
   s.add_dependency 'webpulser-habtm_list', '>= 0.1.2'
   s.add_dependency 'will_paginate', '~> 3.0.pre4'
   s.add_dependency 'authlogic', '>= 3.0.3'
+  s.add_dependency 'squeel', '>= 0.8.7'
 
   s.name = 'forgeos_core'
   s.version = '1.9.4'
