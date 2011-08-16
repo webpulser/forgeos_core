@@ -12,4 +12,12 @@ jQuery(document).ready(function(){
     jQuery('.delivery_method_settings').hide();
     jQuery('#'+current_mailer_setting).show();
   }
+
+  jQuery('#setting_smtp_settings_authentication').change(function() {
+    if(this.value == 'none') {
+      jQuery('#authentication').addClass('hidden');
+    } else {
+      jQuery('#authentication').removeClass('hidden');
+    }
+  });
 });

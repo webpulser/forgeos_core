@@ -111,4 +111,22 @@ module Forgeos::ApplicationHelper
   def statistics_collector_tag(object)
     javascript_include_tag(forgeos_core.statistics_collector_path(:type => object.class.to_s.underscore, :id => object.id))
   end
+
+  def serialized_field(form_builder, object, type, method, options = {})
+    field_name = serialized_field_name(method)
+    raw(
+      form_builder.label(field_name, t(method, :scope => [:helpers, :label, form_builder.object_name])) +
+      tag(:br) +
+      case type
+      when :check_box
+        form_builder.send(type, field_name, options.merge(:checked => (object[method] == '1')))
+      else
+        form_builder.send(type, field_name, options.merge(:value => (object[method] || '')))
+      end
+    )
+  end
+
+  def serialized_field_name(*fields)
+    fields.map(&:to_s) * ']['
+  end
 end

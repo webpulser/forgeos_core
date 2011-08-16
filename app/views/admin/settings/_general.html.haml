@@ -16,7 +16,7 @@
       = address.text_field :city
     .country-select
       = address.label :country_id, t('address.country').capitalize
-      = address.collection_select :country_id, Country.all(:order => "name"), :id, :printable_name, :prompt => t(:please_select)
+      = address.collection_select :country_id, Country.all, :id, :printable_name, :prompt => t(:please_select)
     .clear
 .tool-tip-settings.grid_4
   The shop localization reassure your customers.

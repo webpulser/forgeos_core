@@ -1,8 +1,7 @@
 class Admin::BaseController < Forgeos::ApplicationController
   layout 'admin'
   helper_method :forgeos_js_functions_files, :forgeos_js_inits_files
-  before_filter :login_required, :edition_locale, :except => [:notifications, :url]
-  before_filter :forgeos_core_javascripts_files
+  before_filter :login_required, :edition_locale, :forgeos_core_javascripts_files, :except => [:notifications, :url]
   skip_after_filter :log_visit
   protect_from_forgery
 
