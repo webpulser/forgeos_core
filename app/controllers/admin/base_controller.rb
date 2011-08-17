@@ -48,7 +48,7 @@ private
 
   def edition_locale
     if session[:lang]
-      ActiveRecord::Base.locale = session[:lang]
+      Globalize.locale = session[:lang]
     end
   end
 end

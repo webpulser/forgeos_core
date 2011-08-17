@@ -9,6 +9,7 @@ Forgeos::Core::Engine.routes.draw do
   namespace :admin do
     root :to => 'dashboard#index'
     match 'dashboard' => 'dashboard#index', :as => :dashboard
+    match 'dashboard/change_lang' => 'dashboard#change_lang', :as => :change_lang
     match 'logout' => 'person_sessions#destroy', :as => :logout
     match 'login' => 'person_sessions#new', :as => :login
     match '/notifications' => 'base#notifications', :as => :notifications
