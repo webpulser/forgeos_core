@@ -1,4 +1,4 @@
-class Admin::BaseController < Forgeos::ApplicationController
+class Admin::BaseController < ApplicationController
   layout 'admin'
   helper_method :forgeos_js_functions_files, :forgeos_js_inits_files
   before_filter :login_required, :edition_locale, :forgeos_core_javascripts_files, :except => [:notifications, :url]

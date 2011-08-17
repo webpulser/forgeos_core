@@ -1,4 +1,4 @@
-class PersonSessionsController < Forgeos::ApplicationController
+class PersonSessionsController < ApplicationController
   def new
     @person_session = PersonSession.new
   end

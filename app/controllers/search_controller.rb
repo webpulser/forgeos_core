@@ -1,4 +1,4 @@
-class SearchController < Forgeos::ApplicationController
+class SearchController < ApplicationController
   before_filter :init_index, :only => :index
   def index
     search_keyword = SearchKeyword.find_by_keyword(@keywords) || SearchKeyword.create(:keyword => @keywords)

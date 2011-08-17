@@ -1,4 +1,5 @@
-class Forgeos::ApplicationController < ActionController::Base
+class ApplicationController < ActionController::Base
+  helper :application
   helper_method :current_user_session, :current_user
 
   before_filter :set_locale, :set_time_zone
