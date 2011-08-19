@@ -28,7 +28,7 @@
                   %label= right.name
               .clear
 
-      - rights = Right.where(:conditions => { :categories => {:id => nil} }).includes(:right_categories)
+      - rights = Right.where(:conditions => { :categories => {:id => nil} }).includes(:categories)
       - unless rights.nil?
         .fieldset
           %a.small-icons.panel{ :href => '#' }

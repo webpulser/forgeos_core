@@ -20,7 +20,7 @@
                 %label= right.name
               .clear
 
-      - rights = Right.all(:include => :right_categories, :conditions => { :categories => {:id => nil} })
+      - rights = Right.all(:include => :categories, :conditions => { :categories => {:id => nil} })
       - unless rights.nil?
         .fieldset
           %a.small-icons.panel{ :href => '#' }
