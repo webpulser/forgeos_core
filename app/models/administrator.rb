@@ -9,8 +9,6 @@ class Administrator < Person
     :foreign_key => 'element_id',
     :association_foreign_key => 'category_id'
 
-  before_create :activate
-
   def access_path?(controller,action)
     rights.find_by_controller_name_and_action_name(controller,action)
   end

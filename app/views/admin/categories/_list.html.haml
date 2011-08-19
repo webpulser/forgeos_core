@@ -3,7 +3,7 @@
 - categories.each do |category|
   - li_id = "category_#{category.id}"
   %li{ :rel => category.children.empty? ? 'file' : 'folder', :id => li_id }
-    - link_to '#', :id => "link_#{li_id}", :class => 'big-icons' do
+    = link_to '#', :id => "link_#{li_id}", :class => 'big-icons' do
       = category.name
       %span{ :id => "span_#{li_id}"}= category.total_elements_count
 
