@@ -120,9 +120,15 @@ fr:
       '1': Mme
       '2': Mlle
     select:
-      - [M, 0]
-      - [Mme, 1]
-      - [Mlle, 2]
+      -
+        - M
+        - 0
+      -
+        - Mme
+        - 1
+      -
+        - Mlle
+        - 2
   newsletter:
     one: newsletter
     other: newsletters
