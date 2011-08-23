@@ -12,7 +12,7 @@ class Setting < ActiveRecord::Base
   end
 
   def smtp_settings
-    settings = read_attribute(:smtp_settings) || {}
+    settings = super || {}
     settings.update(:enable_starttls_auto => (settings[:enable_starttls_auto] == '1'))
   end
 
