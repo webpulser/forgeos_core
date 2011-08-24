@@ -44,6 +44,7 @@ function toggle_steps(){
  */
 function set_cookie_for_panels (panel){
   var closed_panels_cookie = jQuery.cookie(COOKIE_NAME);
+  if (closed_panels_cookie == null) closed_panels_cookie = '';
   var step = panel.parent();
   var closed_cookie_info = step.attr('id');
 
