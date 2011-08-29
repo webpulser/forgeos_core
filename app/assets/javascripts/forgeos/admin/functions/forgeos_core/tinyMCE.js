@@ -11,12 +11,12 @@ function tmce_unload_children(selector){
 
 function tmceInit(selector){
   jQuery(selector).tinymce({
-    script_url : '/assets/forgeos/tiny_mce/tiny_mce.js',
+    script_url : '/assets/tiny_mce/tiny_mce.js',
     language : 'fr',
     mode : 'textareas',
     plugins : "table,fullscreen,paste,media,preview,advimage,curblyadvimage,advlink,contextmenu",
     theme : 'advanced',
-    content_css : "/assets/forgeos/tinyMCE/styles.css",
+    content_css : "/assets/tinyMCE/styles.css",
     convert_urls: 0,
     onchange_callback: function(inst){ jQuery(inst.getElement()).trigger('change'); },
     theme_advanced_buttons1 : "undo,redo,|,pasteword,|,anchor,image,media,|,code,preview,|,removeformat,cleanup,|, cut,copy,paste,|,bullist,numlist,|,outdent,indent,|,undo,redo,link,unlink,anchor,image,code,preview,|,forecolor,backcolor",
