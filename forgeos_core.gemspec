@@ -1,3 +1,7 @@
+$:.push File.expand_path("../lib", __FILE__)
+
+require "forgeos/core/version"
+
 Gem::Specification.new do |s|
   s.add_dependency 'rails', '>= 3.1.0.rc4'
   s.add_dependency 'acts-as-taggable-on', '>= 2.0.6'
@@ -16,7 +20,7 @@ Gem::Specification.new do |s|
   s.add_dependency 'squeel', '>= 0.8.7'
 
   s.name = 'forgeos_core'
-  s.version = '1.9.4'
+  s.version = Forgeos::Core::VERSION
   s.date = '2011-08-05'
 
   s.summary = 'Core of Forgeos plugins suite'
@@ -26,5 +30,6 @@ Gem::Specification.new do |s|
   s.email = 'dev@webpulser.com'
   s.homepage = 'http://github.com/webpulser/forgeos_core'
 
-  s.files = Dir['{app,lib,config,db,recipes}/**/*', 'README*', 'LICENSE', 'COPYING*']
+  s.files = Dir['{app,lib,config,db,recipes}/**/*', 'README*', 'LICENSE', 'COPYING*', 'MIT-LICENSE', 'Gemfile']
+  s.test_files = Dir['test/**/*']
 end
