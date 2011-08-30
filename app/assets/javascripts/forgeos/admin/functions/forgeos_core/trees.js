@@ -12,13 +12,15 @@ function duplicate_category(node, type, parent_id, base_url){
     // update node id and duplicate node children
     "complete": function(request){
       var cat_id = request.responseText;
-      jQuery(node).attr('id', 'cageory_' + cat_id);
+      var jnode = jQuery(node);
+      jnode.attr('id', 'category_' + cat_id);
       children.each(function(){ duplicate_category(jQuery(this), type, cat_id, base_url); });
 
-      jQuery(node).children('a').attr('id', 'link_category_' + cat_id);
-      jQuery(node).children('a').children('span').attr('id', 'span_category_' + cat_id);
+      jnode_link = jnode.children('a');
+      jnode_link.attr('id', 'link_category_' + cat_id);
+      jnode_link.children('span').attr('id', 'span_category_' + cat_id);
 
-      set_category_droppable(cat_id, type);
+      set_category_droppable(jnode_link, type);
     },
     "data": get_category_data(name, type, parent_id),
     "dataType": 'text',
@@ -28,10 +30,18 @@ function duplicate_category(node, type, parent_id, base_url){
 
 // return category data with or without parent category
 function get_category_data(name, type, parent_id) {
-  if (parent_id)
-    return {authenticity_token:window._forgeos_js_vars.token, format: 'json', 'category[name]': name, 'category[kind]': type, 'category[parent_id]': parent_id};
-  else
-    return {authenticity_token:window._forgeos_js_vars.token, format: 'json', 'category[name]': name, 'category[kind]': type};
+  var datas = {
+    "authenticity_token": window._forgeos_js_vars.token,
+    "format": 'json',
+    "category[name]": name,
+    "category[kind]": type
+  };
+
+  if (parent_id) {
+    datas["category[parent_id]"] = parent_id;
+  }
+
+  return datas;
 }
 
 // initialise tree theme and callbacks
@@ -41,26 +51,11 @@ function init_category_tree(selector, type, source) {
 
     jQuery(selector).bind('loaded.jstree',function(e, data){
       jQuery(e.target).find('a').each(function(index,selector){
-        var category_id = get_rails_element_id(jQuery(selector).parent('li'));
-        jQuery(selector).droppable({
-          hoverClass: 'ui-state-hover',
-          drop:function(ev, ui){
-            jQuery.ajax({
-              "data": {element_id:get_rails_element_id(jQuery(ui.draggable)), authenticity_token: encodeURIComponent(window._forgeos_js_vars.token)},
-              "success": function(request){jQuery(ev.target).find('span').html(request);},
-              "type":'post',
-              "url": base_url + category_id + '/add_element'
-            });
-          }
-        });
+        set_category_droppable(jQuery(selector));
       });
     }).bind('create_node.jstree', function(e, data){
+
       var jnode = jQuery(data.rslt.obj);
-      var parent_node = jnode.parent().parent('li');
-      var parent_id;
-      // get parent_id if parent node exists
-      if (parent_node[0] != undefined)
-        parent_id = get_rails_element_id(parent_node);
 
       jQuery.ajax({
         "url": base_url,
@@ -68,47 +63,44 @@ function init_category_tree(selector, type, source) {
           var cat_id = request.responseText;
           jnode.attr('id', 'category_' + cat_id);
           jnode.children('a').attr('id', 'link_category_' + cat_id);
-          set_category_droppable(cat_id, type);
+          set_category_droppable(jnode.children('a'), type);
 
           if( jQuery(".parent_id_hidden").size() == 0){
             jQuery(document.body).append('<input type="hidden" id="parent_id_tmp" name="parent_id_tmp" class="parent_id_hidden" value="'+cat_id+'" />');
           } else {
             jQuery('#parent_id_tmp').val(cat_id);
           }
-
         },
-        "data": get_category_data('New folder', type, parent_id),
+        "data": get_category_data('New folder', type, get_rails_element_id(data.rslt.parent)),
         "dataType": 'text',
         "type": 'post'
       });
     }).bind('rename_node.jstree', function(e, data){
-      var NODE = data.rslt.obj;
-      var cat_id = get_rails_element_id(NODE);
       jQuery.ajax({
-        "url": base_url + cat_id,
-        "data": {authenticity_token: window._forgeos_js_vars.token, format: 'json', 'category[name]': jQuery(NODE).children('a').text()},
+        "url": base_url + get_rails_element_id(data.rslt.obj),
+        "data": {
+          "authenticity_token": window._forgeos_js_vars.token,
+          "format": 'json',
+          "category[name]": data.rslt.name
+        },
         "dataType":'text',
         "type":'put'
       });
-    }).bind('move_node.jstree', function(e, data){
-      var NODE = data.rslt.obj;
-      var cat_id = get_rails_element_id(NODE);
-      var parent_id = '';
-      var jnode = jQuery(NODE);
-      var parent_ul = jnode.parents('ul:first');
-      var position = jQuery(parent_ul).children('li').index(jnode);
-      var tree_id = jQuery(e.target).attr('id');
 
-      position = position+1;
-      if (jnode.parent().parent('li').length > 0){
-        parent_id = get_rails_element_id(jnode.parent().parent('li'));
-      }
+    }).bind('move_node.jstree', function(e, data){
+
       jQuery.ajax({
-        "url": base_url + cat_id,
-        "data": { authenticity_token: window._forgeos_js_vars.token, format: 'json', 'categories_hash': get_current_categories( tree_id ) },
+        "url": base_url + get_rails_element_id(data.rslt.o),
+        "data": {
+          "authenticity_token": window._forgeos_js_vars.token,
+          "format": 'json',
+          "category[parent_id]": get_rails_element_id(data.rslt.r),
+          "category[position]": data.rslt.cp
+        },
         "dataType": 'text',
         "type": 'put'
       });
+
     }).bind('delete_node.jstree', function(e, data){
       var NODE = data.rslt.obj;
       var cat_id = get_rails_element_id(NODE);
@@ -117,21 +109,24 @@ function init_category_tree(selector, type, source) {
         "success": function(request){
           jQuery(NODE).attr('id', 'category_' + request.responseText);
         },
-        "data": {authenticity_token: window._forgeos_js_vars.token, format: 'json'},
-        "dataType":'text',
-        "type":'delete'
+        "data": {
+          "authenticity_token": window._forgeos_js_vars.token,
+          "format": 'json'
+        },
+        "dataType": 'text',
+        "type": 'delete'
       });
     }).bind('copy.jstree', function(e, data) {
       duplicate_category(data.rslt.obj, type, undefined, base_url);
     }).bind('select_node.jstree', function(e, data) {
+
       var NODE = data.rslt.obj;
-      jQuery(".parent_id_hidden").remove();
       var cat_id = get_rails_element_id(NODE);
       var current_table = jQuery('#table').dataTableInstance();
       var url = current_table.fnSettings().sAjaxSource;
       var url_base = url.split('?')[0];
 
-      jQuery('#category_sort').show();
+
       // update category id
       var params = get_json_params_from_url(url);
       params.category_id = cat_id;
@@ -140,14 +135,17 @@ function init_category_tree(selector, type, source) {
       // construct url and redraw table
       update_current_dataTable_source('#table',url_base + '?' + params);
 
-      //object_name = jQuery(NODE).attr('id').split('_')[0];
-      category_id = get_rails_element_id(NODE);
+      // add parent_id_tmp for uploads
+      var category_id = get_rails_element_id(NODE);
       if(jQuery(".parent_id_hidden").size() == 0){
         jQuery(document.body).append('<input type="hidden" id="parent_id_tmp" name="parent_id_tmp" class="parent_id_hidden" value="'+category_id+'" />');
       } else {
         jQuery('#parent_id_tmp').val(category_id);
       }
+      jQuery('#category_sort').show();
+
       return true;
+
     }).bind('deselect_node.jstree', function(e, data) {
       jQuery('#category_sort').hide();
       return true;
@@ -189,13 +187,11 @@ function init_category_tree(selector, type, source) {
             "label": "Changer l'image",
             "icon": "image",
             "action": function(obj) {
-              var cat_id = get_rails_element_id(obj);
-              jQuery('.tree-li-selected-to-add-image').each(function(){
-                jQuery(this).removeClass('tree-li-selected-to-add-image');
-              });
-              jQuery(obj).addClass("tree-li-selected-to-add-image");
+              jQuery('.add-image').removeClass('.current');
+              jQuery(obj).addClass('add-image').addClass('current');
+              jQuery(obj).data('callback', 'add_picture_to_category');
 
-              openimageUploadDialogLeftSidebar(cat_id);
+              openimageUploadDialog();
               return false;
             }
           }
@@ -207,7 +203,7 @@ function init_category_tree(selector, type, source) {
       "ui": {
         "selected_parent_close": false
       },
-      "plugins": ['themes', 'json_data', 'contextmenu', 'ui', 'crrm']
+      "plugins": ['themes', 'json_data', 'contextmenu', 'ui', 'crrm', 'dnd']
     });
   }
 }
@@ -305,15 +301,20 @@ function extract_category_name(node) {
 }
 
 // on drop, the dropped element is added to the selected category
-function set_category_droppable(category_id, type) {
-  jQuery('#link_category_' + category_id).droppable({
-    hoverClass: 'ui-state-hover',
-    drop: function(ev, ui){
+function set_category_droppable(category, type) {
+  jQuery(category).droppable({
+    "hoverClass": 'ui-state-hover',
+    "drop": function(ev, ui){
       jQuery.ajax({
-        data: { element_id:get_rails_element_id(jQuery(ui.draggable)),authenticity_token: encodeURIComponent(window._forgeos_js_vars.token)},
-        success:function(request){jQuery('#span_category_' + category_id).html(request);},
-        type:'post',
-        url:'/admin/categories/' + category_id + '/add_element'
+        "data": {
+          "element_id": get_rails_element_id(jQuery(ui.draggable)),
+          "authenticity_token": encodeURIComponent(window._forgeos_js_vars.token)
+        },
+        "success": function(request){
+          jQuery(category).attr('title', request);
+        },
+        "type": 'post',
+        "url": '/admin/categories/' + category_id + '/add_element'
       })
     }
   });
@@ -344,11 +345,6 @@ function addPageClasses(block_id){
       }
     });
   });
-}
-
-//Return current tree to json
-function get_current_categories( tree_id ){
-  return JSON.stringify(jQuery.jstree._reference("#"+tree_id ).get());
 }
 
 function createNewLevel(parent_node,item, TREE_OBJ, level) {
