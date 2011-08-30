@@ -5,19 +5,13 @@ function openStandardDialog(){
 
 //open an upload dialog Box
 function openimageUploadDialog(link){
-  initImageUpload(link);
+  forgeosInitUpload('#image');
   jQuery('#imageSelectDialog').dialog('open');
 }
 
 //open an upload dialog Box
-function openimageLeftSidebarUploadDialog(link){
-  jQuery('#imageLeftSidebarUploadDialog').dialog('open');
-  forgeosInitUpload('#imageLeftSidebar','add_picture_to_category');
-}
-
-//open an upload dialog Box
 function openfileUploadDialog(){
-  initFileUpload();
+  forgeosInitUpload('#file');
   jQuery('#fileSelectDialog').dialog('open');
 }
 
@@ -34,8 +28,8 @@ function toggleSelectedOverlay(element){
   }
 }
 
-function add_picture_to_category(path, id, name){
-  var cat_id = get_rails_element_id($('.tree-li-selected-to-add-image'));
+function add_picture_to_category(data){
+  var cat_id = get_rails_element_id($('.add-image.current'));
   jQuery.ajax({
     "success": function(result){
       jQuery.jstree._focused().refresh();
@@ -43,8 +37,8 @@ function add_picture_to_category(path, id, name){
     },
     "error": function(){},
     "data":  {
-      'category[attachment_ids]': [id],
-      authenticity_token: window._forgeos_js_vars.token
+      "category[attachment_ids][]": data.id,
+      "authenticity_token": window._forgeos_js_vars.token
     },
     "dataType": 'json',
     "type": 'put',

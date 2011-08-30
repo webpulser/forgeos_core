@@ -9,8 +9,6 @@ function change_rule(element, name){
   //check_remove_icon_status(name);
   check_icons('rule-conditions');
   check_icons('end-conditions');
-  InitCustomSelects();
-  rezindex();
 }
 
 function rezindex(){

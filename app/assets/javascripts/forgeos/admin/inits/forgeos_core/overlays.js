@@ -1,29 +1,18 @@
 jQuery(document).ready(function(){
   //init dialog Box
   jQuery('.lightbox-container').dialog({
-    autoOpen:false,
-    modal:true,
-    minHeight: 380,
-    width: 500,
-    resizable:'se'
+    "autoOpen": false,
+    "modal": true,
+    "minHeight": 380,
+    "width": 500,
+    "resizable":'se'
   });
 
   setup_upload_dialog('#imageUpload');
-  setup_upload_dialog('#imageLeftSidebarUpload');
   setup_upload_dialog('#fileUpload');
 
-  jQuery('#imageLeftSidebarSelectDialog').dialog({
-    autoOpen:false,
-    modal:true,
-    width: 800,
-    buttons: {
-      Ok: function() {
-       	add_picture_to_category();
-      },
-    },
-    open: function() { eval(jQuery('#image-table:visible,#thumbnail-table:visible').data('dataTables_init_function')+'()'); },
-    resizable:'se'
-  });
+  setup_select_dialog('#imageSelect', '#image-table:visible,#thumbnail-table:visible');
+  setup_select_dialog('#fileSelect', '#table-files');
 
   jQuery('.display-thumbnails').click(function(e) {
     e.preventDefault();
@@ -54,23 +43,21 @@ jQuery(document).ready(function(){
   });
 
   /*
-   *Add click function on .add-picture items
+   *Add click function on .add-image items
    *Those items are links that show dialog Box to uploads media
    **/
-  jQuery('#add-picture').live('click',function(e){
+  jQuery('.add-image').live('click',function(e){
     e.preventDefault();
-    openimageUploadDialog(jQuery(this));
+    jQuery('.add-image, .add-file').removeClass('current');
+    jQuery(this).addClass('current');
+    openimageUploadDialog();
     return false;
   });
 
-  jQuery('#add-attachment').live('click',function(e){
+  jQuery('.add-file').live('click',function(e){
     e.preventDefault();
-    openimageUploadDialog(jQuery(this));
-    return false;
-  });
-
-  jQuery('#add-file').live('click',function(e){
-    e.preventDefault();
+    jQuery('.add-image, .add-file').removeClass('current');
+    jQuery(this).addClass('current');
     openfileUploadDialog();
     return false;
   });
@@ -79,12 +66,11 @@ jQuery(document).ready(function(){
   *Add click function on .fieldset a.backgrounds  items
   *Those items are links that shows dialogBox to add some blocks/widgets
   **/
-  jQuery('#add-block, #add-widget').bind('click',function(e){
+  jQuery('#add-block, #add-widget').live('click',function(e){
     e.preventDefault();
     openBlockDialog(jQuery(this), jQuery(this).parent());
     return false;
   });
-
 
   jQuery('#fileSelectDialog #inner-lightbox a').live('click',function(){
     jQuery('#fileSelectDialog #inner-lightbox a').removeClass('selected');
@@ -108,18 +94,18 @@ jQuery(document).ready(function(){
   * add the new linked page in pages list
   *and close the dialogg box
   **/
-  jQuery('.link-page.small-icons.page').bind('click',function(){
+  jQuery('.link-page.small-icons.page').live('click',function(){
     if(!jQuery(this).hasClass('active')){
       var url = jQuery(this).attr('href');
       var block_id = url.split('/')[5];
       var page_id = jQuery(this).parent().attr('id').substr(5);
       jQuery.ajax({
-          url: url,
-            complete: putInPageList(jQuery(this).text(), jQuery(this).attr('title'), block_id, page_id),
-            data: 'authenticity_token=' + encodeURIComponent(window._forgeos_js_vars.token),
-            dataType:'script',
-            type:'post'
-            });
+        "url": url,
+        "complete": putInPageList(jQuery(this).text(), jQuery(this).attr('title'), block_id, page_id),
+        "data": { "authenticity_token": encodeURIComponent(window._forgeos_js_vars.token) },
+        "dataType": 'script',
+        "type": 'post'
+      });
       closeDialogBox();
     }
     return false;
@@ -137,13 +123,13 @@ jQuery(document).ready(function(){
   });
 
   jQuery('.lightbox-actuality').dialog({
-    autoOpen:false,
-    modal:true,
-    minHeight: 400,
-    width: 950,
-    open: function(){ tmce_load_children('#form_actuality'); },
-    beforeclose: function(){ tmce_unload_children('#form_actuality'); },
-    resizable: 'se'
+    "autoOpen": false,
+    "modal": true,
+    "minHeight": 400,
+    "width": 950,
+    "open": function(){ tmce_load_children('#form_actuality'); },
+    "beforeclose": function(){ tmce_unload_children('#form_actuality'); },
+    "resizable": 'se'
   });
 
   jQuery('.add-actuality').live('click',function(){
@@ -161,58 +147,5 @@ jQuery(document).ready(function(){
     jQuery('#submit_actuality').removeClass('create-actuality');
     jQuery('#submit_actuality').addClass('update-actuality');
     return false;
-  });
-
-  jQuery('#imageSelectDialog').dialog({
-    autoOpen:false,
-    modal:true,
-    minHeight: 380,
-    width: 800,
-    resizable:'se',
-    buttons: {
-      Ok: function(){
-        dataTableSelectRows('#image-table:visible,#thumbnail-table:visible',function(current_table,indexes){
-          for(var i=0; i<indexes.length; i++){
-            var row = current_table.fnGetData(indexes[i]);
-            var path = row.slice(-3,-2);
-            var id = row.slice(-2,-1);
-            var name = row.slice(-1);
-            add_picture_to_element(path,id,name);
-          }
-          //check_product_first_image();
-        });
-        jQuery('#imageSelectDialog').dialog('close');
-      }
-    },
-    open: function(e,ui){
-      eval(jQuery('#image-table:visible,#thumbnail-table:visible').data('dataTables_init_function')+'()');
-    }
-  });
-
-  jQuery('#fileSelectDialog').dialog({
-    autoOpen:false,
-    modal:true,
-    minHeight: 380,
-    width: 800,
-    resizable:'se',
-    buttons: {
-      Ok: function(){
-        dataTableSelectRows('#table-files', function(current_table, indexes) {
-          for(var i=0; i<indexes.length; i++){
-            var row = current_table.fnGetData(indexes[i]);
-            var size = row.slice(-6,-5);
-            var type = row.slice(-8,-7);
-            var id = row.slice(-2,-1);
-            var name = row.slice(-1);
-
-            add_attachment_to_product(id,name,size,type);
-          }
-        });
-        jQuery('#fileSelectDialog').dialog('close');
-      }
-    },
-    open: function(e,ui){
-      eval(jQuery('#table-files').data('dataTables_init_function')+'()');
-    }
   });
 });

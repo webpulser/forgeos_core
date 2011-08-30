@@ -9,7 +9,7 @@ module Admin::AttachmentHelper
         picture.nil? ? picture_id = '' : picture_id = picture.id
         hidden_field_tag("#{object_name}[#{name}_id]", picture_id, :id => name) +
         link_to(content_tag(:span, label,:class => 'big-icons add-picture'),
-                '#', :class => "add-#{name}picture backgrounds button right") +
+                '#', :class => "add-image backgrounds button right", 'data-callback' => 'add_picture_to_element', 'data-input_name' => "##{name}") +
         content_tag(:div, :class => 'grid_9', :id => "#{name}-picture") do
           content_tag(:ul, :class => 'sortable') do
             unless picture.nil?
@@ -32,7 +32,7 @@ module Admin::AttachmentHelper
       content_tag(:div, :class =>'option-panel-content') do
         link_to(content_tag(:span, t("add_picture").capitalize,
                               :class => 'big-icons add-picture'),
-                  '#', :class => 'add-visualpictures backgrounds button right') +
+                  '#', :class => 'add-image backgrounds button right', 'data-callback' => 'add_picture_to_visuals') +
         content_tag(:div, :class => 'grid_9', :id => 'visuals-picture') do
           content_tag(:ul, :class => 'sortable') do
             pictures.collect{ |picture|

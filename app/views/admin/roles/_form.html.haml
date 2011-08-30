@@ -1,5 +1,5 @@
 = render :partial => 'tabs'
-= form_for [forgeos_core, :admin, role],  :html => { :id => 'wrap' } do |f|
+= form_for [forgeos_core, :admin, role],  :html => { :id => 'wrap', "data-object_name" => role.class.model_name.singular } do |f|
   = hidden_field_tag "role[right_ids][]"
 
   .backgrounds.big-header
@@ -10,7 +10,7 @@
   #content.grid_16.alpha.omega
     .grid_12.alpha
       .padding-wrap
-        - right_categories = RightCategory.order('name').joins(:translations)
+        - right_categories = RightCategory.order('name').joins(:translations).all
         - right_categories.each do |right_category|
           .fieldset
             %a.small-icons.panel{ :href => '#' }
@@ -28,7 +28,7 @@
                   %label= right.name
               .clear
 
-      - rights = Right.where(:conditions => { :categories => {:id => nil} }).includes(:categories)
+      - rights = Right.where(:conditions => { :categories_elements => {:category_id => nil} }).includes(:categories).all
       - unless rights.nil?
         .fieldset
           %a.small-icons.panel{ :href => '#' }

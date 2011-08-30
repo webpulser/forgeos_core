@@ -1,5 +1,5 @@
 = render :partial => 'tabs'
-= form_for [forgeos_core, :admin, media], :html => { :multipart => true, :id => 'wrap'} do |f|
+= form_for [forgeos_core, :admin, media], :html => { :multipart => true, :id => 'wrap', "data-object_name" => media.class.model_name.singular } do |f|
   .backgrounds.big-header
     = f.text_field :name, :id => 'media-title', :class => 'field_name'
     .interact-links
