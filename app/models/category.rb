@@ -34,11 +34,13 @@ class Category < ActiveRecord::Base
 
   def to_jstree
     hash = {}
-    hash[:attr] = { :id => "#{self.class.to_s.underscore}_#{id}", :type => 'folder' }
-    hash[:data] = { :title => name, :icon => category_picture, :attr => { :title => total_elements_count } }
-    unless children.empty?
-     hash[:children] = children.all(:order => 'position ASC').collect(&:to_jstree)
-    end
+    hash[:attr] = { :id => "#{self.class.to_s.underscore}_#{id}"}
+    hash[:data] = { :title => name, :icon => category_picture }
+    hash[:metadata] = { :id => id }
+    hash[:state] = children.empty? ? 'open' : 'closed'
+    #unless children.empty?
+    # hash[:children] = children.all(:order => 'position ASC').collect(&:to_jstree)
+    #end
     hash
   end
 

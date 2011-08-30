@@ -152,7 +152,10 @@ function init_category_tree(selector, type, source) {
     }).jstree({
       "json_data":{
         "ajax": {
-          "url": source
+          "url": source,
+          "data" : function (n) {
+             return { id: (n.data ? n.data('id') : 0) };
+          }
         },
         "progressive_render": true
       },
@@ -200,10 +203,7 @@ function init_category_tree(selector, type, source) {
       "themes": {
         "theme": 'categories'
       },
-      "ui": {
-        "selected_parent_close": false
-      },
-      "plugins": ['themes', 'json_data', 'contextmenu', 'ui', 'crrm', 'dnd']
+      "plugins": ['ui', 'themes', 'json_data', 'contextmenu', 'crrm', 'dnd']
     });
   }
 }

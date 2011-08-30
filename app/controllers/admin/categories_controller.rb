@@ -16,7 +16,11 @@ class Admin::CategoriesController < Admin::BaseController
         else
           # list categories like a tree
           klass = params[:type].camelize.constantize
-          @categories = klass.roots
+          @categories = if params[:id] and params[:id] != '0'
+            klass.find_by_id(params[:id]).children
+          else
+            klass.roots
+          end
 
           render :json => @categories.collect(&:to_jstree).to_json
         end
