@@ -1,48 +1,72 @@
-.jstree-association_categories
-  .jstree-locked li a
-    color: gray
-  ul
-    margin: 0
-    padding: 0
-
+.jstree-association_page
+  li, ins
+    background-color: transparent
   li
-    float: none !important
-    margin: 2px 0 !important
-
-    &.jstree-open
-      ins
-        background: image_url("forgeos/jstree/themes/association_categories/dark-blue-minus.png") 0 0 no-repeat
-    &.jstree-closed
-      ins
-        background: image_url("forgeos/jstree/themes/association_categories/dark-blue-plus.png") 0 0 no-repeat
-      ul
-        display: none
-    &.jstree-checked
-      ins.jstree-checkbox
-        background: image_url("forgeos/jstree/themes/association_categories/check-checked.png") 0px 0 no-repeat
-    &.jstree-unchecked
-      ins.jstree-checkbox
-        background: image_url("forgeos/jstree/themes/association_categories/check-unchecked.png") 0 0 no-repeat
-
-    ul li > ins.jstree-icon
+    &.jstree-last
+      background: transparent
+  .jstree-open > ins
+    background: image_url("forgeos/jstree/themes/association_categories/dark-blue-minus.png") 0 0 no-repeat
+  .jstree-closed > ins
+    background: image_url("forgeos/jstree/themes/association_categories/dark-blue-plus.png") 0 0 no-repeat
+  .jstree-leaf
+    padding-left: 0!important
+  .jstree-hovered
+    background-color: #FDD794
+    color: #F16028
+  .jstree-clicked
+    background: transparent
+    color: #F16028
+  a
+    color: #75491B
+    font-size: 0.8em
+    font-weight: bold
+    padding-right: 10px
+    .jstree-icon
+      margin: 0
+      background-image: image_url("forgeos/admin/big-icons-24-24-verti.png")
+      background-repeat: no-repeat
+      width: 25px
+      background-position: 0 -273px
+    &.jstree-loading .jstree-icon
       background: none
+    &:hover
+      background: transparent
+  &.jstree-focused
+    background: transparent
+  .jstree-no-dots
+    li, .jstree-leaf > ins
+      background: transparent
+    .jstree-open > ins
+      background-position: -18px 0
+    .jstree-closed > ins
+      background-position: 0 0
+  .jstree-no-icons a .jstree-icon
+    display: none
+  .jstree-search
+    font-style: italic
+  .jstree-no-icons .jstree-checkbox
+    display: inline-block
+  .jstree-no-checkboxes .jstree-checkbox
+    display: none !important
+  .jstree-checked
     a
-      display: inline !important
-      color: #557383 !important
-      font-weight: bold
-      font-size: 1em
-      -moz-border-radius: 3px
-      -webkit-border-radius: 3px
-      border-radius: 3px
-      height: 20px
-      &.jstree-hovered
-        background-color: #8fc864
-        color: #FFF !important
-      ins.jstree-icon
-        background: image_url("forgeos/jstree/themes/association_categories/folder.png") -4px -4px no-repeat
-    li
-      padding-left: 15px
+      .jstree-checkbox
+        &:hover
+          background-position: 0 1px!important
+  .jstree-unchecked
+    a
+      .jstree-checkbox
+        &:hover
+          background-position: 0 1px!important
+  .jstree-undetermined
+    a
+      .jstree-checkbox
+        background: url("/assets/forgeos/jstree/themes/association_page/check-unchecked.png") no-repeat scroll left top transparent
+    background-position: -20px -19px
+  .jstree-checked > a > .jstree-checkbox:hover
+    background-position: -38px -37px
+  .jstree-unchecked > a > .jstree-checkbox:hover
+    background-position: -2px -37px
+  .jstree-undetermined > a > .jstree-checkbox:hover
+    background-position: -20px -37px
 
-
-.jstree-leaf
-  padding-left: 5px !important

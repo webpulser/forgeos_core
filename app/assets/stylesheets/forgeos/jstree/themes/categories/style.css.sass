@@ -1,77 +1,98 @@
-.jstree.jstree-categories
-  ul
-    padding: 0
-    margin: 0
+.jstree-categories
+  li, ins
+    background-color: transparent
   li
-    margin: 2px 0
-    width: auto !important
-    float: none !important
+    &.jstree-last
+      background: transparent
+  .jstree-open > ins
+    background: image_url("forgeos/jstree/themes/categories/brown-minus.png") 0px 3px no-repeat
+  .jstree-closed > ins
+    background: image_url("forgeos/jstree/themes/categories/brown-plus.png") 0 3px no-repeat
+  .jstree-leaf > ins
 
-    &.jstree-open
-      ins
-        background: image_url("forgeos/jstree/themes/categories/brown-minus.png") 0px 3px no-repeat
-    &.jstree-closed
-      ins
-        background: image_url("forgeos/jstree/themes/categories/brown-plus.png") 0 3px no-repeat
-      ul
-        display: none
-    ul li > ins.jstree-icon
+  .jstree-hovered
+    background-color: #FDD794
+    color: #F16028
+  .jstree-clicked
+    background: #FDD794
+    color: #F16028
+  a
+    color: #75491B
+    font-size: 0.8em
+    font-weight: bold
+    padding-right: 10px
+    .jstree-icon
+      margin: 0
+      background-image: image_url("forgeos/admin/big-icons-24-24-verti.png")
+      background-repeat: no-repeat
+      width: 25px
+      background-position: 0 -273px
+    &.jstree-loading .jstree-icon
       background: none
-    a
-      color: #75491B
-      font-weight: bold
-      font-size: 0.8em
-      position: relative
-      &:hover, &.hover
-        background-color: #FDD794
-        color: #F16028
+  &.jstree-focused
+    background: transparent
+  .jstree-no-dots
+    li, .jstree-leaf > ins
+      background: transparent
+    .jstree-open > ins
+      background-position: -18px 0
+    .jstree-closed > ins
+      background-position: 0 0
+  .jstree-no-icons a .jstree-icon
+    display: none
+  .jstree-search
+    font-style: italic
+  .jstree-no-icons .jstree-checkbox
+    display: inline-block
+  .jstree-no-checkboxes .jstree-checkbox
+    display: none !important
+  .jstree-checked > a > .jstree-checkbox
+    background-position: -38px -19px
+  .jstree-unchecked > a > .jstree-checkbox
+    background-position: -2px -19px
+  .jstree-undetermined > a > .jstree-checkbox
+    background-position: -20px -19px
+  .jstree-checked > a > .jstree-checkbox:hover
+    background-position: -38px -37px
+  .jstree-unchecked > a > .jstree-checkbox:hover
+    background-position: -2px -37px
+  .jstree-undetermined > a > .jstree-checkbox:hover
+    background-position: -20px -37px
 
-      &.jstree-clicked
-        background-color: #FDD794
-        color: #F16028
-
-        &:hover
-          background-color: #FDD794
-          color: #F16028
-      ins.jstree-icon
-        margin: 0
-        background-image: image_url("forgeos/admin/big-icons-24-24-verti.png")
-        background-repeat: no-repeat
-        width: 25px
-        background-position: 0 -271px
-
-      span
-        float: right
-        height: 13px
-        width: 19px
-        font-size: 0.7em
-        background:
-          image: image_url("forgeos/jstree/themes/categories/bubble-quantity-elements.png")
-          repeat: no-repeat
-          position: -1px -5px
-        text-align: center
-        color: #75491B
-        position: absolute
-        right: 5px
-        top: 5px
-        line-height: 1.4em
-        padding: 0px 5px 2px 1px
-      &.jstree-clicked
-        span
-          background-color: #FDD794
-          color: #F16028
-          padding: 0px 3px 0px 20px
-
-      &.jstree-loading
-        background: none
-
-
-.jstree-categories-context
+#vakata-contextmenu.jstree-categories-context
   width: 160px
-  background: white
   border: 0 none
   position: absolute
   border-bottom: 0
+  ul
+    padding: 0
+    border: 1px solid #979797
+    li
+      padding: 2px
+      padding-left: 5px
+      ins
+        margin-right: 5px
+      a
+        &:hover
+          background: transparent
+          color: #297EBD
+          border: 0 none
+
+      .create
+        background-image: image_url("forgeos/jstree/themes/categories/create.png")
+        background-position: -4px -2px
+      .rename
+        background-image: image_url("forgeos/jstree/themes/categories/rename.png")
+      .remove
+        background-image: image_url("forgeos/jstree/themes/categories/remove.png")
+      .image
+        background-image: image_url("forgeos/jstree/themes/categories/images.png")
+      &:hover
+        background-color: #D6EDF4
+        color: #297EBD
+        border-bottom: 1px solid #aeb0b2
+    .vakata-separator
+      padding: 0
   a
     display: block
     text-decoration: none
@@ -87,10 +108,6 @@
       line-height: 20px
       padding: 1px 0 1px 25px
       margin: 0
-    &:hover
-      background-color: #d6edf4
-      color: #2973bd
-      border-bottom: 1px solid #aeb0b2
     &.jstree-disabled
       color: silver
       opacity: 0.5
@@ -103,16 +120,6 @@
         -ms-filter: "alpha(opacity=50)"
         filter: alpha(opacity = 50)
         zoom: 1
-    ins
-      &.create
-        background-image: image_url("forgeos/jstree/themes/categories/create.png")
-        background-position: -4px -3px
-      &.rename
-        background-image: image_url("forgeos/jstree/themes/categories/rename.png")
-      &.remove
-        background-image: image_url("forgeos/jstree/themes/categories/remove.png")
-      &.image
-        background-image: image_url("forgeos/jstree/themes/categories/images.png")
     span
       margin: 0 !important
   .separator
