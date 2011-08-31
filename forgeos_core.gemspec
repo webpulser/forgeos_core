@@ -3,7 +3,7 @@ $:.push File.expand_path("../lib", __FILE__)
 require "forgeos/core/version"
 
 Gem::Specification.new do |s|
-  s.add_dependency 'rails', '>= 3.1.0.rc4'
+  s.add_dependency 'rails', '>= 3.1.0'
   s.add_dependency 'acts-as-taggable-on', '>= 2.0.6'
   s.add_dependency 'acts_as_list', '>= 0.1.3'
   s.add_dependency 'acts_as_tree', '>= 0.1.1'
@@ -27,7 +27,7 @@ Gem::Specification.new do |s|
   s.summary = 'Core of Forgeos plugins suite'
   s.description = 'Forgeos Core provide users, libraries and administration rights and roles based management'
 
-  s.authors = ['Cyril LEPAGNOT', 'Jean Charles Lefrancois']
+  s.authors = ['Cyril LEPAGNOT', 'Jean Charles Lefrancois', 'Sebastien Dumont', 'Cécile Veneziani', 'Garry Ysenbaert']
   s.email = 'dev@webpulser.com'
   s.homepage = 'http://github.com/webpulser/forgeos_core'
 
