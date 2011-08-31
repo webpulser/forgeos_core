@@ -1,14 +1,13 @@
-var z = 500;
-
-checkExternalClick = function(event) {
-  if (jQuery(event.target).parents('.activedropdown').length === 0) {
-    jQuery('.activedropdown').removeClass('activedropdown');
-    jQuery('.options').hide();
-  }
-};
-
 function InitCustomSelects() {
-  jQuery(document).mousedown(checkExternalClick);
+  var z = 500;
+
+  jQuery(document).mousedown(function(event) {
+    if (jQuery(event.target).parents('.activedropdown').length === 0) {
+      jQuery('.activedropdown').removeClass('activedropdown');
+      jQuery('.options').hide();
+    }
+  });
+
 
   jQuery('select.customize').each(function() {
     if(!jQuery(this).parent().hasClass('enhanced') && !jQuery(this).parent().hasClass('dataTables_length')) {

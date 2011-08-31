@@ -4,12 +4,12 @@
   %head
     %meta{ :content => 'text/html; charset=utf-8', 'http-equiv' => 'Content-Type' }
     %link{ :href => '/assets/forgeos/admin/favicon.gif', :rel => 'shortcut icon', :type => 'image/gif' }
-    = stylesheet_link_tag 'forgeos/960', 'forgeos/admin/login'
+    = stylesheet_link_tag 'forgeos/admin/login'
     = javascript_include_tag 'jquery'
     %title= I18n.t(:login, :scope => ['back_office', 'menu'])
   %body
     = yield
-    = javascript_include_tag 'forgeos/admin/functions/forgeos_core/notifications', 'forgeos/admin/inits/forgeos_core/clicks', :cache => 'forgeos/admin/login'
+    = javascript_include_tag 'forgeos/admin/login'
     :javascript
       window._forgeos_js_vars = {
        "locale": '#{I18n.locale}'
