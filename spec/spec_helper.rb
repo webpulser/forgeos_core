@@ -8,7 +8,7 @@ Dir[File.dirname(__FILE__) + "/spec_helpers/**/*.rb"].each {|file| require(file)
 
 Spec::Runner.configure do |config|
   config.fixture_path = "#{File.dirname(__FILE__)}/../spec/fixtures"
-  
+
   config.include ControllerHelpers::Uploader, :type => :controller
   config.include LoginHelpers, :type => :controller
   config.extend ControllerMacros, :type => :controller

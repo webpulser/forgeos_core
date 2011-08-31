@@ -1,14 +1,14 @@
 require File.expand_path(File.dirname(__FILE__) + '/../../spec_helper')
 
-describe Administrator::AdministratorsController, "GET index" do
+describe Admin::AdministratorsController, "GET index" do
   should_require_admin_login :get, :index
-  
+
   describe 'index' do
     it "should assign @admins" do
       get :index, :format => 'json'
       assigns[:admins].should_not == nil
     end
-    
+
     it "should render the index template" do
       get :index
       response.should render_template(:index)
@@ -18,7 +18,7 @@ describe Administrator::AdministratorsController, "GET index" do
   end
 end
 
-describe Administrator::AdministratorsController, "GET show" do
+describe Admin::AdministratorsController, "GET show" do
   should_require_admin_login :get, :index
 
   describe "admin admin" do
@@ -32,12 +32,12 @@ describe Administrator::AdministratorsController, "GET show" do
       Administrator.should_receive(:find_by_id).with("1")
       get :show, :id => 1
     end
-  
+
     it "should assign @admin" do
       get :show
       assigns[:admin].should == @admin
     end
-    
+
     it "should render the show template" do
       get :show
       response.should render_template("show")
@@ -56,8 +56,8 @@ describe Administrator::AdministratorsController, "GET show" do
   end
 end
 
-describe Administrator::AdministratorsController, "GET new" do
-  describe "admin admin" do 
+describe Admin::AdministratorsController, "GET new" do
+  describe "admin admin" do
     before(:each) do
       login_as_admin
       Administrator.stub!(:new).and_return @admin
@@ -67,12 +67,12 @@ describe Administrator::AdministratorsController, "GET new" do
       Administrator.should_receive(:new).and_return(@admin)
       get :new
     end
-    
+
     it "should assign @admin" do
       get :new
       assigns[:admin].should == @admin
     end
-    
+
     it "should render the new template" do
       get :new
       response.should render_template("new")
@@ -80,11 +80,11 @@ describe Administrator::AdministratorsController, "GET new" do
   end
 end
 
-describe Administrator::AdministratorsController, "GET edit" do
+describe Admin::AdministratorsController, "GET edit" do
   should_require_admin_login :get, :edit
 
   describe "admin admin" do
-  
+
     before(:each) do
       login_as_admin
       @admin = mock_model(Administrator, :save => nil)
@@ -96,12 +96,12 @@ describe Administrator::AdministratorsController, "GET edit" do
       Administrator.should_receive(:find_by_id).with("1")
       get :edit, :id => 1
     end
-    
+
     it "should assign @admin" do
       get :edit
       assigns[:admin].should == @admin
     end
-    
+
     it "should render the edit template" do
       get :edit
       response.should render_template("edit")
@@ -120,11 +120,11 @@ describe Administrator::AdministratorsController, "GET edit" do
   end
 end
 
-describe Administrator::AdministratorsController, "POST create" do
+describe Admin::AdministratorsController, "POST create" do
   should_require_admin_login :post, :create
-  
+
   describe "admin admin" do
-  
+
     before(:each) do
       login_as_admin
 
@@ -145,12 +145,12 @@ describe Administrator::AdministratorsController, "POST create" do
       Administrator.should_receive(:new).with('firstname' => 'John', 'lastname' => 'Doe', 'email' => 'john.doe@company.com', 'password' => 'johndoe', 'password_confirmation' => 'johndoe', 'role_ids' => ['1'], 'right_ids' => ['1', '2', '3']).and_return(@admin)
       post :create, :admin => {'firstname' => 'John', 'lastname' => 'Doe', 'email' => 'john.doe@company.com', 'password' => 'johndoe', 'password_confirmation' => 'johndoe', 'role_ids' => ['1'], 'right_ids' => ['1', '2', '3']}
     end
-	
+
     it "should save the admin" do
       @admin.should_receive(:save)
       post :create, :admin => {'firstname' => 'John', 'lastname' => 'Doe', 'email' => 'john.doe@company.com', 'password' => 'johndoe', 'password_confirmation' => 'johndoe', 'role_ids' => [@role.id], 'right_ids' => @rights.collect{ |right| right.id}}, :avatar => {:uploaded_data => @uploader}
     end
-    
+
     context "when the admin saves successfully" do
       before :each do
         @admin.stub!(:save).and_return true
@@ -158,16 +158,16 @@ describe Administrator::AdministratorsController, "POST create" do
       end
 
       it "should set a flash[:notice] message" do
-        post :create, :admin => {'firstname' => 'John', 'lastname' => 'Doe', 'email' => 'john.doe@company.com', 'password' => 'johndoe', 'password_confirmation' => 'johndoe', 'role_ids' => [@role.id], 'right_ids' => @rights.collect{ |right| right.id}}, :avatar => {:uploaded_data => @uploader}       
+        post :create, :admin => {'firstname' => 'John', 'lastname' => 'Doe', 'email' => 'john.doe@company.com', 'password' => 'johndoe', 'password_confirmation' => 'johndoe', 'role_ids' => [@role.id], 'right_ids' => @rights.collect{ |right| right.id}}, :avatar => {:uploaded_data => @uploader}
         flash[:notice].should_not == nil
       end
-      
+
       it "should redirect to the admins index" do
         post :create, :admin => {'firstname' => 'John', 'lastname' => 'Doe', 'email' => 'john.doe@company.com', 'password' => 'johndoe', 'password_confirmation' => 'johndoe', 'role_ids' => [@role.id], 'right_ids' => @rights.collect{ |right| right.id}}, :avatar => {:uploaded_data => @uploader}
         response.should redirect_to(admin_admins_path)
       end
     end
-    
+
     context "when the admin fails to save" do
       before(:each) do
         @admin.stub!(:save).and_return false
@@ -177,12 +177,12 @@ describe Administrator::AdministratorsController, "POST create" do
         post :create, :admin => {}
         assigns[:admin].should == @admin
       end
-      
+
       it "should put a message in flash[:error]" do
         post :create, :admin => {}
         flash[:error].should_not == nil
       end
-      
+
       it "should render the new template" do
         post :create, :admin => {}
         response.should render_template("new")
@@ -191,9 +191,9 @@ describe Administrator::AdministratorsController, "POST create" do
   end
 end
 
-describe Administrator::AdministratorsController, "PUT update" do
+describe Admin::AdministratorsController, "PUT update" do
   should_require_admin_login :put, :update
-  
+
   describe "admin admin" do
     before(:each) do
       login_as_admin
@@ -202,7 +202,7 @@ describe Administrator::AdministratorsController, "PUT update" do
       @admin.stub!(:user).and_return @user
       Administrator.stub!(:find_by_id).and_return @admin
     end
-    
+
     context "when the admin saves successfully" do
       before(:each) do
         @admin.stub!(:update_attributes).and_return true
@@ -217,12 +217,12 @@ describe Administrator::AdministratorsController, "PUT update" do
         @admin.should_receive(:update_attributes).with('firstname' => 'Bob', 'lastname' => 'Alice', 'email' => 'bob.alice@company.com', 'password' => 'bobalice', 'password_confirmation' => 'bobalice', 'role_ids' => [], 'right_ids' => []).and_return(true)
         put :update, :admin => {'firstname' => 'Bob', 'lastname' => 'Alice', 'email' => 'bob.alice@company.com', 'password' => 'bobalice', 'password_confirmation' => 'bobalice', 'role_ids' => [], 'right_ids' => []}, :avatar => {:uploaded_data => @uploader}
       end
-      
+
       it "should set a flash[:notice] message" do
         put :update, :admin => {}
         flash[:notice].should_not == nil
       end
-      
+
       it "should redirect to the admins index" do
         put :update, :admin => {}
         response.should redirect_to(admin_admins_path)
@@ -244,12 +244,12 @@ describe Administrator::AdministratorsController, "PUT update" do
         response.should redirect_to(admin_admins_path)
       end
     end
-    
+
     context "when the admin fails to save" do
       before(:each) do
         @admin.stub!(:update_attributes).and_return false
       end
-      
+
       it "should assign @admin" do
         put :update, :admin => {}
         assigns[:admin].should == @admin
@@ -259,7 +259,7 @@ describe Administrator::AdministratorsController, "PUT update" do
         put :update, :admin => {}
         flash[:error].should_not == nil
       end
-      
+
       it "should render the edit template" do
         put :update, :admin => {}
         response.should render_template("edit")
@@ -268,7 +268,7 @@ describe Administrator::AdministratorsController, "PUT update" do
   end
 end
 
-describe Administrator::AdministratorsController, "DELETE destroy" do
+describe Admin::AdministratorsController, "DELETE destroy" do
   should_require_admin_login :delete, :destroy
 
   describe "admin admin" do
@@ -277,7 +277,7 @@ describe Administrator::AdministratorsController, "DELETE destroy" do
       @admin = mock_model(Administrator, :save => nil)
       Administrator.stub!(:find_by_id).and_return @admin
     end
-    
+
     context "when the admin is successfully deleted" do
       before(:each) do
         @admin.stub!(:destroy).and_return true
@@ -292,12 +292,12 @@ describe Administrator::AdministratorsController, "DELETE destroy" do
         @admin.should_receive(:destroy)
         delete :destroy
       end
-      
+
       it "should set a flash[:notice] message" do
         delete :destroy
         flash[:notice].should_not == nil
       end
-      
+
       it "should redirect to the admins index" do
         delete :destroy
         response.should redirect_to(admin_admins_path)
@@ -319,12 +319,12 @@ describe Administrator::AdministratorsController, "DELETE destroy" do
         response.should redirect_to(admin_admins_path)
       end
     end
-    
+
     context "when the admin fails to delete" do
       before(:each) do
         @admin.stub!(:destroy).and_return false
       end
-      
+
       it "should assign @admin" do
         delete :destroy
         assigns[:admin].should == @admin
@@ -334,7 +334,7 @@ describe Administrator::AdministratorsController, "DELETE destroy" do
         delete :destroy
         flash[:error].should_not == nil
       end
-      
+
       it "should render the show template" do
         delete :destroy
         response.should redirect_to(admin_admins_path)
