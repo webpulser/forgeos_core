@@ -45,7 +45,11 @@ function init_category_tree(selector, type, source) {
     var base_url = source.replace('.json','/');
 
     jQuery(selector).bind('loaded.jstree',function(e, data){
-      jQuery(e.target).find('a').each(function(index,selector){
+      jQuery(e.target).find('li > a').each(function(index,selector){
+        set_category_droppable(selector);
+      });
+    }).bind('after_open.jstree', function(e, data){
+      jQuery(data.rslt.obj).find('li > a').each(function(index,selector){
         set_category_droppable(selector);
       });
     }).bind('create_node.jstree', function(e, data){
@@ -127,21 +131,21 @@ function init_category_tree(selector, type, source) {
       params = stringify_params_from_json(params);
 
       // construct url and redraw table
-      update_current_dataTable_source('#table',url_base + '?' + params);
+      update_current_dataTable_source(current_table, url_base + '?' + params);
 
       // add parent_id_tmp for uploads
-      var category_id = get_rails_element_id(NODE);
       if(jQuery(".parent_id_hidden").size() == 0){
-        jQuery(document.body).append('<input type="hidden" id="parent_id_tmp" name="parent_id_tmp" class="parent_id_hidden" value="'+category_id+'" />');
+        jQuery(document.body).append('<input type="hidden" id="parent_id_tmp" name="parent_id_tmp" class="parent_id_hidden" value="'+cat_id+'" />');
       } else {
-        jQuery('#parent_id_tmp').val(category_id);
+        jQuery('#parent_id_tmp').val(cat_id);
       }
       jQuery('#category_sort').show();
 
       return true;
 
-    }).bind('deselect_node.jstree', function(e, data) {
+    }).bind('deselect_node.jstree, deselect_all.jstree', function(e, data) {
       jQuery('#category_sort').hide();
+
       return true;
     }).jstree({
       "json_data":{
@@ -260,12 +264,11 @@ function select_all_elements_without_category(tree_id) {
 
   // unselect current selected node
   if (t) {
-    t.deselect_branch(t.selected);
-    t.selected = null;
+    t.deselect_all();
   }
 
   // remove category from dataTables ajax source and redraw the table
-  var current_table = oTable;
+  var current_table = jQuery('#table').dataTableInstance();
   var url = current_table.fnSettings().sAjaxSource;
   var url_base = url.split('?')[0];
   var params;
@@ -276,8 +279,9 @@ function select_all_elements_without_category(tree_id) {
   params = stringify_params_from_json(params);
 
   // construct url and redraw table
-  update_current_dataTable_source('#'+oTable.sInstance,url_base + '?' + params);
+  update_current_dataTable_source(current_table, url_base + '?' + params);
   jQuery('#parent_id_tmp').remove();
+
   return true;
 }
 

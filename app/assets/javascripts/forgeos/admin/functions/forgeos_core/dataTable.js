@@ -169,7 +169,8 @@ function DataTablesDrawCallBack(table) {
 
 // set id to each row and set it draggable
 function DataTablesRowCallBack(nRow, aData, iDisplayIndex){
-  var table = jQuery(this);
+  var table = jQuery('#' + this.sInstance);
+  if (typeof(table) == 'undefined') { table = jQuery(this); }
   var div = jQuery(nRow).find(":regex(id,.+_\\d+)");
 
   if (div.length != 0) {
@@ -226,7 +227,7 @@ function DataTablesRowCallBack(nRow, aData, iDisplayIndex){
 }
 
 function update_current_dataTable_source(selector,source){
-  var current_table = jQuery(selector).dataTableInstance() ;
+  var current_table = jQuery(selector).dataTableInstance();
   current_table.fnSettings().sAjaxSource = source;
   current_table.fnDraw();
 }

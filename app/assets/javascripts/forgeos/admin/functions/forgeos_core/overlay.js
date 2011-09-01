@@ -29,19 +29,19 @@ function toggleSelectedOverlay(element){
 }
 
 function add_picture_to_category(data){
-  var cat_id = get_rails_element_id($('.add-image.current'));
+  var category = jQuery('.add-image.current');
   jQuery.ajax({
     "success": function(result){
-      jQuery.jstree._focused().refresh();
       jQuery('#imageLeftSidebarSelectDialog').dialog('close');
+      category.removeClass('add-image').removeClass('current');
+      jQuery.jstree._focused().refresh(category.parents('li:first'));
     },
-    "error": function(){},
     "data":  {
       "category[attachment_ids][]": data.id,
       "authenticity_token": window._forgeos_js_vars.token
     },
     "dataType": 'json',
     "type": 'put',
-    "url": '/admin/categories/'+ cat_id +'.json',
+    "url": '/admin/categories/'+ get_rails_element_id(category) +'.json',
   });
 }
