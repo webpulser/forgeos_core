@@ -14,7 +14,7 @@ Gem::Specification.new do |s|
   s.add_dependency 'sass', '>= 3.1.4'
   s.add_dependency 'mime-types', '>= 1.16'
   s.add_dependency 'thinking-sphinx', '>= 2.0.5'
-  s.add_dependency 'webpulser-habtm_list', '>= 0.1.2'
+  s.add_dependency 'webpulser-habtm_list', '~> 0.1.3'
   s.add_dependency 'will_paginate', '~> 3.0.pre4'
   s.add_dependency 'authlogic', '>= 3.0.3'
   s.add_dependency 'squeel', '>= 0.8.7'

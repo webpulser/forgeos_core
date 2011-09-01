@@ -99,7 +99,7 @@ jQuery.fn.dataSlideExt.oApi.fnGetSelectedIndexes= function(){
 }
 
 jQuery.fn.extend({
-  dataTableInstance : function(){
+  "dataTableInstance": function(){
     var element = this;
     oTable = undefined;
     jQuery(oTables).each(function(){
@@ -109,7 +109,7 @@ jQuery.fn.extend({
     });
     return oTable;
   },
-  select: function(){
+  "select": function(){
     jQuery(this).addClass('row_selected');
     var checkbox = jQuery(this).find('input[type=checkbox]');
     checkbox.attr('checked',1);
@@ -119,7 +119,7 @@ jQuery.fn.extend({
     var index = jQuery(this).attr('id');
     datable_datas.push(index);
   },
-  unselect: function(){
+  "unselect": function(){
     jQuery(this).removeClass('row_selected');
     var checkbox = jQuery(this).find('input[type=checkbox]');
     checkbox.attr('checked',0);
@@ -130,7 +130,7 @@ jQuery.fn.extend({
     var index_in_table = jQuery.inArray(index, datable_datas);
     datable_datas.splice(index_in_table,1);
   },
-  toggleselect: function(){
+  "toggleselect": function(){
     if (jQuery(this).hasClass('row_selected')) {
       jQuery(this).unselect();
     } else {
@@ -169,7 +169,7 @@ function DataTablesDrawCallBack(table) {
 
 // set id to each row and set it draggable
 function DataTablesRowCallBack(nRow, aData, iDisplayIndex){
-  var table = jQuery('#'+this.sInstance);
+  var table = jQuery(this);
   var div = jQuery(nRow).find(":regex(id,.+_\\d+)");
 
   if (div.length != 0) {
@@ -232,7 +232,6 @@ function update_current_dataTable_source(selector,source){
 }
 
 function hide_paginate(dataTables){
-  console.info(dataTables);
   var pagination = jQuery(dataTables.nPaginateList).parents(':first');
   var pages_number = dataTables.nPaginateList.children.length;
   (pages_number>1) ? pagination.show() : pagination.hide();

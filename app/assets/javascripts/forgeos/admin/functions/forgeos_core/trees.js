@@ -15,12 +15,7 @@ function duplicate_category(node, type, parent_id, base_url){
       var jnode = jQuery(node);
       jnode.attr('id', 'category_' + cat_id);
       children.each(function(){ duplicate_category(jQuery(this), type, cat_id, base_url); });
-
-      jnode_link = jnode.children('a');
-      jnode_link.attr('id', 'link_category_' + cat_id);
-      jnode_link.children('span').attr('id', 'span_category_' + cat_id);
-
-      set_category_droppable(jnode_link, type);
+      set_category_droppable(jnode.children('a'), type);
     },
     "data": get_category_data(name, type, parent_id),
     "dataType": 'text',
@@ -51,7 +46,7 @@ function init_category_tree(selector, type, source) {
 
     jQuery(selector).bind('loaded.jstree',function(e, data){
       jQuery(e.target).find('a').each(function(index,selector){
-        set_category_droppable(jQuery(selector));
+        set_category_droppable(selector);
       });
     }).bind('create_node.jstree', function(e, data){
 
@@ -62,7 +57,6 @@ function init_category_tree(selector, type, source) {
         "complete": function(request){
           var cat_id = request.responseText;
           jnode.attr('id', 'category_' + cat_id);
-          jnode.children('a').attr('id', 'link_category_' + cat_id);
           set_category_droppable(jnode.children('a'), type);
 
           if( jQuery(".parent_id_hidden").size() == 0){
@@ -301,20 +295,22 @@ function extract_category_name(node) {
 }
 
 // on drop, the dropped element is added to the selected category
-function set_category_droppable(category, type) {
-  jQuery(category).droppable({
+function set_category_droppable(selector, type) {
+  var category = jQuery(selector);
+  category.droppable({
     "hoverClass": 'ui-state-hover',
     "drop": function(ev, ui){
+      var droppable = jQuery(this);
       jQuery.ajax({
         "data": {
           "element_id": get_rails_element_id(jQuery(ui.draggable)),
           "authenticity_token": encodeURIComponent(window._forgeos_js_vars.token)
         },
         "success": function(request){
-          jQuery(category).attr('title', request);
+          droppable.effect('highlight', {}, 1000);
         },
         "type": 'post',
-        "url": '/admin/categories/' + category_id + '/add_element'
+        "url": '/admin/categories/' + get_rails_element_id(category.parent()) + '/add_element'
       })
     }
   });
