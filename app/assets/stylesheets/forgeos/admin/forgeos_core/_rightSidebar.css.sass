@@ -23,7 +23,7 @@
   .text
     background-color: $white
     border: 1px solid $contentHeaderBorder
-    +borderCorner
+    +border-radius(4px)
     height: 130px
     padding: 5px
     margin-left: -5px
@@ -63,7 +63,7 @@
       display: inline-block !important
       background-color: $white
       border: 1px solid $white
-      -moz-border-radius: 5px
+      +border-radius(5px)
       color: $greenBlue
       padding: 0px 5px
       margin: 2px 0px
@@ -71,7 +71,7 @@
       padding: 5px
       position: relative
       +left
-      +borderCorner(3px, 3px, 3px, 3px)
+      +border-radius(3px)
       background-color: $white
       margin 2px
   .status p
@@ -97,7 +97,7 @@
     .tags
       background-color: $white
       border: 1px solid $contentHeaderBorder
-      +borderCorner
+      +border-radius(4px)
       a
         background-color: $contentHeaderBorder
         color: $black
@@ -156,7 +156,7 @@
           color: white
         padding: 0
         border: 0
-        +borderCorner(0, 0, 0, 0)
+        +border-radius(0px)
         margin: 0
         span
           display: block
@@ -164,7 +164,7 @@
           float: none !important
           margin: 0
           padding: 5px
-          +borderCorner(0, 0, 0, 0)
+          +border-radius(0px)
           &:hover
             color: white !important
             background:

@@ -91,7 +91,7 @@ li
   margin: 3px 0 0 20px
   text-align: center
   border: 1px solid $contentHeaderBorder
-  +borderCorner(3px,3px,3px,3px)
+  +border-radius(3px)
   +left
   padding: 3px 5px 0 5px
   font-size: 0.8em
@@ -101,7 +101,7 @@ li
   cursor: pointer
 
 .button
-  +borderCorner(2px,2px,2px,2px)
+  +border-radius(2px)
   background-color: #eaebec
   background-position: 0 -10px
   border: 1px solid $contentHeaderBorder
@@ -158,10 +158,10 @@ li
   background: $lightOrangeBg
   padding: 0
   border: 0 !important
-  +borderCorner(0, 0, 0, 0)
-
+  +border-radius(0px)
+  
 .ui-tabs-nav.ui-helper-reset.ui-helper-clearfix.ui-widget-header.ui-corner-all
-  +borderCorner(0, 0, 0, 0)
+  +border-radius(0px)
 
 #wrap
   background-color: $white !important
@@ -177,7 +177,7 @@ li
   padding: 5px 10px
   font-weight: normal
   display: inline-block
-  +borderCorner
+  +border-radius(4px)
   a
     color: $blueLink
     text-decoration: underline
@@ -193,7 +193,7 @@ h2.description
 
 .fieldset
   border: 3px solid $lightLightGray
-  +borderCorner(8px, 8px, 8px, 8px)
+  +border-radius(8px)
   position: relative
   margin: 20px 0
   clear: both
@@ -222,7 +222,7 @@ h2.description
       display: inline
   input
     border: 1px solid $darkGray
-    +borderCorner(3px,3px,3px,3px)
+    +border-radius(3px)
     background:
       position: 0 -600px
       image: image_url("forgeos/admin/backgrounds-verti.png")
@@ -250,7 +250,7 @@ input.center
   position: relative
   border: 1px solid #e0e0e0
   margin: 5px 0px
-  +borderCorner
+  +border-radius(4px)
   background: white
   .edit-link
     position: absolute
@@ -271,7 +271,7 @@ input.center
 form#wrap
   .field
     width: 200px
-    +borderCorner(3px,3px,3px,3px)
+    +border-radius(3px)
     background-position: 0 -595px
     border: 1px solid $contentHeaderBorder
 .disabled
@@ -386,7 +386,7 @@ form#wrap
     margin-left: 15px
   input
     border: 1px solid $contentHeaderBorder
-    +borderCorner
+    +border-radius(4px)
     width: 80px
     text-align: center
     color: $lightGray
@@ -407,12 +407,12 @@ form#wrap
   margin: 20px 0
   input
     border: 1px solid $lightGray
-    +borderCorner
+    +border-radius(4px)
     padding: 3px
 
 .legend textarea
   border: 1px solid #a3a3a3
-  +borderCorner
+  +border-radius(4px)
   padding: 3px
 
 .choices
