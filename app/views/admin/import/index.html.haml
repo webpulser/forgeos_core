@@ -7,18 +7,15 @@
   #content.grid_16.alpha.omega
     .grid_12.alpha
       .inner-content
-        - if @sets = ImportSet.all
-          - unless @sets.empty?
-            = label_tag :set_id, t(:import_set, :count => 1)
-            %div= select_tag :set_id, options_from_collection_for_select([ImportSet.new(:name => 'Please select')]+@sets, :id, :name)
-            .clear
+        - if ImportSet.count > 0
+          = label_tag :set_id, t(:import_set, :count => 1)
+          = select_tag :set_id, options_from_collection_for_select([ImportSet.new(:name => 'Please select')]+ ImportSet.all, :id, :name)
+          %br
         = label :import, :model, t('import.model')
-        %div
-          = select :import, :model, options_for_select(@models.sort.map{|model| [t(model,:count => 2),model] }), { :prompt => true }, :onchange => "jQuery('#import_form').attr('action', 'import/create_'+this.value)"
-        .clear
+        = select :import, :model, options_for_select(@models.sort.map{|model| [t(model,:count => 2),model] }), { :prompt => true }
+        %br
         = label_tag :file, t('import.file')
-        %div
-          = file_field_tag :file
+        = file_field_tag :file
     #right-sidebar.grid_4.omega
       .step
         = label :parser_options, :col_sep, t('import_set.col_sep')
@@ -26,4 +23,3 @@
         %br
         = label :parser_options, :quote_char, t('import_set.quote_char')
         = text_field :parser_options, :quote_char, :value => '"', :size => 2
-= javascript_tag "jQuery('#import_form').attr('action', 'import/create_'+jQuery('#import_model').val())"

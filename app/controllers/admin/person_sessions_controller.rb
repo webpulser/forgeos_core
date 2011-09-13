@@ -27,7 +27,7 @@ class Admin::PersonSessionsController < Admin::BaseController
     if user
       generated_password = generate_password(8)
       if user.update_attributes(:password => generated_password, :password_confirmation => generated_password)
-        UserNotifier.deliver_reset_password(user,generated_password)
+        UserNotifier.delay.reset_password(user,generated_password)
         flash[:notice] = t('admin.reset_password.success').capitalize
       else
         flash[:error] = t('admin.reset_password.failed').capitalize

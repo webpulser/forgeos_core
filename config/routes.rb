@@ -15,7 +15,9 @@ Forgeos::Core::Engine.routes.draw do
     match '/notifications' => 'base#notifications', :as => :notifications
     match '/statistics' => 'statistics#index', :as => :statistics
     match '/statistics/graph' => 'statistics#graph', :as => :statistics_graph
+
     match '/import' => 'import#index', :as => :import
+    match '/import/create_user' => 'import#create_user', :as => :import_create_user
 
     resources :cachings
     resource :person_session do

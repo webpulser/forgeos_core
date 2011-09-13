@@ -1,4 +1,4 @@
-- form_tag nil, :id => 'map_fields_form', :method => :post do
+= form_tag request.url, :id => 'map_fields_form', :method => :post do
   .backgrounds.big-header
     = text_field_tag :set_name,(@set ? @set.name : ''), :class => 'field_name'
     = hidden_field_tag :set_id, @set.id if @set

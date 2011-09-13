@@ -11,6 +11,7 @@ require 'webpulser-habtm_list'
 require 'will_paginate'
 require 'authlogic'
 require 'squeel'
+require 'delayed_job'
 
 module Forgeos
   module Core

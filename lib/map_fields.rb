@@ -42,7 +42,10 @@ module MapFields
 
         file_field = params[options[:file_field]]
 
-        temp_path = File.join(Dir::tmpdir, "map_fields_#{Time.now.to_i}_#{$$}")
+        temp_dir = Rails.root.join('tmp', 'imports')
+        temp_path = File.join(temp_dir, "map_fields_#{Time.now.to_i}_#{$$}")
+
+        Dir.mkdir(temp_dir) unless File.exists?(temp_dir)
         File.open(temp_path, 'wb') do |f|
           f.write file_field.read
         end
@@ -99,9 +102,9 @@ module MapFields
 
     def map_fields_cleanup
       if @mapped_fields
-        if session[:map_fields][:file]
-          File.delete(session[:map_fields][:file])
-        end
+        #if session[:map_fields][:file]
+        #  File.delete(session[:map_fields][:file])
+        #end
         session[:map_fields] = nil
         @mapped_fields = nil
         @map_fields_error = nil
@@ -110,6 +113,8 @@ module MapFields
   end
 
   class MappedFields
+    attr_reader :file, :mapping
+
     def initialize(file, mapping, ignore_first_row, parser_options)
       @file = file
       @parser_options = parser_options
@@ -139,6 +144,10 @@ module MapFields
       @size = CsvParser.read(@file,@parser_options).size
       @size -= 1 if @ignore_first_row
       return @size
+    end
+
+    def close
+      File.delete(@file) if File.exists?(@file)
     end
   end
 
@@ -182,6 +191,50 @@ module MapFields
       result.each do |arr|
         yield arr[0], arr[1]
       end
+    end
+  end
+
+  class Runner
+    def import(fields, methods, email, klass_name, uniq_field, &block)
+      klass = klass_name.constantize
+      created = 0
+      updated = 0
+      errors = []
+      total = fields.size
+      fields.each do |row|
+        attributes = ActiveSupport::OrderedHash.new
+
+        methods.each_with_index do |attribute,i|
+          exist = fields.mapping.values.include?((i+1).to_s)
+          attributes[attribute.to_sym] = row[i] if exist
+        end
+
+        if block_given?
+          attributes = yield(attributes) || {}
+        end
+
+        uniq_field_index = methods.index(uniq_field)
+
+        if uniq_field != nil && row[uniq_field_index] != nil && object = klass.send("find_by_#{uniq_field}",row[uniq_field_index])
+          if object.update_attributes(attributes)
+            updated+=1
+          else
+            errors << object.errors
+          end
+        else
+          object = klass.new(attributes)
+          if object.save
+            created+=1
+          else
+            errors << object.errors
+          end
+        end
+      end
+
+      fields.close
+      UserNotifier.import_finished(email, { :created => created, :total => total, :updated => updated, :errors => errors }).deliver
+      rescue StandardError => error
+        UserNotifier.import_finished(email, { :created => created, :total => total, :updated => updated, :errors => [error]}).deliver
     end
   end
 end
