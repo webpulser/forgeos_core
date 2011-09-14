@@ -195,7 +195,7 @@ module MapFields
   end
 
   class Runner
-    def import(fields, methods, email, klass_name, uniq_field, &block)
+    def import(fields, methods, email, klass_name, uniq_field, modify_attributes_method)
       klass = klass_name.constantize
       created = 0
       updated = 0
@@ -205,12 +205,12 @@ module MapFields
         attributes = ActiveSupport::OrderedHash.new
 
         methods.each_with_index do |attribute,i|
-          exist = fields.mapping.values.include?((i+1).to_s)
+          exist = fields.mapping.keys.include?(i)
           attributes[attribute.to_sym] = row[i] if exist
         end
 
-        if block_given?
-          attributes = yield(attributes) || {}
+        if modify_attributes_method.present? and klass.respond_to?(modify_attributes_method)
+          attributes = klass.send(modify_attributes_method, attributes) || {}
         end
 
         uniq_field_index = methods.index(uniq_field)
@@ -236,5 +236,6 @@ module MapFields
       rescue StandardError => error
         UserNotifier.import_finished(email, { :created => created, :total => total, :updated => updated, :errors => [error]}).deliver
     end
+    handle_asynchronously :import
   end
 end

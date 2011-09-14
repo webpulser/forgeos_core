@@ -17,11 +17,18 @@ class Admin::ImportController < Admin::BaseController
     @models = ['user']
   end
 
-  def create_model(klass, uniq_field = nil, &block)
+  def create_model(klass, uniq_field = nil, modify_attributes_method = :modify_import_attributes)
     if fields_mapped?
       runner = MapFields::Runner.new
-      runner.delay.import(mapped_fields, self.class.read_inheritable_attribute("map_fields_fields_#{params[:action]}"), current_user.email, klass.to_s, uniq_field, &block)
-      flash[:notice] = "Un email vous sera envoyé lorsque l'import sera finie"
+      runner.import(
+        mapped_fields,
+        self.class.read_inheritable_attribute("map_fields_fields_#{params[:action]}"),
+        current_user.email,
+        klass.to_s,
+        uniq_field,
+        modify_attributes_method
+      )
+      flash[:notice] = "Un email vous sera envoyé lorsque l'import sera fini"
       redirect_to([forgeos_core, :admin, :import])
     else
       render(:action => 'create')
