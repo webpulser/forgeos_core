@@ -6,7 +6,7 @@ class Category < ActiveRecord::Base
   #validates_presence_of :name
 
   validates_each :parent_id do |record, attr, value|
-    record.errors.add(attr, 'Can\'t be his self parent') if record.id == value
+    record.errors.add(attr, 'Can\'t be his self parent') if value and record.id == value
   end
 
   # Returns the level of <i>Category</i>
