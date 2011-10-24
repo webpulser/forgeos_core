@@ -2,3 +2,4 @@ test:
   adapter: sqlite3
   database: ":memory:"
   timeout: 500
+  verbosity: quiet
