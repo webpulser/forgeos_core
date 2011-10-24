@@ -29,3 +29,15 @@ disabled:
   time_zone: UTC
   email: jimi.hendrix@forgeos.com
   active: false
+
+user:
+  crypted_password: $2a$10$NOOEOfWmHe1tLDxWUTL8wuAtS0h1Xd59h0G6UVc1OEwUBCDJnhZdm
+  password_salt: bRtKB8d7XyTHghCsLBJm
+  firstname: John
+  lastname: Doe
+  lang: en
+  time_zone: UTC
+  email: john.doe@forgeos.com
+  active: true
+  type: User
+  birthday: <%= Date.today.to_formatted_s(:db) %>

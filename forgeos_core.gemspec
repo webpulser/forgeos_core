@@ -20,7 +20,6 @@ Gem::Specification.new do |s|
   s.add_dependency 'squeel', '>= 0.8.7'
   s.add_dependency 'compass', '0.11.4'
   s.add_dependency 'delayed_job', '2.1.4'
-  s.add_dependency 'sqlite3', '1.3.4'
 
   s.name = 'forgeos_core'
   s.version = Forgeos::Core::VERSION
