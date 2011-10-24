@@ -1,4 +1,4 @@
-postgres:
+test:
   adapter: postgresql
   database: forgeos_core_test
   username: postgres
