@@ -10,7 +10,6 @@ Rails.backtrace_cleaner.remove_silencers!
 # Load support files
 Dir["#{File.dirname(__FILE__)}/support/**/*.rb"].each { |f| require f }
 
-ActiveRecord::Migrator.migrate 'up'
 ActiveSupport::TestCase.use_transactional_fixtures = true
 ActiveSupport::TestCase.use_instantiated_fixtures  = false
 ActiveSupport::TestCase.fixture_path = (File.expand_path("../fixtures",  __FILE__))

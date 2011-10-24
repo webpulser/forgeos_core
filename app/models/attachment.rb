@@ -31,8 +31,8 @@ class Attachment < ActiveRecord::Base
   end
 
   def self.options_for(target = class_name)
-    return {} if Setting.current.nil?
-    (Setting.current.attachments[target] || {}).symbolize_keys
+    return {}# unless ActiveRecord::Base.connection.tables.include?(Setting.table_name) or Setting.current
+    #(Setting.current.attachments[target] || {}).symbolize_keys
   end
 
   define_index do
