@@ -14,17 +14,11 @@ class Attachment < ActiveRecord::Base
       :include => :attachment_links,
       :conditions => {
         :attachment_links => {
-        :element_type => element_type.to_s.classify
-      }
+          :element_type => element_type.to_s.classify
+        }
       }
     }
   }
-
-  define_index do
-    indexes filename, :sortable => true
-    indexes content_type, :sortable => true
-    indexes size, :sortable => true
-  end
 
   def file_type
     content_type.split('/').last
@@ -36,9 +30,13 @@ class Attachment < ActiveRecord::Base
     end
   end
 
-  private
-
   def self.options_for(target = class_name)
     (Setting.current.attachments[target] || {}).symbolize_keys
+  end
+
+  define_index do
+    indexes filename, :sortable => true
+    indexes content_type, :sortable => true
+    indexes size, :sortable => true
   end
 end

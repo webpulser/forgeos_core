@@ -6,13 +6,9 @@ module SortableAttachments
   module ClassMethods
     def has_and_belongs_to_many_attachments(options = {})
       has_many :attachment_links, :as => :element, :order => :position
-      has_many :attachments, { :through => :attachment_links, :class_name => 'Attachment', :order => :position }.merge(options)
-      has_many :pictures, :through => :attachment_links, :class_name => 'Picture', :source => :attachment, :order => :position
-      has_many :docs, :through => :attachment_links, :class_name => 'Doc', :source => :attachment, :order => :position
-      has_many :videos, :through => :attachment_links, :class_name => 'Video', :source => :attachment, :order => :position
-      has_many :pdfs, :through => :attachment_links, :class_name => 'Pdf', :source => :attachment, :order => :position
-      has_many :audios, :through => :attachment_links, :class_name => 'Audio', :source => :attachment, :order => :position
-      has_many :medias, :through => :attachment_links, :class_name => 'Media', :source => :attachment, :order => :position
+      %w(Attachment Picture Doc Video Pdf Audio Media).each do |klass|
+        has_many klass.underscore.pluralize, { :through => :attachment_links, :class_name => klass, :source => :attachment, :order => 'attachment_links.position' }.merge(options)
+      end
 
       unless self.instance_methods.include?('attachment_ids_with_position=')
         include SortableAttachments::InstanceMethods
