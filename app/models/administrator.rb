@@ -10,6 +10,6 @@ class Administrator < Person
     :association_foreign_key => 'category_id'
 
   def access_path?(controller,action)
-    rights.find_by_controller_name_and_action_name(controller,action)
+    rights.find_by_controller_name_and_action_name(controller,action).present?
   end
 end

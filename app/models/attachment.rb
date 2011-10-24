@@ -31,6 +31,7 @@ class Attachment < ActiveRecord::Base
   end
 
   def self.options_for(target = class_name)
+    return {} if Setting.current.nil?
     (Setting.current.attachments[target] || {}).symbolize_keys
   end
 
