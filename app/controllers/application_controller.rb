@@ -3,14 +3,15 @@ class ApplicationController < ActionController::Base
   helper_method :current_user_session, :current_user
 
   before_filter :set_locale, :set_time_zone
-  after_filter :discard_flash_if_xhr, :log_visit
+  after_filter :keep_flash, :log_visit
 
   def notifications
-    @notifications = {}
-    [:error, :notice, :warning].each do |key|
-      @notifications[key] = flash[key] unless flash[key].blank?
-    end
-    render :json => @notifications.to_json
+    render :json => {
+      :notice => notice,
+      :alert => alert,
+      :error => flash[:error],
+      :warning => flash[:warning]
+    }
   end
 
   private
@@ -79,7 +80,11 @@ class ApplicationController < ActionController::Base
     end
   end
 
-  def discard_flash_if_xhr
-    flash.discard if request.xhr?
+  def keep_flash
+    if action_name != 'notifications'
+      flash.keep(:notice)
+      flash.keep(:error)
+      flash.keep(:warning)
+    end
   end
 end
