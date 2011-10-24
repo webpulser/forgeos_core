@@ -11,7 +11,7 @@ Gem::Specification.new do |s|
   s.add_dependency 'fastercsv', '>= 1.5.4'
   s.add_dependency 'globalize3', '>= 0.1.0'
   s.add_dependency 'haml', '>= 3.1.2'
-  s.add_dependency 'sass', '>= 3.1.4'
+  s.add_dependency 'sass-rails', '>= 3.1.4'
   s.add_dependency 'mime-types', '>= 1.16'
   s.add_dependency 'thinking-sphinx', '>= 2.0.5'
   s.add_dependency 'webpulser-habtm_list', '~> 0.1.3'
@@ -20,6 +20,7 @@ Gem::Specification.new do |s|
   s.add_dependency 'squeel', '>= 0.8.7'
   s.add_dependency 'compass', '0.11.4'
   s.add_dependency 'delayed_job', '2.1.4'
+  s.add_dependency 'sqlite3', '1.3.4'
 
   s.name = 'forgeos_core'
   s.version = Forgeos::Core::VERSION

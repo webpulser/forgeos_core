@@ -1,0 +1,11 @@
+administrator:
+  crypted_password: $2a$10$NOOEOfWmHe1tLDxWUTL8wuAtS0h1Xd59h0G6UVc1OEwUBCDJnhZdm
+  role_id: 1
+  password_salt: bRtKB8d7XyTHghCsLBJm
+  lastname: admin
+  firstname: admin
+  lang: en
+  time_zone: UTC
+  email: admin@forgeos.com
+  type: Administrator
+  active: true
