@@ -4,10 +4,11 @@ module ApplicationHelper
     current_user
   end
 
-  def build_menu(menu = Forgeos::Menu,options = { :menu => :menu}, html_options = {})
+  def build_menu(menu = {}, options = { :menu => :menu}, html_options = {})
     menu_name = options.delete(:menu)
-    menu.each do |tab|
-      content_for menu_name, menu_item(tab.dup)
+    menu.each do |k, v|
+      v[:title] ||= k
+      content_for menu_name, menu_item(v.dup)
     end
   end
 
@@ -16,8 +17,8 @@ module ApplicationHelper
   end
 
   def menu_item(tab)
-    html_options = tab[:html] ? tab[:html].dup : {}
-    tab_name = (tab.delete(:i18n) ? I18n.t(*tab[:title]) : tab[:title])
+    html_options = tab[:html] || {}
+    tab_name = I18n.t(tab[:title], :scope => [:back_office, :menu])
     html_options[:class] = '' unless html_options[:class]
     urls = tab.delete(:url)
 

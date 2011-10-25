@@ -1,10 +1,5 @@
-require 'forgeos'
 require 'forgeos/core/engine'
-
-module Forgeos
-  module Core
-  end
-end
+require 'forgeos'
 
 require File.join(File.dirname(__FILE__), '..', 'sphinx_globalize')
 require File.join(File.dirname(__FILE__), '..', 'sortable_attachments')

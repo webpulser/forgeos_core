@@ -24,66 +24,6 @@ module Forgeos
     url.squeeze(sep).gsub(/(^#{sep}+|#{sep}+$)/,'').downcase
   end
 
-  AdminMenu = [
-    { :title => 'back_office.menu.dashboard',
-      :url => '/admin/dashboard',
-      :i18n => true,
-      :html => { :class => 'left first'}
-    },
-    { :title => 'back_office.menu.users',
-      :url => '/admin/users',
-      :i18n => true,
-      :html => { :class => 'left'}
-    },
-    { :title => 'back_office.menu.statistics',
-      :url => '/admin/statistics',
-      :i18n => true,
-      :html => { :class => 'right' }
-    }
-  ]
-
-  AdminSubMenu = [
-    { :title => 'back_office.menu.administration',
-      :i18n => true,
-      :url => [
-        '/admin/administrators',
-        '/admin/roles',
-        '/admin/rights'
-      ],
-      :html => { :class => 'left first'}
-    },
-    { :title => 'back_office.menu.settings',
-      :i18n => true,
-      :url => '/admin/setting',
-      :html => { :class => 'left' }
-    },
-    { :title => 'back_office.menu.library',
-      :i18n => true,
-      :url => [
-        '/admin/library',
-        '/admin/images/attachments',
-        '/admin/pdf/attachments',
-        '/admin/audio/attachments',
-        '/admin/video/attachments',
-        '/admin/media/attachments',
-        '/admin/doc/attachments'
-      ],
-      :html => { :class => 'left' }
-    },
-    { :title => 'back_office.menu.accounts',
-      :i18n => true,
-      :url => '/admin/account',
-      :html => { :class => 'left' }
-    },
-    { :title => 'back_office.menu.logout',
-      :i18n => true,
-      :url => '/admin/logout',
-      :html => { :class => 'right' }
-    },
-    { :title => 'back_office.menu.support',
-      :i18n => true,
-      :url => 'http://www.webpulser.com',
-      :html => { :class => 'right first' }
-    }
-  ]
+  AdminMenu = []
+  AdminSubMenu = []
 end

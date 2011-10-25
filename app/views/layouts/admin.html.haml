@@ -12,10 +12,10 @@
     #container.container_16
       .grid_16
         %ul#submenu.backgrounds
-          - build_menu(Forgeos::AdminSubMenu, :menu => :submenu)
+          - build_menu(Forgeos::MENU_HASH[:forgeos][:admin][:submenu], :menu => :submenu)
           = yield :submenu
         %ul#menu.backgrounds
-          - build_menu(Forgeos::AdminMenu)
+          - build_menu(Forgeos::MENU_HASH[:forgeos][:admin][:menu])
           = yield :menu
         .backgrounds.menu-bottom
         #notifications.grid_16

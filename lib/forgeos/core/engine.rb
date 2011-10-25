@@ -18,6 +18,7 @@ module Forgeos
     class Engine < Rails::Engine
       paths["config/locales"] << 'config/locales/**'
       paths["app/assets"] << 'vendor/assets'
+      paths["forgeos_admin_menu"] = 'config/forgeos_admin_menu.yml'
     end
   end
 end
