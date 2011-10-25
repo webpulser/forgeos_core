@@ -22,6 +22,12 @@ forgeos:
           - /admin/rights
         html:
           class: left first
+        children:
+          administrators: /admin/administrators
+          roles: /admin/roles
+          rights: /admin/rights
+          import: /admin/import
+          cachings: /admin/cachings
       settings:
         url: /admin/setting
         html:
