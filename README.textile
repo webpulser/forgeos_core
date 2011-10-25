@@ -1,4 +1,5 @@
 h1. Introduction
+"!https://secure.travis-ci.org/webpulser/forgeos_core.png!":http://travis-ci.org/webpulser/forgeos_core
 
 ForgeosCore is the core of Forgeos project "http://www.forgeos.com":http://www.forgeos.com
 
