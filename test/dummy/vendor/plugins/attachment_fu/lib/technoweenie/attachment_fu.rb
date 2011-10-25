@@ -1,3 +1,4 @@
+IS_RAILS_3 = Rails::VERSION::MAJOR >= 3
 module Technoweenie # :nodoc:
   module AttachmentFu # :nodoc:
     @@default_processors = %w(ImageScience Rmagick MiniMagick Gd2 CoreImage)
@@ -177,7 +178,11 @@ module Technoweenie # :nodoc:
       end
 
       def self.extended(base)
-        base.class_inheritable_accessor :attachment_options
+        if IS_RAILS_3
+          base.class_attribute :attachment_options
+        else
+          base.class_inheritable_accessor :attachment_options
+        end
         base.before_destroy :destroy_thumbnails
         base.before_validation :set_size_from_temp_path
         base.after_save :after_process_attachment
@@ -198,7 +203,11 @@ module Technoweenie # :nodoc:
         #     end
         #   end
         def after_resize(&block)
-          write_inheritable_array(:after_resize, [block])
+          if IS_RAILS_3
+            self.after_resize = [block]
+          else
+            write_inheritable_array(:after_resize, [block])
+          end
         end
 
         # Callback after an attachment has been saved either to the file system or the DB.
@@ -211,7 +220,11 @@ module Technoweenie # :nodoc:
         #     end
         #   end
         def after_attachment_saved(&block)
-          write_inheritable_array(:after_attachment_saved, [block])
+          if IS_RAILS_3
+            self.after_attachment_saved = [block]
+          else
+            write_inheritable_array(:after_attachment_saved, [block])
+          end
         end
 
         # Callback before a thumbnail is saved.  Use this to pass any necessary extra attributes that may be required.
@@ -224,7 +237,11 @@ module Technoweenie # :nodoc:
         #     end
         #   end
         def before_thumbnail_saved(&block)
-          write_inheritable_array(:before_thumbnail_saved, [block])
+          if IS_RAILS_3
+            self.before_thumbnail_saved = [block]
+          else
+            write_inheritable_array(:before_thumbnail_saved, [block])
+          end
         end
       end
 
