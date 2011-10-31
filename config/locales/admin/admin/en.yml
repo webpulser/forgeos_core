@@ -10,25 +10,25 @@ en:
       failed: a problem occured during the cache deletion
       one: delete selected cached pages
       all: delete the entire cache
-  admin:
-    one: user
-    other: users
-    none: no user
-    all: all users
-    show: show user
-    not_exist: the requested user does not exist
+  administrator:
+    one: administrator
+    other: administrators
+    none: no administrator
+    all: all administrators
+    show: show administrator
+    not_exist: the requested administrator does not exist
     create:
-      success: the user was successfully created
-      failed: a problem occured during the user creation
-      action: create user
+      success: the administrator was successfully created
+      failed: a problem occured during the administrator creation
+      action: create administrator
     update:
-      success: the user was successfully updated
-      failed: a problem occured during the user update
-      action: edit user
+      success: the administrator was successfully updated
+      failed: a problem occured during the administrator update
+      action: edit administrator
     destroy:
-      action: delete the user
-      success: the user was successfully deleted
-      failed: a problem occured during the user deletion
-      confirm: are you sure to delete this user?
+      action: delete the administrator
+      success: the administrator was successfully deleted
+      failed: a problem occured during the administrator deletion
+      confirm: are you sure to delete this administrator?
     contact:
-      action: send a message to the user
+      action: send a message to the administrator

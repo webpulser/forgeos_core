@@ -10,7 +10,7 @@ fr:
       failed: "un problème est survenu lors de la mise à suppression du cache"
       one: supprimer le cache des pages sélectionnées
       all: supprimer la totalité du cache
-  admin:
+  administrator:
     one: administrateur
     other: administrateurs
     none: aucun administrateur

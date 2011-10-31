@@ -24,28 +24,28 @@ class Admin::AdministratorsController < Admin::BaseController
   def create
     @admin = Administrator.new(params[:administrator])
     if @admin.save
-      flash[:notice] = t('admin.create.success').capitalize
+      flash[:notice] = t('administrator.create.success').capitalize
       redirect_to [forgeos_core, :edit, :admin, @admin]
     else
-      flash[:error] = t('admin.create.failed').capitalize
+      flash[:error] = t('administrator.create.failed').capitalize
       render :action => "new"
     end
   end
 
   def update
     if @admin.update_attributes(params[:administrator])
-      flash[:notice] = t('admin.update.success').capitalize
+      flash[:notice] = t('administrator.update.success').capitalize
     else
-      flash[:error] = t('admin.update.failed').capitalize
+      flash[:error] = t('administrator.update.failed').capitalize
     end
     render :action => "edit"
   end
 
   def destroy
     if @admin.destroy
-      flash[:notice] = t('admin.destroy.success').capitalize
+      flash[:notice] = t('administrator.destroy.success').capitalize
     else
-      flash[:error] = t('admin.destroy.failed').capitalize
+      flash[:error] = t('administrator.destroy.failed').capitalize
     end
     respond_to do |wants|
       wants.html do
@@ -66,7 +66,7 @@ private
 
   def get_admin
     unless @admin = Administrator.find_by_id(params[:id])
-      flash[:error] = t('admin.not_exist').capitalize
+      flash[:error] = t('administrator.not_exist').capitalize
       return redirect_to([forgeos_core, :admin, :administrators])
     end
   end
