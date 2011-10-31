@@ -1,0 +1,74 @@
+:ruby
+  # detect current path
+  Forgeos::MENU_HASH[:forgeos][:admin].each do |k, menu|
+    menu.each do |k, link|
+      #if link[:url].is_a?(String) and current_path?(link[:url])
+      #  @current_link = link[:url]
+      #  @links = link[:children].dup || { k => link[:url] }
+      #elsif link[:children]
+      if link[:children]
+        link[:children].each do |key, child|
+          case child
+          when Hash
+            if child[:url]
+              if current_path?(child[:url])
+                @current_link = child[:url]
+                @links = { key => child[:url] }
+                @links.merge!(child[:children]) if child[:children]
+              end
+            end
+
+            if child[:children]
+              child[:children].each do |k, url|
+                if url.is_a?(Array)
+                  url.each do |u|
+                    if current_path?(u)
+                      @current_link = u
+                      @links = { key => child[:url] }
+                      @links.merge!(child[:children])
+                    end
+                  end
+                elsif current_path?(url)
+                  @current_link = url
+                  @links = { key => child[:url] }
+                  @links.merge!(child[:children])
+                end
+              end
+            end
+          when Array
+            child.each do |url|
+              if current_path?(url)
+                @current_link = url
+                @links = link[:children].dup || {}
+              end
+            end
+          else
+            if current_path?(child)
+              @current_link = child
+              @links = link[:children].dup || {}
+            end
+          end
+        end
+      end
+    end
+  end
+
+- if defined?(@links) and defined?(@current_link)
+  %ul.ui-tabs-nav.ui-helper-reset.ui-helper-clearfix.ui-widget-header.ui-corner-all
+    - @links.each do |title, url|
+      - if url == @current_link or (url.is_a?(Array) and url.include?(@current_link))
+        %li.ui-state-default.ui-corner-top.ui-tabs-selected.ui-state-active
+          = link_to '#content' do
+            %span{ :class => ['small-icons', title.singularize] }
+            = t(title, :scope => [:back_office, :menu]).capitalize
+      - else
+        :ruby
+          if url.is_a?(Hash) and url[:url] and url[:children]
+            url = url[:url]
+          elsif url.is_a?(Array)
+            url = url.first
+          end
+        %li.ui-state-default.ui-corner-top
+          = link_to url do
+            %span{ :class => ['small-icons', title.singularize] }
+            = t(title, :scope => [:back_office, :menu]).capitalize

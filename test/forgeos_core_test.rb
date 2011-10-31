@@ -11,6 +11,10 @@ class ForgeosCoreTest < ActiveSupport::TestCase
     assert_kind_of Rails::Engine, @engine
   end
 
+  test "is mounted as an engine" do
+    assert_respond_to Rails.application.routes.url_helpers, :forgeos_core_path
+  end
+
   test "have forgeos_admin_menu_path" do
     assert_not_nil @engine.paths['forgeos_admin_menu']
   end

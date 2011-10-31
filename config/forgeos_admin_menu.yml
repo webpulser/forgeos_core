@@ -5,10 +5,12 @@ forgeos:
         url: /admin/dashboard
         html:
           class: left first
-      users:
+      customers:
         url: /admin/users
         html:
          class: left
+        children:
+          users: /admin/users
       statistics:
         url: /admin/statistics
         html:
@@ -16,16 +18,15 @@ forgeos:
 
     submenu:
       administration:
-        url:
-          - /admin/administrators
-          - /admin/roles
-          - /admin/rights
+        url: /admin/administrators
         html:
           class: left first
         children:
-          administrators: /admin/administrators
-          roles: /admin/roles
-          rights: /admin/rights
+          administrators:
+            url: /admin/administrators
+            children:
+              roles: /admin/roles
+              rights: /admin/rights
           import: /admin/import
           cachings: /admin/cachings
       settings:
@@ -33,16 +34,16 @@ forgeos:
         html:
           class: left
       library:
-        url:
-          - /admin/library
-          - /admin/images/attachments
-          - /admin/pdf/attachments
-          - /admin/audio/attachments
-          - /admin/video/attachments
-          - /admin/media/attachments
-          - /admin/doc/attachments
+        url: /admin/pictures
         html:
           class: left
+        children:
+          pictures: /admin/pictures
+          pdfs: /admin/pdfs
+          audios: /admin/audios
+          videos: /admin/videos
+          media: /admin/media
+          docs: /admin/docs
       accounts:
         url: /admin/account
         html:

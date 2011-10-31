@@ -29,13 +29,22 @@ fr:
       settings: préférences
       library: librairie
       attachments: librairie
-      users: clients
+      customers: clients
+      users: utilisateurs
       menus: navigation
       accounts: votre compte
       logout: déconnexion
       login: connexion
       support: support
       import: import
+      cachings: cache
+      pictures: images
+      audios: fichiers audios
+      pdfs: documents pdfs
+      videos: vidéos
+      media: media
+      docs: documents
+
     account:
       infos: Infos du compte
   or: ou

@@ -11,7 +11,7 @@
   %body
     #container.container_16
       .grid_16
-        %ul#submenu.backgrounds
+        %ul#submenu
           - build_menu(Forgeos::MENU_HASH[:forgeos][:admin][:submenu], :menu => :submenu)
           = yield :submenu
         %ul#menu.backgrounds

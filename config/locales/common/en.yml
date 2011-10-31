@@ -29,13 +29,21 @@ en:
       settings: settings
       library: library
       attachments: library
-      users: customers
+      customers: customers
+      users: users
       menus: navigation
       accounts: your account
       logout: logout
       login: login
       support: support
       import: import
+      cachings: cache
+      pictures: pictures
+      audios: audios
+      pdfs: pdfs
+      videos: videos
+      media: media
+      docs: docs
     account:
       infos: account infos
   or: or
