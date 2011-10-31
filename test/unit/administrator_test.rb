@@ -14,8 +14,9 @@ class AdministratorTest < ActiveSupport::TestCase
         :action_name => 'show'
       )]
     )
-    people(:administrator).update_attribute(:role_id, role)
-    assert people(:administrator).access_path?("products", "show")
+    admin = people(:administrator)
+    admin.role = role
+    assert admin.access_path?("products", "show")
   end
 
   test "couldn't access path" do
@@ -23,8 +24,9 @@ class AdministratorTest < ActiveSupport::TestCase
       :name => 'admin',
       :rights => []
     )
-    people(:administrator).update_attribute(:role_id, role)
-    assert !people(:administrator).access_path?("products", "show")
+    admin = people(:administrator)
+    admin.role = role
+    assert !admin.access_path?("products", "show")
   end
 
 end

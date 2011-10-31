@@ -39,7 +39,7 @@ class Admin::AdministratorsControllerTest < ActionController::TestCase
       )]
     )
     admin = people(:administrator)
-    admin.update_attribute(:role_id, role)
+    admin.role = role
     PersonSession.create(admin)
   end
 end
