@@ -1,6 +1,10 @@
 require 'test_helper'
 
 class VideoCategoryTest < ActiveSupport::TestCase
+  test 'should inherit from Category' do
+    assert_kind_of Category, VideoCategory.new
+  end
+
   test 'should create' do
     category = VideoCategory.new
     assert category.valid?

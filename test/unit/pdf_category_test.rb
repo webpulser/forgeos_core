@@ -1,6 +1,10 @@
 require 'test_helper'
 
 class PdfCategoryTest < ActiveSupport::TestCase
+  test 'should inherit from Category' do
+    assert_kind_of Category, PdfCategory.new
+  end
+
   test 'should create' do
     category = PdfCategory.new
     assert category.valid?

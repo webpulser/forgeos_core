@@ -1,6 +1,10 @@
 require 'test_helper'
 
 class AdministratorCategoryTest < ActiveSupport::TestCase
+  test 'should inherit from Category' do
+    assert_kind_of Category, AdministratorCategory.new
+  end
+
   test 'should create' do
     category = AdministratorCategory.new
     assert category.valid?

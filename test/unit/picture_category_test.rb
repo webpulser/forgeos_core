@@ -1,6 +1,10 @@
 require 'test_helper'
 
 class PictureCategoryTest < ActiveSupport::TestCase
+  test 'should inherit from Category' do
+    assert_kind_of Category, PictureCategory.new
+  end
+
   test 'should create' do
     category = PictureCategory.new
     assert category.valid?

@@ -1,6 +1,10 @@
 require 'test_helper'
 
 class AttachmentCategoryTest < ActiveSupport::TestCase
+  test 'should inherit from Category' do
+    assert_kind_of Category, AttachmentCategory.new
+  end
+
   test 'should create' do
     category = AttachmentCategory.new
     assert category.valid?

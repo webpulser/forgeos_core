@@ -1,6 +1,10 @@
 require 'test_helper'
 
 class AudioCategoryTest < ActiveSupport::TestCase
+  test 'should inherit from Category' do
+    assert_kind_of Category, AudioCategory.new
+  end
+
   test 'should create' do
     category = AudioCategory.new
     assert category.valid?

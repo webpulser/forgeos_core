@@ -1,6 +1,10 @@
 require 'test_helper'
 
 class UserCategoryTest < ActiveSupport::TestCase
+  test 'should inherit from Category' do
+    assert_kind_of Category, UserCategory.new
+  end
+
   test 'should create' do
     category = UserCategory.new
     assert category.valid?
