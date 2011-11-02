@@ -13,4 +13,8 @@ if path = Rails.application.paths['forgeos_admin_menu']
   end
 end
 
-Forgeos::MENU_HASH = HashWithIndifferentAccess.new(menu)
+if defined?(Forgeos::MENU_HASH)
+  Forgeos::MENU_HASH.deep_merge! HashWithIndifferentAccess.new(menu)
+else
+  Forgeos::MENU_HASH = HashWithIndifferentAccess.new(menu)
+end
