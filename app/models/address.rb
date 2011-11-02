@@ -6,9 +6,8 @@ class Address < ActiveRecord::Base
   validates :country_id, :address, :city,
     :presence => true
 
-  # Returns address in a string <i>#{firstname} #{name} #{address} #{zip_code} #{city}</i>
   def to_s
-    "#{I18n.t civility, :scope => [:civility, :label]} #{firstname} #{name} #{address} #{zip_code} #{city} #{country.name.upcase}"
+    "#{address} #{address_2}, #{zip_code} #{city}, #{country.name.upcase}"
   end
 
   def kind
