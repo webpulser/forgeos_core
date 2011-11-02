@@ -99,3 +99,42 @@ function forgeosInitUpload(selector) {
     }
   });
 }
+
+function initAttachmentUpload(file_type) {
+  jQuery('#attachmentUploadDialog').dialog('open');
+  //jQuery('#attachmentUploadDialog').html('<div id="attachmentUpload"></div>');
+  var uploadify_datas = {
+    "parent_id": jQuery('#parent_id_tmp').val(),
+    "format": "json"
+  };
+  uploadify_datas[window._forgeos_js_vars.session_key] = window._forgeos_js_vars.session;
+
+  jQuery('#attachmentUpload').uploadify({
+    "uploader": '/assets/forgeos/uploadify/uploadify.swf',
+    "cancelImg": '/assets/forgeos/admin/big-icons/delete-icon.png',
+    "script": "/admin/attachments",
+    "buttonImg": '/assets/forgeos/uploadify/upload-' + file_type + '_' + window._forgeos_js_vars.locale + '.png',
+    "width": "154",
+    "height": "24",
+    "scriptData": uploadify_datas,
+    "ScriptAccess": "always",
+    "multi": "true",
+    "displayData": "speed",
+    "onComplete": function(e,queueID,fileObj,response,data) {
+      if(typeof JSON=="object" && typeof JSON.parse=="function") {
+        result = JSON.parse(response);
+      } else{
+        result = eval('(' + response + ')');
+      }
+      if (result.result == 'success'){
+        oTable.fnDraw();
+        jQuery.tree.focused().refresh();
+      } else {
+        display_notification_message('error', result.error);
+      }
+    },
+    "onAllComplete": function() {
+      jQuery('#attachmentUploadDialog').dialog('close');
+    }
+  });
+}

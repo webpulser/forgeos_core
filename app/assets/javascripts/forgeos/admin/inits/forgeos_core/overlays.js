@@ -9,6 +9,7 @@ jQuery(document).ready(function(){
   });
 
   setup_upload_dialog('#imageUpload');
+  setup_upload_dialog('#attachmentUpload');
   setup_upload_dialog('#fileUpload');
 
   setup_select_dialog('#imageSelect', '#image-table:visible,#thumbnail-table:visible');
@@ -69,6 +70,12 @@ jQuery(document).ready(function(){
   jQuery('#add-block, #add-widget').live('click',function(e){
     e.preventDefault();
     openBlockDialog(jQuery(this), jQuery(this).parent());
+    return false;
+  });
+
+  jQuery('#add-attachment').live('click',function(e){
+    e.preventDefault();
+    initAttachmentUpload($(this).data('file_type'));
     return false;
   });
 
