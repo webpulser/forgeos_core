@@ -1,4 +1,4 @@
-class AdminCategory < Category
+class AdministratorCategory < Category
   has_and_belongs_to_many :elements,
     :join_table => 'categories_elements',
     :foreign_key => 'category_id',

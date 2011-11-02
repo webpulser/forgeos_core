@@ -57,7 +57,7 @@ Forgeos::Core::Engine.routes.draw do
       end
     end
 
-    %w(media picture doc pdf audio video attachment admin role right user menu).each do |category|
+    %w(media picture doc pdf audio video attachment administrator role right user).each do |category|
       resources "#{category}_categories", :controller => 'categories', :type => "#{category}_category" do
         member do
           post :add_element
