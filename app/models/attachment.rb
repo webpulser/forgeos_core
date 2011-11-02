@@ -31,8 +31,30 @@ class Attachment < ActiveRecord::Base
   end
 
   def self.options_for(target = class_name)
-    return {}# unless ActiveRecord::Base.connection.tables.include?(Setting.table_name) or Setting.current
-    #(Setting.current.attachments[target] || {}).symbolize_keys
+    return {} unless ActiveRecord::Base.connection.tables.include?(Setting.table_name) or Setting.current
+    (Setting.current.attachments[target] || {}).symbolize_keys
+  end
+
+  def self.new_from_rails_form(options = {})
+    data = options[:Filedata]
+    filename = options[:Filename] ||
+      data.send(data.respond_to?(:original_filename) ? :original_filename : :path)
+
+    content_type = MIME::Types.type_for(filename).first.to_s
+    media_class = Media
+
+    [Audio, Video, Pdf, Doc, Picture].each do |klass|
+      media_class = klass if klass.attachment_options[:content_type].include?(content_type)
+    end
+
+    media = media_class.new(options[:attachment])
+    media.uploaded_data = ActiveSupport::HashWithIndifferentAccess.new(
+      :tempfile => data,
+      :content_type => content_type,
+      :filename => filename
+    )
+
+    return media
   end
 
   define_index do

@@ -1,4 +1,5 @@
 require 'rails'
+require 'mime/types'
 require 'globalize3'
 require 'acts-as-taggable-on'
 require 'acts_as_list'

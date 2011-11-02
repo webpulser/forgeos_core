@@ -1,4 +1,5 @@
 attachment:
+  content_type: application/none
   name: attachment
   filename: attachment.none
   alternative: attachment

@@ -57,17 +57,7 @@ class Admin::AttachmentsController < Admin::BaseController
     respond_to do |format|
       format.json do
         if params[:Filedata]
-          require 'mime/types'
-          filename = params[:Filename] || params[:Filedata].original_path
-          @content_type = MIME::Types.type_for(filename).first.to_s
-          media_class = Media
-          [Audio,Video,Pdf,Doc,Picture].each do |klass|
-            media_class = klass if klass.attachment_options[:content_type].include?(@content_type)
-          end
-
-          @media = media_class.new(params[:attachment])
-          @media.uploaded_data = { 'tempfile' => params[:Filedata], 'content_type' => @content_type, 'filename' => Forgeos::url_generator(filename)}
-
+          @media = Attachment.new_from_rails_form(params)
           if @media.save
             flash[:notice] = I18n.t('media.create.success').capitalize
 
@@ -92,26 +82,18 @@ class Admin::AttachmentsController < Admin::BaseController
           render :json => { :result => 'error', :error => 'bad parameters' }
         end
       end
+
       format.js do
         if params[:Filedata]
-          require 'mime/types'
-          filename = params[:Filedata].original_path
-          @content_type = MIME::Types.type_for(filename).first.to_s
-          media_class = Media
-          [Video,Pdf,Doc,Picture].each do |klass|
-            media_class = klass if klass.attachment_options[:content_type].include?(@content_type)
-          end
-
-          @media = media_class.new(params[:attachment])
-          @media.uploaded_data = { 'tempfile' => params[:Filedata], 'content_type' => @content_type, 'filename' => Forgeos::url_generator(filename)}
-
+          @media = Attachment.new_from_rails_form(params)
           @media.save
         end
-          responds_to_parent do
-            render(:update) do |page|
-              page << "upload_callback();"
-            end
+
+        responds_to_parent do
+          render(:update) do |page|
+            page << "upload_callback();"
           end
+        end
       end
     end
   end
