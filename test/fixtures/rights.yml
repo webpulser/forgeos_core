@@ -1,0 +1,4 @@
+right:
+  name: right
+  controller_name: test
+  action_name: test
