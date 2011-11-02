@@ -6,5 +6,4 @@ cp "test/files/database.yml.$DB" "test/dummy/config/database.yml"
 echo "Creating databases for $DB and loading schema"
 cd "test/dummy"
 bundle exec rake db:create
-bundle exec rake db:test:prepare
-bundle exec rake db:fixtures:load
+bundle exec rake db:test:prepare db:fixtures:load
