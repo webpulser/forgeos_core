@@ -31,10 +31,14 @@ class CategoryTest < ActiveSupport::TestCase
   end
 
   test "could change type" do
+    class ::CategoryInherit < Category
+    end
     category = Category.create
-    category.kind = 'AdministratorCategory'
-    category.save
-    assert_instance_of AdministratorCategory, Category.find(category.id)
+    category.kind = 'CategoryInherit'
+    assert category.save
+    assert_equal 'CategoryInherit', category.kind
+    assert_instance_of CategoryInherit, Category.find(category.id)
+    assert_kind_of Category, CategoryInherit.find(category.id)
   end
 
   test "should give a hash for jstree" do
@@ -54,4 +58,51 @@ class CategoryTest < ActiveSupport::TestCase
       :state => 'open'
     }, category.to_jstree)
   end
+
+  test "should have picture" do
+    category = Category.create(:name => 'toto', :description => 'toto', :url => 'toto')
+    assert_equal "folder", category.category_picture
+    category.attachments << attachments(:picture)
+    assert_equal "/uploads/images/3834/7149/picture_categories_icon.jpg", category.category_picture
+  end
+
+  test "should count elements" do
+    class ::TestCategory < Category
+      has_and_belongs_to_many :elements,
+        :join_table => 'categories_elements',
+        :foreign_key => 'category_id',
+        :association_foreign_key => 'element_id',
+        :class_name => 'User'
+    end
+
+    category = TestCategory.create(
+      :name => 'toto',
+      :description => 'toto',
+      :url => 'toto',
+      :elements => [people(:user)]
+    )
+    assert_equal [people(:user)], category.elements
+    assert_equal 1, category.total_elements_count
+  end
+
+  test "should count elements with childrens" do
+    class ::TestCategory < Category
+      has_and_belongs_to_many :elements,
+        :join_table => 'categories_elements',
+        :foreign_key => 'category_id',
+        :association_foreign_key => 'element_id',
+        :class_name => 'User'
+    end
+
+    category = TestCategory.create(:name => 'toto', :description => 'toto', :url => 'toto')
+    child_category = TestCategory.create(
+      :name => 'tata',
+      :description => 'tata',
+      :url => 'tata',
+      :parent => category,
+      :elements => [people(:user)]
+    )
+    assert_equal 1, category.total_elements_count
+  end
+
 end

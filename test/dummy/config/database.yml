@@ -1,5 +1,7 @@
 test:
-  adapter: sqlite3
-  database: 'db/test.sqlite3'
-  pool: 5
-  timeout: 5000
+  adapter: mysql2
+  encoding: utf8
+  socket: /var/run/mysqld/mysqld.sock
+  username: ror
+  password: rorpass1
+  database: forgeos_core_test

@@ -14,7 +14,7 @@ class Attachment < ActiveRecord::Base
       :include => :attachment_links,
       :conditions => {
         :attachment_links => {
-          :element_type => element_type.to_s.classify
+          :element_type => element_type.to_s.classify.constantize.class_name
         }
       }
     }
@@ -41,11 +41,7 @@ class Attachment < ActiveRecord::Base
       data.send(data.respond_to?(:original_filename) ? :original_filename : :path)
 
     content_type = MIME::Types.type_for(filename).first.to_s
-    media_class = Media
-
-    [Audio, Video, Pdf, Doc, Picture].each do |klass|
-      media_class = klass if klass.attachment_options[:content_type].include?(content_type)
-    end
+    media_class = detect_attachment_class_from_content_type(content_type)
 
     media = media_class.new(options[:attachment])
     media.uploaded_data = ActiveSupport::HashWithIndifferentAccess.new(
@@ -55,6 +51,16 @@ class Attachment < ActiveRecord::Base
     )
 
     return media
+  end
+
+  def self.detect_attachment_class_from_content_type(content_type)
+    media_class = Media
+
+    [Audio, Video, Pdf, Doc, Picture].each do |klass|
+      media_class = klass if klass.attachment_options[:content_type].include?(content_type)
+    end
+
+    return media_class
   end
 
   define_index do

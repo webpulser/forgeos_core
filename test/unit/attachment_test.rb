@@ -13,22 +13,6 @@ class AttachmentTest < ActiveSupport::TestCase
     assert_equal 'attachment', attachment.name
   end
 
-  test "should retrieve options from settings" do
-    assert_equal({
-      :storage => :file_system,
-      :file_system_path => 'public/uploads/images',
-      :content_type => :image,
-      :thumbnails => {
-        :big => '500x500',
-        :normal => '200x200',
-        :small => '100x100',
-        :thumb => '50x50',
-        :categories_icon => '16x16'
-      },
-      :max_size => 52428800
-    }, Attachment.options_for('picture'))
-  end
-
   test "should initialize from rails form" do
     attachment = Attachment.new_from_rails_form(:Filedata => File.open(File.expand_path('../../files/empty.file', __FILE__)))
     assert_kind_of Media, attachment
@@ -45,4 +29,20 @@ class AttachmentTest < ActiveSupport::TestCase
     assert_equal 'rails.png', attachment.filename
     assert_equal 'image/png', attachment.content_type
   end
+
+  test "should retreive linked to models" do
+    attachment = attachments(:attachment)
+    AttachmentLink.create(:element => roles(:role), :attachment => attachment)
+    assert_equal [attachment], Attachment.linked_to(:role)
+    assert_equal [attachment], Attachment.linked_to('role')
+  end
+
+  test "should retreive linked to models with inheritance" do
+    attachment = attachments(:attachment)
+    AttachmentLink.create(:element => people(:user), :attachment => attachment)
+    assert_kind_of User, people(:user)
+    assert_equal [attachment], Attachment.linked_to(:user)
+    assert_equal [attachment], Attachment.linked_to('user')
+  end
+
 end
