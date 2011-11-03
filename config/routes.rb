@@ -2,7 +2,7 @@ Forgeos::Core::Engine.routes.draw do
   match '/logout' => 'person_sessions#destroy', :as => :logout
   match '/login' => 'person_sessions#new', :as => :login
   match '/notifications' => 'forgeos/application#notifications', :as => :notifications
-  match '/statistics/:type/:id.:format' => 'statistics_collector#index', :as => :statistics_collector
+  match '/statistics/:type/:id(.:format)' => 'statistics_collector#index', :as => :statistics_collector
   resource :person_session
 
   ## ADMIN ROUTES ##

@@ -50,10 +50,6 @@ class ApplicationController < ActionController::Base
     return @current_user
   end
 
-  def logged_in?
-    current_user
-  end
-
   def login_required
     unless current_user
       store_location

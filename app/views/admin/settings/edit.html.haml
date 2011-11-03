@@ -9,7 +9,7 @@
     .backgrounds.big-header
       = f.text_field :name, :class => 'defaultValue field_name', :title => t('setting.shop_name')
       .interact-links
-        = Forgeos_save_buttons [forgeos_core, :admin, :setting]
+        = forgeos_save_buttons [forgeos_core, :admin, :setting]
     #general.grid_16.alpha.omega
       = render :partial => 'general', :locals => { :f => f }
     #mailer

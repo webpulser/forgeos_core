@@ -1,5 +1,6 @@
 class Admin::BaseController < ApplicationController
   layout 'admin'
+  helper "forgeos/admin/base"
   before_filter :login_required, :edition_locale, :except => [:notifications, :url]
   skip_after_filter :log_visit
   protect_from_forgery

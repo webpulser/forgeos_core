@@ -15,3 +15,12 @@ en:
       category_link: category link
       page_link: page link
       product_link: product link
+    attributes:
+      user:
+        lastname: name
+        firstname: firstname
+  helpers:
+    label:
+      hash:
+        tata: titi
+        toto: tutu

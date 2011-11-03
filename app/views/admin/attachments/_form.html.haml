@@ -3,7 +3,7 @@
   .backgrounds.big-header
     = f.text_field :name, :id => 'media-title', :class => 'field_name'
     .interact-links
-      = Forgeos_save_buttons [forgeos_core, :admin, find_media_type_from_content_type(media).pluralize]
+      = forgeos_save_buttons [forgeos_core, :admin, find_media_type_from_content_type(media).pluralize]
 
   #content.grid_16.alpha.omega
     #media-modify.grid_12.alpha

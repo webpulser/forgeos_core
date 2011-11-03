@@ -3,7 +3,7 @@
     = text_field_tag :set_name,(@set ? @set.name : ''), :class => 'field_name'
     = hidden_field_tag :set_id, @set.id if @set
     .interact-links
-      = Forgeos_save_buttons([forgeos_core, :admin, :import], 'import.button')
+      = forgeos_save_buttons([forgeos_core, :admin, :import], 'import.button')
   #content.grid_16.alpha.omega
     .grid_12.alpha
       .inner-content

@@ -7,7 +7,7 @@
 %strong updated :
 = @results[:updated]
 
-- if errors_count = @results[:errors].flatten.size and errors_count > 0
+- if @results[:errors] and errors_count = @results[:errors].flatten.size and errors_count > 0
   %br
   %h4 errors :
   %strong total :
