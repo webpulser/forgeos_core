@@ -29,8 +29,8 @@ module SortableAttachments
       return if self.new_record?
       ids.each_with_index do |id, i|
         connection.update(
-          "UPDATE `attachment_links` SET `position` = #{i} " +
-          "WHERE `element_id` = #{self.id} AND `element_type` = '#{self.class.base_class}' AND `attachment_id` = #{id}"
+          "UPDATE #{connection.quote_table_name('attachment_links')} SET #{connection.quote_column_name('position')} = #{i} " +
+          "WHERE #{connection.quote_column_name('element_id')} = #{self.id} AND #{connection.quote_column_name('element_type')} = #{connection.quote(self.class.base_class.to_s)} AND #{connection.quote_column_name('attachment_id')} = #{id}"
         ) if id.to_i != 0
       end
     end
