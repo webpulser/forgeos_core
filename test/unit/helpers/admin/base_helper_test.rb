@@ -30,19 +30,4 @@ class Admin::BaseHelperTest < ActionView::TestCase
     assert_match /type="submit"/, output
     assert_match /href="\/admin"/, output
   end
-
-  test "should init datatable" do
-    output = dataTables_tag(:id => 'test', :url => '/admin', :columns => ['toto', 'tata'])
-    assert_match /javascript/, output
-    assert_match /dataTable\(/, output
-    assert_match /jQuery\('#test'\)/, output
-  end
-
-  test "should init dataslide" do
-    output = dataSlides_tag(:id => 'test', :url => '/admin', :columns => ['toto', 'tata'])
-    assert_match /javascript/, output
-    assert_match /dataSlide\(/, output
-    assert_match /jQuery\('#test'\)/, output
-  end
-
 end

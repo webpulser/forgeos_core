@@ -8,7 +8,7 @@ module Forgeos
     end
 
     def current_path?(url, path = request.path.gsub(/\/$/,''))
-      (url_for(url) != '/' || path == '/') && (url_for(url) != '/admin' || path == '/admin') && path.include?(url_for(url))
+      (url_for(url) != '/' || path == '/') && (url_for(url) != '/admin' || path == '/admin') && url_for(path).include?(url_for(url))
     end
 
     def menu_item(tab, title = tab[:title])
@@ -27,7 +27,7 @@ module Forgeos
             when Hash
               menu << menu_item(child.dup, k)
               urls << child[:url]
-              urls += child[:children].values.compact.flatten
+              urls += child[:children].values.compact.flatten if child[:children]
             when String
               menu << menu_item({:url => child}, k)
               urls << child
@@ -36,11 +36,6 @@ module Forgeos
               urls += child
             end
           end
-        else
-          tab[:children].each do |child|
-            menu << menu_item(child.dup)
-          end
-          urls += tab[:children]
         end
       end
 
@@ -55,11 +50,7 @@ module Forgeos
         end
       end
 
-      if helper = tab[:helper] and helper.kind_of?(Hash)
-        link = self.send(helper[:method],tab_name)
-      else
-        link = link_to(tab_name.capitalize, urls.first)
-      end
+      link = link_to(tab_name.capitalize, urls.first)
 
       if defined?(menu) and menu.present?
         link += content_tag(:span, '', :class => 'arrow') + content_tag(:ul, menu.join.html_safe)

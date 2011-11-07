@@ -6,7 +6,9 @@ module SortableAttachments
   module ClassMethods
     def has_and_belongs_to_many_attachments(options = {})
       has_many :attachment_links, :as => :element, :order => :position
-      %w(Attachment Picture Doc Video Pdf Audio Media).each do |klass|
+      has_many :attachments, :through => :attachment_links, :order => 'attachment_links.position'
+
+      %w(Picture Doc Video Pdf Audio Media).each do |klass|
         has_many klass.underscore.pluralize, { :through => :attachment_links, :class_name => klass, :source => :attachment, :order => 'attachment_links.position' }.merge(options)
       end
 

@@ -46,7 +46,7 @@ module Forgeos
                       content_tag(:div,'',:class => 'inner')
                     end
                   end
-                }.join +
+                }.join.html_safe +
                 content_tag(:li,'', :class => 'clear')
               end
             end

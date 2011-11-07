@@ -1,4 +1,5 @@
 Dummy::Application.routes.draw do
+  match 'directory/:id' => 'directory#show', :as => 'current_path_detection'
   mount Forgeos::Core::Engine => '/', :as => 'forgeos_core'
   # The priority is based upon order of creation:
   # first created -> highest priority.
