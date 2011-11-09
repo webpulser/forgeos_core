@@ -10,9 +10,24 @@ Rails.backtrace_cleaner.remove_silencers!
 # Load support files
 Dir["#{File.dirname(__FILE__)}/support/**/*.rb"].each { |f| require f }
 
-ActiveSupport::TestCase.use_transactional_fixtures = true
-ActiveSupport::TestCase.use_instantiated_fixtures  = false
-ActiveSupport::TestCase.fixture_path = (File.expand_path("../fixtures",  __FILE__))
-ActiveSupport::TestCase.fixtures :all
+class ActiveSupport::TestCase
+  self.use_transactional_fixtures = true
+  self.use_instantiated_fixtures  = false
+  self.fixture_path = (File.expand_path("../fixtures",  __FILE__))
+  self.fixtures :all
+  include Authlogic::TestCase
 
-ActiveSupport::TestCase.send(:include, Authlogic::TestCase)
+  def admin_login_to(controller, action)
+    role = Role.create(
+      :name => 'admin',
+      :rights => [Right.create(
+        :name => 'administrators_index',
+        :controller_name => controller,
+        :action_name => action
+      )]
+    )
+    admin = people(:administrator)
+    admin.role = role
+    PersonSession.create(admin)
+  end
+end

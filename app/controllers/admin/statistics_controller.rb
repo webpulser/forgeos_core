@@ -6,6 +6,27 @@ class Admin::StatisticsController < Admin::BaseController
   def index
   end
 
+  # generates the ofc2 graph
+  def graph
+    get_date
+    # visitors
+    visitors = @date.collect{|day| Forgeos::Statistics.total_of_visitors(day)}
+
+    # Bar for visitors
+    bar = ::OpenFlashChart::Bar.new
+    bar.values  = visitors
+    bar.tooltip = "#val# #{I18n.t('visitor', :count => 2)}"
+    bar.colour  = '#F2B833'
+
+    # Conf for Y left axis
+    # calculates max number of visitors
+    max_visitors = visitors.flatten.compact.max.to_i
+    max_count_visitors = max_visitors > 0 ? max_visitors : 5
+
+    return render :json => generate_graph(bar, [max_count_visitors], '#F7BD2E')
+  end
+
+
 private
   def get_date
     @date =
@@ -15,7 +36,7 @@ private
       when 'yesterday'
         Date.yesterday..Date.current
       when 'today'
-        Date.current..Date.current
+        [Date.current]
       else # week
         params[:timestamp] = 'week'
         Date.current.ago(1.week).to_date..Date.current
@@ -36,7 +57,7 @@ private
     days_ratio = @date.to_a.size / steps
     days_step = (days_ratio) > 0 ? days_ratio : 1
 
-    x_labels = XAxisLabels.new
+    x_labels = ::OpenFlashChart::XAxisLabels.new
     x_labels.set_steps(days_step)
     case params[:timestamp]
     when 'week'
@@ -47,7 +68,7 @@ private
     end
     x_labels.colour = '#7D5223'
 
-    x_axis = XAxis.new
+    x_axis = ::OpenFlashChart::XAxis.new
     x_axis.colour = '#7D5223'
     x_axis.grid_colour = '#C8A458'
     x_axis.set_steps(days_step)
@@ -56,7 +77,7 @@ private
     x_axis.set_labels(x_labels)
 
     # Conf for Y axis
-    y_axis = YAxis.new
+    y_axis = ::OpenFlashChart::YAxis.new
     y_axis.colour = '#F2B833'
     y_axis.set_range(0, y_max[0], (y_max[0])/4) if y_max
     y_axis.tick_length = 0
@@ -64,7 +85,7 @@ private
 
     # Conf for Y right axis
     if y_max.size > 1
-      y_axis_right = YAxisRight.new
+      y_axis_right = ::OpenFlashChart::YAxisRight.new
       y_axis_right.set_range(0, y_max[1], (y_max[1])/4) if y_max
       y_axis_right.tick_length = 0
       y_axis_right.stroke = 0
@@ -73,7 +94,7 @@ private
     end
 
     # Tooltip
-    tooltip = Tooltip.new
+    tooltip = ::OpenFlashChart::Tooltip.new
     tooltip.set_shadow(false)
     tooltip.stroke = 1
     tooltip.colour = '#000000'
@@ -82,7 +103,7 @@ private
     tooltip.set_body_style("{font-size: 12px; font-weight: bold; color: #000000;}")
 
     # Construct chart
-    chart = OpenFlashChart.new
+    chart = ::OpenFlashChart::OpenFlashChart.new
     chart.set_bg_colour('#FEF7DB')
     chart.x_axis = x_axis
     chart.y_axis = y_axis

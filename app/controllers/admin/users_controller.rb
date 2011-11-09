@@ -90,52 +90,6 @@ class Admin::UsersController < Admin::BaseController
       end
     end
   end
-
-  # Filter users by something, only by gender & country for the moment
-  def filter
-    return redirect_to(:action => 'index') unless params[:filter]
-
-    @gender = params[:filter][:gender]
-    @country = params[:filter][:country]
-
-    @v_age = params[:filter][:age][:values].to_i
-    @c_age = params[:filter][:age][:conds]
-
-    gender = @gender.chomp.split(',').collect(&:to_i)
-    conditions_ini = {}
-    conditions_ini[:civility] = gender
-    unless @country.blank?
-      conditions_ini[:country_id] = @country.to_i
-    end
-
-    unless @v_age.nil? && @c_age.nil?
-
-      old_date = (Date.today << @v_age*12)
-
-      case @c_age
-        when '=='
-          conditions_ini[:birthday] = old_date.ago(12.month)..old_date
-        when '!='
-          conditions_ini[:birthday_not] = old_date.ago(12.month)..old_date
-        when '>='
-          conditions_ini[:birthday_lte] = old_date
-        when '<='
-          conditions_ini[:birthday_gte] = old_date
-        when '<'
-          conditions_ini[:birthday_gt] = old_date
-        when '>'
-          conditions_ini[:birthday_lt] = old_date
-      end
-    end
-
-    @users = User.all( :conditions => conditions_ini )
-
-    flash[:error] = I18n.t('user.search.failed').capitalize if @users.empty?
-
-    return export_newsletter if params[:commit] == I18n.t('export').capitalize
-    render :template => 'admin/users/index'
-  end
-
 private
 
   def get_user

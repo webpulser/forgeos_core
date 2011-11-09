@@ -1,5 +1,10 @@
 Dummy::Application.routes.draw do
+  root :to => 'person_sessions#new'
   match 'directory/:id' => 'directory#show', :as => 'current_path_detection'
+  match 'keep_flash_test' => 'application#keep_flash_test'
+  match 'login_required_test' => 'application#login_required_test'
+  match 'admin/login_required_test' => 'admin/base#login_required_test'
+  match 'admin/edition_locale_test' => 'admin/base#edition_locale_test'
   mount Forgeos::Core::Engine => '/', :as => 'forgeos_core'
   # The priority is based upon order of creation:
   # first created -> highest priority.

@@ -1,8 +1,8 @@
 class StatisticCounter < ActiveRecord::Base
   belongs_to :element, :polymorphic => true
 
-  def initialize(options = {})
-    super(options = {})
+  def initialize(*args)
+    super(*args)
     set_default_date_to_current
   end
 
