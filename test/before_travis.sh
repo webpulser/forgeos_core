@@ -7,3 +7,4 @@ echo "Creating databases for $DB and loading schema"
 cd "test/dummy"
 bundle exec rake db:create
 bundle exec rake db:test:prepare db:fixtures:load
+bundle exec rake ts:rebuild

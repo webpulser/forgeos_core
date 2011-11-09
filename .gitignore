@@ -5,6 +5,9 @@ test/dummy/db/*.sqlite3
 test/dummy/log/*.log
 test/dummy/tmp/
 test/dummy/config/database.yml
+test/dummy/config/test.sphinx.conf
+test/dummy/db/sphinx/
+test/dummy/log/searchd.test.pid
 *.swp
 *~
 *.rbc

@@ -1,0 +1,3 @@
+test:
+  mem_limit: 128M
+  enable_star: true
