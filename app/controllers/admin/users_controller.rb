@@ -81,12 +81,12 @@ class Admin::UsersController < Admin::BaseController
   # example action to return the contents
   # of a table in CSV format
   def export_newsletter
-    require 'fastercsv'
+    @users = User.all(:select => 'firstname, lastname, email')
     return flash[:error] = I18n.t('user.export.failed').capitalize if @users.empty?
     stream_csv do |csv|
-      csv << %w[name email]
+      csv << %w(firstname lastname email)
       @users.each do |u|
-        csv << [u.fullname,u.email]
+        csv << [u.firstname, u.lastname, u.email]
       end
     end
   end
@@ -104,31 +104,27 @@ private
   end
 
   def stream_csv
-     filename = params[:action] + ".csv"
+    filename = params[:action] + ".csv"
 
-     #this is required if you want this to work with IE
-     if request.env['HTTP_USER_AGENT'] =~ /msie/i
-       headers['Pragma'] = 'public'
-       headers["Content-type"] = 'text/plain'
-       headers['Cache-Control'] = 'no-cache, must-revalidate, post-check=0, pre-check=0'
-       headers['Content-Disposition'] = "attachment; filename=\"#{filename}\""
-       headers['Expires'] = "0"
-     else
-       headers['Content-Type'] ||= 'text/csv'
-       headers['Content-Disposition'] = "attachment; filename=\"#{filename}\""
-     end
+    #this is required if you want this to work with IE
+    if request.env['HTTP_USER_AGENT'] =~ /msie/i
+      headers['Pragma'] = 'public'
+      headers["Content-type"] = 'text/plain'
+      headers['Cache-Control'] = 'no-cache, must-revalidate, post-check=0, pre-check=0'
+      headers['Content-Disposition'] = "attachment; filename=\"#{filename}\""
+      headers['Expires'] = "0"
+    else
+      headers['Content-Type'] ||= 'text/csv'
+    end
+    headers['Content-Disposition'] = "attachment; filename=\"#{filename}\""
 
-    render :text => Proc.new { |response, output|
-			def output.<<(*args)
-				write(*args)
-			end
-      csv = FasterCSV.new(output, :row_sep => "\r\n")
-      yield csv
-    }
+    output = ''
+    yield(CsvParser.new(output, :row_sep => "\r\n"))
+    render :text => output, :stream => true
   end
 
   def sort
-    columns = %w(id concat(lastname,firstname) email active)
+    columns = %w(id full_name email active)
 
     per_page = params[:iDisplayLength] ? params[:iDisplayLength].to_i : 10
     offset = params[:iDisplayStart] ? params[:iDisplayStart].to_i : 0
@@ -155,6 +151,7 @@ private
       options[:star] = true
       @users = User.search(params[:sSearch],options)
     else
+      options[:select] = '*, CONCAT(lastname,firstname) as full_name'
       @users = User.paginate(options)
     end
   end

@@ -12,4 +12,14 @@ class User < Person
   def age
     ((Date.today - self.birthday) / 365).floor
   end
+
+  define_index do
+    indexes firstname, :sortable => true
+    indexes lastname, :sortable => true
+    indexes email, :sortable => true
+    indexes active, :sortable => true
+    indexes 'CONCAT(lastname, firstname)', :as => :full_name, :sortable => true
+    set_property :delta => true
+  end
+
 end

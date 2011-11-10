@@ -1,8 +1,8 @@
 <%
   output = {
     :sEcho => params[:sEcho],
-    :iTotalRecords => @users.total_entries || 0,
-    :iTotalDisplayRecords => @users.size,
+    :iTotalRecords => User.count,
+    :iTotalDisplayRecords => @users.total_entries || 0,
     :aaData => @users.collect do |user|
       klass = user.active? ? 'see-on' : 'see-off'
       table =
@@ -16,7 +16,7 @@
         table <<
         link_to('', [forgeos_core, :activate, :admin, user],
           :remote => true,
-          :method => :post,
+          :method => :put,
           :class => "small-icons #{klass}",
           :id => polymorphic_html_id(user, 'show')
         ) <<

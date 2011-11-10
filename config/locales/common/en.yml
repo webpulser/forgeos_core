@@ -187,9 +187,9 @@ en:
       failed: a problem occured during the customer activation
       action: activate
     disactivation:
-      success: the customer was successfully deactivated
-      failed: a problem occured during the customer deactivation
-      action: deactivate
+      success: the customer was successfully disactivated
+      failed: a problem occured during the customer disactivation
+      action: disactivate
     export:
       failed: export failed, no customers found
     search:

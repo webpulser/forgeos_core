@@ -41,3 +41,27 @@ user:
   active: true
   type: User
   birthday: <%= Date.today.to_formatted_s(:db) %>
+
+tintin:
+  crypted_password: $2a$10$NOOEOfWmHe1tLDxWUTL8wuAtS0h1Xd59h0G6UVc1OEwUBCDJnhZdm
+  password_salt: bRtKB8d7XyTHghCsLBJm
+  firstname: Tin
+  lastname: Tin
+  lang: fr
+  time_zone: UTC
+  email: tintin@forgeos.com
+  active: false
+  type: User
+  birthday: <%= Date.today.to_formatted_s(:db) %>
+
+lennon:
+  crypted_password: $2a$10$NOOEOfWmHe1tLDxWUTL8wuAtS0h1Xd59h0G6UVc1OEwUBCDJnhZdm
+  password_salt: bRtKB8d7XyTHghCsLBJm
+  firstname: John
+  lastname: Lennon
+  lang: en
+  time_zone: UTC
+  email: john.lennon@forgeos.com
+  active: false
+  type: User
+  birthday: <%= Date.today.to_formatted_s(:db) %>

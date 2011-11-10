@@ -32,7 +32,7 @@ class GeoZoneTest < ActiveSupport::TestCase
         :type => 'folder'
       },
       :data => {
-        :title => 'toto<span>1</span>',
+        :title => 'toto<span>3</span>',
         :attributes => {
           :class => 'big-icons',
           :style => 'category_picture',

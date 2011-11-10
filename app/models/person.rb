@@ -21,13 +21,7 @@ class Person < ActiveRecord::Base
   attr_accessible :lastname, :firstname, :email, :password, :password_confirmation,
     :civility, :country_id, :birthday, :phone, :other_phone, :email_confirmation,
     :avatar_attributes, :lang, :time_zone, :address_attributes
-
-  #define_index do
-  #  indexes firstname, :sortable => true
-  #  indexes lastname, :sortable => true
-  #  indexes email, :sortable => true
-  #  set_property :delta => true
-  #end
+  attr_accessible :active, :as => :admin
 
   def fullname
     "#{lastname} #{firstname}"
@@ -40,12 +34,14 @@ class Person < ActiveRecord::Base
 
   # Disactivates the user in the database.
   def disactivate
-    update_attribute(:active, false)
+    self.active = false
+    save
   end
 
   # Activates the user in the database.
   def activate
-    update_attribute(:active, true)
+    self.active = true
+    save
   end
 
   protected

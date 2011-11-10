@@ -47,7 +47,7 @@ Forgeos::Core::Engine.routes.draw do
         get :export_newsletter
       end
       member do
-        post :activate
+        put :activate
       end
     end
 

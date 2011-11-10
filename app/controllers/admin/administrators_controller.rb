@@ -72,7 +72,7 @@ private
   end
 
   def sort
-    columns = %w(id lastname roles.name email active)
+    columns = %w(id full_name role_name email active)
     per_page = params[:iDisplayLength].to_i
     offset =  params[:iDisplayStart].to_i
     page = (offset / per_page) + 1
@@ -98,6 +98,7 @@ private
       options[:star] = true
       @admins = Administrator.search(params[:sSearch],options)
     else
+      options[:select] = '*, CONCAT(lastname,firstname) as full_name, roles.name as role_name'
       @admins = Administrator.paginate(options)
     end
   end
