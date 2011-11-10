@@ -31,7 +31,9 @@ class Attachment < ActiveRecord::Base
   end
 
   def self.options_for(target = class_name)
-    return {} unless ActiveRecord::Base.connection.tables.include?(Setting.table_name) or Setting.current
+    return {} if !ActiveRecord::Base.connection.tables.include?(Setting.table_name) or
+      Setting.current.nil? or
+      Setting.current.attachments.nil?
     (Setting.current.attachments[target] || {}).symbolize_keys
   end
 
