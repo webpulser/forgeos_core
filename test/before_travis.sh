@@ -7,5 +7,7 @@ echo "Creating databases for $DB and loading schema"
 cp -r "test/fixtures" "test/dummy/test/"
 cd "test/dummy"
 bundle exec rake db:create
+echo "Loading Fixtures"
 bundle exec rake db:test:prepare db:fixtures:load
+echo "Building Sphinx Index"
 bundle exec rake ts:rebuild
