@@ -98,7 +98,7 @@ private
       options[:star] = true
       @admins = Administrator.search(params[:sSearch],options)
     else
-      options[:select] = '*, CONCAT(lastname,firstname) as full_name, roles.name as role_name'
+      options[:select] = "*, #{Administrator.sql_fullname_query} as full_name, roles.name as role_name"
       @admins = Administrator.paginate(options)
     end
   end

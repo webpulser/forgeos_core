@@ -18,7 +18,7 @@ class User < Person
     indexes lastname, :sortable => true
     indexes email, :sortable => true
     indexes active, :sortable => true
-    indexes 'CONCAT(lastname, firstname)', :as => :full_name, :sortable => true
+    indexes self.class.sql_fullname_query, :as => :full_name, :sortable => true
     set_property :delta => true
   end
 

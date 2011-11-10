@@ -151,7 +151,7 @@ private
       options[:star] = true
       @users = User.search(params[:sSearch],options)
     else
-      options[:select] = '*, CONCAT(lastname,firstname) as full_name'
+      options[:select] = "*, #{User.sql_fullname_query} as full_name"
       @users = User.paginate(options)
     end
   end

@@ -1,5 +1,5 @@
 class ApplicationController < ActionController::Base
-  CsvParser = (RUBY_VERSION.to_f >= 1.9 ? Csv : FasterCSV)
+  CsvParser = (RUBY_VERSION.to_f >= 1.9 ? CSV : FasterCSV)
   helper :application
   helper_method :current_user_session, :current_user
 

@@ -27,6 +27,15 @@ class Person < ActiveRecord::Base
     "#{lastname} #{firstname}"
   end
 
+  def self.sql_fullname_query
+    case self.connection.class.to_s
+    when 'ActiveRecord::ConnectionAdapters::MysqlAdapter', 'ActiveRecord::ConnectionAdapters::Mysql2Adapter'
+      "CONCAT(lastname, firstname)"
+    when 'ActiveRecord::ConnectionAdapters::PostgreSQLAdapter'
+      "TEXTCAT(lastname, firstname)"
+    end
+  end
+
   def name
     "#{firstname} #{lastname}"
   end
