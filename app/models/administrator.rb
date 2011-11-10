@@ -18,7 +18,7 @@ class Administrator < Person
     indexes lastname, :sortable => true
     indexes email, :sortable => true
     indexes active, :sortable => true
-    indexes self.class.sql_fullname_query, :as => :full_name, :sortable => true
+    indexes Administrator.sql_fullname_query, :as => :full_name, :sortable => true
     indexes role(:name), :as => :role_name, :sortable => true
     set_property :delta => true
   end
