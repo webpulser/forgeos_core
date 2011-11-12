@@ -27,4 +27,12 @@ class SerializedFieldHelperTest < ActionView::TestCase
     assert_equal '<label for="hash_toto">tutu</label><br /><input name="hash[toto]" type="hidden" value="0" /><input checked="checked" id="hash_toto" name="hash[toto]" type="checkbox" value="1" />', serialized_field(form_builder, :check_box, :toto)
   end
 
+  test "should generate field with select" do
+    object = { :toto => '1', :tata => '2'}
+    form_builder = FormBuilder.new(:hash, object, self, {}, nil)
+    assert_equal '<label for="hash_toto">tutu</label><br /><select id="hash_toto" name="hash[toto]"><option value="1">1</option>' + "\n" + '<option value="2">2</option></select>', serialized_field(form_builder, :select, :toto, options_for_select([['1','1'], ['2', '2']]), {})
+    assert_equal '<label for="hash_toto">tutu</label><br /><select id="hash_toto" name="hash[toto]"><option value="1" selected="selected">1</option>' + "\n" + '<option value="2">2</option></select>', serialized_field(form_builder, :select, :toto, [['1','1'], ['2', '2']])
+  end
+
+
 end

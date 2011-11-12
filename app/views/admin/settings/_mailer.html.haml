@@ -1,8 +1,7 @@
 - mailer = f.object.mailer || {}
 
 = f.fields_for :mailer do |mailer_fields|
-  = mailer_fields.label :delivery_method
-  = mailer_fields.select :delivery_method, options_for_select([['SMTP','smtp'],['sendmail','sendmail'],['Test','test']], mailer[:delivery_method]), { :prompt => t(:please_select) }
+  = serialized_field mailer_fields, :select, :delivery_method, options_for_select([['SMTP','smtp'],['sendmail','sendmail'],['Test','test']], mailer[:delivery_method]), { :prompt => t(:please_select) }
   .clear
 
 #smtp.delivery_method_settings.hidden.fieldset.grid_7
@@ -11,24 +10,21 @@
   - smtp_settings = f.object.smtp_settings || {}
 
   = f.fields_for :smtp_settings do |smtp_fields|
-    = serialized_field smtp_fields, smtp_settings, :text_field, :address
-    = serialized_field smtp_fields, smtp_settings, :text_field, :port
-    = serialized_field smtp_fields, smtp_settings, :text_field, :domain
-    = serialized_field smtp_fields, smtp_settings, :check_box, :enable_starttls_auto
+    - authentication = smtp_fields.object[:authentication]
+    = serialized_field smtp_fields, :text_field, :address
+    = serialized_field smtp_fields, :text_field, :port
+    = serialized_field smtp_fields, :text_field, :domain
+    = serialized_field smtp_fields, :check_box, :enable_starttls_auto
 
-    = smtp_fields.label :authentication
-    %br
-    = smtp_fields.select :authentication, options_for_select([['none', 'none'],['plain','plain'],['login','login'],['cran_md5','cran_md5']], smtp_settings[:authentication])
+    = serialized_field smtp_fields, :select, :authentication, options_for_select([['none', 'none'],['plain','plain'],['login','login'],['cran_md5','cran_md5']], authentication)
 
-    #authentication{ :class => (smtp_settings[:authentication] ? nil : 'hidden') }
-      = serialized_field smtp_fields, smtp_settings, :text_field, :user_name
-      = serialized_field smtp_fields, smtp_settings, :text_field, :password
+    #authentication{ :class => (authentication ? nil : 'hidden') }
+      = serialized_field smtp_fields, :text_field, :user_name
+      = serialized_field smtp_fields, :text_field, :password
 #sendmail.delivery_method_settings.hidden.fieldset.grid_7
   %h2 Sendmail Configuration
 
-  - sendmail_settings = f.object.sendmail_settings || {}
-
-  = f.fields_for :sendmail_settings, sendmail_settings do |sendmail_fields|
-    = serialized_field sendmail_fields, sendmail_settings, :text_field, :location
-    = serialized_field sendmail_fields, sendmail_settings, :text_field, :arguments
+  = f.fields_for :sendmail_settings do |sendmail_fields|
+    = serialized_field sendmail_fields, :text_field, :location
+    = serialized_field sendmail_fields, :text_field, :arguments
 #test.delivery_method_settings.hidden

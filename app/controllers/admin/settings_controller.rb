@@ -9,21 +9,13 @@ class Admin::SettingsController < Admin::BaseController
   end
 
   def update
-    settings = params[:setting]
-    if settings
-      smtp_settings = settings[:smtp_settings]
-      if smtp_settings and settings[:smtp_settings][:authentication] == 'none'
-        [:authentication, :password, :user_name].each do |key|
-          smtp_settings[key] = nil
-        end
-      end
-    end
-    if @setting.update_attributes(settings)
+    if @setting.update_attributes(params[:settings])
       flash[:notice] = t('setting.update.success')
+      redirect_to([forgeos_core, :edit, :admin, :setting])
     else
       flash[:error] = t('setting.update.failed')
+      render(:action => :edit)
     end
-    redirect_to([forgeos_core, :edit, :admin, :setting])
   end
 private
 
