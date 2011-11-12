@@ -1,3 +1,4 @@
 test:
-  mem_limit: 128M
+  mem_limit: 256M
   enable_star: true
+  sql_range_step: 10000000

@@ -68,6 +68,6 @@ class Attachment < ActiveRecord::Base
   define_index do
     indexes filename, :sortable => true
     indexes content_type, :sortable => true
-    indexes size, :sortable => true
+    has size, :sortable => true, :type => :integer
   end
 end

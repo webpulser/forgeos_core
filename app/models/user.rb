@@ -17,7 +17,7 @@ class User < Person
     indexes firstname, :sortable => true
     indexes lastname, :sortable => true
     indexes email, :sortable => true
-    indexes active, :sortable => true
+    has active, :sortable => true, :type => :boolean
     indexes User.sql_fullname_query, :as => :full_name, :sortable => true
     set_property :delta => true
   end
