@@ -100,7 +100,7 @@ jQuery(document).ready(function(){
           flush_tag_autocomplete();
         },
         type:'post',
-        url: '/admin/tags/tag'
+        url: '/admin/tags'
       });
     }
     else{

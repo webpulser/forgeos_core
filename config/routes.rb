@@ -19,6 +19,7 @@ Forgeos::Core::Engine.routes.draw do
     match '/import' => 'import#index', :as => :import
     match '/import/create_user' => 'import#create_user', :as => :import_create_user
 
+    resources :tags
     resources :cachings
     resource :person_session do
       collection do
