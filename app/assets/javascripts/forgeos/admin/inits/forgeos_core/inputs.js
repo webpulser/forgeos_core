@@ -80,10 +80,10 @@ jQuery(document).ready(function(){
       var target = jQuery('#tag_autocomplete');
       var out = "";
       jQuery.ajax({
-        beforeSend:function(request){jQuery('#tag').addClass('loading');},
-        data: { tag: value, authenticity_token: window._forgeos_js_vars.token },
-        dataType:'json',
-        success:function(request){
+        "beforeSend":function(request){jQuery('#tag').addClass('loading');},
+        "data": { tag: value },
+        "dataType": 'json',
+        "success": function(request){
           if(request.length>0){
             for (var i=0; i<request.length; i++){
               out += "<span>"+request[i]+"</span>";
@@ -96,11 +96,11 @@ jQuery(document).ready(function(){
             flush_tag_autocomplete();
           }
         },
-        error:function(request){
+        "error": function(request){
           flush_tag_autocomplete();
         },
-        type:'post',
-        url: '/admin/tags'
+        "type": 'get',
+        "url": '/admin/tags'
       });
     }
     else{
