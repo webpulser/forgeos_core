@@ -221,7 +221,7 @@ function init_category_tree(selector, type, source) {
         var cat_id = get_rails_element_id(NODE);
         var table = jQuery('#table');
         if (table.length == 0){
-          var table = jQuery('.table');
+          table = jQuery('.table');
         }
         var current_table = table.dataTableInstance();
         var url = current_table.fnSettings().sAjaxSource;
