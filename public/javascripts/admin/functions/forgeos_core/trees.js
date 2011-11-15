@@ -219,7 +219,11 @@ function init_category_tree(selector, type, source) {
       onselect: function(NODE,TREE_OBJ) {
         jQuery(".parent_id_hidden").remove();
         var cat_id = get_rails_element_id(NODE);
-        var current_table = jQuery('#table').dataTableInstance();
+        var table = jQuery('#table');
+        if (table.length == 0){
+          var table = jQuery('.table');
+        }
+        var current_table = table.dataTableInstance();
         var url = current_table.fnSettings().sAjaxSource;
         var url_base = url.split('?')[0];
 
@@ -230,7 +234,7 @@ function init_category_tree(selector, type, source) {
         params = stringify_params_from_json(params);
 
         // construct url and redraw table
-        update_current_dataTable_source('#table',url_base + '?' + params);
+        update_current_dataTable_source(table.attr('id'),url_base + '?' + params);
 
         object_name = jQuery(NODE).attr('id').split('_')[0];
         category_id = get_rails_element_id(NODE);
