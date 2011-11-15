@@ -234,7 +234,7 @@ function init_category_tree(selector, type, source) {
         params = stringify_params_from_json(params);
 
         // construct url and redraw table
-        update_current_dataTable_source(table.attr('id'),url_base + '?' + params);
+        update_current_dataTable_source('#'+table.attr('id'),url_base + '?' + params);
 
         object_name = jQuery(NODE).attr('id').split('_')[0];
         category_id = get_rails_element_id(NODE);
