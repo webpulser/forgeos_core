@@ -1,6 +1,6 @@
 class CreateRules < ActiveRecord::Migration
   def self.up
-    create_table :rules do |t|
+    create_table :forgeos_rules do |t|
       t.text :conditions,
         :description,
         :variables
@@ -17,6 +17,6 @@ class CreateRules < ActiveRecord::Migration
   end
 
   def self.down
-    drop_table :rules
+    drop_table :forgeos_rules
   end
 end

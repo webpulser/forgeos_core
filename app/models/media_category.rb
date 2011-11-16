@@ -1,2 +1,0 @@
-class MediaCategory < AttachmentCategory
-end

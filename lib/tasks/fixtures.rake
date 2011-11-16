@@ -15,12 +15,12 @@ namespace :forgeos do
 
         tables.each do |file|
           file_name = File.basename(file, '.yml')
-          begin
-            Fixtures.create_fixtures(File.join(PLUGIN_PATH,'db','fixtures'), file_name)
+          #begin
+            ActiveRecord::Fixtures.create_fixtures(File.join(PLUGIN_PATH,'db','fixtures', 'forgeos'), file_name)
             puts "Loaded #{file_name} fixtures"
-          rescue
-            puts "#{file_name} fixtures not loaded"
-          end
+          #rescue
+          #  puts "#{file_name} fixtures not loaded"
+          #end
         end
         Rake::Task['forgeos:core:fixtures:load'].reenable
       end

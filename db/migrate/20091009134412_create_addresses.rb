@@ -1,6 +1,6 @@
 class CreateAddresses < ActiveRecord::Migration
   def self.up
-    create_table :addresses do |t|
+    create_table :forgeos_addresses do |t|
       t.string :address,
         :address_2,
         :zip_code,
@@ -13,6 +13,6 @@ class CreateAddresses < ActiveRecord::Migration
   end
 
   def self.down
-    drop_table :addresses
+    drop_table :forgeos_addresses
   end
 end

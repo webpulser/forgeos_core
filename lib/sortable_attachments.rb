@@ -6,10 +6,10 @@ module SortableAttachments
   module ClassMethods
     def has_and_belongs_to_many_attachments(options = {})
       has_many :attachment_links, :as => :element, :order => :position
-      has_many :attachments, :through => :attachment_links, :order => 'attachment_links.position'
+      has_many :attachments, :through => :attachment_links, :order => 'forgeos_attachment_links.position'
 
       %w(Picture Doc Video Pdf Audio Media).each do |klass|
-        has_many klass.underscore.pluralize, { :through => :attachment_links, :class_name => klass, :source => :attachment, :order => 'attachment_links.position' }.merge(options)
+        has_many klass.underscore.pluralize, { :through => :attachment_links, :class_name => "Forgeos::#{klass}", :source => :attachment, :order => "#{Forgeos::AttachmentLink.table_name}.position" }.merge(options)
       end
 
       unless self.instance_methods.include?('attachment_ids_with_position=')
@@ -28,9 +28,9 @@ module SortableAttachments
     def reset_attachment_positions_by_ids(ids)
       return if self.new_record?
       ids.each_with_index do |id, i|
-        connection.update(
-          "UPDATE #{connection.quote_table_name('attachment_links')} SET #{connection.quote_column_name('position')} = #{i} " +
-          "WHERE #{connection.quote_column_name('element_id')} = #{self.id} AND #{connection.quote_column_name('element_type')} = #{connection.quote(self.class.base_class.to_s)} AND #{connection.quote_column_name('attachment_id')} = #{id}"
+        Forgeos::AttachmentLink.update_all(
+          "position = #{i} ",
+          "element_id = #{self.id} AND element_type = #{connection.quote(self.class.to_s)} AND attachment_id = #{id}"
         ) if id.to_i != 0
       end
     end

@@ -1,6 +1,6 @@
 class CreateMetaInfos < ActiveRecord::Migration
   def self.up
-    create_table :meta_infos do |t|
+    create_table :forgeos_meta_infos do |t|
       t.string :title
       t.text :description,
         :keywords
@@ -9,6 +9,6 @@ class CreateMetaInfos < ActiveRecord::Migration
   end
 
   def self.down
-    drop_table :meta_infos
+    drop_table :forgeos_meta_infos
   end
 end

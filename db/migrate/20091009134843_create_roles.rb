@@ -1,6 +1,6 @@
 class CreateRoles < ActiveRecord::Migration
   def self.up
-    create_table :roles do |t|
+    create_table :forgeos_roles do |t|
       t.string   :name
       t.boolean  :active,
         :default => true, :null => false
@@ -9,6 +9,6 @@ class CreateRoles < ActiveRecord::Migration
   end
 
   def self.down
-    drop_table :roles
+    drop_table :forgeos_roles
   end
 end

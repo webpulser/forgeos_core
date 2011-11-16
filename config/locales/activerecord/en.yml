@@ -2,21 +2,21 @@
 en:
   activerecord:
     models:
-      user: user
+      forgeos/user: user
 
-      media: media
-      doc: document
-      pdf: pdf
-      video: video
-      picture: picture
-      audio: audio file
+      forgeos/media: media
+      forgeos/doc: document
+      forgeos/pdf: pdf
+      forgeos/video: video
+      forgeos/picture: picture
+      forgeos/audio: audio file
 
-      external_link: external link
-      category_link: category link
-      page_link: page link
-      product_link: product link
+      forgeos/external_link: external link
+      forgeos/category_link: category link
+      forgeos/page_link: page link
+      forgeos/product_link: product link
     attributes:
-      user:
+      forgeos/user:
         lastname: name
         firstname: firstname
   helpers:

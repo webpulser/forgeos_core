@@ -1,9 +1,9 @@
 class AddAttachmentsToSettings < ActiveRecord::Migration
   def self.up
-    add_column :settings, :attachments, :text
+    add_column :forgeos_settings, :attachments, :text
   end
 
   def self.down
-    remove_column :settings, :attachments
+    remove_column :forgeos_settings, :attachments
   end
 end

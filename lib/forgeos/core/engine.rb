@@ -20,6 +20,8 @@ module Forgeos
       paths["config/locales"] << 'config/locales/**'
       paths["app/assets"] << 'vendor/assets'
       paths["forgeos_admin_menu"] = 'config/forgeos_admin_menu.yml'
+      isolate_namespace Forgeos
+      engine_name 'forgeos_core_engine'
     end
   end
 end

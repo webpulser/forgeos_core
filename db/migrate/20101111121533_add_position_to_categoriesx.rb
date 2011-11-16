@@ -1,9 +1,9 @@
 class AddPositionToCategoriesx < ActiveRecord::Migration
   def self.up
-    add_column :categories, :position, :int, :default => 0
+    add_column :forgeos_categories, :position, :int, :default => 0
   end
 
   def self.down
-    remove_column :categories, :position
+    remove_column :forgeos_categories, :position
   end
 end

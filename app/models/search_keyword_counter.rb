@@ -1,2 +1,0 @@
-class SearchKeywordCounter < StatisticCounter
-end

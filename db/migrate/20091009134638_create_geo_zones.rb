@@ -1,6 +1,6 @@
 class CreateGeoZones < ActiveRecord::Migration
   def self.up
-    create_table :geo_zones do |t|
+    create_table :forgeos_geo_zones do |t|
       t.string :iso,
         :iso3,
         :name,
@@ -12,6 +12,6 @@ class CreateGeoZones < ActiveRecord::Migration
   end
 
   def self.down
-    drop_table :geo_zones
+    drop_table :forgeos_geo_zones
   end
 end

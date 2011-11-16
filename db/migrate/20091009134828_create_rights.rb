@@ -1,13 +1,13 @@
 class CreateRights < ActiveRecord::Migration
   def self.up
-    create_table :rights do |t|
+    create_table :forgeos_rights do |t|
       t.string :name,
         :controller_name,
         :action_name
-    end  
+    end
   end
 
   def self.down
-    drop_table :rights
+    drop_table :forgeos_rights
   end
 end

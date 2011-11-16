@@ -1,6 +1,6 @@
 class CreatePeople < ActiveRecord::Migration
   def self.up
-    create_table :people do |t|
+    create_table :forgeos_people do |t|
       t.string :email,
         :firstname,
         :lastname,
@@ -26,6 +26,6 @@ class CreatePeople < ActiveRecord::Migration
   end
 
   def self.down
-    drop_table :people
+    drop_table :forgeos_people
   end
 end

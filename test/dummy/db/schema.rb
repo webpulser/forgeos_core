@@ -11,9 +11,24 @@
 #
 # It's strongly recommended to check this file into your version control system.
 
-ActiveRecord::Schema.define(:version => 20111024101878) do
+ActiveRecord::Schema.define(:version => 20111116212547) do
 
-  create_table "addresses", :force => true do |t|
+  create_table "delayed_jobs", :force => true do |t|
+    t.integer  "priority",   :default => 0
+    t.integer  "attempts",   :default => 0
+    t.text     "handler"
+    t.text     "last_error"
+    t.datetime "run_at"
+    t.datetime "locked_at"
+    t.datetime "failed_at"
+    t.string   "locked_by"
+    t.datetime "created_at"
+    t.datetime "updated_at"
+  end
+
+  add_index "delayed_jobs", ["priority", "run_at"], :name => "delayed_jobs_priority"
+
+  create_table "forgeos_addresses", :force => true do |t|
     t.string   "address"
     t.string   "address_2"
     t.string   "zip_code"
@@ -25,7 +40,7 @@ ActiveRecord::Schema.define(:version => 20111024101878) do
     t.datetime "updated_at"
   end
 
-  create_table "attachment_links", :force => true do |t|
+  create_table "forgeos_attachment_links", :force => true do |t|
     t.integer "attachment_id"
     t.integer "element_id"
     t.integer "position"
@@ -33,7 +48,7 @@ ActiveRecord::Schema.define(:version => 20111024101878) do
     t.string  "attachment_type"
   end
 
-  create_table "attachments", :force => true do |t|
+  create_table "forgeos_attachments", :force => true do |t|
     t.string   "content_type"
     t.string   "name"
     t.string   "filename"
@@ -51,7 +66,7 @@ ActiveRecord::Schema.define(:version => 20111024101878) do
     t.string   "alt"
   end
 
-  create_table "categories", :force => true do |t|
+  create_table "forgeos_categories", :force => true do |t|
     t.string   "type",       :limit => 45
     t.integer  "parent_id"
     t.datetime "created_at"
@@ -59,18 +74,18 @@ ActiveRecord::Schema.define(:version => 20111024101878) do
     t.integer  "position",                 :default => 0
   end
 
-  add_index "categories", ["id", "type"], :name => "index_categories_on_id_and_type", :unique => true
+  add_index "forgeos_categories", ["id", "type"], :name => "index_forgeos_categories_on_id_and_type", :unique => true
 
-  create_table "categories_elements", :id => false, :force => true do |t|
+  create_table "forgeos_categories_elements", :id => false, :force => true do |t|
     t.integer "category_id"
     t.integer "element_id"
     t.integer "position",    :default => 0, :null => false
   end
 
-  add_index "categories_elements", ["category_id", "element_id"], :name => "index_categories_elements_on_category_id_and_element_id", :unique => true
+  add_index "forgeos_categories_elements", ["category_id", "element_id"], :name => "index_forgeos_categories_elements_on_category_id_and_element_id", :unique => true
 
-  create_table "category_translations", :force => true do |t|
-    t.integer  "category_id"
+  create_table "forgeos_category_translations", :force => true do |t|
+    t.integer  "forgeos_category_id"
     t.string   "locale"
     t.string   "url"
     t.string   "name"
@@ -79,9 +94,9 @@ ActiveRecord::Schema.define(:version => 20111024101878) do
     t.datetime "updated_at"
   end
 
-  add_index "category_translations", ["category_id"], :name => "index_category_translations_on_category_id"
+  add_index "forgeos_category_translations", ["forgeos_category_id"], :name => "index_cc5c2f78ec5fe2953ff591ce10708766eaa1c94e"
 
-  create_table "comments", :force => true do |t|
+  create_table "forgeos_comments", :force => true do |t|
     t.string   "title",            :limit => 50, :default => ""
     t.text     "comment"
     t.integer  "commentable_id"
@@ -91,24 +106,9 @@ ActiveRecord::Schema.define(:version => 20111024101878) do
     t.datetime "updated_at"
   end
 
-  add_index "comments", ["person_id"], :name => "fk_comments_person"
+  add_index "forgeos_comments", ["person_id"], :name => "fk_comments_person"
 
-  create_table "delayed_jobs", :force => true do |t|
-    t.integer  "priority",   :default => 0
-    t.integer  "attempts",   :default => 0
-    t.text     "handler"
-    t.text     "last_error"
-    t.datetime "run_at"
-    t.datetime "locked_at"
-    t.datetime "failed_at"
-    t.string   "locked_by"
-    t.datetime "created_at"
-    t.datetime "updated_at"
-  end
-
-  add_index "delayed_jobs", ["priority", "run_at"], :name => "delayed_jobs_priority"
-
-  create_table "geo_zones", :force => true do |t|
+  create_table "forgeos_geo_zones", :force => true do |t|
     t.string  "iso"
     t.string  "iso3"
     t.string  "name"
@@ -118,7 +118,7 @@ ActiveRecord::Schema.define(:version => 20111024101878) do
     t.integer "parent_id"
   end
 
-  create_table "import_sets", :force => true do |t|
+  create_table "forgeos_import_sets", :force => true do |t|
     t.text     "fields"
     t.text     "parser_options"
     t.boolean  "ignore_first_row", :default => true, :null => false
@@ -127,8 +127,8 @@ ActiveRecord::Schema.define(:version => 20111024101878) do
     t.datetime "updated_at"
   end
 
-  create_table "meta_info_translations", :force => true do |t|
-    t.integer  "meta_info_id"
+  create_table "forgeos_meta_info_translations", :force => true do |t|
+    t.integer  "forgeos_meta_info_id"
     t.string   "locale"
     t.string   "title"
     t.text     "description"
@@ -137,14 +137,14 @@ ActiveRecord::Schema.define(:version => 20111024101878) do
     t.datetime "updated_at"
   end
 
-  add_index "meta_info_translations", ["meta_info_id"], :name => "index_meta_info_translations_on_meta_info_id"
+  add_index "forgeos_meta_info_translations", ["forgeos_meta_info_id"], :name => "index_bf657d8aeb1f08a77976f6aca7e82e1ff66a07ee"
 
-  create_table "meta_infos", :force => true do |t|
+  create_table "forgeos_meta_infos", :force => true do |t|
     t.integer "target_id"
     t.string  "target_type"
   end
 
-  create_table "people", :force => true do |t|
+  create_table "forgeos_people", :force => true do |t|
     t.string   "email"
     t.string   "firstname"
     t.string   "lastname"
@@ -177,25 +177,20 @@ ActiveRecord::Schema.define(:version => 20111024101878) do
     t.boolean  "delta",                             :default => true,  :null => false
   end
 
-  create_table "rights", :force => true do |t|
+  create_table "forgeos_rights", :force => true do |t|
     t.string "name"
     t.string "controller_name"
     t.string "action_name"
   end
 
-  create_table "rights_roles", :id => false, :force => true do |t|
-    t.integer "right_id"
-    t.integer "role_id"
-  end
-
-  create_table "roles", :force => true do |t|
+  create_table "forgeos_roles", :force => true do |t|
     t.string   "name"
     t.boolean  "active",     :default => true, :null => false
     t.datetime "created_at"
     t.datetime "updated_at"
   end
 
-  create_table "rules", :force => true do |t|
+  create_table "forgeos_rules", :force => true do |t|
     t.text    "conditions"
     t.text    "description"
     t.text    "variables"
@@ -208,13 +203,13 @@ ActiveRecord::Schema.define(:version => 20111024101878) do
     t.integer "parent_id"
   end
 
-  create_table "search_keywords", :force => true do |t|
+  create_table "forgeos_search_keywords", :force => true do |t|
     t.string   "keyword"
     t.datetime "created_at"
     t.datetime "updated_at"
   end
 
-  create_table "settings", :force => true do |t|
+  create_table "forgeos_settings", :force => true do |t|
     t.string  "name"
     t.string  "lang"
     t.string  "time_zone"
@@ -228,12 +223,17 @@ ActiveRecord::Schema.define(:version => 20111024101878) do
     t.text    "attachments"
   end
 
-  create_table "statistic_counters", :force => true do |t|
+  create_table "forgeos_statistic_counters", :force => true do |t|
     t.string  "type"
     t.date    "date"
     t.integer "counter",      :default => 1
     t.integer "element_id"
     t.string  "element_type"
+  end
+
+  create_table "rights_roles", :id => false, :force => true do |t|
+    t.integer "right_id"
+    t.integer "role_id"
   end
 
   create_table "taggings", :force => true do |t|

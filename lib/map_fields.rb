@@ -12,14 +12,15 @@ module MapFields
   module ClassMethods
     def map_fields(action, fields, options = {})
       include MapFields::InstanceMethods
-      write_inheritable_array("map_fields_fields_#{action}", fields)
-      write_inheritable_attribute("map_fields_options_#{action}", options)
-      write_inheritable_attribute(:map_fields_actions, []) unless read_inheritable_attribute(:map_fields_actions)
-      write_inheritable_attribute(:map_fields_actions, (read_inheritable_attribute(:map_fields_actions) << action).uniq)
+      cattr_accessor "map_fields_fields_#{action}", :map_fields_actions, "map_fields_options_#{action}"
+      self.send("map_fields_fields_#{action}=", fields)
+      self.send("map_fields_options_#{action}=", options)
+      map_fields_actions ||= []
+      map_fields_actions = (map_fields_actions << action).uniq
       skip_filter :map_fields
       skip_filter :map_fields_cleanup
-      before_filter :map_fields, :only =>  read_inheritable_attribute(:map_fields_actions)
-      after_filter :map_fields_cleanup, :only =>  read_inheritable_attribute(:map_fields_actions)
+      before_filter :map_fields, :only => map_fields_actions
+      after_filter :map_fields_cleanup, :only => map_fields_actions
     end
   end
 
@@ -30,9 +31,7 @@ module MapFields
         :file_field => 'file',
         :params => []
       }
-      options = default_options.merge(
-        self.class.read_inheritable_attribute("map_fields_options_#{params[:action]}")
-      )
+      options = default_options.merge self.class.send("map_fields_options_#{params[:action]}")
       if session[:map_fields].nil? || params[options[:file_field]]
         session[:map_fields] = {}
         if params[options[:file_field]].blank?
@@ -60,7 +59,7 @@ module MapFields
           @rows << row
           break if @rows.size == 5
         end
-        expected_fields = self.class.read_inheritable_attribute("map_fields_fields_#{params[:action]}")
+        expected_fields = self.class.send("map_fields_fields_#{params[:action]}")
         @fields = ([nil] + expected_fields).inject([]){ |o, e| o << [e, o.size]}
         @parameters = []
         options[:params].each do |param|

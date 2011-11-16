@@ -1,5 +1,5 @@
 class CreateTags < ActiveRecord::Migration
-  def self.up
+  def change
     create_table :taggings do |t|
       t.belongs_to  :tag
       t.belongs_to  :taggable,
@@ -15,12 +15,5 @@ class CreateTags < ActiveRecord::Migration
     create_table :tags do |t|
       t.string :name
     end
-  end
-
-  def self.down
-    drop_table :tags
-    remove_index :taggings, :column => %w(taggable_id taggable_type context)
-    remove_index :taggings, :column => %(tag_id)
-    drop_table :taggings
   end
 end

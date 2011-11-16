@@ -1,6 +1,6 @@
 class CreateAttachmentsElements < ActiveRecord::Migration
   def self.up
-    create_table :attachments_elements, :id => false do |t|
+    create_table :forgeos_attachments_elements, :id => false do |t|
       t.belongs_to :attachment,
         :element
       t.integer :position
@@ -8,6 +8,6 @@ class CreateAttachmentsElements < ActiveRecord::Migration
   end
 
   def self.down
-    drop_table :attachments_elements
+    drop_table :forgeos_attachments_elements
   end
 end

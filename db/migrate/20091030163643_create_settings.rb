@@ -1,6 +1,6 @@
 class CreateSettings < ActiveRecord::Migration
   def self.up
-    create_table :settings do |t|
+    create_table :forgeos_settings do |t|
       t.string :name,
         :lang,
         :time_zone,
@@ -15,6 +15,6 @@ class CreateSettings < ActiveRecord::Migration
   end
 
   def self.down
-    drop_table :settings
+    drop_table :forgeos_settings
   end
 end

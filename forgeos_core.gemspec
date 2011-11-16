@@ -3,7 +3,7 @@ $:.push File.expand_path("../lib", __FILE__)
 require "forgeos/core/version"
 
 Gem::Specification.new do |s|
-  s.add_dependency 'rails', '~> 3.1.1'
+  s.add_dependency 'rails', '~> 3.2.3'
   s.add_dependency 'acts-as-taggable-on', '>= 2.0.6'
   s.add_dependency 'acts_as_list', '>= 0.1.3'
   s.add_dependency 'acts_as_tree', '>= 0.1.1'
@@ -14,7 +14,7 @@ Gem::Specification.new do |s|
   s.add_dependency 'sass-rails', '>= 3.1.4'
   s.add_dependency 'mime-types', '>= 1.16'
   s.add_dependency 'thinking-sphinx', '>= 2.0.5'
-  s.add_dependency 'webpulser-habtm_list', '~> 0.1.3'
+  s.add_dependency 'webpulser-habtm_list', '~> 0.1.3.1'
   s.add_dependency 'will_paginate', '~> 3.0.pre4'
   s.add_dependency 'authlogic', '>= 3.0.3'
   s.add_dependency 'squeel', '>= 0.8.7'

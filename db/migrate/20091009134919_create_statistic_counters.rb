@@ -1,6 +1,6 @@
 class CreateStatisticCounters < ActiveRecord::Migration
   def self.up
-    create_table :statistic_counters do |t|
+    create_table :forgeos_statistic_counters do |t|
       t.string :type
       t.date :date
       t.integer :counter,
@@ -10,6 +10,6 @@ class CreateStatisticCounters < ActiveRecord::Migration
   end
 
   def self.down
-    drop_table :statistic_counters
+    drop_table :forgeos_statistic_counters
   end
 end

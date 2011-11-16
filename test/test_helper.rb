@@ -18,16 +18,16 @@ class ActiveSupport::TestCase
   include Authlogic::TestCase
 
   def admin_login_to(controller, action)
-    role = Role.create(
+    role = Forgeos::Role.create(
       :name => 'admin',
-      :rights => [Right.create(
+      :rights => [Forgeos::Right.create(
         :name => 'administrators_index',
-        :controller_name => controller,
+        :controller_name => "forgeos/#{controller}",
         :action_name => action
       )]
     )
-    admin = people(:administrator)
+    admin = forgeos_people(:administrator)
     admin.role = role
-    PersonSession.create(admin)
+    Forgeos::PersonSession.create(admin)
   end
 end

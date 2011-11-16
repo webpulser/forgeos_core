@@ -1,2 +1,0 @@
-class PictureCategory < AttachmentCategory
-end

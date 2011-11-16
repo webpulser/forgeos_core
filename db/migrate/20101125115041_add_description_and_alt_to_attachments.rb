@@ -1,11 +1,11 @@
 class AddDescriptionAndAltToAttachments < ActiveRecord::Migration
   def self.up
-    add_column :attachments, :description, :text
-    add_column :attachments, :alt, :string
+    add_column :forgeos_attachments, :description, :text
+    add_column :forgeos_attachments, :alt, :string
   end
 
   def self.down
-    remove_column :attachments, :alt
-    remove_column :attachments, :description
+    remove_column :forgeos_attachments, :alt
+    remove_column :forgeos_attachments, :description
   end
 end

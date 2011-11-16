@@ -1,6 +1,6 @@
 class CreateAttachments < ActiveRecord::Migration
   def self.up
-    create_table :attachments do |t|
+    create_table :forgeos_attachments do |t|
       t.string :content_type,
         :name,
         :filename,
@@ -13,10 +13,10 @@ class CreateAttachments < ActiveRecord::Migration
       t.belongs_to :parent,
         :person
       t.timestamps
-    end    
+    end
   end
 
   def self.down
-    drop_table :attachments
+    drop_table :forgeos_attachments
   end
 end

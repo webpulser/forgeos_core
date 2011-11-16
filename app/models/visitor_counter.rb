@@ -1,2 +1,0 @@
-class VisitorCounter < StatisticCounter
-end

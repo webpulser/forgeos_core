@@ -1,2 +1,0 @@
-class AudioCategory < AttachmentCategory
-end

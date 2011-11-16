@@ -1,2 +1,0 @@
-class PdfCategory < AttachmentCategory
-end
