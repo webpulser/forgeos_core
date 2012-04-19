@@ -169,7 +169,7 @@ function DataTablesDrawCallBack(table) {
 
 // set id to each row and set it draggable
 function DataTablesRowCallBack(nRow, aData, iDisplayIndex){
-  var table = jQuery('#'+this.sInstance);
+  var table = jQuery('#'+this.fnSettings().sInstance);
   var div = jQuery(nRow).find(":regex(id,.+_\\d+)");
 
   if (div.length != 0) {

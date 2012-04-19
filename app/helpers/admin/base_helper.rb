@@ -29,7 +29,7 @@ module Admin::BaseHelper
       function #{dataTables_init_function}(){
         var target = jQuery('##{id}');
         if (typeof(target.dataTableInstance) != 'undefined' && typeof(target.dataTableInstance()) != 'undefined') {
-          oTable.fnDraw();
+          target.dataTableInstance.fnDraw();
         } else {
           var table = target.dataTable({
             'sPaginationType': 'full_numbers',
@@ -58,7 +58,6 @@ module Admin::BaseHelper
             }
           });
           oTables.push(table);
-          oTable = table;
         }
       }
 
@@ -91,7 +90,7 @@ module Admin::BaseHelper
       function #{dataTables_init_function}(){
         var target = jQuery('##{id}');
         if (typeof(target.dataTableInstance) != 'undefined' && typeof(target.dataTableInstance()) != 'undefined') {
-          oTable.fnDraw();
+          target.dataTableInstance.fnDraw();
         } else {
           var table = target.dataSlide({
             'sPaginationType': 'full_numbers',
@@ -119,7 +118,6 @@ module Admin::BaseHelper
             }
           });
           oTables.push(table);
-          oTable = table;
         }
       }
 

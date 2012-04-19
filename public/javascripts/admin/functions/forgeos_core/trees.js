@@ -273,15 +273,8 @@ function check_jsTree_selected(element){
   return false;
 }
 
-// unselect current node and refresh dataTables
-function select_all_elements_by_url(url) {
-  // change dataTables ajax source en redraw the table
-  oTable.fnSettings().sAjaxSource = url;
-  oTable.fnDraw();
-}
-
 // unselect current node, remove category and refresh dataTable
-function select_all_elements_without_category(tree_id) {
+function select_all_elements_without_category(table_id) {
   var t = jQuery.tree.focused();
 
   // unselect current selected node
@@ -291,7 +284,7 @@ function select_all_elements_without_category(tree_id) {
   }
 
   // remove category from dataTables ajax source and redraw the table
-  var current_table = oTable;
+  var current_table = jQuery(table_id).dataTableInstance();
   var url = current_table.fnSettings().sAjaxSource;
   var url_base = url.split('?')[0];
   var params;
@@ -302,7 +295,7 @@ function select_all_elements_without_category(tree_id) {
   params = stringify_params_from_json(params);
 
   // construct url and redraw table
-  update_current_dataTable_source('#'+oTable.sInstance,url_base + '?' + params);
+  update_current_dataTable_source(table_id, url_base + '?' + params);
   jQuery('#parent_id_tmp').remove();
   return true;
 }

@@ -34,7 +34,7 @@
           result = eval('(' + response + ')');
         }
         if (result.result == 'success'){
-          oTable.fnDraw();
+          jQuery('#table').dataTableInstance.fnDraw();
           jQuery.tree.focused().refresh();
         } else {
           display_notification_message('error',result.error);
