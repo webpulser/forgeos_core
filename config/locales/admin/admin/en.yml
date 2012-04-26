@@ -8,6 +8,8 @@ en:
       failed: a problem occured during the cache deletion
       one: delete those pages
       all: delete all the pages
+    public_directory: Page cache
+    tmp_directory: Fragment cache
   admin:
     one: user
     other: users

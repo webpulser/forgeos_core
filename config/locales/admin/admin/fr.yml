@@ -8,6 +8,8 @@ fr:
       failed: "un problème est survenu lors de la mise à suppression du cache"
       one: supprimer ces pages
       all: supprimer toutes les pages
+    public_directory: Cache de pages
+    tmp_directory: Cache de fragments
   admin:
     one: administrateur
     other: administrateurs

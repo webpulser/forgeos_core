@@ -2,59 +2,46 @@ class Admin::CachingsController < Admin::BaseController
   autoload :FileUtils, 'fileutils'
 
   def index
-    @files = []
-    directory = Rails.configuration.action_controller.page_cache_directory
-    if directory
-      get_file(directory)
+    respond_to do |wants|
+      wants.html
+      wants.json do
+        if params[:id] == '0'
+          @files = [Rails.configuration.action_controller.page_cache_directory, Rails.cache.cache_path]
+        else
+          get_files(params[:id])
+        end
+      end
     end
   end
 
   def create
     if params[:commit] == t('caching.delete.all').capitalize
-      files = params[:hidden_files]
+      get_files(Rails.configuration.action_controller.page_cache_directory)
+      get_files(Rails.cache.cache_path)
     else
-      files = params[:file]
+      @files = params[:files]
     end
 
-    if files
-      files.values.each do |file|
-        unless File.delete(file)
+    if @files
+      @files.each do |file|
+        unless FileUtils.rm_rf(file)
           flash[:error] = t('caching.delete.failed').capitalize
-          return redirect_to :action => 'index'
         end
       end
     else
-      return redirect_to :action => 'index'
       flash[:error] = t('caching.no_files').capitalize
     end
 
-
-    begin
-      FileUtils.remove_dir(Rails.cache.cache_path, true)
-    rescue
-      p 'This cache directory does not exist'
-    end
-
     flash[:success] = t('caching.delete.create').capitalize
-    return redirect_to :action => 'index'
+    return redirect_to([:admin, :cachings])
   end
 
 
 private
 
-  def get_file(directory)
-    dir = Dir.new(directory)
-    dir.each do |file|
-      path = "#{directory}/#{file}"
-      if File.directory?(path)
-        @files.delete(path)
-        unless file == '.' || file == '..'
-          get_file(path)
-        end
-      else
-        @files << [file, path]
-      end
-    end
+  def get_files(directory)
+    @files ||= []
+    @files += Dir["#{directory}/*"]
   end
 
 end

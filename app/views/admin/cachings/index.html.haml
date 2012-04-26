@@ -5,10 +5,7 @@
     .backgrounds.header
       .interact-links
         = f.submit t('caching.delete.one').capitalize, :class => 'backgrounds interact-button'
+        .left= t('or')
         = f.submit t('caching.delete.all').capitalize, :class => 'backgrounds interact-button'
     .files
-      - @files.each_with_index do |file, index|
-        = check_box_tag "file[#{index}]", file[1]
-        = file[0]
-        = hidden_field_tag "hidden_files[#{index}]", file[1]
-        .clear
+      #caching-tree
