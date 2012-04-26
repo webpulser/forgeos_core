@@ -11,7 +11,7 @@ jQuery(document).ready(function(){
     },
     "callback": {
       "beforedata": function (n) {
-         return { id: (n.data ? n.data('name') : 0) };
+         return { id: (n.data ? n.attr('data-name') : 0) };
       }
     },
     "plugins": { 
