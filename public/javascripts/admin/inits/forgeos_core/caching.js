@@ -1,8 +1,10 @@
 jQuery(document).ready(function(){
   jQuery('#caching-tree').tree({
     "ui": {
-      "theme_path": '/stylesheets/jstree/themes/',
-      "theme_name": 'categories'
+      "theme_path": '/stylesheets/jstree/themes/'
+    },
+    "rules": {
+      "multiple": "on"
     },
     "data": {
       "type": 'json',
@@ -12,12 +14,14 @@ jQuery(document).ready(function(){
     "callback": {
       "beforedata": function (n) {
          return { id: (n.data ? n.attr('data-name') : 0) };
-      }
-    },
-    "plugins": { 
-      "checkbox": {
-        real_checkboxes: true,
-        real_checkboxes_names: function (n) { return ["files[]", n.data('name')]; }
+      },
+      "onchange": function (n, t) {
+        var node = jQuery(n);
+        if (node.find('> a input').length) {
+          node.find('a input').remove();
+        } else {
+          node.find('> a').append('<input type="checkbox" name="files[]" value="'+ node.attr('data-name') +'" checked />');
+        }
       }
     }
   });
