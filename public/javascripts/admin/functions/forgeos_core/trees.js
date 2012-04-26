@@ -292,6 +292,7 @@ function select_all_elements_without_category(table_id) {
   // update category id
   params = get_json_params_from_url(url);
   params.category_id = null;
+  params.scope = null;
   params = stringify_params_from_json(params);
 
   // construct url and redraw table
