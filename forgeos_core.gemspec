@@ -6,7 +6,7 @@ Gem::Specification.new do |s|
   s.add_dependency 'rails', '~> 3.2.3'
   s.add_dependency 'acts-as-taggable-on', '>= 2.0.6'
   s.add_dependency 'acts_as_list', '>= 0.1.3'
-  s.add_dependency 'acts_as_tree', '>= 0.1.1'
+  s.add_dependency 'acts_as_tree', '1.0.1'
   s.add_dependency 'bcrypt-ruby', '>= 2.1.4'
   s.add_dependency 'fastercsv', '>= 1.5.4'
   s.add_dependency 'globalize3', '>= 0.1.0'
