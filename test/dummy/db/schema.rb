@@ -216,9 +216,9 @@ ActiveRecord::Schema.define(:version => 20111116212547) do
     t.string  "phone_number"
     t.string  "fax_number"
     t.string  "email"
-    t.text    "mailer",            :null => false
-    t.text    "smtp_settings",     :null => false
-    t.text    "sendmail_settings", :null => false
+    t.text    "mailer",            :null => false, :default => ''
+    t.text    "smtp_settings",     :null => false, :default => ''
+    t.text    "sendmail_settings", :null => false, :default => ''
     t.integer "address_id"
     t.text    "attachments"
   end
