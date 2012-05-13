@@ -9,7 +9,7 @@ class CreateSettings < ActiveRecord::Migration
         :email
       t.text :mailer,
         :smtp_settings,
-        :sendmail_settings, :null => false
+        :sendmail_settings, :null => false, :default => ''
       t.belongs_to :address
     end
   end
