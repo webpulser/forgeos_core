@@ -8,7 +8,7 @@
 #content.grid_16.alpha.omega
   .grid_12.alpha
     .padding-wrap
-      - right_categories = RightCategory.all(:include => :translations, :order => 'name' )
+      - right_categories = Forgeos::RightCategory.joins(:translations).order('name').all
       - right_categories.each do |right_category|
         - unless right_category.rights.nil?
           .fieldset
@@ -20,8 +20,8 @@
                 %label= right.name
               .clear
 
-      - rights = Right.all(:include => :categories, :conditions => { :categories => {:id => nil} })
-      - unless rights.nil?
+      - rights = Forgeos::Right.where(:forgeos_categories_elements => {:category_id => nil}).includes(:categories)
+      - if rights.any?
         .fieldset
           %a.small-icons.panel{ :href => '#' }
             = t('other')

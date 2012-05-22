@@ -1,6 +1,6 @@
 module Forgeos
   class Admin::RolesController < Admin::BaseController
-    before_filter :get_role, :only => [:show, :edit, :update, :destroy, :rights, :add_right, :activate, :duplicate]
+    before_filter :get_role, :only => [:show, :edit, :update, :destroy, :activate, :duplicate]
     before_filter :new_role, :only => [:new, :create]
 
     def index
@@ -20,7 +20,7 @@ module Forgeos
     end
 
     def duplicate
-      @role = @role.clone
+      @role = @role.dup
       render :action => 'new'
     end
 
@@ -60,17 +60,14 @@ module Forgeos
       end
     end
 
-    def rights
-    end
-
-    def add_right
-      @role.update_attributes(params[:role])
-      @role.save
-      return redirect_to([forgeos_core, :admin, @role])
-    end
-
     def activate
       @role.activate
+      respond_to do |wants|
+        wants.html do
+          redirect_to([forgeos_core,:admin,:roles])
+        end
+        wants.js
+      end
     end
 
   private
@@ -87,12 +84,12 @@ module Forgeos
     end
 
     def sort
-      columns = %w(roles.name roles.name count(people.id) created_at active)
-      per_page = params[:iDisplayLength].to_i
-      offset =  params[:iDisplayStart].to_i
+      columns = %w(forgeos_roles.name forgeos_roles.name count(forgeos_people.id) created_at active)
+      per_page = params[:iDisplayLength] ? params[:iDisplayLength].to_i : 10
+      offset = params[:iDisplayStart] ? params[:iDisplayStart].to_i : 0
       page = (offset / per_page) + 1
       order_column = params[:iSortCol_0].to_i
-      order = "#{columns[order_column]} #{params[:sSortDir_0].upcase}"
+      order = "#{columns[order_column]} #{params[:sSortDir_0] ? params[:sSortDir_0].upcase : 'ASC'}"
 
       conditions = {}
       includes = []
@@ -100,13 +97,13 @@ module Forgeos
       options = { :page => page, :per_page => per_page }
 
       if params[:category_id]
-        conditions[:categories_elements] = { :category_id => params[:category_id] }
+        conditions[:forgeos_categories_elements] = { :category_id => params[:category_id] }
         includes << :categories
       end
 
       if order_column == 2
         includes << :administrators
-        group_by << 'roles.id'
+        group_by << 'forgeos_roles.id'
       end
 
       options[:conditions] = conditions unless conditions.empty?
@@ -116,6 +113,9 @@ module Forgeos
 
       if params[:sSearch] && !params[:sSearch].blank?
         options[:star] = true
+        if options[:order]
+          options[:order].gsub!('forgeos_roles.', '')
+        end
         @roles = Role.search(params[:sSearch],options)
       else
         @roles = Role.paginate(options)

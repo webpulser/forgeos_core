@@ -1,8 +1,8 @@
 <%
   output = {
     :sEcho => params[:sEcho],
-    :iTotalRecords => @rights.total_entries || 0,
-    :iTotalDisplayRecords => @rights.size,
+    :iTotalRecords => Forgeos::Right.count,
+    :iTotalDisplayRecords => @rights.total_entries || 0,
     :aaData => @rights.collect do |right|
       [
         content_tag(:div,

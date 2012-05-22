@@ -26,7 +26,7 @@ module Forgeos
       @right = Right.new(params[:right])
       if @right.save
         flash[:notice] = I18n.t('right.create.success').capitalize
-        return request.xhr? ? (render :nothing => true) : redirect_to([forgeos_core, :admin, @right])
+        return request.xhr? ? render(:nothing => true) : redirect_to([forgeos_core, :edit, :admin, @right])
       else
         flash[:error] = I18n.t('right.create.failed').capitalize
         if request.xhr?
@@ -41,7 +41,7 @@ module Forgeos
     def update
       if @right.update_attributes(params[:right])
         flash[:notice] = I18n.t('right.update.success').capitalize
-        return request.xhr? ? (render :nothing => true) : redirect_to([forgeos_core, :admin, @right])
+        return request.xhr? ? render(:nothing => true) : render(:action => :edit)
       else
         flash[:error] = I18n.t('right.update.failed').capitalize
         if request.xhr?
@@ -78,18 +78,20 @@ module Forgeos
     end
 
     def sort
-      columns = %w(rights.id rights.name controller_name action_name)
-      per_page = params[:iDisplayLength].to_i
-      offset =  params[:iDisplayStart].to_i
+      columns = %w(forgeos_rights.id forgeos_rights.name controller_name action_name)
+      per_page = params[:iDisplayLength] ? params[:iDisplayLength].to_i : 10
+      offset = params[:iDisplayStart] ? params[:iDisplayStart].to_i : 0
       page = (offset / per_page) + 1
-      order = "#{columns[params[:iSortCol_0].to_i]} #{params[:sSortDir_0].upcase}"
+      order_column = params[:iSortCol_0].to_i
+      order = "#{columns[order_column]} #{params[:sSortDir_0] ? params[:sSortDir_0].upcase : 'ASC'}"
+
 
       conditions = {}
       includes = []
       options = { :page => page, :per_page => per_page }
 
       if params[:category_id]
-        conditions[:categories_elements] = { :category_id =>  params[:category_id] }
+        conditions[:forgeos_categories_elements] = { :category_id =>  params[:category_id] }
         includes << :categories
       end
 
@@ -99,6 +101,10 @@ module Forgeos
 
       if params[:sSearch] && !params[:sSearch].blank?
         options[:star] = true
+        if options[:order]
+          options[:order].gsub!('forgeos_rights.', '')
+        end
+
         @rights = Right.search(params[:sSearch],options)
       else
         @rights = Right.paginate(options)

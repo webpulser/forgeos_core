@@ -23,6 +23,25 @@ module Forgeos
       assert_match 'john.doe@forgeos.com', @response.body
     end
 
+    test "should get index as json with category_id" do
+      admin_login_to('admin/users', 'index')
+      get :index, :format => 'json', :sEcho => 0, :use_route => :forgeos_core, :category_id => 1
+      assert_response :success
+      assert_match /\"iTotalDisplayRecords\":0/, @response.body
+      assert_match /\"iTotalRecords\":3/, @response.body
+      assert_match /\"sEcho\":\"0\"/, @response.body
+    end
+
+    test "should get index as json with ids" do
+      admin_login_to('admin/users', 'index')
+      get :index, :format => 'json', :sEcho => 0, :use_route => :forgeos_core, :ids => [forgeos_people(:user).id]
+      assert_response :success
+      assert_match /\"iTotalDisplayRecords\":1/, @response.body
+      assert_match /\"iTotalRecords\":3/, @response.body
+      assert_match /\"sEcho\":\"0\"/, @response.body
+      assert_match 'john.doe@forgeos.com', @response.body
+    end
+
     test "should get index as json with sorting by id" do
       admin_login_to('admin/users', 'index')
       get :index, :format => 'json', :sEcho => 0, :iSortCol_0 => 0, :use_route => :forgeos_core

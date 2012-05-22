@@ -122,12 +122,12 @@ module Forgeos
       options = { :order => order, :page => page, :per_page => per_page }
 
       if params[:category_id]
-        conditions[:categories_elements] = { :category_id => params[:category_id] }
+        conditions[:forgeos_categories_elements] = { :category_id => params[:category_id] }
         includes << :categories
       end
 
       if params[:ids]
-        conditions[:people] = { :id => params[:ids] }
+        conditions[:id] = params[:ids]
       end
 
       options[:conditions] = conditions unless conditions.empty?

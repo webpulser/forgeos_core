@@ -1,8 +1,8 @@
 <%
   output = {
     :sEcho => params[:sEcho],
-    :iTotalRecords => @roles.total_entries || 0,
-    :iTotalDisplayRecords => @roles.size,
+    :iTotalRecords => Forgeos::Role.count,
+    :iTotalDisplayRecords => @roles.total_entries || 0,
     :aaData => @roles.collect do |role|
       klass = role.active? ? 'see-on' : 'see-off'
       [
