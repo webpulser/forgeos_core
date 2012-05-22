@@ -4,8 +4,7 @@ class MigrateFromRestfulAuthenticationToAuthlogic < ActiveRecord::Migration
       t.rename :salt, :password_salt
       t.change :password_salt, :string, :limit => 128
       t.change :crypted_password, :string, :limit => 128
-      t.string :persistence_token, :null => false, :default => ''
-      t.string :people, :perishable_token, :string, :null => :false, :default => ''
+      t.string :persistence_token, :perishable_token, :null => :false, :default => ''
       t.integer :login_count,
         :failed_login_count,
         :null => false,

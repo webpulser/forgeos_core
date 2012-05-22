@@ -163,9 +163,7 @@ ActiveRecord::Schema.define(:version => 20111116212547) do
     t.datetime "updated_at"
     t.integer  "civility"
     t.string   "persistence_token",                 :default => "",    :null => false
-    t.string   "people",                            :default => ""
-    t.string   "perishable_token",                  :default => ""
-    t.string   "string",                            :default => ""
+    t.string   "perishable_token",                  :default => "",    :null => false
     t.integer  "login_count",                       :default => 0,     :null => false
     t.integer  "failed_login_count",                :default => 0,     :null => false
     t.datetime "last_request_at"

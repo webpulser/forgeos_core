@@ -57,12 +57,27 @@ module Forgeos
     end
 
     def activate
-      if @admin.active?
-        @admin.disactivate
+      unless @admin.active?
+        if @admin.activate
+          flash[:notice] = I18n.t('administrator.activation.success').capitalize
+        else
+          flash[:error] = I18n.t('administrator.activation.failed').capitalize
+        end
       else
-        @admin.activate
+        if @admin.disactivate
+          flash[:notice] = I18n.t('administrator.disactivation.success').capitalize
+        else
+          flash[:error] = I18n.t('administrator.disactivation.failed').capitalize
+        end
+      end
+      respond_to do |wants|
+        wants.html do
+          redirect_to(:back)
+        end
+        wants.js
       end
     end
+
   private
 
     def get_admin
@@ -73,33 +88,34 @@ module Forgeos
     end
 
     def sort
-      columns = %w(id full_name role_name email active)
-      per_page = params[:iDisplayLength].to_i
-      offset =  params[:iDisplayStart].to_i
+      columns = %w(forgeos_people.id full_name role_name email active)
+
+      per_page = params[:iDisplayLength] ? params[:iDisplayLength].to_i : 10
+      offset = params[:iDisplayStart] ? params[:iDisplayStart].to_i : 0
       page = (offset / per_page) + 1
-      order_column = params[:iSortCol_0].to_i
-      order = "#{columns[order_column]} #{params[:sSortDir_0].upcase}"
+      order = "#{columns[params[:iSortCol_0].to_i]} #{params[:sSortDir_0] ? params[:sSortDir_0].upcase : 'ASC'}"
 
       conditions = {}
-      includes = []
+      includes = [:role]
       options = { :page => page, :per_page => per_page }
 
       if params[:category_id]
-        conditions[:categories_elements] = { :category_id => params[:category_id] }
+        conditions[:forgeos_categories_elements] = { :category_id => params[:category_id] }
         includes << :categories
       end
 
-      includes << :role if order_column == 2
-
       options[:conditions] = conditions unless conditions.empty?
-      options[:include] = includes unless includes.empty?
+      options[:joins] = includes unless includes.empty?
       options[:order] = order unless order.squeeze.blank?
 
       if params[:sSearch] && !params[:sSearch].blank?
         options[:star] = true
+        if options[:order]
+          options[:order].gsub!('forgeos_people.', '')
+        end
         @admins = Administrator.search(params[:sSearch],options)
       else
-        options[:select] = "*, #{Administrator.sql_fullname_query} as full_name, roles.name as role_name"
+        options[:select] = "*, #{Administrator.sql_fullname_query} as full_name, forgeos_roles.name as role_name"
         @admins = Administrator.paginate(options)
       end
     end

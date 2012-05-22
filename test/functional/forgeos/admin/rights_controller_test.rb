@@ -45,7 +45,6 @@ module Forgeos
       get :index, :format => 'json', :sSearch => 'right', :sEcho => 0, :iSortCol_0 => 1, :sSortDir_0 => 'DESC', :use_route => :forgeos_core
       assert_response :success
       assert_match /\"iTotalRecords\":2/, @response.body
-      assert_match /\"iTotalDisplayRecords\":1/, @response.body
       assert_match /right/, @response.body
     end
 

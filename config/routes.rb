@@ -30,7 +30,7 @@ Forgeos::Core::Engine.routes.draw do
     resource :account
     resources :administrators do
       member do
-        post :activate
+        put :activate
       end
     end
 

@@ -1,8 +1,8 @@
 <%
   output = {
     :sEcho => params[:sEcho],
-    :iTotalRecords => @admins.total_entries || 0,
-    :iTotalDisplayRecords => @admins.size,
+    :iTotalRecords => Forgeos::Administrator.count,
+    :iTotalDisplayRecords => @admins.total_entries || 0,
     :aaData => @admins.collect do |admin|
       klass = admin.active? ? 'see-on' : 'see-off'
       [
