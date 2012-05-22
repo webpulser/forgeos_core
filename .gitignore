@@ -11,3 +11,4 @@ test/dummy/log/searchd.test.pid
 *.swp
 *~
 *.rbc
+coverage

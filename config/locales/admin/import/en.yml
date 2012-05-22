@@ -12,10 +12,12 @@ en:
     update:
       success: "%{nb} %{model} successfully updated"
     failed:
+      missing_file: missing file
       retry: try again, the file maybe corrupted
       give_file: please upload the file
       errors: "%{nb} errors during import process"
     ignore_first_row: Ignore the first row (headings)
+    success: "You will receive an email once this import was completed"
   import_set:
     one: import set
     other: import sets

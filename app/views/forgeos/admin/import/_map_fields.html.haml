@@ -1,7 +1,7 @@
 = form_tag request.url, :id => 'map_fields_form', :method => :post do
   .backgrounds.big-header
     = text_field_tag :set_name,(@set ? @set.name : ''), :class => 'field_name'
-    = hidden_field_tag :set_id, @set.id if @set
+    = hidden_field :import, :set_id, @set.id if @set
     .interact-links
       = forgeos_save_buttons([forgeos_core, :admin, :import], 'import.button')
   #content.grid_16.alpha.omega

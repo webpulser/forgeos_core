@@ -1,5 +1,7 @@
 # Configure Rails Environment
 ENV["RAILS_ENV"] = "test"
+require 'simplecov'
+SimpleCov.start 'rails' if ENV["COVERAGE"]
 
 require File.expand_path("../dummy/config/environment.rb",  __FILE__)
 require "authlogic/test_case"
@@ -13,7 +15,7 @@ Dir["#{File.dirname(__FILE__)}/support/**/*.rb"].each { |f| require f }
 class ActiveSupport::TestCase
   self.use_transactional_fixtures = true
   self.use_instantiated_fixtures  = false
-  self.fixture_path = (File.expand_path("../fixtures",  __FILE__))
+  #self.fixture_path = (File.expand_path("../fixtures",  __FILE__))
   self.fixtures :all
   include Authlogic::TestCase
 

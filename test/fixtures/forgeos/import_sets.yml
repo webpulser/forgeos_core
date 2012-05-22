@@ -1,0 +1,9 @@
+users:
+  name: users
+  parser_options:
+    col_sep: ','
+    quote_char: '"'
+  fields:
+    0: 0
+    1: 1
+    2: 2

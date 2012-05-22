@@ -7,9 +7,9 @@
   #content.grid_16.alpha.omega
     .grid_12.alpha
       .inner-content
-        - if ImportSet.count > 0
-          = label_tag :set_id, t(:import_set, :count => 1)
-          = select_tag :set_id, options_from_collection_for_select([ImportSet.new(:name => 'Please select')]+ ImportSet.all, :id, :name)
+        - if Forgeos::ImportSet.count > 0
+          = label :import, :set_id, t(:import_set, :count => 1)
+          = select :inmport, :set_id, options_from_collection_for_select(Forgeos::ImportSet.order('name').all, :id, :name), :include_blank => true
           %br
         = label :import, :model, t('import.model')
         = select :import, :model, options_for_select(@models.sort.map{|model| [t(model,:count => 2),model] }), { :prompt => true }
