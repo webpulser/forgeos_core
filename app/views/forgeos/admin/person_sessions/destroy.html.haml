@@ -9,10 +9,10 @@
     .grid_3.alpha
       \&nbsp;
     .buttons.grid_4.alpha.omega
-      = link_to forgeos_core.admin_login_path, :class => 'backgrounds button' do
+      = link_to [forgeos_core, :admin, :login], :class => 'backgrounds button' do
         %span.small-icons.admin
           = I18n.t('go_back_admin').capitalize
-      = link_to :root, :class => 'backgrounds button' do
+      = link_to '/', :class => 'backgrounds button' do
         %span.small-icons.see
           = I18n.t('see_site').capitalize
     .grid_3.omega

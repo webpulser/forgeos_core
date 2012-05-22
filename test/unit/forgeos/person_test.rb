@@ -101,5 +101,10 @@ module Forgeos
       forgeos_people(:active).disactivate
       assert !forgeos_people(:active).active?
     end
+
+    test "should generate a password" do
+      assert !Person.generate_password(8).blank?
+    end
   end
+
 end

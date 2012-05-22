@@ -54,6 +54,12 @@ module Forgeos
       save
     end
 
+    def self.generate_password(size)
+      s = ""
+      size.times { s << (i = Kernel.rand(62); i += ((i < 10) ? 48 : ((i < 36) ? 55 : 61 ))).chr }
+      return s
+    end
+
     protected
 
     def skip_uniqueness_of_email?
