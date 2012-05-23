@@ -7,7 +7,7 @@ module Forgeos
     end
 
     test 'should create' do
-      category = AudioCategory.new
+      category = AudioCategory.new(:name => 'test')
       assert category.valid?
     end
 

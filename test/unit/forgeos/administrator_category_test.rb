@@ -7,7 +7,7 @@ module Forgeos
     end
 
     test 'should create' do
-      category = AdministratorCategory.new
+      category = AdministratorCategory.new(:name => 'test')
       assert category.valid?
     end
 

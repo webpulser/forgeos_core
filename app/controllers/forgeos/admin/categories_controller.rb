@@ -8,7 +8,7 @@ module Forgeos
     # List Categories
     def index
       respond_to do |format|
-        format.html{ redirect_to([forgeos_core, :root]) }
+        format.html{ redirect_to([forgeos_core, :admin, :root]) }
         format.json do
           unless params[:type]
             # list page and product categories
@@ -40,12 +40,16 @@ module Forgeos
     def create
       if @category.save
         flash[:notice] = t('category.create.success').capitalize
+        respond_to do |format|
+          format.html { redirect_to [forgeos_core, :edit, :admin, @category] }
+          format.json { render :text => @category.id }
+        end
       else
         flash[:error] = t('category.create.failed').capitalize
-      end
-      respond_to do |format|
-        format.html { redirect_to [forgeos_core, :edit, :admin, @category] }
-        format.json { render :text => @category.id }
+        respond_to do |format|
+          format.html { render :action => 'new' }
+          format.json { render :json => { :errors => @category.errors } }
+        end
       end
     end
 
@@ -59,21 +63,18 @@ module Forgeos
     end
 
     def update
-      if categories = params[:categories_hash]
-        paramz = ActiveSupport::JSON.decode(categories)
-        paramz.each_with_index do | param, position |
-          parent_id = nil
-          update_category_from_params(param, position, parent_id)
-        end
-      elsif @category.update_attributes(params[:category])
+      if @category.update_attributes(params[:category])
         flash[:notice] = t('category.update.success').capitalize
+        respond_to do |format|
+          format.html { redirect_to [forgeos_core, :edit, :admin, @category] }
+          format.json { render :text => @category.total_elements_count }
+        end
       else
         flash[:error] = t('category.update.failed').capitalize
-      end
-
-      respond_to do |format|
-        format.html { render :action => 'edit' }
-        format.json { render :text => @category.total_elements_count }
+        respond_to do |format|
+          format.html { render :action => 'edit' }
+          format.json { render :json => { :errors => @category.errors } }
+        end
       end
     end
 
@@ -85,10 +86,17 @@ module Forgeos
     def destroy
       if @category.destroy
         flash[:notice] = t('category.destroy.success').capitalize
+        respond_to do |format|
+          format.html { redirect_to [forgeos_core, :admin, :categories] }
+          format.json { render :text => true }
+        end
       else
         flash[:error] = t('category.destroy.failed').capitalize
+        respond_to do |format|
+          format.html { redirect_to [forgeos_core, :admin, :categories] }
+          format.json { render :json => { :errors => @category.errors } }
+        end
       end
-      render :text => true
     end
 
     def add_element
@@ -106,27 +114,6 @@ module Forgeos
 
     def new_category
       @category = Category.new(params[:category])
-    end
-
-    def update_category_from_params(param, position, parent_id)
-      if id = param["attributes"]["id"].split("_").last
-        if category = Category.find_by_id(id)
-          children_ids = []
-          if children = param["children"]
-            children.each_with_index do | child, position_child |
-              if child_id = child["attributes"]["id"].split("_").last
-                children_ids << child_id
-                if child["children"].present?
-                  update_category_from_params(child, (position+1+position_child+1), id)
-                elsif _child = Category.find_by_id(child_id)
-                  _child.update_attributes(:parent_id => id, :position => (position+1+position_child+1))
-                end
-              end
-            end
-          end
-          category.update_attributes(:position => position+1, :parent_id => parent_id )
-        end
-      end
     end
 
     def sort

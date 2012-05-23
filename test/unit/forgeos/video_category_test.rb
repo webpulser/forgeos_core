@@ -7,7 +7,7 @@ module Forgeos
     end
 
     test 'should create' do
-      category = VideoCategory.new
+      category = VideoCategory.new(:name => 'test')
       assert category.valid?
     end
 

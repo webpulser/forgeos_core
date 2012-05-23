@@ -3,30 +3,38 @@ require 'test_helper'
 module Forgeos
   class CategoryTest < ActiveSupport::TestCase
     test "should create" do
-      category = Category.new
+      category = Category.new(:name => 'test')
       assert category.valid?
     end
 
+    test "should have a name" do
+      category = Category.new(:name => nil)
+      assert !category.valid?
+
+      category = Category.new(:name => '')
+      assert !category.valid?
+    end
+
     test "should not be his self parent" do
-      category = Category.create
+      category = Category.create(:name => 'test')
       category.update_attributes(:parent_id => category.id)
       assert !category.valid?
       assert_not_nil category.errors[:parent_id]
     end
 
     test "should calculate his level" do
-      category = Category.create
+      category = Category.create(:name => 'test')
       assert_equal 0, category.level
 
-      subcategory = Category.create(:parent_id => category.id)
+      subcategory = Category.create(:name => 'test', :parent_id => category.id)
 
       assert_equal 1, subcategory.level
     end
 
     test "should have descendants" do
-      category = Category.create
-      subcategory = Category.create(:parent_id => category.id)
-      deepercategory = Category.create(:parent_id => subcategory.id)
+      category = Category.create(:name => 'test')
+      subcategory = Category.create(:name => 'test', :parent_id => category.id)
+      deepercategory = Category.create(:name => 'test', :parent_id => subcategory.id)
 
       assert_equal [subcategory, deepercategory], category.descendants
     end
@@ -34,7 +42,7 @@ module Forgeos
     test "could change type" do
       class ::CategoryInherit < Category
       end
-      category = Category.create
+      category = Category.create(:name => 'test')
       category.kind = 'CategoryInherit'
       assert category.save
       assert_equal 'CategoryInherit', category.kind

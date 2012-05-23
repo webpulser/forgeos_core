@@ -7,7 +7,7 @@ module Forgeos
     end
 
     test 'should create' do
-      category = PdfCategory.new
+      category = PdfCategory.new(:name => 'test')
       assert category.valid?
     end
 

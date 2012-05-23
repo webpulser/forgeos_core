@@ -7,7 +7,7 @@ module Forgeos
     end
 
     test 'should create' do
-      category = DocCategory.new
+      category = DocCategory.new(:name => 'test')
       assert category.valid?
     end
 

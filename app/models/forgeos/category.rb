@@ -4,6 +4,7 @@ module Forgeos
     acts_as_tree :order => "position"
     has_and_belongs_to_many_attachments
     acts_as_list :scope => [:type]
+    validates :name, :presence => true
 
     validates_each :parent_id do |record, attr, value|
       record.errors.add(attr, 'Can\'t be his self parent') if not value.nil? and record.id == value

@@ -7,7 +7,7 @@ module Forgeos
     end
 
     test 'should create' do
-      category = MediaCategory.new
+      category = MediaCategory.new(:name => 'test')
       assert category.valid?
     end
 

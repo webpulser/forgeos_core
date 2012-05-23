@@ -7,7 +7,7 @@ module Forgeos
     end
 
     test 'should create' do
-      category = AttachmentCategory.new
+      category = AttachmentCategory.new(:name => 'test')
       assert category.valid?
     end
 
