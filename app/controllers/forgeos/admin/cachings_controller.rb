@@ -6,7 +6,7 @@ module Forgeos
       respond_to do |wants|
         wants.html
         wants.json do
-          if params[:id] == '0'
+          if params[:id] == '0' or params[:id].blank?
             @files = [Rails.configuration.action_controller.page_cache_directory, Rails.cache.cache_path]
           else
             get_files(params[:id])
@@ -25,16 +25,14 @@ module Forgeos
 
       if @files
         @files.each do |file|
-          unless FileUtils.rm_rf(file)
-            flash[:error] = t('caching.delete.failed').capitalize
-          end
+          FileUtils.rm_rf(file)
         end
+        flash[:notice] = t('caching.delete.success').capitalize
       else
         flash[:error] = t('caching.no_files').capitalize
       end
 
-      flash[:success] = t('caching.delete.create').capitalize
-      return redirect_to([forgeos_core, :admin, :cachings])
+      redirect_to([forgeos_core, :admin, :cachings])
     end
 
 
