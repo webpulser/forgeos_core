@@ -26,12 +26,12 @@ module Forgeos
 
     test "should get index as json with directory" do
       admin_login_to('admin/cachings', 'index')
-      get :index, :use_route => :forgeos_core, :id => Rails.configuration.action_controller.page_cache_directory, :format => :json
       files = %w(favicon.ico 500.html 422.html 404.html).map do |fn|
         File.join(Rails.configuration.action_controller.page_cache_directory, fn)
       end
+      get :index, :use_route => :forgeos_core, :id => Rails.configuration.action_controller.page_cache_directory, :format => :json
       assert_response :success
-      assert_equal files, assigns(:files)
+      assert_equal files.sort, assigns(:files).sort
     end
 
     test "should post create" do

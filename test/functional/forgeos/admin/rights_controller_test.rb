@@ -20,7 +20,7 @@ module Forgeos
       assert_match /\"iTotalDisplayRecords\":2/, @response.body
       assert_match /\"iTotalRecords\":2/, @response.body
       assert_match /\"sEcho\":\"0\"/, @response.body
-      assert_match 'right', @response.body
+      assert_match 'test', @response.body
     end
 
     test "should get index as json with category" do
@@ -37,15 +37,16 @@ module Forgeos
       get :index, :format => 'json', :sEcho => 0, :iSortCol_0 => 2, :sSortDir_0 => 'DESC', :use_route => :forgeos_core
       assert_response :success
       assert_match /\"iTotalRecords\":2/, @response.body
-      assert_match /right/, @response.body
+      assert_match 'test', @response.body
     end
 
-    test "should get index as json to search right with sorting by name" do
+    test "should get index as json to search test with sorting by name" do
       admin_login_to('admin/rights', 'index')
-      get :index, :format => 'json', :sSearch => 'right', :sEcho => 0, :iSortCol_0 => 1, :sSortDir_0 => 'DESC', :use_route => :forgeos_core
+      get :index, :format => 'json', :sSearch => 'test', :sEcho => 0, :iSortCol_0 => 1, :use_route => :forgeos_core
       assert_response :success
       assert_match /\"iTotalRecords\":2/, @response.body
-      assert_match /right/, @response.body
+      assert_match /\"iTotalDisplayRecords\":1/, @response.body
+      assert_match 'test', @response.body
     end
 
     #########################
@@ -175,28 +176,24 @@ module Forgeos
     test "should put update" do
       admin_login_to('admin/rights', 'update')
       put :update, :id => forgeos_rights(:right).id, :right => {
-        :name => 'test',
-        :action_name => 'test',
-        :controller_name => 'test'
+        :name => 'test updated'
       }, :use_route => :forgeos_core
 
       assert_response :success
       assert_equal forgeos_rights(:right), assigns(:right)
-      assert_equal 'test', forgeos_rights(:right).reload.name
+      assert_equal 'test updated', forgeos_rights(:right).reload.name
       assert_template 'admin/rights/edit'
     end
 
     test "should put update in xhr" do
       admin_login_to('admin/rights', 'update')
       xhr :put, :update, :id => forgeos_rights(:right).id, :right => {
-        :name => 'test',
-        :action_name => 'test',
-        :controller_name => 'test'
+        :name => 'test updated'
       }, :use_route => :forgeos_core
 
       assert_response :success
       assert_equal forgeos_rights(:right), assigns(:right)
-      assert_equal 'test', forgeos_rights(:right).reload.name
+      assert_equal 'test updated', forgeos_rights(:right).reload.name
     end
 
     test "should put update with invalid record" do
@@ -206,7 +203,7 @@ module Forgeos
       assert_response :success
       assert_equal forgeos_rights(:right), assigns(:right)
       assert !assigns(:right).valid?, "right is valid and should not be"
-      assert_not_equal 'test', forgeos_rights(:right).reload.name
+      assert_not_nil forgeos_rights(:right).reload.name
       assert_template 'admin/rights/edit'
     end
 
@@ -217,7 +214,7 @@ module Forgeos
       assert_response :success
       assert_equal forgeos_rights(:right), assigns(:right)
       assert !assigns(:right).valid?, "right is valid and should not be"
-      assert_not_equal 'test', forgeos_rights(:right).reload.name
+      assert_not_nil forgeos_rights(:right).reload.name
       assert_match '"result":"error"', @response.body
     end
 
