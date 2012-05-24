@@ -23,7 +23,7 @@ class ActiveSupport::TestCase
     role = Forgeos::Role.create(
       :name => 'admin',
       :rights => [Forgeos::Right.create(
-        :name => 'administrators_index',
+        :name => "forgeos/#{controller}##{action}",
         :controller_name => "forgeos/#{controller}",
         :action_name => action
       )]

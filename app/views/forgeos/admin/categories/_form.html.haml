@@ -1,0 +1,12 @@
+= form_for [forgeos_core, :admin, @category] do |f|
+  = f.label :name
+  = f.text_field :name
+  %br
+  = f.label :description
+  = f.text_area :description
+  %br
+  = f.label :url
+  = f.text_field :url
+  %br
+  = f.label :kind
+  = f.text_field :kind

@@ -11,9 +11,7 @@ module Forgeos
         format.html{ redirect_to([forgeos_core, :admin, :root]) }
         format.json do
           unless params[:type]
-            # list page and product categories
-            sort
-            render :layout => false
+            redirect_to [forgeos_core, :admin, :root]
           else
             # list categories like a tree
             klass = params[:type].camelize.constantize
@@ -104,41 +102,16 @@ module Forgeos
       render :text => @category.elements.count
     end
 
-  private
+    private
     def get_category
       unless @category = Category.find_by_id(params[:id])
         flash[:error] = t('category.not_exist').capitalize
-        return redirect_to(:action => :index)
+        return redirect_to [forgeos_core, :admin, :categories]
       end
     end
 
     def new_category
       @category = Category.new(params[:category])
-    end
-
-    def sort
-      columns = %w(category_translations.name category_translations.name)
-      per_page = params[:iDisplayLength].present? ? params[:iDisplayLength].to_i : 50
-      offset =  params[:iDisplayStart].to_i
-      page = (offset / per_page) + 1
-      #order_column = params[:iSortCol_0].to_i
-      #order = "#{columns[order_column]} #{params[:sSortDir_0].upcase}"
-      order = 'position ASC'
-      conditions = {}
-      conditions[:type] = params[:types].collect{ |type| "#{type}Category".camelize } if params[:types]
-
-      options = { :page => page, :per_page => per_page }
-      options[:conditions] = conditions unless conditions.empty?
-      options[:order] = order unless order.squeeze.blank?
-      options[:include] = :translations
-
-      if params[:sSearch] && !params[:sSearch].blank?
-        options[:star] = true
-        options[:sql_order] = options.delete(:order)
-        @categories = Category.search(params[:sSearch], options)
-      else
-        @categories = Category.paginate(options)
-      end
     end
   end
 end

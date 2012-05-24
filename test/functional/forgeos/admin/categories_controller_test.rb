@@ -13,8 +13,7 @@ module Forgeos
     test "should get index as json without type" do
       admin_login_to('admin/categories', 'index')
       get :index, :use_route => :forgeos_core, :format => :json
-      assert_response :success
-      assert_equal 'application/json; charset=utf-8', @response.headers['Content-Type']
+      assert_redirected_to '/admin'
     end
 
     test "should get index as json with type" do
@@ -67,6 +66,20 @@ module Forgeos
       assert_response :success
     end
 
+    test "should get edit" do
+      admin_login_to('admin/categories', 'edit')
+      get :edit, :use_route => :forgeos_core, :id => forgeos_categories(:user_cat).id
+      assert_response :success
+      assert_equal forgeos_categories(:user_cat), assigns(:category)
+    end
+
+    test "should not get edit" do
+      admin_login_to('admin/categories', 'edit')
+      get :edit, :use_route => :forgeos_core, :id => 0
+      assert_redirected_to '/admin/categories'
+      assert_nil assigns(:category)
+    end
+
     test "should put update" do
       admin_login_to('admin/categories', 'update')
       put :update, :use_route => :forgeos_core, :id => forgeos_categories(:user_cat).id, :category => { :name => 'test updated' }
@@ -83,7 +96,6 @@ module Forgeos
       assert_response :success
       assert_nil flash[:notice]
       assert_not_nil flash[:error]
-      assert_equal 'test', forgeos_categories(:user_cat).reload.name
     end
 
     ##########################
@@ -138,6 +150,13 @@ module Forgeos
 
       assert_response :success
       assert_not_nil flash[:error]
+    end
+
+    test "should post add_element" do
+      admin_login_to('admin/categories', 'add_element')
+      post :add_element, :use_route => :forgeos_core, :id => forgeos_categories(:user_cat).id, :element_id => forgeos_people(:user).id
+      assert_response :success
+      assert forgeos_categories(:user_cat).reload.elements.include?(forgeos_people(:user)), "the element has not be added to the category"
     end
   end
 end
