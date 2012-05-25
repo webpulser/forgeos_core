@@ -1,6 +1,6 @@
 = render :partial => 'tabs'
 .backgrounds.big-header
-  %h1= @user.fullname
+  %h1= @user.full_name
   .interact-links
     = link_to I18n.t('user.update.action'), [forgeos_core, :edit, :admin, @user], :class => 'backgrounds interact-button'
     = I18n.t(:or)
@@ -17,7 +17,7 @@
             %p= @user.phone
             %p.customer-email= @user.email
         .clear
-      
+
   #right-sidebar.grid_4.omega.alpha
     .step
       =mail_to @user.email, I18n.t('user.contact').capitalize, :class => 'small-icons contact'
@@ -30,7 +30,4 @@
         %p
           = I18n.t('created_on').capitalize
           = @user.created_at.to_date
-          %br
-          // = I18n.t('by')
-          // =@user.fullname
   .clear

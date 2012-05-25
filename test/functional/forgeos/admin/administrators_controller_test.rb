@@ -70,6 +70,14 @@ module Forgeos
       assert_match 'admin@forgeos.com', @response.body
     end
 
+    test "should get index as json with sorting by full_name" do
+      admin_login_to('admin/administrators', 'index')
+      get :index, :format => 'json', :sEcho => 0, :iSortCol_0 => 1, :use_route => :forgeos_core
+      assert_response :success
+      assert_match /\"iTotalRecords\":1/, @response.body
+      assert_match 'admin@forgeos.com', @response.body
+    end
+
     test "should get index as json with sorting by email" do
       admin_login_to('admin/administrators', 'index')
       get :index, :format => 'json', :sEcho => 0, :iSortCol_0 => 2, :sSortDir_0 => 'DESC', :use_route => :forgeos_core
@@ -80,7 +88,7 @@ module Forgeos
 
     test "should get index as json with sorting by active" do
       admin_login_to('admin/administrators', 'index')
-      get :index, :format => 'json', :sEcho => 0, :iSortCol_0 => 1, :use_route => :forgeos_core
+      get :index, :format => 'json', :sEcho => 0, :iSortCol_0 => 3, :use_route => :forgeos_core
       assert_response :success
       assert_match /\"iTotalRecords\":1/, @response.body
       assert_match 'admin@forgeos.com', @response.body
@@ -95,9 +103,27 @@ module Forgeos
       assert_match 'admin@forgeos.com', @response.body
     end
 
-    test "should get index as json to search admin with sorting by id" do
+    test "should get index as json to search by id" do
       admin_login_to('admin/administrators', 'index')
-      get :index, :format => 'json', :sSearch => 'admin', :sEcho => 0, :iSortCol_0 => 0, :use_route => :forgeos_core
+      get :index, :format => 'json', :sEcho => 0, :sSearch => "##{forgeos_people(:administrator).id}", :use_route => :forgeos_core
+      assert_response :success
+      assert_match /\"iTotalRecords\":1/, @response.body
+      assert_match /\"iTotalDisplayRecords\":1/, @response.body
+      assert_match 'admin@forgeos.com', @response.body
+    end
+
+    test "should get index as json to search nothing with sorting by id" do
+      admin_login_to('admin/administrators', 'index')
+      get :index, :format => 'json', :sSearch => 'nothing', :sEcho => 0, :iSortCol_0 => 0, :use_route => :forgeos_core
+      assert_response :success
+      assert_match /\"iTotalRecords\":1/, @response.body
+      assert_match /\"iTotalDisplayRecords\":0/, @response.body
+      assert_not_match 'admin@forgeos.com', @response.body
+    end
+
+    test "should get index as json to search admin with sorting by full_name" do
+      admin_login_to('admin/administrators', 'index')
+      get :index, :format => 'json', :sSearch => 'admin', :sEcho => 0, :iSortCol_0 => 1, :use_route => :forgeos_core
       assert_response :success
       assert_match /\"iTotalRecords\":1/, @response.body
       assert_match /\"iTotalDisplayRecords\":1/, @response.body

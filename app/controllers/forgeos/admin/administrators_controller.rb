@@ -88,36 +88,8 @@ module Forgeos
     end
 
     def sort
-      columns = %w(forgeos_people.id full_name role_name email active)
-
-      per_page = params[:iDisplayLength] ? params[:iDisplayLength].to_i : 10
-      offset = params[:iDisplayStart] ? params[:iDisplayStart].to_i : 0
-      page = (offset / per_page) + 1
-      order = "#{columns[params[:iSortCol_0].to_i]} #{params[:sSortDir_0] ? params[:sSortDir_0].upcase : 'ASC'}"
-
-      conditions = {}
-      includes = [:role]
-      options = { :page => page, :per_page => per_page }
-
-      if params[:category_id]
-        conditions[:forgeos_categories_elements] = { :category_id => params[:category_id] }
-        includes << :categories
-      end
-
-      options[:conditions] = conditions unless conditions.empty?
-      options[:joins] = includes unless includes.empty?
-      options[:order] = order unless order.squeeze.blank?
-
-      if params[:sSearch] && !params[:sSearch].blank?
-        options[:star] = true
-        if options[:order]
-          options[:order].gsub!('forgeos_people.', '')
-        end
-        @admins = Administrator.search(params[:sSearch],options)
-      else
-        options[:select] = "*, #{Administrator.sql_fullname_query} as full_name, forgeos_roles.name as role_name"
-        @admins = Administrator.paginate(options)
-      end
+      items, search_query = forgeos_sort_from_datatables(Administrator, %w(id full_name role_name email active), %w(firstname lastname role_name email))
+      @admins = items.search(search_query).result
     end
   end
 end

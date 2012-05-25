@@ -24,23 +24,20 @@ module Forgeos
       :avatar_attributes, :lang, :time_zone, :address_attributes
     attr_accessible :active, :as => :admin
 
-    def fullname
-      "#{lastname} #{firstname}"
-    end
-
-    def self.sql_fullname_query
+    ransacker :full_name do |parent|
       case self.connection.class.to_s
       when 'ActiveRecord::ConnectionAdapters::MysqlAdapter', 'ActiveRecord::ConnectionAdapters::Mysql2Adapter'
-        "CONCAT(lastname, firstname)"
+        Arel::Nodes::NamedFunction.new 'CONCAT', [ parent.table[:firstname], parent.table[:lastname] ]
       when 'ActiveRecord::ConnectionAdapters::PostgreSQLAdapter'
-        "TEXTCAT(lastname, firstname)"
+        Arel::Nodes::NamedFunction.new 'TEXTCAT', [ parent.table[:firstname], parent.table[:lastname] ]
+      when 'ActiveRecord::ConnectionAdapters::SQLite3Adapter'
+        Arel::Nodes::NamedFunction.new 'CAST', [ Arel::Nodes::As.new(Arel::Nodes::Concatenation.new(parent.table[:firstname], parent.table[:lastname]), 'TEXT') ]
       end
     end
 
-    def name
+    def full_name
       "#{firstname} #{lastname}"
     end
-
 
     # Disactivates the user in the database.
     def disactivate

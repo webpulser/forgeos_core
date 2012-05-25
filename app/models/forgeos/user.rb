@@ -13,15 +13,5 @@ module Forgeos
     def age
       ((Date.today - self.birthday) / 365).floor
     end
-
-    define_index do
-      indexes firstname, :sortable => true
-      indexes lastname, :sortable => true
-      indexes email, :sortable => true
-      has active, :sortable => true, :type => :boolean
-      indexes User.sql_fullname_query, :as => :full_name, :sortable => true
-      set_property :delta => true
-    end
-
   end
 end

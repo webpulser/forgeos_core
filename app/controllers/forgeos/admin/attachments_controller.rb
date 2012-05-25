@@ -139,44 +139,15 @@ module Forgeos
     end
 
     def sort
-      columns = %w(filename filename content_type attachments.updated_at size used '')
-      per_page = params[:iDisplayLength].to_i
-      offset =  params[:iDisplayStart].to_i
-      page = (offset / per_page) + 1
-      order = "#{columns[params[:iSortCol_0].to_i]} #{params[:sSortDir_0].upcase}"
-
-      conditions = { :parent_id => nil }
-      includes = []
-      options = { :page => page, :per_page => per_page }
-
       # file type
-      unless @file_type.nil?
-        conditions[:type] = @file_type
-        type = @file_type.camelize.constantize
+      @type = if @file_type.present?
+        @file_type.camelize.constantize
       else
-        type = Attachment
+        Attachment
       end
 
-      # category
-      if params[:category_id]
-        conditions[:categories_elements] = { :category_id => params[:category_id] }
-        includes << :categories
-      end
-      if params[:ids]
-        conditions[:attachments] = { :id => params[:ids].split(',') }
-      end
-
-      options[:conditions] = conditions unless conditions.empty?
-      options[:include] = includes unless includes.empty?
-      options[:order] = order unless order.squeeze.blank?
-
-      if params[:sSearch] && !params[:sSearch].blank?
-        options[:star] = true
-        @medias = type.search(params[:sSearch],options)
-      else
-        @medias = type.paginate(options)
-      end
+      items, search_query = forgeos_sort_from_datatables(type, %w(filename filename content_type updated_at size used), %w(filename content_type name))
+      @medias = items.where(:parent_id => nil).search(search_query).result
     end
-
   end
 end

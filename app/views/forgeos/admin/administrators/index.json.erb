@@ -1,9 +1,4 @@
-<%
-  output = {
-    :sEcho => params[:sEcho],
-    :iTotalRecords => Forgeos::Administrator.count,
-    :iTotalDisplayRecords => @admins.total_entries || 0,
-    :aaData => @admins.collect do |admin|
+<%= dataTables_resultset(Forgeos::Administrator, @admins) do |admin|
       klass = admin.active? ? 'see-on' : 'see-off'
       [
         content_tag(:div,
@@ -30,6 +25,4 @@
         )
       ]
   end
-}
 -%>
-<%= raw output.to_json -%>

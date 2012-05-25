@@ -32,5 +32,46 @@ module Forgeos
         Globalize.locale = session[:lang]
       end
     end
+
+    def forgeos_sort_from_datatables(klass, sorting_columns, search_columns = sorting_columns, per_page = nil)
+      search_query = {}
+
+      per_page ||= klass.default_per_page
+      per_page = params[:iDisplayLength].to_i if params[:iDisplayLength]
+      offset = params[:iDisplayStart] ? params[:iDisplayStart].to_i : 0
+      page = (offset / per_page) + 1
+
+      items = klass.page(page)
+      items = items.per(per_page)
+
+      search_query[:s] = { '0' => {
+        :name => sorting_columns[params[:iSortCol_0].to_i],
+        :dir => (params[:sSortDir_0] ? params[:sSortDir_0].downcase : 'asc')
+      }}
+
+      if params[:ids]
+        items = items.where(:id => params[:ids].split(','))
+      else
+
+        keyword = params[:sSearch]
+        search_query[:g] ||= []
+
+        if keyword.present?
+          search_by_keyword = if keyword.start_with?('#')
+            { :id_eq => keyword.gsub(/^#/, '') }
+          else
+            { :m => 'or', :"#{(search_columns).join('_or_')}_cont" => keyword }
+          end
+
+          search_query[:g] << search_by_keyword
+        end
+
+        if params[:category_id]
+          search_query[:g] << { :categories_id_eq => params[:category_id] }
+        end
+      end
+
+      [items, search_query]
+    end
   end
 end

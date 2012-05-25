@@ -84,42 +84,8 @@ module Forgeos
     end
 
     def sort
-      columns = %w(forgeos_roles.name forgeos_roles.name count(forgeos_people.id) created_at active)
-      per_page = params[:iDisplayLength] ? params[:iDisplayLength].to_i : 10
-      offset = params[:iDisplayStart] ? params[:iDisplayStart].to_i : 0
-      page = (offset / per_page) + 1
-      order_column = params[:iSortCol_0].to_i
-      order = "#{columns[order_column]} #{params[:sSortDir_0] ? params[:sSortDir_0].upcase : 'ASC'}"
-
-      conditions = {}
-      includes = []
-      group_by = []
-      options = { :page => page, :per_page => per_page }
-
-      if params[:category_id]
-        conditions[:forgeos_categories_elements] = { :category_id => params[:category_id] }
-        includes << :categories
-      end
-
-      if order_column == 2
-        includes << :administrators
-        group_by << 'forgeos_roles.id'
-      end
-
-      options[:conditions] = conditions unless conditions.empty?
-      options[:include] = includes unless includes.empty?
-      options[:group] = group_by.join(', ') unless group_by.empty?
-      options[:order] = order unless order.squeeze.blank?
-
-      if params[:sSearch] && !params[:sSearch].blank?
-        options[:star] = true
-        if options[:order]
-          options[:order].gsub!('forgeos_roles.', '')
-        end
-        @roles = Role.search(params[:sSearch],options)
-      else
-        @roles = Role.paginate(options)
-      end
+      items, search_query = forgeos_sort_from_datatables(Role, %w(name name administrators_id created_at active), %w(name))
+      @roles = items.search(search_query).result
     end
   end
 end

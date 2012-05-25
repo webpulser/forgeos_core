@@ -78,37 +78,8 @@ module Forgeos
     end
 
     def sort
-      columns = %w(forgeos_rights.id forgeos_rights.name controller_name action_name)
-      per_page = params[:iDisplayLength] ? params[:iDisplayLength].to_i : 10
-      offset = params[:iDisplayStart] ? params[:iDisplayStart].to_i : 0
-      page = (offset / per_page) + 1
-      order_column = params[:iSortCol_0].to_i
-      order = "#{columns[order_column]} #{params[:sSortDir_0] ? params[:sSortDir_0].upcase : 'ASC'}"
-
-
-      conditions = {}
-      includes = []
-      options = { :page => page, :per_page => per_page }
-
-      if params[:category_id]
-        conditions[:forgeos_categories_elements] = { :category_id =>  params[:category_id] }
-        includes << :categories
-      end
-
-      options[:conditions] = conditions unless conditions.empty?
-      options[:include] = includes unless includes.empty?
-      options[:order] = order unless order.squeeze.blank?
-
-      if params[:sSearch] && !params[:sSearch].blank?
-        options[:star] = true
-        if options[:order]
-          options[:order].gsub!('forgeos_rights.', '')
-        end
-
-        @rights = Right.search(params[:sSearch],options)
-      else
-        @rights = Right.paginate(options)
-      end
+      items, search_query = forgeos_sort_from_datatables(Right, %w(id name controller_name action_name), %w(name controller_name action_name))
+      @rights = items.search(search_query).result
     end
   end
 end

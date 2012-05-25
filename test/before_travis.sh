@@ -9,5 +9,3 @@ cd "test/dummy"
 bundle exec rake db:create
 echo "Loading Fixtures"
 bundle exec rake db:test:prepare db:fixtures:load
-echo "Building Sphinx Index"
-bundle exec rake ts:rebuild

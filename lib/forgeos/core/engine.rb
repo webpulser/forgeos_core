@@ -7,11 +7,11 @@ require 'acts_as_tree'
 require 'bcrypt'
 require 'haml'
 require 'sass'
-require 'thinking-sphinx'
 require 'webpulser-habtm_list'
-require 'will_paginate'
 require 'authlogic'
 require 'squeel'
+require 'ransack'
+require 'kaminari'
 require 'delayed_job'
 
 module Forgeos

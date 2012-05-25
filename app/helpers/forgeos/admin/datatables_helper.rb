@@ -1,6 +1,16 @@
 module Forgeos
   module Admin
     module DatatablesHelper
+      def dataTables_resultset(klass, collection = [], &block)
+        resultset = {
+          :sEcho => params[:sEcho],
+          :iTotalRecords => klass.count,
+          :iTotalDisplayRecords => collection.count,
+          :aaData => collection.collect { |item| yield(item) }
+        }
+        raw resultset.to_json
+      end
+
       def dataTables_tag(options = {})
         id = options[:id].nil? ? 'table' : options[:id]
         columns = options[:columns]

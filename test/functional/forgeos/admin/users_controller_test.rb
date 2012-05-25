@@ -84,6 +84,16 @@ module Forgeos
       assert_match 'john.lennon@forgeos.com', @response.body
     end
 
+    test "should get index as json to search by id" do
+      admin_login_to('admin/users', 'index')
+      get :index, :format => 'json', :sEcho => 0, :sSearch => "##{forgeos_people(:lennon).id}", :use_route => :forgeos_core
+      assert_response :success
+      assert_match /\"iTotalRecords\":3/, @response.body
+      assert_match /\"iTotalDisplayRecords\":1/, @response.body
+      assert_not_match 'john.doe@forgeos.com', @response.body
+      assert_match 'john.lennon@forgeos.com', @response.body
+    end
+
     test "should get index as json to search john with sorting by id" do
       admin_login_to('admin/users', 'index')
       get :index, :format => 'json', :sSearch => 'john', :sEcho => 0, :iSortCol_0 => 0, :use_route => :forgeos_core

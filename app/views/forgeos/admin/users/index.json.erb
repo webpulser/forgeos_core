@@ -1,14 +1,9 @@
-<%
-  output = {
-    :sEcho => params[:sEcho],
-    :iTotalRecords => Forgeos::User.count,
-    :iTotalDisplayRecords => @users.total_entries || 0,
-    :aaData => @users.collect do |user|
+<%= dataTables_resultset(Forgeos::User, @users) do |user|
       klass = user.active? ? 'see-on' : 'see-off'
       table =
       [
       content_tag(:div, tag(:div, :class=>'handler') + tag(:div, :class => 'small-icons user-ico'), :id => polymorphic_html_id(user), :class => 'handler_container'),
-      content_tag(:div, (params[:mode] == 'selection' ? user.fullname : link_to(user.fullname, [forgeos_core, :admin, user])), :class => 'user-name'),
+      content_tag(:div, (params[:mode] == 'selection' ? user.full_name : link_to(user.full_name, [forgeos_core, :admin, user])), :class => 'user-name'),
       content_tag(:div, (params[:mode] == 'selection' ? user.email : mail_to(user.email, user.email, :class => 'truncate', :title => user.email)), :class => 'email'),
       ]
 
@@ -33,6 +28,4 @@
       end
       table
     end
-}
 -%>
-<%= raw output.to_json -%>

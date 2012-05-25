@@ -7,8 +7,6 @@ test/dummy/tmp/imports/
 test/dummy/test/fixtures/
 test/dummy/db/migrate/
 test/dummy/config/database.yml
-test/dummy/config/test.sphinx.conf
-test/dummy/db/sphinx/
 test/dummy/log/searchd.test.pid
 *.swp
 *~

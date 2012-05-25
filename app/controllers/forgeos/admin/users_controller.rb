@@ -110,36 +110,8 @@ module Forgeos
     end
 
     def sort
-      columns = %w(id full_name email active)
-
-      per_page = params[:iDisplayLength] ? params[:iDisplayLength].to_i : 10
-      offset = params[:iDisplayStart] ? params[:iDisplayStart].to_i : 0
-      page = (offset / per_page) + 1
-      order = "#{columns[params[:iSortCol_0].to_i]} #{params[:sSortDir_0] ? params[:sSortDir_0].upcase : 'ASC'}"
-
-      conditions = {}
-      includes = []
-      options = { :order => order, :page => page, :per_page => per_page }
-
-      if params[:category_id]
-        conditions[:forgeos_categories_elements] = { :category_id => params[:category_id] }
-        includes << :categories
-      end
-
-      if params[:ids]
-        conditions[:id] = params[:ids]
-      end
-
-      options[:conditions] = conditions unless conditions.empty?
-      options[:include] = includes unless includes.empty?
-
-      if params[:sSearch] && !params[:sSearch].blank?
-        options[:star] = true
-        @users = User.search(params[:sSearch],options)
-      else
-        options[:select] = "*, #{User.sql_fullname_query} as full_name"
-        @users = User.paginate(options)
-      end
+      items, search_query = forgeos_sort_from_datatables(User, %w(id full_name email active), %w(firstname lastname email))
+      @users = items.search(search_query).result
     end
   end
 end

@@ -11,10 +11,6 @@ module Forgeos
       :foreign_key => 'element_id',
       :association_foreign_key => 'category_id'
 
-    define_index do
-      indexes name, :sortable => true
-    end
-
     def activate
       self.update_attribute('active', !self.active)
     end

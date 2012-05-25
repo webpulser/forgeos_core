@@ -10,11 +10,5 @@ module Forgeos
 
     #check that fields have data in them
     validates :name, :controller_name, :action_name, :presence => true
-
-    define_index do
-      indexes name, :sortable => true
-      indexes controller_name, :sortable => true
-      indexes action_name, :sortable => true
-    end
   end
 end

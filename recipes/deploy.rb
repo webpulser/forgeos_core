@@ -1,6 +1,6 @@
 namespace :forgeos do
   task :create_shared, :roles => [:web, :app] do
-    run "mkdir -p #{%w(private/config db/sphinx
+    run "mkdir -p #{%w(private/config
                     public/uploads/avatars
                     public/uploads/pdfs
                     public/uploads/videos
@@ -28,12 +28,10 @@ end
 
 require 'capistrano-helpers/shared'
 require 'capistrano-helpers/privates'
-require 'thinking_sphinx/deploy/capistrano'
 
 set :normalize_asset_timestamps, false
 
 set :privates, %w(config/database.yml)
-set :shared, %w(public/uploads log db/sphinx)
+set :shared, %w(public/uploads log)
 after 'deploy:setup', 'forgeos:create_shared'
 after 'deploy:update_code', 'forgeos:assets'
-after 'deploy', 'thinking_sphinx:restart'

@@ -1,9 +1,4 @@
-<%
-  output = {
-    :sEcho => params[:sEcho],
-    :iTotalRecords => @medias.total_entries || 0,
-    :iTotalDisplayRecords => @medias.size,
-    :aaData => @medias.collect do |media|
+<%= dataTables_resultset(@type, @medias) do |media|
       media_array = []
       if params[:skin] == 'thumbnail'
         media_array << render(:partial => 'table_thumbnail.html.haml', :locals => { :media => media })
@@ -25,6 +20,4 @@
       end
       media_array << media.public_filename << media.id << media.filename
     end
-  }
 -%>
-<%= raw output.to_json -%>

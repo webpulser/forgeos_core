@@ -1,9 +1,4 @@
-<%
-  output = {
-    :sEcho => params[:sEcho],
-    :iTotalRecords => Forgeos::Role.count,
-    :iTotalDisplayRecords => @roles.total_entries || 0,
-    :aaData => @roles.collect do |role|
+<%= dataTables_resultset(Forgeos::Role, @roles) do |role|
       klass = role.active? ? 'see-on' : 'see-off'
       [
         content_tag(:div, '<div class="image">&nbsp;<span class="small-icons role-ico">&nbsp;</span></div>'.html_safe, :id => polymorphic_html_id(role), :class => role.administrators.count > 0 ? 'some-variants plus' : ''),
@@ -28,6 +23,4 @@
         )
       ]
     end
-  }
 -%>
-<%= raw output.to_json %>

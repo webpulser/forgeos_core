@@ -65,11 +65,5 @@ module Forgeos
 
       return media_class
     end
-
-    define_index do
-      indexes filename, :sortable => true
-      indexes content_type, :sortable => true
-      has size, :sortable => true, :type => :integer
-    end
   end
 end

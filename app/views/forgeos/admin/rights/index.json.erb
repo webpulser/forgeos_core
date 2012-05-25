@@ -1,9 +1,4 @@
-<%
-  output = {
-    :sEcho => params[:sEcho],
-    :iTotalRecords => Forgeos::Right.count,
-    :iTotalDisplayRecords => @rights.total_entries || 0,
-    :aaData => @rights.collect do |right|
+<%= dataTables_resultset(Forgeos::Right, @rights) do |right|
       [
         content_tag(:div,
           content_tag(:div, '', :class => 'handler') +
@@ -23,6 +18,4 @@
         )
       ]
     end
- }
 -%>
-<%= raw output.to_json %>
