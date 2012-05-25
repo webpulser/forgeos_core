@@ -118,7 +118,7 @@ module Forgeos
       assert_response :success
       assert_match /\"iTotalRecords\":1/, @response.body
       assert_match /\"iTotalDisplayRecords\":0/, @response.body
-      assert_not_match 'admin@forgeos.com', @response.body
+      assert !@response.body.include?('admin@fogeos.com')
     end
 
     test "should get index as json to search admin with sorting by full_name" do

@@ -90,7 +90,7 @@ module Forgeos
       assert_response :success
       assert_match /\"iTotalRecords\":3/, @response.body
       assert_match /\"iTotalDisplayRecords\":1/, @response.body
-      assert_not_match 'john.doe@forgeos.com', @response.body
+      assert !@response.body.include?('john.doe@forgeos.com')
       assert_match 'john.lennon@forgeos.com', @response.body
     end
 
