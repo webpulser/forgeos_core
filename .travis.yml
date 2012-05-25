@@ -3,6 +3,8 @@ rvm:
   - 1.9.2
   - ree
   - 1.9.3
+  - rbx
+  - jruby
 env:
   - DB=mysql
   - DB=postgres
