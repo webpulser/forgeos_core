@@ -1,6 +1,6 @@
 # Create a database.yml for the right database
 echo "Setting up database.yml for $DB"
-cp "test/files/database.yml.$DB" "test/dummy/config/database.yml"
+cp "test/files/database.$DB.yml" "test/dummy/config/database.yml"
 
 # Set up database
 echo "Creating databases for $DB and loading schema"

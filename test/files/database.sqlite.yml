@@ -1,0 +1,3 @@
+test:
+  adapter: sqlite3
+  database: "db/forgeos_core_test.sqlite3"
