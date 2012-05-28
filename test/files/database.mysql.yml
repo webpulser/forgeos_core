@@ -1,5 +1,5 @@
 test:
   adapter: mysql2
   database: forgeos_core_test
-  username: 
+  username: root
   encoding: utf8
