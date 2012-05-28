@@ -13,6 +13,7 @@ require 'squeel'
 require 'ransack'
 require 'kaminari'
 require 'delayed_job'
+require 'ofc2'
 
 module Forgeos
   module Core

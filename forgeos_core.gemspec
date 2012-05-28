@@ -20,6 +20,7 @@ Gem::Specification.new do |s|
   s.add_dependency 'sass-rails', '>= 3.1.4'
   s.add_dependency 'squeel', '>= 0.8.7'
   s.add_dependency 'webpulser-habtm_list', '~> 0.1.3.1'
+  s.add_dependency 'ofc2', '~> 2.0.1'
 
   s.name = 'forgeos_core'
   s.version = Forgeos::Core::VERSION
