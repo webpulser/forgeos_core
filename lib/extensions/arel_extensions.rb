@@ -5,6 +5,6 @@ class Arel::Nodes::Concatenation < Arel::Nodes::InfixOperation
   end
 end
 
-Arel::Visitors::SQLite.class_eval do
+Arel::Visitors::ToSql.class_eval do
   alias :visit_Arel_Nodes_Concatenation :visit_Arel_Nodes_InfixOperation
 end

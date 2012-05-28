@@ -9,6 +9,9 @@ module Forgeos
       :dependent => :destroy
 
     before_save :fill_blank_name_with_filename
+    before_update do
+      self.attachment_options[:content_type].include?(content_type)
+    end
 
     scope :linked_to, lambda { |element_type|
       {
@@ -25,12 +28,6 @@ module Forgeos
       content_type.split('/').last
     end
 
-    def fill_blank_name_with_filename
-      if name.blank? and filename
-        self.name = filename.split('.').first
-      end
-    end
-
     def self.options_for(target = class_name)
       return {} if !ActiveRecord::Base.connection.tables.include?(Setting.table_name) or
         Setting.current.nil? or
@@ -39,21 +36,24 @@ module Forgeos
     end
 
     def self.new_from_rails_form(options = {})
-      data = options[:Filedata]
-      filename = options[:Filename] ||
-        data.send(data.respond_to?(:original_filename) ? :original_filename : :path)
+      if data = options[:Filedata]
+        filename = options[:Filename] ||
+          data.send(data.respond_to?(:original_filename) ? :original_filename : :path)
 
-      content_type = MIME::Types.type_for(filename).first.to_s
-      media_class = detect_attachment_class_from_content_type(content_type)
+        content_type = MIME::Types.type_for(filename).first.to_s
+        media_class = detect_attachment_class_from_content_type(content_type)
 
-      media = media_class.new(options[:attachment])
-      media.uploaded_data = ActiveSupport::HashWithIndifferentAccess.new(
-        :tempfile => data,
-        :content_type => content_type,
-        :filename => filename
-      )
+        media = media_class.new(options[:attachment])
+        media.uploaded_data = ActiveSupport::HashWithIndifferentAccess.new(
+          :tempfile => data,
+          :content_type => content_type,
+          :filename => filename
+        )
 
-      return media
+        media
+      else
+        Media.new
+      end
     end
 
     def self.detect_attachment_class_from_content_type(content_type)
@@ -63,7 +63,15 @@ module Forgeos
         media_class = klass if klass.attachment_options[:content_type].include?(content_type)
       end
 
-      return media_class
+      media_class
+    end
+
+    private
+
+    def fill_blank_name_with_filename
+      if name.blank? and filename
+        self.name = filename.split('.').first
+      end
     end
   end
 end

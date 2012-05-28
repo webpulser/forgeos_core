@@ -1,4 +1,4 @@
-= form_for [forgeos_core, :admin, user], :html => { :id => 'wrap', :autocomplete => 'off', "data-object_name" => user.class.model_name.singular } do |f|
+= form_for [forgeos_core, :admin, user], :as => :user, :html => { :id => 'wrap', :autocomplete => 'off', "data-object_name" => user.class.model_name.singular } do |f|
   .backgrounds.big-header
     = f.select :civility, t('civility.select'), { :prompt => t(:please_select) }
     = f.text_field :firstname, :title => t('firstname'), :class => 'defaultValue field_name firstname'

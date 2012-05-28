@@ -1,4 +1,4 @@
-= form_for [forgeos_core, :admin, right], :html => { :id => 'wrap' } do |f|
+= form_for [forgeos_core, :admin, right], :as => :right, :html => { :id => 'wrap' } do |f|
   %p
     %b
       = f.label :name, I18n.t('name').capitalize

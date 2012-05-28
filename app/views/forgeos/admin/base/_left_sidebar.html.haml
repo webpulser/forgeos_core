@@ -25,5 +25,5 @@
     %h2.small-icons{ :class => icon_class }
       = link_to_function I18n.t(sidebar_title).capitalize, "select_all_elements_without_category()"
     .category-tree{ :id => tree_id }
-    = form_for [forgeos_core, :admin, Forgeos::Category.new], :html => { :multipart => true, "data-object_name" => Forgeos::Category.model_name.singular } do |f|
+    = form_for [forgeos_core, :admin, Forgeos::Category.new], :as => :category, :html => { :multipart => true, "data-object_name" => Forgeos::Category.model_name.singular } do |f|
       = render :partial => 'attachments_popups'

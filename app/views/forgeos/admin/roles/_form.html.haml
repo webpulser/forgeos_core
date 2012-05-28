@@ -1,5 +1,5 @@
 = render :partial => 'tabs'
-= form_for [forgeos_core, :admin, role],  :html => { :id => 'wrap', "data-object_name" => role.class.model_name.singular } do |f|
+= form_for [forgeos_core, :admin, role], :as => :role, :html => { :id => 'wrap', "data-object_name" => role.class.model_name.singular } do |f|
   = hidden_field_tag "role[right_ids][]"
 
   .backgrounds.big-header

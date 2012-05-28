@@ -9,8 +9,7 @@ module Forgeos
 
     test "should fill blank name with filename" do
       attachment = Attachment.new(:filename => 'attachment.none')
-      assert_respond_to attachment, :fill_blank_name_with_filename
-      attachment.fill_blank_name_with_filename
+      attachment.save
       assert_equal 'attachment', attachment.name
     end
 

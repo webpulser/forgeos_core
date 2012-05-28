@@ -6,39 +6,39 @@
     %span.large-info-name.truncate
       = I18n.t('media.filename').capitalize
     %span.large-info-value
-      = object.filename
+      = video.filename
     .clear
   .large-info-block
     %span.large-info-name
       = I18n.t('media.picture.original_size').capitalize
     %span.large-info-value
-      = "#{object.width} x #{object.height} #{I18n.t('media.pixel', :count => 2)}"
+      = "#{video.width} x #{video.height} #{I18n.t('media.pixel', :count => 2)}"
     .clear
   .large-info-block
     %span.large-info-name
       = I18n.t('media.file_type').capitalize
     %span.large-info-value
-      = object.file_type.upcase
+      = video.file_type.upcase
     .clear
   .large-info-block
     %span.large-info-name
       = I18n.t('media.updated_at').capitalize
     %span.large-info-value
-      = object.updated_at.to_s(:short)
+      = video.updated_at.to_s(:short)
     .clear
   .large-info-block
     %span.large-info-name
       = I18n.t('media.size').capitalize
     %span.large-info-value
-      = "#{object.size/1024} #{I18n.t('media.byte.kilo')}"
+      = "#{video.size/1024} #{I18n.t('media.byte.kilo')}"
     .clear
   .large-info-block
     %span.large-info-name
       = I18n.t('media.description').capitalize
     %span.large-info-value
-      = object.description
+      = video.description
     .clear
 .clear
 
 = javascript_include_tag 'flowplayer-3.1.4.min'
-= javascript_tag "jQuery(document).ready(function(){$('#video-player').flowplayer('/assets/forgeos/flashes/flowplayer-3.1.5.swf', '#{object.public_filename()}'); });"
+= javascript_tag "jQuery(document).ready(function(){$('#video-player').flowplayer('/assets/forgeos/flashes/flowplayer-3.1.5.swf', '#{video.public_filename()}'); });"

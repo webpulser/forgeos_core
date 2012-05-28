@@ -14,6 +14,8 @@ module Forgeos
       admin_login_to('admin/cachings', 'index')
       get :index, :use_route => :forgeos_core, :id => 0, :format => :json
       assert_response :success
+      assert_match 'public/cache', Rails.configuration.action_controller.page_cache_directory
+      assert_match 'tmp/cache', Rails.cache.cache_path
       assert_equal [Rails.configuration.action_controller.page_cache_directory, Rails.cache.cache_path], assigns(:files)
     end
 
@@ -26,9 +28,9 @@ module Forgeos
 
     test "should get index as json with directory" do
       admin_login_to('admin/cachings', 'index')
-      files = %w(favicon.ico 500.html 422.html 404.html).map do |fn|
-        File.join(Rails.configuration.action_controller.page_cache_directory, fn)
-      end
+      files = [File.join(Rails.configuration.action_controller.page_cache_directory,'toto.cache')]
+      File.open(files.first, 'w') {|f| f.write('') }
+      assert File.exist?(files.first)
       get :index, :use_route => :forgeos_core, :id => Rails.configuration.action_controller.page_cache_directory, :format => :json
       assert_response :success
       assert_equal files.sort, assigns(:files).sort
@@ -68,12 +70,9 @@ module Forgeos
 
     test "should purge cache" do
       admin_login_to('admin/cachings', 'create')
-      files = %w(favicon.ico 500.html 422.html 404.html).map do |fn|
-        File.join(Rails.configuration.action_controller.page_cache_directory, fn)
-      end
       tmp_file = File.join(Rails.cache.cache_path,'test.cache')
       File.open(tmp_file, 'w') {|f| f.write('') }
-      files << tmp_file
+      files = [tmp_file]
       post :create, :use_route => :forgeos_core, :commit => I18n.t('caching.delete.all').capitalize
       assert_redirected_to '/admin/cachings'
       assert_not_nil flash[:notice]
@@ -82,8 +81,6 @@ module Forgeos
       files.each do |file|
         assert !File.exist?(file), "#{file} file exist and should not"
       end
-
-      %x(git checkout #{Rails.configuration.action_controller.page_cache_directory} #{Rails.cache.cache_path})
     end
   end
 end

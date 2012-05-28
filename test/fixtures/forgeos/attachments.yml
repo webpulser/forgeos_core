@@ -1,4 +1,5 @@
 attachment:
+  id: 1
   content_type: application/none
   name: attachment
   filename: attachment.none
@@ -7,6 +8,7 @@ attachment:
   description: attachment description
   alt: attachment
 picture:
+  id: 2
   content_type: image/jpeg
   type: Forgeos::Picture
   name: picture
@@ -18,6 +20,7 @@ picture:
   description: picture description
   alt: picture
 pdf:
+  id: 3
   content_type: application/pdf
   type: Forgeos::Pdf
   name: pdf
@@ -27,6 +30,7 @@ pdf:
   description: pdf description
   alt: pdf
 video:
+  id: 4
   content_type: video/mpeg
   type: Forgeos::Video
   name: video
@@ -36,6 +40,7 @@ video:
   description: video description
   alt: video
 audio:
+  id: 5
   content_type: audio/mpeg
   type: Forgeos::Audio
   name: audio
@@ -45,6 +50,7 @@ audio:
   description: audio description
   alt: audio
 doc:
+  id: 6
   content_type: application/vnd.oasis.opendocument.presentation
   type: Forgeos::Doc
   name: doc
@@ -54,6 +60,7 @@ doc:
   description: doc description
   alt: doc
 media:
+  id: 7
   content_type: application/x-gzip
   type: Forgeos::Media
   name: media

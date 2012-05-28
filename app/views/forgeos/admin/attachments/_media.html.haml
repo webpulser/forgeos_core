@@ -5,31 +5,31 @@
     %span.large-info-name.truncate
       = I18n.t('media.filename').capitalize
     %span.large-info-value
-      = object.filename
+      = media.filename
     .clear
   .large-info-block
     %span.large-info-name
       = I18n.t('media.file_type').capitalize
     %span.large-info-value
-      = object.file_type.upcase
+      = media.file_type.upcase
     .clear
   .large-info-block
     %span.large-info-name
       = I18n.t('media.updated_at').capitalize
     %span.large-info-value
-      = object.updated_at.to_s(:short)
+      = media.updated_at.to_s(:short)
     .clear
   .large-info-block
     %span.large-info-name
       = I18n.t('media.size').capitalize
     %span.large-info-value
-      = "#{object.size/1024} #{I18n.t('media.byte.kilo')}"
+      = "#{media.size/1024} #{I18n.t('media.byte.kilo')}"
     .clear
   .large-info-block
     %span.large-info-name
       = I18n.t('media.description').capitalize
     %span.large-info-value
-      = object.description
+      = media.description
     .clear
 
 .clear

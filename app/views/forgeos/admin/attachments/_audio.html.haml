@@ -6,40 +6,40 @@
     %span.large-info-name.truncate
       = I18n.t('media.filename').capitalize
     %span.large-info-value
-      = object.filename
+      = audio.filename
     .clear
   .large-info-block
     %span.large-info-name
       = I18n.t('media.picture.original_size').capitalize
     %span.large-info-value
-      = "#{object.width} x #{object.height} #{I18n.t('media.pixel', :count => 2)}"
+      = "#{audio.width} x #{audio.height} #{I18n.t('media.pixel', :count => 2)}"
     .clear
   .large-info-block
     %span.large-info-name
       = I18n.t('media.file_type').capitalize
     %span.large-info-value
-      = object.file_type.upcase
+      = audio.file_type.upcase
     .clear
   .large-info-block
     %span.large-info-name
       = I18n.t('media.updated_at').capitalize
     %span.large-info-value
-      = object.updated_at.to_s(:short)
+      = audio.updated_at.to_s(:short)
     .clear
   .large-info-block
     %span.large-info-name
       = I18n.t('media.size').capitalize
     %span.large-info-value
-      = "#{object.size/1024} #{I18n.t('media.byte.kilo')}"
+      = "#{audio.size/1024} #{I18n.t('media.byte.kilo')}"
     .clear
   .large-info-block
     %span.large-info-name
       = I18n.t('media.description').capitalize
     %span.large-info-value
-      = object.description
+      = audio.description
     .clear
 
 .clear
 
 = javascript_include_tag 'audio-player'
-= javascript_tag "AudioPlayer.setup('/assets/forgeos/flashes/audio-player.swf', { width: 290 }); AudioPlayer.embed('audio-player', { soundFile: '#{object.public_filename()}', autostart: 'yes' })"
+= javascript_tag "AudioPlayer.setup('/assets/forgeos/flashes/audio-player.swf', { width: 290 }); AudioPlayer.embed('audio-player', { soundFile: '#{audio.public_filename()}', autostart: 'yes' })"

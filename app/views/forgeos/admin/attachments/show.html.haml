@@ -1,22 +1,21 @@
 = render :partial => 'tabs'
 #wrap
   .backgrounds.big-header
-    %h1#media-title
-      = @media.name
+    %h1#media-title= @media.name
     .interact-links
       = link_to I18n.t('media.update.action').capitalize, [forgeos_core, :edit, :admin, @media ], :class => 'backgrounds interact-button'
       = I18n.t('or')
-      = link_to I18n.t('media.back').capitalize, [forgeos_core, :admin, find_media_type_from_content_type(@media).pluralize], :class => 'back-link'
+      = link_to I18n.t('media.back').capitalize, [forgeos_core, :admin, @media.class.model_name.route_key], :class => 'back-link'
 
   #content.grid_16.alpha.omega
     #media-modify.grid_12.alpha
       .media-modify-wrap
-        - permalink = "#{request.protocol}#{request.host_with_port}#{@media.public_filename}"
+        - permalink = url_for(@media.public_filename)
         %h2.permalink
           = I18n.t('permalink', :count => 1).capitalize
           \:
           = link_to permalink, permalink
-      = render :partial => @media.class.to_s.underscore, :object => @media
+      = render :partial => @media.class.model_name.singular_route_key.dup, :object => @media
     #right-sidebar.grid_4.omega
       .step
         = link_to I18n.t('media.destroy.action').capitalize, [forgeos_core, :admin, @media], :confirm => I18n.t('media.destroy.confirm').capitalize, :method => :delete, :class => 'small-icons delete'

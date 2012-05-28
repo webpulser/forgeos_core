@@ -1,9 +1,9 @@
 = render :partial => 'tabs'
-= form_for [forgeos_core, :admin, media], :html => { :multipart => true, :id => 'wrap', "data-object_name" => media.class.model_name.singular } do |f|
+= form_for [forgeos_core, :admin, media], :as => :attachment, :html => { :multipart => true, :id => 'wrap', "data-object_name" => @media_class.model_name.singular } do |f|
   .backgrounds.big-header
     = f.text_field :name, :id => 'media-title', :class => 'field_name'
     .interact-links
-      = forgeos_save_buttons [forgeos_core, :admin, find_media_type_from_content_type(media).pluralize]
+      = forgeos_save_buttons [forgeos_core, :admin, @file_type.pluralize]
 
   #content.grid_16.alpha.omega
     #media-modify.grid_12.alpha
@@ -25,7 +25,7 @@
               = "#{largest_thumb.width} x #{largest_thumb.height} #{I18n.t('media.pixel', :count => 2)}"
 
         .large-info-container.grid_5.alpha.omega
-          - if media.kind_of?(Picture)
+          - if media.kind_of?(Forgeos::Picture)
             .large-info-block
               %span.large-info-name.truncate
                 = I18n.t('media.filename').capitalize
@@ -60,7 +60,7 @@
             = f.label :uploaded_data, nil, :class => 'large-info-name'
             = f.file_field :uploaded_data, :size => 10
             %br
-          - if f.object.is_a?(Picture)
+          - if f.object.is_a?(Forgeos::Picture)
             .large-info-block
               = f.label :alt, t('media.alt').capitalize, :class => 'large-info-name'
               = f.text_field :alt, :size => 24
@@ -90,6 +90,6 @@
         #association-media-tree.inner-step
           %ul
             = hidden_field_tag "#{f.object_name}[category_ids][]"
-            = render :partial => 'admin/categories/associated_elements', :locals => { :association_id => 'category_ids', :element => media, :category_ids => media.category_ids, :categories => find_categories_from_content_type(media) }
+            = render :partial => 'forgeos/admin/categories/associated_elements', :locals => { :association_id => 'category_ids', :element => media, :category_ids => media.category_ids, :categories => find_categories_from_content_type(media) }
             .clear
     .clear
