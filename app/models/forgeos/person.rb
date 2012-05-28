@@ -25,14 +25,12 @@ module Forgeos
     attr_accessible :active, :as => :admin
 
     ransacker :full_name do |parent|
-      #case self.connection.class.to_s
-      #when 'ActiveRecord::ConnectionAdapters::MysqlAdapter', 'ActiveRecord::ConnectionAdapters::Mysql2Adapter'
-      #  Arel::Nodes::NamedFunction.new 'CONCAT', [ parent.table[:firstname], parent.table[:lastname] ]
-      #when 'ActiveRecord::ConnectionAdapters::PostgreSQLAdapter'
-      #  Arel::Nodes::NamedFunction.new 'TEXTCAT', [ parent.table[:firstname], parent.table[:lastname] ]
-      #when 'ActiveRecord::ConnectionAdapters::SQLite3Adapter'
+      case self.connection.class.to_s
+      when 'ActiveRecord::ConnectionAdapters::MysqlAdapter', 'ActiveRecord::ConnectionAdapters::Mysql2Adapter'
+        Arel::Nodes::NamedFunction.new 'CONCAT', [ parent.table[:firstname], parent.table[:lastname] ]
+      else
         Arel::Nodes::Concatenation.new parent.table[:firstname], parent.table[:lastname]
-      #end
+      end
     end
 
     def full_name
