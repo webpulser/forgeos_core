@@ -6,7 +6,7 @@ module Forgeos
       respond_to do |wants|
         wants.html
         wants.json do
-          if params[:id] == '0' or params[:id].blank?
+          if params[:id].present? and params[:id].to_s == '0'
             @files = [Rails.configuration.action_controller.page_cache_directory, Rails.cache.cache_path]
           else
             get_files(params[:id])

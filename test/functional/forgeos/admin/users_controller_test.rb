@@ -19,7 +19,7 @@ module Forgeos
       assert_response :success
       assert_match /\"iTotalDisplayRecords\":3/, @response.body
       assert_match /\"iTotalRecords\":3/, @response.body
-      assert_match /\"sEcho\":\"0\"/, @response.body
+      assert_match /\"sEcho\":0/, @response.body
       assert_match 'john.doe@forgeos.com', @response.body
     end
 
@@ -29,7 +29,7 @@ module Forgeos
       assert_response :success
       assert_match /\"iTotalDisplayRecords\":0/, @response.body
       assert_match /\"iTotalRecords\":3/, @response.body
-      assert_match /\"sEcho\":\"0\"/, @response.body
+      assert_match /\"sEcho\":0/, @response.body
     end
 
     test "should get index as json with ids" do
@@ -38,7 +38,7 @@ module Forgeos
       assert_response :success
       assert_match /\"iTotalDisplayRecords\":1/, @response.body
       assert_match /\"iTotalRecords\":3/, @response.body
-      assert_match /\"sEcho\":\"0\"/, @response.body
+      assert_match /\"sEcho\":0/, @response.body
       assert_match 'john.doe@forgeos.com', @response.body
     end
 

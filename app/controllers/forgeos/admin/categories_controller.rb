@@ -15,8 +15,8 @@ module Forgeos
           else
             # list categories like a tree
             klass = params[:type].camelize.constantize
-            @categories = if params[:id] and params[:id] != '0'
-              klass.find_by_id(params[:id]).children
+            @categories = if root = klass.find_by_id(params[:id])
+              root.children
             else
               klass.roots
             end

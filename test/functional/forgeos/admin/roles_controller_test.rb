@@ -19,7 +19,7 @@ module Forgeos
       assert_response :success
       assert_match /\"iTotalDisplayRecords\":2/, @response.body
       assert_match /\"iTotalRecords\":2/, @response.body
-      assert_match /\"sEcho\":\"0\"/, @response.body
+      assert_match /\"sEcho\":0/, @response.body
       assert_match 'role', @response.body
     end
 
@@ -29,7 +29,7 @@ module Forgeos
       assert_response :success
       assert_match /\"iTotalDisplayRecords\":0/, @response.body
       assert_match /\"iTotalRecords\":2/, @response.body
-      assert_match /\"sEcho\":\"0\"/, @response.body
+      assert_match /\"sEcho\":0/, @response.body
     end
 
     test "should get index as json with sorting by count" do

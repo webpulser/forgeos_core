@@ -1,11 +1,12 @@
 #imageUploadDialog.upload-lightbox-container.white
   #imageUpload
   %span= I18n.t('or')
-  = link_to_function I18n.t('media.add_form_library'), "$('#imageSelectDialog').dialog('open');"
+  %a{ :onclick => "jQuery('#imageSelectDialog').dialog('open');"}= I18n.t 'media.add_form_library'
 
 #imageSelectDialog.media-hoverlay
   .media-hoverlay-header
-    = link_to_function content_tag(:span, I18n.t('media.picture.upload.action').capitalize, :class=>'big-icons add-picture'), "$(\'#imageUploadDialog\').dialog(\'open\'); $(\'#imageSelectDialog\').dialog(\'close\')", :class=>'backgrounds button'
+    %a.backgrounds.button{ :onclick => "jQuery('#imageUploadDialog').dialog('open'); jQuery('#imageSelectDialog').dialog('close')" }
+      %span.big-icons.add-picture= I18n.t 'media.picture.upload.action'
     .display-mode
       .heading-separator
       .display-thumbnails
@@ -15,8 +16,8 @@
     .backgrounds.search-form-thumbnails
   .media-hoverlay-sidebar.grid_3.omega.alpha
     .sidebar-content
-      %h2{ :class => 'small-icons picture'}
-        = link_to_function I18n.t('media.picture.all').capitalize, "select_all_elements_without_category('picture-attachment-tree')"
+      %h2.small-icons.picture
+        %a{ :onclick => "select_all_elements_without_category('picture-attachment-tree')" }= I18n.t 'media.picture.all'
       #picture-attachment-tree
   .media-hoverlay-content.thumbnails
     #thumbnail-table.table.datatable.media.selectable_rows
@@ -35,9 +36,10 @@
 #fileSelectDialog.media-hoverlay
   #inner-lightbox.backgrounds
     - %w(pdf audio video doc media).each do |file_type|
-      = link_to_function I18n.t(:other, :scope => [:media,file_type]), "update_current_dataTable_source('#table-files','#{escape_javascript(forgeos_core.admin_attachments_path(:mode => 'selection',:format => :json, :file_type => file_type))}')", :class => "small-icons #{file_type}"
+      %a.small-icons{ :onclick => "update_current_dataTable_source('#table-files','#{escape_javascript(forgeos_core.admin_attachments_path(:mode => 'selection',:format => :json, :file_type => file_type))}')", :class => file_type }= I18n.t(:other, :scope => [:media,file_type])
   .media-hoverlay-header
-    = link_to_function content_tag(:span, I18n.t('media.upload.action').capitalize, :class=>'big-icons add-media'), "$(\'#fileUploadDialog\').dialog(\'open\'); $(\'#fileSelectDialog\').dialog(\'close\')", :class=>'backgrounds button'
+    %a.backgrounds.button{ :onclick => "jQuery('#fileUploadDialog').dialog('open'); jQuery('#fileSelectDialog').dialog('close')" }
+      %span.big-icons.add-media= I18n.t 'media.upload.action'
     #search.right.files= fg_search
     .backgrounds.search-form-files
   .media-hoverlay-content

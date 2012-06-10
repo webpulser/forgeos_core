@@ -9,7 +9,7 @@ Gem::Specification.new do |s|
   s.add_dependency 'acts_as_tree', '0.2.0'
   s.add_dependency 'authlogic', '>= 3.0.3'
   s.add_dependency 'bcrypt-ruby', '>= 2.1.4'
-  s.add_dependency 'compass', '0.11.4'
+  s.add_dependency 'compass', '>= 0.11.4'
   s.add_dependency 'delayed_job', '>= 3.0.1'
   s.add_dependency 'delayed_job_active_record', '>= 0.3.1'
   s.add_dependency 'fastercsv', '>= 1.5.4'

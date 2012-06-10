@@ -42,7 +42,7 @@ module Forgeos
       assert_response :success
       assert_match /\"iTotalDisplayRecords\":1/, @response.body
       assert_match /\"iTotalRecords\":1/, @response.body
-      assert_match /\"sEcho\":\"0\"/, @response.body
+      assert_match /\"sEcho\":0/, @response.body
       assert_match 'picture', @response.body
     end
 
@@ -155,7 +155,7 @@ module Forgeos
       object = Category.create(:name => 'photos')
       admin_login_to('admin/attachments', 'create')
       assert_difference 'Attachment.count', 1 do
-        post :create, :Filedata => Rack::Test::UploadedFile.new(File.expand_path('../../../../files/rails.png', __FILE__)), :use_route => :forgeos_core, :format => :json, :klass => 'Forgeos::Picture', :target_id => object.id, :target => object.class
+        post :create, :Filedata => Rack::Test::UploadedFile.new(File.expand_path('../../../../files/rails.png', __FILE__)), :use_route => :forgeos_core, :format => :json, :klass => 'Forgeos::Picture', :target_id => object.id, :target => object.class.to_s
       end
 
       assert_response :success

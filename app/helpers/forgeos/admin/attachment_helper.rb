@@ -17,7 +17,7 @@ module Forgeos
                 unless picture.nil?
                   content_tag(:li) do
                     image_tag(picture.public_filename(:normal)) +
-                    link_to_function('', "$(this).parents('li').remove(); $('##{name}').val('null');", :title => t('media.picture.destroy.confirm').capitalize, :class => 'big-icons delete')
+                    link_to('', '#', :onclick => "jQuery(this).parents('li').remove(); jQuery('##{name}').val('null');", :title => t('media.picture.destroy.confirm').capitalize, :class => 'big-icons delete')
                   end
                 end
               end
@@ -39,7 +39,7 @@ module Forgeos
               content_tag(:ul, :class => 'sortable') do
                 pictures.collect{ |picture|
                   content_tag(:li) do
-                    link_to_function('', "$(this).parents('li').remove();", :title => t('media.picture.destroy.confirm').capitalize, :class => 'big-icons delete') +
+                    link_to('', '#', :onclick => "jQuery(this).parents('li').remove();", :title => t('media.picture.destroy.confirm').capitalize, :class => 'big-icons delete') +
                     hidden_field_tag("#{object_name}[attachment_ids][]", picture.id, :id => "attachment_#{picture.id}") +
                     image_tag(picture.public_filename(:thumb)) +
                     content_tag(:div, :class => 'handler') do
