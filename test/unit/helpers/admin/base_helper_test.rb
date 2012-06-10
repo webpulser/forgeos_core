@@ -8,7 +8,7 @@ module Forgeos
       output = fg_submit_tag(:forgeos)
       assert_match /<input/, output
       assert_match /class="backgrounds interact-button"/, output
-      assert_match /Forgeos core/, output
+      assert_match /Forgeos core/i, output
       assert_match /type="submit"/, output
     end
 

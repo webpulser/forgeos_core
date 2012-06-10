@@ -1,21 +1,21 @@
 = form_for [forgeos_core, :admin, right], :as => :right, :html => { :id => 'wrap' } do |f|
   %p
     %b
-      = f.label :name, I18n.t('name').capitalize
+      = f.label :name, t('name')
       \:
     = f.text_field :name
   %p
     %b
-      = f.label :controller_name, I18n.t('controller_name').capitalize
+      = f.label :controller_name, t('controller_name')
       \:
     = f.text_field :controller_name
   %p
     %b
-      = f.label :action_name, I18n.t('action_name').capitalize
+      = f.label :action_name, t('action_name')
       \:
     = f.text_field :action_name
   %p
-    = f.submit I18n.t('save').capitalize
+    = f.submit t('save')
 
 - if !(right.new_record?)
-  - content_for :tools, link_to(I18n.t('show').capitalize, [forgeos_core, :admin,right])
+  - content_for :tools, link_to(t('show'), [forgeos_core, :admin,right])

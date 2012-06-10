@@ -2,32 +2,32 @@
 .backgrounds.big-header
   %h1= @user.full_name
   .interact-links
-    = link_to I18n.t('user.update.action'), [forgeos_core, :edit, :admin, @user], :class => 'backgrounds interact-button'
-    = I18n.t(:or)
-    = link_to I18n.t('user.back'), forgeos_core.admin_users_path, :class => 'back-link'
+    = link_to t('user.update.action'), [forgeos_core, :edit, :admin, @user], :class => 'backgrounds interact-button'
+    =t :or
+    = link_to t('user.back'), forgeos_core.admin_users_path, :class => 'back-link'
 #content.grid_16.alpha.omega
   #customer-see.grid_12.alpha.omega
     // .customer-header.backgrounds
     .padding-wrap
       .fieldset
-        %h3= I18n.t('user.customer_infos').capitalize
+        %h3=t 'user.customer_infos'
         .main-infos
           .main-infos-cutomer
-            %h4.small-icons= I18n.t('user.contact_infos').capitalize
+            %h4.small-icons=t 'user.contact_infos'
             %p= @user.phone
             %p.customer-email= @user.email
         .clear
 
   #right-sidebar.grid_4.omega.alpha
     .step
-      =mail_to @user.email, I18n.t('user.contact').capitalize, :class => 'small-icons contact'
-      = link_to I18n.t('user.destroy.action').capitalize, [forgeos_core, :admin, @user], :confirm => I18n.t('user.destroy.confirm').capitalize, :method => :delete, :class => 'small-icons delete'
+      =mail_to @user.email, t('user.contact'), :class => 'small-icons contact'
+      = link_to t('user.destroy.action'), [forgeos_core, :admin, @user], :confirm => t('user.destroy.confirm'), :method => :delete, :class => 'small-icons delete'
     .step.disabled
-      = link_to I18n.t('newsletter', :count => 2).capitalize, '#', :class => 'small-icons step-title'
+      = link_to t('newsletter', :count => 2), '#', :class => 'small-icons step-title'
     #user_history.step.open
-      = link_to I18n.t('user.history').capitalize, '#', :class => 'small-icons step-title'
+      = link_to t('user.history'), '#', :class => 'small-icons step-title'
       .inner-step
         %p
-          = I18n.t('created_on').capitalize
+          =t 'created_on'
           = @user.created_at.to_date
   .clear

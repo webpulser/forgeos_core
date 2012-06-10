@@ -1,20 +1,20 @@
 #dashboard.statistics.grtid_12.alpha.omega
   .left-dashboard.grid_12.omega.alpha
     .padding-wrap
-      %h2.small-icons.see-stats= I18n.t('statistic.trends').capitalize
+      %h2.small-icons.see-stats=t 'statistic.trends'
       .trend_filter
         - form_tag forgeos_core.admin_statistics_path, :id => 'form_stats' do
           %label
-            = "#{I18n.t('statistic.show.for').capitalize} :"
-          = select_tag :timestamp, options_for_select([[I18n.t('please_select'), nil], [I18n.t('statistic.last.month'), 'month'], [I18n.t('statistic.last.week'), 'week']], params[:timestamp]), :onchange => "$('#form_stats').submit()"
+            = "#{t('statistic.show.for')} :"
+          = select_tag :timestamp, options_for_select([[t('please_select'), nil], [t('statistic.last.month'), 'month'], [t('statistic.last.week'), 'week']], params[:timestamp]), :onchange => "$('#form_stats').submit()"
       .chart
         = raw @graph
       .clear
 
-      %h2.small-icons.search= I18n.t('search').capitalize
+      %h2.small-icons.search=t 'search'
       .to-tab.ui-tabs.ui-widget.ui-widget-content.ui-corner-all
         %ul.ui-tabs-nav.ui-helper-reset.ui-helper-clearfix.ui-widget-header.ui-corner-all
-          %li.ui-state-default.ui-corner-top.ui-tabs-selected.ui-state-active= link_to I18n.t('top_5_items').capitalize, '#top-search'
+          %li.ui-state-default.ui-corner-top.ui-tabs-selected.ui-state-active= link_to t('top_5_items'), '#top-search'
         #top-search.ui-tabs-panel.ui-widget-content.ui-corner-bottom
           %table
             %tbody
@@ -22,13 +22,13 @@
                 - if search_keyword = SearchKeyword.find_by_id(keyword_id)
                   %tr{ :class => cycle('odd','even')}
                     %td= search_keyword.keyword
-                    %td= I18n.t('seen', :count => count, :scope => :search_keyword)
+                    %td=t 'seen', :count => count, :scope => :search_keyword
 
   .right-dahsboard.grid_4.alpha
-    %h2.small-icons.see-stats= I18n.t('statistic.keyfacts').capitalize
+    %h2.small-icons.see-stats=t 'statistic.keyfacts'
     .live-stats-content
       %span
-        %span.keyfacts-name= I18n.t('visitor', :count => 2).capitalize
+        %span.keyfacts-name=t 'visitor', :count => 2
         %span.keyfacts-value= Forgeos::Statistics.total_of_visitors(@date)
         %span.clear
   .clear

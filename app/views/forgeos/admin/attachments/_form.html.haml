@@ -8,53 +8,50 @@
   #content.grid_16.alpha.omega
     #media-modify.grid_12.alpha
       .media-modify-wrap
-        - permalink = "#{request.protocol}#{request.host_with_port}/#{media.public_filename}"
         %h2.permalink
-          = I18n.t('permalink', :count => 1).capitalize
+          =t 'permalink', :count => 1
           \:
-          = link_to permalink, permalink
+          = link_to media.public_filename, media.public_filename
 
         - if largest_thumb = thumbnails.shift
           .large-image.media-image-container.grid_7.omega
             = image_tag largest_thumb.public_filename
             %br
-            %span.media-size
-              = I18n.t("media.thumbnails.#{largest_thumb.thumbnail}").upcase
+            %span.media-size= t(largest_thumb.thumbnail, :scope => [:media, :humbnails]).upcase
             %br
             %span.media-size-pixels
-              = "#{largest_thumb.width} x #{largest_thumb.height} #{I18n.t('media.pixel', :count => 2)}"
+              #{largest_thumb.width} x #{largest_thumb.height} #{t 'media.pixel', :count => 2}
 
         .large-info-container.grid_5.alpha.omega
           - if media.kind_of?(Forgeos::Picture)
             .large-info-block
               %span.large-info-name.truncate
-                = I18n.t('media.filename').capitalize
+                =t 'media.filename'
               %span.large-info-value
                 = media.filename
               .clear
             .large-info-block
               %span.large-info-name
-                = I18n.t('media.picture.original_size').capitalize
-              - size = "#{media.width} x #{media.height} #{I18n.t('media.pixel', :count => 2)}"
-              = link_to size, permalink, :class => 'large-info-value'
+                =t 'media.picture.original_size'
+              %a.large-info-value{ :href => media.public_filename }
+                #{media.width} x #{media.height} #{t 'media.pixel', :count => 2 }
               .clear
           .large-info-block
             %span.large-info-name
-              = I18n.t('media.file_type').capitalize
+              =t 'media.file_type'
             %span.large-info-value
               = media.file_type.upcase
             .clear
           .large-info-block
             %span.large-info-name
-              = I18n.t('media.updated_at').capitalize
+              =t 'media.updated_at'
             %span.large-info-value
               = media.updated_at.to_s(:short)
             .clear
           .large-info-block
             %span.large-info-name
-              = I18n.t('media.size').capitalize
-            %span.large-info-value
-              = "#{media.size/1024} #{I18n.t('media.byte.kilo')}"
+              =t 'media.size'
+            %span.large-info-value #{media.size/1024} #{t 'media.byte.kilo'}
             .clear
           .large-info-block
             = f.label :uploaded_data, nil, :class => 'large-info-name'
@@ -62,11 +59,11 @@
             %br
           - if f.object.is_a?(Forgeos::Picture)
             .large-info-block
-              = f.label :alt, t('media.alt').capitalize, :class => 'large-info-name'
+              = f.label :alt, t('media.alt'), :class => 'large-info-name'
               = f.text_field :alt, :size => 24
               %br
           .large-info-block
-            = f.label :description, t('media.description').capitalize, :class => 'large-info-name'
+            = f.label :description, t('media.description'), :class => 'large-info-name'
             = f.text_area :description, :rows => 5, :cols => 34
         .clear
 
@@ -74,19 +71,17 @@
           .grid_4.alpha.omega.media-image-container
             = image_tag thumb.public_filename
             %br
-            %span.media-size
-              = I18n.t("media.thumbnails.#{thumb.thumbnail}").upcase
+            %span.media-size= t(thumb.thumbnail, :scope => [:media, :thumbnails]).upcase
             %br
             %span.media-size-pixels
-              = "#{thumb.width} x #{thumb.height} #{I18n.t('media.pixel', :count => 2)}"
+              #{thumb.width} x #{thumb.height} #{t 'media.pixel', :count => 2 }
 
     #right-sidebar.grid_4.omega
       .step
-        = link_to I18n.t('media.destroy.action').capitalize, [forgeos_core, :admin, media], :confirm => I18n.t('media.destroy.confirm').capitalize, :method => :delete, :class => 'small-icons delete'
+        = link_to t('media.destroy.action'), [forgeos_core, :admin, media], :confirm => t('media.destroy.confirm'), :method => :delete, :class => 'small-icons delete'
         .clear
       #attachment_associated_collection.step.open
-        %a.small-icons.step-title{ :href => "#" }
-          Associated to collection
+        %a.small-icons.step-title Associated to collection
         #association-media-tree.inner-step
           %ul
             = hidden_field_tag "#{f.object_name}[category_ids][]"

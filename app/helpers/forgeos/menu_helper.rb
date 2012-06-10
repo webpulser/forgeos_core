@@ -15,7 +15,7 @@ module Forgeos
       return ''.html_safe unless tab.has_key?(:url)
       urls = [tab[:url]]
       html_options = (tab[:html] || {}).dup
-      tab_name = I18n.t(tab[:title] || title, :scope => [:back_office, :menu])
+      tab_name = t(tab[:title] || title, :scope => [:back_office, :menu])
 
 
       if tab[:children] && !tab[:children].empty?
@@ -50,7 +50,7 @@ module Forgeos
         end
       end
 
-      link = link_to(tab_name.capitalize, urls.first)
+      link = link_to(tab_name, urls.first)
 
       if defined?(menu) and menu.present?
         link += content_tag(:span, '', :class => 'arrow') + content_tag(:ul, menu.join.html_safe)

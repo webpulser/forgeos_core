@@ -2,7 +2,7 @@
 = render :partial => 'left_sidebar', :locals => {:icon_class => 'all-admins', :sidebar_title => 'administrator.all', :tree_id =>'admins-tree' }
 #content.grid_12.alpha.omega
   .backgrounds.header
-    = link_to content_tag(:span,t('administrator.create.action').capitalize, :class=>'big-icons create-admin'), forgeos_core.new_admin_administrator_path, :class=>'backgrounds action-button'
+    = link_to content_tag(:span,t('administrator.create.action'), :class=>'big-icons create-admin'), forgeos_core.new_admin_administrator_path, :class=>'backgrounds action-button'
     #search.right
       = fg_search
     .backgrounds.search-form

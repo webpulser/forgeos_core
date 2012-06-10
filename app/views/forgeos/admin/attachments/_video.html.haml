@@ -1,44 +1,41 @@
 .large-image.grid_7.omega
-  #video-player
+  %video#video-player{ :src => video.public_filename, :controls => true }
 
 .large-info-container.grid_5.alpha.omega
   .large-info-block
     %span.large-info-name.truncate
-      = I18n.t('media.filename').capitalize
+      =t 'media.filename'
     %span.large-info-value
       = video.filename
     .clear
   .large-info-block
     %span.large-info-name
-      = I18n.t('media.picture.original_size').capitalize
+      =t 'media.picture.original_size'
     %span.large-info-value
-      = "#{video.width} x #{video.height} #{I18n.t('media.pixel', :count => 2)}"
+      #{video.width} x #{video.height} #{t 'media.pixel', :count => 2}
     .clear
   .large-info-block
     %span.large-info-name
-      = I18n.t('media.file_type').capitalize
+      =t 'media.file_type'
     %span.large-info-value
       = video.file_type.upcase
     .clear
   .large-info-block
     %span.large-info-name
-      = I18n.t('media.updated_at').capitalize
+      =t 'media.updated_at'
     %span.large-info-value
       = video.updated_at.to_s(:short)
     .clear
   .large-info-block
     %span.large-info-name
-      = I18n.t('media.size').capitalize
+      =t 'media.size'
     %span.large-info-value
-      = "#{video.size/1024} #{I18n.t('media.byte.kilo')}"
+      #{video.size/1024} #{t 'media.byte.kilo'}
     .clear
   .large-info-block
     %span.large-info-name
-      = I18n.t('media.description').capitalize
+      =t 'media.description'
     %span.large-info-value
       = video.description
     .clear
 .clear
-
-= javascript_include_tag 'flowplayer-3.1.4.min'
-= javascript_tag "jQuery(document).ready(function(){$('#video-player').flowplayer('/assets/forgeos/flashes/flowplayer-3.1.5.swf', '#{video.public_filename()}'); });"

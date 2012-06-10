@@ -1,7 +1,7 @@
 - Forgeos::AttachableTypes.each do |type|
   %li
     %h3
-      = I18n.t("activerecord.models.#{type.underscore}").capitalize
+      =t "activerecord.models.#{type.underscore}"
       \:
 
     - elements = @media.attachment_links.collect{ |sp| sp.attachable if sp.attachable.kind_of?(type.camelize.constantize)}.compact

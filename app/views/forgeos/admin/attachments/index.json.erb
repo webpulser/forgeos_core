@@ -7,13 +7,13 @@
     content_tag(:div, params[:mode] == 'selection' ? media.filename : link_to(media.name, [forgeos_core, :edit, :admin, media], :class => "truncate", :title => media.filename), :class => 'media-name') <<
     media.file_type.upcase <<
     media.updated_at.to_s(:short) <<
-    "#{media.size/1024} #{I18n.t('media.byte.kilo')}" <<
+    "#{media.size/1024} #{t 'media.byte.kilo'}" <<
     "N/A" <<
     link_to('', [forgeos_core, :edit, :admin, media], :class => 'small-icons edit-link') +
     link_to('', [forgeos_core, :admin, media],
       :remote => true,
       :method => :delete,
-      :confirm => I18n.t('media.destroy.confirm').capitalize,
+      :confirm => t('media.destroy.confirm'),
       :class => 'small-icons destroy-link',
       :id => polymorphic_html_id(media, 'destroy')
     )

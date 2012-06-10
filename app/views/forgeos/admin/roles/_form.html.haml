@@ -19,9 +19,9 @@
               .clear
               .multi-select-div
                 %a{ :href => '#' }
-                  = t('select_all').capitalize
+                  =t 'select_all'
                 %a{ :href => '#' }
-                  = t('unselect_all').capitalize
+                  =t 'unselect_all'
               - right_category.rights.each do |right|
                 .checkbox-container
                   = check_box_tag "role[right_ids][]", right.id, (role ? role.rights.include?(right) : false)
@@ -32,7 +32,7 @@
       - if rights.any?
         .fieldset
           %a.small-icons.panel{ :href => '#' }
-            = t('other')
+            =t 'other'
           .option-panel-content
             .clear
             .multi-select-div
@@ -46,11 +46,11 @@
     #right-sidebar.grid_4.omega.alpha
       - unless role.new_record?
         .step
-          /= link_to t('role.duplicate').capitalize, [:duplicate, :admin, role], :class => 'small-icons duplicate'
-          = link_to t('user.destroy.action').capitalize, [forgeos_core, :admin, role], :confirm => t('user.destroy.confirm').capitalize, :method => :delete, :class => 'small-icons delete'
+          /= link_to t('role.duplicate'), [:duplicate, :admin, role], :class => 'small-icons duplicate'
+          = link_to t('user.destroy.action'), [forgeos_core, :admin, role], :confirm => t('user.destroy.confirm'), :method => :delete, :class => 'small-icons delete'
         #role_attributed_to.step.open
           %a.small-icons.step-title{ :href => "#" }
-            = t('role.attributed_to').capitalize
+            =t 'role.attributed_to'
           - role.administrators.each do |admin|
             = admin.full_name
 

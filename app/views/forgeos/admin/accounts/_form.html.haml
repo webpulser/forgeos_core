@@ -10,24 +10,24 @@
       .inner-content
         - admin.build_avatar unless admin.avatar
         = f.fields_for :avatar do |avatar|
-          = avatar.label :uploaded_data, I18n.t('avatar').capitalize
+          = avatar.label :uploaded_data, t('avatar')
           %div
             - if admin.avatar && !admin.avatar.new_record?
               = image_tag(admin.avatar.public_filename(:small))
             = avatar.file_field :uploaded_data
-        = f.label :email, I18n.t('email')
+        = f.label :email, t('email')
         %div
           = f.text_field :email
-        = f.label :password, I18n.t('password')
+        = f.label :password, t('password')
         %div
           = f.password_field :password
-        = f.label :password_confirmation, I18n.t('password_confirmation')
+        = f.label :password_confirmation, t('password_confirmation')
         %div
           = f.password_field :password_confirmation
-        = f.label :lang, I18n.t(:lang, :count => 1)
+        = f.label :lang, t(:lang, :count => 1)
         %div
-          = f.select :lang, I18n.available_locales.collect{ |locale| [I18n.t(locale, :scope => [:lang, :full]),locale.to_s]}, :prompt => I18n.t(:please_select)
+          = f.select :lang, I18n.available_locales.collect{ |locale| [t(locale, :scope => [:lang, :full]),locale.to_s]}, :prompt => t(:please_select)
         .clear
-        = f.label :time_zone, I18n.t(:time_zone, :count => 1)
+        = f.label :time_zone, t(:time_zone, :count => 1)
         %div
           = f.time_zone_select :time_zone, ActiveSupport::TimeZone.all

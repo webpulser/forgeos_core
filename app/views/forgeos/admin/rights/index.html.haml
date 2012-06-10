@@ -3,11 +3,11 @@
 
 #content.grid_12.alpha.omega
   .backgrounds.header
-    = link_to content_tag(:span,I18n.t('right.create.action').capitalize, :class=>'big-icons create-rights'), '#', :class=>'backgrounds action-button create-right'
+    = link_to content_tag(:span,t('right.create.action'), :class=>'big-icons create-rights'), '#', :class=>'backgrounds action-button create-right'
     #search.right
       = fg_search
     .backgrounds.search-form
   .content-background
   %table#table.datatable.draggable_rows
 
-= dataTables_tag :url => forgeos_core.admin_rights_path(:format => :json), :columns => ["{'bSearchable':false,'bSortable':false}","{'sTitle':'#{escape_javascript(I18n.t :name)}'}","{'sTitle':'#{escape_javascript(I18n.t :controller_name)}'}","{'sTitle':'#{escape_javascript(I18n.t :action_name)}'}","{'sClass':'actions-td','bSearchable':false,'bSortable':false}"]
+= dataTables_tag :url => forgeos_core.admin_rights_path(:format => :json), :columns => ["{'bSearchable':false,'bSortable':false}","{'sTitle':'#{escape_javascript(t :name)}'}","{'sTitle':'#{escape_javascript(t :controller_name)}'}","{'sTitle':'#{escape_javascript(t :action_name)}'}","{'sClass':'actions-td','bSearchable':false,'bSortable':false}"]

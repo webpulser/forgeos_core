@@ -6,24 +6,24 @@
       %span.create-list
         %span.shadow
         %span.big-icons.create-folder
-          = I18n.t('folder.create').capitalize
+          =t 'folder.create'
           -#%span.small-icons.create-smart-folder
-          -#= I18n.t('folder.smart').capitalize
+          -#=t 'folder.smart'
     %span.backgrounds.action-button.update-action
       %span.small-icons.more-actions
       %span.small-icons.arrow
         %span.update-list
           %span.shadow
           %span.small-icons.modify-folder
-            = I18n.t('folder.edit').capitalize
+            =t 'folder.edit'
           %span.small-icons.duplicate-folder
-            = I18n.t('folder.duplicate').capitalize
+            =t 'folder.duplicate'
           %span.small-icons.delete-folder
-            = I18n.t('folder.destroy').capitalize
+            =t 'folder.destroy'
   .backgrounds.sidebar-background
   .sidebar-content
     %h2.small-icons{ :class => icon_class }
-      %a{ :onclick => 'select_all_elements_without_category()' }= I18n.t sidebar_title 
+      %a{ :onclick => 'select_all_elements_without_category()' }= t sidebar_title 
     .category-tree{ :id => tree_id }
     = form_for [forgeos_core, :admin, Forgeos::Category.new], :as => :category, :html => { :multipart => true, "data-object_name" => Forgeos::Category.model_name.singular } do |f|
       = render :partial => 'attachments_popups'

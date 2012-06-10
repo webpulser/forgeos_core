@@ -5,20 +5,20 @@
     &nbsp;
   #login-container.grid_10
     .sign-in-message
-      = t('log.in.action').capitalize
+      =t 'log.in.action'
     = form_for @person_session, :url => [forgeos_core, :admin, :person_session], :as => :person_session  do |f|
-      = f.label :email, I18n.t('email').capitalize
+      = f.label :email, t('email')
       %br
       = f.text_field :email, :class => 'text'
       %br
-      = f.label :password, I18n.t('password').capitalize
+      = f.label :password, t('password')
       %br
       = f.password_field :password, :class => 'text'
-      = link_to t('get_forgotten_password').capitalize, forgeos_core.reset_password_admin_person_session_path
+      = link_to t('get_forgotten_password'), forgeos_core.reset_password_admin_person_session_path
       %br
       = f.check_box :remember_me
-      = t(:remember_me).capitalize
+      =t :remember_me
       %br
-      = f.submit t('log.in.action').capitalize, :class => 'backgrounds submit-button'
+      = f.submit t('log.in.action'), :class => 'backgrounds submit-button'
   .grid_3
     &nbsp;

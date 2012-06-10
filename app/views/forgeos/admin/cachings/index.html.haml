@@ -4,8 +4,8 @@
   = form_for :caching, :url => [forgeos_core, :admin, :cachings] do |f|
     .backgrounds.header
       .interact-links
-        = f.submit t('caching.delete.one').capitalize, :class => 'backgrounds interact-button'
-        .left= t('or')
-        = f.submit t('caching.delete.all').capitalize, :class => 'backgrounds interact-button'
+        = f.submit t('caching.delete.one'), :class => 'backgrounds interact-button'
+        .left=t 'or'
+        = f.submit t('caching.delete.all'), :class => 'backgrounds interact-button'
     .files
       #caching-tree

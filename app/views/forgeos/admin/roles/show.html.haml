@@ -1,9 +1,9 @@
 .backgrounds.big-header
   %h1= @role.name
   .interact-links
-    = link_to t('role.update.action').capitalize, [forgeos_core, :edit, :admin, @role], :class => 'backgrounds interact-button'
-    = t('or')
-    = link_to t('back_to_catalog').capitalize, [forgeos_core, :admin, :roles], :class => 'back-link'
+    = link_to t('role.update.action'), [forgeos_core, :edit, :admin, @role], :class => 'backgrounds interact-button'
+    =t 'or'
+    = link_to t('back_to_catalog'), [forgeos_core, :admin, :roles], :class => 'back-link'
 
 #content.grid_16.alpha.omega
   .grid_12.alpha
@@ -24,7 +24,7 @@
       - if rights.any?
         .fieldset
           %a.small-icons.panel{ :href => '#' }
-            = t('other')
+            =t 'other'
           .option-panel-content
             .clear
             .multi-select-div
@@ -35,11 +35,11 @@
 
   #right-sidebar.grid_4.omega.alpha
     .step
-      /= link_to t('role.duplicate').capitalize, [:duplicate, :admin, @role], :class => 'small-icons duplicate'
-      = link_to t('user.destroy.action').capitalize, [forgeos_core, :admin, @role], :confirm => t('user.destroy.confirm').capitalize, :method => :delete, :class => 'small-icons delete'
+      /= link_to t('role.duplicate'), [:duplicate, :admin, @role], :class => 'small-icons duplicate'
+      = link_to t('user.destroy.action'), [forgeos_core, :admin, @role], :confirm => t('user.destroy.confirm'), :method => :delete, :class => 'small-icons delete'
     #role_show_attributed_to.step.open
       %a.small-icons.step-title{ :href => "#" }
-        = t('role.attributed_to').capitalize
+        =t 'role.attributed_to'
       .administrators-list
         - @role.administrators.each do |admin|
           .admin

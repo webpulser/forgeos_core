@@ -3,19 +3,19 @@
   .clear
   = f.fields_for :address do |address|
     .street-input
-      = address.label :address, t(:address, :count => 1).capitalize
+      = address.label :address, t(:address, :count => 1)
       = address.text_field :address
     .street-input
-      = address.label :address_2, t(:address, :count => 1).capitalize
+      = address.label :address_2, t(:address, :count => 1)
       = address.text_field :address_2
     .zip-code-input
-      = address.label :zip_code, t('address.zip_code').capitalize
+      = address.label :zip_code, t('address.zip_code')
       = address.text_field :zip_code
     .town-input
-      = address.label :city, t('address.city').capitalize
+      = address.label :city, t('address.city')
       = address.text_field :city
     .country-select
-      = address.label :country_id, t('address.country').capitalize
+      = address.label :country_id, t('address.country')
       = address.collection_select :country_id, Forgeos::Country.all, :id, :printable_name, :prompt => t(:please_select)
     .clear
 .tool-tip-settings.grid_4
@@ -24,13 +24,13 @@
   %h2= t 'setting.contact_info'
   .clear
   .phone-input
-    = f.label :phone_number, t('setting.phone_number').capitalize
+    = f.label :phone_number, t('setting.phone_number')
     = f.text_field :phone_number
   .phone-input
-    = f.label :fax_number, t('setting.fax_number').capitalize
+    = f.label :fax_number, t('setting.fax_number')
     = f.text_field :fax_number
   .phone-input
-    = f.label :email, t('setting.email').capitalize
+    = f.label :email, t('setting.email')
     = f.text_field :email
   .clear
 .tool-tip-settings.grid_4

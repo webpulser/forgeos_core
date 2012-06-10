@@ -6,7 +6,7 @@
     %link{ :href => '/assets/forgeos/admin/favicon.gif', :rel => 'shortcut icon', :type => 'image/gif' }
     = stylesheet_link_tag 'forgeos/admin/login'
     = javascript_include_tag 'jquery'
-    %title= I18n.t(:login, :scope => ['back_office', 'menu'])
+    %title=t :login, :scope => ['back_office', 'menu']
   %body
     = yield
     = javascript_include_tag 'forgeos/admin/login'

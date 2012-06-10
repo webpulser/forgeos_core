@@ -2,21 +2,21 @@
   = @admin.firstname
   = @admin.lastname
   .interact-links
-    = link_to I18n.t('administrator.update.action').capitalize, [forgeos_core, :edit, :admin, @admin], :class => 'backgrounds interact-button'
-    = I18n.t('or')
-    = link_to I18n.t('cancel').capitalize, forgeos_core.admin_administrators_path, :class => 'back-link'
+    = link_to t('administrator.update.action'), [forgeos_core, :edit, :admin, @admin], :class => 'backgrounds interact-button'
+    =t 'or'
+    = link_to t('cancel'), forgeos_core.admin_administrators_path, :class => 'back-link'
 #content.grid_16.alpha.omega
   .grid_12.alpha
     .inner-content
-      = I18n.t('avatar')
+      =t 'avatar'
       %div= image_tag(@admin.avatar.public_filename(:small)) if @admin.avatar
-      = I18n.t('email')
+      =t 'email'
       %div= @admin.email
-      = I18n.t(:role, :count => 1)
+      =t :role, :count => 1
       %div
         = @admin.role.name
   #right-sidebar.grid_4.omega
     .step
-      = mail_to @admin.email,I18n.t('administrator.contact.action'),  :class => 'small-icons contact'
-      =# link_to I18n.t('administrator.duplicate.action'), [:duplicate,:admin,@admin], :class => 'small-icons duplicate'
-      = link_to I18n.t('administrator.destroy.action').capitalize, [forgeos_core, :admin, @admin], :confirm => I18n.t('administrator.destroy.confirm').capitalize, :method => :delete, :class => 'small-icons delete'
+      = mail_to @admin.email,t('administrator.contact.action'),  :class => 'small-icons contact'
+      =# link_to t('administrator.duplicate.action'), [:duplicate,:admin,@admin], :class => 'small-icons duplicate'
+      = link_to t('administrator.destroy.action'), [forgeos_core, :admin, @admin], :confirm => t('administrator.destroy.confirm'), :method => :delete, :class => 'small-icons delete'

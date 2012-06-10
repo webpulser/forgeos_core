@@ -5,16 +5,16 @@
     \&nbsp;
   #login-container.logout.grid_10
     .sign-out-message
-      = I18n.t('log.out.success').capitalize
+      =t 'log.out.success'
     .grid_3.alpha
       \&nbsp;
     .buttons.grid_4.alpha.omega
       = link_to [forgeos_core, :admin, :login], :class => 'backgrounds button' do
         %span.small-icons.admin
-          = I18n.t('go_back_admin').capitalize
+          =t 'go_back_admin'
       = link_to '/', :class => 'backgrounds button' do
         %span.small-icons.see
-          = I18n.t('see_site').capitalize
+          =t 'see_site'
     .grid_3.omega
       \&nbsp;
   .grid_3

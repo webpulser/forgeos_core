@@ -10,25 +10,25 @@
       .inner-content
         - admin.build_avatar unless admin.avatar
         = f.fields_for :avatar do |avatar|
-          = avatar.label :uploaded_data, I18n.t('avatar').capitalize
+          = avatar.label :uploaded_data, t('avatar')
           %div
             = image_tag(admin.avatar.public_filename(:thumb)) unless admin.avatar.new_record?
             = avatar.file_field :uploaded_data
-        = f.label :email, I18n.t('email')
+        = f.label :email, t('email')
         %div 
           = f.text_field :email
-        = f.label :password, I18n.t('password')
+        = f.label :password, t('password')
         %div
           = f.password_field :password
-        = f.label :password_confirmation, I18n.t('password_confirmation')
+        = f.label :password_confirmation, t('password_confirmation')
         %div
           = f.password_field :password_confirmation
-        = f.label :role_id, I18n.t('role', :count => 1)
+        = f.label :role_id, t('role', :count => 1)
         %div
-          = f.collection_select :role_id, Forgeos::Role.find_all_by_active(true), :id, :name, { :prompt => I18n.t('please_select')}
+          = f.collection_select :role_id, Forgeos::Role.find_all_by_active(true), :id, :name, { :prompt => t('please_select')}
     #right-sidebar.grid_4.omega
       - unless admin.new_record?
         .step
-          = mail_to admin.email,I18n.t('administrator.contact.action'),  :class => 'small-icons contact'
-          =# link_to I18n.t('administrator.duplicate.action'), [:duplicate,:admin,admin], :class => 'small-icons duplicate'
-          = link_to I18n.t('administrator.destroy.action').capitalize, [forgeos_core, :admin, admin], :confirm => I18n.t('administrator.destroy.confirm').capitalize, :method => :delete, :class => 'small-icons delete'
+          = mail_to admin.email,t('administrator.contact.action'),  :class => 'small-icons contact'
+          =# link_to t('administrator.duplicate.action'), [:duplicate,:admin,admin], :class => 'small-icons duplicate'
+          = link_to t('administrator.destroy.action'), [forgeos_core, :admin, admin], :confirm => t('administrator.destroy.confirm'), :method => :delete, :class => 'small-icons delete'

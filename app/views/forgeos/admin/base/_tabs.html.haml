@@ -60,7 +60,7 @@
         %li.ui-state-default.ui-corner-top.ui-tabs-selected.ui-state-active
           = link_to '#content' do
             %span{ :class => ['small-icons', title.singularize] }
-            = t(title, :scope => [:back_office, :menu]).capitalize
+            =t title, :scope => [:back_office, :menu]
       - else
         :ruby
           if url.is_a?(Hash) and url[:url] and url[:children]
@@ -71,4 +71,4 @@
         %li.ui-state-default.ui-corner-top
           = link_to url do
             %span{ :class => ['small-icons', title.singularize] }
-            = t(title, :scope => [:back_office, :menu]).capitalize
+            =t title, :scope => [:back_office, :menu]

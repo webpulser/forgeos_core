@@ -1,9 +1,9 @@
 = form_for @person_session, :url => [forgeos_core, :person_session], :html => { :autocomplete => 'off', :class => 'login_form' } do |f|
-  = f.label :email, t(:email).capitalize
+  = f.label :email, t(:email)
   = f.text_field :email
-  = f.label :password, t(:password).capitalize
+  = f.label :password, t(:password)
   = f.password_field :password
   = f.check_box :remember_me
-  = f.label :remember_me, t(:remember_me).capitalize, :class => 'remember'
-  = f.submit t('log.in.action').capitalize, :class => 'submit_contact'
+  = f.label :remember_me, t(:remember_me), :class => 'remember'
+  = f.submit t('log.in.action'), :class => 'submit_contact'
   .clear

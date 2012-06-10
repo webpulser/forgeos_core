@@ -5,18 +5,18 @@ module Forgeos
       include DatatablesHelper
 
       def fg_search
-        label = content_tag(:span, t('search').capitalize, :class => 'small-icons search-span')
+        label = content_tag(:span, t('search'), :class => 'small-icons search-span')
         link_to(label, '#', :class => 'small-icons left search-link')
       end
 
       def fg_submit_tag(label)
-        submit_tag(t(label).capitalize, :class => 'backgrounds interact-button')
+        submit_tag(t(label), :class => 'backgrounds interact-button')
       end
 
       def forgeos_save_buttons(back_path= [forgeos_core, :admin, :root], label= 'save')
         content_tag(
           :div,
-          fg_submit_tag(label) + t('or') + link_to(t('cancel').capitalize, back_path, :class => 'back-link'),
+          fg_submit_tag(label) + t('or') + link_to(t('cancel'), back_path, :class => 'back-link'),
           :class => 'interact-links'
         )
       end

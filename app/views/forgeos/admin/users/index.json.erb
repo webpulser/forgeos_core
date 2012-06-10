@@ -19,7 +19,7 @@
         link_to('', [forgeos_core, :admin, user],
           :remote => true,
           :method => :delete,
-          :confirm => I18n.t('user.destroy.confirm').capitalize,
+          :confirm => t('user.destroy.confirm'),
           :class => 'small-icons destroy-link',
           :id => polymorphic_html_id(user, 'destroy')
         )

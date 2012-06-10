@@ -1,19 +1,19 @@
 .fieldset.noborder
   .street-input
-    %label= I18n.t(:email).capitalize
+    %label=t :email
     = f.text_field :email
   .street-input
     %label
-      = I18n.t(:password).capitalize
+      =t :password
     = f.password_field :password
     %label
-      = I18n.t(:password_confirmation).capitalize
+      =t :password_confirmation
     = f.password_field :password_confirmation
   .clear
   .street-input
-    %label= I18n.t(:telephone).capitalize
+    %label=t :telephone
     = f.text_field :phone
   .street-input
-    %label= I18n.t(:other_telephone).capitalize
+    %label=t :other_telephone
     = f.text_field :other_phone
   = f.hidden_field :country_id
