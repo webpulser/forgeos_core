@@ -1,5 +1,5 @@
 module Forgeos
-  class Admin::BaseController < ApplicationController
+  class Admin::BaseController < Forgeos::ApplicationController
     layout 'forgeos/admin'
     helper "forgeos/admin/base"
     before_filter :login_required, :edition_locale, :except => [:notifications, :url]
