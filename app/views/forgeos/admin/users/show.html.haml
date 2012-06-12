@@ -1,10 +1,8 @@
-= render :partial => 'tabs'
 .backgrounds.big-header
   %h1= @user.full_name
   .interact-links
-    = link_to t('user.update.action'), [forgeos_core, :edit, :admin, @user], :class => 'backgrounds interact-button'
-    =t :or
-    = link_to t('user.back'), forgeos_core.admin_users_path, :class => 'back-link'
+    = link_to t('user.update.action'), [forgeos_core, :edit, :admin, @user], :class => 'btn btn-large btn-primary'
+    = link_to t('user.back'), [forgeos_core, :admin, :users], :class => 'btn btn-mini'
 #content.grid_16.alpha.omega
   #customer-see.grid_12.alpha.omega
     // .customer-header.backgrounds
@@ -20,8 +18,10 @@
 
   #right-sidebar.grid_4.omega.alpha
     .step
-      =mail_to @user.email, t('user.contact'), :class => 'small-icons contact'
-      = link_to t('user.destroy.action'), [forgeos_core, :admin, @user], :confirm => t('user.destroy.confirm'), :method => :delete, :class => 'small-icons delete'
+      = mail_to @user.email, i(:envelope) + t('user.contact')
+      = link_to [forgeos_core, :admin, @user], :confirm => t('user.destroy.confirm'), :method => :delete do
+        = i :trash
+        = t 'user.destroy.action'
     .step.disabled
       = link_to t('newsletter', :count => 2), '#', :class => 'small-icons step-title'
     #user_history.step.open

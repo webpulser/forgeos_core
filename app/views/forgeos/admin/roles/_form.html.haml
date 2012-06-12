@@ -1,4 +1,3 @@
-= render :partial => 'tabs'
 = form_for [forgeos_core, :admin, role], :as => :role, :html => { :id => 'wrap', "data-object_name" => role.class.model_name.singular } do |f|
   = hidden_field_tag "role[right_ids][]"
 
@@ -46,12 +45,15 @@
     #right-sidebar.grid_4.omega.alpha
       - unless role.new_record?
         .step
-          /= link_to t('role.duplicate'), [:duplicate, :admin, role], :class => 'small-icons duplicate'
-          = link_to t('user.destroy.action'), [forgeos_core, :admin, role], :confirm => t('user.destroy.confirm'), :method => :delete, :class => 'small-icons delete'
+          = link_to [forgeos_core, :admin, role], :confirm => t('user.destroy.confirm'), :method => :delete do
+            = i :trash
+            = t 'user.destroy.action'
         #role_attributed_to.step.open
-          %a.small-icons.step-title{ :href => "#" }
-            =t 'role.attributed_to'
-          - role.administrators.each do |admin|
-            = admin.full_name
+          %a.small-icons.step-title{ :href => "#" }=t 'role.attributed_to'
+          .administrators
+            - role.administrators.each do |admin|
+              .admin
+                = i 'user-md'
+                = admin.full_name
 
     .clear

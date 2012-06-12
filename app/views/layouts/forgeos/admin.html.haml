@@ -1,40 +1,29 @@
-!!! XML
 !!! 5
-%html{ "xml:lang" => I18n.locale, :xmlns => "http://www.w3.org/1999/xhtml" }
+%html{ :lang => I18n.locale }
   %head
     %meta{ :content => "text/html; charset=UTF-8", "http-equiv" => "Content-Type" }
     %link{ :href => "/assets/forgeos/admin/favicon.gif", :rel => "shortcut icon", :type => "image/gif" }
-    = stylesheet_link_tag 'forgeos/admin/base'
-    = javascript_include_tag 'forgeos/admin/base'
-    = csrf_meta_tag
     %title= "#{t(:forgeos)} - #{t(controller.controller_name, :scope => ['back_office', 'menu'])}"
+    = csrf_meta_tag
+    = stylesheet_link_tag 'forgeos/admin/base'
   %body
     #container.container_16
-      .grid_16
-        %ul#submenu
-          - build_menu(Forgeos::MENU_HASH[:forgeos][:admin][:submenu], :menu => :submenu)
-          = yield :submenu
-        %ul#menu.backgrounds
-          - build_menu(Forgeos::MENU_HASH[:forgeos][:admin][:menu])
-          = yield :menu
-        .backgrounds.menu-bottom
-        #notifications.grid_16
-      .clear
-      #page.grid_16.ui-tabs.ui-widget.ui-widget-content.ui-corner-all
+      - build_menu(Forgeos::MENU_HASH[:forgeos][:admin][:submenu], :menu => :submenu)
+      - build_menu(Forgeos::MENU_HASH[:forgeos][:admin][:menu])
+      #submenu.navbar
+        .navbar-inner
+          .container
+            %ul.nav= yield :submenu
+      #menu.navbar
+        .navbar-inner
+          .container
+            %ul.nav= yield :menu
+
+      #page.grid_16
         = yield
+
       #footer
       #dialog
-      = javascript_include_tag 'jquery.cookie'
-      = javascript_include_tag 'forgeos/admin/libs'
-      = javascript_include_tag 'forgeos/admin/functions'
-      = javascript_include_tag 'forgeos/admin/inits'
-      :javascript
-        window._forgeos_js_vars = {
-         "session_key": '#{Rails.application.config.session_options[:key]}',
-         "session": encodeURIComponent('#{cookies[Rails.application.config.session_options[:key]]}'),
-         "locale": '#{I18n.locale}',
-         "token": encodeURIComponent('#{form_authenticity_token.inspect}')
-        }
-        jQuery(document).ready(function(){
-          display_notifications();
-        });
+      #notifications.grid_16
+    = forgeos_js_vars
+    = javascript_include_tag 'forgeos/admin'

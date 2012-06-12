@@ -1,19 +1,12 @@
-!!! XML
 !!! 5
-%html{ 'xml:lang' => I18n.locale, :xmlns => 'http://www.w3.org/1999/xhtml' }
+%html{ :lang => I18n.locale }
   %head
     %meta{ :content => 'text/html; charset=utf-8', 'http-equiv' => 'Content-Type' }
     %link{ :href => '/assets/forgeos/admin/favicon.gif', :rel => 'shortcut icon', :type => 'image/gif' }
-    = stylesheet_link_tag 'forgeos/admin/login'
-    = javascript_include_tag 'jquery'
     %title=t :login, :scope => ['back_office', 'menu']
+    = csrf_meta_tag
+    = stylesheet_link_tag 'forgeos/admin/login'
   %body
     = yield
+    = forgeos_js_vars
     = javascript_include_tag 'forgeos/admin/login'
-    :javascript
-      window._forgeos_js_vars = {
-       "locale": '#{I18n.locale}'
-      }
-      jQuery(document).ready(function(){
-        display_notifications();
-      });

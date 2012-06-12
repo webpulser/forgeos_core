@@ -1,11 +1,11 @@
 #imageUploadDialog.upload-lightbox-container.white
   #imageUpload
   %span=t 'or'
-  %a{ :onclick => "jQuery('#imageSelectDialog').dialog('open');"}= t 'media.add_form_library'
+  %a.select-link= t 'media.add_from_library'
 
 #imageSelectDialog.media-hoverlay
   .media-hoverlay-header
-    %a.backgrounds.button{ :onclick => "jQuery('#imageUploadDialog').dialog('open'); jQuery('#imageSelectDialog').dialog('close')" }
+    %a.backgrounds.button.upload-link
       %span.big-icons.add-picture= t 'media.picture.upload.action'
     .display-mode
       .heading-separator
@@ -17,18 +17,49 @@
   .media-hoverlay-sidebar.grid_3.omega.alpha
     .sidebar-content
       %h2.small-icons.picture
-        %a{ :onclick => "select_all_elements_without_category('picture-attachment-tree')" }= t 'media.picture.all'
+        %a.datatable-select-all{ :"data-tree-id" => 'picture-attachment-tree' }= t 'media.picture.all'
       #picture-attachment-tree
   .media-hoverlay-content.thumbnails
-    #thumbnail-table.table.datatable.media.selectable_rows
+    :ruby
+      slide = dataslide(:class => 'media',
+      :selectable => true,
+      :autostart => false,
+      :id => 'thumbnail-table',
+      :url => forgeos_core.admin_attachments_path(:format => :json, :skin => 'thumbnail', :klass => 'forgeos::Picture', :mode => 'selection'),
+      :columns => [{
+        :bSortable => true,
+        :bSearchable => true,
+        :sType => "string",
+        :bUseRendered => true,
+        :fnRender => nil,
+        :iDataSort => 0,
+        :nTf => nil,
+        :nTh => 'function(){jQuery(".thead").find(".th");}', :sWidth => "0px"},
+        { :bVisible => false },
+        { :bVisible => false },
+        { :bVisible => false }
+      ])
+    = slide
   .media-hoverlay-content.table.hidden
-    %table#image-table.datatable.media.selectable_rows
-      %tr
-        %td
-
-= dataSlides_tag :id => 'thumbnail-table', :url => forgeos_core.admin_attachments_path(:format => :json, :skin => 'thumbnail', :file_type => 'picture', :mode => 'selection'), :columns => [ '{ "bSortable": true, "bSearchable": true, "sType": "string", "bUseRendered": true, "fnRender": null, "iDataSort": 0, "nTf": null, "nTh": function(){$(".thead").find(".th");}, "sWidth": "0px"}','{"bVisible": false}', '{ "bVisible": false }', '{ "bVisible": false}' ], :autostart => false
-
-= dataTables_tag :id => 'image-table', :url => forgeos_core.admin_attachments_path(:format => :json, :file_type => 'picture', :mode => 'selection'), :columns => ["{'sClass':'th-checkbox-container', 'bSortable': false }","{ 'sTitle': '#{t('media.filename')}'}","{ 'sTitle': '#{t('media.content_type')}'}","{ 'sTitle': '#{t('media.updated_at')}'}","{ 'sTitle': '#{t('media.size')}'}", '{"bVisible": false}', '{ "bVisible": false }','{ "bVisible": false}','{ "bVisible": false}','{ "bVisible": false}'], :autostart => false
+    :ruby
+      table = datatable(:class => 'media',
+      :selectable => true,
+      :id => 'image-table',
+      :autostart => false,
+      :url => forgeos_core.admin_attachments_path(:format => :json, :klass => 'forgeos::Picture', :mode => 'selection'),
+      :columns => [
+        { :sClass => 'th-checkbox-container', :bSortable => false },
+        { :sTitle => t('media.filename') },
+        { :sTitle => t('media.content_type') },
+        { :sTitle => t('media.updated_at') },
+        { :sTitle => t('media.size') },
+        { :bVisible => false},
+        { :bVisible => false },
+        { :bVisible => false},
+        { :bVisible => false},
+        { :bVisible => false}
+      ])
+    = table
 
 #fileUploadDialog.upload-lightbox-container.white
   #fileUpload
@@ -36,15 +67,29 @@
 #fileSelectDialog.media-hoverlay
   #inner-lightbox.backgrounds
     - %w(pdf audio video doc media).each do |file_type|
-      %a.small-icons{ :onclick => "update_current_dataTable_source('#table-files','#{escape_javascript(forgeos_core.admin_attachments_path(:mode => 'selection',:format => :json, :file_type => file_type))}')", :class => file_type }=t :other, :scope => [:media,file_type]
+      %a.small-icons.library-change-type{ :"data-table-id" => "#table-files", :href => forgeos_core.admin_attachments_path(:mode => 'selection',:format => :json, :klass => "forgeos::#{file_type.capitalize}"), :class => file_type }=t :other, :scope => [:media,file_type]
   .media-hoverlay-header
-    %a.backgrounds.button{ :onclick => "jQuery('#fileUploadDialog').dialog('open'); jQuery('#fileSelectDialog').dialog('close')" }
+    %a.backgrounds.button.upload-link
       %span.big-icons.add-media= t 'media.upload.action'
     #search.right.files= fg_search
     .backgrounds.search-form-files
   .media-hoverlay-content
-    %table#table-files.datatable.media.selectable_rows
-      %tr
-        %td
-
-= dataTables_tag :id => 'table-files', :url => forgeos_core.admin_attachments_path(:format => :json, :file_type => 'pdf', :mode => 'selection'), :columns => ["{'sClass':'th-checkbox-container', 'bSortable': false }","{ 'sTitle': '#{t('media.filename')}'}","{ 'sTitle': '#{t('media.content_type')}'}","{ 'sTitle': '#{t('media.updated_at')}'}","{ 'sTitle': '#{t('media.size')}'}", '{"bVisible": false}', '{ "bVisible": false }','{ "bVisible": false}','{ "bVisible": false}','{ "bVisible": false}'], :autostart => false
+    :ruby
+      table = datatable(:class => 'media',
+      :selectable => true,
+      :id => 'table-files',
+      :autostart => false,
+      :url => forgeos_core.admin_attachments_path(:format => :json, :klass => 'forgeos::Pdf', :mode => 'selection'),
+      :columns => [
+        { :sClass => 'th-checkbox-container', :bSortable => false },
+        { :sTitle => t('media.filename') },
+        { :sTitle => t('media.content_type') },
+        { :sTitle => t('media.updated_at') },
+        { :sTitle => t('media.size') },
+        { :bVisible => false},
+        { :bVisible => false },
+        { :bVisible => false},
+        { :bVisible => false},
+        { :bVisible => false}
+      ])
+    = table

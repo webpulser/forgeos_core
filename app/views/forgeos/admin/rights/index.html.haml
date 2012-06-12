@@ -1,13 +1,18 @@
-= render :partial => 'tabs'
-= render :partial => 'left_sidebar', :locals => {:icon_class => 'all-rights', :sidebar_title => 'right.all', :tree_id =>'rights-tree' }
-
+= index_sidebar :legal, 'right.all', 'rights-tree'
 #content.grid_12.alpha.omega
   .backgrounds.header
-    = link_to content_tag(:span,t('right.create.action'), :class=>'big-icons create-rights'), '#', :class=>'backgrounds action-button create-right'
-    #search.right
-      = fg_search
+    = create_button(forgeos_core, :right, 'legal', :class => 'btn create-right')
+    = fg_search
     .backgrounds.search-form
   .content-background
-  %table#table.datatable.draggable_rows
-
-= dataTables_tag :url => forgeos_core.admin_rights_path(:format => :json), :columns => ["{'bSearchable':false,'bSortable':false}","{'sTitle':'#{escape_javascript(t :name)}'}","{'sTitle':'#{escape_javascript(t :controller_name)}'}","{'sTitle':'#{escape_javascript(t :action_name)}'}","{'sClass':'actions-td','bSearchable':false,'bSortable':false}"]
+  :ruby
+    table = datatable(:draggable => true,
+    :url => forgeos_core.admin_rights_path(:format => :json),
+    :columns => [
+      { :bSearchable => false, :bSortable => false},
+      { :sTitle => t(:name) },
+      { :sTitle => t(:controller_name) },
+      { :sTitle => t(:action_name) },
+      { :sClass => 'actions-td', :bSearchable => false, :bSortable => false }
+    ])
+  = table

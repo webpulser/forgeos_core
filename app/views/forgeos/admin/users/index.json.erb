@@ -1,31 +1,28 @@
 <%= dataTables_resultset(Forgeos::User, @users) do |user|
-      klass = user.active? ? 'see-on' : 'see-off'
-      table =
-      [
-      content_tag(:div, tag(:div, :class=>'handler') + tag(:div, :class => 'small-icons user-ico'), :id => polymorphic_html_id(user), :class => 'handler_container'),
-      content_tag(:div, (params[:mode] == 'selection' ? user.full_name : link_to(user.full_name, [forgeos_core, :admin, user])), :class => 'user-name'),
-      content_tag(:div, (params[:mode] == 'selection' ? user.email : mail_to(user.email, user.email, :class => 'truncate', :title => user.email)), :class => 'email'),
-      ]
+  name, email = if params[:mode] == 'selection'
+    [user.full_name, user.email]
+  else
+    [
+      link_to(user.full_name, [forgeos_core, :admin, user]),
+      mail_to(user.email, user.email, :class => 'truncate', :title => user.email)
+    ]
+  end
 
-      unless params[:mode] == 'selection'
-        table <<
-        link_to('', [forgeos_core, :activate, :admin, user],
-          :remote => true,
-          :method => :put,
-          :class => "small-icons #{klass}",
-          :id => polymorphic_html_id(user, 'show')
-        ) <<
-        link_to('', [forgeos_core, :edit, :admin, user], :class => 'small-icons edit-link') +
-        link_to('', [forgeos_core, :admin, user],
-          :remote => true,
-          :method => :delete,
-          :confirm => t('user.destroy.confirm'),
-          :class => 'small-icons destroy-link',
-          :id => polymorphic_html_id(user, 'destroy')
-        )
-      else
-        table << user.id
-      end
-      table
-    end
--%>
+
+  table = [
+    handler_icon('user', user),
+    content_tag(:div, name, :class => 'user-name'),
+    content_tag(:div, email, :class => 'email'),
+  ]
+
+  unless params[:mode] == 'selection'
+    table += [
+      activate_toogle_button(forgeos_core, user),
+      edit_button(forgeos_core, user) +
+      destroy_button(forgeos_core, user)
+    ]
+  else
+    table << user.id
+  end
+  table
+end -%>

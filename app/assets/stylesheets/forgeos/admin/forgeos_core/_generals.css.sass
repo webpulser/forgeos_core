@@ -55,12 +55,8 @@ li
     height: 100%
     width: 3px
     margin: 0 10px
-  .dropdown
+  .civility
     width: auto
-    margin: 0 10px 0 0
-    a span
-      line-height: 1em
-      float: none
 
 //--------------------- ----------
 // BACKGROUNDS
@@ -155,11 +151,13 @@ li
 // CONTENT
 //--------------------- ----------
 #page
-  background: $lightOrangeBg
   padding: 0
   border: 0 !important
   +border-radius(0px)
-  
+#sidebar
+  background: $lightOrangeBg
+#content, #sidebar
+  min-height: 600px
 .ui-tabs-nav.ui-helper-reset.ui-helper-clearfix.ui-widget-header.ui-corner-all
   +border-radius(0px)
 

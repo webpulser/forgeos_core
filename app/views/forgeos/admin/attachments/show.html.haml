@@ -1,11 +1,9 @@
-= render :partial => 'tabs'
 #wrap
   .backgrounds.big-header
     %h1#media-title= @media.name
     .interact-links
-      = link_to t('media.update.action'), [forgeos_core, :edit, :admin, @media ], :class => 'backgrounds interact-button'
-      =t 'or'
-      = link_to t('media.back'), [forgeos_core, :admin, @media.class.model_name.route_key], :class => 'back-link'
+      = link_to t('media.update.action'), [forgeos_core, :edit, :admin, @media ], :class => 'btn btn-large btn-primary'
+      = link_to t('media.back'), [forgeos_core, :admin, @media.class.model_name.route_key], :class => 'btn btn-mini'
 
   #content.grid_16.alpha.omega
     #media-modify.grid_12.alpha
@@ -18,6 +16,8 @@
       = render :partial => @media.class.model_name.singular_route_key.dup, :object => @media
     #right-sidebar.grid_4.omega
       .step
-        = link_to t('media.destroy.action'), [forgeos_core, :admin, @media], :confirm => t('media.destroy.confirm'), :method => :delete, :class => 'small-icons delete'
+        = link_to [forgeos_core, :admin, @media], :confirm => t('media.destroy.confirm'), :method => :delete do
+          = i :trash
+          = t 'media.destroy.action'
         .clear
     .clear

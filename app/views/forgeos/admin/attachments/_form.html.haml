@@ -1,4 +1,3 @@
-= render :partial => 'tabs'
 = form_for [forgeos_core, :admin, media], :as => :attachment, :html => { :multipart => true, :id => 'wrap', "data-object_name" => @media_class.model_name.singular } do |f|
   .backgrounds.big-header
     = f.text_field :name, :id => 'media-title', :class => 'field_name'
@@ -78,10 +77,12 @@
 
     #right-sidebar.grid_4.omega
       .step
-        = link_to t('media.destroy.action'), [forgeos_core, :admin, media], :confirm => t('media.destroy.confirm'), :method => :delete, :class => 'small-icons delete'
+        = link_to [forgeos_core, :admin, media], :confirm => t('media.destroy.confirm'), :method => :delete do
+          = i :trash
+          = t 'media.destroy.action'
         .clear
       #attachment_associated_collection.step.open
-        %a.small-icons.step-title Associated to collection
+        %a.small-icons.step-title= t('media.attachement_links')
         #association-media-tree.inner-step
           %ul
             = hidden_field_tag "#{f.object_name}[category_ids][]"

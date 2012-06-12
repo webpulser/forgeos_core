@@ -1,28 +1,11 @@
 <%= dataTables_resultset(Forgeos::Administrator, @admins) do |admin|
-      klass = admin.active? ? 'see-on' : 'see-off'
-      [
-        content_tag(:div,
-          content_tag(:div, '', :class => 'handler') +
-          content_tag(:div, "&nbsp;".html_safe, :id => polymorphic_html_id(admin), :class => 'small-icons admin-ico'),
-          :class => 'handler_container'),
-        content_tag(:div, link_to("#{admin.firstname} #{admin.lastname}", [forgeos_core, :edit, :admin, admin]), :class => 'admin-name'),
-        admin.role.name,
-        content_tag(:div, mail_to(admin.email, admin.email), :class => 'email' ),
-        link_to('', [forgeos_core, :activate, :admin, admin],
-          :remote => true,
-          :method => :post,
-          :class => "small-icons #{klass}",
-          :id => polymorphic_html_id(admin, 'show')
-        ),
-        link_to('', '#', :class => 'small-icons duplicate-link') +
-        link_to('', [forgeos_core, :edit, :admin, admin], :class => 'small-icons edit-link') +
-        link_to('', [forgeos_core, :admin, admin],
-          :remote => true,
-          :method => :delete,
-          :confirm => t('admin.destroy.confirm'),
-          :class => 'small-icons destroy-link',
-          :id => polymorphic_html_id(admin, 'destroy')
-        )
-      ]
-  end
--%>
+  [
+    handler_icon('user-md', admin),
+    content_tag(:div, link_to(admin.full_name, [forgeos_core, :edit, :admin, admin]), :class => 'admin-name'),
+    admin.role ? admin.role.name : '-',
+    content_tag(:div, mail_to(admin.email, admin.email), :class => 'email' ),
+    activate_toogle_button(forgeos_core, admin),
+    edit_button(forgeos_core, admin) +
+    destroy_button(forgeos_core, admin)
+  ]
+end -%>

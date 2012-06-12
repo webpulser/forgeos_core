@@ -1,23 +1,16 @@
 .backgrounds.big-header
-  %h1
-    =h @user.firstname
-    =h @user.lastname
+  %h1= @user.full_name
   .interact-links
-    = link_to t('account.update.action'), forgeos_core.edit_admin_account_path, :class => 'backgrounds interact-button'
-#content.grid_16.alpha.omega
-  .grid_12.alpha
-    #customer-see.inner-content
-      .fieldset
-        %h3=t :infos, :scope => [:back_office, :account]
-        .main-infos
-          .main-infos-cutomer
-            %h4{:class => 'small-icons'}= "#{t(:avatar)} :"
-            %div
-              - if @user.avatar && !@user.avatar.filename.nil?
-                = image_tag(@user.avatar.public_filename(:thumb))
-          .order-billing-adress
-            %h4{:class => 'small-icons'}= "#{t('email')} :"
-            %div
-              =h @user.email
-        .clear
-
+    = link_to t('account.update.action'), forgeos_core.edit_admin_account_path, :class => 'btn btn-primary'
+#content
+  #customer-see.inner-content
+    .fieldset
+      %h3=t :infos, :scope => [:back_office, :account]
+      .main-infos
+        .main-infos-cutomer
+          - if @user.avatar
+            %h4.small-icons #{t(:avatar)} :
+            = image_tag(@user.avatar.public_filename(:thumb))
+          %h4.small-icons #{t('email')} :
+          = @user.email
+      .clear

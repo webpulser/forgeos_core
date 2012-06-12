@@ -1,29 +1,17 @@
-#sidebar.grid_4.omega.alpha
+#sidebar.grid_4.omega
   .backgrounds.header
-    %span.backgrounds.action-button.create-action
-      %span.big-icons.new-category
-      %span.small-icons.arrow
-      %span.create-list
-        %span.shadow
-        %span.big-icons.create-folder
-          =t 'folder.create'
-          -#%span.small-icons.create-smart-folder
-          -#=t 'folder.smart'
-    %span.backgrounds.action-button.update-action
-      %span.small-icons.more-actions
-      %span.small-icons.arrow
-        %span.update-list
-          %span.shadow
-          %span.small-icons.modify-folder
-            =t 'folder.edit'
-          %span.small-icons.duplicate-folder
-            =t 'folder.duplicate'
-          %span.small-icons.delete-folder
-            =t 'folder.destroy'
+    .btn-group
+      %a.btn
+        %i.big-icons.new-category
+        \&nbsp;
+      %a.btn.dropdown-toggle{ 'data-toggle' => 'dropdown' }
+        %span.caret
+      %ul.dropdown-menu
+        %li.big-icons.create-folder{ :"data-tree-id" => tree_id }=t 'folder.create'
   .backgrounds.sidebar-background
   .sidebar-content
-    %h2.small-icons{ :class => icon_class }
-      %a{ :onclick => 'select_all_elements_without_category()' }= t sidebar_title 
+    %h2
+      = i(icon)
+      %a.datatable-select-all{ :"data-tree-id" => tree_id }= t sidebar_title
     .category-tree{ :id => tree_id }
-    = form_for [forgeos_core, :admin, Forgeos::Category.new], :as => :category, :html => { :multipart => true, "data-object_name" => Forgeos::Category.model_name.singular } do |f|
-      = render :partial => 'attachments_popups'
+= render :partial => 'attachments_popups'

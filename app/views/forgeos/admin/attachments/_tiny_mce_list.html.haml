@@ -5,15 +5,15 @@
         - if p.kind_of?(Forgeos::Picture)
           .thumbs
             - p.thumbnails.all(:order => '(width*height) DESC').each do |thumb|
-              = link_to thumb.thumbnail, thumb.public_filename(''), :title => thumb.name, :onclick => "select_thumb(this);return false;"
+              = link_to thumb.thumbnail, thumb.public_filename, :title => thumb.name, :class => 'tiny-mce select-thumb'
               %br
-            = link_to 'original', p.public_filename(''), :title => p.filename, :onclick => "select_thumb(this);return false;"
+            = link_to 'original', p.public_filename, :title => p.filename, :class => 'tiny-mce select-thumb'
             %br
 
-            = link_to 'X', '#', :onclick => "cancel_image();return false;"
-          = link_to image_tag( p.public_filename(''), :alt => p.name ), '#', :onclick => "select_image(this)"
+            %a.tiny-mce.cancel-image X
+          = link_to image_tag( p.public_filename, :alt => p.name ), '#', :class => 'tiny-mce select-image'
         - else
-          = link_to p.name, p.public_filename(''), :onclick => "select_thumb(this);return false;"
+          = link_to p.name, p.public_filename, :class => 'tiny-mce select-thumb'
           \&nbsp;&nbsp;&nbsp;
   %br{:style => "clear:both;"}/
   %div{:style => "float:right;margin-bottom:10px;"}

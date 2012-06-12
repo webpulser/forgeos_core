@@ -1,11 +1,8 @@
-= render :partial => 'tabs'
-
-#content.grid_16.alpha.omega
+#content
   = form_for :caching, :url => [forgeos_core, :admin, :cachings] do |f|
     .backgrounds.header
       .interact-links
-        = f.submit t('caching.delete.one'), :class => 'backgrounds interact-button'
-        .left=t 'or'
-        = f.submit t('caching.delete.all'), :class => 'backgrounds interact-button'
+        = f.submit t('caching.delete.one'), :class => 'btn btn-primary'
+        = f.submit t('caching.delete.all'), :class => 'btn btn-danger'
     .files
       #caching-tree

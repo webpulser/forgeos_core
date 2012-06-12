@@ -1,12 +1,19 @@
-= render :partial => 'tabs'
-= render :partial => 'left_sidebar', :locals => {:icon_class => 'all-admins', :sidebar_title => 'administrator.all', :tree_id =>'admins-tree' }
+= index_sidebar 'user-md', 'administrator.all', 'admins-tree'
 #content.grid_12.alpha.omega
   .backgrounds.header
-    = link_to content_tag(:span,t('administrator.create.action'), :class=>'big-icons create-admin'), forgeos_core.new_admin_administrator_path, :class=>'backgrounds action-button'
-    #search.right
-      = fg_search
+    = create_button(forgeos_core, :administrator, 'user-md')
+    = fg_search
     .backgrounds.search-form
   .content-background
-  %table#table.datatable.draggable_rows
-
-= dataTables_tag :url => forgeos_core.admin_administrators_path(:format => :json), :columns => ["{'bSearchable':false,'bSortable':false}","{'sTitle':'#{t :name}'}","{'sTitle':'#{t :role, :count => 1}'}","{'sTitle':'#{t :email}'}","{'sTitle':'#{t :active}'}","{'sClass':'actions-td','bSearchable':false,'bSortable':false}"]
+  :ruby
+    table = datatable(:draggable => true,
+    :url => forgeos_core.admin_administrators_path(:format => :json),
+    :columns => [
+      {:bSearchable => false, :bSortable => false},
+      {:sTitle => t(:name) },
+      {:sTitle => t(:role, :count => 1) },
+      {:sTitle => t(:email) },
+      {:sTitle => t(:active) },
+      {:sClass => 'actions-td', :bSearchable => false, :bSortable => false }
+    ])
+  = table

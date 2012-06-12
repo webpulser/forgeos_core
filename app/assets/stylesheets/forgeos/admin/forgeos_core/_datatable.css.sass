@@ -134,14 +134,17 @@ table
 // BUTTONS
 //--------------------- ----------
 tr
-  .duplicate-link, .edit-link, .destroy-link
-    height: 0 !important
-    padding: 0
-    width: 16px
-    +block
-    +left
-    margin: 0 3px
+  a.active
+    color: black
+  a.unactive
+    color: gray
+  td.actions-td *
     outline: none
+    text-decoration: none
+    visibility: hidden
+  &:hover
+    td.actions-td *
+      visibility: visible
   p
     clear: left
     display: none
@@ -150,11 +153,6 @@ tr
     color: $lightGray
     .low_stock
       color: $orangeRed
-  &:hover
-    .duplicate-link, .edit-link, .destroy-link
-      height: 16px !important
-      width: 16px !important
-      outline: none
   &.open
     .image
       background: image_url("forgeos/admin/small-icons/dark-blue-minus.png") no-repeat -1px

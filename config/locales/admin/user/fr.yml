@@ -1,0 +1,52 @@
+fr:
+  users: clients
+  user:
+    one: client
+    other: clients
+    back: retour aux clients
+    spent_on: dépensé en
+    all: tous les clients
+    not_exist: "ce client n'existe pas"
+    contact: contacter le client
+    joined_on: inscrit le
+    best_customer:
+      one: meilleur client
+      other: meilleurs clients
+    new_customer:
+      one: nouveau client
+      other: nouveaux clients
+    show:
+      all: voir tous les clients
+    customer_infos: informations sur le client
+    contact_infos: informations sur le contact
+    history: historique du compte
+    create:
+      success: le client a bien été créé
+      failed: un problème est survenu lors de la création du client
+      action: créer un client
+    update:
+      success: le client a bien été mis à jour
+      failed: un problème est survenu lors de la mise à jour du client
+      action: éditer le client
+    destroy:
+      success: le client a bien été supprimé
+      failed: un problème est survenu lors de la suppression du client
+      confirm: êtes-vous sûr de vouloir supprimer ce client ?
+      action: supprimer le client
+    activation:
+      success: le client a bien été activé
+      failed: "un problème est survenu lors de l'activation du client"
+      action: activer
+    disactivation:
+      success: le client a bien été désactivé
+      failed: un problème est survenu lors de la désactivation du client
+      action: désactiver
+    export:
+      failed: "échec de l'export, aucun client trouvé"
+    search:
+      failed: aucun client trouvé
+    online:
+      zero: '%{count} client connecté'
+      one: '%{count} client connecté'
+      other: '%{count} clients connectés'
+

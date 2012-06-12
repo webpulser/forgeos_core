@@ -6,11 +6,11 @@ jQuery(document).ready ->
     width: 500
     resizable: "se"
 
-  setup_upload_dialog "#imageUpload"
-  setup_upload_dialog "#attachmentUpload"
-  setup_upload_dialog "#fileUpload"
-  setup_select_dialog "#imageSelect", "#image-table:visible,#thumbnail-table:visible"
-  setup_select_dialog "#fileSelect", "#table-files"
+  setup_upload_dialog "#image"
+  setup_upload_dialog "#attachment"
+  setup_upload_dialog "#file"
+  setup_select_dialog "#image", "#image-table:visible,#thumbnail-table:visible"
+  setup_select_dialog "#file", "#table-files"
 
   jQuery(".display-thumbnails").click (e) ->
     e.preventDefault()

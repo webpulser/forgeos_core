@@ -1,0 +1,128 @@
+fr:
+  media:
+    list: liste des médias
+    add_from_library: ajouter depuis la librairie
+    one: média
+    other: médias
+    none: aucun média
+    all: tous
+    associated_rights: droits associés
+    show: voir le média
+    back: retour vers la librairie
+    not_exist: "le média sélectionné n'existe pas"
+    used: utilisé(e)
+    linked: fichiers liés
+    name: nom
+    description: description
+    alt: texte alternatif
+    upload:
+      start: démarer le téléchargement
+      clear_queue: nettoyer la liste
+      action: charger des fichiers
+    create:
+      action: créer un média
+      success: le média a bien été créé
+      failed: un problème est survenu lors de la création du média
+    update:
+      action: éditer le média
+      success: le média a bien été mis à jour
+      failed: un problème est survenu lors de la mise à jour du média
+    download:
+      action: télécharger le média
+      failed: un problème est survenu lors du téléchargement du média
+    destroy:
+      action: supprimer le média
+      success: le média a bien été supprimé
+      failed: un problème est survenu lors de la suppression du média
+      confirm: êtes-vous sûr de vouloir supprimer ce média ?
+    type:
+      one: type
+      other: types
+    attach:
+      unknown_type: "le type de l'élément attaché est inconnu"
+      failed: "un problème est survenu lors de l'édition de lien avec l'élément"
+    content_type: content type
+    file_type: type du fichier
+    updated_at: dernière mise à jour
+    filename: nom du fichier
+    size: taille
+    byte:
+      one: octet
+      other: octets
+      kilo: Ko
+      mega: Mo
+    pixel:
+      one: pixel
+      other: pixels
+    thumbnails:
+      big: grand
+      normal: normal
+      small: petit
+      thumb: vignette
+    pdf:
+      one: pdf
+      other: pdfs
+      all: tous les pdfs
+      create:
+        action: ajouter un pdf
+      bootstrap_icon: book
+    medium:
+      one: fichier
+      other: fichiers
+      all: tous les fichiers
+      create:
+        action: ajouter un fichier
+      bootstrap_icon: file
+    doc:
+      one: doc
+      other: docs
+      all: tous les documents
+      create:
+        action: ajouter un document
+      bootstrap_icon: briefcase
+    video:
+      one: vidéo
+      other: vidéos
+      all: toutes les vidéos
+      create:
+        action: ajouter une vidéo
+      bootstrap_icon: film
+    audio:
+      one: fichier audio
+      other: fichiers audio
+      all: toutes les fichiers audio
+      create:
+        action: ajouter un fichier audio
+      bootstrap_icon: music
+    picture:
+      one: image
+      other: images
+      all: toutes les images
+      alternative: texte alternatif
+      title: "titre de l'image"
+      original_size: taille originale
+      add: ajouter une photo
+      featured: photo principale
+      bootstrap_icon: picture
+      show:
+        action: "voir l'image"
+      create:
+        success: "l'image a bien été créée"
+        failed: "un problème est survenu lors de la création de l'image"
+        action: créer une image
+      update:
+        success: "l'image a bien été mise à jour"
+        failed: "un problème est survenu lors de la mise à jour de l'image"
+        action: "éditer l'image"
+      destroy:
+        success: "l'image a bien été supprimée"
+        failed: "un problème est survenu lors de la suppression de l'image"
+        confirm: êtes-vous sûr de vouloir supprimer cette image ?
+      upload:
+        start: "commencer l'envoi"
+        clear_queue: vider la liste
+        action: charger une image
+    misc:
+      one: autre
+      other: autres
+

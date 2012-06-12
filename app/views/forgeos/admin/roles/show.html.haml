@@ -1,9 +1,8 @@
 .backgrounds.big-header
   %h1= @role.name
   .interact-links
-    = link_to t('role.update.action'), [forgeos_core, :edit, :admin, @role], :class => 'backgrounds interact-button'
-    =t 'or'
-    = link_to t('back_to_catalog'), [forgeos_core, :admin, :roles], :class => 'back-link'
+    = link_to t('role.update.action'), [forgeos_core, :edit, :admin, @role], :class => 'btn btn-large btn-primary'
+    = link_to t('back'), [forgeos_core, :admin, :roles], :class => 'btn btn-mini'
 
 #content.grid_16.alpha.omega
   .grid_12.alpha
@@ -35,15 +34,14 @@
 
   #right-sidebar.grid_4.omega.alpha
     .step
-      /= link_to t('role.duplicate'), [:duplicate, :admin, @role], :class => 'small-icons duplicate'
-      = link_to t('user.destroy.action'), [forgeos_core, :admin, @role], :confirm => t('user.destroy.confirm'), :method => :delete, :class => 'small-icons delete'
+      = link_to [forgeos_core, :admin, @role], :confirm => t('user.destroy.confirm'), :method => :delete do
+        = i :trash
+        = t 'user.destroy.action'
     #role_show_attributed_to.step.open
-      %a.small-icons.step-title{ :href => "#" }
-        =t 'role.attributed_to'
+      %a.small-icons.step-title{ :href => "#" }=t 'role.attributed_to'
       .administrators-list
         - @role.administrators.each do |admin|
           .admin
-            %span.small-icons.user-ico
-              .user-name
-                = link_to admin.full_name, [forgeos_core, :admin, admin]
+            = i 'user-md'
+            = link_to admin.full_name, [forgeos_core, :admin, admin]
         .clear

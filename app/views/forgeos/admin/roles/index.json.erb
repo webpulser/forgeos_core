@@ -1,26 +1,12 @@
 <%= dataTables_resultset(Forgeos::Role, @roles) do |role|
-      klass = role.active? ? 'see-on' : 'see-off'
-      [
-        content_tag(:div, '<div class="image">&nbsp;<span class="small-icons role-ico">&nbsp;</span></div>'.html_safe, :id => polymorphic_html_id(role), :class => role.administrators.count > 0 ? 'some-variants plus' : ''),
-        content_tag(:div, link_to(role.name, [forgeos_core, :edit, :admin, role]), :class => 'role-name') +
-          content_tag(:p,role.administrators.all.collect{ |admin| link_to("#{admin.firstname} #{admin.lastname}", [forgeos_core, :admin, admin]) }.join('<br />').html_safe, :style=>'display:none'),
-        role.administrators.count,
-        role.created_at.to_s(:short),
-        link_to('', [forgeos_core, :activate ,:admin, role],
-          :remote => true,
-          :method => :post,
-          :class => "small-icons #{klass}",
-          :id => polymorphic_html_id(role, 'show')
-        ),
-        #link_to('', [:duplicate, :admin, role], :class => 'small-icons duplicate-link') +
-        link_to('', [forgeos_core, :edit, :admin, role], :class => 'small-icons edit-link') +
-        link_to('', [forgeos_core, :admin, role],
-          :remote => true,
-          :method => :delete,
-          :confirm => t('role.destroy.confirm'),
-          :class => 'small-icons destroy-link',
-          :id => polymorphic_html_id(role, 'destroy')
-        )
-      ]
-    end
--%>
+  [
+    handler_icon('list-alt', role),
+    content_tag(:div, link_to(role.name, [forgeos_core, :edit, :admin, role]), :class => 'role-name'),
+    role.administrators.count,
+    role.created_at.to_s(:short),
+    activate_toogle_button(forgeos_core, role),
+    duplicate_button(forgeos_core, role) +
+    edit_button(forgeos_core, role) +
+    destroy_button(forgeos_core, role)
+  ]
+end -%>

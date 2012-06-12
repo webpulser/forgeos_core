@@ -31,12 +31,14 @@ Forgeos::Core::Engine.routes.draw do
     resources :administrators do
       member do
         put :activate
+        get :duplicate
       end
     end
 
     resources :roles do
       member do
-        post :activate
+        put :activate
+        get :duplicate
       end
     end
     resources :rights
@@ -49,6 +51,7 @@ Forgeos::Core::Engine.routes.draw do
       end
       member do
         put :activate
+        get :duplicate
       end
     end
 
@@ -66,9 +69,10 @@ Forgeos::Core::Engine.routes.draw do
       end
     end
 
-    match '/library' => 'attachments#index', :as => :library, :file_type => 'picture'
+    match '/library' => 'attachments#index', :as => :library, :klass => 'forgeos::Picture'
 
-    %w(media picture doc pdf audio video attachment).each do |attachment|
+    resources :attachments, :controller => 'attachments'
+    %w(media picture doc pdf audio video).each do |attachment|
       resources "#{attachment.pluralize}", :controller => 'attachments', :klass => "forgeos::#{attachment.capitalize}" do
         collection do
           get :manage

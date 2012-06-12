@@ -17,6 +17,7 @@ window.duplicate_category = (node, type, parent_id, base_url) ->
     data: get_category_data(name, type, parent_id)
     dataType: "json"
     type: "post"
+
 window.get_category_data = (name, type, parent_id) ->
   datas =
     "category[name]": name
@@ -24,6 +25,7 @@ window.get_category_data = (name, type, parent_id) ->
 
   datas["category[parent_id]"] = parent_id  if parent_id
   datas
+
 window.init_category_tree = (selector, type, source) ->
   unless jQuery(selector).size() is 0
     base_url = source.replace(".json", "/")
@@ -150,6 +152,8 @@ window.check_jsTree_selected = (element) ->
   else
     false
 window.error_on_jsTree_action = (message) ->
+  alert(message)
+
 window.init_association_category_tree = (selector, object_name, category_name, theme) ->
   unless jQuery(selector).size() is 0
     jQuery(selector).bind("check_node.jstree", (e, data) ->

@@ -1,0 +1,17 @@
+en:
+  setting:
+    shop_name: shop name
+    global: global settings
+    general: general
+    display: display
+    mailer: mailer
+    backup: backup
+    email: email
+    phone_number: phone number
+    fax_number: fax number
+    company_info: about your company
+    contact_info: contact
+    update:
+      success: settings are successfully saved
+      failed: a problem occured during settings update
+      action: save settings

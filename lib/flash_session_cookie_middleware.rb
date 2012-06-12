@@ -1,7 +1,7 @@
 require 'rack/utils'
 
 class FlashSessionCookieMiddleware
-  def initialize(app, session_key = ActionController::Base.session_options[:key])
+  def initialize(app, session_key = Rails.application.config.session_options[:key])
     @app = app
     @session_key = session_key
   end

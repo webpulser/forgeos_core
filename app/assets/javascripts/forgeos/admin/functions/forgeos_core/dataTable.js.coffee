@@ -1,13 +1,13 @@
-removedataTablesRow = (selector) ->
+window.removedataTablesRow = (selector) ->
   current_table = jQuery(selector).parents("table:first").dataTableInstance()
   current_table.fnDeleteRow current_table.fnGetPosition(jQuery(selector).parents("tr:first")[0])
   display_notifications()
 
-DataTablesDrawCallBack = (table) ->
+window.DataTablesDrawCallBack = (table) ->
   showObjectsAssociated()
   moveDataTablesSearchField()
 
-DataTablesRowCallBack = (nRow, aData, iDisplayIndex) ->
+window.DataTablesRowCallBack = (nRow, aData, iDisplayIndex) ->
   table = jQuery("#" + @sInstance)
   table = jQuery(this)  if typeof (table) is "undefined"
   div = jQuery(nRow).find(":regex(id,.+_\\d+)")
@@ -52,17 +52,17 @@ DataTablesRowCallBack = (nRow, aData, iDisplayIndex) ->
       jQuery(this).attr "checked", (if jQuery(this).is(":checked") then 0 else 1)
   nRow
 
-update_current_dataTable_source = (selector, source) ->
+window.update_current_dataTable_source = (selector, source) ->
   current_table = jQuery(selector).dataTableInstance()
   current_table.fnSettings().sAjaxSource = source
   current_table.fnDraw()
 
-hide_paginate = (dataTables) ->
+window.hide_paginate = (dataTables) ->
   pagination = jQuery(dataTables.nPaginateList).parents(":first")
   pages_number = dataTables.nPaginateList.children.length
   (if (pages_number > 1) then pagination.show() else pagination.hide())
 
-dataTableSelectRows = (selector, callback) ->
+window.dataTableSelectRows = (selector, callback) ->
   current_table = jQuery(selector).dataTableInstance()
   source = current_table.fnSettings().sAjaxSource
   ids = []
@@ -80,7 +80,7 @@ dataTableSelectRows = (selector, callback) ->
 
   current_table.fnDraw()
 
-save_category_sort = (type, id_pos) ->
+window.save_category_sort = (type, id_pos) ->
   return true  if typeof (type) is "undefined"
   current_table = jQuery("#table").dataTableInstance()
   url = current_table.fnSettings().sAjaxSource
@@ -101,7 +101,7 @@ save_category_sort = (type, id_pos) ->
     dataType: "json"
     type: "put"
 
-replaceDataTablesSearchField = (field_selector, input_selector, _parent) ->
+window.replaceDataTablesSearchField = (field_selector, input_selector, _parent) ->
   input = jQuery(input_selector)
   field = jQuery(field_selector)
   unless input.size() is 0
@@ -109,7 +109,7 @@ replaceDataTablesSearchField = (field_selector, input_selector, _parent) ->
     field.append("<a href=\"#\" class=\"backgrounds button-ok\">OK</a>").find(".button-ok").data("parent", _parent).live "click", toggle_search_elements_ok
     input.remove()
 
-moveDataTablesSearchField = ->
+window.moveDataTablesSearchField = ->
   replaceDataTablesSearchField ".search-form", "#table_wrapper .dataTables_filter", ""
   replaceDataTablesSearchField ".search-form-image", "#image-table_wrapper .dataTables_filter", "image"
   replaceDataTablesSearchField ".search-form-thumbnails", "#thumbnail-table_wrapper .dataSlides_filter", "thumbnails"
@@ -230,3 +230,39 @@ jQuery.expr[":"].regex = (elem, index, match) ->
   regexFlags = "ig"
   regex = new RegExp(matchParams.join("").replace(/^\s+|\s+$/g, ""), regexFlags)
   regex.test jQuery(elem)[attr.method](attr.property)
+
+jQuery.fn.unwrap = ->
+  this.parent(':not(body)').each ->
+    jQuery(this).replaceWith( this.childNodes )
+
+  return this
+
+# Discard inline crud
+window.discard = ->
+  jQuery('#new_row').remove()
+  #$('.create-right').parent().show()
+  jQuery('#table').find('.edit-link').show()
+  jQuery('#table').find('.duplicate-link').show()
+  jQuery('#table').unwrap()
+
+# Disable all edit-right & duplicate-right & the create right button
+window.disable_links = ->
+  #$('.create-right').parent().hide();
+  jQuery('#table .edit-link, #table .duplicate-link').hide()
+
+window.form_ajax_right = (url, method) ->
+  return "jQuery.ajax({\n\
+      success: function(result){\n\
+        eval(jQuery('#table').data('dataTables_init_function')+'()'); \n\
+        jQuery('#table').unwrap(); \n\
+        jQuery('.create-right').parent().show();\n\
+      }, \n\
+      error: function(){\n\
+        display_notifications();\n\
+      }, \n\
+      data: jQuery.param(jQuery(this).serializeArray()) + '&authenticity_token=' + encodeURIComponent('" + window._forgeos_js_vars.token + "'), \n\
+      dataType: 'script', \n\
+      type: '"+method+"', \n\
+      url: '"+url+"'\n\
+    }); \n\
+    return false;"

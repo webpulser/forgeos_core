@@ -5,23 +5,21 @@ module Forgeos
     include Forgeos::Admin::DatatablesHelper
 
     test "should init datatable" do
-      output = dataTables_tag(:id => 'test', :url => '/admin', :columns => ['toto', 'tata'])
-      assert_match /javascript/, output
-      assert_match /dataTable\(/, output
-      assert_match /jQuery\('#test'\)/, output
+      output = datatable(:id => 'test', :url => '/admin', :columns => ['toto', 'tata'])
+      assert_match /<table/, output
+      assert_match /aoColumns/, output
     end
 
     test "should init datatable with callback option" do
-      output = dataTables_tag(:id => 'test', :url => '/admin', :columns => ['toto', 'tata'], :callback => 'callback_method')
-      assert_match /'fnDrawCallback': callback_method/, output
+      output = datatable(:id => 'test', :url => '/admin', :columns => ['toto', 'tata'], :callback => 'callback_method')
+      assert_match /fnDrawCallback&quot;:&quot;callback_method/, output
     end
 
     test "should init dataslide" do
-      output = dataSlides_tag(:id => 'test', :url => '/admin', :columns => ['toto', 'tata'])
-      assert_match /javascript/, output
-      assert_match /dataSlide\(/, output
-      assert_match /jQuery\('#test'\)/, output
+      output = dataslide(:id => 'test', :url => '/admin', :columns => ['toto', 'tata'])
+      assert_match /<div/, output
+      assert_match /dataslide/, output
+      assert_match /aoColumns/, output
     end
-
   end
 end

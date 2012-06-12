@@ -6,8 +6,8 @@ module Forgeos
 
     test "should display submit_tag" do
       output = fg_submit_tag(:forgeos)
-      assert_match /<input/, output
-      assert_match /class="backgrounds interact-button"/, output
+      assert_match /<button/, output
+      assert_match /class="btn btn-large btn-primary"/, output
       assert_match /Forgeos core/i, output
       assert_match /type="submit"/, output
     end
@@ -25,9 +25,9 @@ module Forgeos
 
     test "should display save buttons" do
       output = forgeos_save_buttons('/admin')
-      assert_match /<div class="interact-links">/, output
-      assert_match /or/, output
-      assert_match /class="back-link"/, output
+      assert_match /<button/, output
+      assert_match /class="btn btn-large btn-primary"/, output
+      assert_match /class="btn btn-mini"/, output
       assert_match /type="submit"/, output
       assert_match /href="\/admin"/, output
     end

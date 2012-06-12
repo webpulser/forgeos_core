@@ -1,21 +1,11 @@
 <%= dataTables_resultset(Forgeos::Right, @rights) do |right|
-      [
-        content_tag(:div,
-          content_tag(:div, '', :class => 'handler') +
-          content_tag(:div, '', :id => polymorphic_html_id(right), :class => 'small-icons right-ico'),
-          :class => 'handler_container'),
-        content_tag(:div, right.name, :class => 'right-name'),
-        right.controller_name,
-        right.action_name,
-        content_tag(:span, "&nbsp;".html_safe, :class => 'small-icons duplicate-link duplicate-right') +
-        content_tag(:span, "&nbsp;".html_safe, :class => 'small-icons edit-link edit-right') +
-        link_to('', [forgeos_core, :admin, right],
-          :remote => true,
-          :method => :delete,
-          :confirm => t('right.destroy.confirm'),
-          :class => 'small-icons destroy-link',
-          :id => polymorphic_html_id(right, 'destroy')
-        )
-      ]
-    end
--%>
+  [
+    handler_icon('legal', right),
+    content_tag(:div, right.name, :class => 'right-name'),
+    right.controller_name,
+    right.action_name,
+    link_to('', '#', :class => 'icon icon-copy duplicate-right') +
+    link_to('', '#', :class => 'icon icon-pencil edit-right') +
+    destroy_button(forgeos_core, right)
+  ]
+end -%>

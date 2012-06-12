@@ -143,21 +143,34 @@ window.add_picture_to_element = (data) ->
 window.add_picture_to_visuals = (data) ->
   object_name = jQuery("form#wrap").data("object_name")
   jQuery("#visuals-picture ul.sortable").before "<li><a href=\"#\" onclick=\"jQuery(this).parents('li').remove(); return false;\" class=\"big-icons trash\"></a><input type=\"hidden\" name=\"" + object_name + "[attachment_ids][]\" value=\"" + data.id + "\"/><img src=\"" + data.path + "\" alt=\"" + data.name + "\"/><div class=\"handler\"><div class=\"inner\"></div></div></li>"
+
 window.setup_upload_dialog = (selector) ->
-  jQuery(selector + "Dialog").dialog
+  select_dialog = jQuery(selector + 'SelectDialog')
+  upload_dialog = jQuery(selector + 'UploadDialog')
+  uploader = jQuery(selector + 'Upload')
+
+  upload_dialog.dialog
     autoOpen: false
     modal: true
     width: 500
     buttons:
       Upload: ->
-        jQuery(selector).uploadifyUpload()
+        uploader.uploadifyUpload()
 
       "Clear queue": ->
-        jQuery(selector).uploadifyClearQueue()
+        uploader.uploadifyClearQueue()
 
     resizable: "se"
+  upload_dialog.find('a.select-link').click (e) ->
+    e.preventDefault()
+    select_dialog.dialog('open')
+    upload_dialog.dialog('close')
+
 window.setup_select_dialog = (selector, table_selector) ->
-  jQuery(selector + "Dialog").dialog
+  select_dialog = jQuery(selector + 'SelectDialog')
+  upload_dialog = jQuery(selector + 'UploadDialog')
+
+  select_dialog.dialog
     autoOpen: false
     modal: true
     minHeight: 380
@@ -181,17 +194,21 @@ window.setup_select_dialog = (selector, table_selector) ->
             eval_ callback + "(result);"
             i++
 
-        jQuery(selector + "Dialog").dialog "close"
+        select_dialog.dialog "close"
 
-    open: (e, ui) ->
-      eval_ jQuery(table_selector).data("dataTables_init_function") + "()"
+  select_dialog.find('a.upload-link').click (e) ->
+    e.preventDefault()
+    upload_dialog.dialog('open')
+    select_dialog.dialog('close')
+
 window.forgeosInitUpload = (selector) ->
   upload = selector + "Upload"
   dialog = upload + "Dialog"
   select_dialog = selector + "SelectDialog"
-  jQuery(selector + "Dialog").html "<div id=\"" + upload.replace("#", "") + "\"></div><div class=\"library-add\"><span>or</span><a href=\"#\" onclick=\"$(\"" + dialog + "\").dialog('close'); $(\"" + select_dialog + "\").dialog('open'); return false;\">add from library</a></div>"
+  jQuery(selector + "Dialog").html "<div id='#{upload.replace("#", "")}'></div><div class='library-add'><span>or</span><a class='select-link'>add from library</a></div>"
   uploadify_datas = format: "json"
   uploadify_datas[window._forgeos_js_vars.session_key] = window._forgeos_js_vars.session
+
   $(upload).uploadify
     uploader: "/assets/forgeos/uploadify/uploadify.swf"
     cancelImg: "/assets/forgeos/admin/big-icons/delete-icon.png"
@@ -204,10 +221,7 @@ window.forgeosInitUpload = (selector) ->
     multi: "true"
     displayData: "speed"
     onComplete: (e, queueID, fileObj, response, data) ->
-      if typeof JSON is "object" and typeof JSON.parse is "function"
-        result = JSON.parse(response)
-      else
-        result = eval_("(" + response + ")")
+      result = jQuery(response)
       if result.result is "success"
         result["name"] = fileObj.name
         callback = jQuery(".add-image.current,.add-file.current").data("callback")
@@ -217,18 +231,19 @@ window.forgeosInitUpload = (selector) ->
 
     onAllComplete: ->
       jQuery(dialog).dialog "close"
+
 window.initAttachmentUpload = (file_type) ->
   jQuery("#attachmentUploadDialog").dialog "open"
   uploadify_datas =
     parent_id: jQuery("#parent_id_tmp").val()
     format: "json"
-
   uploadify_datas[window._forgeos_js_vars.session_key] = window._forgeos_js_vars.session
+
   jQuery("#attachmentUpload").uploadify
     uploader: "/assets/forgeos/uploadify/uploadify.swf"
     cancelImg: "/assets/forgeos/admin/big-icons/delete-icon.png"
     script: window._forgeos_js_vars.mount_paths.core + "/admin/attachments"
-    buttonImg: "/assets/forgeos/uploadify/upload-" + file_type + "_" + jQuery("html").attr("lang") + ".png"
+    buttonImg: "/assets/forgeos/uploadify/upload-picture_" + jQuery("html").attr("lang") + ".png"
     width: "154"
     height: "24"
     scriptData: uploadify_datas
@@ -236,10 +251,7 @@ window.initAttachmentUpload = (file_type) ->
     multi: "true"
     displayData: "speed"
     onComplete: (e, queueID, fileObj, response, data) ->
-      if typeof JSON is "object" and typeof JSON.parse is "function"
-        result = JSON.parse(response)
-      else
-        result = eval_("(" + response + ")")
+      result = jQuery(response)
       if result.result is "success"
         oTable.fnDraw()
         jQuery.tree.focused().refresh()

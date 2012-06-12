@@ -3,7 +3,7 @@ require 'test_helper'
 class ForgeosCoreTest < ActiveSupport::TestCase
   setup do
     @engine = Rails.application.railties.engines.find do |engine|
-      engine.engine_name == 'forgeos_core_engine'
+      engine.engine_name == 'forgeos_core'
     end
   end
 

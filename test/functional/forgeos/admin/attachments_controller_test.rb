@@ -91,7 +91,6 @@ module Forgeos
       assert_equal forgeos_attachments(:picture), assigns(:media)
       assert_template 'admin/attachments/show'
       assert_template 'admin/attachments/_picture'
-      assert_match 'http://test.host/', @response.body
     end
 
     test "should not get show" do

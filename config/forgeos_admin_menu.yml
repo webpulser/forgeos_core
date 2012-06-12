@@ -2,57 +2,114 @@ forgeos:
   admin:
     menu:
       dashboard:
-        url: /admin/dashboard
-        html:
-          class: left first
+        url:
+          - forgeos_core
+          - :admin
+          - :dashboard
+        icon: dashboard
       customers:
-        url: /admin/users
-        html:
-         class: left
-        children:
-          users: /admin/users
+        url:
+          - forgeos_core
+          - :admin
+          - :users
+        icon: user
       statistics:
-        url: /admin/statistics
-        html:
-          class: right
-
+        url:
+          - forgeos_core
+          - :admin
+          - :statistics
+        icon: bar-chart
     submenu:
       administration:
-        url: /admin/administrators
-        html:
-          class: left first
+        url: '#'
         children:
           administrators:
-            url: /admin/administrators
-            children:
-              roles: /admin/roles
-              rights: /admin/rights
-          import: /admin/import
-          cachings: /admin/cachings
-      settings:
-        url: /admin/setting
-        html:
-          class: left
+            url:
+              - forgeos_core
+              - :admin
+              - :administrators
+            icon: user-md
+          roles:
+            url:
+              - forgeos_core
+              - :admin
+              - :roles
+            icon: pushpin
+          rights:
+            url:
+              - forgeos_core
+              - :admin
+              - :rights
+            icon: legal
+          settings:
+            url:
+              - forgeos_core
+              - :admin
+              - :setting
+            icon: cogs
+          import:
+            url:
+              - forgeos_core
+              - :admin
+              - :import
+            icon: download-alt
+          cachings:
+            url:
+              - forgeos_core
+              - :admin
+              - :cachings
+            icon: sitemap
       library:
-        url: /admin/pictures
-        html:
-          class: left
+        url: '#'
         children:
-          pictures: /admin/pictures
-          pdfs: /admin/pdfs
-          audios: /admin/audios
-          videos: /admin/videos
-          media: /admin/media
-          docs: /admin/docs
-      accounts:
-        url: /admin/account
-        html:
-          class: left
-      logout:
-        url: /admin/logout
-        html:
-          class: right
-      support:
-        url: http://www.webpulser.com
-        html:
-          class: right first
+          pictures:
+            url:
+              - forgeos_core
+              - :admin
+              - :pictures
+            icon: picture
+          pdfs:
+            url:
+              - forgeos_core
+              - :admin
+              - :pdfs
+            icon: book
+          audios:
+            url:
+              - forgeos_core
+              - :admin
+              - :audios
+            icon: music
+          videos:
+            url:
+              - forgeos_core
+              - :admin
+              - :videos
+            icon: film
+          media:
+            url:
+              - forgeos_core
+              - :admin
+              - :media
+            icon: file
+          docs:
+            url:
+              - forgeos_core
+              - :admin
+              - :docs
+            icon: briefcase
+      account:
+        url: '#'
+        children:
+          accounts:
+            url:
+              - forgeos_core
+              - :admin
+              - :account
+            icon: user
+          logout:
+            url:
+              - forgeos_core
+              - :admin
+              - :logout
+            icon: signout

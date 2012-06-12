@@ -8,9 +8,9 @@ module Forgeos
       admin_login_to('admin/administrators', 'index')
       @request.path = '/admin/administrators' # fix ActionController::TestCase request path is '/'
       get :index, :use_route => :forgeos_core
-      assert_select 'ul.ui-tabs-nav' do
-        assert_select 'li.ui-tabs-selected a', 'administrators'
-        assert_select 'li.ui-tabs-selected a span.small-icons.administrator', true
+      assert_select 'ul.nav' do
+        assert_select 'li.active a', 'administrators'
+        assert_select 'li.active a i.icon-user-md', true
       end
     end
 
@@ -19,8 +19,7 @@ module Forgeos
       @request.path = '/admin/administrators' # fix ActionController::TestCase request path is '/'
       get :index, :use_route => :forgeos_core
       assert_select '#submenu' do
-        assert_select '> li.current a', 'administrators'
-        assert_select '> li.current ul', true
+        assert_select 'li.active a', 'administrators'
       end
     end
 

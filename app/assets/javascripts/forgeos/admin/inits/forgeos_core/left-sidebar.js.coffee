@@ -1,4 +1,6 @@
 jQuery(document).ready ->
+
+  # TODO replace with bootstrap dropdown
   jQuery(".create-action").bind "click", ->
     unless jQuery(".create-list").hasClass("displayed")
       jQuery(".update-list").removeClass "displayed"
@@ -33,32 +35,11 @@ jQuery(document).ready ->
     else
       jQuery(this).find(".choices_list").removeClass "displayed"
 
+  # Create a new folder
   jQuery(".create-folder, .create-smart").live "click", ->
-    tree_id = jQuery(".category-tree").attr("id")
+    tree_id = jQuery(this).data("tree-id")
     t = jQuery.jstree._reference(tree_id)
     if t.get_selected()
       t.create t.get_selected(), 0
     else
       t.create null, 0
-
-  jQuery(".modify-folder").live "click", ->
-    t = jQuery.jstree._focused()
-    if t.get_selected()
-      t.rename t.get_selected()
-    else
-      error_on_jsTree_action "please select a category first"
-
-  jQuery(".delete-folder").live "click", ->
-    t = jQuery.jstree._focused()
-    if t.get_selected()
-      t.remove t.get_selected()
-    else
-      error_on_jsTree_action "please select a category first"
-
-  jQuery(".duplicate-folder").live "click", ->
-    t = jQuery.jstree._focused()
-    if t.get_selected()
-      t.copy()
-      t.paste -1
-    else
-      error_on_jsTree_action "please select a category first"

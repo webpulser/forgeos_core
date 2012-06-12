@@ -24,7 +24,7 @@ function select_thumb(element) {
 
 function upload_callback(){
     //$('#dynamic_images_list').html('');
-    $.ajax({type: "GET", url: "/admin/pictures/attachments/manage?page=1", success: function(request){ $('#dynamic_images_list').html(request); },dataType: "html"});
+    $.ajax({type: "GET", url: window._forgeos_js_vars.mount_paths.core + "/admin/pictures/attachments/manage?page=1", success: function(request){ $('#dynamic_images_list').html(request); },dataType: "html"});
 }
 
 function curbly_insert_image(url, alt_text){
@@ -53,8 +53,7 @@ function ts_onload(){
     $('#image_upload_form').attr("action", ts_upload_image_path());
 }
 function ts_upload_image_path() {
-  path=window.parent.location.pathname.split('/')
-  return "/admin/attachments/create";
+  return window._forgeos_js_vars.mount_paths.core + "/admin/attachments/create";
 }
 function ts_ce(tag,name){
     if (name && window.ActiveXObject){

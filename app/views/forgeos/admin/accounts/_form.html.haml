@@ -1,8 +1,8 @@
 = form_for admin, :url => [forgeos_core, :admin, :account], :as => :administrator, :html => { :method => :put, :multipart => true } do |f|
   .backgrounds.big-header
-    = f.select :civility, t('civility.select'), { :prompt => t(:please_select) }
-    = f.text_field :firstname, :title => t('firstname'), :class => 'defaultValue field_name firstname'
-    = f.text_field :lastname, :title => t('lastname'), :class => 'defaultValue field_name lastname'
+    = f.select :civility, t('civility.select'), { :prompt => t(:please_select) }, :class => 'civility'
+    = f.text_field :firstname, :placeholder => t('firstname'), :class => 'field_name firstname'
+    = f.text_field :lastname, :placeholder => t('lastname'), :class => 'field_name lastname'
     .interact-links
       = forgeos_save_buttons forgeos_core.admin_account_path
   #content.grid_16.alpha.omega
