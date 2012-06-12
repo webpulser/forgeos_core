@@ -1,56 +1,87 @@
 jQuery(document).ready ->
-  jQuery(".create-right").live "click", ->
-    new_row = "<tr id=\"new_row\" class=\"even ui-draggable\">" + "<td><div class=\"small-icons right-ico\">&nbsp;</div></td>" + "<td><input type=\"text\" name=\"right[name]\" size=\"15\" /></td>" + "<td><input type=\"text\" name=\"right[controller_name]\" size=\"15\" /></td>" + "<td><input type=\"text\" name=\"right[action_name]\" size=\"15\" /></td>" + "<td>" + "<a href=\"#\" onclick=\"jQuery('#form_right').trigger('onsubmit'); return false;\"><span class=\"small-icons save\">&nbsp;</span></a>" + "<a href=\"#\" onclick=\"discard(); return false;\"><span class=\"small-icons cancel\">&nbsp;</span></a>" + "</td>" + "</tr>"
-    jQuery("#table").prepend new_row
-    jQuery("#table").wrap "<form action=\"" + window._forgeos_js_vars.mount_paths.core + "/admin/rights/create\" id=\"form_right\" method=\"POST\" onsubmit=\"" + form_ajax_right(window._forgeos_js_vars.mount_paths.core + "/admin/rights/create", "post") + "\"></form>"
-    disable_links()
+  jQuery(".create-right").live "click", (e) ->
+    e.preventDefault()
+    timestamp = new Date().getTime()
+
+    add_inline_form timestamp, "#{window._forgeos_js_vars.mount_paths.core}/admin/rights", 'post'
+    jQuery("#table").prepend right_form(timestamp)
+
     false
 
-  jQuery(".edit-right").live "click", ->
+  jQuery(".edit-right").live "click", (e) ->
+    e.preventDefault()
     row = jQuery(this).parents("tr")
-    row_id = row.attr("id")
-    right_id = get_rails_element_id(row)
-    cell_name = row.children().get(1)
-    cell_controller = row.children().get(2)
-    cell_action = row.children().get(3)
-    cell_actions = jQuery(this).parent()
-    cell_name_value = jQuery(cell_name).children("div").html()
-    cell_controller_value = jQuery(cell_controller).html()
-    cell_action_value = jQuery(cell_action).html()
-    jQuery("table").wrap "<form action=\"" + window._forgeos_js_vars.mount_paths.core + "/admin/rights/" + right_id + "\" id=\"form_right\" method=\"PUT\" onsubmit=\"" + form_ajax_right(window._forgeos_js_vars.mount_paths.core + "/admin/rights/" + right_id, "put") + "\"></form>"
-    new_row = "<tr id=\"new_row\" class=\"odd ui-draggable\">"
-    new_row += "<td><div class=\"small-icons right-ico\">&nbsp;</div></td>"
-    new_row += "<td><input type=\"text\" value=\"" + cell_name_value + "\" name=\"right[name]\" size=\"15\"/></td>"
-    new_row += "<td><input type=\"text\" value=\"" + cell_controller_value + "\" name=\"right[controller_name]\" size=\"15\"/></td>"
-    new_row += "<td><input type=\"text\" value=\"" + cell_action_value + "\" name=\"right[action_name]\" size=\"15\"/></td>"
-    new_row += "<td>"
-    new_row += "<a href=\"#\" onclick=\"jQuery('#form_right').trigger('onsubmit'); return false;\"><span class=\"small-icons save\">&nbsp;</span></a>"
-    new_row += "<a href=\"#\" onclick=\"discard(); row.show(); return false;\"><span class=\"small-icons cancel\">&nbsp;</span></a>"
-    new_row += "</td>"
-    new_row += "</tr>"
-    row.hide()
-    row.after new_row
-    disable_links()
+    right_id = get_rails_element_id(row.find('td div.handler_container'))
+    timestamp = new Date().getTime()
 
-  jQuery(".duplicate-right").live "click", ->
+    add_inline_form timestamp, "#{window._forgeos_js_vars.mount_paths.core}/admin/rights/#{right_id}", 'put'
+
+    row.hide()
+    row.after right_form(timestamp, row)
+
+    false
+
+  jQuery(".duplicate-right").live "click", (e) ->
+    e.preventDefault()
+    timestamp = new Date().getTime()
     row = jQuery(this).parents("tr")
-    cell_name = row.children().get(1)
-    cell_controller = row.children().get(2)
-    cell_action = row.children().get(3)
-    cell_actions = jQuery(this).parent()
-    cell_name_value = jQuery(cell_name).children("div").html()
-    cell_controller_value = jQuery(cell_controller).html()
-    cell_action_value = jQuery(cell_action).html()
-    jQuery("#table").wrap "<form action=\"" + window._forgeos_js_vars.mount_paths.core + "/admin/rights/create\" id=\"form_right\" method=\"POST\" onsubmit=\"" + form_ajax_right(window._forgeos_js_vars.mount_paths.core + "/admin/rights/create", "post") + "\"></form>"
-    new_row = "<tr id=\"new_row\" class=\"" + row.attr("class") + " ui-draggable\">"
-    new_row += "<td><div class=\"small-icons right-ico\">&nbsp;</div></td>"
-    new_row += "<td><input type=\"text\" value=\"" + cell_name_value + "\" name=\"right[name]\" size=\"15\" /></td>"
-    new_row += "<td><input type=\"text\" value=\"" + cell_controller_value + "\" name=\"right[controller_name]\" size=\"15\" /></td>"
-    new_row += "<td><input type=\"text\" value=\"" + cell_action_value + "\" name=\"right[action_name]\" size=\"15\" /></td>"
-    new_row += "<td>"
-    new_row += "<a href=\"#\" onclick=\"jQuery('#form_right').trigger('onsubmit'); return false;\"><span class=\"small-icons save\">&nbsp;</span></a>"
-    new_row += "<a href=\"#\" onclick=\"discard(); return false;\"><span class=\"small-icons cancel\">&nbsp;</span></a>"
-    new_row += "</td>"
-    new_row += "</tr>"
-    row.after new_row
-    disable_links()
+    add_inline_form timestamp, "#{window._forgeos_js_vars.mount_paths.core}/admin/rights", 'post'
+    row.after right_form(timestamp, row)
+
+    false
+
+  right_form = (timestamp, row = null) ->
+    if row?
+      klass = (row.hasClass('odd') ? 'even' : 'odd')
+      cell_name = row.children().get(1)
+      cell_controller = row.children().get(2)
+      cell_action = row.children().get(3)
+
+      name = jQuery(cell_name).children("div").html()
+      controller = jQuery(cell_controller).html()
+      action = jQuery(cell_action).html()
+    else
+      klass = 'even'
+      name = ''
+      controller = ''
+      action = ''
+
+
+    "<tr id='new_row_#{timestamp}' class='new_row #{klass}'>
+    <td><i class='icon-legal'></i></td>
+    <td><input type='text' value='#{name}' name='right[name]' size='25'/></td>
+    <td><input type='text' value='#{controller}' name='right[controller_name]' size='25'/></td>
+    <td><input type='text' value='#{action}' name='right[action_name]' size='15'/></td>
+    <td>
+      <a href='#' onclick=\"jQuery('##{timestamp}').trigger('onsubmit')\"><i class='icon icon-ok-sign'></i></a>
+      <a href='#' onclick=\"inline_discard('#{timestamp}')\"><i class='icon icon-remove-sign'></i></a>
+    </td>
+    </tr>"
+
+  # Discard inline crud
+  window.inline_discard = (timestamp) ->
+    row = jQuery("#new_row_#{timestamp}").prev('tr:hidden')
+    if row.length != 0
+      row.show()
+
+    jQuery("#new_row_#{timestamp}").remove()
+
+    return false
+
+  add_inline_form = (timestamp, url, method) ->
+    jQuery('body').append "<form action=\"#{url}\" id=\"#{timestamp}\" method=\"#{method}\" onsubmit=\"inline_save('#{timestamp}', '#{url}', '#{method}')\"></form>"
+
+  window.inline_save = (timestamp, url, method) ->
+    row = jQuery("#new_row_#{timestamp}")
+    form = jQuery("##{timestamp}").append(row.clone(true))
+    jQuery.ajax
+      success: (result) ->
+        jQuery('#table').dataTableInstance().fnDraw()
+        #jQuery('.create-right').parent().show()
+      error: display_notifications
+      data: form.serializeArray()
+      dataType: 'script'
+      type: method
+      url: url
+
+    return false
