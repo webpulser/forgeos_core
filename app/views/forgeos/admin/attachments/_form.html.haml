@@ -82,7 +82,7 @@
           = t 'media.destroy.action'
         .clear
       #attachment_associated_collection.step.open
-        %a.small-icons.step-title= t('media.attachement_links')
+        %a.icon-step-title= t('media.attachement_links')
         #association-media-tree.inner-step
           %ul
             = hidden_field_tag "#{f.object_name}[category_ids][]"

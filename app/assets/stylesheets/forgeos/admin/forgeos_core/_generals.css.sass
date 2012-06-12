@@ -196,7 +196,7 @@ h2.description
   margin: 20px 0
   clear: both
   min-height: 20px
-  h2,h3,.panel
+  h2,h3,.icon-panel
     background-color: $white
     text-transform: uppercase
     color: $gray
@@ -205,12 +205,11 @@ h2.description
     padding: 10px
     margin: -20px 0 0 20px
     +left
-  .panel
-    padding-left: 17px
-    background-position: 0 -805px
+  .icon-panel:before
+    content: "\f0d8"
   &.open
-    .panel
-      background-position: 0 -902px
+    .icon-panel:before
+      content: "\f0d7"
   label
     display: block
     color: $lightGray
@@ -296,7 +295,7 @@ form#wrap
   position: relative
   z-index: 0
 
-.panel
+.icon-panel
   text-transform: uppercase
   color: $lightGray
   background-position: 0 -816px
@@ -306,9 +305,6 @@ form#wrap
   background-color: white
   padding-right: 5px
   margin: -18px 0 5px 10px
-
-.open .panel, .disabled .panel
-  background-position: 0 -912px
 
 .option-panel-content
   display: none

@@ -2,23 +2,24 @@
   .step
     background: $lightBlueBg image_url("forgeos/admin/backgrounds/background-right-sidebar.png") repeat-x top
     padding: 5px 10px
-    font-size: 0.7em
     margin-bottom: 1px
     color: $greenBlue
     &.status
       padding-top: 30px
     a
-      display: block
+      display: inline-block
       color: $blueLink
-      &.step-title
-        background-position: 0 -816px
+      &.icon-step-title
         color: $greenBlue
         font-weight: bold
+        &:before
+          content: "\f0d8"
     &.open
-      a.step-title
-        background-position: 0 -913px
+      a.icon-step-title
         padding-bottom: 2px
         padding-top: 1px
+        &:before
+          content: "\f0d7"
 
   .text
     background-color: $white

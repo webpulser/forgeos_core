@@ -4,5 +4,4 @@ jQuery(document).ready ->
       path: window._forgeos_js_vars.mount_paths.core + "/admin/"
       expires: 10
 
-  jQuery("a.step-title, a.panel").bind "click", toggle_steps
-  jQuery("a.step-title, a.panel").each init_steps
+  jQuery("a.icon-step-title, a.icon-panel").each init_steps

@@ -1,8 +1,14 @@
-= hidden_field_tag "role[right_ids][]"
-%table
-  - rights.in_groups_of(4,false).each do |right_group|
-    %tr
-      - right_group.each do |right|
-        %td.content
-          = check_box_tag "role[right_ids][]", right.id, (role ? role.rights.include?(right) : false)
-          = right.name
+- if rights.any?
+  .fieldset
+    %a.icon-panel= title
+    .option-panel-content
+      .clear
+      .multi-select-div
+        %a{ :href => '#' }=t :select_all
+        %a{ :href => '#' }=t :unselect_all
+      - rights.each do |right|
+        .checkbox-container
+          = label_tag "role[right_ids][]" do
+            = check_box_tag "role[right_ids][]", right.id, (role ? role.rights.include?(right) : false)
+            = right.name
+      .clear

@@ -1,55 +1,25 @@
 = form_for [forgeos_core, :admin, role], :as => :role, :html => { :id => 'wrap', "data-object_name" => role.class.model_name.singular } do |f|
-  = hidden_field_tag "role[right_ids][]"
-
   .backgrounds.big-header
     = f.text_field :name, :class => 'field_name'
     .interact-links
       = forgeos_save_buttons [forgeos_core,:admin,:roles]
-
   #content.grid_16.alpha.omega
     .grid_12.alpha
       .padding-wrap
-        - right_categories = Forgeos::RightCategory.joins(:translations).order('name').all
-        - right_categories.each do |right_category|
-          .fieldset
-            %a.small-icons.panel{ :href => '#' }
-              = right_category.name
-            .option-panel-content
-              .clear
-              .multi-select-div
-                %a{ :href => '#' }
-                  =t 'select_all'
-                %a{ :href => '#' }
-                  =t 'unselect_all'
-              - right_category.rights.each do |right|
-                .checkbox-container
-                  = check_box_tag "role[right_ids][]", right.id, (role ? role.rights.include?(right) : false)
-                  %label= right.name
-              .clear
+        = hidden_field_tag "role[right_ids][]"
+        - Forgeos::RightCategory.joins(:translations).order('name').each do |right_category|
+          = render 'form_rights', :title => right_category.name, :rights => right_category.rights, :role => role
 
-      - rights = Forgeos::Right.where(:forgeos_categories_elements => {:category_id => nil}).includes(:categories)
-      - if rights.any?
-        .fieldset
-          %a.small-icons.panel{ :href => '#' }
-            =t 'other'
-          .option-panel-content
-            .clear
-            .multi-select-div
-            - rights.each do |right|
-              .checkbox-container
-                = check_box_tag "role[right_ids][]", right.id, (role ? role.rights.include?(right) : false)
-                %label= right.name
-              .clear
+        = render 'form_rights', :title => t(:other), :rights => Forgeos::Right.where(:forgeos_categories_elements => {:category_id => nil}).includes(:categories), :role => role
 
-
-    #right-sidebar.grid_4.omega.alpha
+    #right-sidebar.grid_4.alpha.omega
       - unless role.new_record?
         .step
-          = link_to [forgeos_core, :admin, role], :confirm => t('user.destroy.confirm'), :method => :delete do
+          = link_to [forgeos_core, :admin, role], :confirm => t('role.destroy.confirm'), :method => :delete do
             = i :trash
-            = t 'user.destroy.action'
+            = t 'role.destroy.action'
         #role_attributed_to.step.open
-          %a.small-icons.step-title{ :href => "#" }=t 'role.attributed_to'
+          %a.icon-step-title{ :href => "#" }=t 'role.attributed_to'
           .administrators
             - role.administrators.each do |admin|
               .admin

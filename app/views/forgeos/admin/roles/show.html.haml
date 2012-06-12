@@ -11,8 +11,7 @@
       - right_categories.each do |right_category|
         - unless right_category.rights.nil?
           .fieldset
-            %a.small-icons.panel{ :href => '#' }
-              = right_category.name
+            %a.icon-panel= right_category.name
             .option-panel-content
               .clear
               - right_category.rights.each do |right|
@@ -22,8 +21,7 @@
       - rights = Forgeos::Right.where(:forgeos_categories_elements => {:category_id => nil}).includes(:categories)
       - if rights.any?
         .fieldset
-          %a.small-icons.panel{ :href => '#' }
-            =t 'other'
+          %a.icon-panel=t :other
           .option-panel-content
             .clear
             .multi-select-div
@@ -38,7 +36,7 @@
         = i :trash
         = t 'user.destroy.action'
     #role_show_attributed_to.step.open
-      %a.small-icons.step-title{ :href => "#" }=t 'role.attributed_to'
+      %a.icon-step-title=t 'role.attributed_to'
       .administrators-list
         - @role.administrators.each do |admin|
           .admin
