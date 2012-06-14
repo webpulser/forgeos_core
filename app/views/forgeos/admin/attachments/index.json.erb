@@ -1,29 +1,29 @@
-<%= dataTables_resultset(@media_class, @medias) do |media|
+<%= dataTables_resultset(@attachment_class, @attachments) do |attachment|
   table = []
 
   if params[:skin] == 'thumbnail'
-    table << render(:partial => 'table_thumbnail.html.haml', :locals => { :media => media })
+    table << render(:partial => 'table_thumbnail.html.haml', :locals => { :attachment => attachment })
   else
     name = if params[:mode] == 'selection'
-      media.filename
+      attachment.filename
     else
-      link_to(media.name, [forgeos_core, :edit, :admin, media], :class => "truncate", :title => media.filename)
+      link_to(attachment.name, [forgeos_core, :edit, :admin, attachment], :class => "truncate", :title => attachment.filename)
     end
 
     table += [
-      handler_icon(t(:bootstrap_icon, :scope => [:media, @file_type]), media),
-      content_tag(:div, name, :class => 'media-name'),
-      media.file_type.upcase,
-      media.updated_at.to_s(:short),
-      size_in_kb(media.size),
-      "N/A",
-      edit_button(forgeos_core, media) +
-      destroy_button(forgeos_core, media, t('media.destroy.confirm'))
+      handler_icon(t(:bootstrap_icon, :scope => @file_type), attachment),
+      content_tag(:div, name, :class => 'attachment-name'),
+      attachment.file_type.upcase,
+      attachment.updated_at.to_s(:short),
+      size_in_kb(attachment.size),
+      '-',
+      edit_button(forgeos_core, attachment) +
+      destroy_button(forgeos_core, attachment, t('attachment.destroy.confirm'))
     ]
   end
   table += [
-    media.public_filename,
-    media.id,
-    media.filename
+    attachment.public_filename,
+    attachment.id,
+    attachment.filename
   ]
 end -%>

@@ -59,10 +59,10 @@ doc:
   size: 16
   description: doc description
   alt: doc
-media:
+medium:
   id: 7
   content_type: application/x-gzip
-  type: Forgeos::Media
+  type: Forgeos::Medium
   name: media
   filename: media.tar.gz
   alternative: media

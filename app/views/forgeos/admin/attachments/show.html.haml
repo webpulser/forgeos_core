@@ -1,23 +1,23 @@
 #wrap
-  .backgrounds.big-header
-    %h1#media-title= @media.name
+  .big-header
+    %h1#attachment.title= @attachment.name
     .interact-links
-      = link_to t('media.update.action'), [forgeos_core, :edit, :admin, @media ], :class => 'btn btn-large btn-primary'
-      = link_to t('media.back'), [forgeos_core, :admin, @media.class.model_name.route_key], :class => 'btn btn-mini'
+      = link_to t('attachment.update.action'), [forgeos_core, :edit, :admin, @attachment ], :class => 'btn btn-large btn-primary'
+      = link_to t('attachment.back'), [forgeos_core, :admin, @attachment.class.model_name.route_key], :class => 'btn btn-mini'
 
-  #content.grid_16.alpha.omega
-    #media-modify.grid_12.alpha
-      .media-modify-wrap
-        - permalink = url_for(@media.public_filename)
+  #content.row-fluid
+    #attachment.modify.span9
+      .attachment.modify-wrap
+        - permalink = url_for(@attachment.public_filename)
         %h2.permalink
           =t 'permalink', :count => 1
           \:
           = link_to permalink, permalink
-      = render :partial => @media.class.model_name.singular_route_key.dup, :object => @media
-    #right-sidebar.grid_4.omega
+      = render :partial => @attachment.class.model_name.singular_route_key.dup, :object => @attachment
+    #right-sidebar.span3
       .step
-        = link_to [forgeos_core, :admin, @media], :confirm => t('media.destroy.confirm'), :method => :delete do
+        = link_to [forgeos_core, :admin, @attachment], :confirm => t('attachment.destroy.confirm'), :method => :delete do
           = i :trash
-          = t 'media.destroy.action'
+          = t 'attachment.destroy.action'
         .clear
     .clear

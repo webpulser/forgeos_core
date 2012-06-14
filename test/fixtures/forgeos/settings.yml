@@ -64,7 +64,7 @@ main_setting:
       storage: :file_system
       max_size: 52428800
 
-    media:
-      file_system_path: 'public/uploads/medias'
+    medium:
+      file_system_path: 'public/uploads/media'
       storage: :file_system
       max_size: 52428800

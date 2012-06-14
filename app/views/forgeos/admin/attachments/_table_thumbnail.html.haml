@@ -1,6 +1,6 @@
-= image_tag(media.public_filename(:small),:title=>media.filename, :id => "attachment_#{media.id}")
+= image_tag(attachment.public_filename(:small),:title=>attachment.filename, :id => "attachment_#{attachment.id}")
 %br
-= "#{media.content_type} - #{media.size/1024} Ko"
+= "#{attachment.content_type} - #{attachment.size/1024} Ko"
 /
   %br
-  =# NOT USED select_tag :thumbnail, options_for_select(media.attachment_options[:thumbnails].keys)
+  =# NOT USED select_tag :thumbnail, options_for_select(attachment.attachment_options[:thumbnails].keys)

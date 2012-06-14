@@ -1,91 +1,74 @@
-= form_for [forgeos_core, :admin, media], :as => :attachment, :html => { :multipart => true, :id => 'wrap', "data-object_name" => @media_class.model_name.singular } do |f|
-  .backgrounds.big-header
-    = f.text_field :name, :id => 'media-title', :class => 'field_name'
-    .interact-links
-      = forgeos_save_buttons [forgeos_core, :admin, @file_type.pluralize]
+= form_for [forgeos_core, :admin, attachment], :as => :attachment, :html => { :multipart => true, :id => 'wrap', "data-object_name" => @attachment_class.model_name.singular } do |f|
+  = form_header do
+    .big-header
+      = f.text_field :name, :id => 'attachment.title', :class => 'field_name'
+      .interact-links= forgeos_save_buttons [forgeos_core, :admin, @file_type.pluralize]
 
-  #content.grid_16.alpha.omega
-    #media-modify.grid_12.alpha
-      .media-modify-wrap
+  #content.row-fluid
+    #attachment.modify.span9
+      .well
         %h2.permalink
           =t 'permalink', :count => 1
           \:
-          = link_to media.public_filename, media.public_filename
+          = link_to attachment.public_filename, attachment.public_filename
 
-        - if largest_thumb = thumbnails.shift
-          .large-image.media-image-container.grid_7.omega
-            = image_tag largest_thumb.public_filename
-            %br
-            %span.media-size= t(largest_thumb.thumbnail, :scope => [:media, :humbnails]).upcase
-            %br
-            %span.media-size-pixels
-              #{largest_thumb.width} x #{largest_thumb.height} #{t 'media.pixel', :count => 2}
-
-        .large-info-container.grid_5.alpha.omega
-          - if media.kind_of?(Forgeos::Picture)
-            .large-info-block
-              %span.large-info-name.truncate
-                =t 'media.filename'
-              %span.large-info-value
-                = media.filename
-              .clear
-            .large-info-block
-              %span.large-info-name
-                =t 'media.picture.original_size'
-              %a.large-info-value{ :href => media.public_filename }
-                #{media.width} x #{media.height} #{t 'media.pixel', :count => 2 }
-              .clear
-          .large-info-block
-            %span.large-info-name
-              =t 'media.file_type'
-            %span.large-info-value
-              = media.file_type.upcase
-            .clear
-          .large-info-block
-            %span.large-info-name
-              =t 'media.updated_at'
-            %span.large-info-value
-              = media.updated_at.to_s(:short)
-            .clear
-          .large-info-block
-            %span.large-info-name
-              =t 'media.size'
-            %span.large-info-value #{media.size/1024} #{t 'media.byte.kilo'}
-            .clear
-          .large-info-block
-            = f.label :uploaded_data, nil, :class => 'large-info-name'
-            = f.file_field :uploaded_data, :size => 10
-            %br
-          - if f.object.is_a?(Forgeos::Picture)
-            .large-info-block
-              = f.label :alt, t('media.alt'), :class => 'large-info-name'
-              = f.text_field :alt, :size => 24
-              %br
-          .large-info-block
-            = f.label :description, t('media.description'), :class => 'large-info-name'
-            = f.text_area :description, :rows => 5, :cols => 34
-        .clear
-
-        - thumbnails.each do |thumb|
-          .grid_4.alpha.omega.media-image-container
-            = image_tag thumb.public_filename
-            %br
-            %span.media-size= t(thumb.thumbnail, :scope => [:media, :thumbnails]).upcase
-            %br
-            %span.media-size-pixels
-              #{thumb.width} x #{thumb.height} #{t 'media.pixel', :count => 2 }
-
-    #right-sidebar.grid_4.omega
+    #right-sidebar.span3
       .step
-        = link_to [forgeos_core, :admin, media], :confirm => t('media.destroy.confirm'), :method => :delete do
+        = link_to [forgeos_core, :admin, attachment], :confirm => t('attachment.destroy.confirm'), :method => :delete do
           = i :trash
-          = t 'media.destroy.action'
+          = t 'attachment.destroy.action'
         .clear
       #attachment_associated_collection.step.open
-        %a.icon-step-title= t('media.attachement_links')
-        #association-media-tree.inner-step
+        %a.icon-step-title= t('attachment.attachment_links')
+        #association-attachment.tree.inner-step
           %ul
             = hidden_field_tag "#{f.object_name}[category_ids][]"
-            = render :partial => 'forgeos/admin/categories/associated_elements', :locals => { :association_id => 'category_ids', :element => media, :category_ids => media.category_ids, :categories => find_categories_from_content_type(media) }
-            .clear
+            = render :partial => 'forgeos/admin/categories/associated_elements', :locals => { :association_id => 'category_ids', :element => attachment, :category_ids => attachment.category_ids, :categories => find_categories_from_content_type(attachment) }
+
+    - if largest_thumb = thumbnails.shift
+      %ul.thumbnails.span6
+        %li
+          .thumbnail.large-image.attachment.image-container
+            = image_tag largest_thumb.public_filename
+            %h5.attachment.size= t(largest_thumb.thumbnail, :scope => [:attachment, :thumbnails]).upcase
+            %p.attachment.size-pixels
+              #{largest_thumb.width} x #{largest_thumb.height} #{t 'attachment.pixel', :count => 2}
+        - thumbnails.each do |thumb|
+          %li.attachment.image-container
+            .thumbnail
+              = image_tag thumb.public_filename
+              %h5.attachment.size= t(thumb.thumbnail, :scope => [:attachment, :thumbnails]).upcase
+              %p.attachment.size-pixels
+                #{thumb.width} x #{thumb.height} #{t 'attachment.pixel', :count => 2 }
+
+    .large-info-container.well.span5.form-horizontal
+      - if attachment.kind_of?(Forgeos::Picture)
+        .control-group
+          %label.control-label=t 'attachment.filename'
+          .controls
+            = attachment.filename
+        .control-group
+          %label.control-label=t 'picture.original_size'
+          .controls
+            #{attachment.width} x #{attachment.height} #{t 'attachment.pixel', :count => 2 }
+          .clear
+      .control-group
+        %label.control-label=t 'attachment.file_type'
+        .controls= attachment.file_type.upcase
+      .control-group
+        %label.control-label=t 'attachment.updated_at'
+        .controls= attachment.updated_at.to_s(:short)
+      .control-group
+        %label.control-label=t 'attachment.size'
+        .controls= size_in_kb(attachment.size)
+      .control-group
+        = f.label :uploaded_data, nil, :class => 'control-label'
+        .controls= f.file_field :uploaded_data, :size => 10
+      - if f.object.is_a?(Forgeos::Picture)
+        .control-group
+          = f.label :alt, t('attachment.alt'), :class => 'control-label'
+          .controls= f.text_field :alt, :size => 24
+      .control-group
+        = f.label :description, t('attachment.description'), :class => 'control-label'
+        .controls= f.text_area :description, :rows => 5, :cols => 34
     .clear

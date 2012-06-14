@@ -17,7 +17,7 @@ module Forgeos
       admin_login_to('admin/attachments', 'index')
       get :index, :use_route => :forgeos_core, :format => :json, :klass => 'forgeos::Picture'
       assert_response :success
-      assert_equal Forgeos::Picture, assigns(:media_class)
+      assert_equal Forgeos::Picture, assigns(:attachment_class)
       assert_equal 'picture', assigns(:file_type)
     end
 
@@ -25,7 +25,7 @@ module Forgeos
       admin_login_to('admin/attachments', 'index')
       get :index, :use_route => :forgeos_core, :format => :json
       assert_response :success
-      assert_equal Forgeos::Media, assigns(:media_class)
+      assert_equal Forgeos::Medium, assigns(:attachment_class)
       assert_equal 'medium', assigns(:file_type)
     end
 
@@ -88,7 +88,7 @@ module Forgeos
       admin_login_to('admin/attachments', 'show')
       get :show, :id => forgeos_attachments(:picture).id, :use_route => :forgeos_core
       assert_response :success
-      assert_equal forgeos_attachments(:picture), assigns(:media)
+      assert_equal forgeos_attachments(:picture), assigns(:attachment)
       assert_template 'admin/attachments/show'
       assert_template 'admin/attachments/_picture'
     end
@@ -108,7 +108,7 @@ module Forgeos
       admin_login_to('admin/attachments', 'edit')
       get :edit, :id => forgeos_attachments(:picture).id, :use_route => :forgeos_core
       assert_response :success
-      assert_equal forgeos_attachments(:picture), assigns(:media)
+      assert_equal forgeos_attachments(:picture), assigns(:attachment)
       assert_template 'admin/attachments/edit'
       assert_template 'admin/attachments/_form'
     end
@@ -131,9 +131,9 @@ module Forgeos
       end
 
       assert_response :success
-      assert !assigns(:media).new_record?, "media not saved"
+      assert !assigns(:attachment).new_record?, "media not saved"
       assert_match '"result":"success"', @response.body
-      assert_match "\"id\":#{assigns(:media).id}", @response.body
+      assert_match "\"id\":#{assigns(:attachment).id}", @response.body
     end
 
     test "should post create with category" do
@@ -144,9 +144,9 @@ module Forgeos
       end
 
       assert_response :success
-      assert !assigns(:media).new_record?, "media not saved"
+      assert !assigns(:attachment).new_record?, "media not saved"
       assert_match '"result":"success"', @response.body
-      assert_match "\"id\":#{assigns(:media).id}", @response.body
+      assert_match "\"id\":#{assigns(:attachment).id}", @response.body
       assert_equal 1, category.reload.elements.count
     end
 
@@ -158,9 +158,9 @@ module Forgeos
       end
 
       assert_response :success
-      assert !assigns(:media).new_record?, "media not saved"
+      assert !assigns(:attachment).new_record?, "media not saved"
       assert_match '"result":"success"', @response.body
-      assert_match "\"id\":#{assigns(:media).id}", @response.body
+      assert_match "\"id\":#{assigns(:attachment).id}", @response.body
       assert_equal 1, object.reload.attachments.count
     end
 
@@ -171,8 +171,8 @@ module Forgeos
       end
 
       assert_response :success
-      assert !assigns(:media).valid?, "media is valid and should not be"
-      assert assigns(:media).new_record?, "media is not a new record"
+      assert !assigns(:attachment).valid?, "media is valid and should not be"
+      assert assigns(:attachment).new_record?, "media is not a new record"
       assert_match '"result":"error"', @response.body
     end
 
@@ -182,7 +182,7 @@ module Forgeos
         post :create, :Filedata => Rack::Test::UploadedFile.new(File.expand_path('../../../../files/rails.png', __FILE__)), :route => :forgeos_core, :format => :js, :klass => 'Forgeos::Picture'
       end
 
-      assert !assigns(:media).new_record?, "media not saved"
+      assert !assigns(:attachment).new_record?, "media not saved"
       assert_response :success
     end
 
@@ -193,7 +193,7 @@ module Forgeos
       end
 
       assert_response :success
-      assert !assigns(:media).valid?, "media is valid and should not be"
+      assert !assigns(:attachment).valid?, "media is valid and should not be"
     end
     #########################
     # Testing update method #
@@ -206,7 +206,7 @@ module Forgeos
       }, :use_route => :forgeos_core, :klass => 'Forgeos::Picutre'
 
       assert_response :success
-      assert_equal forgeos_attachments(:picture), assigns(:media)
+      assert_equal forgeos_attachments(:picture), assigns(:attachment)
       assert_equal 'test', forgeos_attachments(:picture).reload.name
       assert_template 'admin/attachments/edit'
     end
@@ -219,8 +219,8 @@ module Forgeos
       }, :use_route => :forgeos_core, :klass => 'Forgeos::Picture'
 
       assert_response :success
-      assert_equal forgeos_attachments(:picture), assigns(:media)
-      assert !assigns(:media).valid?, "media is valid and should not be"
+      assert_equal forgeos_attachments(:picture), assigns(:attachment)
+      assert !assigns(:attachment).valid?, "media is valid and should not be"
       assert_not_equal 'none', forgeos_attachments(:picture).reload.content_type
       assert_template 'admin/attachments/edit'
     end

@@ -1,7 +1,2 @@
-= form_for [forgeos_core, :admin, Forgeos::Attachment.new], :html => { :multipart => true } do |f|
-  #attachmentUploadDialog.upload-lightbox-container.white
-    #attachmentUpload
-      = f.file_field :uploaded_data
-      = hidden_field_tag :target, params[:target]
-      = hidden_field_tag :target_id, params[:target_id]
-      = f.submit t('save')
+#attachmentUploadDialog.upload-lightbox-container
+  = file_field_tag :uploaded_data, :id => 'attachmentUpload'

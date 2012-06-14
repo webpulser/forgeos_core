@@ -10,11 +10,21 @@ table
     width: 70px
     padding: 0
 
-#table_wrapper
-  .dataTables_filter
-    display: none
-  .dataTables_paginate, .dataTables_length
-    float: left
+.top
+  .dataTables_filter,
+  .dataTables_length,
+  .dataSlides_filter,
+  .dataSlides_length
+    display: inline-block
+    input
+      width: 10em
+    select
+      width: 4em
+.dataTables_paginate,
+.dataTables_info,
+.dataSlides_paginate,
+.dataSlides_info
+  float: left
 
 .datatable
   border-collapse: collapse
@@ -86,10 +96,13 @@ table
   .actions
     width: 65px !important
 
-.dataTables_wrapper
+.dataTables_wrapper,
+.dataSlides_wrapper
   margin: 0 0 30px 1px
   .top
-    display: none
+    position: absolute
+    right: 0.5em
+    top: 0.5em
   .bottom
     height: 16px
     margin-top: 10px
@@ -184,8 +197,8 @@ tr
   margin: 20px
   clear: both
 
-.thumbnails
-  .datatable
+.forgeos-thumbnails
+  .dataslide
     width: 100% !important
     .thead
       .tr

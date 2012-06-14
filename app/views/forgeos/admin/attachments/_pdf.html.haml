@@ -1,32 +1,32 @@
-.large-image.grid_7.omega
+.large-image.span3
 
-.large-info-container.grid_5.alpha.omega
+.large-info-container.span6
   .large-info-block
     %span.large-info-name.truncate
-      =t 'media.filename'
+      =t 'attachment.filename'
     %span.large-info-value
       = pdf.filename
     .clear
   .large-info-block
     %span.large-info-name
-      =t 'media.file_type'
+      =t 'attachment.file_type'
     %span.large-info-value
       = pdf.file_type.upcase
     .clear
   .large-info-block
     %span.large-info-name
-      =t 'media.updated_at'
+      =t 'attachment.updated_at'
     %span.large-info-value
       = pdf.updated_at.to_s(:short)
     .clear
   .large-info-block
     %span.large-info-name
-      =t 'media.size'
-    %span.large-info-value #{pdf.size/1024} #{t 'media.byte.kilo'}
+      =t 'attachment.size'
+    %span.large-info-value= size_in_kb pdf.size
     .clear
   .large-info-block
     %span.large-info-name
-      =t 'media.description'
+      =t 'attachment.description'
     %span.large-info-value
       = pdf.description
     .clear

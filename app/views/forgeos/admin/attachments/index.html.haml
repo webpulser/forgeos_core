@@ -1,30 +1,17 @@
-- icon = t(:bootstrap_icon, :scope => [:media, @file_type])
-= index_sidebar icon, "media.#{@file_type}.all", "#{@file_type}-attachment-tree"
-#content.grid_12.alpha.omega
-  .backgrounds.header
-    = link_to '#', :class => 'btn', :id => 'add-attachment', 'data-file_type' => @media_class do
-      = i('plus-sign')
-      = i(icon)
-      = t(:action, :scope => [:media, @file_type, :create])
-    #search.right
-      = link_to content_tag(:span, t('search'), :class => 'small-icons search-span'), '#', :class => 'small-icons left search-link'
-    .backgrounds.search-form
-  .content-background
-  :ruby
-    table = datatable(:draggable => true,
-    :url => forgeos_core.admin_attachments_path(:format => :json, :klass => @media_class),
-    :columns => [
+:ruby
+  icon = t(:bootstrap_icon, :scope => @file_type)
+
+  view = index_view icon, forgeos_core, @attachment_class, [
       { :sClass => 'image_product_td', :bSortable => false },
       { :sTitle => t('name') },
       { :sTitle => t('type') },
-      { :sTitle => t('media.updated_at') },
-      { :sTitle => t('media.size') },
-      { :bVisible => false, :sTitle => t('media.used') },
+      { :sTitle => t('attachment.updated_at') },
+      { :sTitle => t('attachment.size') },
+      { :bVisible => false, :sTitle => t('attachment.used') },
       { :bSortable => false, :bSearchable => false, :sClass => 'actions-td' },
       { :bVisible => false },
       { :bVisible => false },
       { :bVisible => false }
-    ])
-  = table
-
-= render :partial => 'attachments_popup', :locals => {:klass => @media_class}
+  ], { :id => 'add-attachment', "data-callback" => 'refresh_after_file_upload' }
+= view
+= render :partial => 'attachments_popup', :locals => {:klass => @attachment_class}

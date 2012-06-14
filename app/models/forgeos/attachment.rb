@@ -41,29 +41,29 @@ module Forgeos
           data.send(data.respond_to?(:original_filename) ? :original_filename : :path)
 
         content_type = MIME::Types.type_for(filename).first.to_s
-        media_class = detect_attachment_class_from_content_type(content_type)
+        attachment_class = detect_attachment_class_from_content_type(content_type)
 
-        media = media_class.new(options[:attachment])
-        media.uploaded_data = ActiveSupport::HashWithIndifferentAccess.new(
+        attachment = attachment_class.new(options[:attachment])
+        attachment.uploaded_data = ActiveSupport::HashWithIndifferentAccess.new(
           :tempfile => data,
           :content_type => content_type,
           :filename => filename
         )
 
-        media
+        attachment
       else
-        Media.new
+        Medium.new
       end
     end
 
     def self.detect_attachment_class_from_content_type(content_type)
-      media_class = Media
+      attachment_class = Medium
 
       [Audio, Video, Pdf, Doc, Picture].each do |klass|
-        media_class = klass if klass.attachment_options[:content_type].include?(content_type)
+        attachment_class = klass if klass.attachment_options[:content_type].include?(content_type)
       end
 
-      media_class
+      attachment_class
     end
 
     private

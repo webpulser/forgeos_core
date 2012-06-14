@@ -61,7 +61,7 @@ Forgeos::Core::Engine.routes.draw do
       end
     end
 
-    %w(media picture doc pdf audio video attachment administrator role right user).each do |category|
+    %w(medium picture doc pdf audio video attachment administrator role right user).each do |category|
       resources "#{category}_categories", :controller => 'categories', :type => "forgeos::#{category.capitalize}_category" do
         member do
           post :add_element
@@ -72,7 +72,7 @@ Forgeos::Core::Engine.routes.draw do
     match '/library' => 'attachments#index', :as => :library, :klass => 'forgeos::Picture'
 
     resources :attachments, :controller => 'attachments'
-    %w(media picture doc pdf audio video).each do |attachment|
+    %w(medium picture doc pdf audio video).each do |attachment|
       resources "#{attachment.pluralize}", :controller => 'attachments', :klass => "forgeos::#{attachment.capitalize}" do
         collection do
           get :manage

@@ -5,10 +5,10 @@
     padding-left: 30px
     background-position: 10px -1434px
 
-.media-hoverlay
+.attachment-hoverlay
   padding: 0px !important
 
-.media-hoverlay-header
+.attachment-hoverlay-header
   background-color: $white
   height: 35px
   padding-top: 6px
@@ -19,8 +19,7 @@
     weight: bold
   color: $blueLink
   padding: 5px 15px 0
-  .search,
-  #search
+  #search_image, #search_files
     margin-right: 0
     font:
       size: 0.9em
@@ -33,13 +32,8 @@
     span
       padding: 1px 20px 0 30px
 
-.media-hoverlay-content
+.attachment-hoverlay-content
   background-color: $white
-  float: right
-  width: 70%
-  min-height: 400px
-  height: auto !important
-  height: 400px
   font-size: 0.8em
   table
     width: 100% !important
@@ -48,36 +42,10 @@
   #external-link
     padding: 15px
 
-.media-hoverlay-sidebar
-  padding: 10px
-  width: 25%
-
 .display-mode
-  float: right
-  width: 90px
-  height: 32px
-  .heading-separator
-    background: transparent image_url("forgeos/admin/borders/heading-separator.png") no-repeat scroll left top
-    height: 100%
-    margin: 0 10px
-    width: 3px
-    +left
-  .display-list
-    +left
-    background: transparent image_url("forgeos/admin/big-icons-27-27-verti.png") 0 -80px no-repeat
-    background: transparent image_url("forgeos/admin/big-icons-27-27-verti.png") 0 -80px no-repeat
-    width: 27px
-    height: 27px
-    margin-left: 2px
-    &.off
-      background: transparent image_url("forgeos/admin/big-icons-27-27-verti.png") 0 1px no-repeat
-  .display-thumbnails
-    +left
-    background: transparent image_url("forgeos/admin/big-icons-27-27-verti.png") 0 -242px no-repeat
-    width: 27px
-    height: 27px
-    &.off
-      background: transparent image_url("forgeos/admin/big-icons-27-27-verti.png") 0 -161px no-repeat
+  color: black
+  .off
+    color: gray
 
 div.tree-link
   padding-top: 10px !important
@@ -129,6 +97,5 @@ div.tree-link
     font-size: 1.1em
 
 .upload-lightbox-container,
-.media-hoverlay
+.attachment-hoverlay
   display: none
-

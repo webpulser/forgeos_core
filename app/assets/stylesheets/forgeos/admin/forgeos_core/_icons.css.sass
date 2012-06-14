@@ -179,11 +179,11 @@ a.icon
 .products, .offers, .all-admins, .all-roles, .all-rights, .all-menus, .pages, .product-types
   color: $darkBrown
 
-.page-name, .widget-name, .menu-name, .product-name, .order-name, .media-name, .admin-name, .role-name, .right-name, .user-name, .category-name
+.page-name, .widget-name, .menu-name, .product-name, .order-name, .attachment-name, .admin-name, .role-name, .right-name, .user-name, .category-name
   color: $lightGray
   padding-left: 0px
 
-.page-name a, .widget-name a, .menu-name a, .product-name a, .order-name a, .media-name a, .admin-name a, .role-name a, .right-name a, .user-name a, .category-name a
+.page-name a, .widget-name a, .menu-name a, .product-name a, .order-name a, .attachment-name a, .admin-name a, .role-name a, .right-name a, .user-name a, .category-name a
   color: $blueLink
   font:
     size: 1.3em !important
@@ -191,7 +191,7 @@ a.icon
   +block
   +left
 
-.page-name span, .widget-name span, .menu-name span, .product-name span, .order-name span, .media-name span, .admin-name span, .role-name span, .right-name span, .user-name span, .category-name span
+.page-name span, .widget-name span, .menu-name span, .product-name span, .order-name span, .attachment-name span, .admin-name span, .role-name span, .right-name span, .user-name span, .category-name span
   background-color: $blueLink
   color: $white
   +left
@@ -233,7 +233,9 @@ input.interact-button
   width: auto
 
 .interact-links
-  float: right
+  position: absolute
+  display: inline
+  right: .5em
   font-size: 13px
   line-height: 35px
   color: $lightGray
@@ -325,7 +327,7 @@ input.interact-button
 .audio
   background-position: 0 -4371px
 
-.media
+.attachment
   background-position: 0 -1969px
 
 .doc
@@ -372,7 +374,7 @@ input.interact-button
 .add-audio
   background-position: 0 -1846px
 
-.add-media
+.add-attachment
   background-position: 0 -1131px
 
 .add-doc
@@ -396,7 +398,7 @@ input.interact-button
   background-position: 0 -1442px
   color: $blueLink
 
-.media-hoverlay
+.attachment-hoverlay
   #inner-lightbox a
     &.picture
       background-position: 5px -2591px

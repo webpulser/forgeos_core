@@ -3,3 +3,28 @@
 #submenu
   .navbar-inner
     background: none
+
+.tabs ul.nav
+  margin-bottom: 0
+  li
+    a
+      color: white
+    &:hover a
+      color: gray
+    &.active a
+      color: #006EBD
+
+.subnav
+  background-color: white
+  .nav, .big-header
+    margin: 0 auto
+  .nav-pills
+    li.active a
+      background-color: gray
+
+.subnav-fixed
+  position: fixed
+  left: 0
+  right: 0
+  top: 0
+  z-index: 1020

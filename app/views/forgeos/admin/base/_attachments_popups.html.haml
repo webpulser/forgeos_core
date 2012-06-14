@@ -1,27 +1,28 @@
-#imageUploadDialog.upload-lightbox-container.white
-  #imageUpload
-  %span=t 'or'
-  %a.select-link= t 'media.add_from_library'
+#imageUploadDialog.upload-lightbox-container
+  = file_field_tag :uploaded_date, :id => 'imageUpload'
 
-#imageSelectDialog.media-hoverlay
-  .media-hoverlay-header
-    %a.backgrounds.button.upload-link
-      %span.big-icons.add-picture= t 'media.picture.upload.action'
-    .display-mode
-      .heading-separator
-      .display-thumbnails
-      .display-list.off
-    #search.right.image= fg_search
+#imageSelectDialog.attachment-hoverlay.row-fluid
+  .attachment-hoverlay-header
+    %a.btn.upload-link
+      = i :upload
+      = t 'picture.upload.action'
+    %span.display-mode
+      %a.btn.display-thumbnails
+        = i('th-large')
+      %a.btn.display-list.off
+        = i('th-list')
+    #search_image.right.forgeos-thumbnails
     .backgrounds.search-form-image
     .backgrounds.search-form-thumbnails
-  .media-hoverlay-sidebar.grid_3.omega.alpha
+  .attachment-hoverlay-sidebar.span3
     .sidebar-content
-      %h2.small-icons.picture
-        %a.datatable-select-all{ :"data-tree-id" => 'picture-attachment-tree' }= t 'media.picture.all'
+      %h2
+        = i(:picture)
+        %a.datatable-select-all{ :"data-tree-id" => 'picture-attachment-tree' }= t 'picture.all'
       #picture-attachment-tree
-  .media-hoverlay-content.thumbnails
+  .attachment-hoverlay-content.forgeos-thumbnails.span8
     :ruby
-      slide = dataslide(:class => 'media',
+      slide = dataslide(:class => 'attachment',
       :selectable => true,
       :autostart => false,
       :id => 'thumbnail-table',
@@ -40,19 +41,19 @@
         { :bVisible => false }
       ])
     = slide
-  .media-hoverlay-content.table.hidden
+  .attachment-hoverlay-content.table.span8.hidden
     :ruby
-      table = datatable(:class => 'media',
+      table = datatable(:class => 'attachment',
       :selectable => true,
       :id => 'image-table',
       :autostart => false,
       :url => forgeos_core.admin_attachments_path(:format => :json, :klass => 'forgeos::Picture', :mode => 'selection'),
       :columns => [
         { :sClass => 'th-checkbox-container', :bSortable => false },
-        { :sTitle => t('media.filename') },
-        { :sTitle => t('media.content_type') },
-        { :sTitle => t('media.updated_at') },
-        { :sTitle => t('media.size') },
+        { :sTitle => t('attachment.filename') },
+        { :sTitle => t('attachment.content_type') },
+        { :sTitle => t('attachment.updated_at') },
+        { :sTitle => t('attachment.size') },
         { :bVisible => false},
         { :bVisible => false },
         { :bVisible => false},
@@ -61,31 +62,39 @@
       ])
     = table
 
-#fileUploadDialog.upload-lightbox-container.white
-  #fileUpload
+#fileUploadDialog.upload-lightbox-container
+  = file_field_tag :uploaded_date, :id => 'fileUpload'
 
-#fileSelectDialog.media-hoverlay
-  #inner-lightbox.backgrounds
-    - %w(pdf audio video doc media).each do |file_type|
-      %a.small-icons.library-change-type{ :"data-table-id" => "#table-files", :href => forgeos_core.admin_attachments_path(:mode => 'selection',:format => :json, :klass => "forgeos::#{file_type.capitalize}"), :class => file_type }=t :other, :scope => [:media,file_type]
-  .media-hoverlay-header
-    %a.backgrounds.button.upload-link
-      %span.big-icons.add-media= t 'media.upload.action'
-    #search.right.files= fg_search
-    .backgrounds.search-form-files
-  .media-hoverlay-content
+#fileSelectDialog.attachment-hoverlay.row-fluid
+  .attachment-hoverlay-header
+    - %w(pdf audio video doc medium).each do |file_type|
+      - url = forgeos_core.admin_attachments_path(:mode => 'selection',:format => :json, :klass => "forgeos::#{file_type.capitalize}")
+      %a.btn.library-change-type{ :"data-table-id" => "#table-files", :href => url, :class => file_type }
+        =i t(:bootstrap_icon, :scope => file_type)
+        =t :other, :scope => file_type
+  .attachment-hoverlay-header.span3
+    %a.btn
+      = t :upload
+      = t 'attachment.upload.action'
+  .attachment-hoverlay-sidebar.span3
+    .sidebar-content
+      %h2
+        = i(:file)
+        %a.datatable-select-all{ :"data-tree-id" => 'file-attachment-tree' }= t 'attachment.file.all'
+      #file-attachment-tree
+  .attachment-hoverlay-content.span8
     :ruby
-      table = datatable(:class => 'media',
+      table = datatable(:class => 'attachment',
       :selectable => true,
       :id => 'table-files',
       :autostart => false,
       :url => forgeos_core.admin_attachments_path(:format => :json, :klass => 'forgeos::Pdf', :mode => 'selection'),
       :columns => [
         { :sClass => 'th-checkbox-container', :bSortable => false },
-        { :sTitle => t('media.filename') },
-        { :sTitle => t('media.content_type') },
-        { :sTitle => t('media.updated_at') },
-        { :sTitle => t('media.size') },
+        { :sTitle => t('attachment.filename') },
+        { :sTitle => t('attachment.content_type') },
+        { :sTitle => t('attachment.updated_at') },
+        { :sTitle => t('attachment.size') },
         { :bVisible => false},
         { :bVisible => false },
         { :bVisible => false},

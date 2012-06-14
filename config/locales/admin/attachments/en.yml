@@ -1,0 +1,124 @@
+en:
+  attachment:
+    list: list of media
+    add_from_library: add from library
+    associated_rights: associated rights
+    show: show media
+    back: back to library
+    not_exist: the requested media does not exist
+    used: used
+    linked: linked files
+    name: name
+    description: description
+    alt: alternatif text
+    upload:
+      start: start upload
+      clear_queue: clear queue
+      action: upload files
+    create:
+      action: create a media
+      success: the media was successfully created
+      failed: a problem occured during the media creation
+    update:
+      action: edit the media
+      success: the media was successfully updated
+      failed: a problem occured during the media update
+    download:
+      action: download the media
+      failed: a problem occured during the media download
+    destroy:
+      action: delete media
+      success: the media was successfully deleted
+      failed: a problem occured during the media deletion
+      confirm: are you sure that you want to delete this media?
+    type:
+      one: type
+      other: types
+    attach:
+      unknown_type: the type of the attachable element is unknown
+      error: a problem occured during the check of the type of the attachable element
+    content_type: content type
+    file_type: file type
+    updated_at: last modification
+    filename: filename
+    size: size
+    byte:
+      one: byte
+      other: bytes
+      kilo: Kb
+      mega: Mb
+    pixel:
+      one: pixel
+      other: pixels
+    thumbnails:
+      big: big
+      normal: normal
+      small: small
+      thumb: thumb
+      categories_icon: category ison
+  pdf:
+    one: pdf file
+    other: pdf files
+    all: all pdf files
+    create:
+      action: add a pdf file
+    bootstrap_icon: book
+  medium:
+    one: file
+    other: files
+    all: all files
+    create:
+      action: add a file
+    bootstrap_icon: file
+  doc:
+    one: document
+    other: documents
+    all: all documents
+    create:
+      action: add a document
+    bootstrap_icon: briefcase
+  video:
+    one: video
+    other: videos
+    all: all videos
+    create:
+      action: add a video
+    bootstrap_icon: film
+  audio:
+    one: audio file
+    other: audio files
+    all: all audio files
+    create:
+      action: add an audio file
+    bootstrap_icon: music
+  picture:
+    one: picture
+    other: pictures
+    all: all pictures
+    alternative: alternative text
+    title: picture title
+    original_size: original image size
+    add: add picture
+    featured: featured picture
+    bootstrap_icon: picture
+    show:
+      action: show picture
+    create:
+      success: the picture was successfully created
+      failed: a problem occured during the picture creation
+      action: create a picture
+    update:
+      success: the picture was successfully updated
+      failed: a problem occured during the picture update
+      action: edit picture
+    destroy:
+      success: the picture was successfully deleted
+      failed: a problem occured during the picture deletion
+      confirm: are you sure to delete this picture ?
+    upload:
+      start: Start Upload
+      clear_queue: Clear Queue
+      action: upload a picture
+  misc:
+    one: other
+    other: others

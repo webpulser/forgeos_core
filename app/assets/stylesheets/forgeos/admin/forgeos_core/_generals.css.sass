@@ -19,28 +19,27 @@ a
   color: $blueLink
 img
   border: 0px
-li
-  list-style: none
+#container
+  position: relative
 .hidden
-  display: none
+  display: none !important
 //--------------------- ----------
 // HEADER
 //--------------------- ----------
 .header
-  background-position: 0px 0px
+  +background-image(linear-gradient(#fff 25%, #ccc 87%, #bbb 98%, #aaa))
   height: 35px
   padding:
     top: 5px
 
 .big-header
-  background-position: 0px -251px
+  min-height: 50px
   padding: 10px 15px 0
-  height: 48px
   margin-top: 0
-  line-height: 48px
   border-bottom: $grayBorder
   font-size: 1em
-  background-color: $white
+  position: relative
+  +background-image(linear-gradient(#fff 25%, #ccc 87%, #bbb 98%, #aaa))
   h1
     color: $orange
     +left
@@ -51,9 +50,8 @@ li
     color: $lightGray
     font-size: 1.2em
   .header-separator
-    background: transparent image_url("forgeos/admin/borders/heading-separator.png") no-repeat scroll left top
+    border-left: 1px solid gray
     height: 100%
-    width: 3px
     margin: 0 10px
   .civility
     width: auto
@@ -156,7 +154,6 @@ li
   +border-radius(0px)
 #sidebar
   background: $lightOrangeBg
-#content, #sidebar
   min-height: 600px
 .ui-tabs-nav.ui-helper-reset.ui-helper-clearfix.ui-widget-header.ui-corner-all
   +border-radius(0px)
@@ -202,8 +199,8 @@ h2.description
     color: $gray
     font-size: 0.9em
     font-weight: normal
-    padding: 10px
-    margin: -20px 0 0 20px
+    padding: 0 10px
+    margin: -10px 0 0 20px
     +left
   .icon-panel:before
     content: "\f0d8"
@@ -438,22 +435,9 @@ a.truncate
   clear: both
   background-color: $white
 #lang-switcher
-  background-color:  $black
-  float: right
-  .dropdown
-    a.dropdown_toggle span
-      color:  #333
-      font-weight: bold
-      &:hover
-        color: #666
-    &.fr
-      a.dropdown_toggle span
-        padding-left: 22px
-    .options
-      left: 0
-      top: 21px
-      min-width: 148px
-      opacity: 0.9
+  position: absolute
+  top: 45px
+  right: 5px
 
 
 //--------------------- ---------
