@@ -1,21 +1,39 @@
-.uploadifyQueueItem
-  font: 11px Verdana, Geneva, sans-serif
-  background-color: #f5f5f5
-  border: 3px solid #e5e5e5
-  margin-top: 5px
-  padding: 10px
-  width: 300px
-  .cancel
-    float: right
+.uploadify
+  position: relative
+  margin-bottom: 1em
 
-.uploadifyProgress
-  background-color: white
-  border-top: 1px solid gray
-  border-left: 1px solid gray
-  border-right: 1px solid #c5c5c5
-  border-bottom: 1px solid #c5c5c5
+.uploadify-queue
+  margin-bottom: 1em
+
+.uploadify-queue-item
+  background-color: #F5F5F5
+  -webkit-border-radius: 3px
+  -moz-border-radius: 3px
+  border-radius: 3px
+  font: 11px Verdana, Geneva, sans-serif
+  margin-top: 5px
+  max-width: 350px
+  padding: 10px
+
+.uploadify-error
+  background-color: #FDE5DD !important
+
+.uploadify-queue-item
+  .cancel a
+    background: image_url('/assets/uploadify/uploadify-cancel.png') 0 0 no-repeat
+    float: right
+    height: 16px
+    text-indent: -9999px
+    width: 16px
+  &.completed
+    background-color: #E5E5E5
+
+.uploadify-progress
+  background-color: #E5E5E5
   margin-top: 10px
   width: 100%
 
-.uploadifyProgressBar
-  background-color: #0099ff
+.uploadify-progress-bar
+  background-color: #0099FF
+  height: 3px
+  width: 1px
