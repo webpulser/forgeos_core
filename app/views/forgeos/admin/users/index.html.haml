@@ -1,18 +1,9 @@
-= index_sidebar :user, 'user.all', 'user-tree'
-#content.grid_12.alpha.omega
-  .backgrounds.header
-    = create_button(forgeos_core, :user, :user)
-    = fg_search
-    .backgrounds.search-form
-  .content-background
-  :ruby
-    table = datatable(:draggable => true,
-    :url => forgeos_core.admin_users_path(:format => :json),
-    :columns => [
-      { :bSearchable => false, :bSortable => false },
-      { :sTitle => t(:name) },
-      { :sTitle => t(:email) },
-      { :sTitle => t(:activate) },
-      { :sClass => 'actions-td', :bSearchable => false, :bSortable => false}
-    ])
-  = table
+:ruby
+  view = index_view :user, forgeos_core, Forgeos::User, [
+    { :bSearchable => false, :bSortable => false },
+    { :sTitle => t(:name) },
+    { :sTitle => t(:email) },
+    { :sTitle => t(:activate) },
+    { :sClass => 'actions-td', :bSearchable => false, :bSortable => false}
+  ]
+= view

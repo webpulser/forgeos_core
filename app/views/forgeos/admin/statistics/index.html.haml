@@ -1,5 +1,5 @@
 #dashboard.statistics
-  .left-dashboard.grid_12.omega.alpha
+  .left-dashboard.span8
     .padding-wrap
       %h2.small-icons.see-stats=t 'statistic.trends'
       .trend_filter
@@ -24,7 +24,7 @@
                     %td= search_keyword.keyword
                     %td=t 'seen', :count => count, :scope => :search_keyword
 
-  .right-dahsboard.grid_4.alpha
+  .right-dahsboard.span4
     %h2.small-icons.see-stats=t 'statistic.keyfacts'
     .live-stats-content
       %span

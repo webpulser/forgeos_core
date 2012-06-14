@@ -4,8 +4,33 @@ module Forgeos
       include AttachmentHelper
       include DatatablesHelper
 
-      def index_sidebar(icon, title, id)
-        render :partial => 'left_sidebar', :locals => { :icon => icon, :sidebar_title => title, :tree_id => id }
+      def index_sidebar(icon, engine, model, category = "#{model}Category".constantize)
+        url = engine.send("admin_#{category.model_name.route_key}_path", :format => :json)
+        model_name = model.model_name.singular_route_key
+        render :partial => 'left_sidebar', :locals => { :icon => icon, :sidebar_title => "#{model_name}.all", :tree_id => "#{model_name}-tree", :url => url, :model_name => model }
+      end
+
+      def index_view(icon, engine, model, columns, button = {})
+        model_name = model.model_name.singular_route_key
+        index_sidebar(icon, engine, model) +
+        content_tag(:div, :class => 'span8', :id => 'content') do
+          content_tag(:div, create_button(engine, model_name, icon, button), :class => 'header') +
+          content_tag(:div, '', :class => 'content-background') +
+          datatable(
+            :draggable => true,
+            :url => engine.send("admin_#{model.model_name.route_key}_path", :format => :json),
+            :columns => columns
+          )
+        end
+      end
+
+      def form_header(html_options = {}, &block)
+        html_options[:class] ||= 'subnav container'
+        content_tag(:div, html_options) do
+          if block_given?
+            yield
+          end
+        end
       end
 
       def create_button(engine, model, icon, html_options = {})
@@ -15,11 +40,6 @@ module Forgeos
           i(icon) +
           t(:action, :scope => [model, :create])
         end
-      end
-
-
-      def size_in_kb(size)
-        "#{size/1024} #{t 'media.byte.kilo'}"
       end
 
       def handler_icon(icon, model)

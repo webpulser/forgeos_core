@@ -1,11 +1,11 @@
-.backgrounds.big-header
+.big-header
   %h1= @role.name
   .interact-links
     = link_to t('role.update.action'), [forgeos_core, :edit, :admin, @role], :class => 'btn btn-large btn-primary'
     = link_to t('back'), [forgeos_core, :admin, :roles], :class => 'btn btn-mini'
 
-#content.grid_16.alpha.omega
-  .grid_12.alpha
+#content.row-fluid
+  .span9
     .padding-wrap
       - right_categories = Forgeos::RightCategory.joins(:translations).order('name').all
       - right_categories.each do |right_category|
@@ -30,7 +30,7 @@
                 %label= right.name
               .clear
 
-  #right-sidebar.grid_4.omega.alpha
+  #right-sidebar.span3
     .step
       = link_to [forgeos_core, :admin, @role], :confirm => t('user.destroy.confirm'), :method => :delete do
         = i :trash

@@ -1,12 +1,12 @@
 = form_for [forgeos_core, :admin, admin], :as => :administrator, :html => { :id => 'wrap', :multipart=>true } do |f|
-  .backgrounds.big-header
-    = f.select :civility, t('civility.select'), { :prompt => t(:please_select) }, :class => 'civility'
-    = f.text_field :firstname, :placeholder => t('firstname'), :class => 'field_name firstname'
-    = f.text_field :lastname, :placeholder => t('lastname'), :class => 'field_name lastname'
-    .interact-links
-      = forgeos_save_buttons forgeos_core.admin_administrators_path
-  #content.grid_16.alpha.omega
-    .grid_12.alpha
+  = form_header do
+    .big-header
+      = f.select :civility, t('civility.select'), { :prompt => t(:please_select) }, :class => 'civility'
+      = f.text_field :firstname, :placeholder => t('firstname'), :class => 'field_name firstname'
+      = f.text_field :lastname, :placeholder => t('lastname'), :class => 'field_name lastname'
+      .interact-links= forgeos_save_buttons [forgeos_core, :admin, :administrators]
+  #content.row-fluid
+    .span9
       .inner-content
         - admin.build_avatar unless admin.avatar
         = f.fields_for :avatar do |avatar|
@@ -26,7 +26,7 @@
         = f.label :role_id, t('role', :count => 1)
         %div
           = f.collection_select :role_id, Forgeos::Role.find_all_by_active(true), :id, :name, { :prompt => t('please_select')}
-    #right-sidebar.grid_4.omega
+    #right-sidebar.span3
       - unless admin.new_record?
         .step
           = mail_to admin.email, i(:envelope) + t('administrator.contact.action')

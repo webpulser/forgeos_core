@@ -1,20 +1,23 @@
-= form_for @setting, :url => [forgeos_core, :admin, :setting], :as => :setting do |f|
-  #blocks-header.ui-tabs.ui-widget.ui-widget-content.ui-corner-all
-    %ul.ui-tabs-nav.ui-helper-reset.ui-helper-clearfix.ui-widget-header.ui-corner-all
-      %li.ui-state-default.ui-corner-top.ui-tabs-selected.ui-state-active= link_to t(:general, :scope => :setting), '#general', :class => 'selected'
-      %li.ui-state-default.ui-corner-top= link_to t(:mailer, :scope => :setting), '#mailer'
-      %li.ui-state-default.ui-corner-top= link_to t(:display, :scope => :setting), '#display'
-      %li.ui-state-default.ui-corner-top= link_to t(:backup, :scope => :setting), '#backup'
-    .backgrounds.big-header
+= form_for @setting, :url => [forgeos_core, :admin, :setting], :as => :setting, :html => { :id => 'wrap' } do |f|
+  = form_header do
+    .big-header
       = f.text_field :name, :class => 'field_name', :placeholder => t('setting.shop_name')
-      .interact-links
-        = forgeos_save_buttons [forgeos_core, :admin, :setting]
-    #general.grid_16.alpha.omega
-      = render :partial => 'general', :locals => { :f => f }
-    #mailer
+      .interact-links= forgeos_save_buttons [forgeos_core, :admin, :setting]
+
+    %ul.nav.nav-pills
+      %li.active= link_to t(:general, :scope => :setting), '#general', :class => 'selected'
+      %li= link_to t(:mailer, :scope => :setting), '#mailer'
+      %li= link_to t(:display, :scope => :setting), '#display'
+      %li= link_to t(:backup, :scope => :setting), '#backup'
+
+  #content.row-fluid
+    .span11
+      .row-fluid
+        %h4#general= t(:general, :scope => :setting)
+        = render :partial => 'general', :locals => { :f => f }
+      %h4#mailer= t(:mailer, :scope => :setting)
       = render :partial => 'mailer', :locals => { :f => f }
-    #display
+      %h4#display= t(:display, :scope => :setting)
       = render :partial => 'display', :locals => { :f => f }
-    #backup
+      %h4#backup= t(:backup, :scope => :setting)
       = render :partial => 'backup', :locals => { :f => f }
-    .clear

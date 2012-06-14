@@ -1,11 +1,11 @@
 = form_tag request.url, :id => 'map_fields_form', :method => :post do
-  .backgrounds.big-header
+  .big-header
     = text_field_tag :set_name,(@set ? @set.name : ''), :class => 'field_name'
     = hidden_field :import, :set_id, @set.id if @set
     .interact-links
       = forgeos_save_buttons([forgeos_core, :admin, :import], 'import.button')
-  #content.grid_16.alpha.omega
-    .grid_12.alpha
+  #content.row-fluid
+    .span9
       .inner-content
         - @parameters.each do |arr|
           = hidden_field_tag arr[0], arr[1]
@@ -29,7 +29,7 @@
                       - else
                         %td= truncate(h(column), :lenght => 255)
         #progressbar
-    #right-sidebar.grid_4.omega
+    #right-sidebar.span3
       .step
         = check_box_tag :ignore_first_row, true,(@set ? @set.ignore_first_row : true), :id => 'ignore_first_row_option'
         = label_tag :ignore_first_row, t('import.ignore_first_row')

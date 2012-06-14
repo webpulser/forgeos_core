@@ -1,11 +1,11 @@
-.backgrounds.big-header
+.big-header
   = @admin.firstname
   = @admin.lastname
   .interact-links
     = link_to t('administrator.update.action'), [forgeos_core, :edit, :admin, @admin], :class => 'btn btn-large btn-primary'
     = link_to t('back'), [forgeos_core, :admin, :administrators], :class => 'btn btn-mini'
-#content.grid_16.alpha.omega
-  .grid_12.alpha
+#content.row-fluid
+  .span9
     .inner-content
       =t 'avatar'
       %div= image_tag(@admin.avatar.public_filename(:small)) if @admin.avatar
@@ -14,7 +14,7 @@
       =t :role, :count => 1
       %div
         = @admin.role.name
-  #right-sidebar.grid_4.omega
+  #right-sidebar.span3
     .step
       = mail_to @admin.email, i(:envelope) + t('administrator.contact.action')
       = link_to [forgeos_core, :admin, @admin], :confirm => t('administrator.destroy.confirm'), :method => :delete do

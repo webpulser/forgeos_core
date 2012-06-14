@@ -1,38 +1,37 @@
-.fieldset.grid_10
-  %h2= t 'setting.company_info'
-  .clear
-  = f.fields_for :address do |address|
-    .street-input
-      = address.label :address, t(:address, :count => 1)
-      = address.text_field :address
-    .street-input
-      = address.label :address_2, t(:address, :count => 1)
-      = address.text_field :address_2
-    .zip-code-input
-      = address.label :zip_code, t('address.zip_code')
-      = address.text_field :zip_code
-    .town-input
-      = address.label :city, t('address.city')
-      = address.text_field :city
-    .country-select
-      = address.label :country_id, t('address.country')
-      = address.collection_select :country_id, Forgeos::Country.all, :id, :printable_name, :prompt => t(:please_select)
-    .clear
-.tool-tip-settings.grid_4
-  The shop localization reassure your customers.
-.fieldset.grid_10
-  %h2= t 'setting.contact_info'
-  .clear
-  .phone-input
-    = f.label :phone_number, t('setting.phone_number')
-    = f.text_field :phone_number
-  .phone-input
-    = f.label :fax_number, t('setting.fax_number')
-    = f.text_field :fax_number
-  .phone-input
-    = f.label :email, t('setting.email')
-    = f.text_field :email
-  .clear
-.tool-tip-settings.grid_4
-  The shop localization reassure your customers.
-
+.row-fluid
+  .fieldset.span8
+    %h2= t 'setting.company_info'
+    %br
+    = f.fields_for :address do |address|
+      .street-input
+        = address.label :address, t(:address, :count => 1)
+        = address.text_field :address
+      .street-input
+        = address.label :address_2, t(:address, :count => 1)
+        = address.text_field :address_2
+      .zip-code-input
+        = address.label :zip_code, t('address.zip_code')
+        = address.text_field :zip_code
+      .town-input
+        = address.label :city, t('address.city')
+        = address.text_field :city
+      .country-select
+        = address.label :country_id, t('address.country')
+        = address.collection_select :country_id, Forgeos::Country.all, :id, :printable_name, :prompt => t(:please_select)
+  .alert.alert-warning.span4
+    The shop localization reassure your customers.
+.row-fluid
+  .fieldset.span8
+    %h2= t 'setting.contact_info'
+    %br
+    .phone-input
+      = f.label :phone_number, t('setting.phone_number')
+      = f.text_field :phone_number
+    .phone-input
+      = f.label :fax_number, t('setting.fax_number')
+      = f.text_field :fax_number
+    .phone-input
+      = f.label :email, t('setting.email')
+      = f.text_field :email
+  .alert.alert-warning.span4
+    The shop localization reassure your customers.

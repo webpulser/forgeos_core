@@ -1,5 +1,0 @@
-<%- if @user.destroyed? -%>
-  removedataTablesRow('#<%= polymorphic_html_id @user, 'destroy' -%>');
-<%- else -%>
-  display_notifications();
-<%- end -%>

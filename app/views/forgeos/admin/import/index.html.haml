@@ -1,10 +1,10 @@
 = render :partial => 'lang_switcher'
 = form_tag([forgeos_core, :admin, :import] , :multipart => true, :id => 'import_form') do
-  .backgrounds.big-header
+  .big-header
     .interact-links
       = fg_submit_tag 'import.send_file'
-  #content.grid_16.alpha.omega
-    .grid_12.alpha
+  #content
+    .span8
       .inner-content
         - if Forgeos::ImportSet.count > 0
           = label :import, :set_id, t(:import_set, :count => 1)
@@ -15,7 +15,7 @@
         %br
         = label_tag :file, t('import.file')
         = file_field_tag :file
-    #right-sidebar.grid_4.omega
+    #right-sidebar.span4
       .step
         = label :parser_options, :col_sep, t('import_set.col_sep')
         = text_field :parser_options, :col_sep, :value => ',', :size => 2

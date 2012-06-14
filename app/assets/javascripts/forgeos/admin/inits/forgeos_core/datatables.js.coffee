@@ -1,6 +1,12 @@
 window.oTables = [] unless oTables?
 jQuery(document).ready ->
-  jQuery('.datatable').each ->
+  jQuery('a.icon-trash').live 'ajax:success', ->
+    link = jQuery(this)
+    current_table = link.parents("table:first").dataTableInstance()
+    current_table.fnDeleteRow current_table.fnGetPosition(link.parents("tr:first")[0])
+    display_notifications()
+
+  jQuery('.dataslide,.datatable').each ->
     target = jQuery this
     if target.dataTableInstance()?
       oTable.fnDraw()

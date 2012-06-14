@@ -1,10 +1,10 @@
 = form_for [forgeos_core, :admin, role], :as => :role, :html => { :id => 'wrap', "data-object_name" => role.class.model_name.singular } do |f|
-  .backgrounds.big-header
-    = f.text_field :name, :class => 'field_name'
-    .interact-links
-      = forgeos_save_buttons [forgeos_core,:admin,:roles]
-  #content.grid_16.alpha.omega
-    .grid_12.alpha
+  = form_header do
+    .big-header
+      = f.text_field :name, :class => 'field_name'
+      .interact-links= forgeos_save_buttons [forgeos_core,:admin,:roles]
+  #content.row-fluid
+    .span9
       .padding-wrap
         = hidden_field_tag "role[right_ids][]"
         - Forgeos::RightCategory.joins(:translations).order('name').each do |right_category|
@@ -12,7 +12,7 @@
 
         = render 'form_rights', :title => t(:other), :rights => Forgeos::Right.where(:forgeos_categories_elements => {:category_id => nil}).includes(:categories), :role => role
 
-    #right-sidebar.grid_4.alpha.omega
+    #right-sidebar.span3
       - unless role.new_record?
         .step
           = link_to [forgeos_core, :admin, role], :confirm => t('role.destroy.confirm'), :method => :delete do

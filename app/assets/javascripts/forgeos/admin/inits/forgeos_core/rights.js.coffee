@@ -64,7 +64,7 @@ jQuery(document).ready ->
     if row.length != 0
       row.show()
 
-    jQuery("#new_row_#{timestamp}").remove()
+    jQuery("##{timestamp}, #new_row_#{timestamp}").remove()
 
     return false
 
@@ -73,11 +73,12 @@ jQuery(document).ready ->
 
   window.inline_save = (timestamp, url, method) ->
     row = jQuery("#new_row_#{timestamp}")
-    form = jQuery("##{timestamp}").append(row.clone(true))
+    form = jQuery("##{timestamp}")
+    form.html(row.clone(true))
     jQuery.ajax
       success: (result) ->
         jQuery('#table').dataTableInstance().fnDraw()
-        #jQuery('.create-right').parent().show()
+        form.remove()
       error: display_notifications
       data: form.serializeArray()
       dataType: 'script'

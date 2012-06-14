@@ -1,12 +1,3 @@
-window.removedataTablesRow = (selector) ->
-  current_table = jQuery(selector).parents("table:first").dataTableInstance()
-  current_table.fnDeleteRow current_table.fnGetPosition(jQuery(selector).parents("tr:first")[0])
-  display_notifications()
-
-window.DataTablesDrawCallBack = (table) ->
-  showObjectsAssociated()
-  moveDataTablesSearchField()
-
 window.DataTablesRowCallBack = (nRow, aData, iDisplayIndex) ->
   table = jQuery("#" + @sInstance)
   table = jQuery(this)  if typeof (table) is "undefined"
@@ -15,6 +6,8 @@ window.DataTablesRowCallBack = (nRow, aData, iDisplayIndex) ->
     div_id = div[0].id
     row_id = "row_" + div_id
     jQuery(nRow).attr "id", row_id
+
+  # Draggable Rows
   if table.hasClass("draggable_rows")
     jQuery(nRow).draggable
       revert: "invalid"
@@ -36,6 +29,8 @@ window.DataTablesRowCallBack = (nRow, aData, iDisplayIndex) ->
       stop: (event, ui) ->
         jQuery("#page").removeClass "sidebar_dragg"
         jQuery(this).removeClass "dragging"
+
+  # Selectable Rows
   if table.hasClass("selectable_rows")
     table.data "selected_rows", []  if typeof (table.data("selected_rows")) is "undefined"
     datable_datas = table.data("selected_rows")
@@ -45,11 +40,13 @@ window.DataTablesRowCallBack = (nRow, aData, iDisplayIndex) ->
     else
       jQuery(nRow).addClass "row_selected"
       jQuery(nRow).children("td:first").append "<input id=\"select_" + jQuery(nRow).attr("id") + "\" type=\"checkbox\" name=\"none\" checked=\"checked\"/>"
+
     jQuery(nRow).click ->
-      jQuery(this).toggleselect()
+      jQuery(this).dataTableToggleselect()
 
     jQuery(nRow).find("input[type=checkbox]").click ->
       jQuery(this).attr "checked", (if jQuery(this).is(":checked") then 0 else 1)
+
   nRow
 
 window.update_current_dataTable_source = (selector, source) ->
@@ -75,7 +72,6 @@ window.dataTableSelectRows = (selector, callback) ->
     callback current_table, indexes
     current_table.fnUnSelectNodes()
     current_table.fnSettings().sAjaxSource = source
-    current_table.fnSettings().fnDrawCallback = DataTablesDrawCallBack
     current_table.fnClearTable()
 
   current_table.fnDraw()
@@ -100,21 +96,6 @@ window.save_category_sort = (type, id_pos) ->
 
     dataType: "json"
     type: "put"
-
-window.replaceDataTablesSearchField = (field_selector, input_selector, _parent) ->
-  input = jQuery(input_selector)
-  field = jQuery(field_selector)
-  unless input.size() is 0
-    field.html input.clone(true)
-    field.append("<a href=\"#\" class=\"backgrounds button-ok\">OK</a>").find(".button-ok").data("parent", _parent).live "click", toggle_search_elements_ok
-    input.remove()
-
-window.moveDataTablesSearchField = ->
-  replaceDataTablesSearchField ".search-form", "#table_wrapper .dataTables_filter", ""
-  replaceDataTablesSearchField ".search-form-image", "#image-table_wrapper .dataTables_filter", "image"
-  replaceDataTablesSearchField ".search-form-thumbnails", "#thumbnail-table_wrapper .dataSlides_filter", "thumbnails"
-  replaceDataTablesSearchField ".search-form-files", "#table-files_wrapper .dataTables_filter", "files"
-  jQuery(".search-link").live "click", toggle_search_elements
 
 jQuery.fn.dataTableExt.oSort["currency-asc"] = (a, b) ->
   x = a.replace(/€/g, "")
@@ -145,7 +126,7 @@ jQuery.fn.dataTableExt.oApi.fnUnSelectNodes = ->
   i = 0
 
   while i < aTrs.length
-    jQuery(aTrs[i]).unselect()
+    jQuery(aTrs[i]).dataTableUnselect()
     i++
 
 jQuery.fn.dataTableExt.oApi.fnGetSelectedIndexes = ->
@@ -173,7 +154,7 @@ jQuery.fn.dataSlideExt.oApi.fnUnSelectNodes = ->
   i = 0
 
   while i < aTrs.length
-    jQuery(aTrs[i]).unselect()
+    jQuery(aTrs[i]).dataTableUnselect()
     i++
 
 jQuery.fn.dataSlideExt.oApi.fnGetSelectedIndexes = ->
@@ -195,7 +176,7 @@ jQuery.fn.extend
 
     oTable
 
-  select: ->
+  dataTableSelect: ->
     jQuery(this).addClass "row_selected"
     checkbox = jQuery(this).find("input[type=checkbox]")
     checkbox.attr "checked", 1
@@ -204,7 +185,7 @@ jQuery.fn.extend
     index = jQuery(this).attr("id")
     datable_datas.push index
 
-  unselect: ->
+  dataTableUnselect: ->
     jQuery(this).removeClass "row_selected"
     checkbox = jQuery(this).find("input[type=checkbox]")
     checkbox.attr "checked", 0
@@ -214,11 +195,12 @@ jQuery.fn.extend
     index_in_table = jQuery.inArray(index, datable_datas)
     datable_datas.splice index_in_table, 1
 
-  toggleselect: ->
-    if jQuery(this).hasClass("row_selected")
-      jQuery(this).unselect()
+  dataTableToggleselect: ->
+    row = jQuery(this)
+    if row.hasClass("row_selected")
+      row.dataTableUnselect()
     else
-      jQuery(this).select()
+      row.dataTableSelect()
 
 jQuery.expr[":"].regex = (elem, index, match) ->
   matchParams = match[3].split(",")

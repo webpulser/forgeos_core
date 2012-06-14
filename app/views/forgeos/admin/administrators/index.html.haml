@@ -1,19 +1,11 @@
-= index_sidebar 'user-md', 'administrator.all', 'admins-tree'
-#content.grid_12.alpha.omega
-  .backgrounds.header
-    = create_button(forgeos_core, :administrator, 'user-md')
-    = fg_search
-    .backgrounds.search-form
-  .content-background
-  :ruby
-    table = datatable(:draggable => true,
-    :url => forgeos_core.admin_administrators_path(:format => :json),
-    :columns => [
-      {:bSearchable => false, :bSortable => false},
-      {:sTitle => t(:name) },
-      {:sTitle => t(:role, :count => 1) },
-      {:sTitle => t(:email) },
-      {:sTitle => t(:active) },
-      {:sClass => 'actions-td', :bSearchable => false, :bSortable => false }
-    ])
-  = table
+:ruby
+  view = index_view 'user-md', forgeos_core, Forgeos::Administrator, [
+    {:bSearchable => false, :bSortable => false},
+    {:sTitle => t(:name) },
+    {:sTitle => t(:role, :count => 1) },
+    {:sTitle => t(:email) },
+    {:sTitle => t(:active) },
+    {:sClass => 'actions-td', :bSearchable => false, :bSortable => false }
+  ]
+
+= view

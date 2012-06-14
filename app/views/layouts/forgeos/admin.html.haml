@@ -4,12 +4,15 @@
     %meta{ :content => "text/html; charset=UTF-8", "http-equiv" => "Content-Type" }
     %link{ :href => "/assets/forgeos/admin/favicon.gif", :rel => "shortcut icon", :type => "image/gif" }
     %title= "#{t(:forgeos)} - #{t(controller.controller_name, :scope => ['back_office', 'menu'])}"
+    %meta{ :name => 'viewport', :content => 'width=device-width, initial-scale=1.0' }
     = csrf_meta_tag
     = stylesheet_link_tag 'forgeos/admin/base'
-  %body
-    #container.container_16
-      - build_menu(Forgeos::MENU_HASH[:forgeos][:admin][:submenu], :menu => :submenu)
-      - build_menu(Forgeos::MENU_HASH[:forgeos][:admin][:menu])
+  %body{ :class => controller.controller_name, "data-spy" => 'scroll', "data-target" => '.nav-pills'}
+    :ruby
+      build_menu(Forgeos::MENU_HASH[:forgeos][:admin][:submenu], :menu => :submenu)
+      build_menu(Forgeos::MENU_HASH[:forgeos][:admin][:menu])
+      menu = yield(:submenu) + yield(:menu)
+    #container.container
       #submenu.navbar
         .navbar-inner
           .container
@@ -19,11 +22,15 @@
           .container
             %ul.nav= yield :menu
 
-      #page.grid_16
+      #alerts
+      - if menu.match(/active dropdown([^<]|<([^\/]|\/([^u]|u([^l]|l([^>]|$)|$)|$)|$))+<ul class="dropdown-menu">([^<]|<([^\/]|\/([^u]|u([^l]|l([^>]|$)|$)|$)|$)*)<\/ul/)
+        .tabs
+          %ul.nav.nav-tabs=raw $6
+
+      .row-fluid
         = yield
 
       #footer
       #dialog
-      #notifications.grid_16
     = forgeos_js_vars
     = javascript_include_tag 'forgeos/admin'

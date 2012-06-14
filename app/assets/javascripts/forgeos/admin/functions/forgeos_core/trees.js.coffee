@@ -26,10 +26,9 @@ window.get_category_data = (name, type, parent_id) ->
   datas["category[parent_id]"] = parent_id  if parent_id
   datas
 
-window.init_category_tree = (selector, type, source) ->
-  unless jQuery(selector).size() is 0
+window.init_category_tree = (tree, type, source) ->
     base_url = source.replace(".json", "/")
-    jQuery(selector).bind("loaded.jstree", (e, data) ->
+    tree.bind("loaded.jstree", (e, data) ->
       jQuery(e.target).find("li > a").each (index, selector) ->
         set_category_droppable selector
     ).bind("after_open.jstree", (e, data) ->
@@ -49,7 +48,7 @@ window.init_category_tree = (selector, type, source) ->
             jQuery("#parent_id_tmp").val cat_id
 
         data: get_category_data("New folder", type, get_rails_element_id(data.rslt.parent))
-        dataType: "text"
+        dataType: "json"
         type: "post"
     ).bind("rename_node.jstree", (e, data) ->
       jQuery.ajax
@@ -180,10 +179,14 @@ window.init_association_category_tree = (selector, object_name, category_name, t
 window.select_all_elements_by_url = (url) ->
   oTable.fnSettings().sAjaxSource = url
   oTable.fnDraw()
+
 window.select_all_elements_without_category = (tree_id) ->
-  t = jQuery.jstree._focused()
-  t.deselect_all()  if t
-  current_table = jQuery("#table").dataTableInstance()
+  tree = jQuery.jstree._focused()
+  tree.deselect_all()  if tree
+
+  table = jQuery("##{tree_id}").parents('.row-fluid').find('.dataslide:visible,.datatable:visible')
+  current_table = table.dataTableInstance()
+
   url = current_table.fnSettings().sAjaxSource
   url_base = url.split("?")[0]
   params = undefined
@@ -193,6 +196,7 @@ window.select_all_elements_without_category = (tree_id) ->
   update_current_dataTable_source current_table, url_base + "?" + params
   jQuery("#parent_id_tmp").remove()
   true
+
 window.update_parent_categories_count = (element) ->
   element.parents("li").each ->
     span = jQuery(this).children("a").children("span")
@@ -215,9 +219,6 @@ window.set_category_droppable = (selector, type) ->
 
         type: "post"
         url: window._forgeos_js_vars.mount_paths.core + "/admin/categories/" + get_rails_element_id(category.parent()) + "/add_element"
-window.removeClasses = ->
-  elementsWithClassName = jQuery(".lightbox-container").find(".clicked, .active")
-  elementsWithClassName.removeClass "clicked active"
 window.addBlockClasses = ->
   jQuery(".block-selected").each ->
     block_id = jQuery(this).val()

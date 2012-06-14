@@ -1,14 +1,13 @@
 = form_for [forgeos_core, :admin, user], :as => :user, :html => { :id => 'wrap', :autocomplete => 'off', "data-object_name" => user.class.model_name.singular } do |f|
-  .backgrounds.big-header
-    = f.select :civility, t('civility.select'), { :prompt => t(:please_select) }, :class => 'civility'
-    = f.text_field :firstname, :placeholder => t('firstname'), :class => 'field_name firstname'
-    = f.text_field :lastname, :placeholder => t('lastname'), :class => 'field_name lastname'
-    .interact-links
-      = forgeos_save_buttons forgeos_core.admin_users_path
+  = form_header do
+    .big-header
+      = f.select :civility, t('civility.select'), { :prompt => t(:please_select) }, :class => 'civility'
+      = f.text_field :firstname, :placeholder => t('firstname'), :class => 'field_name firstname'
+      = f.text_field :lastname, :placeholder => t('lastname'), :class => 'field_name lastname'
+      .interact-links= forgeos_save_buttons forgeos_core.admin_users_path
 
-  #content.grid_16.alpha.omega
-    #customer-see.grid_12.alpha.omega
-      // .customer-header.backgrounds
+  #content.row-fluid
+    .span9
       .padding-wrap
         = render :partial => 'fieldset_account_informations', :locals => { :user => user, :f => f }
         /
@@ -40,7 +39,7 @@
                 Cancel
 
     -unless user.new_record?
-      #right-sidebar.grid_4.omega.alpha
+      #right-sidebar.span3
         .step
           = mail_to @user.email, i(:envelope) + t('user.contact')
           = link_to [forgeos_core, :admin, user], :confirm => t('user.destroy.confirm'), :method => :delete do

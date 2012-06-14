@@ -1,5 +1,5 @@
-#sidebar.grid_4.omega
-  .backgrounds.header
+#sidebar.span4
+  .header
     .btn-group
       %a.btn
         %i.big-icons.new-category
@@ -13,5 +13,5 @@
     %h2
       = i(icon)
       %a.datatable-select-all{ :"data-tree-id" => tree_id }= t sidebar_title
-    .category-tree{ :id => tree_id }
+    .category-tree{ :id => tree_id, "data-model_name" => model_name, "data-url" => url }
 = render :partial => 'attachments_popups'

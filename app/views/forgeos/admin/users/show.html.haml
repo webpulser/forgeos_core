@@ -1,10 +1,10 @@
-.backgrounds.big-header
+.big-header
   %h1= @user.full_name
   .interact-links
     = link_to t('user.update.action'), [forgeos_core, :edit, :admin, @user], :class => 'btn btn-large btn-primary'
     = link_to t('user.back'), [forgeos_core, :admin, :users], :class => 'btn btn-mini'
-#content.grid_16.alpha.omega
-  #customer-see.grid_12.alpha.omega
+#content.row-fluid
+  #customer-see.span9
     // .customer-header.backgrounds
     .padding-wrap
       .fieldset
@@ -16,7 +16,7 @@
             %p.customer-email= @user.email
         .clear
 
-  #right-sidebar.grid_4.omega.alpha
+  #right-sidebar.span3
     .step
       = mail_to @user.email, i(:envelope) + t('user.contact')
       = link_to [forgeos_core, :admin, @user], :confirm => t('user.destroy.confirm'), :method => :delete do

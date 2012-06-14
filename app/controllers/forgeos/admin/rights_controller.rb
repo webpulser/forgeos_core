@@ -64,7 +64,7 @@ module Forgeos
         wants.html do
           redirect_to([forgeos_core, :admin, :rights])
         end
-        wants.js
+        wants.js { render :nothing => true }
       end
     end
 

@@ -1,19 +1,11 @@
-= index_sidebar 'list-alt', 'role.all', 'roles-tree'
-#content.grid_12.alpha.omega
-  .backgrounds.header
-    = create_button(forgeos_core, :role, 'list-alt')
-    = fg_search
-    .backgrounds.search-form
-  .content-background
-  :ruby
-    table = datatable(:draggable => true,
-    :url => forgeos_core.admin_roles_path(:format => :json),
-    :columns => [
-      { :bSearchable => false, :bSortable => false },
-      { :sTitle => t(:name) },
-      { :sTitle => t(:administrator, :count => 2) },
-      { :sTitle => t(:created_on) },
-      { :sTitle => t(:active) },
-      { :sClass => 'actions-td', :bSearchable => false, :bSortable => false}
-    ])
-  = table
+:ruby
+  view = index_view 'list-alt', forgeos_core, Forgeos::Role, [
+    { :bSearchable => false, :bSortable => false },
+    { :sTitle => t(:name) },
+    { :sTitle => t(:administrator, :count => 2) },
+    { :sTitle => t(:created_on) },
+    { :sTitle => t(:active) },
+    { :sClass => 'actions-td', :bSearchable => false, :bSortable => false}
+
+  ]
+= view

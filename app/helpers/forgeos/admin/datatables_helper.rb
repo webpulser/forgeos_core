@@ -24,7 +24,7 @@ module Forgeos
         # data source
         datatable_options = {
           :sPaginationType => 'full_numbers',
-          :sDom => "<'top'f>tpl<'clear'>i",
+          :sDom => "<'top form-inline'fl>tpi",
           :aoColumns => columns,
           :sProcessing => true,
           :iDisplayLength => per_page,
@@ -32,13 +32,12 @@ module Forgeos
           :aaSorting => [[sort_col,sort_order]],
           :bStateSave => save_state,
           :bAutoWidth => false,
-          :oLanguage => t('jquery.dataTables.oLanguage.sProcessing')
+          :oLanguage => t('jquery.dataTables.oLanguage')
         }
 
         if source = options.delete(:url) and source.present?
           datatable_options[:bServerSide] = true
           datatable_options[:sAjaxSource] = source
-          datatable_options[:fnDrawCallback] = 'DataTablesDrawCallBack'
           datatable_options[:fnRowCallback] = 'DataTablesRowCallBack'
         end
 
@@ -65,7 +64,7 @@ module Forgeos
         # data source
         datatable_options = {
           :sPaginationType => 'full_numbers',
-          :sDom => "<'top'f>tpl<'clear'>i",
+          :sDom => "<'top form-inline'fl>tpi",
           :aoColumns => columns,
           :sProcessing => true,
           :iDisplayLength => per_page,
@@ -73,13 +72,12 @@ module Forgeos
           :bLengthChange => true,
           :bStateSave => save_state,
           :bAutoWidth => false,
-          :oLanguage => t('jquery.dataTables.oLanguage.sProcessing')
+          :oLanguage => t('jquery.dataTables.oLanguage')
         }
 
         if source = options.delete(:url) and source.present?
           datatable_options[:bServerSide] = true
           datatable_options[:sAjaxSource] = source
-          datatable_options[:fnDrawCallback] = 'DataTablesDrawCallBack'
           datatable_options[:fnRowCallback] = 'DataTablesRowCallBack'
         end
 

@@ -1,18 +1,9 @@
-= index_sidebar :legal, 'right.all', 'rights-tree'
-#content.grid_12.alpha.omega
-  .backgrounds.header
-    = create_button(forgeos_core, :right, 'legal', :class => 'btn create-right')
-    = fg_search
-    .backgrounds.search-form
-  .content-background
-  :ruby
-    table = datatable(:draggable => true,
-    :url => forgeos_core.admin_rights_path(:format => :json),
-    :columns => [
-      { :bSearchable => false, :bSortable => false},
-      { :sTitle => t(:name) },
-      { :sTitle => t(:controller_name) },
-      { :sTitle => t(:action_name) },
-      { :sClass => 'actions-td', :bSearchable => false, :bSortable => false }
-    ])
-  = table
+:ruby
+  view = index_view :legal, forgeos_core, Forgeos::Right, [
+    { :bSearchable => false, :bSortable => false},
+    { :sTitle => t(:name) },
+    { :sTitle => t(:controller_name) },
+    { :sTitle => t(:action_name) },
+    { :sClass => 'actions-td', :bSearchable => false, :bSortable => false }
+  ], { :class => 'btn create-right' }
+= view
