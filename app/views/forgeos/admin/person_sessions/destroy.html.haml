@@ -1,21 +1,14 @@
-#container.container_16
-  #spacer.grid_16
-    \&nbsp;
-  .grid_3
-    \&nbsp;
-  #login-container.logout.grid_10
-    .sign-out-message
-      =t 'log.out.success'
-    .grid_3.alpha
-      \&nbsp;
-    .buttons.grid_4.alpha.omega
-      = link_to [forgeos_core, :admin, :login], :class => 'backgrounds button' do
-        %span.small-icons.admin
+#container.container
+  .row
+    #login-container.logout.span6.offset3
+      .sign-out-message
+        =t 'log.out.success'
+      .buttons
+        = link_to [forgeos_core, :admin, :login], :class => 'btn btn-large' do
+          = i(:lock)
           =t 'go_back_admin'
-      = link_to '/', :class => 'backgrounds button' do
-        %span.small-icons.see
+        %br
+        %br
+        = link_to '/', :class => 'btn btn-large' do
+          = i('eye-open')
           =t 'see_site'
-    .grid_3.omega
-      \&nbsp;
-  .grid_3
-    \&nbsp;

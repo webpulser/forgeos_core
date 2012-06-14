@@ -1,24 +1,21 @@
-#container.container_16
-  #spacer.grid_16
-    #notifications.grid_16
-  .grid_3
-    &nbsp;
-  #login-container.grid_10
-    .sign-in-message
-      =t 'log.in.action'
-    = form_for @person_session, :url => [forgeos_core, :admin, :person_session], :as => :person_session  do |f|
-      = f.label :email, t('email')
-      %br
-      = f.text_field :email, :class => 'text'
-      %br
-      = f.label :password, t('password')
-      %br
-      = f.password_field :password, :class => 'text'
-      = link_to t('get_forgotten_password'), forgeos_core.reset_password_admin_person_session_path
-      %br
-      = f.check_box :remember_me
-      =t :remember_me
-      %br
-      = f.submit t('log.in.action'), :class => 'backgrounds submit-button'
-  .grid_3
-    &nbsp;
+#container.container
+  .row
+    #alerts.span6.offset3
+  .row
+    #login-container.span6.offset3
+      .sign-in-message
+        =i :lock
+        =t 'log.in.action'
+      = form_for @person_session, :url => [forgeos_core, :admin, :person_session], :as => :person_session  do |f|
+        = f.label :email, t('email')
+        = f.text_field :email, :class => 'text'
+        %br
+        = f.label :password, t('password')
+        = f.password_field :password, :class => 'text'
+        = link_to t('get_forgotten_password'), forgeos_core.reset_password_admin_person_session_path
+        %br
+        = f.check_box :remember_me
+        =t :remember_me
+        %br
+        %br
+        = f.submit t('log.in.action'), :class => 'btn btn-primary'
