@@ -5,7 +5,7 @@ module Forgeos
         resultset = {
           :sEcho => params[:sEcho],
           :iTotalRecords => klass.count,
-          :iTotalDisplayRecords => collection.count,
+          :iTotalDisplayRecords => collection.total_count,
           :aaData => collection.collect { |item| yield(item) }
         }
         raw resultset.to_json

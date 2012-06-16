@@ -1,48 +1,24 @@
-= form_for [forgeos_core, :admin, user], :as => :user, :html => { :id => 'wrap', :autocomplete => 'off', "data-object_name" => user.class.model_name.singular } do |f|
+= simple_form_for [forgeos_core, :admin, user], :as => :user, :html => { :id => 'wrap', :autocomplete => 'off', "data-object_name" => user.class.model_name.singular } do |f|
   = form_header do
     .big-header
+      = f.button :wrapped, :cancel => [forgeos_core, :admin, :users]
+      = link_to t('.assume_id'), [forgeos_core, :assume, :admin, @user], :class => 'btn btn-large btn-danger' unless f.object.new_record?
       = f.select :civility, t('civility.select'), { :prompt => t(:please_select) }, :class => 'civility'
       = f.text_field :firstname, :placeholder => t('firstname'), :class => 'field_name firstname'
       = f.text_field :lastname, :placeholder => t('lastname'), :class => 'field_name lastname'
-      .interact-links= forgeos_save_buttons forgeos_core.admin_users_path
 
   #content.row-fluid
-    .span9
-      .padding-wrap
-        = render :partial => 'fieldset_account_informations', :locals => { :user => user, :f => f }
-        /
-          .fieldset.messages-fieldset
-            %h3
-              Messages
-            .received-message
-              %a.small-icons{ :href => '#' }
-                New message!
-              %span
-                Received on 28/08/88
-            .sent-message
-              %a.small-icons
-                New message!
-              %span
-                Sent on 28/08/88
-            .send-message
-              %label
-                Title
-              %input.all-width{ :type => 'text' }
-              %label
-                Body
-              %textarea
-              .clear
-              %a.backgrounds.button{ :href => '#' }
-                Send message
-              =t 'or'
-              %a.back-link{ :href => '#' }
-                Cancel
+    .inner-content.span9
+      = field_set_tag nil, :class => 'well' do
+        = f.input :lang, :as => :select, :collection => I18n.available_locales
+        - (f.object.class.input_columns - [ :lang, :firstname, :lastname, :civility ]).each do |field|
+          = f.input field
 
-    -unless user.new_record?
+    - unless f.object.new_record?
       #right-sidebar.span3
         .step
           = mail_to @user.email, i(:envelope) + t('user.contact')
-          = link_to [forgeos_core, :admin, user], :confirm => t('user.destroy.confirm'), :method => :delete do
+          = link_to [forgeos_core, :admin, user], :data => {:confirm => t('user.destroy.confirm')}, :method => :delete do
             = i :trash
             = t 'user.destroy.action'
         .step.disabled
@@ -53,4 +29,3 @@
             %p
               =t 'created_on'
               = @user.created_at.to_date
-      .clear

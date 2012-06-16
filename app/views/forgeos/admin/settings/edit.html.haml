@@ -1,23 +1,40 @@
-= form_for @setting, :url => [forgeos_core, :admin, :setting], :as => :setting, :html => { :id => 'wrap' } do |f|
+= simple_form_for @setting, :url => [forgeos_core, :admin, :setting], :as => :setting, :html => { :id => 'wrap' } do |f|
   = form_header do
     .big-header
-      = f.text_field :name, :class => 'field_name', :placeholder => t('setting.shop_name')
-      .interact-links= forgeos_save_buttons [forgeos_core, :admin, :setting]
+      = f.button :wrapped, :cancel => [forgeos_core, :admin, :setting]
+      = f.text_field :name, :class => 'field_name', :placeholder => f.object.class.human_attribute_name(:name)
+    #scrollbar
+      %ul.nav.nav-pills
+        %li= link_to t('.main'), '#content'
+        %li= link_to t('.mails'), '#mails'
 
-    %ul.nav.nav-pills
-      %li.active= link_to t(:general, :scope => :setting), '#general', :class => 'selected'
-      %li= link_to t(:mailer, :scope => :setting), '#mailer'
-      %li= link_to t(:display, :scope => :setting), '#display'
-      %li= link_to t(:backup, :scope => :setting), '#backup'
+  #content
+    .inner-content.row-fluid
+      = field_set_tag nil, :class => 'well' do
+        = f.input :phone_number
+        = f.input :fax_number
+        = f.input :email
+      = field_set_tag :display, :class => 'well span5' do
+        = f.input :lang, :as => :select, :collection => I18n.available_locales
+        = f.input :time_zone
+      = field_set_tag :site_address, :class => 'well span6' do
+        = f.simple_fields_for :site_address do |address_form|
+          - (address_form.object.attributes.keys.map(&:to_sym) - [:id, :created_at, :updated_at, :person_id, :country_id ]).each do |field|
+            = address_form.input field
+          - (address_form.object.reflections.keys - [:person]).each do |association|
+            = address_form.association association
 
-  #content.row-fluid
-    .span11
-      .row-fluid
-        %h4#general= t(:general, :scope => :setting)
-        = render :partial => 'general', :locals => { :f => f }
-      %h4#mailer= t(:mailer, :scope => :setting)
-      = render :partial => 'mailer', :locals => { :f => f }
-      %h4#display= t(:display, :scope => :setting)
-      = render :partial => 'display', :locals => { :f => f }
-      %h4#backup= t(:backup, :scope => :setting)
-      = render :partial => 'backup', :locals => { :f => f }
+      = field_set_tag :mails, :id => 'mails' do
+        = f.input :delivery_method, :as => :select, :collection => ['smtp','sendmail','test']
+
+        = field_set_tag :smtp, :class => 'well span5' do
+          = f.input :authentication, :as => :select, :collection => [:plain, :login, :none, :cram_md5]
+          = f.input :port
+          = f.input :domain
+          = f.input :user_name
+          = f.input :password
+          = f.input :enable_starttls_auto, :as => :radio_buttons
+
+        = field_set_tag :sendmail_settings, :class => 'well span5' do
+          = f.input :location
+          = f.input :arguments

@@ -1,16 +1,16 @@
-.big-header
-  %h1= @user.full_name
-  .interact-links
-    = link_to t('account.update.action'), forgeos_core.edit_admin_account_path, :class => 'btn btn-primary'
-#content
-  #customer-see.inner-content
-    .fieldset
-      %h3=t :infos, :scope => [:back_office, :account]
-      .main-infos
-        .main-infos-cutomer
-          - if @user.avatar
-            %h4.small-icons #{t(:avatar)} :
-            = image_tag(@user.avatar.public_filename(:thumb))
-          %h4.small-icons #{t('email')} :
-          = @user.email
-      .clear
+#wrap.form-horizontal
+  .subnav
+    .big-header
+      .form-actions= link_to t('account.update.action'), forgeos_core.edit_admin_account_path, :class => 'btn btn-primary'
+      %h1= @user.full_name
+  #content
+    .inner-content
+      = field_set_tag nil, :class => 'well' do
+        %legend=t :infos, :scope => [:back_office, :account]
+        - if @user.avatar
+          .control-group
+            %label.control-label= @user.class.human_attribute_name :avatar
+            .controls= image_tag(@user.avatar.public_filename(:thumb))
+        .control-group
+          %label.control-label= @user.class.human_attribute_name :email
+          .controls= @user.email

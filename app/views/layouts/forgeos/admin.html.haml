@@ -3,16 +3,16 @@
   %head
     %meta{ :content => "text/html; charset=UTF-8", "http-equiv" => "Content-Type" }
     %link{ :href => "/assets/forgeos/admin/favicon.gif", :rel => "shortcut icon", :type => "image/gif" }
-    %title= "#{t(:forgeos)} - #{t(controller.controller_name, :scope => ['back_office', 'menu'])}"
+    %title= t(controller.controller_name, :scope => ['back_office', 'menu'])
     %meta{ :name => 'viewport', :content => 'width=device-width, initial-scale=1.0' }
     = csrf_meta_tag
     = stylesheet_link_tag 'forgeos/admin/base'
-  %body{ :class => controller.controller_name, "data-spy" => 'scroll', "data-target" => '.nav-pills'}
+  %body{ :class => controller.controller_name, "data-spy" => 'scroll', "data-target" => '#scrollbar'}
     :ruby
       build_menu(Forgeos::MENU_HASH[:forgeos][:admin][:submenu], :menu => :submenu)
       build_menu(Forgeos::MENU_HASH[:forgeos][:admin][:menu])
       menu = yield(:submenu) + yield(:menu)
-    #container.container
+    #container
       #submenu.navbar
         .navbar-inner
           .container
@@ -23,12 +23,26 @@
             %ul.nav= yield :menu
 
       #alerts
+        - [:alert, :warning, :notice].each do |type|
+          - if message = flash[type]
+            :ruby
+              alert_class = case type
+              when :notice
+                :success
+              when :alert
+                :error
+              else
+                type
+              end
+            .alert{ :class => "alert-#{alert_class}" }
+              %button.close{ "data-dismiss" => 'alert' } &times;
+              = message.html_safe
+        - flash.discard
       - if menu.match(/active dropdown([^<]|<([^\/]|\/([^u]|u([^l]|l([^>]|$)|$)|$)|$))+<ul class="dropdown-menu">([^<]|<([^\/]|\/([^u]|u([^l]|l([^>]|$)|$)|$)|$)*)<\/ul/)
         .tabs
           %ul.nav.nav-tabs=raw $6
 
-      .row-fluid
-        = yield
+      = yield
 
       #footer
       #dialog

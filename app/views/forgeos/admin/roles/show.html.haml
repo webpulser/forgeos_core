@@ -1,38 +1,30 @@
-.big-header
-  %h1= @role.name
-  .interact-links
+.big-header.form-horizontal
+  .form-actions
     = link_to t('role.update.action'), [forgeos_core, :edit, :admin, @role], :class => 'btn btn-large btn-primary'
-    = link_to t('back'), [forgeos_core, :admin, :roles], :class => 'btn btn-mini'
+    = t('simple_form.buttons.or')
+    = link_to t('simple_form.buttons.cancel'), [forgeos_core, :admin, :roles], :class => 'btn btn-mini'
+  %h1= @role.name
 
 #content.row-fluid
-  .span9
-    .padding-wrap
-      - right_categories = Forgeos::RightCategory.joins(:translations).order('name').all
-      - right_categories.each do |right_category|
-        - unless right_category.rights.nil?
-          .fieldset
-            %a.icon-panel= right_category.name
-            .option-panel-content
-              .clear
-              - right_category.rights.each do |right|
-                %label= right.name
-              .clear
+  .inner-content.span9
+    - right_categories = Forgeos::RightCategory.joins(:translations).order('name').all
+    - right_categories.each do |right_category|
+      - unless right_category.rights.nil?
+        %fieldset.well
+          %legend= right_category.name
+          - right_category.rights.each do |right|
+            %label= right.name
 
-      - rights = Forgeos::Right.where(:forgeos_categories_elements => {:category_id => nil}).includes(:categories)
-      - if rights.any?
-        .fieldset
-          %a.icon-panel=t :other
-          .option-panel-content
-            .clear
-            .multi-select-div
-            - rights.each do |right|
-              .checkbox-container
-                %label= right.name
-              .clear
+    - rights = Forgeos::Right.where(:forgeos_categories_elements => {:category_id => nil}).includes(:categories)
+    - if rights.any?
+      %fieldset.well
+        %legend=t :other
+        - rights.each do |right|
+          %label= right.name
 
   #right-sidebar.span3
     .step
-      = link_to [forgeos_core, :admin, @role], :confirm => t('user.destroy.confirm'), :method => :delete do
+      = link_to [forgeos_core, :admin, @role], :data => {:confirm => t('user.destroy.confirm')}, :method => :delete do
         = i :trash
         = t 'user.destroy.action'
     #role_show_attributed_to.step.open
@@ -42,4 +34,3 @@
           .admin
             = i 'user-md'
             = link_to admin.full_name, [forgeos_core, :admin, admin]
-        .clear

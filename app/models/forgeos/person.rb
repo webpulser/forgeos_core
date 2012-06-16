@@ -33,6 +33,15 @@ module Forgeos
       end
     end
 
+    def self.input_columns
+      content_columns.map(&:name).map(&:to_sym) -
+      [ :crypted_password, :password_salt, :persistence_token,
+        :last_request_at, :current_login_at, :last_login_at,
+        :current_login_ip, :last_login_ip, :perishable_token,
+        :created_at, :updated_at
+      ]
+    end
+
     def full_name
       "#{firstname} #{lastname}"
     end

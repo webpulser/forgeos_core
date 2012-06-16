@@ -1,0 +1,22 @@
+fr:
+  activerecord:
+    attributes:
+      forgeos/setting:
+        name: "nom de l'entreprise"
+        email: courriel
+        phone_number: téléphone
+        fax_number: fax
+        site_address: Adresse de la société
+        delivery_method: protocol d'envoie de courriel
+        lang: langue principale du site
+        time_zone: fuseau horaire du site
+        port: port
+        domain: nom de domaine
+        user_name: login du compte smtp
+        password: mot de passe du compte smtp
+        authentication: type d'authentification
+        enable_starttls_auto: activer SSL
+        update:
+          success: les options ont bien été sauvegardées
+          failed: un problème est survenu lors de la mise à jour des options
+          action: mettre à jour les options

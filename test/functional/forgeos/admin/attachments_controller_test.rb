@@ -179,7 +179,7 @@ module Forgeos
     test "should post create in js" do
       admin_login_to('admin/attachments', 'create')
       assert_difference 'Attachment.count', 1 do
-        post :create, :Filedata => Rack::Test::UploadedFile.new(File.expand_path('../../../../files/rails.png', __FILE__)), :route => :forgeos_core, :format => :js, :klass => 'Forgeos::Picture'
+        post :create, :Filedata => Rack::Test::UploadedFile.new(File.expand_path('../../../../files/rails.png', __FILE__)), :use_route => :forgeos_core, :format => :js, :klass => 'Forgeos::Picture'
       end
 
       assert !assigns(:attachment).new_record?, "media not saved"

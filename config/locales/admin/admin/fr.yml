@@ -8,8 +8,11 @@ fr:
     delete:
       success: Le cache a été supprimé
       failed: "un problème est survenu lors de la mise à suppression du cache"
-      one: supprimer le cache des pages sélectionnées
-      all: supprimer la totalité du cache
+  helpers:
+    submit:
+      caching:
+        delete: supprimer le cache des pages sélectionnées
+        delete_all: supprimer la totalité du cache
   administrator:
     one: administrateur
     other: administrateurs

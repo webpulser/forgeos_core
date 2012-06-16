@@ -1,35 +1,20 @@
-= form_for [forgeos_core, :admin, admin], :as => :administrator, :html => { :id => 'wrap', :multipart=>true } do |f|
+= simple_form_for [forgeos_core, :admin, admin], :as => :administrator, :html => { :id => 'wrap', :multipart=>true } do |f|
   = form_header do
     .big-header
+      = f.button :wrapped, :cancel => [forgeos_core, :admin, :administrators]
       = f.select :civility, t('civility.select'), { :prompt => t(:please_select) }, :class => 'civility'
       = f.text_field :firstname, :placeholder => t('firstname'), :class => 'field_name firstname'
       = f.text_field :lastname, :placeholder => t('lastname'), :class => 'field_name lastname'
-      .interact-links= forgeos_save_buttons [forgeos_core, :admin, :administrators]
   #content.row-fluid
-    .span9
-      .inner-content
-        - admin.build_avatar unless admin.avatar
-        = f.fields_for :avatar do |avatar|
-          = avatar.label :uploaded_data, t('avatar')
-          %div
-            = image_tag(admin.avatar.public_filename(:thumb)) unless admin.avatar.new_record?
-            = avatar.file_field :uploaded_data
-        = f.label :email, t('email')
-        %div 
-          = f.text_field :email
-        = f.label :password, t('password')
-        %div
-          = f.password_field :password
-        = f.label :password_confirmation, t('password_confirmation')
-        %div
-          = f.password_field :password_confirmation
-        = f.label :role_id, t('role', :count => 1)
-        %div
-          = f.collection_select :role_id, Forgeos::Role.find_all_by_active(true), :id, :name, { :prompt => t('please_select')}
+    .inner-content.span9
+      = field_set_tag nil, :class => 'well' do
+        = f.input :lang, :as => :select, :collection => I18n.available_locales
+        - (f.object.class.input_columns - [ :lang, :firstname, :lastname, :civility ]).each do |field|
+          = f.input field
     #right-sidebar.span3
       - unless admin.new_record?
         .step
           = mail_to admin.email, i(:envelope) + t('administrator.contact.action')
-          = link_to [forgeos_core, :admin, admin], :confirm => t('administrator.destroy.confirm'), :method => :delete do
+          = link_to [forgeos_core, :admin, admin], :data => { :confirm => t('administrator.destroy.confirm') }, :method => :delete do
             = i :trash
             = t 'administrator.destroy.action'

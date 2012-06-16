@@ -19,7 +19,7 @@ module Forgeos
 
     test "should put update" do
       admin_login_to('admin/settings', 'update')
-      put :update, :settings => { :smtp_settings => { :password => 'test'}, :name => 'test'}, :use_route => :forgeos_core
+      put :update, :setting => { :smtp_settings => { :password => 'test'}, :name => 'test'}, :use_route => :forgeos_core
       assert_redirected_to '/admin/setting/edit'
       assert_equal Setting.current, assigns(:setting)
       assert_equal 'test', Setting.current.name
@@ -28,7 +28,7 @@ module Forgeos
 
     test "should not put update" do
       admin_login_to('admin/settings', 'update')
-      put :update, :settings => { :name => ''}, :use_route => :forgeos_core
+      put :update, :setting => { :name => ''}, :use_route => :forgeos_core
       assert_response :success
       assert_not_nil flash[:error]
     end

@@ -8,8 +8,11 @@ en:
     delete:
       success: The cache was successfully deleted
       failed: a problem occured during the cache deletion
-      one: delete selected cached pages
-      all: delete the entire cache
+  helpers:
+    submit:
+      caching:
+        delete: delete selected cached pages
+        delete_all: delete the entire cache
   administrator:
     one: administrator
     other: administrators

@@ -27,10 +27,18 @@ img
 // HEADER
 //--------------------- ----------
 .header
+  border-bottom: 1px solid $contentHeaderBorder
   +background-image(linear-gradient(#fff 25%, #ccc 87%, #bbb 98%, #aaa))
-  height: 35px
+  min-height: 35px
   padding:
     top: 5px
+  &.header-fixed
+    position: fixed
+    z-index: 1020
+    top: 0
+    width: 100%
+  .span8
+    position: relative
 
 .big-header
   min-height: 50px
@@ -41,8 +49,8 @@ img
   position: relative
   +background-image(linear-gradient(#fff 25%, #ccc 87%, #bbb 98%, #aaa))
   h1
+    display: inline
     color: $orange
-    +left
     font-size: 1.3em
   span
     display: block
@@ -55,6 +63,12 @@ img
     margin: 0 10px
   .civility
     width: auto
+  .field_name,.orange_input
+    width: auto !important
+    +element_form_name
+    &.firstname,&.lastname
+      min-width: 8em
+      max-width: 12.5em
 
 //--------------------- ----------
 // BACKGROUNDS
@@ -152,18 +166,14 @@ img
   padding: 0
   border: 0 !important
   +border-radius(0px)
-#sidebar
   background: $lightOrangeBg
-  min-height: 600px
-.ui-tabs-nav.ui-helper-reset.ui-helper-clearfix.ui-widget-header.ui-corner-all
-  +border-radius(0px)
 
 #wrap
   background-color: $white !important
   margin: 0
   width: 100%
 
-.padding-wrap
+.inner-content
   padding: 10px
 
 .permalink
@@ -446,4 +456,3 @@ a.truncate
 
 .big_orange_input
   +element_form_name
-

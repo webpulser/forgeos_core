@@ -1,38 +1,41 @@
-= form_tag request.url, :id => 'map_fields_form', :method => :post do
+= form_tag request.url, :id => 'map_fields_form', :class => 'form-horizontal', :method => :post do
   .big-header
+    .fom-actions
+      = submit_tag t('.import'), :class => 'btn btn-large btn-primary'
+      = t 'simple_form.buttons.or'
+      = link_to t('.cancel'), [forgeos_core, :admin, :import], :class => 'btn btn-mini'
     = text_field_tag :set_name,(@set ? @set.name : ''), :class => 'field_name'
     = hidden_field :import, :set_id, @set.id if @set
-    .interact-links
-      = forgeos_save_buttons([forgeos_core, :admin, :import], 'import.button')
   #content.row-fluid
-    .span9
-      .inner-content
-        - @parameters.each do |arr|
-          = hidden_field_tag arr[0], arr[1]
-        - unless @rows.empty?
-          .map_fields
-            %table
-              %thead
+    .inner-content.span9
+      - @parameters.each do |arr|
+        = hidden_field_tag arr[0], arr[1]
+      - unless @rows.empty?
+        .map_fields
+          %table
+            %thead
+              %tr
+                - (1..@rows[0].size).each do |c|
+                  - selected_field = nil
+                  - @fields.find { |field| 
+                  -   selected_field = @set ? @set.fields[c.to_s].to_i : (field[1] if field[0].kind_of?(String) && @rows[0][c-1].kind_of?(String) && field[0].match(Regexp.new(@rows[0][c-1],'i')))
+                  - }
+                  %th.enhanced= select_tag "fields[#{c}]", options_for_select(@fields,selected_field), :include_blank => true
+            %tbody
+              - @rows.each do |row|
                 %tr
-                  - (1..@rows[0].size).each do |c|
-                    - selected_field = nil
-                    - @fields.find { |field| 
-                    -   selected_field = @set ? @set.fields[c.to_s].to_i : (field[1] if field[0].kind_of?(String) && @rows[0][c-1].kind_of?(String) && field[0].match(Regexp.new(@rows[0][c-1],'i')))
-                    - }
-                    %th.enhanced= select_tag "fields[#{c}]", options_for_select(@fields,selected_field), :include_blank => true
-              %tbody
-                - @rows.each do |row|
-                  %tr
-                    - row.each do |column|
-                      - if RUBY_VERSION.to_f >= 1.9
-                        %td= truncate(h(column), :lenght => 255).force_encoding('utf-8')
-                      - else
-                        %td= truncate(h(column), :lenght => 255)
-        #progressbar
+                  - row.each do |column|
+                    - if RUBY_VERSION.to_f >= 1.9
+                      %td= truncate(h(column), :lenght => 255).force_encoding('utf-8')
+                    - else
+                      %td= truncate(h(column), :lenght => 255)
+      #progressbar
     #right-sidebar.span3
       .step
-        = check_box_tag :ignore_first_row, true,(@set ? @set.ignore_first_row : true), :id => 'ignore_first_row_option'
-        = label_tag :ignore_first_row, t('import.ignore_first_row')
-        %br
-        = check_box_tag :save_set
-        = label_tag :save_set, t('import_set.save')
+        .control-group
+          = label_tag :ignore_first_row, t('import.ignore_first_row'), :class => 'control-label'
+          .controls= check_box_tag :ignore_first_row, true,(@set ? @set.ignore_first_row : true), :id => 'ignore_first_row_option'
+        .control-group
+          = label_tag :save_set, t('import_set.save'), :class => 'control-label'
+          .controls
+            = check_box_tag :save_set

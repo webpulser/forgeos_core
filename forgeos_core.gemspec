@@ -49,4 +49,5 @@ Gem::Specification.new do |s|
   s.add_dependency 'acts-as-taggable-on', '>= 2.0.6'
   s.add_dependency 'acts_as_list', '>= 0.1.3'
   s.add_dependency 'acts_as_tree', '0.2.0'
+  s.add_dependency 'simple_form', '>= 2.0.2'
 end

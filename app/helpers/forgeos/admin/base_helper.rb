@@ -1,31 +1,58 @@
 module Forgeos
   module Admin
     module BaseHelper
+      include Forgeos::MenuHelper
+      include Forgeos::AttachmentHelper
+      include Forgeos::SerializedFieldHelper
+      include Forgeos::StatisticsHelper
       include AttachmentHelper
       include DatatablesHelper
 
-      def index_sidebar(icon, engine, model, category = "#{model}Category".constantize)
+
+      def index_sidebar(engine, model, icon, category = "#{model}Category".constantize)
         url = engine.send("admin_#{category.model_name.route_key}_path", :format => :json)
         model_name = model.model_name.singular_route_key
-        render :partial => 'left_sidebar', :locals => { :icon => icon, :sidebar_title => "#{model_name}.all", :tree_id => "#{model_name}-tree", :url => url, :model_name => model }
+        render :partial => 'left_sidebar', :locals => { :icon => icon, :sidebar_title => "#{model_name}.all", :tree_id => "#{model_name}-tree" , :url => url, :model_name => category }
+      end
+
+      def index_model_name(model)
+        model.model_name.singular_route_key
+      end
+
+      def index_header(engine, model, icon, button)
+        category_model_name = index_model_name("#{model}Category".constantize)
+        content_tag(:div, :class => 'header row-fluid') do
+          content_tag(:div, :class => 'span4') do
+            content_tag(:div, :class => 'btn-group') do
+              link_to(content_tag(:i, '', :class => 'big-icons new-category') + '&nbsp;'.html_safe, '#', :class => 'btn') +
+              link_to(content_tag(:span, '', :class => 'caret'), '#', :class => 'btn dropdown-toggle', :data => { :toggle => 'dropdown' }) +
+              content_tag(:ul, :class => 'dropdown-menu') do
+                content_tag(:li, t('folder.create'), :class => 'big-icons create-folder', :data => { :"tree-id" => "#{category_model_name}-tree" })
+              end
+            end
+          end +
+          content_tag(:div, create_button(engine, index_model_name(model), icon, button), :class => 'span8')
+        end
       end
 
       def index_view(icon, engine, model, columns, button = {})
-        model_name = model.model_name.singular_route_key
-        index_sidebar(icon, engine, model) +
-        content_tag(:div, :class => 'span8', :id => 'content') do
-          content_tag(:div, create_button(engine, model_name, icon, button), :class => 'header') +
-          content_tag(:div, '', :class => 'content-background') +
-          datatable(
-            :draggable => true,
-            :url => engine.send("admin_#{model.model_name.route_key}_path", :format => :json),
-            :columns => columns
-          )
+        content_tag(:div, :id => 'page', :class => 'row-fluid') do
+          index_header(engine, model, icon, button) +
+          content_tag(:div, :class => 'row-fluid') do
+            index_sidebar(engine, model, icon) +
+            content_tag(:div, :class => 'span8', :id => 'content') do
+              datatable(
+                :draggable => true,
+                :url => engine.send("admin_#{model.model_name.route_key}_path", :format => :json),
+                :columns => columns
+              )
+            end
+          end
         end
       end
 
       def form_header(html_options = {}, &block)
-        html_options[:class] ||= 'subnav container'
+        html_options[:class] ||= 'subnav'
         content_tag(:div, html_options) do
           if block_given?
             yield
@@ -70,7 +97,7 @@ module Forgeos
         link_to('', [engine, :admin, model],
           :remote => true,
           :method => :delete,
-          :confirm => confirm,
+          :data => { :confirm => confirm },
           :class => 'icon icon-trash',
           :id => polymorphic_html_id(model, 'destroy')
         )
@@ -92,19 +119,23 @@ module Forgeos
         content_tag(:div, '', :id => 'search')
       end
 
-      def fg_submit_tag(label)
-        button_tag((content_tag(:i, '', :class => 'icon-ok') + t(label)).html_safe, :class => 'btn btn-large btn-primary')
+      def fg_submit_tag(label, form = nil)
+        if form
+          form.submit :class => 'btn btn-large btn-primary'
+        else
+          button_tag((content_tag(:i, '', :class => 'icon-ok') + t(label)).html_safe, :class => 'btn btn-large btn-primary')
+        end
       end
 
-      def forgeos_save_buttons(back_path= [forgeos_core, :admin, :root], label= 'save_changes')
-        fg_submit_tag(label) +
-          link_to(t(:cancel), back_path, :class => 'btn btn-mini')
+      def forgeos_save_buttons(back_path= [forgeos_core, :admin, :root], label= 'forgeos.admin.base.save_changes', form = nil)
+        fg_submit_tag(label, form) +
+          link_to(t('forgeos.admin.base.cancel'), back_path, :class => 'btn btn-mini')
       end
 
       def polymorphic_html_id(object, prefix = '')
         elements = []
         elements << prefix if prefix.present?
-        elements << object.class.to_s.underscore
+        elements << object.class.to_s.underscore.gsub(/^.*\//, '')
         elements << object.id
 
         elements * '_'

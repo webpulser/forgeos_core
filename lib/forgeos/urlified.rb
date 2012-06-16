@@ -5,7 +5,7 @@ module Forgeos
     end
 
     def force_url_format
-      self.url= Forgeos::url_generator(self.url)
+      self.url = self.url.parameterize if self.url.present?
     end
 
     def generate_url

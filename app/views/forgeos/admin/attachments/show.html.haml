@@ -1,23 +1,19 @@
-#wrap
+#wrap.form-horizontal
   .big-header
-    %h1#attachment.title= @attachment.name
-    .interact-links
+    .form-actions
       = link_to t('attachment.update.action'), [forgeos_core, :edit, :admin, @attachment ], :class => 'btn btn-large btn-primary'
+      = t('simple_form.buttons.or')
       = link_to t('attachment.back'), [forgeos_core, :admin, @attachment.class.model_name.route_key], :class => 'btn btn-mini'
+    %h1.title= @attachment.name
 
   #content.row-fluid
-    #attachment.modify.span9
-      .attachment.modify-wrap
-        - permalink = url_for(@attachment.public_filename)
-        %h2.permalink
-          =t 'permalink', :count => 1
-          \:
-          = link_to permalink, permalink
-      = render :partial => @attachment.class.model_name.singular_route_key.dup, :object => @attachment
+    .span9.well
+      %h2.permalink
+        #{t 'permalink', :count => 1} :
+        = link_to @attachment.public_filename, @attachment.public_filename
     #right-sidebar.span3
       .step
-        = link_to [forgeos_core, :admin, @attachment], :confirm => t('attachment.destroy.confirm'), :method => :delete do
+        = link_to [forgeos_core, :admin, @attachment], :data => { :confirm => t('attachment.destroy.confirm')}, :method => :delete do
           = i :trash
           = t 'attachment.destroy.action'
-        .clear
-    .clear
+    = render :partial => @attachment.class.model_name.singular_route_key.dup, :object => @attachment

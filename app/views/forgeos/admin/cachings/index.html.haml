@@ -1,9 +1,9 @@
-= form_for :caching, :url => [forgeos_core, :admin, :cachings] do |f|
+= simple_form_for :caching, :url => [forgeos_core, :admin, :cachings] do |f|
   =form_header do
     .big-header
-      .interact-links
-        = f.submit t('caching.delete.one'), :class => 'btn btn-primary'
-        = f.submit t('caching.delete.all'), :class => 'btn btn-danger'
+      .form-actions
+        = f.submit t('helpers.submit.caching.delete'), :class => 'btn btn-large btn-primary'
+        = f.submit t('helpers.submit.caching.delete_all'), :class => 'btn btn-large btn-danger'
   #content
-    .files
+    .inner-content.files
       #caching-tree

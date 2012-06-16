@@ -1,6 +1,6 @@
 module Forgeos
   class Admin::UsersController < Admin::BaseController
-    before_filter :get_user, :only => [:show, :activate, :edit, :update, :destroy]
+    before_filter :get_user, :only => [:show, :activate, :edit, :update, :destroy, :assume]
     before_filter :new_user, :only => [:new, :create]
 
     def index
@@ -96,6 +96,15 @@ module Forgeos
         :filename => 'export_newsletter.csv',
         :disposition => 'attachment'
     end
+
+    def assume
+      if assumed_user_session = assume_user(@user)
+        redirect_to '/'
+      else
+        redirect_to [forgeos_core, :admin, :users]
+      end
+    end
+
   private
 
     def get_user

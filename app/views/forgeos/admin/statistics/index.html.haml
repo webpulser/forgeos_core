@@ -1,34 +1,29 @@
-#dashboard.statistics
-  .left-dashboard.span8
-    .padding-wrap
-      %h2.small-icons.see-stats=t 'statistic.trends'
+#dashboard.statistics.form-horizontal.row-fluid
+  .left-dashboard.span8.inner-content
+    = field_set_tag t('.trends'), :class => 'well' do
       .trend_filter
         - form_tag forgeos_core.admin_statistics_path, :id => 'form_stats' do
-          %label
-            = "#{t('statistic.show.for')} :"
+          %label= t('statistic.show.for')
           = select_tag :timestamp, options_for_select([[t('please_select'), nil], [t('statistic.last.month'), 'month'], [t('statistic.last.week'), 'week']], params[:timestamp]), :onchange => "$('#form_stats').submit()"
-      .chart
-        = raw @graph
-      .clear
+      .chart= raw @graph
 
-      %h2.small-icons.search=t 'search'
-      .to-tab.ui-tabs.ui-widget.ui-widget-content.ui-corner-all
-        %ul.ui-tabs-nav.ui-helper-reset.ui-helper-clearfix.ui-widget-header.ui-corner-all
-          %li.ui-state-default.ui-corner-top.ui-tabs-selected.ui-state-active= link_to t('top_5_items'), '#top-search'
-        #top-search.ui-tabs-panel.ui-widget-content.ui-corner-bottom
-          %table
-            %tbody
-              - @keywords.each do |keyword_id, count|
-                - if search_keyword = SearchKeyword.find_by_id(keyword_id)
-                  %tr{ :class => cycle('odd','even')}
-                    %td= search_keyword.keyword
-                    %td=t 'seen', :count => count, :scope => :search_keyword
+    = field_set_tag t('.search'), :class => 'well' do
+      .tabbable
+        %ul.nav.nav-tabs
+          %li.active= link_to t('top_5_items'), '#top-search'
+        .tab-content
+          #top-search.tab-pane.active
+            %table
+              %tbody
+                - @keywords.each do |keyword_id, count|
+                  - if search_keyword = SearchKeyword.find_by_id(keyword_id)
+                    %tr{ :class => cycle('odd','even')}
+                      %td= search_keyword.keyword
+                      %td=t 'seen', :count => count, :scope => :search_keyword
 
   .right-dahsboard.span4
-    %h2.small-icons.see-stats=t 'statistic.keyfacts'
-    .live-stats-content
-      %span
-        %span.keyfacts-name=t 'visitor', :count => 2
-        %span.keyfacts-value= Forgeos::Statistics.total_of_visitors(@date)
-        %span.clear
-  .clear
+    = field_set_tag t('.keyfacts'), :class => 'well' do
+      .control-group
+        %label.control-label.keyfacts-name=t 'visitor', :count => 2
+        .controls
+          .keyfacts-value= Forgeos::Statistics.total_of_visitors(@date)

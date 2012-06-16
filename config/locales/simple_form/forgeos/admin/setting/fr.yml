@@ -1,0 +1,15 @@
+fr:
+  simple_form:
+    titles:
+      forgeos/setting:
+        sendmail_settings: via sendmail
+        mails: configuration mail
+        smtp: via smtp
+    placeholders:
+      forgeos/setting:
+        email: contact@entreprise.org
+    popovers:
+      forgeos/setting:
+        site_address:
+          title: the company address
+          content: can be displayed in the front

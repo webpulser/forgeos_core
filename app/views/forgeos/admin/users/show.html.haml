@@ -1,25 +1,25 @@
-.big-header
-  %h1= @user.full_name
-  .interact-links
+.big-header.form-horizontal
+  .form-actions
     = link_to t('user.update.action'), [forgeos_core, :edit, :admin, @user], :class => 'btn btn-large btn-primary'
-    = link_to t('user.back'), [forgeos_core, :admin, :users], :class => 'btn btn-mini'
-#content.row-fluid
-  #customer-see.span9
-    // .customer-header.backgrounds
-    .padding-wrap
-      .fieldset
-        %h3=t 'user.customer_infos'
-        .main-infos
-          .main-infos-cutomer
-            %h4.small-icons=t 'user.contact_infos'
-            %p= @user.phone
-            %p.customer-email= @user.email
-        .clear
+    = t('simple_form.buttons.or')
+    = link_to t('simple_form.buttons.cancel'), [forgeos_core, :admin, :users], :class => 'btn btn-mini'
+    = link_to t('.assume_id'), [forgeos_core, :assume, :admin, @user], :class => 'btn btn-large btn-danger'
+  %h1= @user.full_name
+#content.row-fluid.form-horizontal
+  .span9
+    .inner-content
+      %fieldset.well
+        %legend=t '.infos'
+        - (@user.class.content_columns.map(&:name).map(&:to_sym) - [:perishable_token, :persistence_token, :crypted_password, :password_salt ]).each do |column|
+          .control-group
+            %label.control-label= Forgeos::User.human_attribute_name(column)
+            .controls
+              = @user.send(column)
 
   #right-sidebar.span3
     .step
       = mail_to @user.email, i(:envelope) + t('user.contact')
-      = link_to [forgeos_core, :admin, @user], :confirm => t('user.destroy.confirm'), :method => :delete do
+      = link_to [forgeos_core, :admin, @user], :data => { :confirm => t('user.destroy.confirm')}, :method => :delete do
         = i :trash
         = t 'user.destroy.action'
     .step.disabled

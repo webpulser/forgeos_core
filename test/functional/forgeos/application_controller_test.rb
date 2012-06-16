@@ -9,7 +9,7 @@ module Forgeos
     end
 
     test "should keep flash for notifications" do
-      get :keep_flash_test, nil, nil, { :notice => 'test' }
+      xhr :get, :keep_flash_test, nil, nil, { :notice => 'test' }
       get :notifications, :use_route => :forgeos_core
       assert_match /\"notice\":\"test\"/, @response.body
     end

@@ -79,7 +79,7 @@ module Forgeos
     end
 
     def keep_flash
-      if action_name != 'notifications'
+      if action_name != 'notifications' and request.xhr?
         flash.keep(:notice)
         flash.keep(:error)
         flash.keep(:warning)

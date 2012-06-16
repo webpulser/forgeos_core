@@ -1,23 +1,29 @@
-= form_for [forgeos_core, :admin, role], :as => :role, :html => { :id => 'wrap', "data-object_name" => role.class.model_name.singular } do |f|
+= simple_form_for [forgeos_core, :admin, role], :as => :role, :html => { :id => 'wrap', "data-object_name" => role.class.model_name.singular } do |f|
+  - categories = Forgeos::RightCategory.joins(:translations).order('name')
   = form_header do
     .big-header
+      = f.button :wrapped, :cancel => [forgeos_core,:admin,:roles]
       = f.text_field :name, :class => 'field_name'
-      .interact-links= forgeos_save_buttons [forgeos_core,:admin,:roles]
+    #scrollbar
+      %ul.nav.nav-pills
+        - categories.each do |cat|
+          %li= link_to cat.name_without_path, "##{polymorphic_html_id(cat)}"
+        %li= link_to 'Other', '#other'
   #content.row-fluid
-    .span9
-      .padding-wrap
-        = hidden_field_tag "role[right_ids][]"
-        - Forgeos::RightCategory.joins(:translations).order('name').each do |right_category|
-          = render 'form_rights', :title => right_category.name, :rights => right_category.rights, :role => role
+    .inner-content.span9
+      - categories.each do |category|
+        = field_set_tag category.name_without_path, :id => polymorphic_html_id(category) do
+          = f.association :rights, :label => false, :as => :check_boxes, :collection => category.rights
 
-        = render 'form_rights', :title => t(:other), :rights => Forgeos::Right.where(:forgeos_categories_elements => {:category_id => nil}).includes(:categories), :role => role
+      = field_set_tag :other, :id => 'other' do
+        = f.association :rights, :label => false, :as => :check_boxes, :collection => Forgeos::Right.includes(:categories).where(:forgeos_categories_elements => {:category_id => nil})
 
     #right-sidebar.span3
       - unless role.new_record?
         .step
-          = link_to [forgeos_core, :admin, role], :confirm => t('role.destroy.confirm'), :method => :delete do
+          = link_to [forgeos_core, :admin, role], :data => { :confirm => t('role.destroy.confirm')}, :method => :delete do
             = i :trash
-            = t 'role.destroy.action'
+            = t '.destroy'
         #role_attributed_to.step.open
           %a.icon-step-title{ :href => "#" }=t 'role.attributed_to'
           .administrators
@@ -25,5 +31,3 @@
               .admin
                 = i 'user-md'
                 = admin.full_name
-
-    .clear

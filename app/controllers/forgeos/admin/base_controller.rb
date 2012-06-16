@@ -9,6 +9,7 @@ module Forgeos
   private
 
     def login_required
+      return_to_admin
       unless current_user.is_a?(Administrator)
         store_location
         flash[:warning] = t(:login_required)
@@ -26,6 +27,21 @@ module Forgeos
         return false
       end
     end
+
+    # Set session to another user. Only available to admins
+    def assume_user(new_user)
+      return unless current_user and current_user.is_a?(Administrator) and not new_user.is_a?(Administrator)
+      session[:admin_id] = current_user.id
+      PersonSession.create(new_user, true)
+    end
+
+    def return_to_admin
+      if admin = Administrator.find_by_id(session[:admin_id])
+        session[:admin_id] = nil
+        current_user_session = PersonSession.create(admin, true)
+      end
+    end
+
 
     def edition_locale
       if session[:lang]

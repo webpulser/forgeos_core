@@ -52,6 +52,7 @@ Forgeos::Core::Engine.routes.draw do
       member do
         put :activate
         get :duplicate
+        get :assume
       end
     end
 

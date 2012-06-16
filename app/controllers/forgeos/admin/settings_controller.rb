@@ -6,11 +6,11 @@ module Forgeos
     end
 
     def edit
-      @setting.build_address unless @setting.address
+      @setting.build_site_address unless @setting.site_address
     end
 
     def update
-      if @setting.update_attributes(params[:settings])
+      if @setting.update_attributes(params[:setting])
         flash[:notice] = t('setting.update.success')
         redirect_to([forgeos_core, :edit, :admin, :setting])
       else

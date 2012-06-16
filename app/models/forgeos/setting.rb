@@ -1,11 +1,11 @@
 module Forgeos
   class Setting < ActiveRecord::Base
-    belongs_to :address, :dependent => :destroy
-    serialize :mailer
-    serialize :smtp_settings
-    serialize :sendmail_settings
+    belongs_to :site_address, :dependent => :destroy, :class_name => 'Forgeos::Address', :foreign_key => :address_id
+    store :mailer, :accessors => [:delivery_method]
+    store :smtp_settings, :accessors => [:address, :port, :domain, :enable_starttls_auto, :authentication, :user_name, :password]
+    store :sendmail_settings, :accessors => [:location, :arguments]
     serialize :attachments
-    accepts_nested_attributes_for :address
+    accepts_nested_attributes_for :site_address
 
     validates :name, :presence => true
 

@@ -9,6 +9,21 @@
   h2
     &.orders
       background-position: 0 -2446px
+    clear: both
+    color: $gray
+    font-size: 1.5em
+    font-weight: normal
+    margin: 10px 0
+
+  table
+    border-collapse: collapse
+    width: 100%
+    font-size: 0.9em
+    margin-bottom: 5px
+    td
+      padding: 5px
+    .even
+      background-color: $whiteGray
 
 .summary
   em
@@ -35,24 +50,42 @@
 
 .see-stats
   background-position: 0 -3215px
+.latest-activity
+  border: 1px solid $contentHeaderBorder
+  padding: 8px 0
+.first-block
+  height: 2em
+  line-height: 2em
+  padding-bottom: 2px
+  padding-left: 8px
+  border-bottom: 1px solid $lightOrangeYellowBg - #001b57
 
-#dashboard h2
-  clear: both
-  color: $gray
-  font-size: 1.5em
-  font-weight: normal
-  margin: 10px 0
+.second-block
+  height: 2em
+  line-height: 2em
+  padding-top: 8px
+  padding-left: 8px
+.live-stats-content span
+  display: block
+  border-bottom: 1px solid $contentHeaderBorder
+  padding: 2px 0
+  font-size: 0.8em
 
-#dashboard table
-  border-collapse: collapse
-  width: 100%
-  font-size: 0.9em
-  margin-bottom: 5px
-  td
-    padding: 5px
-  .even
-    background-color: $whiteGray
+// TODO move to forgeos_commerce
+#order-see .order-see-wrap, #attachment-modify .attachment-modify-wrap
+  font-size: 1em
+  padding-left: 10px
 
+.big-header
+  .order-price
+    font-size: 1.4em
+    color: $orange
+    font-weight: bold
+  .order-currency
+    font-size: 1.4em
+    color: $orange
+    font-weight: bold
+    padding-left: 5px
 .table-price
   font-weight: bold
 
@@ -85,9 +118,6 @@
   margin-left: 8px
   font-size: 0.8em
 
-.latest-activity
-  border: 1px solid $contentHeaderBorder
-  padding: 8px 0
 
 .sales-info-block
   border: 1px solid $lightOrangeRedBg
@@ -99,18 +129,6 @@
   font-size: 0.8em
   position: relative
 
-.first-block
-  height: 2em
-  line-height: 2em
-  padding-bottom: 2px
-  padding-left: 8px
-  border-bottom: 1px solid $lightOrangeYellowBg - #001b57
-
-.second-block
-  height: 2em
-  line-height: 2em
-  padding-top: 8px
-  padding-left: 8px
 
 .today-sales span
   color: $orangeRed
@@ -165,27 +183,6 @@
   color: $lightGreen
   text-align: center
   font-weight: bold
-
-.live-stats-content span
-  display: block
-  border-bottom: 1px solid $contentHeaderBorder
-  padding: 2px 0
-  font-size: 0.8em
-
-#order-see .order-see-wrap, #attachment-modify .attachment-modify-wrap
-  font-size: 1em
-  padding-left: 10px
-
-.big-header
-  .order-price
-    font-size: 1.4em
-    color: $orange
-    font-weight: bold
-  .order-currency
-    font-size: 1.4em
-    color: $orange
-    font-weight: bold
-    padding-left: 5px
 
 .product-th
   width: 30%

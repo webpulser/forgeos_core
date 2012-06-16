@@ -1,0 +1,32 @@
+= field_set_tag :file_info, :class => 'well span5' do
+  - if attachment.kind_of?(Forgeos::Picture)
+    .control-group
+      %label.control-label=t 'attachment.filename'
+      .controls
+        = attachment.filename
+    .control-group
+      %label.control-label=t 'picture.original_size'
+      .controls
+        #{attachment.width} x #{attachment.height} #{t 'attachment.pixel', :count => 2 }
+      .clear
+  .control-group
+    %label.control-label=t 'attachment.file_type'
+    .controls= attachment.file_type.upcase
+  .control-group
+    %label.control-label=t 'attachment.updated_at'
+    .controls= attachment.updated_at.to_s(:short)
+  .control-group
+    %label.control-label=t 'attachment.size'
+    .controls= size_in_kb(attachment.size)
+  - if defined?(form) and form
+    = form.input :uploaded_data, :as => :file
+    = form.input :alt
+    = form.input :description, :input_html => { :rows => 4 }
+  - else
+    .control-group
+      %label.control-label=t 'attachment.alt'
+      .controls= attachment.alt
+    .control-group
+      %label.control-label=t 'attachment.description'
+      .controls
+        %p= attachment.description

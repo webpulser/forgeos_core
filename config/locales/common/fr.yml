@@ -1,5 +1,5 @@
 fr:
-  forgeos: Forgeos Core
+  forgeos_core: Forgeos Core
   keyword:
     one: mot clé
     other: mots clés
@@ -57,8 +57,19 @@ fr:
     is_equals_or_less_than: est égal ou inférieur à
     is_greater_than: est supérieur à
     is_less_than: est inférieur à
-  save_changes: enregistrer
-  cancel: annuler
+  forgeos:
+    admin:
+      base:
+        save_changes: enregistrer
+        cancel: annuler
+      roles:
+        form:
+          destroy: supprimer le rôle
+  helpers:
+    submit:
+     role:
+       create: créer le rôle
+       update: sauvegarder le rôle
   _yes: oui
   _no: non
   ok: ok

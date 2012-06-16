@@ -1,20 +1,20 @@
 = render :partial => 'lang_switcher'
-= form_tag([forgeos_core, :admin, :import] , :multipart => true, :id => 'import_form') do
+= form_tag([forgeos_core, :admin, :import] , :multipart => true, :id => 'import_form', :class => 'form-horizontal') do
   .big-header
-    .interact-links
-      = fg_submit_tag 'import.send_file'
-  #content
-    .span8
-      .inner-content
+    .form-actions= fg_submit_tag 'import.send_file'
+  #content.row-fluid
+    .inner-content.span8
+      = field_set_tag nil, :class => 'well' do
         - if Forgeos::ImportSet.count > 0
-          = label :import, :set_id, t(:import_set, :count => 1)
-          = select :inmport, :set_id, options_from_collection_for_select(Forgeos::ImportSet.order('name').all, :id, :name), :include_blank => true
-          %br
-        = label :import, :model, t('import.model')
-        = select :import, :model, options_for_select(@models.sort.map{|model| [t(model,:count => 2),model] }), { :prompt => true }
-        %br
-        = label_tag :file, t('import.file')
-        = file_field_tag :file
+          .control-group
+            = label :import, :set_id, t(:import_set, :count => 1), :class => 'control-label'
+            .controls= select :import, :set_id, options_from_collection_for_select(Forgeos::ImportSet.order('name').all, :id, :name), :include_blank => true
+        .control-group
+          = label :import, :model, t('import.model'), :class => 'control-label'
+          .controls= select :import, :model, options_for_select(@models.sort.map{|model| [t(model,:count => 2),model] }), { :prompt => true }
+        .control-group
+          = label_tag :file, t('import.file'), :class => 'control-label'
+          .controls= file_field_tag :file
     #right-sidebar.span4
       .step
         = label :parser_options, :col_sep, t('import_set.col_sep')

@@ -19,10 +19,12 @@ require 'nested_form'
 require 'jquery-rails'
 require 'jquery-ui-rails'
 require 'flash_session_cookie_middleware'
+require 'simple_form'
+
 module Forgeos
   module Core
     class Engine < Rails::Engine
-      paths["config/locales"] << 'config/locales/**'
+      paths["config/locales"] << 'config/locales/**/*'
       paths["app/assets"] << 'vendor/assets'
       paths["forgeos_admin_menu"] = 'config/forgeos_admin_menu.yml'
       isolate_namespace Forgeos

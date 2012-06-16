@@ -29,7 +29,6 @@ table
 .datatable
   border-collapse: collapse
   width: 100% !important
-  font-size: 0.7em
   text-align: left
   thead
     height: 30px
@@ -67,7 +66,7 @@ table
       color: $white
   td
     vertical-align: top
-    padding: 5px
+    padding: 0.4em
     color: $lightGray
     span.odd
       background-color: transparent
@@ -77,16 +76,10 @@ table
       background-color: transparent
       border: 0
       color: #777777
-    &.image_product_td
-      width: 75px
     &.biggest_td
-      width: 200px
-    &.see_td
-      width: 30px
-    &.actions-td
-      width: 70px !important
-    &.enhanced
-      padding: 5px 0
+      width: 10em
+    .handler_container
+      font-size: 1.5em
   img
     border: 1px solid $contentHeaderBorder
     height: 45px
@@ -107,6 +100,12 @@ table
     height: 16px
     margin-top: 10px
     margin-left: 22px
+
+#page .header
+  .top
+    position: absolute
+    right: 0.5em
+    top: 0
 
 //--------------------- ----------
 // PAGINATE BUTTONS
@@ -155,8 +154,12 @@ tr
     outline: none
     text-decoration: none
     visibility: hidden
+  .handler
+    visibility: hidden
   &:hover
     td.actions-td *
+      visibility: visible
+    .handler
       visibility: visible
   p
     clear: left
@@ -204,8 +207,8 @@ tr
       .tr
         display: none
     .tr
-      width: 123px
-      height: 170px
+      width: 160px
+      height: 160px
       +left
       margin: 1%
       border: 2px solid white

@@ -1,20 +1,18 @@
-= form_for [forgeos_core, :admin, attachment], :as => :attachment, :html => { :multipart => true, :id => 'wrap', "data-object_name" => @attachment_class.model_name.singular } do |f|
+= simple_form_for [forgeos_core, :admin, attachment], :as => :attachment, :html => { :multipart => true, :id => 'wrap', "data-object_name" => @attachment_class.model_name.singular } do |f|
   = form_header do
     .big-header
+      = f.button :wrapped, :cancel => [forgeos_core, :admin, @file_type.pluralize]
       = f.text_field :name, :id => 'attachment.title', :class => 'field_name'
-      .interact-links= forgeos_save_buttons [forgeos_core, :admin, @file_type.pluralize]
 
   #content.row-fluid
-    #attachment.modify.span9
-      .well
-        %h2.permalink
-          =t 'permalink', :count => 1
-          \:
-          = link_to attachment.public_filename, attachment.public_filename
+    .span9.well
+      %h2.permalink
+        #{t 'permalink', :count => 1} :
+        = link_to attachment.public_filename, attachment.public_filename
 
     #right-sidebar.span3
       .step
-        = link_to [forgeos_core, :admin, attachment], :confirm => t('attachment.destroy.confirm'), :method => :delete do
+        = link_to [forgeos_core, :admin, attachment], :data => { :confirm => t('attachment.destroy.confirm')}, :method => :delete do
           = i :trash
           = t 'attachment.destroy.action'
         .clear
@@ -24,51 +22,4 @@
           %ul
             = hidden_field_tag "#{f.object_name}[category_ids][]"
             = render :partial => 'forgeos/admin/categories/associated_elements', :locals => { :association_id => 'category_ids', :element => attachment, :category_ids => attachment.category_ids, :categories => find_categories_from_content_type(attachment) }
-
-    - if largest_thumb = thumbnails.shift
-      %ul.thumbnails.span6
-        %li
-          .thumbnail.large-image.attachment.image-container
-            = image_tag largest_thumb.public_filename
-            %h5.attachment.size= t(largest_thumb.thumbnail, :scope => [:attachment, :thumbnails]).upcase
-            %p.attachment.size-pixels
-              #{largest_thumb.width} x #{largest_thumb.height} #{t 'attachment.pixel', :count => 2}
-        - thumbnails.each do |thumb|
-          %li.attachment.image-container
-            .thumbnail
-              = image_tag thumb.public_filename
-              %h5.attachment.size= t(thumb.thumbnail, :scope => [:attachment, :thumbnails]).upcase
-              %p.attachment.size-pixels
-                #{thumb.width} x #{thumb.height} #{t 'attachment.pixel', :count => 2 }
-
-    .large-info-container.well.span5.form-horizontal
-      - if attachment.kind_of?(Forgeos::Picture)
-        .control-group
-          %label.control-label=t 'attachment.filename'
-          .controls
-            = attachment.filename
-        .control-group
-          %label.control-label=t 'picture.original_size'
-          .controls
-            #{attachment.width} x #{attachment.height} #{t 'attachment.pixel', :count => 2 }
-          .clear
-      .control-group
-        %label.control-label=t 'attachment.file_type'
-        .controls= attachment.file_type.upcase
-      .control-group
-        %label.control-label=t 'attachment.updated_at'
-        .controls= attachment.updated_at.to_s(:short)
-      .control-group
-        %label.control-label=t 'attachment.size'
-        .controls= size_in_kb(attachment.size)
-      .control-group
-        = f.label :uploaded_data, nil, :class => 'control-label'
-        .controls= f.file_field :uploaded_data, :size => 10
-      - if f.object.is_a?(Forgeos::Picture)
-        .control-group
-          = f.label :alt, t('attachment.alt'), :class => 'control-label'
-          .controls= f.text_field :alt, :size => 24
-      .control-group
-        = f.label :description, t('attachment.description'), :class => 'control-label'
-        .controls= f.text_area :description, :rows => 5, :cols => 34
-    .clear
+    = render :partial => @attachment.class.model_name.singular_route_key.dup, :object => attachment, :locals => { :form => f }
