@@ -26,7 +26,7 @@ module Forgeos
     test "should post create" do
       post :create, :use_route => :forgeos_core
       assert_kind_of PersonSession, assigns(:person_session)
-      assert_not_nil flash[:error]
+      assert_not_nil flash[:alert]
       assert_redirected_to '/login'
 
       post :create, :person_session => { :email => forgeos_people(:user).email, :password => 'admin'}, :use_route => :forgeos_core

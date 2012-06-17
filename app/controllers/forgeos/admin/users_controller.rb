@@ -21,10 +21,10 @@ module Forgeos
 
     def create
       if @user.save
-        flash[:notice] = I18n.t('user.create.success').capitalize
+        flash.notice = I18n.t('user.create.success').capitalize
         redirect_to([forgeos_core, :edit, :admin, @user])
       else
-        flash[:error] = I18n.t('user.create.failed').capitalize
+        flash.alert = I18n.t('user.create.failed').capitalize
         render :action => 'new'
       end
     end
@@ -34,9 +34,9 @@ module Forgeos
 
     def update
       if @user.update_attributes(params[:user])
-        flash[:notice] = I18n.t('user.update.success').capitalize
+        flash.notice = I18n.t('user.update.success').capitalize
       else
-        flash[:error] = I18n.t('user.update.failed').capitalize
+        flash.alert = I18n.t('user.update.failed').capitalize
       end
       render :action => 'edit'
     end
@@ -45,9 +45,9 @@ module Forgeos
     # return the list of all users
     def destroy
       if @user.destroy
-        flash[:notice] = I18n.t('user.destroy.success').capitalize
+        flash.notice = I18n.t('user.destroy.success').capitalize
       else
-        flash[:error] = I18n.t('user.destroy.failed').capitalize
+        flash.alert = I18n.t('user.destroy.failed').capitalize
       end
       respond_to do |wants|
         wants.html do
@@ -60,15 +60,15 @@ module Forgeos
     def activate
       unless @user.active?
         if @user.activate
-          flash[:notice] = I18n.t('user.activation.success').capitalize
+          flash.notice = I18n.t('user.activation.success').capitalize
         else
-          flash[:error] = I18n.t('user.activation.failed').capitalize
+          flash.alert = I18n.t('user.activation.failed').capitalize
         end
       else
         if @user.disactivate
-          flash[:notice] = I18n.t('user.disactivation.success').capitalize
+          flash.notice = I18n.t('user.disactivation.success').capitalize
         else
-          flash[:error] = I18n.t('user.disactivation.failed').capitalize
+          flash.alert = I18n.t('user.disactivation.failed').capitalize
         end
       end
       respond_to do |wants|
@@ -83,7 +83,7 @@ module Forgeos
     # of a table in CSV format
     def export_newsletter
       @users = User.select('firstname, lastname, email').all
-      return flash[:error] = I18n.t('user.export.failed').capitalize if @users.empty?
+      return flash.alert = I18n.t('user.export.failed').capitalize if @users.empty?
       csv_string = CsvParser.generate do |csv|
         csv << %w(firstname lastname email)
         @users.each do |u|
@@ -109,7 +109,7 @@ module Forgeos
 
     def get_user
       unless @user = User.find_by_id(params[:id])
-        flash[:error] = I18n.t('user.not_exist').capitalize
+        flash.alert = I18n.t('user.not_exist').capitalize
         return redirect_to([forgeos_core, :admin, :users])
       end
     end

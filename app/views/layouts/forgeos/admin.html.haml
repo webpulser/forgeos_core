@@ -13,6 +13,7 @@
       build_menu(Forgeos::MENU_HASH[:forgeos][:admin][:menu])
       menu = yield(:submenu) + yield(:menu)
     #container
+      -# display admin menus
       #submenu.navbar
         .navbar-inner
           .container
@@ -22,6 +23,7 @@
           .container
             %ul.nav= yield :menu
 
+      -# display flash messages
       #alerts
         - [:alert, :warning, :notice].each do |type|
           - if message = flash[type]
@@ -38,6 +40,7 @@
               %button.close{ "data-dismiss" => 'alert' } &times;
               = message.html_safe
         - flash.discard
+      -# display current active subnav as tabs
       - if menu.match(/active dropdown([^<]|<([^\/]|\/([^u]|u([^l]|l([^>]|$)|$)|$)|$))+<ul class="dropdown-menu">([^<]|<([^\/]|\/([^u]|u([^l]|l([^>]|$)|$)|$)|$)*)<\/ul/)
         .tabs
           %ul.nav.nav-tabs=raw $6

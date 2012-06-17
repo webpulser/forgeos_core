@@ -30,13 +30,13 @@ module Forgeos
             uniq_field,
             modify_attributes_method
           )
-          flash[:notice] = I18n.t('import.success')
+          flash.notice = I18n.t('import.success')
           redirect_to([forgeos_core, :admin, :import])
         else
           render(:action => 'create')
         end
       rescue MapFields::MissingFileContentsError => error
-        flash[:error] = I18n.t('import.failed.missing_file')
+        flash.alert = I18n.t('import.failed.missing_file')
         redirect_to([forgeos_core, :admin, :import])
       end
     end

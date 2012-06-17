@@ -145,7 +145,7 @@ module Forgeos
       admin_login_to('admin/administrators','show')
       get :show, :id => 0, :use_route => :forgeos_core
       assert_redirected_to '/admin/administrators'
-      assert_not_nil flash[:error]
+      assert_not_nil flash[:alert]
     end
 
     #########################
@@ -165,7 +165,7 @@ module Forgeos
       admin_login_to('admin/administrators','edit')
       get :edit, :id => 0, :use_route => :forgeos_core
       assert_redirected_to '/admin/administrators'
-      assert_not_nil flash[:error]
+      assert_not_nil flash[:alert]
     end
 
     #########################
@@ -224,7 +224,7 @@ module Forgeos
       assert assigns(:admin).new_record?, "administrator is not a new record"
       assert_equal 'test', assigns(:admin).lastname
       assert_template 'admin/administrators/new'
-      assert_not_nil flash[:error]
+      assert_not_nil flash[:alert]
     end
 
     #########################
@@ -296,7 +296,7 @@ module Forgeos
       end
 
       assert_redirected_to '/admin/administrators'
-      assert_not_nil flash[:error]
+      assert_not_nil flash[:alert]
     end
 
     test "should not delete destroy in js" do
@@ -312,7 +312,7 @@ module Forgeos
       end
 
       assert_response :success
-      assert_not_nil flash[:error]
+      assert_not_nil flash[:alert]
     end
 
     ###########################
@@ -339,7 +339,7 @@ module Forgeos
 
       assert_equal forgeos_people(:administrator), assigns(:admin)
       assert forgeos_people(:administrator).reload.active?
-      assert_not_nil flash[:error]
+      assert_not_nil flash[:alert]
       assert_redirected_to '/admin/administrators'
     end
   end

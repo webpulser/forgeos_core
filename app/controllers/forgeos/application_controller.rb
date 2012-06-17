@@ -11,7 +11,7 @@ module Forgeos
       render :json => {
         :notice => notice,
         :alert => alert,
-        :error => flash[:error],
+        :error => flash.alert,
         :warning => flash[:warning]
       }
     end
@@ -55,7 +55,7 @@ module Forgeos
     def login_required
       unless current_user
         store_location
-        flash[:notice] = t('login_required')
+        flash.notice = t('login_required')
         redirect_to([forgeos_core, :login])
         return false
       end
@@ -81,7 +81,7 @@ module Forgeos
     def keep_flash
       if action_name != 'notifications' and request.xhr?
         flash.keep(:notice)
-        flash.keep(:error)
+        flash.keep(:alert)
         flash.keep(:warning)
       end
     end

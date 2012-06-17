@@ -30,7 +30,7 @@ module Forgeos
       admin_login_to('admin/settings', 'update')
       put :update, :setting => { :name => ''}, :use_route => :forgeos_core
       assert_response :success
-      assert_not_nil flash[:error]
+      assert_not_nil flash[:alert]
     end
 
   end

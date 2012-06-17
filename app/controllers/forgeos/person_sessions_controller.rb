@@ -8,16 +8,16 @@ module Forgeos
       @person_session = PersonSession.new(params[:person_session])
       if @person_session.save
         redirect_to_stored_location('/')
-        flash[:notice] = t('log.in.success').capitalize
+        flash.notice = t('log.in.success').capitalize
       else
-        flash[:error] = t('log.in.failed').capitalize
+        flash.alert = t('log.in.failed').capitalize
         redirect_to_stored_location([forgeos_core, :login])
       end
     end
 
     def destroy
       if current_user_session and current_user_session.destroy
-        flash[:notice] = I18n.t('log.out.success').capitalize
+        flash.notice = I18n.t('log.out.success').capitalize
       end
       redirect_to('/')
     end

@@ -25,28 +25,28 @@ module Forgeos
     def create
       @admin = Administrator.new(params[:administrator])
       if @admin.save
-        flash[:notice] = t('administrator.create.success').capitalize
+        flash.notice = t('administrator.create.success').capitalize
         redirect_to [forgeos_core, :edit, :admin, @admin]
       else
-        flash[:error] = t('administrator.create.failed').capitalize
+        flash.alert = t('administrator.create.failed').capitalize
         render :action => "new"
       end
     end
 
     def update
       if @admin.update_attributes(params[:administrator])
-        flash[:notice] = t('administrator.update.success').capitalize
+        flash.notice = t('administrator.update.success').capitalize
       else
-        flash[:error] = t('administrator.update.failed').capitalize
+        flash.alert = t('administrator.update.failed').capitalize
       end
       render :action => "edit"
     end
 
     def destroy
       if @admin.destroy
-        flash[:notice] = t('administrator.destroy.success').capitalize
+        flash.notice = t('administrator.destroy.success').capitalize
       else
-        flash[:error] = t('administrator.destroy.failed').capitalize
+        flash.alert = t('administrator.destroy.failed').capitalize
       end
       respond_to do |wants|
         wants.html do
@@ -59,15 +59,15 @@ module Forgeos
     def activate
       unless @admin.active?
         if @admin.activate
-          flash[:notice] = I18n.t('administrator.activation.success').capitalize
+          flash.notice = I18n.t('administrator.activation.success').capitalize
         else
-          flash[:error] = I18n.t('administrator.activation.failed').capitalize
+          flash.alert = I18n.t('administrator.activation.failed').capitalize
         end
       else
         if @admin.disactivate
-          flash[:notice] = I18n.t('administrator.disactivation.success').capitalize
+          flash.notice = I18n.t('administrator.disactivation.success').capitalize
         else
-          flash[:error] = I18n.t('administrator.disactivation.failed').capitalize
+          flash.alert = I18n.t('administrator.disactivation.failed').capitalize
         end
       end
       respond_to do |wants|
@@ -82,7 +82,7 @@ module Forgeos
 
     def get_admin
       unless @admin = Administrator.find_by_id(params[:id])
-        flash[:error] = t('administrator.not_exist').capitalize
+        flash.alert = t('administrator.not_exist').capitalize
         return redirect_to([forgeos_core, :admin, :administrators])
       end
     end

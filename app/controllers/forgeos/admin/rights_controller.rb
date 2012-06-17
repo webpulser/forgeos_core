@@ -25,10 +25,10 @@ module Forgeos
     def create
       @right = Right.new(params[:right])
       if @right.save
-        flash[:notice] = I18n.t('right.create.success').capitalize
+        flash.notice = I18n.t('right.create.success').capitalize
         return request.xhr? ? render(:nothing => true) : redirect_to([forgeos_core, :edit, :admin, @right])
       else
-        flash[:error] = I18n.t('right.create.failed').capitalize
+        flash.alert = I18n.t('right.create.failed').capitalize
         if request.xhr?
           render :nothing => true, :json => { :result => 'error' }
           return false
@@ -40,10 +40,10 @@ module Forgeos
 
     def update
       if @right.update_attributes(params[:right])
-        flash[:notice] = I18n.t('right.update.success').capitalize
+        flash.notice = I18n.t('right.update.success').capitalize
         return request.xhr? ? render(:nothing => true) : render(:action => :edit)
       else
-        flash[:error] = I18n.t('right.update.failed').capitalize
+        flash.alert = I18n.t('right.update.failed').capitalize
         if request.xhr?
           render :nothing => true, :json => { :result => 'error' }
           return false
@@ -55,9 +55,9 @@ module Forgeos
 
     def destroy
       if @right.destroy
-        flash[:notice] = I18n.t('right.destroy.success').capitalize
+        flash.notice = I18n.t('right.destroy.success').capitalize
       else
-        flash[:error] = I18n.t('right.destroy.failed').capitalize
+        flash.alert = I18n.t('right.destroy.failed').capitalize
       end
 
       respond_to do |wants|
@@ -72,7 +72,7 @@ module Forgeos
 
     def get_right
       unless @right = Right.find_by_id(params[:id])
-        flash[:error] = I18n.t('right.not_exist').capitalize
+        flash.alert = I18n.t('right.not_exist').capitalize
         return redirect_to([forgeos_core, :admin, :rights])
       end
     end

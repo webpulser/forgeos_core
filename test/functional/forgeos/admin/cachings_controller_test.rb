@@ -45,7 +45,7 @@ module Forgeos
       assert !File.exist?(files.first)
       assert_redirected_to '/admin/cachings'
       assert_equal files, assigns(:files)
-      assert_nil flash[:error]
+      assert_nil flash[:alert]
       assert_not_nil flash[:notice]
     end
 
@@ -64,7 +64,7 @@ module Forgeos
       post :create, :use_route => :forgeos_core
       assert_redirected_to '/admin/cachings'
       assert_equal nil, assigns(:files)
-      assert_not_nil flash[:error]
+      assert_not_nil flash[:alert]
       assert_nil flash[:notice]
     end
 
@@ -76,7 +76,7 @@ module Forgeos
       post :create, :use_route => :forgeos_core, :commit => I18n.t('caching.delete.all').capitalize
       assert_redirected_to '/admin/cachings'
       assert_not_nil flash[:notice]
-      assert_nil flash[:error]
+      assert_nil flash[:alert]
 
       files.each do |file|
         assert !File.exist?(file), "#{file} file exist and should not"

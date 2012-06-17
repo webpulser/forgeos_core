@@ -29,28 +29,28 @@ module Forgeos
 
     def create
       if @role.save
-        flash[:notice] = I18n.t('role.create.success').capitalize
+        flash.notice = I18n.t('role.create.success').capitalize
         redirect_to [forgeos_core, :edit, :admin, @role]
       else
-        flash[:error] = I18n.t('role.create.failed').capitalize
+        flash.alert = I18n.t('role.create.failed').capitalize
         render :action => "new"
       end
     end
 
     def update
       if @role.update_attributes(params[:role])
-        flash[:notice] = I18n.t('role.update.success').capitalize
+        flash.notice = I18n.t('role.update.success').capitalize
       else
-        flash[:error] = I18n.t('role.update.failed').capitalize
+        flash.alert = I18n.t('role.update.failed').capitalize
       end
       render :action => "edit"
     end
 
     def destroy
       if @role.destroy
-        flash[:notice] = I18n.t('role.destroy.success').capitalize
+        flash.notice = I18n.t('role.destroy.success').capitalize
       else
-        flash[:error] = I18n.t('role.destroy.failed').capitalize
+        flash.alert = I18n.t('role.destroy.failed').capitalize
       end
       respond_to do |wants|
         wants.html do
@@ -74,7 +74,7 @@ module Forgeos
 
     def get_role
       unless @role = Role.find_by_id(params[:id])
-        flash[:error] = I18n.t('role.not_exist').capitalize
+        flash.alert = I18n.t('role.not_exist').capitalize
         return redirect_to([forgeos_core,:admin,:roles])
       end
     end

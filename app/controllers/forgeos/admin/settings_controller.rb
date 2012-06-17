@@ -11,10 +11,10 @@ module Forgeos
 
     def update
       if @setting.update_attributes(params[:setting])
-        flash[:notice] = t('setting.update.success')
+        flash.notice = t('setting.update.success')
         redirect_to([forgeos_core, :edit, :admin, :setting])
       else
-        flash[:error] = t('setting.update.failed')
+        flash.alert = t('setting.update.failed')
         render(:action => :edit)
       end
     end

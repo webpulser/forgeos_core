@@ -25,7 +25,7 @@ module Forgeos
     test "should post create" do
       post :create, :use_route => :forgeos_core
       assert_kind_of PersonSession, assigns(:person_session)
-      assert_not_nil flash[:error]
+      assert_not_nil flash[:alert]
       assert_redirected_to '/admin'
 
       post :create, :person_session => { :email => forgeos_people(:administrator).email, :password => 'admin'}, :use_route => :forgeos_core
@@ -45,7 +45,7 @@ module Forgeos
     test "should not reset password" do
       post :reset_password, :use_route => :forgeos_core, :email => 'toto@forgeos.com'
       assert_redirected_to '/admin/login'
-      assert_not_nil flash[:error]
+      assert_not_nil flash[:alert]
     end
 
     test "could not reset password" do
@@ -53,7 +53,7 @@ module Forgeos
       assert !forgeos_people(:administrator).reload.valid?
       post :reset_password, :use_route => :forgeos_core, :email => forgeos_people(:administrator).email
       assert_redirected_to '/admin/login'
-      assert_not_nil flash[:error]
+      assert_not_nil flash[:alert]
     end
 
   end

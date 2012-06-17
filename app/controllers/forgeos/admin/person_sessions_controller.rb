@@ -10,9 +10,9 @@ module Forgeos
     def create
       @person_session = PersonSession.new(params[:person_session])
       if @person_session.save
-        flash[:notice] = t('log.in.success').capitalize
+        flash.notice = t('log.in.success').capitalize
       else
-        flash[:error] = t('log.in.failed').capitalize
+        flash.alert = t('log.in.failed').capitalize
       end
 
       redirect_to_stored_location([forgeos_core, :admin, :root])
@@ -20,7 +20,7 @@ module Forgeos
 
     def destroy
       current_user_session.destroy
-      flash[:notice] = t('log.out.success').capitalize
+      flash.notice = t('log.out.success').capitalize
     end
 
     def reset_password
@@ -29,12 +29,12 @@ module Forgeos
         generated_password = Person.generate_password(8)
         if user.update_attributes(:password => generated_password, :password_confirmation => generated_password)
           UserNotifier.delay.reset_password(user,generated_password)
-          flash[:notice] = t('admin.reset_password.success').capitalize
+          flash.notice = t('admin.reset_password.success').capitalize
         else
-          flash[:error] = t('admin.reset_password.failed').capitalize
+          flash.alert = t('admin.reset_password.failed').capitalize
         end
       else
-        flash[:error] = t('admin.not_exist').capitalize
+        flash.alert = t('admin.not_exist').capitalize
       end
       redirect_to [forgeos_core, :admin, :login]
     end

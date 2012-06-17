@@ -37,13 +37,13 @@ module Forgeos
     # The Category can be a child of another Category.
     def create
       if @category.save
-        flash[:notice] = t('category.create.success').capitalize
+        flash.notice = t('category.create.success').capitalize
         respond_to do |format|
           format.html { redirect_to [forgeos_core, :edit, :admin, @category] }
           format.json { render :text => @category.id }
         end
       else
-        flash[:error] = t('category.create.failed').capitalize
+        flash.alert = t('category.create.failed').capitalize
         respond_to do |format|
           format.html { render :action => 'new' }
           format.json { render :json => { :errors => @category.errors } }
@@ -62,13 +62,13 @@ module Forgeos
 
     def update
       if @category.update_attributes(params[:category])
-        flash[:notice] = t('category.update.success').capitalize
+        flash.notice = t('category.update.success').capitalize
         respond_to do |format|
           format.html { redirect_to [forgeos_core, :edit, :admin, @category] }
           format.json { render :text => @category.total_elements_count }
         end
       else
-        flash[:error] = t('category.update.failed').capitalize
+        flash.alert = t('category.update.failed').capitalize
         respond_to do |format|
           format.html { render :action => 'edit' }
           format.json { render :json => { :errors => @category.errors } }
@@ -83,13 +83,13 @@ module Forgeos
     #  if destroy succed, return the Categories list
     def destroy
       if @category.destroy
-        flash[:notice] = t('category.destroy.success').capitalize
+        flash.notice = t('category.destroy.success').capitalize
         respond_to do |format|
           format.html { redirect_to [forgeos_core, :admin, :categories] }
           format.json { render :text => true }
         end
       else
-        flash[:error] = t('category.destroy.failed').capitalize
+        flash.alert = t('category.destroy.failed').capitalize
         respond_to do |format|
           format.html { redirect_to [forgeos_core, :admin, :categories] }
           format.json { render :json => { :errors => @category.errors } }
@@ -105,7 +105,7 @@ module Forgeos
     private
     def get_category
       unless @category = Category.find_by_id(params[:id])
-        flash[:error] = t('category.not_exist').capitalize
+        flash.alert = t('category.not_exist').capitalize
         return redirect_to [forgeos_core, :admin, :categories]
       end
     end

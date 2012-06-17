@@ -33,7 +33,7 @@ module Forgeos
       admin_login_to('admin/attachments', 'index')
       get :index, :use_route => :forgeos_core, :format => :json, :klass => 'Nothing'
       assert_redirected_to '/admin/library'
-      assert_not_nil flash[:error]
+      assert_not_nil flash[:alert]
     end
 
     test "should get index as json with ids" do
@@ -97,7 +97,7 @@ module Forgeos
       admin_login_to('admin/attachments','show')
       get :show, :id => 0, :use_route => :forgeos_core
       assert_redirected_to '/admin/library'
-      assert_not_nil flash[:error]
+      assert_not_nil flash[:alert]
     end
 
     #########################
@@ -117,7 +117,7 @@ module Forgeos
       admin_login_to('admin/attachments','edit')
       get :edit, :id => 0, :use_route => :forgeos_core
       assert_redirected_to '/admin/library'
-      assert_not_nil flash[:error]
+      assert_not_nil flash[:alert]
     end
 
     #########################
@@ -261,7 +261,7 @@ module Forgeos
       end
 
       assert_redirected_to '/admin/audios'
-      assert_not_nil flash[:error]
+      assert_not_nil flash[:alert]
     end
 
     test "should not delete destroy in js" do
@@ -277,7 +277,7 @@ module Forgeos
       end
 
       assert_response :success
-      assert_not_nil flash[:error]
+      assert_not_nil flash[:alert]
     end
 
     ###########################

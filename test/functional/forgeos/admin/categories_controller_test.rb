@@ -51,7 +51,7 @@ module Forgeos
         post :create, :use_route => :forgeos_core, :category => { :name => 'test' }
       end
       assert_not_nil flash[:notice]
-      assert_nil flash[:error]
+      assert_nil flash[:alert]
       assert_kind_of Category, assigns(:category)
       assert_redirected_to "/admin/categories/#{assigns(:category).id}/edit"
     end
@@ -62,7 +62,7 @@ module Forgeos
         post :create, :use_route => :forgeos_core, :category => { :name => nil }
       end
       assert_nil flash[:notice]
-      assert_not_nil flash[:error]
+      assert_not_nil flash[:alert]
       assert_response :success
     end
 
@@ -84,7 +84,7 @@ module Forgeos
       admin_login_to('admin/categories', 'update')
       put :update, :use_route => :forgeos_core, :id => forgeos_categories(:user_cat).id, :category => { :name => 'test updated' }
       assert_not_nil flash[:notice]
-      assert_nil flash[:error]
+      assert_nil flash[:alert]
       assert_kind_of UserCategory, assigns(:category)
       assert_equal 'test updated', forgeos_categories(:user_cat).reload.name
       assert_redirected_to "/admin/user_categories/#{assigns(:category).id}/edit"
@@ -95,7 +95,7 @@ module Forgeos
       put :update, :use_route => :forgeos_core, :category => { :name => nil }, :id => forgeos_categories(:user_cat).id
       assert_response :success
       assert_nil flash[:notice]
-      assert_not_nil flash[:error]
+      assert_not_nil flash[:alert]
     end
 
     ##########################
@@ -133,7 +133,7 @@ module Forgeos
       end
 
       assert_redirected_to '/admin/categories'
-      assert_not_nil flash[:error]
+      assert_not_nil flash[:alert]
     end
 
     test "should not delete destroy in json" do
@@ -149,7 +149,7 @@ module Forgeos
       end
 
       assert_response :success
-      assert_not_nil flash[:error]
+      assert_not_nil flash[:alert]
     end
 
     test "should post add_element" do

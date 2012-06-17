@@ -14,7 +14,7 @@ module Forgeos
       admin_login_to('admin/import', 'create_user')
       get :create_user, :use_route => :forgeos_core, :parser_options => { :col_sep => ',', :quote_char => '"' }
       assert_redirected_to '/admin/import'
-      assert_equal 'missing file', flash[:error]
+      assert_equal 'missing file', flash[:alert]
     end
 
     test "should display fields form mapper for user" do

@@ -65,7 +65,7 @@ module Forgeos
       admin_login_to('admin/roles','show')
       get :show, :id => 0, :use_route => :forgeos_core
       assert_redirected_to '/admin/roles'
-      assert_not_nil flash[:error]
+      assert_not_nil flash[:alert]
     end
 
     #########################
@@ -85,7 +85,7 @@ module Forgeos
       admin_login_to('admin/roles','edit')
       get :edit, :id => 0, :use_route => :forgeos_core
       assert_redirected_to '/admin/roles'
-      assert_not_nil flash[:error]
+      assert_not_nil flash[:alert]
     end
 
     #########################
@@ -136,7 +136,7 @@ module Forgeos
       assert !assigns(:role).valid?, "role is valid and should not be"
       assert assigns(:role).new_record?, "role is not a new record"
       assert_template 'admin/roles/new'
-      assert_not_nil flash[:error]
+      assert_not_nil flash[:alert]
     end
 
     #########################
@@ -192,7 +192,7 @@ module Forgeos
       end
 
       assert_redirected_to '/admin/roles'
-      assert_not_nil flash[:error]
+      assert_not_nil flash[:alert]
     end
 
     ############################

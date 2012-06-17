@@ -13,7 +13,7 @@ module Forgeos
 
     def update
       if @user.update_attributes(params[:administrator])
-        flash[:notice] = t('my_account.update.success').capitalize
+        flash.notice = t('my_account.update.success').capitalize
       end
       render :action => 'edit'
     end

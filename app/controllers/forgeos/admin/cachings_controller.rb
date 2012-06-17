@@ -27,9 +27,9 @@ module Forgeos
         @files.each do |file|
           FileUtils.rm_rf(file)
         end
-        flash[:notice] = t('caching.delete.success').capitalize
+        flash.notice = t('caching.delete.success').capitalize
       else
-        flash[:error] = t('caching.no_files').capitalize
+        flash.alert = t('caching.no_files').capitalize
       end
 
       redirect_to([forgeos_core, :admin, :cachings])
