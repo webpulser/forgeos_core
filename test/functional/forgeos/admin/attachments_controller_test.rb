@@ -127,7 +127,8 @@ module Forgeos
     test "should post create" do
       admin_login_to('admin/attachments', 'create')
       assert_difference 'Attachment.count', 1 do
-        post :create, :Filedata => Rack::Test::UploadedFile.new(File.expand_path('../../../../files/rails.png', __FILE__)), :use_route => :forgeos_core, :format => :json, :klass => 'Forgeos::Picture'
+        post :create, :Filedata => Rack::Test::UploadedFile.new(File.expand_path('../../../../files/rails.png', __FILE__)),
+        :use_route => :forgeos_core, :format => :json, :klass => 'Forgeos::Picture'
       end
 
       assert_response :success
@@ -140,7 +141,8 @@ module Forgeos
       category = PictureCategory.create(:name => 'photos')
       admin_login_to('admin/attachments', 'create')
       assert_difference 'Attachment.count', 1 do
-        post :create, :Filedata => Rack::Test::UploadedFile.new(File.expand_path('../../../../files/rails.png', __FILE__)), :use_route => :forgeos_core, :format => :json, :klass => 'Forgeos::Picture', :parent_id => category.id
+        post :create, :Filedata => Rack::Test::UploadedFile.new(File.expand_path('../../../../files/rails.png', __FILE__)),
+        :use_route => :forgeos_core, :format => :json, :klass => 'Forgeos::Picture', :parent_id => category.id
       end
 
       assert_response :success
@@ -154,7 +156,8 @@ module Forgeos
       object = Category.create(:name => 'photos')
       admin_login_to('admin/attachments', 'create')
       assert_difference 'Attachment.count', 1 do
-        post :create, :Filedata => Rack::Test::UploadedFile.new(File.expand_path('../../../../files/rails.png', __FILE__)), :use_route => :forgeos_core, :format => :json, :klass => 'Forgeos::Picture', :target_id => object.id, :target => object.class.to_s
+        post :create, :Filedata => Rack::Test::UploadedFile.new(File.expand_path('../../../../files/rails.png', __FILE__)),
+        :use_route => :forgeos_core, :format => :json, :klass => 'Forgeos::Picture', :target_id => object.id, :target => object.class.to_s
       end
 
       assert_response :success
@@ -179,7 +182,8 @@ module Forgeos
     test "should post create in js" do
       admin_login_to('admin/attachments', 'create')
       assert_difference 'Attachment.count', 1 do
-        post :create, :Filedata => Rack::Test::UploadedFile.new(File.expand_path('../../../../files/rails.png', __FILE__)), :use_route => :forgeos_core, :format => :js, :klass => 'Forgeos::Picture'
+        post :create, :Filedata => Rack::Test::UploadedFile.new(File.expand_path('../../../../files/rails.png', __FILE__)),
+        :use_route => :forgeos_core, :format => :js, :klass => 'Forgeos::Picture'
       end
 
       assert !assigns(:attachment).new_record?, "media not saved"

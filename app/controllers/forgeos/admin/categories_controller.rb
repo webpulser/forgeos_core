@@ -1,9 +1,8 @@
 # This Controller Manage Categories
 module Forgeos
   class Admin::CategoriesController < Admin::BaseController
-    before_filter :get_category, :only => [:edit, :update, :destroy, :add_element]
-    before_filter :new_category, :only => [:new, :create]
     skip_before_filter :set_currency, :only => [:index]
+    helper_method :category
 
     # List Categories
     def index
@@ -36,17 +35,17 @@ module Forgeos
     #
     # The Category can be a child of another Category.
     def create
-      if @category.save
+      if category.save
         flash.notice = t('category.create.success').capitalize
         respond_to do |format|
-          format.html { redirect_to [forgeos_core, :edit, :admin, @category] }
-          format.json { render :text => @category.id }
+          format.html { redirect_to [forgeos_core, :edit, :admin, category] }
+          format.json { render :text => category.id }
         end
       else
         flash.alert = t('category.create.failed').capitalize
         respond_to do |format|
           format.html { render :action => 'new' }
-          format.json { render :json => { :errors => @category.errors } }
+          format.json { render :json => { :errors => category.errors } }
         end
       end
     end
@@ -58,20 +57,21 @@ module Forgeos
     #
     # The Category can be a child of another Category.
     def edit
+      category
     end
 
     def update
-      if @category.update_attributes(params[:category])
+      if category.save
         flash.notice = t('category.update.success').capitalize
         respond_to do |format|
-          format.html { redirect_to [forgeos_core, :edit, :admin, @category] }
-          format.json { render :text => @category.total_elements_count }
+          format.html { redirect_to [forgeos_core, :edit, :admin, category] }
+          format.json { render :text => category.total_elements_count }
         end
       else
         flash.alert = t('category.update.failed').capitalize
         respond_to do |format|
           format.html { render :action => 'edit' }
-          format.json { render :json => { :errors => @category.errors } }
+          format.json { render :json => { :errors => category.errors } }
         end
       end
     end
@@ -82,7 +82,7 @@ module Forgeos
     # ==== Output
     #  if destroy succed, return the Categories list
     def destroy
-      if @category.destroy
+      if category.destroy
         flash.notice = t('category.destroy.success').capitalize
         respond_to do |format|
           format.html { redirect_to [forgeos_core, :admin, :categories] }
@@ -92,26 +92,29 @@ module Forgeos
         flash.alert = t('category.destroy.failed').capitalize
         respond_to do |format|
           format.html { redirect_to [forgeos_core, :admin, :categories] }
-          format.json { render :json => { :errors => @category.errors } }
+          format.json { render :json => { :errors => category.errors } }
         end
       end
     end
 
     def add_element
-      @category.update_attribute(:element_ids, @category.element_ids << params[:element_id].to_i)
-      render :text => @category.elements.count
+      category.update_attribute(:element_ids, category.element_ids << params[:element_id].to_i)
+      render :text => category.elements.count
     end
 
     private
-    def get_category
-      unless @category = Category.find_by_id(params[:id])
-        flash.alert = t('category.not_exist').capitalize
-        return redirect_to [forgeos_core, :admin, :categories]
-      end
-    end
 
-    def new_category
-      @category = Category.new(params[:category])
+    def category
+      return @category if @category
+      unless @category = (params[:id] ? Forgeos::Category.find_by_id(params[:id]) : Forgeos::Category.new)
+        flash.alert = t('category.not_exist').capitalize
+        return redirect_to([forgeos_core, :admin, :categories])
+      end
+
+      @category.attributes = params[:category] if params[:category]
+
+      @category
     end
   end
 end
+

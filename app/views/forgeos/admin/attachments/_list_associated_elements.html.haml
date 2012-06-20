@@ -4,7 +4,7 @@
       =t "activerecord.models.#{type.underscore}"
       \:
 
-    - elements = @attachment.attachment_links.collect{ |sp| sp.attachable if sp.attachable.kind_of?(type.camelize.constantize)}.compact
+    - elements = attachment.attachment_links.collect{ |sp| sp.attachable if sp.attachable.kind_of?(type.camelize.constantize)}.compact
     - unless elements.nil? or elements.empty?
       %ul.no-list-style-type
         - elements.each do |element|

@@ -1,9 +1,9 @@
 .big-header.form-horizontal
   .form-actions
-    = link_to t('role.update.action'), [forgeos_core, :edit, :admin, @role], :class => 'btn btn-large btn-primary'
+    = link_to t('role.update.action'), [forgeos_core, :edit, :admin, role], :class => 'btn btn-large btn-primary'
     = t('simple_form.buttons.or')
     = link_to t('simple_form.buttons.cancel'), [forgeos_core, :admin, :roles], :class => 'btn btn-mini'
-  %h1= @role.name
+  %h1= role.name
 
 #content.row-fluid
   .inner-content.span9
@@ -24,13 +24,13 @@
 
   #right-sidebar.span3
     .step
-      = link_to [forgeos_core, :admin, @role], :data => {:confirm => t('user.destroy.confirm')}, :method => :delete do
+      = link_to [forgeos_core, :admin, role], :data => {:confirm => t('user.destroy.confirm')}, :method => :delete do
         = i :trash
         = t 'user.destroy.action'
     #role_show_attributed_to.step.open
       %a.icon-step-title=t 'role.attributed_to'
       .administrators-list
-        - @role.administrators.each do |admin|
+        - role.administrators.each do |admin|
           .admin
             = i 'user-md'
             = link_to admin.full_name, [forgeos_core, :admin, admin]

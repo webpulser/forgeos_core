@@ -1,25 +1,4 @@
-require 'mime/types'
-require 'bcrypt'
-require 'ransack'
-require 'squeel'
-require 'haml'
-require 'sass-rails'
-require 'compass-rails'
-require 'compass_twitter_bootstrap'
-require 'globalize3'
-require 'acts-as-taggable-on'
-require 'acts_as_list'
-require 'acts_as_tree'
-require 'webpulser-habtm_list'
-require 'kaminari'
-require 'ofc2'
-require 'authlogic'
-require 'delayed_job'
-require 'nested_form'
-require 'jquery-rails'
-require 'jquery-ui-rails'
-require 'flash_session_cookie_middleware'
-require 'simple_form'
+require File.join(File.dirname(__FILE__), 'dependencies')
 
 module Forgeos
   module Core
@@ -32,3 +11,4 @@ module Forgeos
     end
   end
 end
+

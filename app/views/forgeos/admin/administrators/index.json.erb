@@ -1,4 +1,4 @@
-<%= dataTables_resultset(Forgeos::Administrator, @admins) do |admin|
+<%= dataTables_resultset(Forgeos::Administrator, @administrators) do |admin|
   [
     handler_icon('user-md', admin),
     content_tag(:div, link_to(admin.full_name, [forgeos_core, :edit, :admin, admin]), :class => 'admin-name'),

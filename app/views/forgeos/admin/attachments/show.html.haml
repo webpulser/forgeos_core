@@ -1,19 +1,19 @@
 #wrap.form-horizontal
   .big-header
     .form-actions
-      = link_to t('attachment.update.action'), [forgeos_core, :edit, :admin, @attachment ], :class => 'btn btn-large btn-primary'
+      = link_to t('attachment.update.action'), [forgeos_core, :edit, :admin, attachment ], :class => 'btn btn-large btn-primary'
       = t('simple_form.buttons.or')
-      = link_to t('attachment.back'), [forgeos_core, :admin, @attachment.class.model_name.route_key], :class => 'btn btn-mini'
-    %h1.title= @attachment.name
+      = link_to t('attachment.back'), [forgeos_core, :admin, attachment.class.model_name.route_key], :class => 'btn btn-mini'
+    %h1.title= attachment.name
 
   #content.row-fluid
     .span9.well
       %h2.permalink
         #{t 'permalink', :count => 1} :
-        = link_to @attachment.public_filename, @attachment.public_filename
+        = link_to attachment.public_filename, attachment.public_filename
     #right-sidebar.span3
       .step
-        = link_to [forgeos_core, :admin, @attachment], :data => { :confirm => t('attachment.destroy.confirm')}, :method => :delete do
+        = link_to [forgeos_core, :admin, attachment], :data => { :confirm => t('attachment.destroy.confirm')}, :method => :delete do
           = i :trash
           = t 'attachment.destroy.action'
-    = render :partial => @attachment.class.model_name.singular_route_key.dup, :object => @attachment
+    = render :partial => attachment.class.model_name.singular_route_key.dup, :object => attachment

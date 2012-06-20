@@ -1,6 +1,6 @@
 module Forgeos
   class Admin::RightsController < Admin::BaseController
-    before_filter :get_right, :only => [:show, :edit, :update, :destroy]
+    helper_method :right
 
     def index
       respond_to do |format|
@@ -13,20 +13,20 @@ module Forgeos
     end
 
     def show
+      right
     end
 
     def new
-      @right = Right.new(params[:right])
     end
 
     def edit
+      right
     end
 
     def create
-      @right = Right.new(params[:right])
-      if @right.save
+      if right.save
         flash.notice = I18n.t('right.create.success').capitalize
-        return request.xhr? ? render(:nothing => true) : redirect_to([forgeos_core, :edit, :admin, @right])
+        return request.xhr? ? render(:nothing => true) : redirect_to([forgeos_core, :edit, :admin, right])
       else
         flash.alert = I18n.t('right.create.failed').capitalize
         if request.xhr?
@@ -39,7 +39,7 @@ module Forgeos
     end
 
     def update
-      if @right.update_attributes(params[:right])
+      if right.save
         flash.notice = I18n.t('right.update.success').capitalize
         return request.xhr? ? render(:nothing => true) : render(:action => :edit)
       else
@@ -54,7 +54,7 @@ module Forgeos
     end
 
     def destroy
-      if @right.destroy
+      if right.destroy
         flash.notice = I18n.t('right.destroy.success').capitalize
       else
         flash.alert = I18n.t('right.destroy.failed').capitalize
@@ -70,11 +70,16 @@ module Forgeos
 
   private
 
-    def get_right
-      unless @right = Right.find_by_id(params[:id])
-        flash.alert = I18n.t('right.not_exist').capitalize
+    def right
+      return @right if @right
+      unless @right = (params[:id] ? Forgeos::Right.find_by_id(params[:id]) : Forgeos::Right.new)
+        flash.alert = t('right.not_exist').capitalize
         return redirect_to([forgeos_core, :admin, :rights])
       end
+
+      @right.attributes = params[:right] if params[:right]
+
+      @right
     end
 
     def sort

@@ -1,7 +1,6 @@
 module Forgeos
   class Admin::RolesController < Admin::BaseController
-    before_filter :get_role, :only => [:show, :edit, :update, :destroy, :activate, :duplicate]
-    before_filter :new_role, :only => [:new, :create]
+    helper_method :role
 
     def index
       respond_to do |format|
@@ -14,23 +13,25 @@ module Forgeos
     end
 
     def show
+      role
     end
 
     def new
     end
 
     def duplicate
-      @role = @role.dup
+      @role = role.dup
       render :action => 'new'
     end
 
     def edit
+      role
     end
 
     def create
-      if @role.save
+      if role.save
         flash.notice = I18n.t('role.create.success').capitalize
-        redirect_to [forgeos_core, :edit, :admin, @role]
+        redirect_to [forgeos_core, :edit, :admin, role]
       else
         flash.alert = I18n.t('role.create.failed').capitalize
         render :action => "new"
@@ -38,7 +39,7 @@ module Forgeos
     end
 
     def update
-      if @role.update_attributes(params[:role])
+      if role.save
         flash.notice = I18n.t('role.update.success').capitalize
       else
         flash.alert = I18n.t('role.update.failed').capitalize
@@ -47,7 +48,7 @@ module Forgeos
     end
 
     def destroy
-      if @role.destroy
+      if role.destroy
         flash.notice = I18n.t('role.destroy.success').capitalize
       else
         flash.alert = I18n.t('role.destroy.failed').capitalize
@@ -61,7 +62,7 @@ module Forgeos
     end
 
     def activate
-      @role.activate
+      role.activate
       respond_to do |wants|
         wants.html do
           redirect_to([forgeos_core,:admin,:roles])
@@ -71,20 +72,20 @@ module Forgeos
     end
 
   private
-
-    def get_role
-      unless @role = Role.find_by_id(params[:id])
-        flash.alert = I18n.t('role.not_exist').capitalize
-        return redirect_to([forgeos_core,:admin,:roles])
+    def role
+      return @role if @role
+      unless @role = (params[:id] ? Forgeos::Role.find_by_id(params[:id]) : Forgeos::Role.new)
+        flash.alert = t('role.not_exist').capitalize
+        return redirect_to([forgeos_core, :admin, :roles])
       end
-    end
 
-    def new_role
-      @role = Role.new(params[:role])
+      @role.attributes = params[:role] if params[:role]
+
+      @role
     end
 
     def sort
-      items, search_query = forgeos_sort_from_datatables(Role, %w(name name administrators_id created_at active), %w(name))
+      items, search_query = forgeos_sort_from_datatables(Role, %w(name name roles_id created_at active), %w(name))
       @roles = items.search(search_query).result
     end
   end

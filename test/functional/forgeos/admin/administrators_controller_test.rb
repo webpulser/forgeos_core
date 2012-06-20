@@ -137,7 +137,7 @@ module Forgeos
       admin_login_to('admin/administrators','show')
       get :show, :id => forgeos_people(:administrator).id, :use_route => :forgeos_core
       assert_response :success
-      assert_equal forgeos_people(:administrator), assigns(:admin)
+      assert_equal forgeos_people(:administrator), assigns(:administrator)
       assert_template 'admin/administrators/show'
     end
 
@@ -156,7 +156,7 @@ module Forgeos
       admin_login_to('admin/administrators', 'edit')
       get :edit, :id => forgeos_people(:administrator).id, :use_route => :forgeos_core
       assert_response :success
-      assert_equal forgeos_people(:administrator), assigns(:admin)
+      assert_equal forgeos_people(:administrator), assigns(:administrator)
       assert_template 'admin/administrators/edit'
       assert_template 'admin/administrators/_form'
     end
@@ -176,7 +176,7 @@ module Forgeos
       admin_login_to('admin/administrators', 'new')
       get :new, :use_route => :forgeos_core
       assert_response :success
-      assert assigns(:admin).new_record?, "administrator is not a new record"
+      assert assigns(:administrator).new_record?, "administrator is not a new record"
       assert_template 'admin/administrators/new'
       assert_template 'admin/administrators/_form'
     end
@@ -185,8 +185,8 @@ module Forgeos
       admin_login_to('admin/administrators', 'new')
       get :new, :administrator => { :lastname => 'test' },:use_route => :forgeos_core
       assert_response :success
-      assert assigns(:admin).new_record?, "administrator is not a new record"
-      assert_equal 'test', assigns(:admin).lastname
+      assert assigns(:administrator).new_record?, "administrator is not a new record"
+      assert_equal 'test', assigns(:administrator).lastname
     end
 
     #########################
@@ -205,9 +205,9 @@ module Forgeos
         }, :use_route => :forgeos_core
       end
 
-      assert_redirected_to "/admin/administrators/#{assigns(:admin).id}/edit"
-      assert !assigns(:admin).new_record?, "administrator not saved"
-      assert_equal 'test', assigns(:admin).lastname
+      assert_redirected_to "/admin/administrators/#{assigns(:administrator).id}"
+      assert !assigns(:administrator).new_record?, "administrator not saved"
+      assert_equal 'test', assigns(:administrator).lastname
     end
 
     test "should post create with invalid record" do
@@ -220,9 +220,9 @@ module Forgeos
       end
 
       assert_response :success
-      assert !assigns(:admin).valid?, "administrator is valid and should not be"
-      assert assigns(:admin).new_record?, "administrator is not a new record"
-      assert_equal 'test', assigns(:admin).lastname
+      assert !assigns(:administrator).valid?, "administrator is valid and should not be"
+      assert assigns(:administrator).new_record?, "administrator is not a new record"
+      assert_equal 'test', assigns(:administrator).lastname
       assert_template 'admin/administrators/new'
       assert_not_nil flash[:alert]
     end
@@ -241,10 +241,9 @@ module Forgeos
         :password_confirmation => 'forgeos'
       }, :use_route => :forgeos_core
 
-      assert_response :success
-      assert_equal forgeos_people(:administrator), assigns(:admin)
+      assert_equal forgeos_people(:administrator), assigns(:administrator)
       assert_equal 'test', forgeos_people(:administrator).reload.lastname
-      assert_template 'admin/administrators/edit'
+      assert_redirected_to "/admin/administrators/#{assigns(:administrator).id}"
     end
 
     test "should put update with invalid record" do
@@ -255,8 +254,8 @@ module Forgeos
       }, :use_route => :forgeos_core
 
       assert_response :success
-      assert_equal forgeos_people(:administrator), assigns(:admin)
-      assert !assigns(:admin).valid?, "administrator is valid and should not be"
+      assert_equal forgeos_people(:administrator), assigns(:administrator)
+      assert !assigns(:administrator).valid?, "administrator is valid and should not be"
       assert_not_equal 'test', forgeos_people(:administrator).reload.lastname
       assert_template 'admin/administrators/edit'
     end
@@ -324,7 +323,7 @@ module Forgeos
       @request.env['HTTP_REFERER'] = 'http://test.host/admin/administrators'
       put :activate, :id => forgeos_people(:administrator).id, :use_route => :forgeos_core
 
-      assert_equal forgeos_people(:administrator), assigns(:admin)
+      assert_equal forgeos_people(:administrator), assigns(:administrator)
       assert !forgeos_people(:administrator).reload.active?
       assert_redirected_to '/admin/administrators'
     end
@@ -337,7 +336,7 @@ module Forgeos
       @request.env['HTTP_REFERER'] = 'http://test.host/admin/administrators'
       put :activate, :id => forgeos_people(:administrator).id, :use_route => :forgeos_core
 
-      assert_equal forgeos_people(:administrator), assigns(:admin)
+      assert_equal forgeos_people(:administrator), assigns(:administrator)
       assert forgeos_people(:administrator).reload.active?
       assert_not_nil flash[:alert]
       assert_redirected_to '/admin/administrators'

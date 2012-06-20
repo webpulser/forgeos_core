@@ -1,7 +1,6 @@
 module Forgeos
   class Admin::UsersController < Admin::BaseController
-    before_filter :get_user, :only => [:show, :activate, :edit, :update, :destroy, :assume]
-    before_filter :new_user, :only => [:new, :create]
+    helper_method :user
 
     def index
       respond_to do |format|
@@ -14,15 +13,16 @@ module Forgeos
     end
 
     def show
+      user
     end
 
     def new
     end
 
     def create
-      if @user.save
+      if user.save
         flash.notice = I18n.t('user.create.success').capitalize
-        redirect_to([forgeos_core, :edit, :admin, @user])
+        redirect_to([forgeos_core, :edit, :admin, user])
       else
         flash.alert = I18n.t('user.create.failed').capitalize
         render :action => 'new'
@@ -30,10 +30,11 @@ module Forgeos
     end
 
     def edit
+      user
     end
 
     def update
-      if @user.update_attributes(params[:user])
+      if user.save
         flash.notice = I18n.t('user.update.success').capitalize
       else
         flash.alert = I18n.t('user.update.failed').capitalize
@@ -44,7 +45,7 @@ module Forgeos
     # Remotly Destroy an User
     # return the list of all users
     def destroy
-      if @user.destroy
+      if user.destroy
         flash.notice = I18n.t('user.destroy.success').capitalize
       else
         flash.alert = I18n.t('user.destroy.failed').capitalize
@@ -58,14 +59,14 @@ module Forgeos
     end
 
     def activate
-      unless @user.active?
-        if @user.activate
+      unless user.active?
+        if user.activate
           flash.notice = I18n.t('user.activation.success').capitalize
         else
           flash.alert = I18n.t('user.activation.failed').capitalize
         end
       else
-        if @user.disactivate
+        if user.disactivate
           flash.notice = I18n.t('user.disactivation.success').capitalize
         else
           flash.alert = I18n.t('user.disactivation.failed').capitalize
@@ -98,7 +99,7 @@ module Forgeos
     end
 
     def assume
-      if assumed_user_session = assume_user(@user)
+      if assumed_user_session = assume_user(user)
         redirect_to '/'
       else
         redirect_to [forgeos_core, :admin, :users]
@@ -107,15 +108,16 @@ module Forgeos
 
   private
 
-    def get_user
-      unless @user = User.find_by_id(params[:id])
-        flash.alert = I18n.t('user.not_exist').capitalize
+    def user
+      return @user if @user
+      unless @user = (params[:id] ? Forgeos::User.find_by_id(params[:id]) : Forgeos::User.new)
+        flash.alert = t('user.not_exist').capitalize
         return redirect_to([forgeos_core, :admin, :users])
       end
-    end
 
-    def new_user
-      @user = User.new(params[:user])
+      @user.attributes = params[:user] if params[:user]
+
+      @user
     end
 
     def sort

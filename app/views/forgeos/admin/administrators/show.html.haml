@@ -1,22 +1,22 @@
 .big-header.form-horizontal
   .form-actions
-    = link_to t('administrator.update.action'), [forgeos_core, :edit, :admin, @admin], :class => 'btn btn-large btn-primary'
+    = link_to t('administrator.update.action'), [forgeos_core, :edit, :admin, administrator], :class => 'btn btn-large btn-primary'
     = t('simple_form.buttons.or')
     = link_to t('simple_form.buttons.cancel'), [forgeos_core, :admin, :administrators], :class => 'btn btn-mini'
-  %h1= @admin.full_name
+  %h1= administrator.full_name
 
 #content.row-fluid
   .inner-content.span9
     =t 'avatar'
-    %div= image_tag(@admin.avatar.public_filename(:small)) if @admin.avatar
+    %div= image_tag(administrator.avatar.public_filename(:small)) if administrator.avatar
     =t 'email'
-    %div= @admin.email
+    %div= administrator.email
     =t :role, :count => 1
     %div
-      = @admin.role.name
+      = administrator.role.name
   #right-sidebar.span3
     .step
-      = mail_to @admin.email, i(:envelope) + t('administrator.contact.action')
-      = link_to [forgeos_core, :admin, @admin], :data => { :confirm => t('administrator.destroy.confirm')}, :method => :delete do
+      = mail_to administrator.email, i(:envelope) + t('administrator.contact.action')
+      = link_to [forgeos_core, :admin, administrator], :data => { :confirm => t('administrator.destroy.confirm')}, :method => :delete do
         = i :trash
         = t 'administrator.destroy.action'

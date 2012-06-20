@@ -2,15 +2,15 @@
   %b
     =t 'name'
     \:
-  = h @right.name
+  = h right.name
 %p
   %b
     =t 'controller_name'
     \:
-  = h @right.controller_name
+  = h right.controller_name
 %p
   %b
     =t 'action_name'
     \:
-  = h @right.action_name
-- content_for :tools, link_to(t('edit'), forgeos_core.edit_admin_right_path(@right))
+  = h right.action_name
+- content_for :tools, link_to(t('edit'), [forgeos_core, :edit, :admin, right])

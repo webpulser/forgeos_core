@@ -1,10 +1,10 @@
 .big-header.form-horizontal
   .form-actions
-    = link_to t('user.update.action'), [forgeos_core, :edit, :admin, @user], :class => 'btn btn-large btn-primary'
+    = link_to t('user.update.action'), [forgeos_core, :edit, :admin, user], :class => 'btn btn-large btn-primary'
     = t('simple_form.buttons.or')
     = link_to t('simple_form.buttons.cancel'), [forgeos_core, :admin, :users], :class => 'btn btn-mini'
-    = link_to t('.assume_id'), [forgeos_core, :assume, :admin, @user], :class => 'btn btn-large btn-danger'
-  %h1= @user.full_name
+    = link_to i(:signin) + t('.assume_id'), [forgeos_core, :assume, :admin, user], :class => 'btn btn-large btn-danger'
+  %h1= user.full_name
 #content.row-fluid.form-horizontal
   .span9
     .inner-content
@@ -18,8 +18,8 @@
 
   #right-sidebar.span3
     .step
-      = mail_to @user.email, i(:envelope) + t('user.contact')
-      = link_to [forgeos_core, :admin, @user], :data => { :confirm => t('user.destroy.confirm')}, :method => :delete do
+      = mail_to user.email, i(:envelope) + t('user.contact')
+      = link_to [forgeos_core, :admin, user], :data => { :confirm => t('user.destroy.confirm')}, :method => :delete do
         = i :trash
         = t 'user.destroy.action'
     .step.disabled
@@ -29,5 +29,5 @@
       .inner-step
         %p
           =t 'created_on'
-          = @user.created_at.to_date
+          = user.created_at.to_date
   .clear
