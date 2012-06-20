@@ -49,4 +49,10 @@ fr:
       zero: '%{count} client connecté'
       one: '%{count} client connecté'
       other: '%{count} clients connectés'
-
+  forgeos:
+    admin:
+      users:
+        show:
+          assume_id: se connecter en tant que
+        form:
+          assume_id: se connecter en tant que
