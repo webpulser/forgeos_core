@@ -1,6 +1,6 @@
 module Forgeos
   class Admin::AdministratorsController < Admin::BaseController
-    helper_method :administrator
+    expose(:administrator, :model => Forgeos::Administrator)
 
     def index
       respond_to do |format|
@@ -86,17 +86,6 @@ module Forgeos
       items, search_query = forgeos_sort_from_datatables(Administrator, %w(id full_name role_name email active), %w(firstname lastname role_name email))
       @administrators = items.search(search_query).result
     end
-
-    def administrator
-      return @administrator if @administrator
-      unless @administrator = (params[:id] ? Forgeos::Administrator.find_by_id(params[:id]) : Forgeos::Administrator.new)
-        flash.alert = t('administrator.not_exist').capitalize
-        return redirect_to([forgeos_core, :admin, :administrators])
-      end
-
-      @administrator.attributes = params[:administrator] if params[:administrator]
-
-      @administrator
-    end
   end
 end
+

@@ -1,6 +1,6 @@
 module Forgeos
   class Admin::RightsController < Admin::BaseController
-    helper_method :right
+    expose(:right, :model => Forgeos::Right)
 
     def index
       respond_to do |format|
@@ -69,19 +69,6 @@ module Forgeos
     end
 
   private
-
-    def right
-      return @right if @right
-      unless @right = (params[:id] ? Forgeos::Right.find_by_id(params[:id]) : Forgeos::Right.new)
-        flash.alert = t('right.not_exist').capitalize
-        return redirect_to([forgeos_core, :admin, :rights])
-      end
-
-      @right.attributes = params[:right] if params[:right]
-
-      @right
-    end
-
     def sort
       items, search_query = forgeos_sort_from_datatables(Right, %w(id name controller_name action_name), %w(name controller_name action_name))
       @rights = items.search(search_query).result

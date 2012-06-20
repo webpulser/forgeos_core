@@ -1,6 +1,6 @@
 module Forgeos
   class Admin::UsersController < Admin::BaseController
-    helper_method :user
+    expose(:user, :model => Forgeos::User)
 
     def index
       respond_to do |format|
@@ -108,21 +108,10 @@ module Forgeos
 
   private
 
-    def user
-      return @user if @user
-      unless @user = (params[:id] ? Forgeos::User.find_by_id(params[:id]) : Forgeos::User.new)
-        flash.alert = t('user.not_exist').capitalize
-        return redirect_to([forgeos_core, :admin, :users])
-      end
-
-      @user.attributes = params[:user] if params[:user]
-
-      @user
-    end
-
     def sort
       items, search_query = forgeos_sort_from_datatables(User, %w(id full_name email active), %w(firstname lastname email))
       @users = items.search(search_query).result
     end
   end
 end
+

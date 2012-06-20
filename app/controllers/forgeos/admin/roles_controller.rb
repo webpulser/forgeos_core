@@ -1,6 +1,6 @@
 module Forgeos
   class Admin::RolesController < Admin::BaseController
-    helper_method :role
+    expose(:role, :model => Forgeos::Role)
 
     def index
       respond_to do |format|
@@ -72,18 +72,6 @@ module Forgeos
     end
 
   private
-    def role
-      return @role if @role
-      unless @role = (params[:id] ? Forgeos::Role.find_by_id(params[:id]) : Forgeos::Role.new)
-        flash.alert = t('role.not_exist').capitalize
-        return redirect_to([forgeos_core, :admin, :roles])
-      end
-
-      @role.attributes = params[:role] if params[:role]
-
-      @role
-    end
-
     def sort
       items, search_query = forgeos_sort_from_datatables(Role, %w(name name roles_id created_at active), %w(name))
       @roles = items.search(search_query).result

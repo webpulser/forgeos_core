@@ -2,7 +2,7 @@
 module Forgeos
   class Admin::CategoriesController < Admin::BaseController
     skip_before_filter :set_currency, :only => [:index]
-    helper_method :category
+    expose(:category, :model => Forgeos::Category)
 
     # List Categories
     def index
@@ -100,20 +100,6 @@ module Forgeos
     def add_element
       category.update_attribute(:element_ids, category.element_ids << params[:element_id].to_i)
       render :text => category.elements.count
-    end
-
-    private
-
-    def category
-      return @category if @category
-      unless @category = (params[:id] ? Forgeos::Category.find_by_id(params[:id]) : Forgeos::Category.new)
-        flash.alert = t('category.not_exist').capitalize
-        return redirect_to([forgeos_core, :admin, :categories])
-      end
-
-      @category.attributes = params[:category] if params[:category]
-
-      @category
     end
   end
 end

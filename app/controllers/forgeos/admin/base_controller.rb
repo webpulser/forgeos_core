@@ -7,6 +7,25 @@ module Forgeos
     protect_from_forgery
 
   private
+    # decent_exposure remplacement (waiting for decent_exposure v2.0)
+    def self.expose(name, options = {}, &block)
+      model = options[:model] || name.camelize.constantize
+      define_method(name) do
+        resource_name = "@#{name}".to_sym
+        resource = self.instance_variable_get(resource_name)
+        return resource if resource
+        unless resource = self.instance_variable_set(resource_name, (params[:id] ? model.find_by_id(params[:id]) : model.new))
+          flash.alert = t(:not_exist, :scope => [name]).capitalize
+          return redirect_to([forgeos_core, :admin, name.to_s.pluralize.to_sym])
+        end
+
+        resource.attributes = params[name] if params[name]
+
+        resource
+      end
+
+      helper_method name
+    end
 
     def login_required
       return_to_admin
