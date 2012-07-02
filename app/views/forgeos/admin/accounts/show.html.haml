@@ -2,7 +2,7 @@
   .subnav
     .big-header
       .form-actions= link_to t('account.update.action'), forgeos_core.edit_admin_account_path, :class => 'btn btn-primary'
-      %h1= @user.full_name
+      %h1= @user.fullname
   #content
     .inner-content
       = field_set_tag nil, :class => 'well' do

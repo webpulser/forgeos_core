@@ -1,7 +1,7 @@
 <%= dataTables_resultset(Forgeos::Administrator, @administrators) do |admin|
   [
     handler_icon('user-md', admin),
-    content_tag(:div, link_to(admin.full_name, [forgeos_core, :edit, :admin, admin]), :class => 'admin-name'),
+    content_tag(:div, link_to(admin.fullname, [forgeos_core, :edit, :admin, admin]), :class => 'admin-name'),
     admin.role ? admin.role.name : '-',
     content_tag(:div, mail_to(admin.email, admin.email), :class => 'email' ),
     activate_toogle_button(forgeos_core, admin),

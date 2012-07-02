@@ -4,7 +4,7 @@
     = t('simple_form.buttons.or')
     = link_to t('simple_form.buttons.cancel'), [forgeos_core, :admin, :users], :class => 'btn btn-mini'
     = link_to i(:signin) + t('.assume_id'), [forgeos_core, :assume, :admin, user], :class => 'btn btn-large btn-danger'
-  %h1= user.full_name
+  %h1= user.fullname
 #content.row-fluid.form-horizontal
   .span9
     .inner-content

@@ -109,7 +109,7 @@ module Forgeos
   private
 
     def sort
-      items, search_query = forgeos_sort_from_datatables(User, %w(id full_name email active), %w(firstname lastname email))
+      items, search_query = forgeos_sort_from_datatables(User, %w(id fullname email active), %w(firstname lastname email))
       @users = items.search(search_query).result
     end
   end

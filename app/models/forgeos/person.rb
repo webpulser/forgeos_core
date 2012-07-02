@@ -5,7 +5,7 @@ module Forgeos
       c.crypto_provider = Authlogic::CryptoProviders::BCrypt
     end
 
-    ransacker :full_name do |parent|
+    ransacker :fullname do |parent|
       case self.connection.class.to_s
       when 'ActiveRecord::ConnectionAdapters::MysqlAdapter', 'ActiveRecord::ConnectionAdapters::Mysql2Adapter'
         Arel::Nodes::NamedFunction.new 'CONCAT', [ parent.table[:firstname], parent.table[:lastname] ]
@@ -74,10 +74,10 @@ module Forgeos
     end
 
 
-    def full_name
+    def fullname
       "#{firstname} #{lastname}"
     end
-    alias :to_s :full_name
+    alias :to_s :fullname
 
 
   protected

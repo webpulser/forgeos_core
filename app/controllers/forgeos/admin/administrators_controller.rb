@@ -83,7 +83,7 @@ module Forgeos
   private
 
     def sort
-      items, search_query = forgeos_sort_from_datatables(Administrator, %w(id full_name role_name email active), %w(firstname lastname role_name email))
+      items, search_query = forgeos_sort_from_datatables(Administrator, %w(id fullname role_name email active), %w(firstname lastname role_name email))
       @administrators = items.search(search_query).result
     end
   end

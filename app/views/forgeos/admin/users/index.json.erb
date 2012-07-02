@@ -1,9 +1,9 @@
 <%= dataTables_resultset(Forgeos::User, @users) do |user|
   name, email = if params[:mode] == 'selection'
-    [user.full_name, user.email]
+    [user.fullname, user.email]
   else
     [
-      link_to(user.full_name, [forgeos_core, :admin, user]),
+      link_to(user.fullname, [forgeos_core, :admin, user]),
       mail_to(user.email, user.email, :class => 'truncate', :title => user.email)
     ]
   end

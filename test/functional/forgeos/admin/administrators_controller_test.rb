@@ -69,7 +69,7 @@ module Forgeos
       assert_match 'admin@forgeos.com', @response.body
     end
 
-    test "should get index as json with sorting by full_name" do
+    test "should get index as json with sorting by fullname" do
       admin_login_to('admin/administrators', 'index')
       get :index, :format => 'json', :sEcho => 0, :iSortCol_0 => 1, :use_route => :forgeos_core
       assert_response :success
@@ -120,7 +120,7 @@ module Forgeos
       assert !@response.body.include?('admin@fogeos.com')
     end
 
-    test "should get index as json to search admin with sorting by full_name" do
+    test "should get index as json to search admin with sorting by fullname" do
       admin_login_to('admin/administrators', 'index')
       get :index, :format => 'json', :sSearch => 'admin', :sEcho => 0, :iSortCol_0 => 1, :use_route => :forgeos_core
       assert_response :success

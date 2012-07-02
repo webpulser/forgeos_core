@@ -82,8 +82,8 @@ module Forgeos
       assert person.valid?
     end
 
-    test "a full_name of a person is the composition of his lastname then his firstname" do
-      assert_equal("Gary Grant", forgeos_people(:active).full_name)
+    test "a fullname of a person is the composition of his lastname then his firstname" do
+      assert_equal("Gary Grant", forgeos_people(:active).fullname)
     end
 
     test "could activate a person" do
