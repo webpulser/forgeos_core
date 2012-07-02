@@ -23,7 +23,7 @@ module Forgeos
     end
 
     def total_elements_count
-      ([elements.count('id')] + children.all(:select => 'id,type').map(&:total_elements_count)).sum
+      ([elements.count('id')] + children.select('id,type').all.map(&:total_elements_count)).sum
     end
 
     def category_picture

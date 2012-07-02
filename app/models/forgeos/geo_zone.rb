@@ -18,13 +18,10 @@ module Forgeos
         }
       }
 
-      if element_to_count
-        hash[:data][:title] += "<span>#{self.send(element_to_count).count}</span>".html_safe
-      end
+      hash[:data][:title] += "<span>#{self.send(element_to_count).count}</span>".html_safe if element_to_count
 
-      unless children.empty?
-        hash[:children] = children.collect{ |g| g.to_jstree(element_to_count)}
-      end
+      hash[:children] = children.map{ |g| g.to_jstree(element_to_count)} unless children.empty?
+
       hash
     end
   end

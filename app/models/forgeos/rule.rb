@@ -1,15 +1,11 @@
 module Forgeos
   class Rule < ActiveRecord::Base
     acts_as_tree
-    before_save :usage
     serialize :variables
 
     validates :name, :conditions, :presence => true
 
-    def usage
-      #activated = false if max_use && max_use > 0 && use >= max_use
-      #self.active = true
-    end
+    before_save :usage
 
     def activate
       activation_state = !self.active?
@@ -19,14 +15,19 @@ module Forgeos
       end
     end
 
+    def description
+      return super unless parent
+      super || parent.description
+    end
+
     def name
       return super unless parent
       super || parent.name
     end
 
-    def description
-      return super unless parent
-      super || parent.description
+    def usage
+      #activated = false if max_use && max_use > 0 && use >= max_use
+      #self.active = true
     end
   end
 end
