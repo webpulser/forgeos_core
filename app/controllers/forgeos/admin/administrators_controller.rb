@@ -60,13 +60,13 @@ module Forgeos
 
     def activate
       unless administrator.active?
-        if administrator.activate
+        if administrator.activate!
           flash.notice = I18n.t('administrator.activation.success').capitalize
         else
           flash.alert = I18n.t('administrator.activation.failed').capitalize
         end
       else
-        if administrator.disactivate
+        if administrator.disactivate!
           flash.notice = I18n.t('administrator.disactivation.success').capitalize
         else
           flash.alert = I18n.t('administrator.disactivation.failed').capitalize

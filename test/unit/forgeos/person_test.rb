@@ -37,8 +37,8 @@ module Forgeos
 
     test "could disable presence of firstname" do
       Person.class_eval do
-        def skip_presence_of_firstname?
-          true
+        def firstname_required?
+          false
         end
       end
       person = Person.new(
@@ -53,8 +53,8 @@ module Forgeos
 
     test "could disable presence of lastname" do
       Person.class_eval do
-        def skip_presence_of_lastname?
-          true
+        def lastname_required?
+          false
         end
       end
       person = Person.new(
@@ -68,8 +68,8 @@ module Forgeos
 
     test "could disable uniqueness of email" do
       Person.class_eval do
-        def skip_uniqueness_of_email?
-          true
+        def email_uniq?
+          false
         end
       end
       person = Person.new(

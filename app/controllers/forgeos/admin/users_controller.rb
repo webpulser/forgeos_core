@@ -60,13 +60,13 @@ module Forgeos
 
     def activate
       unless user.active?
-        if user.activate
+        if user.activate!
           flash.notice = I18n.t('user.activation.success').capitalize
         else
           flash.alert = I18n.t('user.activation.failed').capitalize
         end
       else
-        if user.disactivate
+        if user.disactivate!
           flash.notice = I18n.t('user.disactivation.success').capitalize
         else
           flash.alert = I18n.t('user.disactivation.failed').capitalize
