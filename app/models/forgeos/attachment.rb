@@ -8,24 +8,34 @@ module Forgeos
     has_many :attachment_links,
       :dependent => :destroy
 
-    before_save :fill_blank_name_with_filename
-    before_update do
-      self.attachment_options[:content_type].include?(content_type)
-    end
+    before_validation :fill_blank_name_with_filename
+    validates :name, :presence => { :unless => :parent_id }
+    validates :content_type, :inclusion => { :in => lambda { |att| att.content_types.to_a } }
+
 
     scope :linked_to, lambda { |element_type|
-      {
-        :include => :attachment_links,
-        :conditions => {
-          :forgeos_attachment_links => {
-            :element_type => element_type.to_s.classify.constantize.base_class.to_s
-          }
-        }
-      }
-    }
+      includes(:attachment_links).
+      where(:forgeos_attachment_links => {
+        :element_type => element_type.to_s.classify.constantize.base_class.to_s
+      })
+     }
 
-    def file_type
-      content_type.split('/').last
+    def content_types
+      if self.class.respond_to?(:attachment_options)
+        self.class.attachment_options[:content_type]
+      else
+        []
+      end
+    end
+
+    def self.detect_attachment_class_from_content_type(content_type)
+      attachment_class = Medium
+
+      [Audio, Video, Pdf, Doc, Picture].each do |klass|
+        attachment_class = klass if klass.attachment_options[:content_type].include?(content_type)
+      end
+
+      attachment_class
     end
 
     def self.options_for(target = class_name)
@@ -56,22 +66,18 @@ module Forgeos
       end
     end
 
-    def self.detect_attachment_class_from_content_type(content_type)
-      attachment_class = Medium
 
-      [Audio, Video, Pdf, Doc, Picture].each do |klass|
-        attachment_class = klass if klass.attachment_options[:content_type].include?(content_type)
-      end
-
-      attachment_class
+    def file_type
+      content_type.split('/').last
     end
 
-    private
+  private
 
     def fill_blank_name_with_filename
-      if name.blank? and filename
+      if name.blank? and filename.to_s.match(/\./)
         self.name = filename.split('.').first
       end
     end
   end
 end
+
