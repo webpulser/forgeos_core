@@ -1,10 +1,12 @@
 module Forgeos
   class Setting < ActiveRecord::Base
     belongs_to :site_address, :dependent => :destroy, :class_name => 'Forgeos::Address', :foreign_key => :address_id
+
     store :mailer, :accessors => [:delivery_method]
     store :smtp_settings, :accessors => [:address, :port, :domain, :enable_starttls_auto, :authentication, :user_name, :password]
     store :sendmail_settings, :accessors => [:location, :arguments]
     serialize :attachments
+
     accepts_nested_attributes_for :site_address
 
     validates :name, :presence => true
@@ -20,7 +22,7 @@ module Forgeos
       settings
     end
 
-    def smtp_settings_attributes=(attributes)
+    def smtp_settings=(attributes)
       if attributes and attributes[:authentication] == 'none'
         [:authentication, :password, :user_name].each do |key|
           attributes.delete(key)
@@ -28,14 +30,6 @@ module Forgeos
       end
 
       write_attribute(:smtp_settings, attributes)
-    end
-
-    def mailer_attributes=(attributes)
-      write_attribute(:mailer, attributes)
-    end
-
-    def sendmail_settings_attributes=(attributes)
-      write_attribute(:sendmail_settings, attributes)
     end
   end
 end

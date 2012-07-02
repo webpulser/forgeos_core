@@ -18,20 +18,23 @@ module Forgeos
 
     test "should write smtp_settings" do
       setting = Setting.new
-      setting.smtp_settings_attributes= { :toto => 1}
+      setting.smtp_settings = { :toto => 1}
       assert_equal({ :toto => 1 }, setting.smtp_settings)
     end
 
     test "should persist smtp_settings" do
+      new_params = { :toto => 1 }
       setting = Setting.new(:name => 'test')
-      setting.smtp_settings_attributes= { :toto => 1}
+      setting.smtp_settings = new_params
       setting.save
-      assert_equal({ :toto => 1 }, Setting.last.smtp_settings)
+      assert setting.valid?, 'setting is invalid and should not be'
+      assert_equal(new_params, setting.smtp_settings)
+      assert_equal(new_params, setting.reload.smtp_settings)
     end
 
     test "should remove authentication and user_name and password from smtp_settings if authentication is none" do
       setting = Setting.new
-      setting.smtp_settings_attributes= {
+      setting.smtp_settings = {
         :authentication => 'none',
         :user_name => 'test',
         :password => 'test',
@@ -43,26 +46,26 @@ module Forgeos
 
     test "should write mailer" do
       setting = Setting.new
-      setting.mailer_attributes= { :toto => 1}
+      setting.mailer = { :toto => 1}
       assert_equal({ :toto => 1 }, setting.mailer)
     end
 
     test "should persist mailer" do
       setting = Setting.new(:name => 'test')
-      setting.mailer_attributes= { :toto => 1}
+      setting.mailer = { :toto => 1}
       setting.save
       assert_equal({ :toto => 1 }, Setting.last.mailer)
     end
 
     test "should write sendmail_settings" do
       setting = Setting.new
-      setting.sendmail_settings_attributes= { :toto => 1}
+      setting.sendmail_settings = { :toto => 1}
       assert_equal({ :toto => 1 }, setting.sendmail_settings)
     end
 
     test "should persist sendmail_settings" do
       setting = Setting.new(:name => 'test')
-      setting.sendmail_settings_attributes= { :toto => 1}
+      setting.sendmail_settings = { :toto => 1}
       setting.save
       assert_equal({ :toto => 1 }, Setting.last.sendmail_settings)
     end
