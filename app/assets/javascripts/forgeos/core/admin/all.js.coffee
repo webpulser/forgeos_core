@@ -1,0 +1,46 @@
+define 'forgeos/core/admin/all', [
+    './attachments',
+    './base',
+    './clicks',
+    './datatables',
+    './editor',
+    './header',
+    './import',
+    './inputs',
+    './notifications',
+    './popins',
+    './rights',
+    './settings',
+    './sidebars',
+    './trees'
+  ],
+  (
+    Attachments,
+    Base,
+    Clicks,
+    DataTables,
+    Editor,
+    Header,
+    Import,
+    Inputs,
+    Notifications,
+    Mary,
+    Rights,
+    Settings,
+    Sidebars,
+    Trees
+  ) ->
+    new: ->
+      Attachments.new()
+      Clicks.new()
+      DataTables.new()
+      Header.new()
+      Editor.new()
+      Import.new()
+      Inputs.new()
+      Mary.new()
+      Notifications.new()
+      Rights.new()
+      Settings.new()
+      Sidebars.new()
+      Trees.new()

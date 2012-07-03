@@ -22,10 +22,11 @@ Gem::Specification.new do |s|
   # Assets
   s.add_dependency 'haml', '>= 3.1.2'
   s.add_dependency 'sass-rails', '>= 3.1.4'
-  s.add_dependency 'jquery-ui-rails'
+  s.add_dependency 'jquery-rails'
   s.add_dependency 'compass-rails', '>= 1.0.2'
   s.add_dependency 'compass_twitter_bootstrap'
   s.add_dependency 'coffee-rails'
+  s.add_dependency 'requirejs-rails', '~> 0.9.0'
 
   # Authentication
   s.add_dependency 'bcrypt-ruby', '>= 2.1.4'

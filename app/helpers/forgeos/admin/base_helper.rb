@@ -1,6 +1,7 @@
 module Forgeos
   module Admin
     module BaseHelper
+      include RequirejsHelper
       include Forgeos::MenuHelper
       include Forgeos::AttachmentHelper
       include Forgeos::SerializedFieldHelper
