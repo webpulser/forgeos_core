@@ -1,7 +1,11 @@
-define 'forgeos/core/admin/sidebars', ['./sidebars/right', './sidebars/left'], (Right, Left) ->
+define 'forgeos/core/admin/sidebars', ->
   initialize = ->
-    Right.new()
-    Left.new()
+    require ['forgeos/core/admin/sidebars/right'], (rightSidebar) ->
+      rightSidebar.new()
+
+    require ['forgeos/core/admin/sidebars/left'], (leftSidebar) ->
+      leftSidebar.new()
+ 
 
   # public methods
   new: initialize

@@ -1,4 +1,4 @@
-define 'forgeos/core/admin/rights', ['jquery', './base', './notifications'], ($, Base, Notifications) ->
+define 'forgeos/core/admin/rights', ['jquery'], ($) ->
 
   add_inline_form = (timestamp, url, method) ->
     $('body').append "<form action=\"#{url}\" id=\"#{timestamp}\" method=\"#{method}\" onsubmit=\"inline_save('#{timestamp}', '#{url}', '#{method}')\"></form>"
@@ -17,13 +17,14 @@ define 'forgeos/core/admin/rights', ['jquery', './base', './notifications'], ($,
     $(".edit-right").live "click", (e) ->
       e.preventDefault()
       row = $(this).parents("tr")
-      right_id = Base.get_rails_element_id(row.find('td div.handler_container'))
-      timestamp = new Date().getTime()
+      require ['forgeos/core/admin/base'], (Base) ->
+        right_id = Base.get_rails_element_id(row.find('td div.handler_container'))
+        timestamp = new Date().getTime()
 
-      add_inline_form timestamp, "#{window._forgeos_js_vars.mount_paths.core}/admin/rights/#{right_id}", 'put'
+        add_inline_form timestamp, "#{window._forgeos_js_vars.mount_paths.core}/admin/rights/#{right_id}", 'put'
 
-      row.hide()
-      row.after right_form(timestamp, row)
+        row.hide()
+        row.after right_form(timestamp, row)
 
       false
 
@@ -34,6 +35,21 @@ define 'forgeos/core/admin/rights', ['jquery', './base', './notifications'], ($,
       row = $(this).parents("tr")
       add_inline_form timestamp, "#{window._forgeos_js_vars.mount_paths.core}/admin/rights", 'post'
       row.after right_form(timestamp, row)
+
+      false
+
+  bind_inline_buttons = ->
+    $('.inline_save').live 'click', (e) ->
+      e.preventDefault()
+      
+      $($(this).attr('href')).trigger('onsubmit')
+
+      false
+
+    $('.inline_discard').live 'click', (e) ->
+      e.preventDefault()
+      
+      inline_discard($(this).attr('href'))
 
       false
 
@@ -56,7 +72,8 @@ define 'forgeos/core/admin/rights', ['jquery', './base', './notifications'], ($,
         $('#table').dataTableInstance().fnDraw()
         form.remove()
       error: ->
-        Notifications.new()
+        require ['forgeos/core/admin/notifications'], (Notifications) ->
+          Notifications.new()
       data: form.serializeArray()
       dataType: 'script'
       type: method
@@ -87,12 +104,13 @@ define 'forgeos/core/admin/rights', ['jquery', './base', './notifications'], ($,
     <td><input type='text' value='#{controller}' name='right[controller_name]' size='25'/></td>
     <td><input type='text' value='#{action}' name='right[action_name]' size='15'/></td>
     <td>
-      <a href='#' onclick=\"$('##{timestamp}').trigger('onsubmit')\"><i class='icon icon-ok-sign'></i></a>
-      <a href='#' onclick=\"inline_discard('#{timestamp}')\"><i class='icon icon-remove-sign'></i></a>
+      <a class='inline_save' href='##{timestamp}'><i class='icon icon-ok-sign'></i></a>
+      <a class='inline_discard' href='#{timestamp}'><i class='icon icon-remove-sign'></i></a>
     </td>
     </tr>"
 
   initialize = ->
+    bind_inline_buttons()
     bind_create()
     bind_edit()
     bind_duplicate()

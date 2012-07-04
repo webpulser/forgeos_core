@@ -1,4 +1,4 @@
-define 'forgeos/core/admin/inputs', ['jquery', 'forgeos/jqueryui/jquery.ui.datepicker', 'forgeos/jqueryui/jquery.ui.sortable'], ($) ->
+define 'forgeos/core/admin/inputs', ['jquery'], ($) ->
 
   build_url_from_name = ->
     # catch object name field to build object url
@@ -33,25 +33,35 @@ define 'forgeos/core/admin/inputs', ['jquery', 'forgeos/jqueryui/jquery.ui.datep
       element.val value  if element.is(":visible")
 
   init_sortable = ->
-    $(".sortable").each ->
-      $(this).sortable
-        handle: ".handler"
-        placeholder: "ui-state-highlight"
+    sortables = $('.sortable')
+    if sortables.length > 0
+      require ['forgeos/jqueryui/jquery.ui.sortable'], ->
+        sortables.each ->
+          $(this).sortable
+            handle: ".handler"
+            placeholder: "ui-state-highlight"
 
-    $(".nested_sortable").each ->
-      $(this).sortable
-        handle: ".handler"
-        placeholder: "ui-state-highlight"
-        update: (event, ui) ->
-          update_block_container_positions $(this)
+    nested_sortables = $('.nested_sortable')
+    if nested_sortables.length > 0
+      require ['forgeos/jqueryui/jquery.ui.sortable'], ->
+        nested_sortables.each ->
+          $(this).sortable
+            handle: ".handler"
+            placeholder: "ui-state-highlight"
+            update: (event, ui) ->
+              require ['forgeos/core/admin/base'], (Base) ->
+                Base.update_block_container_positions $(this)
 
   init_datepickers = ->
-    $("input.date-picker").datepicker
-      dateFormat: "dd/mm/yy"
-      showOn: "both"
-      buttonText: ""
-      changeMonth: true
-      changeYear: true
+    picker = $("input.date-picker")
+    if picker.length > 0
+      require ['forgeos/jqueryui/jquery.ui.datepicker'], ->
+        picker.datepicker
+          dateFormat: "dd/mm/yy"
+          showOn: "both"
+          buttonText: ""
+          changeMonth: true
+          changeYear: true
 
   initialize = ->
     build_url_from_name()

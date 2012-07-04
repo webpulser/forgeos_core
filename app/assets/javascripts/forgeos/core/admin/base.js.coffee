@@ -1,4 +1,4 @@
-define 'forgeos/core/admin/base', ['jquery', 'forgeos/jqueryui/jquery.effects.explode', 'jquery_ujs'], ($) ->
+define 'forgeos/core/admin/base', ['jquery', 'jquery_ujs'], ($) ->
   capitalize = (string) ->
     string.charAt(0).toUpperCase() + string.slice(1)
 
@@ -64,13 +64,14 @@ define 'forgeos/core/admin/base', ['jquery', 'forgeos/jqueryui/jquery.effects.ex
   remove_rails_nested_object = (selector) ->
     line = $(selector)
     del = line.find("input.destroy")
-    if del.length > 0
-      del.val 1
-      tmce_unload_children selector
-      line.hide "explode", {}, 3000
-    else
-      line.hide "explode", {}, 3000, ->
-        $(this).remove()
+    require ['forgeos/core/admin/editor', 'forgeos/jqueryui/jquery.effects.explode'], (Editor) ->
+      if del.length > 0
+        del.val 1
+        Editor.unload_children selector
+        line.hide "explode", {}, 3000
+      else
+        line.hide "explode", {}, 3000, ->
+          $(this).remove()
 
   update_block_container_positions = (container) ->
     $(container).children(".block-container:visible").each ->

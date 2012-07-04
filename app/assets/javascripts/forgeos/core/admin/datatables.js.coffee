@@ -1,6 +1,6 @@
-define 'forgeos/core/admin/datatables', ['jquery', './notifications', 'jquery.dataTables.min', 'forgeos/jquery.dataSlides'], ($, Notifications) ->
+define 'forgeos/core/admin/datatables', ['jquery'], ($) ->
 
-  DataTablesRowCallBack = (nRow, aData, iDisplayIndex) ->
+  default_row_callback = (nRow, aData, iDisplayIndex) ->
     table = $("#" + @sInstance)
     table = $(this)  if typeof (table) is "undefined"
     div = $(nRow).find(":regex(id,.+_\\d+)")
@@ -11,26 +11,27 @@ define 'forgeos/core/admin/datatables', ['jquery', './notifications', 'jquery.da
 
     # Draggable Rows
     if table.hasClass("draggable_rows")
-      $(nRow).draggable
-        revert: "invalid"
-        cursor: "move"
-        handle: ".handler"
-        cursorAt:
-          top: 15
-          left: 75
+      require ['forgeos/jqueryui/jquery.ui.draggable'], ->
+        $(nRow).draggable
+          revert: "invalid"
+          cursor: "move"
+          handle: ".handler"
+          cursorAt:
+            top: 15
+            left: 75
 
-        helper: (e) ->
-          element = $($(e.currentTarget).find("td a")[0])
-          title = element.text()
-          "<div class=\"ui-helper ui-corner-all\"><span class=\"handler\"><span class=\"inner\">&nbsp;</span></span>" + title + "</div>"
+          helper: (e) ->
+            element = $($(e.currentTarget).find("td a")[0])
+            title = element.text()
+            "<div class=\"ui-helper ui-corner-all\"><span class=\"handler\"><span class=\"inner\">&nbsp;</span></span>" + title + "</div>"
 
-        start: (event, ui) ->
-          $("#page").addClass "sidebar_dragg"
-          $(this).addClass "dragging"
+          start: (event, ui) ->
+            $("#page").addClass "sidebar_dragg"
+            $(this).addClass "dragging"
 
-        stop: (event, ui) ->
-          $("#page").removeClass "sidebar_dragg"
-          $(this).removeClass "dragging"
+          stop: (event, ui) ->
+            $("#page").removeClass "sidebar_dragg"
+            $(this).removeClass "dragging"
 
     # Selectable Rows
     if table.hasClass("selectable_rows")
@@ -99,8 +100,10 @@ define 'forgeos/core/admin/datatables', ['jquery', './notifications', 'jquery.da
       dataType: "json"
       type: "put"
 
+  # Extend dataTables API to add
+  # selection feature
   extend_datatables = ->
-    return unless $.fn.dataTableExt?
+    extend_jquery()
     $.fn.dataTableExt.oApi.fnGetSelectedNodes = ->
       aReturn = new Array()
       aTrs = $(this).dataTableInstance().fnGetNodes()
@@ -129,6 +132,10 @@ define 'forgeos/core/admin/datatables', ['jquery', './notifications', 'jquery.da
         i++
       aReturn
 
+  # Extend dataSlides API to add
+  # selection feature
+  extend_dataslides = ->
+    extend_jquery()
     $.fn.dataSlideExt.oApi.fnGetSelectedNodes = ->
       aReturn = new Array()
       aTrs = $(this).dataTableInstance().fnGetNodes()
@@ -158,40 +165,47 @@ define 'forgeos/core/admin/datatables', ['jquery', './notifications', 'jquery.da
       aReturn
 
   extend_jquery = ->
-    $.fn.extend
-      dataTableInstance: ->
-        element = this
-        oTable = `undefined`
-        $(oTables).each ->
-          oTable = this  if $(this).attr("id") is $(element).attr("id")
+    unless $.fn.dataTableInstance?
+      $.fn.extend
+        dataTableInstance: ->
+          element = this
+          oTable = `undefined`
+          $(oTables).each ->
+            oTable = this  if $(this).attr("id") is $(element).attr("id")
 
-        oTable
+          oTable
 
-      dataTableSelect: ->
-        $(this).addClass "row_selected"
-        checkbox = $(this).find("input[type=checkbox]")
-        checkbox.attr "checked", 1
-        datatable = $(this).parents(".datatable").dataTableInstance()
-        datable_datas = $(this).parents(".datatable").data("selected_rows")
-        index = $(this).attr("id")
-        datable_datas.push index
+    unless $.fn.dataTableSelect?
+      $.fn.extend
+        dataTableSelect: ->
+          $(this).addClass "row_selected"
+          checkbox = $(this).find("input[type=checkbox]")
+          checkbox.attr "checked", 1
+          datatable = $(this).parents(".datatable").dataTableInstance()
+          datable_datas = $(this).parents(".datatable").data("selected_rows")
+          index = $(this).attr("id")
+          datable_datas.push index
 
-      dataTableUnselect: ->
-        $(this).removeClass "row_selected"
-        checkbox = $(this).find("input[type=checkbox]")
-        checkbox.attr "checked", 0
-        datatable = $(this).parents(".datatable").dataTableInstance()
-        datable_datas = $(this).parents(".datatable").data("selected_rows")
-        index = $(this).attr("id")
-        index_in_table = $.inArray(index, datable_datas)
-        datable_datas.splice index_in_table, 1
+    unless $.fn.dataTableUnselect?
+      $.fn.extend
+        dataTableUnselect: ->
+          $(this).removeClass "row_selected"
+          checkbox = $(this).find("input[type=checkbox]")
+          checkbox.attr "checked", 0
+          datatable = $(this).parents(".datatable").dataTableInstance()
+          datable_datas = $(this).parents(".datatable").data("selected_rows")
+          index = $(this).attr("id")
+          index_in_table = $.inArray(index, datable_datas)
+          datable_datas.splice index_in_table, 1
 
-      dataTableToggleselect: ->
-        row = $(this)
-        if row.hasClass("row_selected")
-          row.dataTableUnselect()
-        else
-          row.dataTableSelect()
+    unless $.fn.dataTableToggleselect?
+      $.fn.extend
+        dataTableToggleselect: ->
+          row = $(this)
+          if row.hasClass("row_selected")
+            row.dataTableUnselect()
+          else
+            row.dataTableSelect()
 
     $.expr[":"].regex = (elem, index, match) ->
       matchParams = match[3].split(",")
@@ -211,21 +225,37 @@ define 'forgeos/core/admin/datatables', ['jquery', './notifications', 'jquery.da
       return this
 
   setup_datatables = ->
+    tables = $('.datatable')
+    slides = $('.dataslide')
     window.oTables = [] unless oTables?
 
-    $('.dataslide,.datatable').each ->
-      target = $ this
-      if target.dataTableInstance()?
-        oTable.fnDraw()
-      else
-        if target.hasClass('datatable')
-          table = target.dataTable target.data('datatable-options')
-        else
-          table = target.dataSlide target.data('dataslide-options')
+    if tables.length > 0
+      require ['jquery.dataTables.min'], ->
+        extend_datatables()
+        tables.each ->
+          target = $(this)
+          if target.dataTableInstance()?
+            oTable.fnDraw()
+          else
+            table = target.dataTable target.data('datatable-options')
 
-        if table?
-          oTables.push table
-          oTable = table
+            if table?
+              oTables.push table
+              oTable = table
+
+    if slides.length > 0
+      require ['forgeos/jquery.dataSlides'], ->
+        extend_dataslides()
+        slides.each ->
+          target = $(this)
+          if target.dataTableInstance()?
+            oTable.fnDraw()
+          else
+            table = target.dataSlide target.data('dataslide-options')
+
+            if table?
+              oTables.push table
+              oTable = table
 
 
 
@@ -234,7 +264,8 @@ define 'forgeos/core/admin/datatables', ['jquery', './notifications', 'jquery.da
       link = $(this)
       current_table = link.parents("table:first").dataTableInstance()
       current_table.fnDeleteRow current_table.fnGetPosition(link.parents("tr:first")[0])
-      Notifications.new()
+      require ['forgeos/core/admin/notifications'], (Notifications) ->
+        Notifications.new()
 
   bind_select_all = ->
     $('a.datatable-select-all').click (e) ->
@@ -249,8 +280,6 @@ define 'forgeos/core/admin/datatables', ['jquery', './notifications', 'jquery.da
         update_current_dataTable_source(id, url)
 
   initialize = ->
-    extend_jquery()
-    extend_datatables()
     bind_destroy_row()
     bind_library_type_switch()
     bind_select_all()
@@ -258,4 +287,4 @@ define 'forgeos/core/admin/datatables', ['jquery', './notifications', 'jquery.da
 
   # public methods
   new: initialize
-
+  update_current_dataTable_source: update_current_dataTable_source

@@ -1,24 +1,29 @@
-define 'forgeos/core/admin/attachments', ['jquery', './base', 'jquery.uploadify', 'forgeos/jqueryui/jquery.ui.dialog'], ($, Base) ->
+define 'forgeos/core/admin/attachments', ['jquery'], ($) ->
   setup_upload_dialog = (selector) ->
     select_dialog = $(selector + 'SelectDialog')
     upload_dialog = $(selector + 'UploadDialog')
     uploader = $(selector + 'Upload')
 
-    upload_dialog.dialog
-      autoOpen: false
-      modal: true
-      width: 500
-      buttons:
-        'upload': ->
-          uploader.uploadifyUpload()
+    require ['forgeos/jqueryui/jquery.ui.dialog'], ->
+      upload_dialog.dialog
+        autoOpen: false
+        modal: true
+        width: 500
+        buttons:
+          'upload': ->
+            require ['jquery.uploadify'], ->
+              uploader.uploadifyUpload()
 
-        'clear queue': ->
-          uploader.uploadifyClearQueue()
-        'add_from_library': ->
-          select_dialog.dialog('open')
-          upload_dialog.dialog('close')
+          'clear queue': ->
+            require ['jquery.uploadify'], ->
+              uploader.uploadifyClearQueue()
 
-      resizable: "se"
+          'add_from_library': ->
+            select_dialog.dialog('open')
+            upload_dialog.dialog('close')
+
+        resizable: "se"
+
     upload_dialog.find('a.select-link').click (e) ->
       e.preventDefault()
       select_dialog.dialog 'open'
@@ -28,30 +33,31 @@ define 'forgeos/core/admin/attachments', ['jquery', './base', 'jquery.uploadify'
     select_dialog = $(selector + 'SelectDialog')
     upload_dialog = $(selector + 'UploadDialog')
 
-    select_dialog.dialog
-      autoOpen: false
-      modal: true
-      minHeight: 380
-      width: 800
-      resizable: "se"
-      buttons:
-        ok: ->
-          dataTableSelectRows table_selector, (current_table, indexes) ->
-            for index in indexes
-              row = current_table.fnGetData(indexes[index])
-              result =
-                size: row.slice(-6, -5)
-                type: row.slice(-8, -7)
-                path: row.slice(-3, -2)
-                id: row.slice(-2, -1)
-                name: row.slice(-1)
+    require ['forgeos/jqueryui/jquery.ui.dialog'], ->
+      select_dialog.dialog
+        autoOpen: false
+        modal: true
+        minHeight: 380
+        width: 800
+        resizable: "se"
+        buttons:
+          ok: ->
+            dataTableSelectRows table_selector, (current_table, indexes) ->
+              for index in indexes
+                row = current_table.fnGetData(indexes[index])
+                result =
+                  size: row.slice(-6, -5)
+                  type: row.slice(-8, -7)
+                  path: row.slice(-3, -2)
+                  id: row.slice(-2, -1)
+                  name: row.slice(-1)
 
-              callback = $(".add-image.current, .add-file.current").data("callback")
-              callback.call result
+                callback = $(".add-image.current, .add-file.current").data("callback")
+                callback.call result
 
-              null
+                null
 
-          select_dialog.dialog "close"
+            select_dialog.dialog "close"
 
     select_dialog.find('a.upload-link').click (e) ->
       e.preventDefault()
@@ -71,30 +77,32 @@ define 'forgeos/core/admin/attachments', ['jquery', './base', 'jquery.uploadify'
     uploadify_datas['parent_id'] = $("#parent_id_tmp").val() if $("#parent_id_tmp").length != 0
     uploadify_datas[window._forgeos_js_vars.session_key] = window._forgeos_js_vars.session
 
-    $(upload).uploadify
-      swf: "/assets/uploadify/uploadify.swf"
-      uploader: window._forgeos_js_vars.mount_paths.core + "/admin/attachments"
-      buttonClass: 'btn btn-large'
-      width: "154"
-      height: "24"
-      formData: uploadify_datas
-      multi: "true"
-      progressData: "speed"
-      onUploadSuccess: (file, data, response) ->
-        data["name"] = file.name
-        callback = button.data("callback")
-        eval("#{callback}(data);") if callback?
-      onUploadError: (file, errorCode, errorMsg, errorString) ->
-        display_notification_message "error", errorString
-      onQueueComplete: ->
-        $(upload_dialog).dialog "close"
-      onDialogClose: ->
-        $('.ui-dialog-buttonset button').removeClass('ui-state-disabled')
-      onSWFReady: ->
-        ui_dialog = $(upload_dialog).parents('.ui-dialog')
-        if selector == '#attachment'
-          ui_dialog.find('.ui-dialog-buttonset button:last').hide()
-        ui_dialog.find('.ui-dialog-buttonset button:lt(2)').addClass('ui-state-disabled')
+
+    require ['jquery.uploadify'], ->
+      $(upload).uploadify
+        swf: "/assets/uploadify/uploadify.swf"
+        uploader: window._forgeos_js_vars.mount_paths.core + "/admin/attachments"
+        buttonClass: 'btn btn-large'
+        width: "154"
+        height: "24"
+        formData: uploadify_datas
+        multi: "true"
+        progressData: "speed"
+        onUploadSuccess: (file, data, response) ->
+          data["name"] = file.name
+          callback = button.data("callback")
+          eval("#{callback}(data);") if callback?
+        onUploadError: (file, errorCode, errorMsg, errorString) ->
+          display_notification_message "error", errorString
+        onQueueComplete: ->
+          $(upload_dialog).dialog "close"
+        onDialogClose: ->
+          $('.ui-dialog-buttonset button').removeClass('ui-state-disabled')
+        onSWFReady: ->
+          ui_dialog = $(upload_dialog).parents('.ui-dialog')
+          if selector == '#attachment'
+            ui_dialog.find('.ui-dialog-buttonset button:last').hide()
+          ui_dialog.find('.ui-dialog-buttonset button:lt(2)').addClass('ui-state-disabled')
 
   open_upload_dialog = (type, link) ->
     forgeosInitUpload "##{type}", link
@@ -124,16 +132,17 @@ define 'forgeos/core/admin/attachments', ['jquery', './base', 'jquery.uploadify'
 
   add_picture_to_category = (data) ->
     category = $(".add-image.current")
-    $.ajax
-      success: (result) ->
-        $("#imageLeftSidebarSelectDialog").dialog "close"
-        category.removeClass("add-image").removeClass "current"
-        $.jstree._focused().refresh category.parents("li:first")
-      data:
-        "category[attachment_ids][]": data.id
-      dataType: "json"
-      type: "put"
-      url: window._forgeos_js_vars.mount_paths.core + "/admin/categories/" + Base.get_rails_element_id(category) + ".json"
+    require ['forgeos/core/admin/base'], (Base) ->
+      $.ajax
+        success: (result) ->
+          $("#imageLeftSidebarSelectDialog").dialog "close"
+          category.removeClass("add-image").removeClass "current"
+          $.jstree._focused().refresh category.parents("li:first")
+        data:
+          "category[attachment_ids][]": data.id
+        dataType: "json"
+        type: "put"
+        url: window._forgeos_js_vars.mount_paths.core + "/admin/categories/" + Base.get_rails_element_id(category) + ".json"
 
   refresh_after_file_upload = (data) ->
     $('#table').dataTableInstance().fnDraw()

@@ -1,4 +1,4 @@
-define 'forgeos/core/admin/clicks', ['jquery', 'jquery_nested_form'], ($) ->
+define 'forgeos/core/admin/clicks', ['jquery'], ($) ->
   bind_gray_destroy = ->
     # Can be replaced by NestedForm
     $(".gray-destroy").live "click", ->
@@ -23,8 +23,17 @@ define 'forgeos/core/admin/clicks', ['jquery', 'jquery_nested_form'], ($) ->
 
       false
 
+  bind_nested_form_buttons = ->
+    buttons = $('form a.add_nested_fields, form a.remove_nested_fields')
+    if buttons.length > 0
+      require('jquery_nested_form')
 
-  # public methods
-  new: ->
+  initialize = ->
+    bind_nested_form_buttons()
     bind_gray_destroy()
     bind_destroy()
+
+
+  # public methods
+  new: initialize
+

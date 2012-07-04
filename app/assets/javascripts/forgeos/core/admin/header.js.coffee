@@ -1,4 +1,4 @@
-define 'forgeos/core/admin/header', ['jquery', 'bootstrap-dropdown', 'bootstrap-scrollspy', 'bootstrap-tab'], ($) ->
+define 'forgeos/core/admin/header', ['jquery'], ($) ->
 
   copy_dataTables_filters = ->
     filters = $('#content .dataTables_wrapper .top')
@@ -9,8 +9,14 @@ define 'forgeos/core/admin/header', ['jquery', 'bootstrap-dropdown', 'bootstrap-
     setTimeout copy_dataTables_filters, 500
 
   init_navbar = ->
+    navbar = $('.navbar')
+    if navbar.length > 0
+      require ['bootstrap-dropdown']
+      init_subnavbar()
+
+  init_subnavbar = ->
     $nav = $('.subnav')
-    if $nav.length != 0
+    if $nav.length > 0
       bigProcessScroll = ->
         scrollTop = $win.scrollTop()
 
@@ -34,9 +40,15 @@ define 'forgeos/core/admin/header', ['jquery', 'bootstrap-dropdown', 'bootstrap-
 
       $win.on 'scroll', bigProcessScroll
 
+      breadcrumbs = $('#scrollbar li a')
+      if breadcrumbs.length > 0
+        require ['bootstrap-tab', 'bootstrap-scrollspy'], ->
+          init_scrollbar()
+
   init_page_header = ->
     $header = $('#page .header')
     if $header.length != 0
+      require ['bootstrap-dropdown'], ->
       headerProcessScroll = ->
         scrollTop = $win.scrollTop()
 
@@ -61,7 +73,7 @@ define 'forgeos/core/admin/header', ['jquery', 'bootstrap-dropdown', 'bootstrap-
       $win.on 'scroll', headerProcessScroll
 
   init_scrollbar = ->
-    $('#scrollbar a').click (e) ->
+    $('#scrollbar li a').click (e) ->
       e.preventDefault()
       $(window).scrollTop($($(this).attr('href')).position().top)
       false
@@ -69,7 +81,6 @@ define 'forgeos/core/admin/header', ['jquery', 'bootstrap-dropdown', 'bootstrap-
   initialize = ->
     init_page_header()
     init_navbar()
-    init_scrollbar()
     init_dataTables_filters()
 
   # public methods

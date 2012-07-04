@@ -1,12 +1,15 @@
-define 'forgeos/core/admin/popins', ['jquery', 'forgeos/jqueryui/jquery.ui.dialog'], ($) ->
+define 'forgeos/core/admin/popins', ['jquery'], ($) ->
 
   init_default_dialog = ->
-    $(".lightbox-container").dialog
-      autoOpen: false
-      modal: true
-      minHeight: 380
-      width: 500
-      resizable: "se"
+    dialogs = $(".lightbox-container")
+    if dialogs.length > 0
+      require ['forgeos/jqueryui/jquery.ui.dialog'], ->
+        dialogs.dialog
+          autoOpen: false
+          modal: true
+          minHeight: 380
+          width: 500
+          resizable: "se"
 
   bind_blocks_tabs = ->
     $(".static-tab,.widget-tab").live "click", (e) ->

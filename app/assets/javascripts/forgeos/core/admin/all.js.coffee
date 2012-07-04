@@ -1,6 +1,5 @@
 define 'forgeos/core/admin/all', [
     './attachments',
-    './base',
     './clicks',
     './datatables',
     './editor',
@@ -12,11 +11,11 @@ define 'forgeos/core/admin/all', [
     './rights',
     './settings',
     './sidebars',
-    './trees'
+    './trees',
+    'jquery_ujs'
   ],
   (
     Attachments,
-    Base,
     Clicks,
     DataTables,
     Editor,
