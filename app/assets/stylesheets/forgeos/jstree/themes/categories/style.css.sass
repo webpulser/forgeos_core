@@ -59,71 +59,12 @@
   .jstree-undetermined > a > .jstree-checkbox:hover
     background-position: -20px -37px
 
-#vakata-contextmenu.jstree-categories-context
-  width: 160px
-  border: 0 none
-  position: absolute
-  border-bottom: 0
-  ul
-    padding: 0
-    border: 1px solid #979797
-    li
-      padding: 2px
-      padding-left: 5px
-      ins
-        margin-right: 5px
-      a
-        &:hover
-          background: transparent
-          color: #297EBD
-          border: 0 none
+.vakata-context.jstree-categories-contextmenu
+  li
+    a
+      ins, span
+        height: auto
 
-      .create
-        background-image: image_url("forgeos/jstree/themes/categories/create.png")
-        background-position: -4px -2px
-      .rename
-        background-image: image_url("forgeos/jstree/themes/categories/rename.png")
-      .remove
-        background-image: image_url("forgeos/jstree/themes/categories/remove.png")
-      .image
-        background-image: image_url("forgeos/jstree/themes/categories/images.png")
-      &:hover
-        background-color: #D6EDF4
-        color: #297EBD
-        border-bottom: 1px solid #aeb0b2
-    .vakata-separator
-      padding: 0
-  a
-    display: block
-    text-decoration: none
-    border-bottom: 0 none
-    color: black
-    line-height: 20px
-    margin: 0
-    &.jstree-disabled:hover
-      display: block
-      text-decoration: none
-      border-bottom: 1px solid #aeb0b2
-      color: black
-      line-height: 20px
-      padding: 1px 0 1px 25px
-      margin: 0
-    &.jstree-disabled
-      color: silver
-      opacity: 0.5
-      -ms-filter: "alpha(opacity=50)"
-      filter: alpha(opacity = 50)
-      zoom: 1
-      &:hover
-        color: silver
-        opacity: 0.5
-        -ms-filter: "alpha(opacity=50)"
-        filter: alpha(opacity = 50)
-        zoom: 1
-    span
-      margin: 0 !important
-  .separator
-    display: none !important
 #jstree-dragged.jstree-categories li li.open
   background: image_url("forgeos/jstree/themes/categories/brown-plus.png") 0 3px no-repeat
 

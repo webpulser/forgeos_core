@@ -35,7 +35,9 @@ define 'forgeos/core/admin/trees', ['jquery'], ($) ->
   # Initialize a new category tree with JsTree
   init_category_tree = (tree, type, source) ->
     return true unless tree?
-    require ['jquery.jstree'], ->
+
+    plugins = [ 'ui', 'themes', 'json', 'contextmenu', 'dnd']
+    require require_jstree_plugins(plugins), ->
       setup_jstree()
       base_url = source.replace(".json", "/")
 
@@ -51,11 +53,16 @@ define 'forgeos/core/admin/trees', ['jquery'], ($) ->
           $.ajax
             url: base_url
             complete: (request) ->
+              require ['forgeos/core/admin/notifications'], (Notifications) ->
+                Notifications.new()
+
               cat_id = request.responseText
               jnode.attr "id", "category_" + cat_id
               set_category_droppable jnode.children("a"), type
               if $(".parent_id_hidden").size() is 0
-                $(document.body).append "<input type=\"hidden\" id=\"parent_id_tmp\" name=\"parent_id_tmp\" class=\"parent_id_hidden\" value=\"" + cat_id + "\" />"
+                require ['mustache', 'text!templates/admin/trees/current_node.html'], (Mustache, node) ->
+                  $(document.body).append Mustache.render node,
+                    value: cat_id
               else
                 $("#parent_id_tmp").val cat_id
 
@@ -67,18 +74,22 @@ define 'forgeos/core/admin/trees', ['jquery'], ($) ->
           $.ajax
             url: base_url + Base.get_rails_element_id(data.rslt.obj)
             data:
-              "category[name]": data.rslt.name
-
+              "category[name]": data.rslt.title
+            complete: ->
+              require ['forgeos/core/admin/notifications'], (Notifications) ->
+                Notifications.new()
             dataType: "json"
             type: "put"
       ).bind("move_node.jstree", (e, data) ->
         require ['forgeos/core/admin/base'], (Base) ->
           $.ajax
-            url: base_url + Base.get_rails_element_id(data.rslt.o)
+            url: base_url + Base.get_rails_element_id(data.rslt.obj)
             data:
-              "category[parent_id]": Base.get_rails_element_id(data.rslt.r)
-              "category[position]": data.rslt.cp
-
+              "category[parent_id]": Base.get_rails_element_id(data.rslt.parent)
+              "category[position]": data.rslt.position
+            complete: ->
+              require ['forgeos/core/admin/notifications'], (Notifications) ->
+                Notifications.new()
             dataType: "json"
             type: "put"
       ).bind("delete_node.jstree", (e, data) ->
@@ -89,6 +100,8 @@ define 'forgeos/core/admin/trees', ['jquery'], ($) ->
             url: base_url + cat_id
             success: (request) ->
               $(NODE).attr "id", "category_" + request.responseText
+              require ['forgeos/core/admin/notifications'], (Notifications) ->
+                Notifications.new()
 
             dataType: "json"
             type: "delete"
@@ -99,9 +112,12 @@ define 'forgeos/core/admin/trees', ['jquery'], ($) ->
         require ['forgeos/core/admin/base'], (Base) ->
           cat_id = Base.get_rails_element_id(NODE)
           if $(".parent_id_hidden").length > 0
-            $(document.body).append "<input type=\"hidden\" id=\"parent_id_tmp\" name=\"parent_id_tmp\" class=\"parent_id_hidden\" value=\"" + cat_id + "\" />"
+            require ['mustache', 'text!templates/admin/trees/current_node.html'], (Mustache, node) ->
+              $(document.body).append Mustache.render node,
+                value: cat_id
           else
             $("#parent_id_tmp").val cat_id
+
           $("#category_sort").show()
 
           require ['forgeos/core/admin/datatables'], (Datatables) ->
@@ -117,45 +133,55 @@ define 'forgeos/core/admin/trees', ['jquery'], ($) ->
         $("#category_sort").hide()
         true
       ).jstree
-        json_data:
+        json:
           ajax:
             url: source
             data: (n) ->
               id: (if n.data then n.data("id") else 0)
 
           progressive_render: true
-
         contextmenu:
           items:
             create:
-              label: "Créer"
-              icon: "create"
-              action: (obj) ->
-                @create @_get_node(obj), 0, {}, null, false
-
-              separator_after: false
-
+              separator_before: false
+              separator_after: true
+              label: 'Create'
+              icon: 'icon icon-plus-sign'
+              action: (data) ->
+                inst = $.jstree._reference(data.reference)
+                obj = inst.get_node(data.reference)
+                inst.create_node obj, {}, 'last', (new_node) ->
+                  edit = ->
+                    inst.edit new_node
+                  setTimeout(edit, 0)
             rename:
-              label: "Renommer"
-              icon: "rename"
-              action: (obj) ->
-                @rename obj
-
+              separator_before: false
+              separator_after: false
+              label: 'Rename'
+              icon: 'icon icon-edit'
+              action: (data) ->
+                inst = $.jstree._reference(data.reference)
+                obj = inst.get_node(data.reference)
+                inst.edit obj
             remove:
-              label: "Supprimer"
-              icon: "remove"
-              action: (obj) ->
-                tree = this
-                $.each obj, ->
-                  tree.remove this
-
+              separator_before: false
+              separator_after: false
+              label: 'Delete'
+              icon: 'icon icon-trash'
+              action: (data) ->
+                inst = $.jstree._reference(data.reference)
+                obj = inst.get_node(data.reference)
+                inst.delete_node obj
             add_image:
               label: "Changer l'image"
-              icon: "image"
-              action: (obj) ->
+              icon: 'icon icon-picture'
+              action: (data) ->
+                inst = $.jstree._reference(data.reference)
+                obj = inst.get_node(data.reference)
                 button = $(obj)
+
                 $(".add-image").removeClass ".current"
-                button.addClass("add-image").addClass "current"
+                button.addClass("add-image current")
                 button.data "callback", "add_picture_to_category"
                 require ['forgeos/core/admin/attachments'], (Attachments) ->
                   Attachments.open_upload_dialog('image', button)
@@ -165,7 +191,7 @@ define 'forgeos/core/admin/trees', ['jquery'], ($) ->
         themes:
           theme: "categories"
 
-        plugins: [ "ui", "themes", "json_data", "contextmenu", "crrm", "dnd" ]
+        plugins: plugins
 
   check_jsTree_selected = (element) ->
     typeof ($.jstree._reference(element).selected) is "undefined"
@@ -173,22 +199,38 @@ define 'forgeos/core/admin/trees', ['jquery'], ($) ->
   error_on_jsTree_action = (message) ->
     alert(message)
 
+  require_jstree_plugins = (plugins) ->
+    pls = $(plugins).map (i, name) ->
+      "jstree/jstree.#{name}"
+    ['jstree/jstree'].concat pls.toArray()
+
   init_association_category_tree = (selector, object_name, category_name, theme) ->
     tree = $(selector)
     if tree.length > 0
-      require ['jquery.jstree'], ->
+      plugins = ['html_data', 'ui', 'themes', 'checkbox']
+      require require_jstree_plugins(plugins), ->
         setup_jstree()
+
         tree.bind("check_node.jstree", (e, data) ->
           jnode = $(data.rslt.obj)
-          if typeof (object_name) is "undefined"
-            oname = jnode.attr("id").split("_")[0]
-          else
-            oname = object_name
-
-          require ['forgeos/core/admin/base'], (Base) ->
+          jnode.addClass "jstree-clicked"
+          require [
+            'forgeos/core/admin/base',
+            'mustache',
+            'text!templates/admin/trees/category_input.html'
+          ], (
+            Base,
+            Mustache,
+            input
+          ) ->
+            object_name = jnode.attr("id").split("_")[0] if object_name?
             category_id = Base.get_rails_element_id(jnode)
-            jnode.append "<input type=\"hidden\" id=\"" + oname + "_" + category_name + "_ids_" + category_id + "\" name=\"" + oname + "[" + category_name + "_ids][]\" value=\"" + category_id + "\" />"
-            jnode.addClass "jstree-clicked"
+
+            jnode.append Mustache.render input,
+              object_name: object_name
+              association: category_name
+              value: category_id
+
 
         ).bind("uncheck_node.jstree", (e, data) ->
           jnode = $(data.rslt.obj)
@@ -201,30 +243,11 @@ define 'forgeos/core/admin/trees', ['jquery'], ($) ->
           ui:
             selected_parent_close: false
 
-          plugins: [ "html_data", "ui", "themes", "checkbox" ]
+          plugins: plugins
 
   select_all_elements_by_url = (url) ->
     oTable.fnSettings().sAjaxSource = url
     oTable.fnDraw()
-
-  select_all_elements_without_category = (tree_id) ->
-    require ['forgeos/core/admin/base','forgeos/core/admin/datatables', 'jquery.jstree'], (Base, Datatables) ->
-      tree = $.jstree._focused()
-      tree.deselect_all()  if tree
-
-      table = $("##{tree_id}").parents('.row-fluid').find('.dataslide:visible,.datatable:visible')
-      current_table = table.dataTableInstance()
-
-      url = current_table.fnSettings().sAjaxSource
-      url_base = url.split("?")[0]
-      params = undefined
-      params = Base.get_json_params_from_url(url)
-      params.category_id = null
-      params = Base.stringify_params_from_json(params)
-      Datatables.update_current_dataTable_source current_table, url_base + "?" + params
-    $("#parent_id_tmp").remove()
-
-    true
 
   update_parent_categories_count = (element) ->
     element.parents("li").each ->
@@ -238,7 +261,7 @@ define 'forgeos/core/admin/trees', ['jquery'], ($) ->
   set_category_droppable = (selector, type) ->
     category = $(selector)
     if category.length > 0
-      require ['forgeos/jqueryui/jquery.ui.droppable'], ->
+      require ['jqueryui/jquery.ui.droppable'], ->
         category.droppable
           hoverClass: "ui-state-hover"
           drop: (ev, ui) ->
@@ -283,26 +306,21 @@ define 'forgeos/core/admin/trees', ['jquery'], ($) ->
             parent_node["category_" + cat_id] = cat_id
 
   setup_jstree = ->
-    $.jstree._themes = "/assets/forgeos/jstree/themes/"
+    $.jstree.THEMES_DIR = "/assets/forgeos/jstree/themes/"
 
   init_caching_tree = ->
     tree = $("#caching-tree")
     if tree.length > 0
-      require ['jquery.jstree'], ->
+      plugins = [ 'ui', 'themes', 'checkbox', 'json' ]
+      require require_jstree_plugins(plugins), ->
         setup_jstree()
         tree.jstree
-          json_data:
+          json:
             ajax:
               url: _forgeos_js_vars.mount_paths.core + "/admin/cachings.json"
               data: (n) ->
                 id: (if n.data then n.data("name") else 0)
-
-          checkbox:
-            real_checkboxes: true
-            real_checkboxes_names: (n) ->
-              [ "files[]", n.data("name") ]
-
-          plugins: [ "ui", "themes", "checkbox", "json_data" ]
+          plugins: plugins
 
   init_category_trees = ->
     $('.category-tree').each ->
@@ -311,7 +329,7 @@ define 'forgeos/core/admin/trees', ['jquery'], ($) ->
 
   initialize = ->
     init_category_trees()
-    init_association_category_tree "#association-attachment-tree", `undefined`, "attachment_category", "association_categories"
+    init_association_category_tree "#association-attachment-tree", null, "attachment_category", "association_categories"
     init_caching_tree()
 
   # public methods

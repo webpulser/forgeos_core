@@ -26,7 +26,7 @@ define 'forgeos/core/admin/clicks', ['jquery'], ($) ->
   bind_nested_form_buttons = ->
     buttons = $('form a.add_nested_fields, form a.remove_nested_fields')
     if buttons.length > 0
-      require('jquery_nested_form')
+      require ['jquery_nested_form']
 
   initialize = ->
     bind_nested_form_buttons()

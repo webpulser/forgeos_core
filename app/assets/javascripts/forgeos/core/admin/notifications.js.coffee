@@ -9,8 +9,11 @@ define 'forgeos/core/admin/notifications', ['jquery'], ($) ->
   display = (type, message, delay) ->
     timestamp = new Date().getTime()
 
-    require ['bootstrap-alert'], ->
-      $("#alerts").append "<div id='#{timestamp}' class='alert alert-#{type}'><button class='close' data-dismiss='alert'>&times;</button>#{message}</div>"
+    require ['mustache', 'text!templates/admin/notifications/new.html', 'bootstrap-alert'], (Mustache, template) ->
+      $("#alerts").append Mustache.render template,
+        id: timestamp
+        type: type
+        message: message
 
       setTimeout "jQuery('##{timestamp}').remove();", delay if delay?
 

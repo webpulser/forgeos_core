@@ -1,7 +1,25 @@
 define 'forgeos/core/admin/rights', ['jquery'], ($) ->
 
   add_inline_form = (timestamp, url, method) ->
-    $('body').append "<form action=\"#{url}\" id=\"#{timestamp}\" method=\"#{method}\" onsubmit=\"inline_save('#{timestamp}', '#{url}', '#{method}')\"></form>"
+    require ['mustache', 'text!templates/admin/rights/form.html'], (Mustache, template) ->
+      form = Mustache.render template,
+        url: url
+        timestamp: timestamp
+        method: method
+
+      $('body').append form
+
+    $("##{timestamp}").on 'submit', (e) ->
+      e.preventDefault()
+      save(timestamp, url, method)
+
+      false
+
+  bind_buttons = ->
+    bind_create()
+    bind_edit()
+    bind_duplicate()
+    bind_form_buttons()
 
   bind_create = ->
     $(".create-right").live "click", (e) ->
@@ -9,7 +27,8 @@ define 'forgeos/core/admin/rights', ['jquery'], ($) ->
       timestamp = new Date().getTime()
 
       add_inline_form timestamp, "#{window._forgeos_js_vars.mount_paths.core}/admin/rights", 'post'
-      $("#table").prepend right_form(timestamp)
+      right_form timestamp, null, (html) ->
+        $("#table").prepend html
 
       false
 
@@ -22,9 +41,9 @@ define 'forgeos/core/admin/rights', ['jquery'], ($) ->
         timestamp = new Date().getTime()
 
         add_inline_form timestamp, "#{window._forgeos_js_vars.mount_paths.core}/admin/rights/#{right_id}", 'put'
-
         row.hide()
-        row.after right_form(timestamp, row)
+        right_form timestamp, row, (html) ->
+          row.after html
 
       false
 
@@ -34,27 +53,27 @@ define 'forgeos/core/admin/rights', ['jquery'], ($) ->
       timestamp = new Date().getTime()
       row = $(this).parents("tr")
       add_inline_form timestamp, "#{window._forgeos_js_vars.mount_paths.core}/admin/rights", 'post'
-      row.after right_form(timestamp, row)
+      right_form timestamp, row, (html) ->
+        row.after html
 
       false
 
-  bind_inline_buttons = ->
+  bind_form_buttons = ->
     $('.inline_save').live 'click', (e) ->
       e.preventDefault()
-      
-      $($(this).attr('href')).trigger('onsubmit')
+
+      $($(this).attr('href')).trigger 'submit'
 
       false
 
     $('.inline_discard').live 'click', (e) ->
       e.preventDefault()
-      
-      inline_discard($(this).attr('href'))
 
+      cancel $(this).attr('href')
       false
 
   # Discard inline crud
-  inline_discard = (timestamp) ->
+  cancel = (timestamp) ->
     row = $("#new_row_#{timestamp}").prev('tr:hidden')
     if row.length != 0
       row.show()
@@ -63,7 +82,7 @@ define 'forgeos/core/admin/rights', ['jquery'], ($) ->
 
     return false
 
-  inline_save = (timestamp, url, method) ->
+  save = (timestamp, url, method) ->
     row = $("#new_row_#{timestamp}")
     form = $("##{timestamp}")
     form.html(row.clone(true))
@@ -81,39 +100,32 @@ define 'forgeos/core/admin/rights', ['jquery'], ($) ->
 
     return false
 
-  right_form = (timestamp, row = null) ->
+  right_form = (timestamp, row = null, block) ->
     if row?
-      klass = (row.hasClass('odd') ? 'even' : 'odd')
       cell_name = row.children().get(1)
       cell_controller = row.children().get(2)
       cell_action = row.children().get(3)
 
-      name = $(cell_name).children("div").html()
-      controller = $(cell_controller).html()
-      action = $(cell_action).html()
+      data =
+        klass: (row.hasClass('odd') ? 'even' : 'odd')
+        name: $(cell_name).children("div").html()
+        controller: $(cell_controller).html()
+        action: $(cell_action).html()
+        timestamp: timestamp
     else
-      klass = 'even'
-      name = ''
-      controller = ''
-      action = ''
+      data =
+        klass: 'even'
+        name: ''
+        controller: ''
+        action: ''
+        timestamp: timestamp
 
+    require ['mustache', "text!templates/admin/rights/new.html"], (Mustache, template) ->
+      block(Mustache.render(template, data))
 
-    "<tr id='new_row_#{timestamp}' class='new_row #{klass}'>
-    <td><i class='icon-legal'></i></td>
-    <td><input type='text' value='#{name}' name='right[name]' size='25'/></td>
-    <td><input type='text' value='#{controller}' name='right[controller_name]' size='25'/></td>
-    <td><input type='text' value='#{action}' name='right[action_name]' size='15'/></td>
-    <td>
-      <a class='inline_save' href='##{timestamp}'><i class='icon icon-ok-sign'></i></a>
-      <a class='inline_discard' href='#{timestamp}'><i class='icon icon-remove-sign'></i></a>
-    </td>
-    </tr>"
 
   initialize = ->
-    bind_inline_buttons()
-    bind_create()
-    bind_edit()
-    bind_duplicate()
+    bind_buttons()
 
   # public methods
   new: initialize

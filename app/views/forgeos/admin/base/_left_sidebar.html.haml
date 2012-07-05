@@ -1,7 +1,8 @@
 #sidebar.span4
   .sidebar-content
     %h2
-      = i(icon)
-      %a.datatable-select-all{ :"data-tree-id" => tree_id }= t sidebar_title
+      %a.datatable-select-all{ :"data-tree-id" => tree_id }
+        = i(icon)
+        = t sidebar_title
     .category-tree{ :id => tree_id, "data-model_name" => model_name, "data-url" => url }
 = render :partial => 'attachments_popups'

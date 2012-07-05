@@ -1,0 +1,15 @@
+<tr id="new_row_{{ timestamp }}" class="new_row {{ klass }}">
+  <td>
+    <div class="handler_container">
+      <div class="handler"></div>
+      <i class="icon-legal"></i>
+    </div>
+  </td>
+  <td><input type="text" value="{{ name }}" name="right[name]" size="25"/></td>
+  <td><input type="text" value="{{ controller }}" name="right[controller_name]" size="25"/></td>
+  <td><input type="text" value="{{ action }}" name="right[action_name]" size="15"/></td>
+  <td class="actions-td">
+    <a class="icon icon-ok-sign inline_save" href="#{{ timestamp }}"></a>
+    <a class="icon icon-remove-sign inline_discard" href="{{ timestamp }}"></a>
+  </td>
+</tr>

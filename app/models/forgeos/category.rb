@@ -36,13 +36,15 @@ module Forgeos
 
     def to_jstree
       hash = {}
-      hash[:attr] = { :id => "#{self.class.to_s.underscore}_#{id}"}
-      hash[:data] = { :title => name, :icon => category_picture }
-      hash[:metadata] = { :id => id }
-      hash[:state] = children.empty? ? 'open' : 'closed'
-      #unless children.empty?
-      # hash[:children] = children.all(:order => 'position ASC').collect(&:to_jstree)
-      #end
+      hash[:li_attr] = { :id => "#{self.class.to_s.underscore}_#{id}"}
+      hash[:title] = name
+      hash[:data] = {
+        :id => id,
+        :jstree => {
+          :closed => !children.empty?,
+          :icon => category_picture
+        }
+      }
       hash
     end
 

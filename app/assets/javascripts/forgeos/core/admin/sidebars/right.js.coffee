@@ -6,7 +6,7 @@ define 'forgeos/core/admin/sidebars/right', ['jquery'], ($) ->
 
     button.bind "click", toggle_steps
 
-    require ['jquery.cookie'], ->
+    require ['cookie'], ->
       closed_panels_cookie = $.cookie("closed_panels_list")
 
       if step.hasClass("disabled")
@@ -16,7 +16,7 @@ define 'forgeos/core/admin/sidebars/right', ['jquery'], ($) ->
 
 
   set_cookie_for_panels = (panel) ->
-    require ['jquery.cookie'], ->
+    require ['cookie'], ->
       closed_panels_cookie = $.cookie("closed_panels_list")
       closed_panels_cookie = ""  unless closed_panels_cookie?
 
@@ -34,15 +34,17 @@ define 'forgeos/core/admin/sidebars/right', ['jquery'], ($) ->
         expires: 10
 
   submit_tag = (input) ->
-    hidden_field_tag_name = "<input type=\"hidden\" name=\"tag_list[]\" value=\"" + input.val() + "\" />"
-    destroy = "<a href=\"#\" class=\"big-icons gray-destroy\">&nbsp;</a>"
-    new_tag = "<span >" + input.val() + hidden_field_tag_name + destroy + "</span>"
-    $(".tags .wrap_tags").append new_tag
-    input.val ""
+    # add the new tag
+    require ['mustache', 'text!templates/admin/tags/new.html'], (Mustache, template) ->
+      $(".tags .wrap_tags").append Mustache.render template,
+        tag: input.val()
+
+      input.val ""
+
+    # save tags as keywords if keywords are presents
     tags = []
     $($(input.form).serializeArray()).each ->
       tags.push input.value  if input.name is "tag_list[]" and input.value isnt ""
-
     element = $("textarea:regex(id,.+_meta_info_attributes_keywords)")
     element.val tags.join(", ")  if element.is(":visible")
 

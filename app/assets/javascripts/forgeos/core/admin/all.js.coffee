@@ -29,6 +29,7 @@ define 'forgeos/core/admin/all', [
     Sidebars,
     Trees
   ) ->
+
     new: ->
       Attachments.new()
       Clicks.new()

@@ -12,8 +12,9 @@ module Forgeos
 
       def index_sidebar(engine, model, icon, category = "#{model}Category".constantize)
         url = engine.send("admin_#{category.model_name.route_key}_path", :format => :json)
-        model_name = model.model_name.singular_route_key
-        render :partial => 'left_sidebar', :locals => { :icon => icon, :sidebar_title => "#{model_name}.all", :tree_id => "#{model_name}-tree" , :url => url, :model_name => category }
+        model_name = index_model_name(model)
+        category_model_name = index_model_name(category)
+        render :partial => 'left_sidebar', :locals => { :icon => icon, :sidebar_title => "#{model_name}.all", :tree_id => "#{category_model_name}-tree" , :url => url, :model_name => category }
       end
 
       def index_model_name(model)
@@ -25,10 +26,10 @@ module Forgeos
         content_tag(:div, :class => 'header row-fluid') do
           content_tag(:div, :class => 'span4') do
             content_tag(:div, :class => 'btn-group') do
-              link_to(content_tag(:i, '', :class => 'big-icons new-category') + '&nbsp;'.html_safe, '#', :class => 'btn') +
+              link_to(i('folder-close') + '&nbsp;'.html_safe, '#', :class => 'btn') +
               link_to(content_tag(:span, '', :class => 'caret'), '#', :class => 'btn dropdown-toggle', :data => { :toggle => 'dropdown' }) +
               content_tag(:ul, :class => 'dropdown-menu') do
-                content_tag(:li, t('folder.create'), :class => 'big-icons create-folder', :data => { :"tree-id" => "#{category_model_name}-tree" })
+                content_tag(:li, i('plus-sign') + t('folder.create'), :class => 'create-folder', "data-tree_id" => "#{category_model_name}-tree")
               end
             end
           end +
@@ -44,6 +45,7 @@ module Forgeos
             content_tag(:div, :class => 'span8', :id => 'content') do
               datatable(
                 :draggable => true,
+                :autostart => true,
                 :url => engine.send("admin_#{model.model_name.route_key}_path", :format => :json),
                 :columns => columns
               )

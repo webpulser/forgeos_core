@@ -41,14 +41,16 @@ define 'forgeos/core/admin/sidebars/left', ['jquery'], ($) ->
 
   bind_create_folder = ->
     # Create a new folder
-    $(".create-folder, .create-smart").live "click", ->
-      tree_id = $(this).data("tree-id")
-      require ['jquery.jstree'], ->
-        t = $.jstree._reference(tree_id)
-        if t.get_selected()
-          t.create t.get_selected(), 0
-        else
-          t.create null, 0
+    $(".create-folder, .create-smart").on "click", ->
+      tree_id = $(this).data("tree_id")
+      require ['jstree/jstree'], ->
+        inst = $.jstree._reference(tree_id)
+        selected = inst.get_selected()
+        selected = -1 if selected.length is 0
+        inst.create_node selected, {}, 'first', (new_node) ->
+          edit = ->
+            inst.edit new_node
+          setTimeout(edit, 0)
 
   initialize = ->
     bind_create_folder()

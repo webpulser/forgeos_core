@@ -10,14 +10,20 @@
     end
 
     data = {
+      :title => file_label,
       :data => {
-        :title => file_label,
-        :icon => (is_file ? 'file' : 'folder')
-      },
-      :metadata => { :name => file }
+        :name => file,
+        :jstree => {
+          :closed => !is_file,
+          :icon => (is_file ? 'file' : 'folder'),
+          :checkbox => {
+            :name => 'files[]',
+            :value => file
+          }
+        }
+      }
     }
 
-    data[:state] = 'closed' unless is_file
 
     data
   end

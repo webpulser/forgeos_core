@@ -4,18 +4,18 @@ define 'forgeos/core/admin/attachments', ['jquery'], ($) ->
     upload_dialog = $(selector + 'UploadDialog')
     uploader = $(selector + 'Upload')
 
-    require ['forgeos/jqueryui/jquery.ui.dialog'], ->
+    require ['jqueryui/jquery.ui.dialog'], ->
       upload_dialog.dialog
         autoOpen: false
         modal: true
         width: 500
         buttons:
           'upload': ->
-            require ['jquery.uploadify'], ->
+            require ['uploadify'], ->
               uploader.uploadifyUpload()
 
           'clear queue': ->
-            require ['jquery.uploadify'], ->
+            require ['uploadify'], ->
               uploader.uploadifyClearQueue()
 
           'add_from_library': ->
@@ -33,7 +33,7 @@ define 'forgeos/core/admin/attachments', ['jquery'], ($) ->
     select_dialog = $(selector + 'SelectDialog')
     upload_dialog = $(selector + 'UploadDialog')
 
-    require ['forgeos/jqueryui/jquery.ui.dialog'], ->
+    require ['jqueryui/jquery.ui.dialog'], ->
       select_dialog.dialog
         autoOpen: false
         modal: true
@@ -69,7 +69,9 @@ define 'forgeos/core/admin/attachments', ['jquery'], ($) ->
     upload_dialog = upload + "Dialog"
     select_dialog = selector + "SelectDialog"
 
-    $(selector + "Dialog").html "<input type='file' id='#{upload.replace("#", "")}'></input>"
+    require ['mustache', 'text!templates/admin/attachments/failsafe_uploadify.html'], (Mustache, failsafe_uploadify) ->
+      $(selector + "Dialog").html Mustache.render failsafe_uploadify,
+        id: upload.replace("#", "")
 
     uploadify_datas =
       format: "json"
@@ -78,7 +80,7 @@ define 'forgeos/core/admin/attachments', ['jquery'], ($) ->
     uploadify_datas[window._forgeos_js_vars.session_key] = window._forgeos_js_vars.session
 
 
-    require ['jquery.uploadify'], ->
+    require ['uploadify'], ->
       $(upload).uploadify
         swf: "/assets/uploadify/uploadify.swf"
         uploader: window._forgeos_js_vars.mount_paths.core + "/admin/attachments"
@@ -88,10 +90,11 @@ define 'forgeos/core/admin/attachments', ['jquery'], ($) ->
         formData: uploadify_datas
         multi: "true"
         progressData: "speed"
-        onUploadSuccess: (file, data, response) ->
+        onUploadSuccess: (file, text, response) ->
+          data = $.parseJSON(text)
           data["name"] = file.name
           callback = button.data("callback")
-          eval("#{callback}(data);") if callback?
+          eval(callback)(data) if callback?
         onUploadError: (file, errorCode, errorMsg, errorString) ->
           display_notification_message "error", errorString
         onQueueComplete: ->
@@ -119,34 +122,52 @@ define 'forgeos/core/admin/attachments', ['jquery'], ($) ->
       $(element).addClass "selected"
       $(element).siblings().removeClass "selected"
 
-  # Uploadify Callback
+  # Uploadify Callbacks
   add_picture_to_element = (data) ->
     object_name = $("form#wrap").data("object_name")
     input = $(".add-image.current").data("input_name")
-    $(input + "-picture ul.sortable").html "<li><img src=\"" + data.path + "\" alt=\"" + data.name + "\"/><a href=\"#\" onclick=\"$(this).parents('li').remove(); $('" + input + "').val(null); return false;\" class=\"big-icons delete\"></a></li>"
+
+    require ['mustache', 'text!templates/admin/attachments/picture_in_element.html'], (Mustache, template) ->
+      $(input + "-picture ul.sortable").html Mustache.render template,
+        src: data.path
+        name: data.name
+        input: input
+
     $(input).val data.id
 
   add_picture_to_visuals = (data) ->
     object_name = $("form#wrap").data("object_name")
-    $("#visuals-picture ul.sortable").before "<li><a href=\"#\" onclick=\"$(this).parents('li').remove(); return false;\" class=\"big-icons trash\"></a><input type=\"hidden\" name=\"" + object_name + "[attachment_ids][]\" value=\"" + data.id + "\"/><img src=\"" + data.path + "\" alt=\"" + data.name + "\"/><div class=\"handler\"><div class=\"inner\"></div></div></li>"
 
-  add_picture_to_category = (data) ->
-    category = $(".add-image.current")
+    require ['mustache', 'text!templates/admin/attachments/visual.html'], (Mustache, template) ->
+      $("#visuals-picture ul.sortable").before Mustache.render template,
+        id: data.id
+        name: data.name
+        src: data.path
+        object_name: object_name
+
+    false
+
+  add_picture_to_category = (picture) ->
     require ['forgeos/core/admin/base'], (Base) ->
+      category = $(".add-image.current")
       $.ajax
-        success: (result) ->
-          $("#imageLeftSidebarSelectDialog").dialog "close"
-          category.removeClass("add-image").removeClass "current"
-          $.jstree._focused().refresh category.parents("li:first")
+        url: window._forgeos_js_vars.mount_paths.core + "/admin/categories/" + Base.get_rails_element_id(category)
         data:
-          "category[attachment_ids][]": data.id
+          'category[attachment_ids][]': picture.id
         dataType: "json"
         type: "put"
-        url: window._forgeos_js_vars.mount_paths.core + "/admin/categories/" + Base.get_rails_element_id(category) + ".json"
+        success: (result) ->
+          $("#imageLeftSidebarSelectDialog").dialog "close"
+          require ['jstree/jstree'], ->
+            $.jstree._focused().refresh category.parents("li:first")
+
+          category.removeClass("add-image").removeClass "current"
+
 
   refresh_after_file_upload = (data) ->
-    $('#table').dataTableInstance().fnDraw()
-    $.jstree._focused().refresh()
+    require ['jstree/jstree', 'dataTables'], ->
+      $('#table').dataTableInstance().fnDraw()
+      $.jstree._focused().refresh()
 
   # Image Manager
   imageManager = ->

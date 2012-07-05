@@ -64,7 +64,7 @@ define 'forgeos/core/admin/base', ['jquery', 'jquery_ujs'], ($) ->
   remove_rails_nested_object = (selector) ->
     line = $(selector)
     del = line.find("input.destroy")
-    require ['forgeos/core/admin/editor', 'forgeos/jqueryui/jquery.effects.explode'], (Editor) ->
+    require ['forgeos/core/admin/editor', 'jqueryui/jquery.effects.explode'], (Editor) ->
       if del.length > 0
         del.val 1
         Editor.unload_children selector

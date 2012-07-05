@@ -3,16 +3,18 @@ define 'forgeos/core/admin/datatables', ['jquery'], ($) ->
   default_row_callback = (nRow, aData, iDisplayIndex) ->
     table = $("#" + @sInstance)
     table = $(this)  if typeof (table) is "undefined"
-    div = $(nRow).find(":regex(id,.+_\\d+)")
+    row = $(nRow)
+    div = row.find(":regex(id,.+_\\d+)")
+
     unless div.length is 0
       div_id = div[0].id
       row_id = "row_" + div_id
-      $(nRow).attr "id", row_id
+      row.attr "id", row_id
 
     # Draggable Rows
     if table.hasClass("draggable_rows")
-      require ['forgeos/jqueryui/jquery.ui.draggable'], ->
-        $(nRow).draggable
+      require ['mustache', 'text!templates/admin/tables/drag_helper.html', 'jqueryui/jquery.ui.draggable'], (Mustache, drag_helper_tpl) ->
+        row.draggable
           revert: "invalid"
           cursor: "move"
           handle: ".handler"
@@ -22,8 +24,8 @@ define 'forgeos/core/admin/datatables', ['jquery'], ($) ->
 
           helper: (e) ->
             element = $($(e.currentTarget).find("td a")[0])
-            title = element.text()
-            "<div class=\"ui-helper ui-corner-all\"><span class=\"handler\"><span class=\"inner\">&nbsp;</span></span>" + title + "</div>"
+            Mustache.render drag_helper_tpl,
+              name: element.text()
 
           start: (event, ui) ->
             $("#page").addClass "sidebar_dragg"
@@ -37,17 +39,22 @@ define 'forgeos/core/admin/datatables', ['jquery'], ($) ->
     if table.hasClass("selectable_rows")
       table.data "selected_rows", []  if typeof (table.data("selected_rows")) is "undefined"
       datable_datas = table.data("selected_rows")
-      index = $(nRow).attr("id")
-      if $.inArray(index, datable_datas) < 0
-        $(nRow).children("td:first").append "<input id=\"select_" + $(nRow).attr("id") + "\" type=\"checkbox\" name=\"none\"/>"
-      else
-        $(nRow).addClass "row_selected"
-        $(nRow).children("td:first").append "<input id=\"select_" + $(nRow).attr("id") + "\" type=\"checkbox\" name=\"none\" checked=\"checked\"/>"
+      index = row.attr("id")
+      require  ['mustache', 'text!templates/admin/tables/checkbox.html'], (Mustache, checkbox_tpl) ->
+        if $.inArray(index, datable_datas) < 0
+          selected = null
+        else
+          selected = 'checked'
+          row.addClass "row_selected"
 
-      $(nRow).click ->
+        row.children("td:first").append Mustache.render checkbox_tpl,
+          id: row.attr('id')
+          checked: selected
+
+      row.click ->
         $(this).dataTableToggleselect()
 
-      $(nRow).find("input[type=checkbox]").click ->
+      row.find("input[type=checkbox]").click ->
         $(this).attr "checked", (if $(this).is(":checked") then 0 else 1)
 
     nRow
@@ -230,7 +237,7 @@ define 'forgeos/core/admin/datatables', ['jquery'], ($) ->
     window.oTables = [] unless oTables?
 
     if tables.length > 0
-      require ['jquery.dataTables.min'], ->
+      require ['dataTables'], ->
         extend_datatables()
         tables.each ->
           target = $(this)
@@ -244,7 +251,7 @@ define 'forgeos/core/admin/datatables', ['jquery'], ($) ->
               oTable = table
 
     if slides.length > 0
-      require ['forgeos/jquery.dataSlides'], ->
+      require ['dataSlides'], ->
         extend_dataslides()
         slides.each ->
           target = $(this)
@@ -264,6 +271,7 @@ define 'forgeos/core/admin/datatables', ['jquery'], ($) ->
       link = $(this)
       current_table = link.parents("table:first").dataTableInstance()
       current_table.fnDeleteRow current_table.fnGetPosition(link.parents("tr:first")[0])
+      C
       require ['forgeos/core/admin/notifications'], (Notifications) ->
         Notifications.new()
 
@@ -278,6 +286,26 @@ define 'forgeos/core/admin/datatables', ['jquery'], ($) ->
       e.preventDefault()
       if id = $(this).data('table-id') and url = $(this).attr('href')
         update_current_dataTable_source(id, url)
+
+  select_all_elements_without_category = (tree_id) ->
+    require ['forgeos/core/admin/base', 'jstree/jstree'], (Base) ->
+      tree = $.jstree._reference(tree_id)
+      tree.deselect_all() if tree
+
+      table = $("##{tree_id}").parents('.row-fluid').find('.dataslide:visible,.datatable:visible')
+      current_table = table.dataTableInstance()
+
+      url = current_table.fnSettings().sAjaxSource
+      url_base = url.split("?")[0]
+      params = undefined
+      params = Base.get_json_params_from_url(url)
+      params.category_id = null
+      params = Base.stringify_params_from_json(params)
+      update_current_dataTable_source current_table, url_base + "?" + params
+    $("#parent_id_tmp").remove()
+
+    true
+
 
   initialize = ->
     bind_destroy_row()

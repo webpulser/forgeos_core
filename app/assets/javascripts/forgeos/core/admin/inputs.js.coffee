@@ -35,7 +35,7 @@ define 'forgeos/core/admin/inputs', ['jquery'], ($) ->
   init_sortable = ->
     sortables = $('.sortable')
     if sortables.length > 0
-      require ['forgeos/jqueryui/jquery.ui.sortable'], ->
+      require ['jqueryui/jquery.ui.sortable'], ->
         sortables.each ->
           $(this).sortable
             handle: ".handler"
@@ -43,7 +43,7 @@ define 'forgeos/core/admin/inputs', ['jquery'], ($) ->
 
     nested_sortables = $('.nested_sortable')
     if nested_sortables.length > 0
-      require ['forgeos/jqueryui/jquery.ui.sortable'], ->
+      require ['jqueryui/jquery.ui.sortable'], ->
         nested_sortables.each ->
           $(this).sortable
             handle: ".handler"
@@ -55,7 +55,7 @@ define 'forgeos/core/admin/inputs', ['jquery'], ($) ->
   init_datepickers = ->
     picker = $("input.date-picker")
     if picker.length > 0
-      require ['forgeos/jqueryui/jquery.ui.datepicker'], ->
+      require ['jqueryui/jquery.ui.datepicker'], ->
         picker.datepicker
           dateFormat: "dd/mm/yy"
           showOn: "both"

@@ -3,7 +3,7 @@ define 'forgeos/core/admin/popins', ['jquery'], ($) ->
   init_default_dialog = ->
     dialogs = $(".lightbox-container")
     if dialogs.length > 0
-      require ['forgeos/jqueryui/jquery.ui.dialog'], ->
+      require ['jqueryui/jquery.ui.dialog'], ->
         dialogs.dialog
           autoOpen: false
           modal: true

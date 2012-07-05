@@ -38,15 +38,16 @@ module Forgeos
         if source = options.delete(:url) and source.present?
           datatable_options[:bServerSide] = true
           datatable_options[:sAjaxSource] = source
-          datatable_options[:fnRowCallback] = 'DataTablesRowCallBack'
+          datatable_options[:fnRowCallback] = 'default_row_callback'
         end
 
         datatable_options[:fnDrawCallback] = options.delete(:callback) if options[:callback].present?
-        options[:"data-datatable-options"] = datatable_options.to_json
+        options['data-datatable-options'] = datatable_options.to_json
         options[:class] ||= ''
         options[:class] << ' datatable'
         options[:class] << ' selectable_rows' if options.delete(:selectable)
         options[:class] << ' draggable_rows' if options.delete(:draggable)
+        options['data-autostart'] = true if options.delete(:autostart)
 
         content_tag(:table, options) do
           content_tag(:tr, content_tag(:td))
@@ -78,15 +79,16 @@ module Forgeos
         if source = options.delete(:url) and source.present?
           datatable_options[:bServerSide] = true
           datatable_options[:sAjaxSource] = source
-          datatable_options[:fnRowCallback] = 'DataTablesRowCallBack'
+          datatable_options[:fnRowCallback] = 'default_row_callback'
         end
 
-        options[:"data-dataslide-options"] = datatable_options.to_json
+        options['data-dataslide-options'] = datatable_options.to_json
 
         options[:class] ||= ''
         options[:class] << ' table dataslide'
         options[:class] << ' selectable_rows' if options.delete(:selectable)
         options[:class] << ' draggable_rows' if options.delete(:draggable)
+        options['data-autostart'] = true if options.delete(:autostart)
 
         content_tag(:div, '',options)
       end
