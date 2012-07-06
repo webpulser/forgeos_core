@@ -54,17 +54,17 @@ module Forgeos
       category = Category.create(:name => 'toto', :description => 'toto', :url => 'toto')
       assert_kind_of Hash, category.to_jstree
       assert_equal({
-        :attr => {
+        :li_attr => {
           :id => "forgeos/category_#{category.id}"
         },
+        :title => "toto",
         :data => {
-          :title => "toto",
-          :icon => 'folder'
+          :id => category.id,
+          :jstree => {
+            :icon => 'folder',
+            :closed => false
+          }
         },
-        :metadata => {
-          :id => category.id
-        },
-        :state => 'open'
       }, category.to_jstree)
     end
 
