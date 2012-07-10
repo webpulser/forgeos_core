@@ -1,6 +1,5 @@
 module Forgeos
   class Avatar < Attachment
-    has_attachment self.options_for('avatar')
-    validates_as_attachment
+    has_attachment :avatar
   end
 end

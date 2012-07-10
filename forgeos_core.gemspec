@@ -1,3 +1,4 @@
+# coding: utf-8
 $:.push File.expand_path("../lib", __FILE__)
 
 require "forgeos/core/version"
@@ -28,6 +29,13 @@ Gem::Specification.new do |s|
   s.add_dependency 'coffee-rails'
   s.add_dependency 'requirejs-rails', '~> 0.9.0'
 
+  # Uploads management
+  s.add_dependency 'carrierwave', '~> 0.6.2'
+  s.add_dependency 'carrierwave-meta', '~> 0.0.3'
+  s.add_dependency 'carrierwave_backgrounder', '~> 0.0.7'
+  s.add_dependency 'mime-types', '>= 1.16'
+  s.add_dependency 'mini_magick', '~> 3.4'
+
   # Authentication
   s.add_dependency 'bcrypt-ruby', '>= 2.1.4'
   s.add_dependency 'authlogic', '>= 3.0.3'
@@ -48,7 +56,6 @@ Gem::Specification.new do |s|
 
   # Others
   s.add_dependency 'globalize3', '>= 0.1.0'
-  s.add_dependency 'mime-types', '>= 1.16'
   s.add_dependency 'webpulser-habtm_list', '~> 0.1.3.1'
   s.add_dependency 'ofc2', '~> 2.0.1'
   s.add_dependency 'fastercsv', '>= 1.5.4'

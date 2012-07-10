@@ -9,7 +9,13 @@ module SortableAttachments
       has_many :attachments, :through => :attachment_links, :order => 'forgeos_attachment_links.position'
 
       %w(Picture Doc Video Pdf Audio Medium).each do |klass|
-        has_many klass.underscore.pluralize, { :through => :attachment_links, :class_name => "Forgeos::#{klass}", :source => :attachment, :order => "#{Forgeos::AttachmentLink.table_name}.position" }.merge(options)
+        defaults = {
+          :through => :attachment_links,
+          :class_name => "Forgeos::#{klass}",
+          :source => :attachment,
+          :order => "#{Forgeos::AttachmentLink.table_name}.position"
+        }
+        has_many klass.underscore.pluralize, defaults.merge(options)
       end
 
       unless self.instance_methods.include?('attachment_ids_with_position=')

@@ -15,7 +15,7 @@
       content_tag(:div, name, :class => 'attachment-name'),
       attachment.file_type.upcase,
       attachment.updated_at.to_s(:short),
-      size_in_kb(attachment.size),
+      size_in_kb(attachment.file.size),
       '-',
       edit_button(forgeos_core, attachment) +
       destroy_button(forgeos_core, attachment, t('attachment.destroy.confirm'))

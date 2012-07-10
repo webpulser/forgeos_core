@@ -11,7 +11,7 @@ module Forgeos
       assert ActiveRecord::Base.respond_to?(:has_and_belongs_to_many_attachments)
     end
 
-    test "should include instace methods" do
+    test "should include instance methods" do
       record = Forgeos::SortableAttachmentRecord.new
       assert_respond_to record, :attachment_ids
       assert_respond_to record, :picture_ids
@@ -41,7 +41,7 @@ module Forgeos
       assert_equal [forgeos_attachments(:audio).id, forgeos_attachments(:picture).id], record.attachment_ids
     end
 
-    test "should " do
+    test "should get attachment by type" do
       record = Forgeos::SortableAttachmentRecord.create(:attachment_ids => [forgeos_attachments(:picture).id, forgeos_attachments(:audio).id])
 
       assert_equal [forgeos_attachments(:picture), forgeos_attachments(:audio)], record.attachments

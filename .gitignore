@@ -8,6 +8,9 @@ test/dummy/test/fixtures/
 test/dummy/db/migrate/
 test/dummy/config/database.yml
 test/dummy/log/searchd.test.pid
+test/dummy/public/uploads/medium/
+test/dummy/public/uploads/picture/*.*
+test/dummy/public/uploads/tmp/
 *.swp
 *~
 *.rbc

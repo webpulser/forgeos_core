@@ -4,16 +4,14 @@
       %li.attachment_list{:id => p.id}
         - if p.kind_of?(Forgeos::Picture)
           .thumbs
-            - p.thumbnails.all(:order => '(width*height) DESC').each do |thumb|
-              = link_to thumb.thumbnail, thumb.public_filename, :title => thumb.name, :class => 'tiny-mce select-thumb'
+            - p.file.versions.merge(:original => p.file).each do |thumb_name, thumb_url|
+              = link_to thumb_name, thumb_url.url, :title => p.name, :class => 'tiny-mce select-thumb'
               %br
-            = link_to 'original', p.public_filename, :title => p.filename, :class => 'tiny-mce select-thumb'
-            %br
 
             %a.tiny-mce.cancel-image X
-          = link_to image_tag( p.public_filename, :alt => p.name ), '#', :class => 'tiny-mce select-image'
+          = link_to image_tag(p.file.url, :alt => p.name ), '#', :class => 'tiny-mce select-image'
         - else
-          = link_to p.name, p.public_filename, :class => 'tiny-mce select-thumb'
+          = link_to p.name, p.file.url, :class => 'tiny-mce select-thumb'
           \&nbsp;&nbsp;&nbsp;
   %br{:style => "clear:both;"}/
   %div{:style => "float:right;margin-bottom:10px;"}

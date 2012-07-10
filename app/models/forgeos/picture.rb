@@ -1,6 +1,5 @@
 module Forgeos
   class Picture < Attachment
-    has_attachment self.options_for('picture')
-    validates_as_attachment
+    has_attachment :picture
   end
 end

@@ -72,7 +72,7 @@ module Forgeos
       category = Category.create(:name => 'toto', :description => 'toto', :url => 'toto')
       assert_equal "folder", category.category_picture
       category.attachments << forgeos_attachments(:picture)
-      assert_equal "/uploads/images/0000/0002/picture_categories_icon.jpg", category.category_picture
+      assert_equal "/uploads/picture/2/categories_icon_picture.jpg", category.category_picture
     end
 
     test "should count elements" do

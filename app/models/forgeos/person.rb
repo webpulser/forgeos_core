@@ -22,7 +22,6 @@ module Forgeos
     has_one :address,
       :dependent => :destroy
     accepts_nested_attributes_for :address
-    accepts_nested_attributes_for :avatar, :reject_if => proc { |attributes| attributes['uploaded_data'].blank? }
 
     validates :lastname,
       :presence => { :if => :lastname_required? }

@@ -1,6 +1,5 @@
 module Forgeos
   class Video < Attachment
-    has_attachment self.options_for('video')
-    validates_as_attachment
+    has_attachment :video
   end
 end

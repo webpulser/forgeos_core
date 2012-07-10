@@ -1,5 +1,6 @@
 module Forgeos
   class Attachment < ActiveRecord::Base
+    extend ::CarrierWave::Backgrounder::ORM::ActiveRecord
     has_and_belongs_to_many :categories,
       :readonly => true,
       :join_table => 'forgeos_categories_elements',
@@ -9,8 +10,8 @@ module Forgeos
       :dependent => :destroy
 
     before_validation :fill_blank_name_with_filename
-    validates :name, :presence => { :unless => :parent_id }
-    validates :content_type, :inclusion => { :in => lambda { |att| att.content_types.to_a } }
+    validates :name, :presence => true
+    delegate :filename, :content_type, :width, :height, :to => :file
 
 
     scope :linked_to, lambda { |element_type|
@@ -20,45 +21,72 @@ module Forgeos
       })
      }
 
-    def content_types
-      if self.class.respond_to?(:attachment_options)
-        self.class.attachment_options[:content_type]
-      else
-        []
-      end
-    end
-
-    def self.detect_attachment_class_from_content_type(content_type)
+    def self.detect_attachment_class_from_extension(extension)
       attachment_class = Medium
 
       [Audio, Video, Pdf, Doc, Picture].each do |klass|
-        attachment_class = klass if klass.attachment_options[:content_type].include?(content_type)
+        attachment_class = klass if klass.uploaders[:file].new.extension_white_list.include?(extension)
       end
-
       attachment_class
     end
 
+    def self.detect_attachment_class_from_filename(filename = '')
+      detect_attachment_class_from_extension(File.extname(filename).gsub('.', ''))
+    end
+
+    # Retrieve options from Forgeos::Setting
     def self.options_for(target = class_name)
       return {} if !ActiveRecord::Base.connection.tables.include?(Setting.table_name) or
         Setting.current.nil? or
         Setting.current.attachments.nil?
-      (Setting.current.attachments[target] || {}).symbolize_keys
+
+      ActiveSupport::HashWithIndifferentAccess.new(Setting.current.attachments[target.to_s] || {})
+    end
+
+    # Abstract ClassMethod to set attachment uploader options
+    # Examples:
+    # class Image < Forgeos::Attachment
+    #   has_attachment :image
+    # end
+    def self.has_attachment(options)
+      options = options_for(options) unless options.is_a?(Hash)
+
+      thumbnails = options[:versions] || []
+      extensions = options[:content_types] || nil
+
+      mount_uploader :file, AttachmentUploader do
+        storage options[:storage].to_sym
+
+        if extensions.present?
+          class_eval <<-RUBY
+            def extension_white_list
+              #{extensions}
+            end
+          RUBY
+        end
+
+        thumbnails.each do |thumbnail|
+          version thumbnail[0] do
+            process thumbnail[1]
+          end
+          thumbnails.delete(thumbnail[0])
+        end
+      end
+      process_in_background :file
+      store_in_background :file
     end
 
     def self.new_from_rails_form(options = {})
       if data = options[:Filedata]
-        filename = options[:Filename] ||
-          data.send(data.respond_to?(:original_filename) ? :original_filename : :path)
+        filename = options[:Filename]
+        filename ||= data.original_filename if data.respond_to?(:original_filename)
+        filename ||= File.basename(data.path)
 
-        content_type = MIME::Types.type_for(filename).first.to_s
-        attachment_class = detect_attachment_class_from_content_type(content_type)
+        attachment_class = detect_attachment_class_from_filename(filename)
 
         attachment = attachment_class.new(options[:attachment])
-        attachment.uploaded_data = ActiveSupport::HashWithIndifferentAccess.new(
-          :tempfile => data,
-          :content_type => content_type,
-          :filename => filename
-        )
+        attachment.file.store!(data)
+        attachment.file.filename = filename
 
         attachment
       else
@@ -68,13 +96,27 @@ module Forgeos
 
 
     def file_type
-      content_type.split('/').last
+      file_content_type.split('/').last
+    end
+
+
+    # AttachmentFu compatibility to attachment url with thumbnails/version as option
+    # Examples:
+    # public_filename => "/uploads/image.jpg"
+    # public_filename(:version) => "/uploads/image_version.jpg"
+    def public_filename(thumb = nil)
+      if thumb.present?
+        file.send(thumb).url
+      else
+        file.url
+      end
     end
 
   private
 
     def fill_blank_name_with_filename
-      if name.blank? and filename.to_s.match(/\./)
+      filename = file.filename.to_s
+      if name.blank? and filename.match(/\./)
         self.name = filename.split('.').first
       end
     end

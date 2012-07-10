@@ -6,7 +6,7 @@ module Forgeos
     skip_before_filter :verify_authenticity_token, :only => [:create]
 
     def manage
-      @attachments = @attachment_class.where(:parent_id => nil).order('created_at DESC').page(params[:page]).per(10)
+      @attachments = @attachment_class.order('created_at DESC').page(params[:page]).per(10)
       render :partial => 'tiny_mce_list'
     end
 
@@ -27,7 +27,11 @@ module Forgeos
 
     # GET /attachments/1/download
     def download
-      send_file(attachment.full_filename)
+      if attachment.file.url.start_with?('/')
+        send_file(attachment.file.current_path)
+      else
+        redirect_to(attachment.file.url)
+      end
     end
 
     # GET /attachments/1/edit
@@ -61,7 +65,7 @@ module Forgeos
               attachment.categories << parent_category
             end
 
-            render :json => { :result => 'success', :id => attachment.id, :path => attachment.public_filename, :size => attachment.size, :type => attachment.class.model_name.singular_route_key }
+            render :json => { :result => 'success', :id => attachment.id, :path => attachment.public_filename, :size => attachment.file.size, :type => attachment.class.model_name.singular_route_key }
           else
             render :json => { :result => 'error', :error => attachment.errors.first }
           end
@@ -123,8 +127,8 @@ module Forgeos
     end
 
     def sort
-      items, search_query = forgeos_sort_from_datatables(@attachment_class, %w(filename filename content_type updated_at size used), %w(filename content_type name))
-      @attachments = items.where(:parent_id => nil).search(search_query).result
+      items, search_query = forgeos_sort_from_datatables(@attachment_class, %w(id name file_content_type updated_at file_size used), %w(file file_content_type name))
+      @attachments = items.search(search_query).result
     end
   end
 end

@@ -170,7 +170,7 @@ module Forgeos
     test "should post create with invalid record" do
       admin_login_to('admin/attachments', 'create')
       assert_no_difference 'Attachment.count', 1 do
-        post :create, :Filedata => nil, :attachment => { :filename => nil }, :use_route => :forgeos_core, :format => :json
+        post :create, :Filedata => nil, :attachment => { :file => nil }, :use_route => :forgeos_core, :format => :json
       end
 
       assert_response :success
@@ -218,14 +218,15 @@ module Forgeos
     test "should put update with invalid record" do
       admin_login_to('admin/attachments', 'update')
       put :update, :id => forgeos_attachments(:picture).id, :attachment => {
-        :filename => nil,
-        :content_type => 'none'
+        :name => nil,
+        :file => nil,
+        :file_content_type => 'none'
       }, :use_route => :forgeos_core, :klass => 'Forgeos::Picture'
 
       assert_response :success
       assert_equal forgeos_attachments(:picture), assigns(:attachment)
       assert !assigns(:attachment).valid?, "media is valid and should not be"
-      assert_not_equal 'none', forgeos_attachments(:picture).reload.content_type
+      assert_not_equal 'none', forgeos_attachments(:picture).reload.file_content_type
       assert_template 'admin/attachments/edit'
     end
 
@@ -293,7 +294,7 @@ module Forgeos
       get :download, :id => forgeos_attachments(:picture).id, :use_route => :forgeos_core
 
       assert_response :success
-      assert_equal forgeos_attachments(:picture).content_type, @response.headers['Content-Type']
+      assert_equal forgeos_attachments(:picture).file_content_type, @response.headers['Content-Type']
     end
 
     ###########################

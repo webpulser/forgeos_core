@@ -3,14 +3,17 @@ require 'test_helper'
 module Forgeos
   class AttachmentTest < ActiveSupport::TestCase
     test "should give file_type" do
-      assert_equal 'application/none', forgeos_attachments(:attachment).content_type
+      assert_equal 'application/none', forgeos_attachments(:attachment).file_content_type
       assert_equal 'none', forgeos_attachments(:attachment).file_type
     end
 
     test "should fill blank name with filename" do
-      attachment = Attachment.new(:filename => 'attachment.none')
+      # forcing file processing
+      Forgeos::AttachmentUploader.enable_processing = true
+
+      attachment = Medium.new(:file => File.open(File.expand_path('../../../files/rails.png', __FILE__)))
       attachment.save
-      assert_equal 'attachment', attachment.name
+      assert_equal 'rails', attachment.name
     end
 
     test "should initialize from rails form" do
@@ -20,14 +23,18 @@ module Forgeos
 
     test "should get the filename from rails form" do
       attachment = Attachment.new_from_rails_form(:Filedata => File.open(File.expand_path('../../../files/empty.file', __FILE__)), :Filename => 'toto.test')
-      assert_equal 'toto.test', attachment.filename
+      assert_equal 'toto.test', attachment.file.filename
     end
 
     test "should retreive the right model from content_type" do
+      # forcing file processing
+      Forgeos::AttachmentUploader.enable_processing = true
+
+
       attachment = Attachment.new_from_rails_form(:Filedata => File.open(File.expand_path('../../../files/rails.png', __FILE__)))
+
       assert_kind_of Picture, attachment
-      assert_equal 'rails.png', attachment.filename
-      assert_equal 'image/png', attachment.content_type
+      assert_equal 'rails.png', attachment.file.filename
     end
 
     test "should retreive linked to models" do

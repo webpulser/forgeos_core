@@ -21,5 +21,12 @@
         #association-attachment.tree.inner-step
           %ul
             = hidden_field_tag "#{f.object_name}[category_ids][]"
-            = render :partial => 'forgeos/admin/categories/associated_elements', :locals => { :association_id => 'category_ids', :element => attachment, :category_ids => attachment.category_ids, :categories => find_categories_from_content_type(attachment) }
-    = render :partial => @attachment.class.model_name.singular_route_key.dup, :object => attachment, :locals => { :form => f }
+            :ruby
+              locals = {
+                :association_id => 'category_ids',
+                :element => attachment,
+                :category_ids => attachment.category_ids,
+                :categories => find_categories_from_extension(File.extname(attachment.file.filename || ''))
+              }
+            = render :partial => @attachment_class.model_name.singular_route_key.dup, :object => attachment, :locals => { :form => f }
+            = render :partial => 'forgeos/admin/categories/associated_elements', :locals => locals

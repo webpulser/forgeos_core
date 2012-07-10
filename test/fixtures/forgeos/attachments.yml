@@ -1,71 +1,55 @@
 attachment:
   id: 1
-  content_type: application/none
+  file_content_type: application/none
+  file: attachment.none
   name: attachment
-  filename: attachment.none
-  alternative: attachment
-  size: 16
   description: attachment description
   alt: attachment
 picture:
   id: 2
-  content_type: image/jpeg
+  file_content_type: image/jpeg
   type: Forgeos::Picture
+  file: picture.jpg
   name: picture
-  filename: picture.jpg
-  alternative: picture
-  height: 50
-  width: 50
-  size: 16
   description: picture description
   alt: picture
 pdf:
   id: 3
-  content_type: application/pdf
+  file_content_type: application/pdf
   type: Forgeos::Pdf
+  file: pdf.pdf
   name: pdf
-  filename: pdf.pdf
-  alternative: pdf
-  size: 16
   description: pdf description
   alt: pdf
 video:
   id: 4
-  content_type: video/mpeg
+  file_content_type: video/mpeg
   type: Forgeos::Video
+  file: video.mpg
   name: video
-  filename: video.mpg
-  alternative: video
-  size: 16
   description: video description
   alt: video
 audio:
   id: 5
-  content_type: audio/mpeg
+  file_content_type: audio/mpeg
   type: Forgeos::Audio
+  file: audio.mp3
   name: audio
-  filename: audio.mp3
-  alternative: audio
-  size: 16
   description: audio description
   alt: audio
 doc:
   id: 6
-  content_type: application/vnd.oasis.opendocument.presentation
+  file_content_type: application/vnd.oasis.opendocument.presentation
   type: Forgeos::Doc
+  file: doc.odp
   name: doc
-  filename: doc.odp
-  alternative: doc
-  size: 16
   description: doc description
   alt: doc
 medium:
   id: 7
-  content_type: application/x-gzip
+  file_content_type: application/x-gzip
   type: Forgeos::Medium
+  file: media.tar.gz
   name: media
-  filename: media.tar.gz
-  alternative: media
-  size: 16
   description: media description
   alt: media

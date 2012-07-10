@@ -17,9 +17,10 @@
     .controls= attachment.updated_at.to_s(:short)
   .control-group
     %label.control-label=t 'attachment.size'
-    .controls= size_in_kb(attachment.size)
+    .controls= size_in_kb(attachment.file.size)
   - if defined?(form) and form
-    = form.input :uploaded_data, :as => :file
+    = form.input :file
+    = form.hidden_field :file_cache
     = form.input :alt
     = form.input :description, :input_html => { :rows => 4 }
   - else
