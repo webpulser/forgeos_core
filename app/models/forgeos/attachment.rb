@@ -58,11 +58,9 @@ module Forgeos
         storage options[:storage].to_sym
 
         if extensions.present?
-          class_eval <<-RUBY
-            def extension_white_list
-              #{extensions}
-            end
-          RUBY
+          define_method "extension_white_list" do
+            return extensions
+          end
         end
 
         thumbnails.each do |thumbnail|
@@ -84,8 +82,9 @@ module Forgeos
 
         attachment_class = detect_attachment_class_from_filename(filename)
 
+        options[:attachment] = {}
+        options[:attachment][:file] = data
         attachment = attachment_class.new(options[:attachment])
-        attachment.file.store!(data)
         attachment.file.filename = filename
 
         attachment

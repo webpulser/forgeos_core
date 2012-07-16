@@ -3,16 +3,16 @@
     %ul.thumbnails
       %li.span12
         .thumbnail
-          = image_tag largest_thumb.public_filename
+          = image_tag largest_thumb.last
           .caption
-            %h5.attachment-size= t(largest_thumb.thumbnail, :scope => [:attachment, :thumbnails]).upcase
+            %h5.attachment-size= t(largest_thumb.first, :scope => [:attachment, :thumbnails]).upcase
             %p.attachment-size-pixels
-              #{largest_thumb.width} x #{largest_thumb.height} #{t 'attachment.pixel', :count => 2}
+              //#{largest_thumb.width} x #{largest_thumb.height} #{t 'attachment.pixel', :count => 2}
       - thumbnails.each do |thumb|
         %li.span3
           .thumbnail
-            = image_tag thumb.public_filename
+            = image_tag thumb.last
             .caption
-              %h5.attachment-size= t(thumb.thumbnail, :scope => [:attachment, :thumbnails]).upcase
+              %h5.attachment-size= t(thumb.first, :scope => [:attachment, :thumbnails]).upcase
               %p.attachment-size-pixels
-                #{thumb.width} x #{thumb.height} #{t 'attachment.pixel', :count => 2 }
+                //#{thumb.width} x #{thumb.height} #{t 'attachment.pixel', :count => 2 }

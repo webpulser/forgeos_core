@@ -2,7 +2,7 @@
   = image_tag(attachment.public_filename(:small),:title=>attachment.filename, :id => "attachment_#{attachment.id}")
   %h5= attachment.name
   %p
-    = "#{attachment.content_type} - #{size_in_kb attachment.size}"
+    = "#{attachment.file.content_type} - #{size_in_kb attachment.file.size}"
   /
     %br
     =# NOT USED select_tag :thumbnail, options_for_select(attachment.attachment_options[:thumbnails].keys)

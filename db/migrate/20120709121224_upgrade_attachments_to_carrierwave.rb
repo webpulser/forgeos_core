@@ -3,6 +3,7 @@ class UpgradeAttachmentsToCarrierwave < ActiveRecord::Migration
   def change
     remove_column :forgeos_attachments, :thumbnail
     remove_column :forgeos_attachments, :parent_id
+    remove_column :forgeos_attachments, :alternative
 
     rename_column :forgeos_attachments, :filename, :file
     rename_column :forgeos_attachments, :content_type, :file_content_type

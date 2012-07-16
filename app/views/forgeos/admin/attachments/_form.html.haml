@@ -28,5 +28,5 @@
                 :category_ids => attachment.category_ids,
                 :categories => find_categories_from_extension(File.extname(attachment.file.filename || ''))
               }
-            = render :partial => @attachment_class.model_name.singular_route_key.dup, :object => attachment, :locals => { :form => f }
-            = render :partial => 'forgeos/admin/categories/associated_elements', :locals => locals
+    = render :partial => @attachment_class.model_name.singular_route_key.dup, :object => attachment, :locals => { :form => f }
+    = render :partial => 'forgeos/admin/categories/associated_elements', :locals => locals

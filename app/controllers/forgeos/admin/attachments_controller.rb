@@ -1,8 +1,7 @@
 module Forgeos
   class Admin::AttachmentsController < Admin::BaseController
     helper_method :attachment
-    before_filter :get_file_type, :only => [:index, :manage]
-    before_filter :get_thumbnails, :only => [:show, :edit, :update]
+    before_filter :file_type, :only => [:index, :manage]
     skip_before_filter :verify_authenticity_token, :only => [:create]
 
     def manage
@@ -103,15 +102,16 @@ module Forgeos
       @attachment.attributes = params[:attachment] if params[:attachment]
       @attachment_class = @attachment.class
       @file_type = @attachment_class.model_name.singular_route_key
+      thumbnails
 
       @attachment
     end
 
-    def get_thumbnails
-      @thumbnails = @attachment ? @attachment.thumbnails.all(:order => '(width*height) DESC') : []
+    def thumbnails
+      @thumbnails = attachment ? attachment.file.versions : []
     end
 
-    def get_file_type
+    def file_type
       begin
         @attachment_class = if params[:klass].present?
           params[:klass].camelize.constantize
