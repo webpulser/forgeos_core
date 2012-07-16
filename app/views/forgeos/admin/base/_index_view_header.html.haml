@@ -1,0 +1,13 @@
+.header.row-fluid
+  .span4
+    .btn-group
+      = link_to '#', :class => 'btn' do
+        = i 'folder-close'
+        \&nbsp;
+      = link_to '#', :class => 'btn dropdown-toggle', :data => { :toggle => 'dropdown' } do
+        %span.caret
+      %ul.dropdown-menu
+        %li.create-folder{ 'data-tree_id' => tree_id }
+          = i 'plus-sign'
+          = t 'folder.create'
+  .span8= button

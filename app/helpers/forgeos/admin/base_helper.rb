@@ -9,49 +9,8 @@ module Forgeos
       include AttachmentHelper
       include DatatablesHelper
 
-
-      def index_sidebar(engine, model, icon, category = "#{model}Category".constantize)
-        url = engine.send("admin_#{category.model_name.route_key}_path", :format => :json)
-        model_name = index_model_name(model)
-        category_model_name = index_model_name(category)
-        render :partial => 'left_sidebar', :locals => { :icon => icon, :sidebar_title => "#{model_name}.all", :tree_id => "#{category_model_name}-tree" , :url => url, :model_name => category }
-      end
-
-      def index_model_name(model)
-        model.model_name.singular_route_key
-      end
-
-      def index_header(engine, model, icon, button)
-        category_model_name = index_model_name("#{model}Category".constantize)
-        content_tag(:div, :class => 'header row-fluid') do
-          content_tag(:div, :class => 'span4') do
-            content_tag(:div, :class => 'btn-group') do
-              link_to(i('folder-close') + '&nbsp;'.html_safe, '#', :class => 'btn') +
-              link_to(content_tag(:span, '', :class => 'caret'), '#', :class => 'btn dropdown-toggle', :data => { :toggle => 'dropdown' }) +
-              content_tag(:ul, :class => 'dropdown-menu') do
-                content_tag(:li, i('plus-sign') + t('folder.create'), :class => 'create-folder', "data-tree_id" => "#{category_model_name}-tree")
-              end
-            end
-          end +
-          content_tag(:div, create_button(engine, index_model_name(model), icon, button), :class => 'span8')
-        end
-      end
-
       def index_view(icon, engine, model, columns, button = {})
-        content_tag(:div, :id => 'page', :class => 'row-fluid') do
-          index_header(engine, model, icon, button) +
-          content_tag(:div, :class => 'row-fluid') do
-            index_sidebar(engine, model, icon) +
-            content_tag(:div, :class => 'span8', :id => 'content') do
-              datatable(
-                :draggable => true,
-                :autostart => true,
-                :url => engine.send("admin_#{model.model_name.route_key}_path", :format => :json),
-                :columns => columns
-              )
-            end
-          end
-        end
+        ForgeosAdminIndexViewPresenter.new(self, engine, model, icon, columns, button)
       end
 
       def form_header(html_options = {}, &block)
@@ -63,14 +22,6 @@ module Forgeos
         end
       end
 
-      def create_button(engine, model, icon, html_options = {})
-        html_options[:class] ||= 'btn'
-        link_to [engine, :new, :admin, model], html_options do
-          i('plus-sign') +
-          i(icon) +
-          t(:action, :scope => [model, :create])
-        end
-      end
 
       def handler_icon(icon, model)
         content_tag(:div, :id => polymorphic_html_id(model), :class => 'handler_container') do
