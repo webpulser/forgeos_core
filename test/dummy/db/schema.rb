@@ -229,7 +229,7 @@ ActiveRecord::Schema.define(:version => 20111116212547) do
     t.string  "element_type"
   end
 
-  create_table "rights_roles", :id => false, :force => true do |t|
+  create_table "forgeos_rights_forgeos_roles", :id => false, :force => true do |t|
     t.integer "right_id"
     t.integer "role_id"
   end

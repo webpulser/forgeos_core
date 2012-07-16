@@ -1,7 +1,8 @@
 module Forgeos
   class Role < ActiveRecord::Base
     has_many :administrators
-    has_and_belongs_to_many :rights
+    has_and_belongs_to_many :rights,
+    :join_table => 'forgeos_rights_forgeos_roles'
 
     validates :name, :presence => true
 
