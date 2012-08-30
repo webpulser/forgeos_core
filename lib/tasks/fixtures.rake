@@ -9,14 +9,14 @@ namespace :forgeos do
           PLUGIN_PATH = Gem.loaded_specs[args.plugin_name].full_gem_path
           tables = args.tables.split(' ')
         else
-          puts "usage: rake forgeos:core:fixtures:load[PLUGIN_NAME,table_name1,table_name2];"
+          puts "usage: rake forgeos:core:fixtures:load[PLUGIN_NAME,table_name1 table_name2];"
           exit
         end
 
         tables.each do |file|
           file_name = File.basename(file, '.yml')
           #begin
-            ActiveRecord::Fixtures.create_fixtures(File.join(PLUGIN_PATH,'db','fixtures', 'forgeos'), file_name)
+            ActiveRecord::Fixtures.create_fixtures(File.join(PLUGIN_PATH,'db','fixtures'), "forgeos_#{file_name}")
             puts "Loaded #{file_name} fixtures"
           #rescue
           #  puts "#{file_name} fixtures not loaded"

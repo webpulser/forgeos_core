@@ -1,0 +1,54 @@
+main_setting:
+  id: 1
+  name: Forgeos
+  lang: en
+  time_zone: UTC
+  mailer:
+    delivery_method: test
+  smtp_settings:
+    port: 25
+  sendmail_settings:
+    path: /
+  attachments:
+    picture:
+      storage: file
+      content_types: [ jpeg, jpg, gif, png ]
+      versions:
+        big:
+          resize_to_fill: [500, 500]
+        normal:
+          resize_to_fill: [200, 200]
+        small:
+          resize_to_fill: [100, 100]
+        thumb:
+          resize_to_fill: [50, 50]
+        categories_icon:
+          resize_to_fill: [16, 16]
+
+    avatar:
+      storage: file
+      content_types: [jpg, jpeg]
+      versions:
+        small:
+          resize_to_fill: [100, 100]
+        thumb:
+          resize_to_fill: [50, 50]
+
+    doc:
+      content_types: [ doc, xls, docx, xlsx, odp, odt ]
+      storage: file
+
+    pdf:
+      content_types: [pdf]
+      storage: file
+
+    video:
+      content_types: [ avi, ogg, mp4, flv, mov, mpg ]
+      storage: file
+
+    audio:
+      storage: file
+      content_types: [ mp3, wav, ogg ]
+
+    medium:
+      storage: file
