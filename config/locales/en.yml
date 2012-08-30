@@ -56,6 +56,7 @@ en:
           success: your changed on settings are successfully saved
           action: change settings
         user_name: user name
+        background_uploads: process uploads in background (increase speed if enabled)
     models:
       forgeos/audio: audio file
       forgeos/category_link: category link

@@ -17,6 +17,7 @@
       = field_set_tag :display, :class => 'well span5' do
         = f.input :lang, :as => :select, :collection => I18n.available_locales
         = f.input :time_zone
+        = f.input :background_uploads
       = field_set_tag :site_address, :class => 'well span6' do
         = f.simple_fields_for :site_address do |address_form|
           - (address_form.object.attributes.keys.map(&:to_sym) - [:id, :created_at, :updated_at, :person_id, :country_id ]).each do |field|

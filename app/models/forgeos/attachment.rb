@@ -1,6 +1,10 @@
 module Forgeos
   class Attachment < ActiveRecord::Base
-    extend ::CarrierWave::Backgrounder::ORM::ActiveRecord
+    if Setting.current.background_uploads?
+      require 'carrierwave_backgrounder'
+      extend ::CarrierWave::Backgrounder::ORM::ActiveRecord
+    end
+
     has_and_belongs_to_many :categories,
       :readonly => true,
       :join_table => 'forgeos_categories_elements',
@@ -70,8 +74,14 @@ module Forgeos
           thumbnails.delete(thumbnail[0])
         end
       end
-      process_in_background :file
-      store_in_background :file
+      if process_upload_in_background?
+        process_in_background :file
+        store_in_background :file
+      end
+    end
+
+    def self.process_upload_in_background?
+      Setting.current.background_uploads?
     end
 
     def self.new_from_rails_form(options = {})
@@ -95,6 +105,8 @@ module Forgeos
 
 
     def file_type
+      return '' unless file_content_type
+
       file_content_type.split('/').last
     end
 

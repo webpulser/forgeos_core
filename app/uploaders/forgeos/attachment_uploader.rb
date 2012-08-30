@@ -6,7 +6,10 @@ module Forgeos
     include ::Sprockets::Helpers::RailsHelper
     include ::Sprockets::Helpers::IsolatedHelper
     include ::CarrierWave::Meta
-    include ::CarrierWave::Backgrounder::Delay
+    if Setting.current.background_uploads?
+      require 'carrierwave_backgrounder'
+      include ::CarrierWave::Backgrounder::Delay
+    end
 
     process :store_meta
 

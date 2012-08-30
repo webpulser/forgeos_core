@@ -37,6 +37,7 @@ fr:
           failed: un problème est survenu lors de la mise à jour des options
           success: les options ont bien été sauvegardées
         user_name: login du compte smtp
+        background_uploads: traiter les téléversements en tâche de fond (ils seront plus rapides si activé)
       forgeos/user:
         firstname: prénom
         lastname: nom

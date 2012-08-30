@@ -11,7 +11,7 @@
 #
 # It's strongly recommended to check this file into your version control system.
 
-ActiveRecord::Schema.define(:version => 20111116212547) do
+ActiveRecord::Schema.define(:version => 20120830165635) do
 
   create_table "delayed_jobs", :force => true do |t|
     t.integer  "priority",   :default => 0
@@ -22,8 +22,8 @@ ActiveRecord::Schema.define(:version => 20111116212547) do
     t.datetime "locked_at"
     t.datetime "failed_at"
     t.string   "locked_by"
-    t.datetime "created_at"
-    t.datetime "updated_at"
+    t.datetime "created_at",                :null => false
+    t.datetime "updated_at",                :null => false
   end
 
   add_index "delayed_jobs", ["priority", "run_at"], :name => "delayed_jobs_priority"
@@ -36,8 +36,8 @@ ActiveRecord::Schema.define(:version => 20111116212547) do
     t.string   "type"
     t.integer  "country_id"
     t.integer  "person_id"
-    t.datetime "created_at"
-    t.datetime "updated_at"
+    t.datetime "created_at", :null => false
+    t.datetime "updated_at", :null => false
   end
 
   create_table "forgeos_attachment_links", :force => true do |t|
@@ -49,28 +49,28 @@ ActiveRecord::Schema.define(:version => 20111116212547) do
   end
 
   create_table "forgeos_attachments", :force => true do |t|
+    t.string   "file_content_type"
     t.string   "name"
     t.string   "file"
-    t.string   "file_content_type"
-    t.string   "file_width"
-    t.string   "file_height"
-    t.string   "file_image_size"
-    t.string   "file_size"
-    t.string   "file_tmp"
-    t.boolean   "file_processing"
     t.string   "type"
+    t.integer  "file_height"
+    t.integer  "file_width"
+    t.integer  "file_size"
     t.integer  "person_id"
-    t.datetime "created_at"
-    t.datetime "updated_at"
+    t.datetime "created_at",        :null => false
+    t.datetime "updated_at",        :null => false
     t.text     "description"
     t.string   "alt"
+    t.string   "file_image_size"
+    t.boolean  "file_processing"
+    t.string   "file_tmp"
   end
 
   create_table "forgeos_categories", :force => true do |t|
     t.string   "type",       :limit => 45
     t.integer  "parent_id"
-    t.datetime "created_at"
-    t.datetime "updated_at"
+    t.datetime "created_at",                              :null => false
+    t.datetime "updated_at",                              :null => false
     t.integer  "position",                 :default => 0
   end
 
@@ -90,11 +90,12 @@ ActiveRecord::Schema.define(:version => 20111116212547) do
     t.string   "url"
     t.string   "name"
     t.text     "description"
-    t.datetime "created_at"
-    t.datetime "updated_at"
+    t.datetime "created_at",          :null => false
+    t.datetime "updated_at",          :null => false
   end
 
   add_index "forgeos_category_translations", ["forgeos_category_id"], :name => "index_cc5c2f78ec5fe2953ff591ce10708766eaa1c94e"
+  add_index "forgeos_category_translations", ["locale"], :name => "index_forgeos_category_translations_on_locale"
 
   create_table "forgeos_comments", :force => true do |t|
     t.string   "title",            :limit => 50, :default => ""
@@ -102,8 +103,8 @@ ActiveRecord::Schema.define(:version => 20111116212547) do
     t.integer  "commentable_id"
     t.string   "commentable_type"
     t.integer  "person_id"
-    t.datetime "created_at"
-    t.datetime "updated_at"
+    t.datetime "created_at",                                     :null => false
+    t.datetime "updated_at",                                     :null => false
   end
 
   add_index "forgeos_comments", ["person_id"], :name => "fk_comments_person"
@@ -123,8 +124,8 @@ ActiveRecord::Schema.define(:version => 20111116212547) do
     t.text     "parser_options"
     t.boolean  "ignore_first_row", :default => true, :null => false
     t.string   "name"
-    t.datetime "created_at"
-    t.datetime "updated_at"
+    t.datetime "created_at",                         :null => false
+    t.datetime "updated_at",                         :null => false
   end
 
   create_table "forgeos_meta_info_translations", :force => true do |t|
@@ -133,11 +134,12 @@ ActiveRecord::Schema.define(:version => 20111116212547) do
     t.string   "title"
     t.text     "description"
     t.text     "keywords"
-    t.datetime "created_at"
-    t.datetime "updated_at"
+    t.datetime "created_at",           :null => false
+    t.datetime "updated_at",           :null => false
   end
 
   add_index "forgeos_meta_info_translations", ["forgeos_meta_info_id"], :name => "index_bf657d8aeb1f08a77976f6aca7e82e1ff66a07ee"
+  add_index "forgeos_meta_info_translations", ["locale"], :name => "index_forgeos_meta_info_translations_on_locale"
 
   create_table "forgeos_meta_infos", :force => true do |t|
     t.integer "target_id"
@@ -159,11 +161,11 @@ ActiveRecord::Schema.define(:version => 20111116212547) do
     t.integer  "country_id"
     t.integer  "role_id"
     t.date     "birthday"
-    t.datetime "created_at"
-    t.datetime "updated_at"
+    t.datetime "created_at",                                           :null => false
+    t.datetime "updated_at",                                           :null => false
     t.integer  "civility"
-    t.string   "persistence_token",                 :default => "",    :null => false
-    t.string   "perishable_token",                  :default => "",    :null => false
+    t.string   "persistence_token",                 :default => ""
+    t.string   "perishable_token",                  :default => ""
     t.integer  "login_count",                       :default => 0,     :null => false
     t.integer  "failed_login_count",                :default => 0,     :null => false
     t.datetime "last_request_at"
@@ -172,7 +174,6 @@ ActiveRecord::Schema.define(:version => 20111116212547) do
     t.string   "current_login_ip"
     t.string   "last_login_ip"
     t.boolean  "active",                            :default => false, :null => false
-    t.boolean  "delta",                             :default => true,  :null => false
   end
 
   create_table "forgeos_rights", :force => true do |t|
@@ -181,11 +182,16 @@ ActiveRecord::Schema.define(:version => 20111116212547) do
     t.string "action_name"
   end
 
+  create_table "forgeos_rights_forgeos_roles", :id => false, :force => true do |t|
+    t.integer "right_id"
+    t.integer "role_id"
+  end
+
   create_table "forgeos_roles", :force => true do |t|
     t.string   "name"
     t.boolean  "active",     :default => true, :null => false
-    t.datetime "created_at"
-    t.datetime "updated_at"
+    t.datetime "created_at",                   :null => false
+    t.datetime "updated_at",                   :null => false
   end
 
   create_table "forgeos_rules", :force => true do |t|
@@ -203,8 +209,8 @@ ActiveRecord::Schema.define(:version => 20111116212547) do
 
   create_table "forgeos_search_keywords", :force => true do |t|
     t.string   "keyword"
-    t.datetime "created_at"
-    t.datetime "updated_at"
+    t.datetime "created_at", :null => false
+    t.datetime "updated_at", :null => false
   end
 
   create_table "forgeos_settings", :force => true do |t|
@@ -214,11 +220,12 @@ ActiveRecord::Schema.define(:version => 20111116212547) do
     t.string  "phone_number"
     t.string  "fax_number"
     t.string  "email"
-    t.text    "mailer",            :null => false, :default => ''
-    t.text    "smtp_settings",     :null => false, :default => ''
-    t.text    "sendmail_settings", :null => false, :default => ''
+    t.text    "mailer",             :default => "",    :null => false
+    t.text    "smtp_settings",      :default => "",    :null => false
+    t.text    "sendmail_settings",  :default => "",    :null => false
     t.integer "address_id"
     t.text    "attachments"
+    t.boolean "background_uploads", :default => false, :null => false
   end
 
   create_table "forgeos_statistic_counters", :force => true do |t|
@@ -227,11 +234,6 @@ ActiveRecord::Schema.define(:version => 20111116212547) do
     t.integer "counter",      :default => 1
     t.integer "element_id"
     t.string  "element_type"
-  end
-
-  create_table "forgeos_rights_forgeos_roles", :id => false, :force => true do |t|
-    t.integer "right_id"
-    t.integer "role_id"
   end
 
   create_table "taggings", :force => true do |t|
