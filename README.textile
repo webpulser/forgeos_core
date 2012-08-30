@@ -1,21 +1,29 @@
-h1. Introduction
+h2. Introduction
+
 "!https://secure.travis-ci.org/webpulser/forgeos_core.png!":http://travis-ci.org/webpulser/forgeos_core
 
 ForgeosCore is the core of Forgeos project "http://www.forgeos.com":http://www.forgeos.com
 
-VERSION : 1.9.2
-
-h1. Prerequisites
-
-h2. Plugins
-
-* attachment_fu
-* localized_dates
-
-h1. Initialize
+h2. Install
 
  <pre><code>
+  rails new my_forgeos_site
+  cd my_forgeos_site
+  add "gem 'forgeos_core'" to your Gemfile then :
+  bundle install
   rake forgeos:core:install
  </code></pre>
+
+h2. Translations
+
+A ruby translation project managed on "Locale":http://www.localeapp.com/ that's open to all!
+
+h3. Contributing to webpulser/forgeos_core
+
+* Edit the translations directly on the "webpulser/forgeos_core":http://www.localeapp.com/projects/public?search=webpulser/forgeos_core project on Locale.
+* *That's it!*
+* The maintainer will then pull translations from the Locale project and push to Github.
+
+Happy translating!
 
 Powered by "Webpulser":http://www.webpulser.com

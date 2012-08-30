@@ -1,0 +1,819 @@
+en:
+  _no: 'no'
+  _yes: 'yes'
+  account:
+    update:
+      action: update your information
+  action_name: action name
+  active: active
+  activerecord:
+    attributes:
+      forgeos/user:
+        firstname: firstname
+        lastname: name
+      setting:
+        backup: backup
+        company_info: about your company
+        contact_info: contact
+        display: display
+        email: email
+        fax_number: fax number
+        general: general
+        global: global settings
+        mailer: mailer
+        phone_number: phone number
+        shop_name: shop name
+        update:
+          action: save settings
+          failed: a problem occured during settings update
+          success: settings are successfully saved
+      forgeos/administrator:
+        active: active
+        birthday: birthday
+        email: email address
+        lang: language
+        other_phone: mobile phone number
+        password: password
+        password_confirmation: confirm your password
+        phone: phone number
+        time_zone: time zone
+      forgeos/setting:
+        authentication: authentication
+        delivery_method: delivery method
+        domain: domain
+        email: email address
+        enable_starttls_auto: use SSL
+        fax_number: fax number
+        lang: site default lang
+        name: name
+        password: password
+        phone_number: phone number
+        port: port
+        site_address: site address
+        time_zone: default time zone
+        update:
+          failed: a problem occured during settings update
+          success: your changed on settings are successfully saved
+          action: change settings
+        user_name: user name
+    models:
+      forgeos/audio: audio file
+      forgeos/category_link: category link
+      forgeos/doc: document
+      forgeos/external_link: external link
+      forgeos/media: media
+      forgeos/page_link: page link
+      forgeos/pdf: pdf
+      forgeos/picture: picture
+      forgeos/product_link: product link
+      forgeos/user: user
+      forgeos/video: video
+    errors:
+      messages:
+        accepted: must be accepted
+        blank: can't be blank
+        confirmation: doesn't match confirmation
+        empty: can't be empty
+        equal_to: must be equal to %{count}
+        even: must be even
+        exclusion: is reserved
+        greater_than: must be greater than %{count}
+        greater_than_or_equal_to: must be greater than or equal to %{count}
+        inclusion: is not included in the list
+        invalid: is invalid
+        less_than: must be less than %{count}
+        less_than_or_equal_to: must be less than or equal to %{count}
+        not_a_number: is not a number
+        not_an_integer: must be an integer
+        odd: must be odd
+        record_invalid: ! 'Validation failed: %{errors}'
+        taken: has already been taken
+        too_long:
+          one: is too long (maximum is 1 character)
+          other: is too long (maximum is %{count} characters)
+        too_short:
+          one: is too short (minimum is 1 character)
+          other: is too short (minimum is %{count} characters)
+        wrong_length:
+          one: is the wrong length (should be 1 character)
+          other: is the wrong length (should be %{count} characters)
+      format: ! '%{attribute} %{message}'
+      template:
+        body: ! 'There were problems with the following fields:'
+        header:
+          one: 1 error prohibited this %{model} from being saved
+          other: ! '%{count} errors prohibited this %{model} from being saved'
+  address:
+    address: address
+    address_2: address suite
+    city: city
+    country: country
+    same_people_infos: people name is the same
+    zip_code: zip_code
+  admin_access_denied: You have not access rights for this page
+  administration: administration
+  administrator:
+    all: all administrators
+    contact:
+      action: send a message to the administrator
+    create:
+      action: create administrator
+      failed: a problem occured during the administrator creation
+      success: the administrator was successfully created
+    destroy:
+      action: delete the administrator
+      confirm: are you sure to delete this administrator?
+      failed: a problem occured during the administrator deletion
+      success: the administrator was successfully deleted
+    none: no administrator
+    not_exist: the requested administrator does not exist
+    show: show administrator
+    update:
+      action: edit administrator
+      failed: a problem occured during the administrator update
+      success: the administrator was successfully updated
+  admins: administrators
+  ago: ago %{time}
+  and: and
+  attachment:
+    add_from_library: add from library
+    alt: alternatif text
+    associated_rights: associated rights
+    attach:
+      error: a problem occured during the check of the type of the attachable element
+      unknown_type: the type of the attachable element is unknown
+      failed: the media couldn't be linked
+    back: back to library
+    byte:
+      kilo: Kb
+      mega: Mb
+    content_type: content type
+    create:
+      action: create a media
+      failed: a problem occured during the media creation
+      success: the media was successfully created
+    description: description
+    destroy:
+      action: delete media
+      confirm: are you sure that you want to delete this media?
+      failed: a problem occured during the media deletion
+      success: the media was successfully deleted
+    download:
+      action: download the media
+      failed: a problem occured during the media download
+    file_type: file type
+    filename: filename
+    linked: linked files
+    list: list of media
+    name: name
+    not_exist: the requested media does not exist
+    pixel:
+      one: pixel
+      other: pixels
+    show: show media
+    size: size
+    thumbnails:
+      big: big
+      categories_icon: category ison
+      normal: normal
+      small: small
+      thumb: thumb
+    type:
+      one: type
+      other: types
+    update:
+      action: edit the media
+      failed: a problem occured during the media update
+      success: the media was successfully updated
+    updated_at: last modification
+    upload:
+      action: upload files
+      clear_queue: clear queue
+      start: start upload
+    used: used
+  audio:
+    all: all audio files
+    bootstrap_icon: music
+    create:
+      action: add an audio file
+  avatar: avatar
+  back_office:
+    account:
+      infos: account infos
+    menu:
+      accounts: your account
+      administration: administration
+      administrators: administrators
+      attachments: library
+      audios: audios
+      cachings: cache
+      customers: customers
+      dashboard: dashboard
+      docs: docs
+      import: import
+      library: library
+      login: login
+      logout: logout
+      media: media
+      menus: navigation
+      pdfs: pdfs
+      pictures: pictures
+      rights: rights
+      roles: roles
+      settings: settings
+      statistics: statistics
+      support: support
+      users: users
+      videos: videos
+      account: account
+  by: by
+  caching:
+    delete:
+      failed: a problem occured during the cache deletion
+      success: The cache was successfully deleted
+    no_files: there is no caching pages to delete
+    public_directory: plain pages cache directory
+    tmp_directory: segment's cache directory
+  cancel: cancel
+  categories: categories
+  category:
+    create:
+      action: create a category
+      failed: a problem occured during the category creation
+      success: the category was successfully created
+    destroy:
+      confirm: are you sure to delete this category ?
+      failed: a problem occured during the category deletion
+      success: the category was successfully deleted
+    not_exist: the requested category does not exist
+    save_sort:
+      action: save order for site display
+    sub:
+      create:
+        action: create a subcategory
+    update:
+      action: edit category
+      failed: a problem occured during the category update
+      success: the category was successfully updated
+  civility:
+    label:
+      '0': Mr
+      '1': Ms
+      '2': Mss
+    select:
+    - - Mr
+      - 0
+    - - Ms
+      - 1
+    - - Mss
+      - 2
+  conditions:
+    is: is
+    is_equals_or_greater_than: is equals or greater than
+    is_equals_or_less_than: is equals or less than
+    is_greater_than: is greater than
+    is_less_than: is less than
+    is_not: is not
+  controller_name: controller name
+  country: country
+  created_on: created on
+  customer:
+    one: customer
+    other: customers
+  date:
+    abbr_day_names:
+    - Sun
+    - Mon
+    - Tue
+    - Wed
+    - Thu
+    - Fri
+    - Sat
+    abbr_month_names:
+    - 
+    - Jan
+    - Feb
+    - Mar
+    - Apr
+    - May
+    - Jun
+    - Jul
+    - Aug
+    - Sep
+    - Oct
+    - Nov
+    - Dec
+    day: day
+    day_names:
+    - Sunday
+    - Monday
+    - Tuesday
+    - Wednesday
+    - Thursday
+    - Friday
+    - Saturday
+    formats:
+      default: ! '%Y-%m-%d'
+      long: ! '%B %d, %Y'
+      only_day: ! '%e'
+      short: ! '%b %d'
+      long_ordinal: ! '%e %B %Y'
+    month: month
+    month_names:
+    - 
+    - January
+    - February
+    - March
+    - April
+    - May
+    - June
+    - July
+    - August
+    - September
+    - October
+    - November
+    - December
+    order:
+    - :year
+    - :month
+    - :day
+    year: year
+  doc:
+    all: all documents
+    bootstrap_icon: briefcase
+    create:
+      action: add a document
+  download: download
+  email: email
+  firstname: firstname
+  folder:
+    associated_to: associated to folder
+    create: create a folder
+    destroy: delete a folder
+    duplicate: duplicate a folder
+    edit: modify a folder
+    smart: create a smart folder
+  forgeos_core: Forgeos Core
+  get_forgotten_password: I forgot my password
+  go_back_admin: go back to administration
+  helpers:
+    submit:
+      caching:
+        delete: delete selected cached pages
+        delete_all: delete the entire cache
+      create: Create %{model}
+      role:
+        create: create
+        update: update
+      submit: Save %{model}
+      update: Update %{model}
+    select:
+      prompt: Please select
+  import:
+    button: import
+    create:
+      success: ! '%{nb} %{model} successfully created'
+    failed:
+      errors: ! '%{nb} errors during import process'
+      give_file: please upload the file
+      missing_file: missing file
+      retry: try again, the file maybe corrupted
+    file: file
+    ignore_first_row: Ignore the first row (headings)
+    model: model
+    send_file: send the file
+    success: You will receive an email once this import was completed
+    update:
+      success: ! '%{nb} %{model} successfully updated'
+  import_set:
+    col_sep: column separator
+    quote_char: quote character
+    save: save import config ?
+  inactive: inactive
+  jquery:
+    dataTables:
+      oLanguage:
+        sFirst: first
+        sInfo: Showing _START_ to _END_ of _TOTAL_ entries
+        sInfoEmpty: Showing 0 to 0 of 0 entries
+        sLast: last
+        sLengthMenu: Show _MENU_ entries
+        sNext: next
+        sPrevious: previous
+        sProcessing: Processing...
+        sSearch: ! ' '
+        sZeroRecords: No matching records found
+  keyword:
+    one: keyword
+    other: keywords
+  lang:
+    full:
+      de: Deutch
+      en: English
+      es: Spanish
+      fr: French
+  lastname: lastname
+  library: library
+  log:
+    account:
+      new: sign up
+      show: your account
+    in:
+      action: log in
+      failed: connection failed, check your email and password
+      success: you are successfully connected
+    out:
+      success: you have been successfully disconnected
+  login: login
+  login_required: You must be logged in to access this page
+  logout: logout
+  marketing: marketing
+  medias: medias
+  medium:
+    all: all files
+    bootstrap_icon: file
+    create:
+      action: add a file
+  meta_description: meta description
+  misc:
+    one: other
+    other: others
+  name: name
+  newsletter:
+    export: export for newsletter
+  notification:
+    one: notification
+    other: notifications
+  ok: ok
+  or: or
+  other_telephone: other telephone
+  password: password
+  password_confirmation: password confirmation
+  pdf:
+    all: all pdf files
+    bootstrap_icon: book
+    create:
+      action: add a pdf file
+  picture:
+    add: add picture
+    all: all pictures
+    alternative: alternative text
+    bootstrap_icon: picture
+    create:
+      action: create a picture
+      failed: a problem occured during the picture creation
+      success: the picture was successfully created
+    destroy:
+      confirm: are you sure to delete this picture ?
+      failed: a problem occured during the picture deletion
+      success: the picture was successfully deleted
+    featured: featured picture
+    original_size: original image size
+    show:
+      action: show picture
+    title: picture title
+    update:
+      action: edit picture
+      failed: a problem occured during the picture update
+      success: the picture was successfully updated
+    upload:
+      action: upload a picture
+      clear_queue: Clear Queue
+      start: Start Upload
+  please_select: please select
+  remember_me: remember me
+  right:
+    all: all rights
+    create:
+      action: create right
+      failed: a problem occured during the right creation
+      success: the right was successfully updated
+    destroy:
+      confirm: are you sure that you want to delete this right?
+      failed: a problem occured during the right deletion
+      success: the right was successfully deleted
+    none: no rights
+    not_exist: the requested right does not exist
+    show: show right
+    update:
+      action: edit right
+      failed: a problem occured during the right update
+      success: the right was successfully updated
+  rights: rights
+  role:
+    all: all roles
+    attributed_to: role attributed to users
+    create:
+      action: create role
+      failed: a problem occured during the role creation
+      success: the role was successfully created
+    destroy:
+      confirm: are you sure that you want to delete this role?
+      failed: a problem occured during the role deletion
+      success: the role was successfully deleted
+    none: no roles
+    not_exist: the requested role does not exist
+    show: show role
+    update:
+      action: edit role
+      failed: a problem occured during the role update
+      success: the role was successfully updated
+  roles: roles
+  save_changes: save changes
+  search: search
+  see_site: see the website
+  show: show
+  simple_form:
+    buttons:
+      cancel: back
+      or: or
+    placeholders:
+      forgeos/setting:
+        email: contact@enterprise.org
+    popovers:
+      forgeos/setting:
+        site_address:
+          content: can be displayed in the front
+          title: the company address
+    titles:
+      forgeos/setting:
+        mails: mail delivery configuration
+        sendmail_settings: with locale sendmail command
+        smtp: through SMTP
+  site_builder: site builder
+  statistic:
+    average_customer: average customers
+    average_order: average order
+    conversion_rate: conversion rate
+    keyfacts: keyfacts
+    last:
+      month: last 30 days
+      week: last 7 days
+    live:
+      one: live statistic
+      other: live statistics
+    products_sold: products sold
+    revenue: revenue
+    show:
+      all: see statistics
+      for: show for
+    trends: trends
+  statistics: statistics
+  status:
+    one: status
+    other: statuses
+  support: support
+  tag_enter: enter tag ...
+  telephone: telephone
+  time:
+    formats:
+      am: am
+      datetime:
+        formats:
+          default: ! '%Y-%m-%dT%H:%M:%S%Z'
+      default: ! '%a, %d %b %Y %H:%M:%S %z'
+      long: ! '%B %d, %Y %H:%M'
+      only_second: ! '%S'
+      pm: pm
+      short: ! '%d %b %H:%M'
+      time: ! '%H:%M'
+      long_ordinal: ! '%A %d %B %Y %H:%M:%S %Z'
+    am: am
+    pm: pm
+  time_zone:
+    one: time zone
+    other: time zones
+  top_5_items: Top 5 search items
+  updated_at: date modified
+  user:
+    activation:
+      action: activate
+      failed: a problem occured during the customer activation
+      success: the customer was successfully activated
+    all: all customers
+    back: back to customer list
+    best_customer:
+      one: best customer
+      other: best customers
+    contact: contact customer
+    contact_infos: contact informations
+    create:
+      action: create a customer
+      failed: a problem occured during the customer creation
+      success: the customer was successfully created
+    customer_infos: customer infos
+    destroy:
+      action: destroy customer
+      confirm: are you sure to delete this customer?
+      failed: a problem occured during the customer deletion
+      success: the customer was successfully destroyed
+    disactivation:
+      action: disactivate
+      failed: a problem occured during the customer disactivation
+      success: the customer was successfully disactivated
+    export:
+      failed: export failed, no customers found
+    history: account history
+    joined_on: joined on
+    new_customer:
+      one: new customer
+      other: new customers
+    not_exist: this customer doesn't exist
+    online:
+      one: ! '%{count} user online'
+      other: ! '%{count} users online'
+    search:
+      failed: no customers found
+    show:
+      all: see all customers
+    spent_on: spent on
+    update:
+      action: edit customer
+      failed: a problem occured during the customer update
+      success: the customer was successfully updated
+  users: customers
+  video:
+    all: all videos
+    bootstrap_icon: film
+    create:
+      action: add a video
+  visitor:
+    online:
+      one: ! '%{count} visitor online'
+      other: ! '%{count} visitors online'
+  your_account: your account
+  activemodel:
+    errors:
+      format: ! '%{attribute} %{message}'
+      messages:
+        accepted: must be accepted
+        blank: can't be blank
+        confirmation: doesn't match confirmation
+        empty: can't be empty
+        equal_to: must be equal to %{count}
+        even: must be even
+        exclusion: is reserved
+        greater_than: must be greater than %{count}
+        greater_than_or_equal_to: must be greater than or equal to %{count}
+        inclusion: is not included in the list
+        invalid: is invalid
+        less_than: must be less than %{count}
+        less_than_or_equal_to: must be less than or equal to %{count}
+        not_a_number: is not a number
+        not_an_integer: must be an integer
+        odd: must be odd
+        record_invalid: ! 'Validation failed: %{errors}'
+        taken: has already been taken
+        too_long:
+          one: is too long (maximum is 1 character)
+          other: is too long (maximum is %{count} characters)
+        too_short:
+          one: is too short (minimum is 1 character)
+          other: is too short (minimum is %{count} characters)
+        wrong_length:
+          one: is the wrong length (should be 1 character)
+          other: is the wrong length (should be %{count} characters)
+      template:
+        body: ! 'There were problems with the following fields:'
+        header:
+          one: 1 error prohibited this %{model} from being saved
+          other: ! '%{count} errors prohibited this %{model} from being saved'
+  datetime:
+    distance_in_words:
+      about_x_hours:
+        one: about 1 hour
+        other: about %{count} hours
+      about_x_months:
+        one: about 1 month
+        other: about %{count} months
+      about_x_years:
+        one: about 1 year
+        other: about %{count} years
+      almost_x_years:
+        one: almost 1 year
+        other: almost %{count} years
+      half_a_minute: half a minute
+      less_than_x_minutes:
+        one: less than a minute
+        other: less than %{count} minutes
+      less_than_x_seconds:
+        one: less than 1 second
+        other: less than %{count} seconds
+      over_x_years:
+        one: over 1 year
+        other: over %{count} years
+      x_days:
+        one: 1 day
+        other: ! '%{count} days'
+      x_minutes:
+        one: 1 minute
+        other: ! '%{count} minutes'
+      x_months:
+        one: 1 month
+        other: ! '%{count} months'
+      x_seconds:
+        one: 1 second
+        other: ! '%{count} seconds'
+    prompts:
+      day: Day
+      hour: Hour
+      minute: Minute
+      month: Month
+      second: Seconds
+      year: Year
+  errors:
+    format: ! '%{attribute} %{message}'
+    messages:
+      accepted: must be accepted
+      blank: can't be blank
+      confirmation: doesn't match confirmation
+      empty: can't be empty
+      equal_to: must be equal to %{count}
+      even: must be even
+      exclusion: is reserved
+      greater_than: must be greater than %{count}
+      greater_than_or_equal_to: must be greater than or equal to %{count}
+      inclusion: is not included in the list
+      invalid: is invalid
+      less_than: must be less than %{count}
+      less_than_or_equal_to: must be less than or equal to %{count}
+      not_a_number: is not a number
+      not_an_integer: must be an integer
+      odd: must be odd
+      record_invalid: ! 'Validation failed: %{errors}'
+      taken: has already been taken
+      too_long:
+        one: is too long (maximum is 1 character)
+        other: is too long (maximum is %{count} characters)
+      too_short:
+        one: is too short (minimum is 1 character)
+        other: is too short (minimum is %{count} characters)
+      wrong_length:
+        one: is the wrong length (should be 1 character)
+        other: is the wrong length (should be %{count} characters)
+    template:
+      body: ! 'There were problems with the following fields:'
+      header:
+        one: 1 error prohibited this %{model} from being saved
+        other: ! '%{count} errors prohibited this %{model} from being saved'
+  forgeos:
+    admin:
+      base:
+        cancel: cancel
+        save_changes: save changes
+      roles:
+        form:
+          destroy: delete
+      users:
+        form:
+          assume_id: connect as this user
+        show:
+          assume_id: connect as this user
+  last_modification: last changes
+  number:
+    currency:
+      format:
+        delimiter: ! ','
+        format: ! '%u%n'
+        precision: 2
+        separator: .
+        significant: false
+        strip_insignificant_zeros: false
+        unit: $
+    format:
+      delimiter: ! ','
+      precision: 3
+      separator: .
+      significant: false
+      strip_insignificant_zeros: false
+    human:
+      decimal_units:
+        format: ! '%n %u'
+        units:
+          billion: Billion
+          million: Million
+          quadrillion: Quadrillion
+          thousand: Thousand
+          trillion: Trillion
+          unit: ''
+      format:
+        delimiter: ''
+        precision: 3
+        significant: true
+        strip_insignificant_zeros: true
+      storage_units:
+        format: ! '%n %u'
+        units:
+          byte:
+            one: Byte
+            other: Bytes
+          gb: GB
+          kb: KB
+          mb: MB
+          tb: TB
+    percentage:
+      format:
+        delimiter: ''
+    precision:
+      format:
+        delimiter: ''

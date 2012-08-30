@@ -1,0 +1,822 @@
+fr:
+  _no: non
+  _yes: oui
+  account:
+    update:
+      action: modifier vos informations
+  action_name: nom de l'action
+  active: actif
+  activerecord:
+    attributes:
+      forgeos/administrator:
+        email: courriel
+        phone: téléphone fixe
+        other_phone: mobile
+        lang: langue
+        time_zone: fuseau horaire
+        birthday: date d'anniversaire
+        active: actif
+        password: mot de passe
+        password_confirmation: veuillez confirmer votre mot de passe
+      forgeos/setting:
+        authentication: type d'authentification
+        delivery_method: protocol d'envoie de courriel
+        domain: nom de domaine
+        email: courriel
+        enable_starttls_auto: activer SSL
+        fax_number: fax
+        lang: langue principale du site
+        name: nom de l'entreprise
+        password: mot de passe du compte smtp
+        phone_number: téléphone
+        port: port
+        site_address: Adresse de la société
+        time_zone: fuseau horaire du site
+        update:
+          action: mettre à jour les options
+          failed: un problème est survenu lors de la mise à jour des options
+          success: les options ont bien été sauvegardées
+        user_name: login du compte smtp
+      forgeos/user:
+        firstname: prénom
+        lastname: nom
+      setting:
+        backup: sauvegarde
+        company_info: à prpos de votre entreprise
+        contact_info: contact
+        display: affichage
+        email: courriel
+        fax_number: numéro de fax
+        general: général
+        global: paramètres globaux
+        mailer: envoie de courriel
+        phone_number: numéro de téléphone
+        shop_name: nom de votre boutique
+        update:
+          action: enregistrer les paramètres
+          failed: un problème est survenu durant la mise à jours des paramètres
+          success: les paramètres ont bien été sauvegardés
+    errors:
+      messages:
+        accepted: doit être accepté(e)
+        blank: doit être rempli(e)
+        confirmation: ne concorde pas avec la confirmation
+        empty: doit être rempli(e)
+        equal_to: doit être égal à %{count}
+        even: doit être pair
+        exclusion: n'est pas disponible
+        greater_than: doit être supérieur à %{count}
+        greater_than_or_equal_to: doit être supérieur ou égal à %{count}
+        inclusion: n'est pas inclus(e) dans la liste
+        invalid: n'est pas valide
+        less_than: doit être inférieur à %{count}
+        less_than_or_equal_to: doit être inférieur ou égal à %{count}
+        not_a_number: n'est pas un nombre
+        odd: doit être impair
+        taken: n'est pas disponible
+        too_long:
+          one: est trop long (pas plus d'un caractère)
+          other: est trop long (pas plus de %{count} caractères)
+        too_short:
+          one: est trop court (au moins un caractère)
+          other: est trop court (au moins %{count} caractères)
+        wrong_length:
+          one: ne fait pas la bonne longueur (doit comporter un seul caractère)
+          other: ne fait pas la bonne longueur (doit comporter %{count} caractères)
+        not_an_integer: doit être un nombre entier
+        record_invalid: ! 'La validation a échoué : %{errors}'
+      template:
+        body: ! 'Veuillez vérifier les champs suivants : '
+        header:
+          one: ! 'Impossible d''enregistrer ce(tte) %{model} : 1 erreur'
+          other: ! 'Impossible d''enregistrer ce(tte) %{model} : %{count} erreurs'
+      format: ! '%{attribute} %{message}'
+    models:
+      forgeos/audio: fichier audio
+      forgeos/category_link: lien vers une catégorie
+      forgeos/doc: document
+      forgeos/external_link: lien externe
+      forgeos/media: media
+      forgeos/page_link: lien vers une page
+      forgeos/pdf: pdf
+      forgeos/picture: image
+      forgeos/user: client
+      forgeos/video: vidéo
+  address:
+    address: adresse
+    address_2: complément d'adresse
+    city: ville
+    country: pays
+    same_people_infos: le nom est identique
+    zip_code: code postal
+  admin_access_denied: Vous n'avez pas les droits d'accès à cette page
+  administration: administration
+  administrator:
+    all: tous les utilisateurs
+    contact:
+      action: envoyer un message à l'administrateur
+    create:
+      action: créer un administrateur
+      failed: un problème est survenu lors de la création de l'administrateur
+      success: l'administrateur a bien été créé
+    destroy:
+      action: supprimer l'administrateur
+      confirm: êtes-vous sûr de vouloir supprimer cet utilisateur?
+      failed: un problème est survenu lors de la suppression de l'administrateur
+      success: l'administrateur a bien été supprimé
+    none: aucun administrateur
+    not_exist: l'administrateur sélectionné n'existe pas
+    show: voir l'administrateur
+    update:
+      action: éditer l'administrateur
+      failed: un problème est survenu lors de la mise à jour de l'administrateur
+      success: l'administrateur a bien été mis à jour
+  admins: administrateurs
+  ago: il y a %{time}
+  and: et
+  attachment:
+    add_from_library: ajouter depuis la librairie
+    alt: texte alternatif
+    associated_rights: droits associés
+    attach:
+      error: un problème est survenu durant la détection du type de média
+      failed: un problème est survenu lors de la liaison avec ce média
+      unknown_type: le type de l'élément attaché est inconnu
+    back: retour vers la librairie
+    byte:
+      kilo: Ko
+      mega: Mo
+    content_type: content type
+    create:
+      action: créer un média
+      failed: un problème est survenu lors de la création du média
+      success: le média a bien été créé
+    description: description
+    destroy:
+      action: supprimer le média
+      confirm: êtes-vous sûr de vouloir supprimer ce média ?
+      failed: un problème est survenu lors de la suppression du média
+      success: le média a bien été supprimé
+    download:
+      action: télécharger le média
+      failed: un problème est survenu lors du téléchargement du média
+    file_type: type du fichier
+    filename: nom du fichier
+    linked: fichiers liés
+    list: liste des médias
+    name: nom
+    not_exist: le média sélectionné n'existe pas
+    pixel:
+      one: pixel
+      other: pixels
+    show: voir le média
+    size: taille
+    thumbnails:
+      big: grand
+      categories_icon: icon de catégory
+      normal: normal
+      small: petit
+      thumb: vignette
+    type:
+      one: type
+      other: types
+    update:
+      action: éditer le média
+      failed: un problème est survenu lors de la mise à jour du média
+      success: le média a bien été mis à jour
+    updated_at: dernière mise à jour
+    upload:
+      action: charger des fichiers
+      clear_queue: nettoyer la liste
+      start: démarer le téléchargement
+    used: utilisé(e)
+  audio:
+    all: toutes les fichiers audio
+    bootstrap_icon: music
+    create:
+      action: ajouter un fichier audio
+  avatar: avatar
+  back_office:
+    account:
+      infos: Infos du compte
+    menu:
+      accounts: votre compte
+      administration: administration
+      administrators: administrateurs
+      attachments: librairie
+      audios: fichiers audios
+      cachings: cache
+      customers: clients
+      dashboard: accueil
+      docs: documents
+      import: import
+      library: librairie
+      login: connexion
+      logout: déconnexion
+      media: media
+      menus: navigation
+      pdfs: documents pdfs
+      pictures: images
+      rights: droits
+      roles: rôles
+      settings: préférences
+      statistics: statistiques
+      support: support
+      users: utilisateurs
+      videos: vidéos
+      account: compte
+  by: par
+  caching:
+    delete:
+      failed: un problème est survenu lors de la mise à suppression du cache
+      success: Le cache a été supprimé
+    no_files: il n'y a pas de pages à supprimer
+    public_directory: Répertoire de cache de pages entières
+    tmp_directory: Répertoire de cache partiel
+  cancel: annuler
+  categories: catégories
+  category:
+    create:
+      action: créer une catégorie
+      failed: un problème est survenu lors de la création de la catégorie
+      success: la catégorie a bien été créée
+    destroy:
+      confirm: êtes-vous sûr de vouloir supprimer cette catégorie ?
+      failed: un problème est survenu lors de la suppression de la catégorie
+      success: la catégorie a bien été supprimée
+    not_exist: la catégorie demandée n'existe pas
+    save_sort:
+      action: sauvegarder l'ordre pour le site
+    sub:
+      create:
+        action: créer une catégorie sous-jacente
+    update:
+      action: éditer la catégorie
+      failed: un problème est survenu lors de la mise à jour de la catégorie
+      success: la catégorie a bien été mise à jour
+  civility:
+    label:
+      '0': M
+      '1': Mme
+      '2': Mlle
+    select:
+    - - M
+      - 0
+    - - Mme
+      - 1
+    - - Mlle
+      - 2
+  conditions:
+    is: est
+    is_equals_or_greater_than: est égal ou supérieur à
+    is_equals_or_less_than: est égal ou inférieur à
+    is_greater_than: est supérieur à
+    is_less_than: est inférieur à
+    is_not: n'est pas
+  controller_name: nom du contrôleur
+  country: pays
+  created_on: date de création
+  customer:
+    one: client
+    other: clients
+  date:
+    abbr_day_names:
+    - dim
+    - lun
+    - mar
+    - mer
+    - jeu
+    - ven
+    - sam
+    abbr_month_names:
+    - 
+    - jan.
+    - fév.
+    - mar.
+    - avr.
+    - mai
+    - juin
+    - juil.
+    - août
+    - sept.
+    - oct.
+    - nov.
+    - déc.
+    day: jour
+    day_names:
+    - dimanche
+    - lundi
+    - mardi
+    - mercredi
+    - jeudi
+    - vendredi
+    - samedi
+    formats:
+      default: ! '%d/%m/%Y'
+      long: ! '%e %B %Y'
+      long_ordinal: ! '%e %B %Y'
+      only_day: ! '%e'
+      short: ! '%e %b'
+    month: mois
+    month_names:
+    - 
+    - janvier
+    - février
+    - mars
+    - avril
+    - mai
+    - juin
+    - juillet
+    - août
+    - septembre
+    - octobre
+    - novembre
+    - décembre
+    order:
+    - :day
+    - :month
+    - :year
+    year: année
+  datetime:
+    distance_in_words:
+      about_x_hours:
+        one: environ une heure
+        other: environ %{count} heures
+      about_x_months:
+        one: environ un mois
+        other: environ %{count} mois
+      about_x_years:
+        one: environ un an
+        other: environ %{count} ans
+      half_a_minute: une demi-minute
+      less_than_x_minutes:
+        one: moins d'une minute
+        other: moins de %{count} minutes
+        zero: moins d'une minute
+      less_than_x_seconds:
+        one: moins d'une seconde
+        other: moins de %{count} secondes
+        zero: moins d'une seconde
+      over_x_years:
+        one: plus d'un an
+        other: plus de %{count} ans
+      x_days:
+        one: 1 jour
+        other: ! '%{count} jours'
+      x_minutes:
+        one: 1 minute
+        other: ! '%{count} minutes'
+      x_months:
+        one: 1 mois
+        other: ! '%{count} mois'
+      x_seconds:
+        one: 1 seconde
+        other: ! '%{count} secondes'
+      almost_x_years:
+        one: presqu'un an
+        other: presque %{count} ans
+    prompts:
+      day: Jour
+      hour: Heure
+      minute: Minute
+      month: Mois
+      second: Seconde
+      year: Année
+  doc:
+    all: tous les documents
+    bootstrap_icon: briefcase
+    create:
+      action: ajouter un document
+  download: télécharger
+  email: email
+  firstname: prénom
+  folder:
+    associated_to: associations avec les dossiers
+    create: créer un dossier
+    destroy: supprimer le dossier
+    duplicate: dupliquer le dossier
+    edit: modifier le dossier
+    smart: créer un dossier dynamique
+  forgeos:
+    admin:
+      base:
+        cancel: annuler
+        save_changes: enregistrer
+      roles:
+        form:
+          destroy: supprimer le rôle
+      users:
+        form:
+          assume_id: se connecter en tant que
+        show:
+          assume_id: se connecter en tant que
+  forgeos_core: Forgeos Core
+  get_forgotten_password: mot de passe oublié
+  go_back_admin: retour vers l'administration
+  helpers:
+    submit:
+      caching:
+        delete: supprimer le cache des pages sélectionnées
+        delete_all: supprimer la totalité du cache
+      role:
+        create: créer le rôle
+        update: sauvegarder le rôle
+      create: Créer un(e) %{model}
+      submit: Enregistrer ce(tte) %{model}
+      update: Modifier ce(tte) %{model}
+    select:
+      prompt: Veuillez sélectionner
+  import:
+    button: importer
+    create:
+      success: ! '%{nb} %{model} ont été créés'
+    failed:
+      errors: ! '%{nb} erreurs durant le processus d''import'
+      give_file: n'oubliez pas le fichier d'import
+      missing_file: merci de transmettre le fichier d'import
+      retry: veuillez réessayer, le fichier doit être corrompu
+    file: fichier
+    ignore_first_row: Ignorer la première ligne (headings)
+    model: modèle
+    send_file: envoyer le fichier
+    success: Un email vous sera envoyé lorsque l'import sera fini
+    update:
+      success: ! '%{nb} %{model} ont été mis à jours'
+  import_set:
+    col_sep: séparateur de colonnes
+    quote_char: caractère d'encapsulation
+    save: sauvegarder la configuration ?
+  inactive: inactif
+  jquery:
+    dataTables:
+      oLanguage:
+        sFirst: premier
+        sInfo: Visualisation de _START_ à _END_ sur _TOTAL_ entrées
+        sInfoEmpty: Visualistation de 0 à 0 sur 0 entrées
+        sLast: dernier
+        sLengthMenu: Afficher _MENU_ entrées
+        sNext: suivant
+        sPrevious: précédent
+        sProcessing: En cours...
+        sSearch: ! ' '
+        sZeroRecords: Aucun résultat trouvé
+  keyword:
+    one: mot clé
+    other: mots clés
+  lang:
+    full:
+      de: Allemand
+      en: Anglais
+      es: Espagnol
+      fr: Français
+  last_modification: dernière modification
+  lastname: nom
+  library: librairie
+  log:
+    account:
+      new: creer un compte
+      show: votre compte
+    in:
+      action: se connecter
+      failed: connexion échouée, veuillez vérifier votre email et votre mot de passe
+      success: connexion réussie
+    out:
+      success: déconnection réussie, à bientôt !
+  login: connexion
+  login_required: Vous devez être identifié pour accéder à cette page
+  logout: déconnexion
+  marketing: marketing
+  medias: médias
+  medium:
+    all: tous les fichiers
+    bootstrap_icon: file
+    create:
+      action: ajouter un fichier
+  meta_description: meta description
+  misc:
+    one: autre
+    other: autres
+  name: nom
+  newsletter:
+    export: exporter pour la newsletter
+  notification:
+    one: notification
+    other: notifications
+  number:
+    currency:
+      format:
+        format: ! '%n %u'
+        precision: 2
+        unit: €
+        delimiter: ! ' '
+        separator: ! ','
+        significant: false
+        strip_insignificant_zeros: false
+    format:
+      delimiter: ! ' '
+      precision: 3
+      separator: ! ','
+      significant: false
+      strip_insignificant_zeros: false
+    human:
+      format:
+        delimiter: ''
+        precision: 2
+        significant: true
+        strip_insignificant_zeros: true
+      storage_units:
+        format: ! '%n %u'
+        units:
+          byte:
+            one: octet
+            other: octets
+          gb: Go
+          kb: ko
+          mb: Mo
+          tb: To
+      decimal_units:
+        format: ! '%n %u'
+        units:
+          billion: milliard
+          million: million
+          quadrillion: million de milliards
+          thousand: millier
+          trillion: billion
+          unit: ''
+    percentage:
+      format:
+        delimiter: ''
+    precision:
+      format:
+        delimiter: ''
+  ok: ok
+  or: ou
+  other_telephone: autre téléphone
+  password: mot de passe
+  password_confirmation: vérification du mot de passe
+  pdf:
+    all: tous les pdfs
+    bootstrap_icon: book
+    create:
+      action: ajouter un pdf
+  picture:
+    add: ajouter une photo
+    all: toutes les images
+    alternative: texte alternatif
+    bootstrap_icon: picture
+    create:
+      action: créer une image
+      failed: un problème est survenu lors de la création de l'image
+      success: l'image a bien été créée
+    destroy:
+      confirm: êtes-vous sûr de vouloir supprimer cette image ?
+      failed: un problème est survenu lors de la suppression de l'image
+      success: l'image a bien été supprimée
+    featured: photo principale
+    original_size: taille originale
+    show:
+      action: voir l'image
+    title: titre de l'image
+    update:
+      action: éditer l'image
+      failed: un problème est survenu lors de la mise à jour de l'image
+      success: l'image a bien été mise à jour
+    upload:
+      action: charger une image
+      clear_queue: vider la liste
+      start: commencer l'envoi
+  please_select: veuillez choisir
+  remember_me: se souvenir de moi
+  right:
+    all: tous les droits
+    create:
+      action: créer un droit
+      failed: un problème est survenu lors de la création du droit
+      success: le droit a bien été créé
+    destroy:
+      confirm: êtes-vous sûr de vouloir supprimer ce droit ?
+      failed: un problème est survenu lors de la suppression du droit
+      success: le droit a bien été supprimé
+    none: aucun droit
+    not_exist: le droit sélectionné n'existe pas
+    show: voir le droit
+    update:
+      action: éditer le droit
+      failed: un problème est survenu lors de la mise à jour du droit
+      success: le droit a bien été mis à jour
+  rights: droits
+  role:
+    all: tous les rôles
+    attributed_to: rôle attribué aux utilisateurs
+    create:
+      action: créer un rôle
+      failed: un problème est survenu lors de la création du rôle
+      success: le rôle a bien été créé
+    destroy:
+      confirm: êtes-vous sûr de vouloir supprimer ce rôle ?
+      failed: un problème est survenu lors de la suppression du rôle
+      success: le rôle a bien été supprimé
+    none: aucun rôle
+    not_exist: le rôle sélectionné n'existe pas
+    show: voir le rôle
+    update:
+      action: éditer le rôle
+      failed: un problème est survenu lors de la mise à jour du rôle
+      success: le rôle a bien été mis à jour
+  roles: rôles
+  save_changes: sauvegarder
+  search: rechercher
+  see_site: voir le site
+  show: afficher
+  simple_form:
+    buttons:
+      cancel: revenir à la liste
+      or: ou
+    placeholders:
+      forgeos/setting:
+        email: contact@entreprise.org
+    popovers:
+      forgeos/setting:
+        site_address:
+          content: peut être affiché dans le site
+          title: l'adresse de votre entreprise
+    titles:
+      forgeos/setting:
+        mails: configuration mail
+        sendmail_settings: via sendmail
+        smtp: via smtp
+  site_builder: site builder
+  statistic:
+    average_customer: utilisateur moyen
+    average_order: commande moyenne
+    conversion_rate: taux de conversion
+    keyfacts: chiffres clés
+    last:
+      month: les 30 derniers jours
+      week: les 7 derniers jours
+    live:
+      one: statistique temps réel
+      other: statistiques temps réel
+    products_sold: produits vendus
+    revenue: recette
+    show:
+      all: voir les statistiques
+      for: voir pour
+    trends: tendances
+  statistics: statistiques
+  status:
+    one: statut
+    other: statuts
+  support: support
+  tag_enter: Entrez un tag ...
+  telephone: téléphone
+  time:
+    am: am
+    formats:
+      am: matin
+      datetime:
+        formats:
+          default: ! '%Y-%m-%dT%H:%M:%S%Z'
+      default: ! '%d %B %Y %H:%M:%S'
+      long: ! '%A %d %B %Y %H:%M'
+      long_ordinal: ! '%A %d %B %Y %H:%M:%S %Z'
+      only_second: ! '%S'
+      pm: après midi
+      short: ! '%d %b %H:%M'
+      time: ! '%H:%M'
+    pm: pm
+  time_zone:
+    one: fuseau horaire
+    other: fuseaux horaires
+  top_5_items: top 5 des produits recherchés
+  updated_at: date de modification
+  user:
+    activation:
+      action: activer
+      failed: un problème est survenu lors de l'activation du client
+      success: le client a bien été activé
+    all: tous les clients
+    back: retour aux clients
+    best_customer:
+      one: meilleur client
+      other: meilleurs clients
+    contact: contacter le client
+    contact_infos: informations sur le contact
+    create:
+      action: créer un client
+      failed: un problème est survenu lors de la création du client
+      success: le client a bien été créé
+    customer_infos: informations sur le client
+    destroy:
+      action: supprimer le client
+      confirm: êtes-vous sûr de vouloir supprimer ce client ?
+      failed: un problème est survenu lors de la suppression du client
+      success: le client a bien été supprimé
+    disactivation:
+      action: désactiver
+      failed: un problème est survenu lors de la désactivation du client
+      success: le client a bien été désactivé
+    export:
+      failed: échec de l'export, aucun client trouvé
+    history: historique du compte
+    joined_on: inscrit le
+    new_customer:
+      one: nouveau client
+      other: nouveaux clients
+    not_exist: ce client n'existe pas
+    online:
+      one: ! '%{count} client connecté'
+      other: ! '%{count} clients connectés'
+      zero: ! '%{count} client connecté'
+    search:
+      failed: aucun client trouvé
+    show:
+      all: voir tous les clients
+    spent_on: dépensé en
+    update:
+      action: éditer le client
+      failed: un problème est survenu lors de la mise à jour du client
+      success: le client a bien été mis à jour
+  users: clients
+  video:
+    all: toutes les vidéos
+    bootstrap_icon: film
+    create:
+      action: ajouter une vidéo
+  visitor:
+    online:
+      one: ! '%{count} visiteur en ligne'
+      other: ! '%{count} visiteurs en ligne'
+      zero: ! '%{count} visiteur en ligne'
+  your_account: votre compte
+  activemodel:
+    errors:
+      format: ! '%{attribute} %{message}'
+      messages:
+        accepted: doit être accepté(e)
+        blank: doit être rempli(e)
+        confirmation: ne concorde pas avec la confirmation
+        empty: doit être rempli(e)
+        equal_to: doit être égal à %{count}
+        even: doit être pair
+        exclusion: n'est pas disponible
+        greater_than: doit être supérieur à %{count}
+        greater_than_or_equal_to: doit être supérieur ou égal à %{count}
+        inclusion: n'est pas inclus(e) dans la liste
+        invalid: n'est pas valide
+        less_than: doit être inférieur à %{count}
+        less_than_or_equal_to: doit être inférieur ou égal à %{count}
+        not_a_number: n'est pas un nombre
+        not_an_integer: doit être un nombre entier
+        odd: doit être impair
+        record_invalid: ! 'La validation a échoué : %{errors}'
+        taken: n'est pas disponible
+        too_long:
+          one: est trop long (pas plus d'un caractère)
+          other: est trop long (pas plus de %{count} caractères)
+        too_short:
+          one: est trop court (au moins un caractère)
+          other: est trop court (au moins %{count} caractères)
+        wrong_length:
+          one: ne fait pas la bonne longueur (doit comporter un seul caractère)
+          other: ne fait pas la bonne longueur (doit comporter %{count} caractères)
+      template:
+        body: ! 'Veuillez vérifier les champs suivants : '
+        header:
+          one: ! 'Impossible d''enregistrer ce(tte) %{model} : 1 erreur'
+          other: ! 'Impossible d''enregistrer ce(tte) %{model} : %{count} erreurs'
+  errors:
+    format: ! '%{attribute} %{message}'
+    messages:
+      accepted: doit être accepté(e)
+      blank: doit être rempli(e)
+      confirmation: ne concorde pas avec la confirmation
+      empty: doit être rempli(e)
+      equal_to: doit être égal à %{count}
+      even: doit être pair
+      exclusion: n'est pas disponible
+      greater_than: doit être supérieur à %{count}
+      greater_than_or_equal_to: doit être supérieur ou égal à %{count}
+      inclusion: n'est pas inclus(e) dans la liste
+      invalid: n'est pas valide
+      less_than: doit être inférieur à %{count}
+      less_than_or_equal_to: doit être inférieur ou égal à %{count}
+      not_a_number: n'est pas un nombre
+      not_an_integer: doit être un nombre entier
+      odd: doit être impair
+      record_invalid: ! 'La validation a échoué : %{errors}'
+      taken: n'est pas disponible
+      too_long:
+        one: est trop long (pas plus d'un caractère)
+        other: est trop long (pas plus de %{count} caractères)
+      too_short:
+        one: est trop court (au moins un caractère)
+        other: est trop court (au moins %{count} caractères)
+      wrong_length:
+        one: ne fait pas la bonne longueur (doit comporter un seul caractère)
+        other: ne fait pas la bonne longueur (doit comporter %{count} caractères)
+    template:
+      body: ! 'Veuillez vérifier les champs suivants : '
+      header:
+        one: ! 'Impossible d''enregistrer ce(tte) %{model} : 1 erreur'
+        other: ! 'Impossible d''enregistrer ce(tte) %{model} : %{count} erreurs'
