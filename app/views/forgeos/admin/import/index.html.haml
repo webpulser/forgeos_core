@@ -7,11 +7,11 @@
       = field_set_tag nil, :class => 'well' do
         - if Forgeos::ImportSet.count > 0
           .control-group
-            = label :import, :set_id, t(:import_set, :count => 1), :class => 'control-label'
+            = label :import, :set_id, Forgeos::ImportSet.model_name.human, :class => 'control-label'
             .controls= select :import, :set_id, options_from_collection_for_select(Forgeos::ImportSet.order('name').all, :id, :name), :include_blank => true
         .control-group
           = label :import, :model, t('import.model'), :class => 'control-label'
-          .controls= select :import, :model, options_for_select(@models.sort.map{|model| [t(model,:count => 2),model] }), { :prompt => true }
+          .controls= select :import, :model, options_for_select(@models.sort.map{|model| [model.model_name.human(:count => 2),model] }), { :prompt => true }
         .control-group
           = label_tag :file, t('import.file'), :class => 'control-label'
           .controls= file_field_tag :file

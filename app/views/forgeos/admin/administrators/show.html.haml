@@ -11,9 +11,8 @@
     %div= image_tag(administrator.avatar.public_filename(:small)) if administrator.avatar
     =t 'email'
     %div= administrator.email
-    =t :role, :count => 1
-    %div
-      = administrator.role.name
+    = Forgeos::Role.model_name.human
+    %div= administrator.role.name
   #right-sidebar.span3
     .step
       = mail_to administrator.email, i(:envelope) + t('administrator.contact.action')

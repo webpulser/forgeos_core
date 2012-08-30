@@ -2,7 +2,7 @@
   view = index_view 'user-md', forgeos_core, Forgeos::Administrator, [
     {:bSearchable => false, :bSortable => false},
     {:sTitle => t(:name) },
-    {:sTitle => t(:role, :count => 1) },
+    {:sTitle => Forgeos::Role.model_name.human },
     {:sTitle => t(:email) },
     {:sTitle => t(:active) },
     {:sClass => 'actions-td', :bSearchable => false, :bSortable => false }
