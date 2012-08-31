@@ -821,3 +821,4 @@ fr:
       header:
         one: ! 'Impossible d''enregistrer ce(tte) %{model} : 1 erreur'
         other: ! 'Impossible d''enregistrer ce(tte) %{model} : %{count} erreurs'
+  visitors: visiteurs

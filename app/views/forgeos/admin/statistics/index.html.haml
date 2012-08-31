@@ -24,6 +24,6 @@
   .right-dahsboard.span4
     = field_set_tag t('.keyfacts'), :class => 'well' do
       .control-group
-        %label.control-label.keyfacts-name=t 'visitor', :count => 2
+        %label.control-label.keyfacts-name=t :visitors
         .controls
           .keyfacts-value= Forgeos::Statistics.total_of_visitors(@date)

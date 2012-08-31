@@ -15,7 +15,7 @@ module Forgeos
     private
 
     def models
-      @models = ['user']
+      @models = [User]
     end
 
     def create_model(klass, uniq_field = nil, modify_attributes_method = :modify_import_attributes)
