@@ -7,7 +7,7 @@ module Forgeos
     test "should get index" do
       admin_login_to('admin/import', 'index')
       get :index, :use_route => :forgeos_core
-      assert_equal ['user'], assigns(:models)
+      assert_equal [Forgeos::User], assigns(:models)
     end
 
     test "should raise missing file create_user" do

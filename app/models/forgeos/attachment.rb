@@ -1,6 +1,6 @@
 module Forgeos
   class Attachment < ActiveRecord::Base
-    if Setting.current.background_uploads?
+    if Setting.current.try(:background_uploads?)
       require 'carrierwave_backgrounder'
       extend ::CarrierWave::Backgrounder::ORM::ActiveRecord
     end
@@ -81,7 +81,7 @@ module Forgeos
     end
 
     def self.process_upload_in_background?
-      Setting.current.background_uploads?
+      Setting.current.try(:background_uploads?)
     end
 
     def self.new_from_rails_form(options = {})

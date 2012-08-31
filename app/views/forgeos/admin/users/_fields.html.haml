@@ -1,0 +1,29 @@
+- submit_label = (defined?(bulk_edit) and bulk_edit ? bulk_edit : nil)
+= form_header do
+  .big-header
+    = f.button :wrapped, submit_label, :cancel => [forgeos_core, :admin, :users]
+    = link_to i(:signin) + t('.assume_id'), [forgeos_core, :assume, :admin, user], :class => 'btn btn-large btn-danger' unless f.object.new_record?
+    = f.select :civility, t('civility.select'), { :prompt => t(:please_select) }, :class => 'civility'
+    = f.text_field :firstname, :placeholder => t('firstname'), :class => 'field_name firstname'
+    = f.text_field :lastname, :placeholder => t('lastname'), :class => 'field_name lastname'
+
+#content.row-fluid
+  .inner-content.span9
+    = field_set_tag nil, :class => 'well' do
+      = f.input :lang, :as => :select, :collection => I18n.available_locales
+      - (f.object.class.input_columns - [ :lang, :firstname, :lastname, :civility ]).each do |field|
+        = f.input field
+
+  - unless f.object.new_record?
+    #right-sidebar.span3
+      .step
+        = mail_to user.email, i(:envelope) + t('user.contact')
+        = link_to [forgeos_core, :admin, user], :data => {:confirm => t('user.destroy.confirm')}, :method => :delete do
+          = i :trash
+          = t 'user.destroy.action'
+      #user_created_on.step.open
+        = link_to t('user.history'), '#', :class => 'icon-step-title'
+        .inner-step
+          %p
+            =t 'created_on'
+            = user.created_at.to_date

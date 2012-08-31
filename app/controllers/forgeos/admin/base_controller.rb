@@ -19,7 +19,7 @@ module Forgeos
           return redirect_to([forgeos_core, :admin, name.to_s.pluralize.to_sym])
         end
 
-        resource.attributes = params[name] if params[name]
+        resource.assign_attributes(params[name], :as => :admin) if params[name]
 
         resource
       end

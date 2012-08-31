@@ -6,7 +6,7 @@ module Forgeos
     include ::Sprockets::Helpers::RailsHelper
     include ::Sprockets::Helpers::IsolatedHelper
     include ::CarrierWave::Meta
-    if Setting.current.background_uploads?
+    if Setting.current.try(:background_uploads?)
       require 'carrierwave_backgrounder'
       include ::CarrierWave::Backgrounder::Delay
     end

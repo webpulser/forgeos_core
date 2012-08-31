@@ -22,8 +22,6 @@
       = link_to [forgeos_core, :admin, user], :data => { :confirm => t('user.destroy.confirm')}, :method => :delete do
         = i :trash
         = t 'user.destroy.action'
-    .step.disabled
-      = link_to t('newsletter', :count => 2), '#', :class => 'icon-step-title'
     #user_history.step.open
       = link_to t('user.history'), '#', :class => 'icon-step-title'
       .inner-step

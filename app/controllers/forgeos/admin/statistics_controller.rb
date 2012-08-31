@@ -16,7 +16,7 @@ module Forgeos
       # Bar for visitors
       bar = OFC2::Bar.new
       bar.values  = visitors
-      bar.set_tip = "#val# #{I18n.t('visitor', :count => 2)}"
+      bar.set_tip = "#val# #{I18n.t :visitors}"
       bar.colour  = '#F2B833'
 
       # Conf for Y left axis

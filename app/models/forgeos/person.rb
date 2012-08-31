@@ -30,7 +30,7 @@ module Forgeos
 
     attr_accessible :lastname, :firstname, :email, :password, :password_confirmation,
       :civility, :country_id, :birthday, :phone, :other_phone, :email_confirmation,
-      :avatar_attributes, :lang, :time_zone, :address_attributes
+      :avatar_attributes, :lang, :time_zone, :address_attributes, :as => [:default, :admin]
     attr_accessible :active, :as => :admin
 
     def self.generate_password(size)
@@ -47,7 +47,7 @@ module Forgeos
         :last_request_at, :current_login_at, :last_login_at,
         :current_login_ip, :last_login_ip, :perishable_token,
         :created_at, :updated_at
-      ]
+      ] + [:password, :password_confirmation]
     end
 
     # Activates the user in the database.

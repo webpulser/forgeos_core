@@ -20,7 +20,8 @@ module Forgeos
       attachment = Attachment.new_from_rails_form(:Filedata => File.open(File.expand_path('../../../files/empty.file', __FILE__)))
       assert_kind_of Medium, attachment
       assert attachment.save, "Attachment should be saved"
-      assert !attachment.file_tmp.nil?, "Temporary file should not be nil"
+      assert !attachment.file_tmp.nil?, "Temporary file should not be nil" if Setting.current.background_uploads?
+      assert attachment.file_tmp.nil?, "Temporary file should be nil" unless Setting.current.background_uploads?
     end
 
     test "should get the filename from rails form" do
