@@ -76,7 +76,7 @@ define 'forgeos/core/admin/base', ['jquery', 'jquery_ujs'], ($) ->
   update_block_container_positions = (container) ->
     $(container).children(".block-container:visible").each ->
       index = $(this).parent().children(".block-container:visible").index(this)
-      item_position = $(this).find("input:regex(id,.+_position)")
+      item_position = $(this).find('input[id~="_position"]')
       item_position.val index
 
 

@@ -1,13 +1,5 @@
 define 'forgeos/core/admin/header', ['jquery'], ($) ->
 
-  copy_dataTables_filters = ->
-    filters = $('#content .dataTables_wrapper .top')
-    $('#page .header .span8').append(filters.clone(true))
-    filters.hide()
-
-  init_dataTables_filters = ->
-    setTimeout copy_dataTables_filters, 500
-
   init_navbar = ->
     navbar = $('.navbar')
     if navbar.length > 0
@@ -78,10 +70,12 @@ define 'forgeos/core/admin/header', ['jquery'], ($) ->
       $(window).scrollTop($($(this).attr('href')).position().top)
       false
 
+
+
+
   initialize = ->
     init_page_header()
     init_navbar()
-    init_dataTables_filters()
 
   # public methods
   new: initialize

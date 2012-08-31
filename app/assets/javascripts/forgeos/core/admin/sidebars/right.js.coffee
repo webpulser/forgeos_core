@@ -45,7 +45,7 @@ define 'forgeos/core/admin/sidebars/right', ['jquery'], ($) ->
     tags = []
     $($(input.form).serializeArray()).each ->
       tags.push input.value  if input.name is "tag_list[]" and input.value isnt ""
-    element = $("textarea:regex(id,.+_meta_info_attributes_keywords)")
+    element = $('textarea[id~="_meta_info_attributes_keywords"]')
     element.val tags.join(", ")  if element.is(":visible")
 
   toggle_steps = (e) ->

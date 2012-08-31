@@ -6,19 +6,19 @@ define 'forgeos/core/admin/inputs', ['jquery'], ($) ->
       value = $(this).val()
       id = $(this).attr("id")
       element_name = id.split("_")[0]
-      element = $("textarea:regex(id,.+_meta_info_attributes_title)")
+      element = $('textarea[id~="_meta_info_attributes_title"]')
       element.val value  if element.is(":visible")
 
       $.ajax
         beforeSend: (request) ->
-          $("input:regex(id,.+_url)").addClass "loading"
+          $('input[id~="_url"]').addClass "loading"
 
         data:
           url: value
 
         dataType: "text"
         success: (request) ->
-          target = $("input:regex(id,.+_url)")
+          target = $('input[id~="_url"]')
           target.val request
           target.removeClass "loading"
 
@@ -27,9 +27,9 @@ define 'forgeos/core/admin/inputs', ['jquery'], ($) ->
 
   build_meta_description_from_description = ->
     # catch object description to build object meta description
-    $("textarea.mceEditor:regex(id,.+_(description|content))").change ->
+    $('textarea.mceEditor[id~="_description"], textarea.mceEditor[id~="_content"]').change ->
       value = $(this).text()
-      element = $("textarea:regex(id,.+_meta_info_attributes_description)")
+      element = $('textarea[id~="_meta_info_attributes_description"]')
       element.val value  if element.is(":visible")
 
   init_sortable = ->
